@@ -6,8 +6,9 @@ from gtts import gTTS
 from PIL import Image, ImageDraw
 import uuid
 from pathlib import Path
+import random
 
-app = FastAPI(title="Zerenthis Viral Engine")
+app = FastAPI(title="Zerenthis GOD Engine")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,34 +23,42 @@ OUT = BASE / "outputs"
 OUT.mkdir(exist_ok=True)
 
 # ----------------------------
-# 🧠 VIRAL SCRIPT ENGINE
+# 🧠 VIRAL SCRIPT SYSTEM
 # ----------------------------
 def generate_script(topic):
     return [
         f"Stop scrolling. {topic} is about to change everything.",
-        f"Most people completely misunderstand {topic}.",
-        f"This is where the real advantage starts.",
-        f"If you learn this early, you win faster.",
-        f"The gap is getting bigger every day.",
-        f"This is your moment to move.",
+        f"Nobody is talking about this part of {topic}.",
+        f"This is where people fall behind.",
+        f"This gives you unfair advantage.",
+        f"The gap is widening fast.",
+        f"If you act now, you win.",
     ]
 
 # ----------------------------
-# 🎥 SCENE CREATOR
+# 🎨 VISUAL STYLE ENGINE
 # ----------------------------
-def make_scene(text, duration, i):
-    colors = [
+def get_color(i):
+    styles = [
         (10,12,22),
         (18,14,35),
         (12,22,30),
         (22,16,28),
+        (15,15,40),
     ]
+    return styles[i % len(styles)]
 
-    bg = ColorClip((1280,720), color=colors[i % len(colors)]).set_duration(duration)
+# ----------------------------
+# 🎥 SCENE BUILDER (UPGRADED)
+# ----------------------------
+def make_scene(text, duration, i):
+    bg = ColorClip((1280,720), color=get_color(i)).set_duration(duration)
+
+    zoom = bg.resize(lambda t: 1 + 0.02*t)  # slight zoom effect
 
     main = TextClip(
         text,
-        fontsize=48,
+        fontsize=50,
         color="white",
         method="caption",
         size=(1000,500)
@@ -57,45 +66,45 @@ def make_scene(text, duration, i):
 
     caption = TextClip(
         text.upper(),
-        fontsize=30,
+        fontsize=32,
         color="cyan",
         method="caption",
         size=(1000,200)
     ).set_position(("center",600)).set_duration(duration)
 
-    return CompositeVideoClip([bg, main, caption])
+    return CompositeVideoClip([zoom, main, caption])
 
 # ----------------------------
-# 🎬 VIDEO ENGINE
+# 🎬 VIDEO ENGINE (GOD MODE)
 # ----------------------------
 def build_video(topic):
     uid = str(uuid.uuid4())
 
-    script_parts = generate_script(topic)
-    full_script = " ".join(script_parts)
+    parts = generate_script(topic)
+    full_script = " ".join(parts)
 
     audio_path = OUT / f"{uid}.mp3"
     video_path = OUT / f"{uid}.mp4"
 
-    # voice
     gTTS(full_script).save(audio_path)
 
     audio = AudioFileClip(str(audio_path))
     total = audio.duration
 
-    per = total / len(script_parts)
+    per = total / len(parts)
 
     clips = []
-    for i, part in enumerate(script_parts):
-        clips.append(make_scene(part, per, i))
+    for i, p in enumerate(parts):
+        clips.append(make_scene(p, per, i))
 
     final = concatenate_videoclips(clips).set_audio(audio)
+
     final.write_videofile(str(video_path), fps=24)
 
-    return video_path.name, script_parts
+    return video_path.name, parts
 
 # ----------------------------
-# 🖼 THUMBNAIL ENGINE
+# 🖼 THUMBNAIL ENGINE (UPGRADED)
 # ----------------------------
 def make_thumbnail(text):
     uid = str(uuid.uuid4())
@@ -104,7 +113,8 @@ def make_thumbnail(text):
     img = Image.new("RGB", (1280,720), color=(10,12,22))
     draw = ImageDraw.Draw(img)
 
-    draw.text((100,300), text[:30].upper(), fill=(255,255,255))
+    draw.text((100,250), text.upper()[:30], fill=(255,255,255))
+    draw.text((100,350), "THIS CHANGES EVERYTHING", fill=(0,255,255))
 
     img.save(path)
     return path.name
@@ -112,14 +122,14 @@ def make_thumbnail(text):
 # ----------------------------
 # ✂️ SHORTS ENGINE
 # ----------------------------
-def make_shorts(script_parts):
-    shorts = []
-    for part in script_parts:
-        shorts.append({
-            "clip": part,
-            "caption": part.upper()
-        })
-    return shorts
+def make_shorts(parts):
+    return [
+        {
+            "clip": p,
+            "caption": p.upper()
+        }
+        for p in parts
+    ]
 
 # ----------------------------
 # 🚀 UNIVERSAL ENDPOINT
@@ -134,13 +144,14 @@ async def universal(req: Request):
     shorts = make_shorts(parts)
 
     return {
-        "type":"viral_video",
+        "type":"god_video",
         "title": f"{prompt} Is About To Explode",
         "video_url": f"/files/{video}",
         "thumbnail_url": f"/files/{thumb}",
         "shorts": shorts,
-        "description": f"This changes everything about {prompt}. Follow for more.",
-        "hooks": parts[:2]
+        "hooks": parts[:2],
+        "description": f"This will change how you think about {prompt}. Follow for more.",
+        "script": parts
     }
 
 # ----------------------------
