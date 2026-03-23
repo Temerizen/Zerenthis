@@ -6,117 +6,201 @@
 
   <style>
     body {
-      margin:0;
-      background:#0a0d18;
-      color:white;
-      font-family:Arial;
+      margin: 0;
+      background: #0a0d18;
+      color: white;
+      font-family: Arial, sans-serif;
     }
 
     .container {
-      padding:20px;
-      max-width:900px;
-      margin:auto;
+      padding: 20px;
+      max-width: 950px;
+      margin: auto;
     }
 
     h1 {
-      color:#7c4dff;
-      text-align:center;
+      color: #7c4dff;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      text-align: center;
+      color: #8fa0c5;
+      margin-bottom: 20px;
+    }
+
+    textarea, select {
+      width: 100%;
+      background: #111;
+      color: white;
+      border: 1px solid #333;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-sizing: border-box;
     }
 
     textarea {
-      width:100%;
-      height:100px;
-      background:#111;
-      color:white;
-      border:1px solid #333;
-      padding:10px;
-      margin-top:10px;
+      height: 100px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .buttons {
-      display:flex;
-      gap:10px;
-      margin-top:10px;
-      flex-wrap:wrap;
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
     }
 
     button {
-      flex:1;
-      padding:12px;
-      background:#7c4dff;
-      border:none;
-      color:white;
-      cursor:pointer;
+      flex: 1;
+      padding: 12px;
+      background: linear-gradient(135deg, #7c4dff, #35d6ff);
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: bold;
     }
 
     .studio {
-      margin-top:20px;
+      margin-top: 20px;
     }
 
     .card {
-      background:#111;
-      border:1px solid #333;
-      padding:15px;
-      margin-bottom:15px;
+      background: #111;
+      border: 1px solid #333;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border: 1px solid #333;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      color: #8fa0c5;
     }
 
     video {
-      width:100%;
-      margin-top:10px;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+      background: #000;
     }
 
     img {
-      width:100%;
-      margin-top:10px;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+      background: #000;
     }
 
     .label {
-      color:#888;
-      font-size:12px;
-      margin-top:5px;
+      color: #888;
+      font-size: 12px;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hooks, .script, .titles {
+      background: #171b28;
+      border: 1px solid #2b3144;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 
 <body>
-
 <div class="container">
-
   <h1>Zerenthis Studio</h1>
+  <div class="sub">Money Mode, God Mode, and Smart Growth Mode</div>
 
-  <textarea id="prompt" placeholder="Enter topic (e.g. AI automation)"></textarea>
+  <textarea id="prompt" placeholder="Enter topic, e.g. AI automation"></textarea>
+
+  <div class="row">
+    <select id="mode">
+      <option value="money">💰 Money Mode</option>
+      <option value="god">🧠 God Mode</option>
+    </select>
+
+    <select id="count">
+      <option value="3">Batch 3</option>
+      <option value="5" selected>Batch 5</option>
+      <option value="7">Batch 7</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <select id="niche">
+      <option value="ai">AI</option>
+      <option value="business">Business</option>
+      <option value="self">Self Improvement</option>
+    </select>
+
+    <div></div>
+  </div>
 
   <div class="buttons">
     <button onclick="generateSingle()">Generate Video</button>
-    <button onclick="generateBatch()">Auto Generate (Factory)</button>
+    <button onclick="generateBatch()">Auto Generate Factory</button>
+    <button onclick="generateGrowth()">Smart Growth</button>
   </div>
 
   <div class="studio" id="studio"></div>
-
 </div>
 
 <script>
 const backend = "https://semantiqai-backend-production-bcab.up.railway.app";
 
 // -------------------------
-// 🎥 SINGLE VIDEO
+// Single video
 // -------------------------
 async function generateSingle() {
-  const prompt = document.getElementById("prompt").value;
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
+  const mode = document.getElementById("mode").value;
   const studio = document.getElementById("studio");
 
   studio.innerHTML = "Generating video...";
 
   const res = await fetch(backend + "/universal", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({ prompt })
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      prompt,
+      mode
+    })
   });
 
   const data = await res.json();
 
   studio.innerHTML = `
     <div class="card">
+      <div class="badge">${data.mode.toUpperCase()} MODE</div>
       <h2>${data.title}</h2>
 
       <div class="label">Video</div>
@@ -129,36 +213,43 @@ async function generateSingle() {
       <p>${data.description}</p>
 
       <div class="label">Hooks</div>
-      <p>${(data.hooks || []).join("<br>")}</p>
+      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
+
+      <div class="label">Script</div>
+      <div class="script">${(data.script || []).join("<br><br>")}</div>
     </div>
   `;
 }
 
 // -------------------------
-// 🏭 BATCH FACTORY
+// Batch factory
 // -------------------------
 async function generateBatch() {
-  const prompt = document.getElementById("prompt").value;
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
+  const mode = document.getElementById("mode").value;
+  const count = parseInt(document.getElementById("count").value, 10);
   const studio = document.getElementById("studio");
 
   studio.innerHTML = "Generating batch...";
 
   const res = await fetch(backend + "/factory", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
       topic: prompt,
-      count: 5
+      count,
+      mode
     })
   });
 
   const data = await res.json();
 
-  let html = `<h2>Generated ${data.total} Videos</h2>`;
+  let html = `<h2>${data.mode.toUpperCase()} MODE BATCH (${data.total})</h2>`;
 
   data.items.forEach(item => {
     html += `
       <div class="card">
+        <div class="badge">${item.mode.toUpperCase()} MODE</div>
         <h3>${item.title}</h3>
 
         <div class="label">Video</div>
@@ -168,7 +259,60 @@ async function generateBatch() {
         <img src="${backend}${item.thumbnail_url}" />
 
         <div class="label">Hooks</div>
-        <p>${item.hooks.join("<br>")}</p>
+        <div class="hooks">${item.hooks.join("<br>")}</div>
+
+        <div class="label">Script</div>
+        <div class="script">${item.script.join("<br><br>")}</div>
+      </div>
+    `;
+  });
+
+  studio.innerHTML = html;
+}
+
+// -------------------------
+// Smart growth
+// -------------------------
+async function generateGrowth() {
+  const niche = document.getElementById("niche").value;
+  const count = parseInt(document.getElementById("count").value, 10);
+  const studio = document.getElementById("studio");
+
+  studio.innerHTML = "Finding best topics...";
+
+  const res = await fetch(backend + "/growth", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      niche,
+      count
+    })
+  });
+
+  const data = await res.json();
+
+  let html = `<h2>SMART GROWTH OUTPUT (${data.total})</h2>`;
+
+  data.items.forEach(item => {
+    html += `
+      <div class="card">
+        <div class="badge">SMART GROWTH</div>
+        <h3>${item.title}</h3>
+
+        <div class="label">Video</div>
+        <video controls src="${backend}${item.video_url}"></video>
+
+        <div class="label">Thumbnail</div>
+        <img src="${backend}${item.thumbnail_url}" />
+
+        <div class="label">Suggested Titles</div>
+        <div class="titles">${item.suggested_titles.join("<br>")}</div>
+
+        <div class="label">Hooks</div>
+        <div class="hooks">${item.hooks.join("<br>")}</div>
+
+        <div class="label">Script</div>
+        <div class="script">${item.script.join("<br><br>")}</div>
       </div>
     `;
   });
@@ -176,6 +320,5 @@ async function generateBatch() {
   studio.innerHTML = html;
 }
 </script>
-
 </body>
 </html>
