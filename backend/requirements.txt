@@ -1,4 +1,4 @@
-fastapi
+fafastapi
 uvicorn[standard]
 moviepy
 gTTS
