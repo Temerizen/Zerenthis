@@ -17,6 +17,26 @@ def root():
 
 @app.get("/command")
 def command(q: str = ""):
-    if not q:
-        return {"response": "Command idle."}
+    text = q.lower()
+
+    if "video idea" in text:
+        return {"response": "YouTube Idea: 'I Let AI Run My Life for 24 Hours (Insane Results)'"}
+    
+    if "business" in text:
+        return {"response": "Start a niche AI tool, post daily content, monetize with subscriptions."}
+
     return {"response": f"Zerenthis processed: {q}"}
+
+
+# 🔥 FOUNDER ENDPOINT
+@app.get("/founder")
+def founder():
+    return {
+        "status": "Founder access confirmed",
+        "tools": [
+            "Content Generator",
+            "YouTube Idea Engine",
+            "Execution Planner",
+            "Automation System (coming soon)"
+        ]
+    }
