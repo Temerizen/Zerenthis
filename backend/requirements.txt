@@ -2,6 +2,7 @@ fastapi
 uvicorn[standard]
 moviepy
 gTTS
+pillow
 imageio
 imageio-ffmpeg
 numpy
