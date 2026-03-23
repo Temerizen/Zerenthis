@@ -3,11 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from moviepy.editor import *
 from gtts import gTTS
-from PIL import Image, ImageDraw, ImageFont
-import uuid, os
+from PIL import Image, ImageDraw
+import uuid
 from pathlib import Path
 
-app = FastAPI(title="Zerenthis Creator Engine")
+app = FastAPI(title="Zerenthis Viral Engine")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,46 +22,42 @@ OUT = BASE / "outputs"
 OUT.mkdir(exist_ok=True)
 
 # ----------------------------
-# 🧠 SCRIPT ENGINE (CREATOR STYLE)
+# 🧠 VIRAL SCRIPT ENGINE
 # ----------------------------
 def generate_script(topic):
-    return f"""
-[HOOK]
-Most people are completely missing what {topic} is really doing.
-
-[BUILD]
-This is not just a trend. It is changing leverage, speed, and opportunity.
-
-[INSIGHT]
-The people who understand {topic} early are already gaining an advantage.
-
-[PAYOFF]
-If you use this correctly, you can move faster than 99% of people.
-
-[CTA]
-Follow for more high-leverage insights.
-""".strip()
+    return [
+        f"Stop scrolling. {topic} is about to change everything.",
+        f"Most people completely misunderstand {topic}.",
+        f"This is where the real advantage starts.",
+        f"If you learn this early, you win faster.",
+        f"The gap is getting bigger every day.",
+        f"This is your moment to move.",
+    ]
 
 # ----------------------------
-# 🎥 VIDEO ENGINE
+# 🎥 SCENE CREATOR
 # ----------------------------
-def split_scenes(script):
-    return [s.strip() for s in script.split("\n\n") if s.strip()]
+def make_scene(text, duration, i):
+    colors = [
+        (10,12,22),
+        (18,14,35),
+        (12,22,30),
+        (22,16,28),
+    ]
 
-def make_scene(text, duration):
-    bg = ColorClip((1280,720), color=(10,12,22)).set_duration(duration)
+    bg = ColorClip((1280,720), color=colors[i % len(colors)]).set_duration(duration)
 
     main = TextClip(
         text,
-        fontsize=42,
+        fontsize=48,
         color="white",
         method="caption",
         size=(1000,500)
     ).set_position("center").set_duration(duration)
 
     caption = TextClip(
-        text[:100],
-        fontsize=28,
+        text.upper(),
+        fontsize=30,
         color="cyan",
         method="caption",
         size=(1000,200)
@@ -69,27 +65,34 @@ def make_scene(text, duration):
 
     return CompositeVideoClip([bg, main, caption])
 
-def build_video(topic, script):
+# ----------------------------
+# 🎬 VIDEO ENGINE
+# ----------------------------
+def build_video(topic):
     uid = str(uuid.uuid4())
+
+    script_parts = generate_script(topic)
+    full_script = " ".join(script_parts)
 
     audio_path = OUT / f"{uid}.mp3"
     video_path = OUT / f"{uid}.mp4"
 
     # voice
-    gTTS(script).save(audio_path)
+    gTTS(full_script).save(audio_path)
 
     audio = AudioFileClip(str(audio_path))
-    duration = audio.duration
+    total = audio.duration
 
-    scenes = split_scenes(script)
-    per = duration / max(len(scenes),1)
+    per = total / len(script_parts)
 
-    clips = [make_scene(s, per) for s in scenes]
+    clips = []
+    for i, part in enumerate(script_parts):
+        clips.append(make_scene(part, per, i))
 
     final = concatenate_videoclips(clips).set_audio(audio)
     final.write_videofile(str(video_path), fps=24)
 
-    return video_path.name
+    return video_path.name, script_parts
 
 # ----------------------------
 # 🖼 THUMBNAIL ENGINE
@@ -101,30 +104,43 @@ def make_thumbnail(text):
     img = Image.new("RGB", (1280,720), color=(10,12,22))
     draw = ImageDraw.Draw(img)
 
-    draw.text((100,300), text[:40], fill=(255,255,255))
+    draw.text((100,300), text[:30].upper(), fill=(255,255,255))
 
     img.save(path)
     return path.name
 
 # ----------------------------
-# 🚀 UNIVERSAL ROUTE
+# ✂️ SHORTS ENGINE
+# ----------------------------
+def make_shorts(script_parts):
+    shorts = []
+    for part in script_parts:
+        shorts.append({
+            "clip": part,
+            "caption": part.upper()
+        })
+    return shorts
+
+# ----------------------------
+# 🚀 UNIVERSAL ENDPOINT
 # ----------------------------
 @app.post("/universal")
 async def universal(req: Request):
     data = await req.json()
     prompt = data.get("prompt","AI automation")
 
-    script = generate_script(prompt)
-    video = build_video(prompt, script)
+    video, parts = build_video(prompt)
     thumb = make_thumbnail(prompt)
+    shorts = make_shorts(parts)
 
     return {
-        "type":"video",
-        "title": f"{prompt} Will Change Everything",
+        "type":"viral_video",
+        "title": f"{prompt} Is About To Explode",
         "video_url": f"/files/{video}",
         "thumbnail_url": f"/files/{thumb}",
-        "script": script,
-        "description": f"This video explains {prompt}. Subscribe for more."
+        "shorts": shorts,
+        "description": f"This changes everything about {prompt}. Follow for more.",
+        "hooks": parts[:2]
     }
 
 # ----------------------------
