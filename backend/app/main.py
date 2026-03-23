@@ -42,6 +42,7 @@ def founder():
         "status": "Founder access confirmed",
         "tools": [
             "Full Video Pack v2",
+            "Batch Video Pack",
             "Mini Book Pack",
             "Podcast Episode Pack",
             "Movie Package",
@@ -50,10 +51,8 @@ def founder():
     }
 
 
-@app.get("/generate/video")
-def generate_video(topic: str = "AI automation", tone: str = "bold"):
+def build_video_pack(topic: str, angle: str, tone: str):
     topic_title = topic.title()
-    tone = tone.lower().strip()
 
     if tone == "dramatic":
         voice = "high-stakes, cinematic, emotionally charged"
@@ -64,10 +63,49 @@ def generate_video(topic: str = "AI automation", tone: str = "bold"):
     else:
         voice = "bold, sharp, high-energy, strategic"
 
+    title = f"{angle}: {topic_title}"
+    hook = f"{angle} is the side of {topic} most people completely miss, and that is exactly why it creates such massive upside."
+    script = f"""
+TONE: {voice}
+
+[INTRO]
+Today we are breaking down {topic} through the lens of: {angle}.
+Most people look at the surface. We are going deeper.
+
+[SECTION 1]
+{angle} changes how people think about {topic}.
+This is not just about information. It is about leverage, timing, and positioning.
+
+[SECTION 2]
+The reason this matters is simple:
+people who understand {topic} early can create faster, learn faster, and move with more control.
+
+[SECTION 3]
+The practical move is to use {topic} in one focused workflow first.
+Then refine it.
+Then scale it.
+
+[OUTRO]
+The winners in this shift will not be the loudest.
+They will be the people who build early and compound quietly.
+    """.strip()
+
+    return {
+        "title": title,
+        "hook": hook,
+        "script": script,
+        "thumbnail_text": f"{angle} Wins",
+        "description": f"This video explores {topic} through the angle of {angle}, showing why it matters and how to use it.",
+        "cta": "Subscribe for more leverage-driven AI content.",
+    }
+
+
+@app.get("/generate/video")
+def generate_video(topic: str = "AI automation", tone: str = "bold"):
     titles = [
-        f"How {topic_title} Can Change Your Life Faster Than You Think",
-        f"The Real Opportunity Behind {topic_title}",
-        f"Why {topic_title} Is Bigger Than Most People Realize"
+        f"How {topic.title()} Can Change Your Life Faster Than You Think",
+        f"The Real Opportunity Behind {topic.title()}",
+        f"Why {topic.title()} Is Bigger Than Most People Realize"
     ]
 
     hooks = [
@@ -77,53 +115,26 @@ def generate_video(topic: str = "AI automation", tone: str = "bold"):
     ]
 
     script = f"""
-TONE: {voice}
-
 [INTRO]
 Today we are breaking down {topic} and why it matters more than most people realize.
-If you understand this early, you gain leverage while everyone else stays confused.
 
-[SECTION 1: WHAT THIS REALLY IS]
-At its core, {topic} is not just a trend.
-It is a leverage system.
-It helps people produce more, learn faster, move quicker, and expand output with less friction.
+[SECTION 1]
+At its core, {topic} is a leverage system.
 
-[SECTION 2: WHY THIS MATTERS NOW]
-The timing matters.
-People who adopt {topic} early build compound advantages.
-They create systems, assets, and experience while everyone else is still hesitating.
+[SECTION 2]
+The timing matters. Early adopters build compound advantages.
 
-[SECTION 3: THE PRACTICAL ADVANTAGE]
-Here is where it gets real.
-You can use {topic} to:
-- create content faster
-- build products faster
-- research faster
-- learn faster
-- make better strategic decisions
-
-That means output increases while effort stays more controlled.
-
-[SECTION 4: WHY MOST PEOPLE MISS IT]
-Most people wait for certainty.
-They want proof before action.
-But by the time something feels obvious, the biggest advantage window is already closing.
-
-[SECTION 5: HOW TO START]
-Start with one workflow.
-Use {topic} on one clear problem.
-Refine the result.
-Then stack that workflow until it becomes part of your system.
+[SECTION 3]
+Use {topic} to create content faster, learn faster, and scale output.
 
 [OUTRO]
-The real question is not whether {topic} matters.
-The real question is whether you will use it before everyone else catches on.
+The question is whether you will use it before everyone else catches on.
     """.strip()
 
     shorts = [
-        f"Short 1: {topic_title} is not just a tool. It is leverage. The people using it early are buying speed while everyone else is buying delay.",
-        f"Short 2: Most people wait too long to learn {topic}. By the time it feels obvious, the biggest advantage is already gone.",
-        f"Short 3: If you use {topic} correctly, you do not just save time. You multiply output."
+        f"{topic.title()} is leverage.",
+        f"Most people will move too late on {topic}.",
+        f"{topic.title()} multiplies output."
     ]
 
     return {
@@ -133,22 +144,51 @@ The real question is whether you will use it before everyone else catches on.
         "hook_options": hooks,
         "full_script": script,
         "thumbnail_text_options": [
-            f"{topic_title} Changes Everything",
-            f"The {topic_title} Advantage",
+            f"{topic.title()} Changes Everything",
+            f"The {topic.title()} Advantage",
             f"Most People Miss This"
         ],
-        "description": f"This video breaks down {topic}, why it matters right now, how it creates leverage, and how to start using it strategically.",
+        "description": f"This video breaks down {topic}, why it matters right now, and how to use it strategically.",
         "tags": [
             topic,
             "AI",
             "automation",
             "productivity",
             "business",
-            "future tech",
-            "content strategy"
+            "future tech"
         ],
-        "cta": "Subscribe for more system-level AI content, leverage strategies, and execution frameworks.",
+        "cta": "Subscribe for more system-level AI content.",
         "shorts_pack": shorts
+    }
+
+
+@app.get("/generate/video-batch")
+def generate_video_batch(topic: str = "AI automation", tone: str = "bold", count: int = 5):
+    angles = [
+        "The Hidden Advantage",
+        "Why Early Movers Win",
+        "The Leverage Shift",
+        "What Most People Miss",
+        "The Smartest Way To Start",
+        "The New Opportunity",
+        "Why This Changes Everything"
+    ]
+
+    count = max(1, min(count, 10))
+    selected = angles[:count]
+
+    items = []
+    for idx, angle in enumerate(selected, start=1):
+        pack = build_video_pack(topic, angle, tone)
+        pack["video_number"] = idx
+        items.append(pack)
+
+    return {
+        "type": "Batch Video Pack",
+        "topic": topic,
+        "tone": tone,
+        "count": count,
+        "items": items
     }
 
 
@@ -167,38 +207,9 @@ def generate_minibook(topic: str = "AI leverage"):
             "Execution Plan",
             "Closing Thoughts"
         ],
-        "content": f"""
-# The Beginner's Guide to {topic.title()}
-
-## Introduction
-This mini book is designed to give you a practical understanding of {topic} without unnecessary fluff.
-
-## What {topic.title()} Really Is
-At its core, {topic} is a leverage system. It helps people produce, learn, and execute faster.
-
-## Why Most People Stay Behind
-Most people wait too long. They consume passively instead of building skill with real tools.
-
-## Core Principles
-1. Leverage beats effort alone.
-2. Speed matters when windows are opening.
-3. Systems outperform random action.
-
-## Practical Use Cases
-You can use {topic} for content creation, research, learning, planning, and monetization.
-
-## Execution Plan
-Start small.
-Use one clear workflow.
-Refine based on output.
-Stack results over time.
-
-## Closing Thoughts
-The future belongs to people who can combine judgment with leverage.
-That is the real value of {topic}.
-        """.strip(),
-        "back_cover": f"A concise, actionable guide to understanding {topic} and using it for real-world leverage.",
-        "sales_description": f"Learn the foundations of {topic} in a clear, fast, and useful format built for action-takers."
+        "content": f"A concise mini-book draft about {topic}.",
+        "back_cover": f"A concise, actionable guide to understanding {topic}.",
+        "sales_description": f"Learn the foundations of {topic} in a clear, fast format."
     }
 
 
@@ -207,21 +218,19 @@ def generate_podcast(topic: str = "AI and the future"):
     return {
         "type": "Podcast Episode Pack",
         "episode_title": f"{topic.title()}: What Changes Next",
-        "opening": f"Welcome back. Today we are talking about {topic}, why it matters, and what shifts are coming faster than most people expect.",
+        "opening": f"Welcome back. Today we are talking about {topic}.",
         "segments": [
             "Why this topic matters now",
             "The biggest misconception",
             "The practical opportunity",
-            "What happens next",
-            "Final takeaway"
+            "What happens next"
         ],
         "talking_points": [
             f"{topic.title()} is moving from novelty to infrastructure.",
-            "Early understanding creates long-term advantage.",
-            "Most people underestimate compounding technological shifts."
+            "Early understanding creates long-term advantage."
         ],
-        "closing": "That is the real takeaway. Learn early, act early, and keep building while the field is still open.",
-        "show_notes": f"This episode explores {topic}, what it means, why it matters, and how to think strategically about the shift."
+        "closing": "Learn early, act early, and keep building.",
+        "show_notes": f"This episode explores {topic}."
     }
 
 
@@ -230,15 +239,15 @@ def generate_movie(topic: str = "AI civilization"):
     return {
         "type": "Movie Package",
         "title": f"{topic.title()}: The Last Advantage",
-        "logline": f"In a world reshaped by {topic}, one outsider discovers the system is being quietly rewritten by those who understood it first.",
-        "treatment": f"A high-stakes story about power, adaptation, and the social consequences of {topic}.",
+        "logline": f"In a world reshaped by {topic}, one outsider discovers the system is being quietly rewritten.",
+        "treatment": f"A high-stakes story about power and adaptation around {topic}.",
         "act_structure": [
-            "Act I: Discovery of the hidden shift",
-            "Act II: Escalation and resistance",
-            "Act III: Confrontation and transformation"
+            "Act I: Discovery",
+            "Act II: Escalation",
+            "Act III: Transformation"
         ],
         "poster_tagline": "The future did not arrive equally.",
-        "trailer_copy": f"In a world transformed by {topic}, the gap between the builders and the rest becomes impossible to ignore."
+        "trailer_copy": f"In a world transformed by {topic}, the gap becomes impossible to ignore."
     }
 
 
@@ -249,12 +258,12 @@ def generate_game(topic: str = "AI empire"):
         "title": f"{topic.title()}: Ascension Protocol",
         "genre": "Strategy RPG",
         "core_loop": f"Build, upgrade, automate, and dominate systems inside a world shaped by {topic}.",
-        "lore": f"In the aftermath of the {topic} shift, factions compete to control the infrastructure of intelligence.",
+        "lore": f"In the aftermath of the {topic} shift, factions compete to control intelligence infrastructure.",
         "progression": [
-            "Start with one weak node",
-            "Expand systems and influence",
-            "Unlock automation layers",
-            "Take control of rival territories"
+            "Start with one node",
+            "Expand systems",
+            "Unlock automation",
+            "Control rival territories"
         ],
         "characters": [
             "The Founder",
@@ -262,5 +271,5 @@ def generate_game(topic: str = "AI empire"):
             "The Architect",
             "The Rival Operator"
         ],
-        "monetization": "Premium game with expansion packs and cosmetics."
+        "monetization": "Premium game with expansions."
     }
