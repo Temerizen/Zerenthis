@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis | Where Intelligence Becomes Power</title>
-  <meta
-    name="description"
-    content="Zerenthis is a premium intelligence platform for execution, learning, simulation, creation, and founder control."
-  />
+  <title>Zerenthis | Founder Content Factory</title>
+  <meta name="description" content="Zerenthis founder-only content factory for one-click generation of finished content packages." />
   <style>
     :root{
       --bg:#05060b;
@@ -20,7 +17,6 @@
       --cyan:#35d6ff;
       --green:#61f2b0;
     }
-
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%}
     body{
@@ -31,16 +27,12 @@
         radial-gradient(circle at top right, rgba(53,214,255,.12), transparent 25%),
         linear-gradient(180deg,#05060b 0%,#090c14 100%);
     }
-
-    button,input{font:inherit}
-    a{text-decoration:none;color:inherit}
-
+    button,input,textarea{font:inherit}
     .shell{
       display:grid;
       grid-template-columns:280px 1fr;
       min-height:100vh;
     }
-
     .sidebar{
       background:rgba(8,10,18,.86);
       border-right:1px solid var(--line);
@@ -52,7 +44,6 @@
       flex-direction:column;
       gap:18px;
     }
-
     .brand{
       display:flex;
       gap:14px;
@@ -60,7 +51,6 @@
       padding:8px 8px 18px;
       border-bottom:1px solid var(--line);
     }
-
     .brand-mark{
       width:56px;
       height:56px;
@@ -74,16 +64,13 @@
       font-size:1.6rem;
       color:white;
     }
-
     .brand-mark img{
       width:100%;
       height:100%;
       object-fit:cover;
     }
-
     .brand-text h1{margin:0;font-size:1.06rem}
     .brand-text p{margin:4px 0 0;color:var(--muted);font-size:.86rem}
-
     .label{
       color:var(--muted);
       letter-spacing:.18em;
@@ -91,12 +78,10 @@
       font-size:.72rem;
       padding:0 10px;
     }
-
     .nav{
       display:grid;
       gap:10px;
     }
-
     .nav-link{
       display:flex;
       justify-content:space-between;
@@ -109,13 +94,11 @@
       cursor:pointer;
       transition:.18s ease;
     }
-
     .nav-link:hover,.nav-link.active{
       transform:translateX(2px);
       background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
       border-color:var(--line2);
     }
-
     .sidebar-card{
       margin-top:auto;
       padding:16px;
@@ -123,14 +106,12 @@
       border:1px solid var(--line);
       background:rgba(255,255,255,.03);
     }
-
     .status-row{
       display:flex;
       gap:10px;
       align-items:center;
       margin-bottom:10px;
     }
-
     .dot{
       width:10px;
       height:10px;
@@ -138,11 +119,9 @@
       background:var(--green);
       box-shadow:0 0 18px rgba(97,242,176,.5);
     }
-
     .main{
       padding:26px;
     }
-
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -150,7 +129,6 @@
       gap:18px;
       margin-bottom:22px;
     }
-
     .eyebrow{
       letter-spacing:.18em;
       text-transform:uppercase;
@@ -158,27 +136,23 @@
       color:var(--muted);
       margin-bottom:8px;
     }
-
     .title{
       margin:0;
       font-size:clamp(2.1rem,4vw,3.6rem);
       line-height:1.02;
       letter-spacing:-.04em;
     }
-
     .subtitle{
       margin:12px 0 0;
       color:#cfd8f6;
       max-width:760px;
       line-height:1.65;
     }
-
     .actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
     }
-
     .btn{
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
@@ -187,54 +161,13 @@
       border-radius:14px;
       cursor:pointer;
     }
-
     .btn.primary{
       border:none;
       background:linear-gradient(135deg,var(--violet),var(--cyan));
       color:white;
     }
-
-    .command-bar{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:12px;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(255,255,255,.03);
-      margin-bottom:12px;
-    }
-
-    .command-bar input{
-      width:100%;
-      background:transparent;
-      border:none;
-      outline:none;
-      color:var(--text);
-      font-size:1rem;
-    }
-
-    .status-strip{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:22px;
-    }
-
-    .pill{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(255,255,255,.03);
-      font-size:.9rem;
-    }
-
     .page{display:none}
     .page.active{display:block}
-
     .stack{display:grid;gap:18px}
     .hero,.panel,.stat,.module-card{
       border:1px solid var(--line);
@@ -243,27 +176,22 @@
       padding:24px;
       box-shadow:0 10px 40px rgba(0,0,0,.32);
     }
-
     .hero h2{margin:0 0 12px;font-size:clamp(1.9rem,3.8vw,3.1rem)}
     .hero p,.panel p,.module-card p{color:#b7c0df;line-height:1.68}
-
     .grid-3{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:18px;
     }
-
     .module-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
       margin-top:16px;
     }
-
     .stat .label-sm{color:var(--muted);font-size:.92rem}
     .stat .value{font-size:2rem;font-weight:800;margin:10px 0 8px}
     .stat .detail{color:#bcc4e1}
-
     .tag{
       display:inline-block;
       margin-bottom:10px;
@@ -272,9 +200,7 @@
       letter-spacing:.16em;
       text-transform:uppercase;
     }
-
     .module-card h4{margin:0 0 10px;font-size:1.12rem}
-
     .small-btn{
       margin-top:10px;
       padding:10px 12px;
@@ -284,19 +210,48 @@
       color:var(--text);
       cursor:pointer;
     }
-
-    #commandOutput{
-      display:none;
-      margin-bottom:18px;
-      padding:14px 16px;
-      border-radius:16px;
+    .pill{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
       border:1px solid var(--line);
+      border-radius:999px;
       background:rgba(255,255,255,.03);
-      color:#dbe3ff;
-      line-height:1.6;
-      max-width:760px;
+      font-size:.9rem;
+      margin-right:10px;
+      margin-bottom:10px;
     }
-
+    .factory-controls{
+      display:grid;
+      gap:14px;
+      margin-bottom:16px;
+    }
+    .factory-controls input, .factory-controls select{
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    .factory-buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    pre{
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      overflow-wrap:anywhere;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      color:#dbe3ff;
+      line-height:1.7;
+    }
     .founder-lock{
       position:fixed;
       inset:0;
@@ -308,11 +263,9 @@
       z-index:50;
       padding:20px;
     }
-
     .founder-lock.open{
       display:flex;
     }
-
     .lock-card{
       width:min(460px,100%);
       border:1px solid var(--line2);
@@ -321,17 +274,14 @@
       box-shadow:0 30px 100px rgba(0,0,0,.5);
       padding:24px;
     }
-
     .lock-card h3{
       margin:0 0 10px;
       font-size:1.5rem;
     }
-
     .lock-card p{
       color:#b7c0df;
       line-height:1.6;
     }
-
     .lock-card input{
       width:100%;
       margin-top:12px;
@@ -342,26 +292,20 @@
       color:var(--text);
       outline:none;
     }
-
     .lock-actions{
       display:flex;
       gap:12px;
       margin-top:14px;
       flex-wrap:wrap;
     }
-
     .lock-error{
       margin-top:12px;
       color:#ffb8c8;
       display:none;
     }
-
-    #founderOutput{
-      margin-top:15px;
-      color:#dbe3ff;
-      line-height:1.7;
+    #factoryOutput{
+      margin-top:16px;
     }
-
     @media (max-width: 1080px){
       .shell{grid-template-columns:1fr}
       .sidebar{
@@ -376,9 +320,6 @@
       .topbar{
         flex-direction:column;
         align-items:start;
-      }
-      .command-bar{
-        grid-template-columns:1fr;
       }
     }
   </style>
@@ -399,167 +340,116 @@
       <div class="label">System</div>
       <nav class="nav">
         <button class="nav-link active" onclick="jump('core')"><span>Core</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('cognitive')"><span>Cognitive Lab</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('school')"><span>AI School</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('execution')"><span>Execution Engine</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('factory')"><span>Content Factory</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('simulation')"><span>Reality Simulation</span><span>◦</span></button>
-        <button class="nav-link" onclick="openFounderGate()"><span>Founder Panel</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('factory')"><span>Founder Factory</span><span>◦</span></button>
+        <button class="nav-link" onclick="openFounderGate()"><span>Founder Login</span><span>◦</span></button>
       </nav>
 
       <div class="sidebar-card">
-        <div class="status-row"><span class="dot"></span><span>System horizon stable</span></div>
-        <small>Zerenthis public shell online. Backend connected. Founder tools available after unlock.</small>
+        <div class="status-row"><span class="dot"></span><span>Factory horizon stable</span></div>
+        <small>Founder-only one-click content generation is the priority layer in this version.</small>
       </div>
     </aside>
 
     <main class="main">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Command surface</div>
-          <h1 class="title">Command Intelligence. Execute Without Friction.</h1>
-          <p class="subtitle">This version is connected to your live backend, and the Founder Panel can now load actual founder tools from the API.</p>
+          <div class="eyebrow">Founder content factory</div>
+          <h1 class="title">Generate Finished Packages, Not Ideas</h1>
+          <p class="subtitle">Public gets lightweight idea outputs later. Founder gets the real machine: one-click generation of finished content packages for publishing and production.</p>
         </div>
         <div class="actions">
-          <button class="btn">System Log</button>
+          <button class="btn" onclick="jump('core')">Overview</button>
           <button class="btn primary" onclick="openFounderGate()">Founder Access</button>
         </div>
-      </div>
-
-      <div class="command-bar">
-        <input id="commandInput" type="text" placeholder="Tell Zerenthis what to do..." />
-        <button class="btn primary" onclick="runCommand()">Run Command</button>
-      </div>
-      <div id="commandOutput"></div>
-
-      <div class="status-strip">
-        <span class="pill">System Status: Operational</span>
-        <span class="pill">Mode: Focus</span>
-        <span class="pill">Backend: Connected</span>
-        <span class="pill" id="timePill">Last update: just now</span>
       </div>
 
       <section id="core" class="page active">
         <div class="stack">
           <div class="hero">
-            <div class="eyebrow">Intelligence layer</div>
-            <h2>Where Intelligence Becomes Power</h2>
-            <p>Zerenthis is now more than a static shell. The command bar is wired to the live Railway backend, and the founder layer can load live founder tools.</p>
+            <div class="eyebrow">Current stage</div>
+            <h2>Founder Content Factory v1</h2>
+            <p>This version is built for founder-first asset generation. Video packs, mini books, podcasts, movie packages, and game packages can now be generated directly from the founder layer.</p>
           </div>
 
           <div class="grid-3">
             <div class="stat">
-              <div class="label-sm">Launch Readiness</div>
-              <div class="value">98%</div>
-              <div class="detail">Public shell is live and backend-connected.</div>
+              <div class="label-sm">Founder Mode</div>
+              <div class="value">Active</div>
+              <div class="detail">The factory is centered on founder-only full output generation.</div>
             </div>
             <div class="stat">
-              <div class="label-sm">System Modules</div>
-              <div class="value">6 + 1</div>
-              <div class="detail">Six public surfaces plus one gated founder surface.</div>
+              <div class="label-sm">Output Types</div>
+              <div class="value">5</div>
+              <div class="detail">Video, mini book, podcast, movie, and game packages.</div>
             </div>
             <div class="stat">
-              <div class="label-sm">Founder Tools</div>
-              <div class="value">Live</div>
-              <div class="detail">Founder panel can fetch tools from the backend.</div>
+              <div class="label-sm">Workflow</div>
+              <div class="value">1 Click</div>
+              <div class="detail">Topic in. Finished structured package out.</div>
             </div>
           </div>
 
           <div class="panel">
-            <div class="eyebrow">Operational surfaces</div>
-            <h3>Premium system architecture</h3>
+            <div class="eyebrow">Founder-only generators</div>
+            <h3>What v1 can generate</h3>
             <div class="module-grid">
               <div class="module-card">
-                <div class="tag">Mind expansion</div>
-                <h4>Cognitive Lab</h4>
-                <p>Train focus, abstraction, recall, and structured reasoning.</p>
-                <button class="small-btn" onclick="jump('cognitive')">Open module</button>
+                <div class="tag">Publishing</div>
+                <h4>Full Video Pack</h4>
+                <p>Title, hook, full script, thumbnail text, description, tags, CTA, short caption.</p>
               </div>
               <div class="module-card">
-                <div class="tag">Adaptive instruction</div>
-                <h4>AI School</h4>
-                <p>Turn ambitious topics into guided programs and learning paths.</p>
-                <button class="small-btn" onclick="jump('school')">Open module</button>
+                <div class="tag">Publishing</div>
+                <h4>Mini Book Pack</h4>
+                <p>Title, subtitle, contents, draft, back cover, sales description.</p>
               </div>
               <div class="module-card">
-                <div class="tag">Workflow ignition</div>
-                <h4>Execution Engine</h4>
-                <p>Convert intentions into tracked queues and strategic momentum.</p>
-                <button class="small-btn" onclick="jump('execution')">Open module</button>
+                <div class="tag">Audio</div>
+                <h4>Podcast Episode Pack</h4>
+                <p>Episode title, opening, segments, talking points, closing, show notes.</p>
               </div>
               <div class="module-card">
-                <div class="tag">Media production</div>
-                <h4>Content Factory</h4>
-                <p>Shape concepts into scripts, thumbnails, and publishing flow.</p>
-                <button class="small-btn" onclick="jump('factory')">Open module</button>
+                <div class="tag">Narrative</div>
+                <h4>Movie Package</h4>
+                <p>Title, logline, treatment, act structure, poster tagline, trailer copy.</p>
               </div>
               <div class="module-card">
-                <div class="tag">Strategic forecasting</div>
-                <h4>Reality Simulation</h4>
-                <p>Explore branches before real-world time and money get spent.</p>
-                <button class="small-btn" onclick="jump('simulation')">Open module</button>
-              </div>
-              <div class="module-card">
-                <div class="tag">Private command layer</div>
-                <h4>Founder Panel</h4>
-                <p>Reserved controls for owner-only access and live founder tools.</p>
-                <button class="small-btn" onclick="openFounderGate()">Founder login</button>
+                <div class="tag">Interactive</div>
+                <h4>Game Package</h4>
+                <p>Title, genre, core loop, lore, progression, characters, monetization.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="cognitive" class="page">
-        <div class="hero">
-          <div class="eyebrow">Mind expansion</div>
-          <h2>Cognitive Lab</h2>
-          <p>Build focus systems, reasoning drills, memory loops, and deliberate intelligence training.</p>
-        </div>
-      </section>
-
-      <section id="school" class="page">
-        <div class="hero">
-          <div class="eyebrow">Adaptive instruction</div>
-          <h2>AI School</h2>
-          <p>A branded academy layer for guided learning, subject mastery, and challenge-based progress.</p>
-        </div>
-      </section>
-
-      <section id="execution" class="page">
-        <div class="hero">
-          <div class="eyebrow">Workflow ignition</div>
-          <h2>Execution Engine</h2>
-          <p>Ideas matter less than execution velocity. This section frames action as leverage and momentum.</p>
-        </div>
-      </section>
-
       <section id="factory" class="page">
-        <div class="hero">
-          <div class="eyebrow">Media production</div>
-          <h2>Content Factory</h2>
-          <p>A creative machine room for concepts, scripts, thumbnail direction, and output planning.</p>
-        </div>
-      </section>
+        <div class="stack">
+          <div class="hero">
+            <div class="eyebrow">Founder factory</div>
+            <h2>One-click generation</h2>
+            <p>Choose an asset type, enter a topic, and generate a finished package from the live founder backend.</p>
+          </div>
 
-      <section id="simulation" class="page">
-        <div class="hero">
-          <div class="eyebrow">Strategic forecasting</div>
-          <h2>Reality Simulation</h2>
-          <p>Model branches before the real world charges you for them.</p>
-        </div>
-      </section>
+          <div class="panel">
+            <div class="factory-controls">
+              <input id="topicInput" type="text" placeholder="Enter a topic, niche, or angle..." value="AI automation" />
+              <select id="generatorType">
+                <option value="video">Full Video Pack</option>
+                <option value="minibook">Mini Book Pack</option>
+                <option value="podcast">Podcast Episode Pack</option>
+                <option value="movie">Movie Package</option>
+                <option value="game">Game Package</option>
+              </select>
+            </div>
 
-      <section id="founder" class="page">
-        <div class="hero">
-          <div class="eyebrow">Private command layer</div>
-          <h2>Founder Panel</h2>
-          <p>Founder access granted. Load the live founder tools from your backend.</p>
-        </div>
+            <div class="factory-buttons">
+              <button class="btn primary" onclick="generateAsset()">Generate Full Package</button>
+              <button class="btn" onclick="clearOutput()">Clear Output</button>
+            </div>
 
-        <div class="panel">
-          <button class="btn primary" onclick="loadFounder()">Load Founder Tools</button>
-          <div id="founderOutput"></div>
+            <div id="factoryOutput"></div>
+          </div>
         </div>
       </section>
     </main>
@@ -569,10 +459,10 @@
     <div class="lock-card">
       <div class="eyebrow">Founder authentication</div>
       <h3>Founder access required</h3>
-      <p>Enter the founder password to unlock the Founder Panel in this browser session.</p>
+      <p>Enter the founder password to unlock the Founder Factory in this browser session.</p>
       <input id="founderPassword" type="password" placeholder="Enter founder password" />
       <div class="lock-actions">
-        <button class="btn primary" onclick="unlockFounder()">Unlock Founder Panel</button>
+        <button class="btn primary" onclick="unlockFounder()">Unlock Founder Factory</button>
         <button class="btn" onclick="closeFounderGate()">Cancel</button>
       </div>
       <div class="lock-error" id="lockError">Incorrect password.</div>
@@ -582,13 +472,10 @@
   <script>
     const pages = [...document.querySelectorAll('.page')];
     const navButtons = [...document.querySelectorAll('.nav-link')];
-    const output = document.getElementById('commandOutput');
     const founderLock = document.getElementById('founderLock');
     const founderPassword = document.getElementById('founderPassword');
     const lockError = document.getElementById('lockError');
-    const timePill = document.getElementById('timePill');
     const backendUrl = 'https://semantiqai-backend-production-bcab.up.railway.app';
-
     let founderUnlocked = false;
 
     function setActiveNav(label) {
@@ -598,18 +485,18 @@
     }
 
     function jump(id) {
-      if (id === 'founder' && !founderUnlocked) {
+      if (id === 'factory' && !founderUnlocked) {
         openFounderGate();
         return;
       }
       pages.forEach(p => p.classList.toggle('active', p.id === id));
-      setActiveNav(id === 'school' ? 'ai school' : id);
+      setActiveNav(id === 'factory' ? 'founder factory' : id);
       location.hash = id;
     }
 
     function openFounderGate() {
       if (founderUnlocked) {
-        jump('founder');
+        jump('factory');
         return;
       }
       founderLock.classList.add('open');
@@ -628,84 +515,52 @@
       if (entered === founderSecret) {
         founderUnlocked = true;
         closeFounderGate();
-        jump('founder');
-        writeOutput('Founder access granted.');
+        jump('factory');
       } else {
         lockError.style.display = 'block';
       }
     }
 
-    function writeOutput(text) {
-      output.style.display = 'block';
-      output.textContent = text;
+    function clearOutput() {
+      document.getElementById('factoryOutput').innerHTML = '';
     }
 
-    async function runCommand() {
-      const input = document.getElementById('commandInput');
-      const value = (input.value || '').trim();
-
-      if (!value) {
-        writeOutput('Command idle. Try typing something into the command box.');
-        jump('core');
-        return;
+    function renderObject(obj) {
+      let html = '';
+      for (const [key, value] of Object.entries(obj)) {
+        html += `<div class="pill">${key.replaceAll('_', ' ')}</div>`;
+        if (Array.isArray(value)) {
+          html += `<pre>${value.join('\n')}</pre>`;
+        } else {
+          html += `<pre>${value}</pre>`;
+        }
       }
+      return html;
+    }
 
-      writeOutput('Thinking...');
+    async function generateAsset() {
+      const topic = document.getElementById('topicInput').value.trim() || 'AI automation';
+      const type = document.getElementById('generatorType').value;
+      const output = document.getElementById('factoryOutput');
+
+      output.innerHTML = '<pre>Generating full package...</pre>';
 
       try {
-        const res = await fetch(`${backendUrl}/command?q=${encodeURIComponent(value)}`);
+        const res = await fetch(`${backendUrl}/generate/${type}?topic=${encodeURIComponent(topic)}`);
         const data = await res.json();
-        writeOutput(data.response || 'No response returned.');
+        output.innerHTML = renderObject(data);
       } catch (err) {
-        writeOutput('Error connecting to Zerenthis backend.');
-      }
-
-      const lower = value.toLowerCase();
-      if (lower.includes('founder')) openFounderGate();
-      else if (lower.includes('content') || lower.includes('video') || lower.includes('factory')) jump('factory');
-      else if (lower.includes('execute') || lower.includes('task') || lower.includes('plan')) jump('execution');
-      else if (lower.includes('learn') || lower.includes('school') || lower.includes('study')) jump('school');
-      else if (lower.includes('think') || lower.includes('focus') || lower.includes('cognitive')) jump('cognitive');
-      else if (lower.includes('simulate') || lower.includes('scenario')) jump('simulation');
-      else jump('core');
-    }
-
-    async function loadFounder() {
-      const founderOutput = document.getElementById('founderOutput');
-      founderOutput.textContent = 'Loading...';
-
-      try {
-        const res = await fetch(`${backendUrl}/founder`);
-        const data = await res.json();
-
-        founderOutput.innerHTML = `
-          <strong>${data.status || 'Founder data loaded'}</strong><br><br>
-          ${(data.tools || []).map(t => '• ' + t).join('<br>')}
-        `;
-      } catch (err) {
-        founderOutput.textContent = 'Error loading founder tools.';
+        output.innerHTML = '<pre>Error generating asset. Check backend deployment.</pre>';
       }
     }
-
-    function refreshTime() {
-      const d = new Date();
-      timePill.textContent = 'Last update: ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-    }
-
-    document.getElementById('commandInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') runCommand();
-    });
 
     founderPassword.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') unlockFounder();
     });
 
-    refreshTime();
-    setInterval(refreshTime, 30000);
-
     const initial = location.hash.replace('#', '');
-    if (initial && pages.some(p => p.id === initial) && initial !== 'founder') {
-      jump(initial);
+    if (initial === 'factory') {
+      openFounderGate();
     } else {
       jump('core');
     }
