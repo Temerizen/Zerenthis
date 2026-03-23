@@ -253,22 +253,16 @@
       gap:18px;
     }
 
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-    }
-
-    .stat .label-sm{color:var(--muted);font-size:.92rem}
-    .stat .value{font-size:2rem;font-weight:800;margin:10px 0 8px}
-    .stat .detail{color:#bcc4e1}
-
     .module-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
       margin-top:16px;
     }
+
+    .stat .label-sm{color:var(--muted);font-size:.92rem}
+    .stat .value{font-size:2rem;font-weight:800;margin:10px 0 8px}
+    .stat .detail{color:#bcc4e1}
 
     .tag{
       display:inline-block;
@@ -362,6 +356,12 @@
       display:none;
     }
 
+    #founderOutput{
+      margin-top:15px;
+      color:#dbe3ff;
+      line-height:1.7;
+    }
+
     @media (max-width: 1080px){
       .shell{grid-template-columns:1fr}
       .sidebar{
@@ -370,7 +370,7 @@
         border-right:0;
         border-bottom:1px solid var(--line);
       }
-      .grid-2,.grid-3,.module-grid{
+      .grid-3,.module-grid{
         grid-template-columns:1fr;
       }
       .topbar{
@@ -409,7 +409,7 @@
 
       <div class="sidebar-card">
         <div class="status-row"><span class="dot"></span><span>System horizon stable</span></div>
-        <small>Zerenthis public shell online. Backend connected. Founder route is gated in-browser.</small>
+        <small>Zerenthis public shell online. Backend connected. Founder tools available after unlock.</small>
       </div>
     </aside>
 
@@ -418,7 +418,7 @@
         <div>
           <div class="eyebrow">Command surface</div>
           <h1 class="title">Command Intelligence. Execute Without Friction.</h1>
-          <p class="subtitle">This version is connected to your live backend, so the command box now returns real responses instead of only acting like a shell.</p>
+          <p class="subtitle">This version is connected to your live backend, and the Founder Panel can now load actual founder tools from the API.</p>
         </div>
         <div class="actions">
           <button class="btn">System Log</button>
@@ -444,13 +444,13 @@
           <div class="hero">
             <div class="eyebrow">Intelligence layer</div>
             <h2>Where Intelligence Becomes Power</h2>
-            <p>Zerenthis is now more than a static shell. Your command bar is wired to the live Railway backend, which means this site has crossed the line from presentation into real system foundation.</p>
+            <p>Zerenthis is now more than a static shell. The command bar is wired to the live Railway backend, and the founder layer can load live founder tools.</p>
           </div>
 
           <div class="grid-3">
             <div class="stat">
               <div class="label-sm">Launch Readiness</div>
-              <div class="value">97%</div>
+              <div class="value">98%</div>
               <div class="detail">Public shell is live and backend-connected.</div>
             </div>
             <div class="stat">
@@ -459,9 +459,9 @@
               <div class="detail">Six public surfaces plus one gated founder surface.</div>
             </div>
             <div class="stat">
-              <div class="label-sm">Backend State</div>
-              <div class="value">Online</div>
-              <div class="detail">Railway API responding to live commands.</div>
+              <div class="label-sm">Founder Tools</div>
+              <div class="value">Live</div>
+              <div class="detail">Founder panel can fetch tools from the backend.</div>
             </div>
           </div>
 
@@ -502,7 +502,7 @@
               <div class="module-card">
                 <div class="tag">Private command layer</div>
                 <h4>Founder Panel</h4>
-                <p>Reserved controls for owner-only access.</p>
+                <p>Reserved controls for owner-only access and live founder tools.</p>
                 <button class="small-btn" onclick="openFounderGate()">Founder login</button>
               </div>
             </div>
@@ -554,7 +554,12 @@
         <div class="hero">
           <div class="eyebrow">Private command layer</div>
           <h2>Founder Panel</h2>
-          <p>Founder access granted. This surface is visible because the founder gate has been unlocked in this browser session.</p>
+          <p>Founder access granted. Load the live founder tools from your backend.</p>
+        </div>
+
+        <div class="panel">
+          <button class="btn primary" onclick="loadFounder()">Load Founder Tools</button>
+          <div id="founderOutput"></div>
         </div>
       </section>
     </main>
@@ -663,6 +668,23 @@
       else if (lower.includes('think') || lower.includes('focus') || lower.includes('cognitive')) jump('cognitive');
       else if (lower.includes('simulate') || lower.includes('scenario')) jump('simulation');
       else jump('core');
+    }
+
+    async function loadFounder() {
+      const founderOutput = document.getElementById('founderOutput');
+      founderOutput.textContent = 'Loading...';
+
+      try {
+        const res = await fetch(`${backendUrl}/founder`);
+        const data = await res.json();
+
+        founderOutput.innerHTML = `
+          <strong>${data.status || 'Founder data loaded'}</strong><br><br>
+          ${(data.tools || []).map(t => '• ' + t).join('<br>')}
+        `;
+      } catch (err) {
+        founderOutput.textContent = 'Error loading founder tools.';
+      }
     }
 
     function refreshTime() {
