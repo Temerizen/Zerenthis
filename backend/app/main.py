@@ -13,109 +13,110 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"status": "Zerenthis Viral Engine Live"}
+    return {"status": "Zerenthis Intelligence Engine Live"}
 
 
-def generate_long_video(topic, tone, visual):
-    return {
-        "type": "viral_long_video",
+def detect_category(topic):
+    topic = topic.lower()
 
-        "title_options": [
-            f"{topic.title()} Is About To Change Everything",
-            f"The Truth About {topic.title()} Nobody Talks About",
-            f"Why {topic.title()} Is Bigger Than You Think"
-        ],
+    if any(x in topic for x in ["ai", "automation", "tech"]):
+        return "tech"
+    if any(x in topic for x in ["money", "business", "income"]):
+        return "business"
+    if any(x in topic for x in ["fitness", "gym", "health"]):
+        return "fitness"
+    if any(x in topic for x in ["electrician", "plumbing", "trade"]):
+        return "trades"
 
-        "hook_options": [
-            f"Most people have no idea what {topic} is actually doing behind the scenes.",
-            f"If you understand {topic} early, you gain a massive advantage.",
-            f"This is the shift that will separate creators from everyone else."
-        ],
+    return "general"
 
-        "script": f"""
-[HOOK 0:00]
-Most people are completely underestimating {topic}.
 
-[INTRO 0:20]
-This is not just another trend.
-This is a shift in how leverage works.
+def generate_angle_variations(topic):
+    return [
+        f"The Hidden Truth About {topic}",
+        f"Why {topic} Is About To Explode",
+        f"What Nobody Tells You About {topic}",
+        f"How {topic} Creates Opportunity",
+        f"The Real Reason {topic} Matters"
+    ]
 
-[SEGMENT 1]
-{topic} is fundamentally changing how people create and scale.
-But almost everyone is still using it wrong.
 
-[RE-HOOK]
-And what comes next is where things get serious.
+def generate_script(topic, category):
+    if category == "trades":
+        return f"""
+[HOOK]
+Nobody is talking about how powerful {topic} really is.
 
-[SEGMENT 2]
-The real advantage is not using {topic}.
-It is using it earlier and smarter than others.
+[INTRO]
+While everyone chases online trends, skilled trades like {topic} are becoming more valuable.
 
-[RE-HOOK]
-Now here is where it gets even more powerful.
+[SECTION 1]
+Demand for skilled workers is rising while supply is shrinking.
 
-[SEGMENT 3]
-You can use {topic} to build systems that work for you.
-Not just tools you use.
+[REHOOK]
+And this is where the opportunity becomes real.
 
-[RE-HOOK]
-But almost nobody sees this part.
+[SECTION 2]
+Most people overlook trades because they are focused on quick wins.
 
-[SEGMENT 4]
-The gap between people who understand this and those who don’t will grow fast.
+But trades create stable, high-income paths.
 
-[FINAL]
-The future belongs to people who move early.
+[SECTION 3]
+The barrier to entry is skill, not hype.
 
-[CTA]
-Subscribe if you want to stay ahead.
-        """,
+That is exactly why it pays.
 
-        "visual_plan": f"""
-Scene 1: {visual} intro (dark cinematic feel)
-Scene 2: fast cuts + subtitles
-Scene 3: b-roll of AI systems / tech
-Scene 4: emotional slow shots
-Scene 5: powerful ending visual
-        """,
+[OUTRO]
+The people who understand this early will win quietly.
+        """
 
-        "thumbnail_text": [
-            "THIS CHANGES EVERYTHING",
-            "YOU'RE TOO EARLY",
-            "NOBODY IS READY"
-        ],
+    if category == "tech":
+        return f"""
+[HOOK]
+{topic} is changing the way leverage works.
 
-        "description": f"""
-This video explains {topic}, why it matters, and how it is changing everything.
+[INTRO]
+This is not just another tool, it is a shift.
 
-Watch until the end to understand the real opportunity.
-        """,
+[SECTION 1]
+Early adopters gain massive advantages.
 
-        "tags": [
-            topic,
-            "AI",
-            "automation",
-            "future",
-            "business",
-            "money"
-        ],
+[REHOOK]
+But here is what most people miss.
 
-        "shorts": [
-            f"{topic} is not a tool. It is leverage.",
-            f"Most people will be too late to this.",
-            f"This changes everything."
-        ]
-    }
+[SECTION 2]
+It is not about using it, it is about using it strategically.
+
+[OUTRO]
+This is where the real opportunity begins.
+        """
+
+    return f"""
+[HOOK]
+{topic} is more important than people realize.
+
+[INTRO]
+Most people misunderstand it.
+
+[SECTION]
+There is hidden opportunity here.
+
+[OUTRO]
+The question is whether you act on it.
+    """
 
 
 @app.get("/generate")
-def generate(
-    asset_type: str = "video",
-    topic: str = "AI automation",
-    tone: str = "dramatic",
-    visual: str = "dark cinematic"
-):
-    if asset_type == "video":
-        return generate_long_video(topic, tone, visual)
+def generate(topic: str = "AI automation"):
+    category = detect_category(topic)
 
-    return {"error": "Unsupported type"}
+    return {
+        "category": category,
+        "titles": generate_angle_variations(topic),
+        "script": generate_script(topic, category),
+        "shorts": [
+            f"{topic} is an opportunity most people ignore.",
+            f"The gap is growing fast.",
+            f"This changes how people win."
+        ]
+    }
