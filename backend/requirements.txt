@@ -1,8 +1,7 @@
 fastapi
 uvicorn[standard]
-gTTS
 moviepy
+gTTS
 imageio
 imageio-ffmpeg
 numpy
-pydantic
