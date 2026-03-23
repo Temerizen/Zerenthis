@@ -24,10 +24,14 @@ def command(q: str = ""):
         return {"response": "Command idle."}
 
     if "idea" in text:
-        return {"response": "Public idea mode: AI productivity challenge, automation tutorial, future-of-AI breakdown."}
+        return {
+            "response": "Public idea mode: AI productivity challenge, automation tutorial, future-of-AI breakdown."
+        }
 
     if "founder" in text:
-        return {"response": "Founder route detected. Open Founder Panel for full generation tools."}
+        return {
+            "response": "Founder route detected. Open Founder Panel for full generation tools."
+        }
 
     return {"response": f"Zerenthis processed: {q}"}
 
@@ -37,7 +41,7 @@ def founder():
     return {
         "status": "Founder access confirmed",
         "tools": [
-            "Full Video Pack",
+            "Full Video Pack v2",
             "Mini Book Pack",
             "Podcast Episode Pack",
             "Movie Package",
@@ -47,47 +51,104 @@ def founder():
 
 
 @app.get("/generate/video")
-def generate_video(topic: str = "AI automation"):
-    return {
-        "type": "Full Video Pack",
-        "title": f"How {topic.title()} Can Change Your Life Faster Than You Think",
-        "hook": f"Most people are sleeping on {topic}. That is exactly why this is such a massive opportunity right now.",
-        "script": f"""
+def generate_video(topic: str = "AI automation", tone: str = "bold"):
+    topic_title = topic.title()
+    tone = tone.lower().strip()
+
+    if tone == "dramatic":
+        voice = "high-stakes, cinematic, emotionally charged"
+    elif tone == "educational":
+        voice = "clear, structured, practical, teacher-like"
+    elif tone == "luxury":
+        voice = "premium, polished, elite, confident"
+    else:
+        voice = "bold, sharp, high-energy, strategic"
+
+    titles = [
+        f"How {topic_title} Can Change Your Life Faster Than You Think",
+        f"The Real Opportunity Behind {topic_title}",
+        f"Why {topic_title} Is Bigger Than Most People Realize"
+    ]
+
+    hooks = [
+        f"Most people are sleeping on {topic}. That is exactly why this is such a massive opportunity right now.",
+        f"If you understand {topic} before everyone else does, you gain leverage while they stay stuck reacting.",
+        f"The people who move early on {topic} are not just learning a tool. They are buying time, speed, and advantage."
+    ]
+
+    script = f"""
+TONE: {voice}
+
 [INTRO]
 Today we are breaking down {topic} and why it matters more than most people realize.
 If you understand this early, you gain leverage while everyone else stays confused.
 
-[SECTION 1]
-First, let’s define the real opportunity.
-{topic.title()} is not just a trend. It is a leverage multiplier.
-It saves time, scales output, and gives smaller creators disproportionate power.
+[SECTION 1: WHAT THIS REALLY IS]
+At its core, {topic} is not just a trend.
+It is a leverage system.
+It helps people produce more, learn faster, move quicker, and expand output with less friction.
 
-[SECTION 2]
-Here is why this matters now.
-The people who learn to use {topic} today are building skills and assets that compound.
-The people who ignore it will end up consuming what others create.
+[SECTION 2: WHY THIS MATTERS NOW]
+The timing matters.
+People who adopt {topic} early build compound advantages.
+They create systems, assets, and experience while everyone else is still hesitating.
 
-[SECTION 3]
-Here is the practical angle.
-You can use {topic} to create content faster, build systems, learn quicker, and expand your reach.
-That means speed, output, and visibility all increase at once.
+[SECTION 3: THE PRACTICAL ADVANTAGE]
+Here is where it gets real.
+You can use {topic} to:
+- create content faster
+- build products faster
+- research faster
+- learn faster
+- make better strategic decisions
+
+That means output increases while effort stays more controlled.
+
+[SECTION 4: WHY MOST PEOPLE MISS IT]
+Most people wait for certainty.
+They want proof before action.
+But by the time something feels obvious, the biggest advantage window is already closing.
+
+[SECTION 5: HOW TO START]
+Start with one workflow.
+Use {topic} on one clear problem.
+Refine the result.
+Then stack that workflow until it becomes part of your system.
 
 [OUTRO]
 The real question is not whether {topic} matters.
 The real question is whether you will use it before everyone else catches on.
-        """.strip(),
-        "thumbnail_text": f"{topic.title()} Changes Everything",
-        "description": f"This video breaks down {topic}, why it matters, how to use it, and why early movers have the advantage.",
+    """.strip()
+
+    shorts = [
+        f"Short 1: {topic_title} is not just a tool. It is leverage. The people using it early are buying speed while everyone else is buying delay.",
+        f"Short 2: Most people wait too long to learn {topic}. By the time it feels obvious, the biggest advantage is already gone.",
+        f"Short 3: If you use {topic} correctly, you do not just save time. You multiply output."
+    ]
+
+    return {
+        "type": "Full Video Pack v2",
+        "tone": tone,
+        "title_options": titles,
+        "hook_options": hooks,
+        "full_script": script,
+        "thumbnail_text_options": [
+            f"{topic_title} Changes Everything",
+            f"The {topic_title} Advantage",
+            f"Most People Miss This"
+        ],
+        "description": f"This video breaks down {topic}, why it matters right now, how it creates leverage, and how to start using it strategically.",
         "tags": [
             topic,
             "AI",
             "automation",
             "productivity",
+            "business",
             "future tech",
-            "business"
+            "content strategy"
         ],
-        "cta": "Subscribe for more system-level AI content and strategic execution frameworks.",
-        "short_caption": f"{topic.title()} is the leverage play most people still do not understand."
+        "cta": "Subscribe for more system-level AI content, leverage strategies, and execution frameworks.",
+        "shorts_pack": shorts
     }
 
 
