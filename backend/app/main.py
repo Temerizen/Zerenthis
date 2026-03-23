@@ -13,90 +13,109 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"status": "Zerenthis Universal Engine Live"}
+    return {"status": "Zerenthis Viral Engine Live"}
 
 
-def generate_video(topic, length, tone, format_type, visual):
+def generate_long_video(topic, tone, visual):
     return {
-        "type": "video",
-        "title": f"{topic.title()} Will Change Everything",
-        "length": length,
-        "tone": tone,
-        "format": format_type,
-        "visual_style": visual,
+        "type": "viral_long_video",
+
+        "title_options": [
+            f"{topic.title()} Is About To Change Everything",
+            f"The Truth About {topic.title()} Nobody Talks About",
+            f"Why {topic.title()} Is Bigger Than You Think"
+        ],
+
+        "hook_options": [
+            f"Most people have no idea what {topic} is actually doing behind the scenes.",
+            f"If you understand {topic} early, you gain a massive advantage.",
+            f"This is the shift that will separate creators from everyone else."
+        ],
+
         "script": f"""
-[HOOK]
-Most people are missing what {topic} is really doing.
+[HOOK 0:00]
+Most people are completely underestimating {topic}.
 
-[INTRO]
-This video breaks down {topic} and why it matters now.
+[INTRO 0:20]
+This is not just another trend.
+This is a shift in how leverage works.
 
-[SECTION 1]
-{topic} is not just a tool, it is leverage.
+[SEGMENT 1]
+{topic} is fundamentally changing how people create and scale.
+But almost everyone is still using it wrong.
 
-[SECTION 2]
-The people using {topic} early gain an unfair advantage.
+[RE-HOOK]
+And what comes next is where things get serious.
 
-[SECTION 3]
-You can use {topic} to create, scale, and move faster.
+[SEGMENT 2]
+The real advantage is not using {topic}.
+It is using it earlier and smarter than others.
 
-[OUTRO]
-The real question is whether you act early or stay behind.
+[RE-HOOK]
+Now here is where it gets even more powerful.
+
+[SEGMENT 3]
+You can use {topic} to build systems that work for you.
+Not just tools you use.
+
+[RE-HOOK]
+But almost nobody sees this part.
+
+[SEGMENT 4]
+The gap between people who understand this and those who don’t will grow fast.
+
+[FINAL]
+The future belongs to people who move early.
+
+[CTA]
+Subscribe if you want to stay ahead.
         """,
+
         "visual_plan": f"""
-Scene 1: {visual} intro
+Scene 1: {visual} intro (dark cinematic feel)
 Scene 2: fast cuts + subtitles
-Scene 3: cinematic explanation
-Scene 4: closing emotional shot
+Scene 3: b-roll of AI systems / tech
+Scene 4: emotional slow shots
+Scene 5: powerful ending visual
         """,
-        "cta": "Subscribe for more high-leverage content."
-    }
 
-
-def generate_ebook(topic):
-    return {
-        "type": "ebook",
-        "title": f"The Complete Guide to {topic}",
-        "chapters": [
-            "Introduction",
-            "Core Concepts",
-            "Execution",
-            "Scaling",
-            "Conclusion"
+        "thumbnail_text": [
+            "THIS CHANGES EVERYTHING",
+            "YOU'RE TOO EARLY",
+            "NOBODY IS READY"
         ],
-        "content": f"A full ebook about {topic}."
-    }
 
+        "description": f"""
+This video explains {topic}, why it matters, and how it is changing everything.
 
-def generate_podcast(topic):
-    return {
-        "type": "podcast",
-        "title": f"{topic} Explained",
-        "segments": [
-            "Intro",
-            "Deep Dive",
-            "Takeaways"
+Watch until the end to understand the real opportunity.
+        """,
+
+        "tags": [
+            topic,
+            "AI",
+            "automation",
+            "future",
+            "business",
+            "money"
         ],
-        "script": f"A full podcast script about {topic}."
+
+        "shorts": [
+            f"{topic} is not a tool. It is leverage.",
+            f"Most people will be too late to this.",
+            f"This changes everything."
+        ]
     }
 
 
 @app.get("/generate")
-def universal_generate(
+def generate(
     asset_type: str = "video",
     topic: str = "AI automation",
-    length: str = "10 min",
-    tone: str = "bold",
-    format_type: str = "standard",
-    visual: str = "modern"
+    tone: str = "dramatic",
+    visual: str = "dark cinematic"
 ):
     if asset_type == "video":
-        return generate_video(topic, length, tone, format_type, visual)
+        return generate_long_video(topic, tone, visual)
 
-    if asset_type == "ebook":
-        return generate_ebook(topic)
-
-    if asset_type == "podcast":
-        return generate_podcast(topic)
-
-    return {"error": "Unknown asset type"}
+    return {"error": "Unsupported type"}
