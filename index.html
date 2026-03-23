@@ -4,126 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zerenthis | Where Intelligence Becomes Power</title>
-  <meta
-    name="description"
-    content="Zerenthis is a premium intelligence platform for execution, learning, simulation, creation, and founder control."
-  />
   <style>
     :root{
       --bg:#05060b;
-      --bg2:#0a0f1f;
-      --panel:rgba(16,20,33,.72);
-      --panel-2:rgba(22,28,46,.82);
+      --panel:rgba(16,20,33,.76);
       --line:rgba(255,255,255,.08);
-      --line-2:rgba(255,255,255,.14);
+      --line2:rgba(255,255,255,.14);
       --text:#edf2ff;
       --muted:#9ba7cc;
-      --soft:#cfd8f6;
       --violet:#7c4dff;
       --cyan:#35d6ff;
       --green:#61f2b0;
-      --amber:#ffc96b;
       --danger:#ff7fa2;
-      --shadow:0 20px 60px rgba(0,0,0,.36);
-      --shadow-lg:0 30px 100px rgba(0,0,0,.48);
-      --radius:24px;
-      --radius-sm:16px;
-      --max:1440px;
     }
-
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     html,body{margin:0;min-height:100%}
     body{
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:Inter,system-ui,-apple-system,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 0% 0%, rgba(124,77,255,.18), transparent 25%),
-        radial-gradient(circle at 100% 0%, rgba(53,214,255,.13), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(53,214,255,.08), transparent 30%),
-        linear-gradient(180deg, var(--bg) 0%, #090c14 100%);
-      overflow-x:hidden;
+        radial-gradient(circle at top left, rgba(124,77,255,.18), transparent 25%),
+        radial-gradient(circle at top right, rgba(53,214,255,.12), transparent 25%),
+        linear-gradient(180deg,#05060b 0%,#090c14 100%);
     }
-
-    a{color:inherit;text-decoration:none}
     button,input{font:inherit}
-    button{cursor:pointer}
-    img{max-width:100%;display:block}
-
-    .ambient{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
-      pointer-events:none;
-      z-index:0;
-    }
-    .ambient::before,
-    .ambient::after{
-      content:"";
-      position:absolute;
-      border-radius:999px;
-      filter:blur(70px);
-      opacity:.28;
-    }
-    .ambient::before{
-      width:380px;
-      height:380px;
-      left:-100px;
-      top:-80px;
-      background:radial-gradient(circle, rgba(124,77,255,.9), transparent 60%);
-      animation:floatA 16s ease-in-out infinite;
-    }
-    .ambient::after{
-      width:450px;
-      height:450px;
-      right:-140px;
-      top:12vh;
-      background:radial-gradient(circle, rgba(53,214,255,.75), transparent 62%);
-      animation:floatB 18s ease-in-out infinite;
-    }
-
-    @keyframes floatA{
-      0%,100%{transform:translate(0,0)}
-      50%{transform:translate(48px,28px)}
-    }
-    @keyframes floatB{
-      0%,100%{transform:translate(0,0)}
-      50%{transform:translate(-50px,52px)}
-    }
-
-    .mobile-toggle{
-      display:none;
-      position:fixed;
-      top:16px;
-      right:16px;
-      z-index:6;
-      border:1px solid var(--line);
-      background:rgba(12,15,25,.88);
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:14px;
-      backdrop-filter:blur(16px);
-      box-shadow:var(--shadow);
-    }
+    a{text-decoration:none;color:inherit}
 
     .shell{
-      position:relative;
-      z-index:1;
-      max-width:var(--max);
-      margin:0 auto;
       display:grid;
       grid-template-columns:280px 1fr;
       min-height:100vh;
     }
 
     .sidebar{
+      background:rgba(8,10,18,.86);
+      border-right:1px solid var(--line);
+      padding:22px 18px;
       position:sticky;
       top:0;
       height:100vh;
-      padding:22px 18px;
-      border-right:1px solid var(--line);
-      background:rgba(8,10,18,.82);
-      backdrop-filter:blur(24px);
       display:flex;
       flex-direction:column;
       gap:18px;
@@ -143,25 +62,16 @@
       border-radius:16px;
       display:grid;
       place-items:center;
-      background:linear-gradient(135deg, var(--violet), var(--cyan));
-      box-shadow:0 16px 44px rgba(124,77,255,.38);
-      color:white;
+      background:linear-gradient(135deg,var(--violet),var(--cyan));
+      box-shadow:0 16px 44px rgba(124,77,255,.35);
+      overflow:hidden;
       font-weight:900;
       font-size:1.6rem;
-      letter-spacing:.04em;
-      overflow:hidden;
+      color:white;
     }
 
-    .brand-text h1{
-      margin:0;
-      font-size:1.06rem;
-    }
-
-    .brand-text p{
-      margin:4px 0 0;
-      font-size:.86rem;
-      color:var(--muted);
-    }
+    .brand-text h1{margin:0;font-size:1.06rem}
+    .brand-text p{margin:4px 0 0;color:var(--muted);font-size:.86rem}
 
     .label{
       color:var(--muted);
@@ -169,7 +79,6 @@
       text-transform:uppercase;
       font-size:.72rem;
       padding:0 10px;
-      margin-top:6px;
     }
 
     .nav{
@@ -185,15 +94,15 @@
       border-radius:16px;
       border:1px solid transparent;
       color:#d8def7;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      background:transparent;
+      cursor:pointer;
+      transition:.18s ease;
     }
 
-    .nav-link:hover,
-    .nav-link.active{
+    .nav-link:hover,.nav-link.active{
       transform:translateX(2px);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      border-color:var(--line-2);
-      box-shadow:0 12px 30px rgba(0,0,0,.16);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
+      border-color:var(--line2);
     }
 
     .sidebar-card{
@@ -201,17 +110,14 @@
       padding:16px;
       border-radius:18px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.03);
     }
 
     .status-row{
       display:flex;
-      align-items:center;
       gap:10px;
+      align-items:center;
       margin-bottom:10px;
-      color:var(--soft);
-      font-size:.92rem;
     }
 
     .dot{
@@ -222,19 +128,14 @@
       box-shadow:0 0 18px rgba(97,242,176,.5);
     }
 
-    .sidebar-card small{
-      color:var(--muted);
-      line-height:1.55;
-    }
-
     .main{
-      padding:26px 26px 42px;
+      padding:26px;
     }
 
     .topbar{
       display:flex;
-      align-items:flex-end;
       justify-content:space-between;
+      align-items:end;
       gap:18px;
       margin-bottom:22px;
     }
@@ -249,14 +150,14 @@
 
     .title{
       margin:0;
-      font-size:clamp(2.2rem, 4vw, 3.6rem);
+      font-size:clamp(2.1rem,4vw,3.6rem);
       line-height:1.02;
       letter-spacing:-.04em;
     }
 
     .subtitle{
       margin:12px 0 0;
-      color:var(--soft);
+      color:#cfd8f6;
       max-width:760px;
       line-height:1.65;
     }
@@ -273,20 +174,13 @@
       color:var(--text);
       padding:12px 16px;
       border-radius:14px;
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      border-color:var(--line-2);
-      box-shadow:0 12px 32px rgba(0,0,0,.16);
+      cursor:pointer;
     }
 
     .btn.primary{
       border:none;
-      background:linear-gradient(135deg, var(--violet), var(--cyan));
+      background:linear-gradient(135deg,var(--violet),var(--cyan));
       color:white;
-      box-shadow:0 18px 46px rgba(80,50,200,.34);
     }
 
     .command-bar{
@@ -296,8 +190,7 @@
       padding:14px;
       border:1px solid var(--line);
       border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.03);
       margin-bottom:22px;
     }
 
@@ -310,165 +203,60 @@
       font-size:1rem;
     }
 
-    .command-bar input::placeholder{
-      color:var(--muted);
-    }
-
     .status-strip{
       display:flex;
-      flex-wrap:wrap;
       gap:12px;
+      flex-wrap:wrap;
       margin-bottom:22px;
     }
 
     .pill{
       display:inline-flex;
-      align-items:center;
       gap:10px;
+      align-items:center;
       padding:10px 12px;
       border:1px solid var(--line);
       border-radius:999px;
       background:rgba(255,255,255,.03);
-      color:#dde5ff;
       font-size:.9rem;
-      box-shadow:var(--shadow);
     }
 
-    .page{
-      display:none;
-      opacity:0;
-      transform:translateY(10px);
-      transition:opacity .28s ease, transform .28s ease;
-    }
+    .page{display:none}
+    .page.active{display:block}
 
-    .page.active{
-      display:block;
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    .stack{
-      display:grid;
-      gap:18px;
-    }
-
-    .hero,
-    .panel,
-    .stat,
-    .module-card,
-    .timeline-item{
+    .stack{display:grid;gap:18px}
+    .hero,.panel,.stat,.module-card{
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
+      background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018));
       border-radius:24px;
-      box-shadow:
-        0 10px 40px rgba(0,0,0,.4),
-        inset 0 1px 0 rgba(255,255,255,.05);
-      backdrop-filter:blur(18px);
+      padding:24px;
+      box-shadow:0 10px 40px rgba(0,0,0,.32);
     }
 
-    .hero{
-      padding:30px;
-      position:relative;
-      overflow:hidden;
-    }
+    .hero h2{margin:0 0 12px;font-size:clamp(1.9rem,3.8vw,3.1rem)}
+    .hero p,.panel p,.module-card p{color:#b7c0df;line-height:1.68}
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-50px;
-      bottom:-70px;
-      width:260px;
-      height:260px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(53,214,255,.18), transparent 62%);
-      pointer-events:none;
-    }
-
-    .hero h2{
-      margin:0 0 12px;
-      font-size:clamp(1.9rem, 3.8vw, 3.1rem);
-      letter-spacing:-.03em;
-    }
-
-    .hero p,
-    .panel p,
-    .module-card p,
-    .timeline-item p{
-      color:#b7c0df;
-      line-height:1.68;
-      max-width:760px;
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
     }
 
     .grid-2{
       display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
     }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:18px;
-    }
-
-    .grid-4{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-
-    .stat{
-      padding:22px;
-    }
-
-    .label-sm{
-      color:var(--muted);
-      font-size:.92rem;
-    }
-
-    .value{
-      font-size:2rem;
-      font-weight:800;
-      margin:10px 0 8px;
-    }
-
-    .detail{
-      color:#bcc4e1;
-    }
-
-    .panel{
-      padding:24px;
-    }
-
-    .section-head h3{
-      margin:0 0 6px;
-      font-size:1.42rem;
-    }
-
-    .section-head p{
-      margin:0;
-    }
+    .stat .label-sm{color:var(--muted);font-size:.92rem}
+    .stat .value{font-size:2rem;font-weight:800;margin:10px 0 8px}
+    .stat .detail{color:#bcc4e1}
 
     .module-grid{
       display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
       margin-top:16px;
-    }
-
-    .module-card{
-      padding:22px;
-      background:linear-gradient(180deg, rgba(22,27,44,.82), rgba(18,20,31,.8));
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .module-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.14);
-      box-shadow:
-        0 0 30px rgba(124,77,255,.25),
-        0 0 60px rgba(53,214,255,.15),
-        0 14px 40px rgba(0,0,0,.3);
     }
 
     .tag{
@@ -480,10 +268,7 @@
       text-transform:uppercase;
     }
 
-    .module-card h4{
-      margin:0 0 10px;
-      font-size:1.12rem;
-    }
+    .module-card h4{margin:0 0 10px;font-size:1.12rem}
 
     .small-btn{
       margin-top:10px;
@@ -493,81 +278,6 @@
       background:rgba(255,255,255,.04);
       color:var(--text);
       cursor:pointer;
-    }
-
-    .list{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      padding:14px 16px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.025);
-    }
-
-    .row small{
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .badge{
-      white-space:nowrap;
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:.82rem;
-      border:1px solid rgba(97,242,176,.22);
-      background:rgba(97,242,176,.1);
-      color:#c7fae1;
-    }
-
-    .badge.warn{
-      border-color:rgba(255,127,159,.22);
-      background:rgba(255,127,159,.09);
-      color:#ffc5d4;
-    }
-
-    .metrics{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .timeline{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .timeline-item{
-      padding:18px;
-    }
-
-    .timeline-item strong{
-      display:block;
-      margin-bottom:6px;
-    }
-
-    .help{
-      margin-top:18px;
-      padding:16px;
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.14);
-      color:var(--muted);
-      background:rgba(255,255,255,.02);
-    }
-
-    .footer-note{
-      color:var(--muted);
-      font-size:.92rem;
-      line-height:1.6;
     }
 
     #commandOutput{
@@ -582,34 +292,89 @@
       max-width:760px;
     }
 
+    .founder-lock{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(2,4,10,.72);
+      backdrop-filter:blur(10px);
+      z-index:50;
+      padding:20px;
+    }
+
+    .founder-lock.open{
+      display:flex;
+    }
+
+    .lock-card{
+      width:min(460px,100%);
+      border:1px solid var(--line2);
+      border-radius:24px;
+      background:rgba(14,18,30,.94);
+      box-shadow:0 30px 100px rgba(0,0,0,.5);
+      padding:24px;
+    }
+
+    .lock-card h3{
+      margin:0 0 10px;
+      font-size:1.5rem;
+    }
+
+    .lock-card p{
+      color:#b7c0df;
+      line-height:1.6;
+    }
+
+    .lock-card input{
+      width:100%;
+      margin-top:12px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+
+    .lock-actions{
+      display:flex;
+      gap:12px;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+
+    .lock-error{
+      margin-top:12px;
+      color:#ffb8c8;
+      display:none;
+    }
+
     @media (max-width: 1080px){
-      .mobile-toggle{display:block}
       .shell{grid-template-columns:1fr}
       .sidebar{
-        position:fixed;
-        left:0;
-        top:0;
-        bottom:0;
-        width:min(84vw, 320px);
-        height:100vh;
-        transform:translateX(-102%);
-        transition:transform .25s ease;
-        z-index:5;
+        position:relative;
+        height:auto;
+        border-right:0;
+        border-bottom:1px solid var(--line);
       }
-      .sidebar.open{transform:translateX(0)}
-      .main{padding:72px 18px 28px}
-      .grid-2,.grid-3,.grid-4,.module-grid{grid-template-columns:1fr}
-      .topbar{flex-direction:column;align-items:flex-start}
-      .command-bar{grid-template-columns:1fr}
+      .grid-2,.grid-3,.module-grid{
+        grid-template-columns:1fr;
+      }
+      .topbar{
+        flex-direction:column;
+        align-items:start;
+      }
+      .command-bar{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="ambient"></div>
-  <button class="mobile-toggle" id="mobileToggle">Menu</button>
-
   <div class="shell">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar">
       <div class="brand">
         <div class="brand-mark">
           <img src="zerenthis-logo.png" alt="Zerenthis logo" onerror="this.style.display='none'; this.parentElement.textContent='Z';" />
@@ -622,18 +387,18 @@
 
       <div class="label">System</div>
       <nav class="nav">
-        <a class="nav-link active" href="#core"><span>Core</span><span>◦</span></a>
-        <a class="nav-link" href="#cognitive"><span>Cognitive Lab</span><span>◦</span></a>
-        <a class="nav-link" href="#school"><span>AI School</span><span>◦</span></a>
-        <a class="nav-link" href="#execution"><span>Execution Engine</span><span>◦</span></a>
-        <a class="nav-link" href="#factory"><span>Content Factory</span><span>◦</span></a>
-        <a class="nav-link" href="#simulation"><span>Reality Simulation</span><span>◦</span></a>
-        <a class="nav-link" href="#founder"><span>Founder Panel</span><span>◦</span></a>
+        <button class="nav-link active" onclick="jump('core')"><span>Core</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('cognitive')"><span>Cognitive Lab</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('school')"><span>AI School</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('execution')"><span>Execution Engine</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('factory')"><span>Content Factory</span><span>◦</span></button>
+        <button class="nav-link" onclick="jump('simulation')"><span>Reality Simulation</span><span>◦</span></button>
+        <button class="nav-link" onclick="openFounderGate()"><span>Founder Panel</span><span>◦</span></button>
       </nav>
 
       <div class="sidebar-card">
         <div class="status-row"><span class="dot"></span><span>System horizon stable</span></div>
-        <small>Zerenthis public shell online. Premium visual layer active. Founder route available.</small>
+        <small>Zerenthis public shell online. Founder route is locked behind a founder gate.</small>
       </div>
     </aside>
 
@@ -642,11 +407,11 @@
         <div>
           <div class="eyebrow">Command surface</div>
           <h1 class="title">Command Intelligence. Execute Without Friction.</h1>
-          <p class="subtitle">A sharper, more premium Zerenthis shell with cleaner hierarchy, better motion, stronger copy, and enough presence to feel like a real platform instead of a test dashboard.</p>
+          <p class="subtitle">This is the premium public shell. The Founder Panel is now gated, and the section navigation is wired intentionally as an interface, not fake page links.</p>
         </div>
         <div class="actions">
           <button class="btn">System Log</button>
-          <button class="btn primary" onclick="jump('founder')">Enter Founder Layer</button>
+          <button class="btn primary" onclick="openFounderGate()">Founder Access</button>
         </div>
       </div>
 
@@ -668,433 +433,148 @@
           <div class="hero">
             <div class="eyebrow">Intelligence layer</div>
             <h2>Where Intelligence Becomes Power</h2>
-            <p>Zerenthis is positioned as an intelligence engine, not a generic tool. This version upgrades your live site into a polished command room with stronger visuals, premium copy, smoother interaction, and a more convincing product aura.</p>
-            <div class="actions">
-              <button class="btn primary" onclick="jump('execution')">Open Execution Engine</button>
-              <button class="btn" onclick="jump('factory')">View Content Factory</button>
-            </div>
+            <p>Zerenthis is the command room. This version is honest about what it is: a polished public shell with real section switching, stronger interaction, and a founder layer that is hidden until unlocked.</p>
           </div>
 
           <div class="grid-3">
             <div class="stat">
               <div class="label-sm">Launch Readiness</div>
               <div class="value">96%</div>
-              <div class="detail">Public shell is live, polished, and ready to be shown.</div>
+              <div class="detail">Public shell is live, polished, and showable.</div>
             </div>
             <div class="stat">
               <div class="label-sm">System Modules</div>
-              <div class="value">7</div>
-              <div class="detail">Each surface now feels like part of one premium ecosystem.</div>
+              <div class="value">6 + 1</div>
+              <div class="detail">Six public surfaces plus one locked founder surface.</div>
             </div>
             <div class="stat">
-              <div class="label-sm">Brand State</div>
-              <div class="value">Ascended</div>
-              <div class="detail">Sharper copy, deeper visuals, cleaner structure, stronger presence.</div>
+              <div class="label-sm">Founder State</div>
+              <div class="value">Locked</div>
+              <div class="detail">Founder Panel requires founder access.</div>
             </div>
           </div>
 
           <div class="panel">
-            <div class="section-head">
-              <div class="eyebrow">Operational surfaces</div>
-              <h3>Premium system architecture</h3>
-              <p>Less feature pile. More command room. Each module has a distinct purpose and a coherent place in the brand.</p>
-            </div>
-
+            <div class="eyebrow">Operational surfaces</div>
+            <h3>Premium system architecture</h3>
             <div class="module-grid">
               <div class="module-card">
                 <div class="tag">Mind expansion</div>
                 <h4>Cognitive Lab</h4>
-                <p>Train focus, abstraction, recall, and structured reasoning inside a chamber designed for mental upgrades.</p>
+                <p>Train focus, abstraction, recall, and structured reasoning.</p>
                 <button class="small-btn" onclick="jump('cognitive')">Open module</button>
               </div>
-
               <div class="module-card">
                 <div class="tag">Adaptive instruction</div>
                 <h4>AI School</h4>
-                <p>Turn ambitious topics into guided programs with learning paths, progression, and curriculum logic.</p>
+                <p>Turn ambitious topics into guided programs and learning paths.</p>
                 <button class="small-btn" onclick="jump('school')">Open module</button>
               </div>
-
               <div class="module-card">
                 <div class="tag">Workflow ignition</div>
                 <h4>Execution Engine</h4>
-                <p>Convert intentions into action sequences, tracked queues, and strategic momentum.</p>
+                <p>Convert intentions into tracked queues and strategic momentum.</p>
                 <button class="small-btn" onclick="jump('execution')">Open module</button>
               </div>
-
               <div class="module-card">
                 <div class="tag">Media production</div>
                 <h4>Content Factory</h4>
-                <p>Shape concepts into scripts, thumbnail directions, and publishing pipelines with less chaos.</p>
+                <p>Shape concepts into scripts, thumbnails, and publishing flow.</p>
                 <button class="small-btn" onclick="jump('factory')">Open module</button>
               </div>
-
               <div class="module-card">
                 <div class="tag">Strategic forecasting</div>
                 <h4>Reality Simulation</h4>
-                <p>Explore branches and consequences before real-world time or money gets spent.</p>
+                <p>Explore branches before real-world time and money get spent.</p>
                 <button class="small-btn" onclick="jump('simulation')">Open module</button>
               </div>
-
               <div class="module-card">
                 <div class="tag">Private command layer</div>
                 <h4>Founder Panel</h4>
-                <p>Reserve owner-level controls, internal strategy views, and private metrics for the vault.</p>
-                <button class="small-btn" onclick="jump('founder')">Open module</button>
+                <p>Reserved controls for owner-only access.</p>
+                <button class="small-btn" onclick="openFounderGate()">Founder login</button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="cognitive" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Mind expansion</div>
-            <h2>Cognitive Lab</h2>
-            <p>Build a space for focus systems, reasoning drills, memory loops, and deliberate intelligence training. This section is shaped to feel like a chamber, not a classroom.</p>
-          </div>
-
-          <div class="grid-4">
-            <div class="stat"><div class="label-sm">Focus Depth</div><div class="value">73</div><div class="detail">Current training intensity score.</div></div>
-            <div class="stat"><div class="label-sm">Recall Chains</div><div class="value">12</div><div class="detail">Linked memory pathways active.</div></div>
-            <div class="stat"><div class="label-sm">Reasoning Sprints</div><div class="value">8</div><div class="detail">Live exercises staged.</div></div>
-            <div class="stat"><div class="label-sm">Upgrade State</div><div class="value">Rising</div><div class="detail">Momentum curve ascending.</div></div>
-          </div>
-
-          <div class="panel">
-            <div class="section-head">
-              <div class="eyebrow">Training loops</div>
-              <h3>Suggested routines</h3>
-            </div>
-
-            <div class="list">
-              <div class="row">
-                <div>
-                  <strong>Pattern Recognition Sprint</strong><br />
-                  <small>Train symbolic compression, abstraction speed, and mental linking.</small>
-                </div>
-                <span class="badge">Ready</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Deep Focus Interval</strong><br />
-                  <small>Build longer uninterrupted reasoning windows with less cognitive leakage.</small>
-                </div>
-                <span class="badge">Ready</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Mental Model Rotation</strong><br />
-                  <small>Cycle through inversion, probabilistic thinking, and first-principles analysis.</small>
-                </div>
-                <span class="badge">Ready</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="school" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Adaptive instruction</div>
-            <h2>AI School</h2>
-            <p>A branded academy layer for guided learning, subject mastery, and challenge-based progress. It feels like a school built from the inside out, not a pile of lessons taped together.</p>
-          </div>
-
-          <div class="grid-2">
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Curriculum engine</div>
-                <h3>Program lanes</h3>
-              </div>
-
-              <div class="list">
-                <div class="row">
-                  <div>
-                    <strong>Foundations</strong><br />
-                    <small>Orientation, terminology, principles, and conceptual footing.</small>
-                  </div>
-                  <span class="badge">Online</span>
-                </div>
-
-                <div class="row">
-                  <div>
-                    <strong>Intermediate Systems</strong><br />
-                    <small>Frameworks, drills, and applied case studies.</small>
-                  </div>
-                  <span class="badge">Online</span>
-                </div>
-
-                <div class="row">
-                  <div>
-                    <strong>Expert Acceleration</strong><br />
-                    <small>High-complexity routes, scenarios, and decision pressure.</small>
-                  </div>
-                  <span class="badge">Online</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Formats</div>
-                <h3>Learning modes</h3>
-              </div>
-
-              <div class="metrics">
-                <span class="pill">Lesson Maps</span>
-                <span class="pill">Tutor Mode</span>
-                <span class="pill">Quiz Loops</span>
-                <span class="pill">Challenge Exams</span>
-                <span class="pill">Skill Trees</span>
-                <span class="pill">Progress Memory</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="execution" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Workflow ignition</div>
-            <h2>Execution Engine</h2>
-            <p>Ideas do not matter nearly as much as execution velocity. This section frames action as a system of queue logic, leverage, and momentum instead of random busyness.</p>
-          </div>
-
-          <div class="panel">
-            <div class="section-head">
-              <div class="eyebrow">Queue surface</div>
-              <h3>Active operations</h3>
-            </div>
-
-            <div class="list">
-              <div class="row">
-                <div>
-                  <strong>Launch Rebrand</strong><br />
-                  <small>Finalize identity, logo placement, copy, and deployment shell.</small>
-                </div>
-                <span class="badge">In motion</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Website Polish Sweep</strong><br />
-                  <small>Refine states, spacing, typography, and motion.</small>
-                </div>
-                <span class="badge">In motion</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Founder Systems Draft</strong><br />
-                  <small>Map private flows and owner-level control surfaces.</small>
-                </div>
-                <span class="badge">Queued</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Action lens</div>
-                <h3>Prioritization logic</h3>
-              </div>
-              <p>Score by leverage, speed, permanence, and downstream payoff. Fewer actions. More impact. Less entropy.</p>
-            </div>
-
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">State</div>
-                <h3>Current mode</h3>
-              </div>
-              <p>Focused build state. Noise reduction active. High-value surfaces prioritized first.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="factory" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Media production</div>
-            <h2>Content Factory</h2>
-            <p>A creative machine room for concepts, scripts, thumbnail direction, and output planning. Less editor desk. More studio reactor.</p>
-          </div>
-
-          <div class="grid-2">
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Pipelines</div>
-                <h3>Factory lanes</h3>
-              </div>
-
-              <div class="list">
-                <div class="row">
-                  <div>
-                    <strong>Video Concepts</strong><br />
-                    <small>Angles, titles, hooks, and audience intent.</small>
-                  </div>
-                  <span class="badge">Ready</span>
-                </div>
-
-                <div class="row">
-                  <div>
-                    <strong>Script Forge</strong><br />
-                    <small>Long-form narrative structure and pacing blocks.</small>
-                  </div>
-                  <span class="badge">Ready</span>
-                </div>
-
-                <div class="row">
-                  <div>
-                    <strong>Thumbnail Signals</strong><br />
-                    <small>Visual framing and high-contrast image direction.</small>
-                  </div>
-                  <span class="badge">Ready</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Publishing rhythm</div>
-                <h3>Output path</h3>
-              </div>
-
-              <div class="timeline">
-                <div class="timeline-item">
-                  <strong>Stage 1</strong>
-                  <p>Generate concept clusters from a central topic.</p>
-                </div>
-                <div class="timeline-item">
-                  <strong>Stage 2</strong>
-                  <p>Convert the chosen concept into a structured script outline.</p>
-                </div>
-                <div class="timeline-item">
-                  <strong>Stage 3</strong>
-                  <p>Draft thumbnail language, CTA flow, and metadata.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="simulation" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Strategic forecasting</div>
-            <h2>Reality Simulation</h2>
-            <p>Model branches before the real world charges you for them. This section makes strategy feel like a laboratory rather than a gamble.</p>
-          </div>
-
-          <div class="panel">
-            <div class="section-head">
-              <div class="eyebrow">Scenario table</div>
-              <h3>Current branches</h3>
-            </div>
-
-            <div class="list">
-              <div class="row">
-                <div>
-                  <strong>Fast Launch Path</strong><br />
-                  <small>Ship branded shell now and deepen infrastructure later.</small>
-                </div>
-                <span class="badge">Low friction</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Deep Build Path</strong><br />
-                  <small>Delay launch and expand backend complexity first.</small>
-                </div>
-                <span class="badge warn">Higher drag</span>
-              </div>
-
-              <div class="row">
-                <div>
-                  <strong>Hybrid Path</strong><br />
-                  <small>Launch the shell while growing the inner engine privately.</small>
-                </div>
-                <span class="badge">Best balance</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="founder" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Private command layer</div>
-            <h2>Founder Panel</h2>
-            <p>This is where the system bends. Reserved controls for brand overrides, private metrics, roadmap pressure points, and owner-only strategy surfaces.</p>
-          </div>
-
-          <div class="grid-2">
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Privileges</div>
-                <h3>Founder controls</h3>
-              </div>
-
-              <div class="metrics">
-                <span class="pill">Brand Override</span>
-                <span class="pill">Module Visibility</span>
-                <span class="pill">Launch Switches</span>
-                <span class="pill">Private Metrics</span>
-                <span class="pill">Roadmap Layer</span>
-                <span class="pill">Internal Notes</span>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="section-head">
-                <div class="eyebrow">Doctrine</div>
-                <h3>Build in public. Keep the engine private.</h3>
-              </div>
-              <p>Use the visible shell to attract attention and prove direction. Keep the deep experiments and unfair advantages behind sealed doors until they are sharp enough to matter.</p>
-            </div>
-          </div>
-
-          <div class="help">
-            This is a premium frontend shell. It gives you a stronger public face right now while your deeper system can keep evolving privately behind it.
-          </div>
-        </div>
-      </section>
+      <section id="cognitive" class="page"><div class="hero"><div class="eyebrow">Mind expansion</div><h2>Cognitive Lab</h2><p>Build focus systems, reasoning drills, memory loops, and deliberate intelligence training.</p></div></section>
+      <section id="school" class="page"><div class="hero"><div class="eyebrow">Adaptive instruction</div><h2>AI School</h2><p>A branded academy layer for guided learning, subject mastery, and challenge-based progress.</p></div></section>
+      <section id="execution" class="page"><div class="hero"><div class="eyebrow">Workflow ignition</div><h2>Execution Engine</h2><p>Ideas matter less than execution velocity. This section frames action as leverage and momentum.</p></div></section>
+      <section id="factory" class="page"><div class="hero"><div class="eyebrow">Media production</div><h2>Content Factory</h2><p>A creative machine room for concepts, scripts, thumbnail direction, and output planning.</p></div></section>
+      <section id="simulation" class="page"><div class="hero"><div class="eyebrow">Strategic forecasting</div><h2>Reality Simulation</h2><p>Model branches before the real world charges you for them.</p></div></section>
+      <section id="founder" class="page"><div class="hero"><div class="eyebrow">Private command layer</div><h2>Founder Panel</h2><p>Founder access granted. This surface is now visible because the founder gate has been unlocked in this browser session.</p></div></section>
     </main>
+  </div>
+
+  <div class="founder-lock" id="founderLock">
+    <div class="lock-card">
+      <div class="eyebrow">Founder authentication</div>
+      <h3>Founder access required</h3>
+      <p>Enter the founder password to unlock the Founder Panel in this browser session.</p>
+      <input id="founderPassword" type="password" placeholder="Enter founder password" />
+      <div class="lock-actions">
+        <button class="btn primary" onclick="unlockFounder()">Unlock Founder Panel</button>
+        <button class="btn" onclick="closeFounderGate()">Cancel</button>
+      </div>
+      <div class="lock-error" id="lockError">Incorrect password.</div>
+    </div>
   </div>
 
   <script>
     const pages = [...document.querySelectorAll('.page')];
-    const links = [...document.querySelectorAll('.nav-link')];
-    const sidebar = document.getElementById('sidebar');
-    const mobileToggle = document.getElementById('mobileToggle');
-    const timePill = document.getElementById('timePill');
+    const navButtons = [...document.querySelectorAll('.nav-link')];
     const output = document.getElementById('commandOutput');
-    const commandInput = document.getElementById('commandInput');
+    const founderLock = document.getElementById('founderLock');
+    const founderPassword = document.getElementById('founderPassword');
+    const lockError = document.getElementById('lockError');
+    const timePill = document.getElementById('timePill');
 
-    function showPage(id) {
-      const target = id || (location.hash || '#core').replace('#', '');
-      const exists = pages.some(p => p.id === target);
-      const finalTarget = exists ? target : 'core';
+    let founderUnlocked = false;
 
-      pages.forEach(p => p.classList.toggle('active', p.id === finalTarget));
-      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + finalTarget));
-
-      if (!exists) location.hash = '#core';
-      if (window.innerWidth <= 1080) sidebar.classList.remove('open');
+    function setActiveNav(label) {
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      const target = navButtons.find(btn => btn.textContent.toLowerCase().includes(label.toLowerCase()));
+      if (target) target.classList.add('active');
     }
 
     function jump(id) {
-      location.hash = '#' + id;
-      showPage(id);
+      if (id === 'founder' && !founderUnlocked) {
+        openFounderGate();
+        return;
+      }
+      pages.forEach(p => p.classList.toggle('active', p.id === id));
+      setActiveNav(id === 'school' ? 'ai school' : id);
+      location.hash = id;
+    }
+
+    function openFounderGate() {
+      if (founderUnlocked) {
+        jump('founder');
+        return;
+      }
+      founderLock.classList.add('open');
+      lockError.style.display = 'none';
+      founderPassword.value = '';
+      setTimeout(() => founderPassword.focus(), 50);
+    }
+
+    function closeFounderGate() {
+      founderLock.classList.remove('open');
+    }
+
+    function unlockFounder() {
+      const entered = founderPassword.value;
+      const founderSecret = "ZERENTHIS-FOUNDER";
+      if (entered === founderSecret) {
+        founderUnlocked = true;
+        closeFounderGate();
+        jump('founder');
+        writeOutput('Founder access granted.');
+      } else {
+        lockError.style.display = 'block';
+      }
     }
 
     function writeOutput(text) {
@@ -1103,7 +583,8 @@
     }
 
     function runCommand() {
-      const value = (commandInput.value || '').trim().toLowerCase();
+      const input = document.getElementById('commandInput');
+      const value = (input.value || '').trim().toLowerCase();
 
       if (!value) {
         writeOutput('Command idle. Try: "open founder panel", "run simulation", "show content factory", or "go to ai school".');
@@ -1112,26 +593,26 @@
       }
 
       if (value.includes('founder')) {
-        jump('founder');
-        writeOutput('Founder route opened. Private command layer active.');
+        openFounderGate();
+        writeOutput('Founder access requested.');
       } else if (value.includes('content') || value.includes('video') || value.includes('factory')) {
         jump('factory');
-        writeOutput('Content Factory engaged. Creative production surfaces online.');
+        writeOutput('Content Factory engaged.');
       } else if (value.includes('execute') || value.includes('task') || value.includes('plan')) {
         jump('execution');
-        writeOutput('Execution Engine engaged. Queue logic and action surfaces loaded.');
+        writeOutput('Execution Engine engaged.');
       } else if (value.includes('learn') || value.includes('school') || value.includes('study')) {
         jump('school');
-        writeOutput('AI School opened. Adaptive instruction surfaces online.');
+        writeOutput('AI School opened.');
       } else if (value.includes('think') || value.includes('focus') || value.includes('cognitive')) {
         jump('cognitive');
-        writeOutput('Cognitive Lab opened. Mind expansion chamber active.');
+        writeOutput('Cognitive Lab opened.');
       } else if (value.includes('simulate') || value.includes('scenario')) {
         jump('simulation');
-        writeOutput('Reality Simulation opened. Scenario branches ready for analysis.');
+        writeOutput('Reality Simulation opened.');
       } else {
         jump('core');
-        writeOutput('Command interpreted. Core system overview loaded.');
+        writeOutput('Core overview loaded.');
       }
     }
 
@@ -1140,17 +621,23 @@
       timePill.textContent = 'Last update: ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     }
 
-    window.addEventListener('hashchange', () => showPage());
-    mobileToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-    commandInput.addEventListener('keydown', (e) => {
+    document.getElementById('commandInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') runCommand();
+    });
+
+    founderPassword.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlockFounder();
     });
 
     refreshTime();
     setInterval(refreshTime, 30000);
-    showPage((location.hash || '#core').replace('#', ''));
-    window.jump = jump;
-    window.runCommand = runCommand;
+
+    const initial = location.hash.replace('#', '');
+    if (initial && pages.some(p => p.id === initial) && initial !== 'founder') {
+      jump(initial);
+    } else {
+      jump('core');
+    }
   </script>
 </body>
 </html>
