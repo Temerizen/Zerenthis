@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zerenthis | Where Intelligence Becomes Power</title>
+  <meta
+    name="description"
+    content="Zerenthis is a premium intelligence platform for execution, learning, simulation, creation, and founder control."
+  />
   <style>
     :root{
       --bg:#05060b;
@@ -15,8 +19,8 @@
       --violet:#7c4dff;
       --cyan:#35d6ff;
       --green:#61f2b0;
-      --danger:#ff7fa2;
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%}
     body{
@@ -27,6 +31,7 @@
         radial-gradient(circle at top right, rgba(53,214,255,.12), transparent 25%),
         linear-gradient(180deg,#05060b 0%,#090c14 100%);
     }
+
     button,input{font:inherit}
     a{text-decoration:none;color:inherit}
 
@@ -68,6 +73,12 @@
       font-weight:900;
       font-size:1.6rem;
       color:white;
+    }
+
+    .brand-mark img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
     .brand-text h1{margin:0;font-size:1.06rem}
@@ -191,7 +202,7 @@
       border:1px solid var(--line);
       border-radius:20px;
       background:rgba(255,255,255,.03);
-      margin-bottom:22px;
+      margin-bottom:12px;
     }
 
     .command-bar input{
@@ -282,7 +293,7 @@
 
     #commandOutput{
       display:none;
-      margin-top:12px;
+      margin-bottom:18px;
       padding:14px 16px;
       border-radius:16px;
       border:1px solid var(--line);
@@ -398,7 +409,7 @@
 
       <div class="sidebar-card">
         <div class="status-row"><span class="dot"></span><span>System horizon stable</span></div>
-        <small>Zerenthis public shell online. Founder route is locked behind a founder gate.</small>
+        <small>Zerenthis public shell online. Backend connected. Founder route is gated in-browser.</small>
       </div>
     </aside>
 
@@ -407,7 +418,7 @@
         <div>
           <div class="eyebrow">Command surface</div>
           <h1 class="title">Command Intelligence. Execute Without Friction.</h1>
-          <p class="subtitle">This is the premium public shell. The Founder Panel is now gated, and the section navigation is wired intentionally as an interface, not fake page links.</p>
+          <p class="subtitle">This version is connected to your live backend, so the command box now returns real responses instead of only acting like a shell.</p>
         </div>
         <div class="actions">
           <button class="btn">System Log</button>
@@ -424,7 +435,7 @@
       <div class="status-strip">
         <span class="pill">System Status: Operational</span>
         <span class="pill">Mode: Focus</span>
-        <span class="pill">Active Processes: 3</span>
+        <span class="pill">Backend: Connected</span>
         <span class="pill" id="timePill">Last update: just now</span>
       </div>
 
@@ -433,24 +444,24 @@
           <div class="hero">
             <div class="eyebrow">Intelligence layer</div>
             <h2>Where Intelligence Becomes Power</h2>
-            <p>Zerenthis is the command room. This version is honest about what it is: a polished public shell with real section switching, stronger interaction, and a founder layer that is hidden until unlocked.</p>
+            <p>Zerenthis is now more than a static shell. Your command bar is wired to the live Railway backend, which means this site has crossed the line from presentation into real system foundation.</p>
           </div>
 
           <div class="grid-3">
             <div class="stat">
               <div class="label-sm">Launch Readiness</div>
-              <div class="value">96%</div>
-              <div class="detail">Public shell is live, polished, and showable.</div>
+              <div class="value">97%</div>
+              <div class="detail">Public shell is live and backend-connected.</div>
             </div>
             <div class="stat">
               <div class="label-sm">System Modules</div>
               <div class="value">6 + 1</div>
-              <div class="detail">Six public surfaces plus one locked founder surface.</div>
+              <div class="detail">Six public surfaces plus one gated founder surface.</div>
             </div>
             <div class="stat">
-              <div class="label-sm">Founder State</div>
-              <div class="value">Locked</div>
-              <div class="detail">Founder Panel requires founder access.</div>
+              <div class="label-sm">Backend State</div>
+              <div class="value">Online</div>
+              <div class="detail">Railway API responding to live commands.</div>
             </div>
           </div>
 
@@ -499,12 +510,53 @@
         </div>
       </section>
 
-      <section id="cognitive" class="page"><div class="hero"><div class="eyebrow">Mind expansion</div><h2>Cognitive Lab</h2><p>Build focus systems, reasoning drills, memory loops, and deliberate intelligence training.</p></div></section>
-      <section id="school" class="page"><div class="hero"><div class="eyebrow">Adaptive instruction</div><h2>AI School</h2><p>A branded academy layer for guided learning, subject mastery, and challenge-based progress.</p></div></section>
-      <section id="execution" class="page"><div class="hero"><div class="eyebrow">Workflow ignition</div><h2>Execution Engine</h2><p>Ideas matter less than execution velocity. This section frames action as leverage and momentum.</p></div></section>
-      <section id="factory" class="page"><div class="hero"><div class="eyebrow">Media production</div><h2>Content Factory</h2><p>A creative machine room for concepts, scripts, thumbnail direction, and output planning.</p></div></section>
-      <section id="simulation" class="page"><div class="hero"><div class="eyebrow">Strategic forecasting</div><h2>Reality Simulation</h2><p>Model branches before the real world charges you for them.</p></div></section>
-      <section id="founder" class="page"><div class="hero"><div class="eyebrow">Private command layer</div><h2>Founder Panel</h2><p>Founder access granted. This surface is now visible because the founder gate has been unlocked in this browser session.</p></div></section>
+      <section id="cognitive" class="page">
+        <div class="hero">
+          <div class="eyebrow">Mind expansion</div>
+          <h2>Cognitive Lab</h2>
+          <p>Build focus systems, reasoning drills, memory loops, and deliberate intelligence training.</p>
+        </div>
+      </section>
+
+      <section id="school" class="page">
+        <div class="hero">
+          <div class="eyebrow">Adaptive instruction</div>
+          <h2>AI School</h2>
+          <p>A branded academy layer for guided learning, subject mastery, and challenge-based progress.</p>
+        </div>
+      </section>
+
+      <section id="execution" class="page">
+        <div class="hero">
+          <div class="eyebrow">Workflow ignition</div>
+          <h2>Execution Engine</h2>
+          <p>Ideas matter less than execution velocity. This section frames action as leverage and momentum.</p>
+        </div>
+      </section>
+
+      <section id="factory" class="page">
+        <div class="hero">
+          <div class="eyebrow">Media production</div>
+          <h2>Content Factory</h2>
+          <p>A creative machine room for concepts, scripts, thumbnail direction, and output planning.</p>
+        </div>
+      </section>
+
+      <section id="simulation" class="page">
+        <div class="hero">
+          <div class="eyebrow">Strategic forecasting</div>
+          <h2>Reality Simulation</h2>
+          <p>Model branches before the real world charges you for them.</p>
+        </div>
+      </section>
+
+      <section id="founder" class="page">
+        <div class="hero">
+          <div class="eyebrow">Private command layer</div>
+          <h2>Founder Panel</h2>
+          <p>Founder access granted. This surface is visible because the founder gate has been unlocked in this browser session.</p>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -530,6 +582,7 @@
     const founderPassword = document.getElementById('founderPassword');
     const lockError = document.getElementById('lockError');
     const timePill = document.getElementById('timePill');
+    const backendUrl = 'https://semantiqai-backend-production-bcab.up.railway.app';
 
     let founderUnlocked = false;
 
@@ -582,38 +635,34 @@
       output.textContent = text;
     }
 
-    function runCommand() {
+    async function runCommand() {
       const input = document.getElementById('commandInput');
-      const value = (input.value || '').trim().toLowerCase();
+      const value = (input.value || '').trim();
 
       if (!value) {
-        writeOutput('Command idle. Try: "open founder panel", "run simulation", "show content factory", or "go to ai school".');
+        writeOutput('Command idle. Try typing something into the command box.');
         jump('core');
         return;
       }
 
-      if (value.includes('founder')) {
-        openFounderGate();
-        writeOutput('Founder access requested.');
-      } else if (value.includes('content') || value.includes('video') || value.includes('factory')) {
-        jump('factory');
-        writeOutput('Content Factory engaged.');
-      } else if (value.includes('execute') || value.includes('task') || value.includes('plan')) {
-        jump('execution');
-        writeOutput('Execution Engine engaged.');
-      } else if (value.includes('learn') || value.includes('school') || value.includes('study')) {
-        jump('school');
-        writeOutput('AI School opened.');
-      } else if (value.includes('think') || value.includes('focus') || value.includes('cognitive')) {
-        jump('cognitive');
-        writeOutput('Cognitive Lab opened.');
-      } else if (value.includes('simulate') || value.includes('scenario')) {
-        jump('simulation');
-        writeOutput('Reality Simulation opened.');
-      } else {
-        jump('core');
-        writeOutput('Core overview loaded.');
+      writeOutput('Thinking...');
+
+      try {
+        const res = await fetch(`${backendUrl}/command?q=${encodeURIComponent(value)}`);
+        const data = await res.json();
+        writeOutput(data.response || 'No response returned.');
+      } catch (err) {
+        writeOutput('Error connecting to Zerenthis backend.');
       }
+
+      const lower = value.toLowerCase();
+      if (lower.includes('founder')) openFounderGate();
+      else if (lower.includes('content') || lower.includes('video') || lower.includes('factory')) jump('factory');
+      else if (lower.includes('execute') || lower.includes('task') || lower.includes('plan')) jump('execution');
+      else if (lower.includes('learn') || lower.includes('school') || lower.includes('study')) jump('school');
+      else if (lower.includes('think') || lower.includes('focus') || lower.includes('cognitive')) jump('cognitive');
+      else if (lower.includes('simulate') || lower.includes('scenario')) jump('simulation');
+      else jump('core');
     }
 
     function refreshTime() {
