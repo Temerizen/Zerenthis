@@ -1,391 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis | Founder Content Factory V2</title>
-  <meta name="description" content="Founder-only one-click content generation for finished publishable packages." />
-  <style>
-    :root{
-      --bg:#05060b;
-      --panel:rgba(16,20,33,.76);
-      --line:rgba(255,255,255,.08);
-      --line2:rgba(255,255,255,.14);
-      --text:#edf2ff;
-      --muted:#9ba7cc;
-      --violet:#7c4dff;
-      --cyan:#35d6ff;
-      --green:#61f2b0;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%}
-    body{
-      font-family:Inter,system-ui,-apple-system,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(124,77,255,.18), transparent 25%),
-        radial-gradient(circle at top right, rgba(53,214,255,.12), transparent 25%),
-        linear-gradient(180deg,#05060b 0%,#090c14 100%);
-    }
-    button,input,select,textarea{font:inherit}
-    .shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
-    .sidebar{
-      background:rgba(8,10,18,.86);
-      border-right:1px solid var(--line);
-      padding:22px 18px;
-      position:sticky;
-      top:0;
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .brand{display:flex;gap:14px;align-items:center;padding:8px 8px 18px;border-bottom:1px solid var(--line)}
-    .brand-mark{
-      width:56px;height:56px;border-radius:16px;display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--violet),var(--cyan));
-      box-shadow:0 16px 44px rgba(124,77,255,.35);
-      overflow:hidden;font-weight:900;font-size:1.6rem;color:white;
-    }
-    .brand-mark img{width:100%;height:100%;object-fit:cover}
-    .brand-text h1{margin:0;font-size:1.06rem}
-    .brand-text p{margin:4px 0 0;color:var(--muted);font-size:.86rem}
-    .label{color:var(--muted);letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;padding:0 10px}
-    .nav{display:grid;gap:10px}
-    .nav-link{
-      display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:16px;
-      border:1px solid transparent;color:#d8def7;background:transparent;cursor:pointer;transition:.18s ease;
-    }
-    .nav-link:hover,.nav-link.active{
-      transform:translateX(2px);
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
-      border-color:var(--line2);
-    }
-    .sidebar-card{
-      margin-top:auto;padding:16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.03);
-    }
-    .status-row{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-    .dot{
-      width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(97,242,176,.5);
-    }
-    .main{padding:26px}
-    .topbar{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:22px}
-    .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;color:var(--muted);margin-bottom:8px}
-    .title{margin:0;font-size:clamp(2.1rem,4vw,3.6rem);line-height:1.02;letter-spacing:-.04em}
-    .subtitle{margin:12px 0 0;color:#cfd8f6;max-width:760px;line-height:1.65}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{
-      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
-      padding:12px 16px;border-radius:14px;cursor:pointer;
-    }
-    .btn.primary{border:none;background:linear-gradient(135deg,var(--violet),var(--cyan));color:white}
-    .page{display:none}
-    .page.active{display:block}
-    .stack{display:grid;gap:18px}
-    .hero,.panel,.stat,.module-card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018));
-      border-radius:24px;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.32);
-    }
-    .hero h2{margin:0 0 12px;font-size:clamp(1.9rem,3.8vw,3.1rem)}
-    .hero p,.panel p,.module-card p{color:#b7c0df;line-height:1.68}
-    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:16px}
-    .stat .label-sm{color:var(--muted);font-size:.92rem}
-    .stat .value{font-size:2rem;font-weight:800;margin:10px 0 8px}
-    .stat .detail{color:#bcc4e1}
-    .tag{
-      display:inline-block;margin-bottom:10px;color:var(--muted);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
-    }
-    .module-card h4{margin:0 0 10px;font-size:1.12rem}
-    .pill{
-      display:inline-flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);
-      border-radius:999px;background:rgba(255,255,255,.03);font-size:.9rem;margin-right:10px;margin-bottom:10px;
-    }
-    .factory-controls{display:grid;gap:14px;margin-bottom:16px}
-    .factory-controls input,.factory-controls select{
-      width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line2);
-      background:rgba(255,255,255,.04);color:var(--text);outline:none;
-    }
-    .factory-buttons{display:flex;gap:12px;flex-wrap:wrap}
-    pre{
-      white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;
-      background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;
-      padding:16px;color:#dbe3ff;line-height:1.7;
-    }
-    .founder-lock{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-      background:rgba(2,4,10,.72);backdrop-filter:blur(10px);z-index:50;padding:20px;
-    }
-    .founder-lock.open{display:flex}
-    .lock-card{
-      width:min(460px,100%);border:1px solid var(--line2);border-radius:24px;
-      background:rgba(14,18,30,.94);box-shadow:0 30px 100px rgba(0,0,0,.5);padding:24px;
-    }
-    .lock-card h3{margin:0 0 10px;font-size:1.5rem}
-    .lock-card p{color:#b7c0df;line-height:1.6}
-    .lock-card input{
-      width:100%;margin-top:12px;padding:14px 16px;border-radius:14px;border:1px solid var(--line2);
-      background:rgba(255,255,255,.04);color:var(--text);outline:none;
-    }
-    .lock-actions{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-    .lock-error{margin-top:12px;color:#ffb8c8;display:none}
-    #factoryOutput{margin-top:16px}
-    @media (max-width: 1080px){
-      .shell{grid-template-columns:1fr}
-      .sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
-      .grid-3,.module-grid{grid-template-columns:1fr}
-      .topbar{flex-direction:column;align-items:start}
-    }
-  </style>
-</head>
-<body>
-  <div class="shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">
-          <img src="zerenthis-logo.png" alt="Zerenthis logo" onerror="this.style.display='none'; this.parentElement.textContent='Z';" />
-        </div>
-        <div class="brand-text">
-          <h1>Zerenthis</h1>
-          <p>Ascension Engine</p>
-        </div>
-      </div>
+<script>
+const backendUrl = 'https://semantiqai-backend-production-bcab.up.railway.app';
+let founderUnlocked = false;
 
-      <div class="label">System</div>
-      <nav class="nav">
-        <button class="nav-link active" onclick="jump('core')"><span>Core</span><span>◦</span></button>
-        <button class="nav-link" onclick="jump('factory')"><span>Founder Factory</span><span>◦</span></button>
-        <button class="nav-link" onclick="openFounderGate()"><span>Founder Login</span><span>◦</span></button>
-      </nav>
+function generateAsset() {
+  const topic = document.getElementById('topicInput').value || 'AI automation';
+  const type = document.getElementById('generatorType').value;
+  const tone = document.getElementById('toneInput').value;
 
-      <div class="sidebar-card">
-        <div class="status-row"><span class="dot"></span><span>Factory horizon stable</span></div>
-        <small>Founder-only one-click generation with stronger YouTube-ready output in V2.</small>
-      </div>
-    </aside>
+  const output = document.getElementById('factoryOutput');
+  output.innerHTML = "<pre>Generating...</pre>";
 
-    <main class="main">
-      <div class="topbar">
-        <div>
-          <div class="eyebrow">Founder content factory v2</div>
-          <h1 class="title">Generate Full Packs Built For Publishing</h1>
-          <p class="subtitle">V2 upgrades the video generator into a stronger publishing machine with title options, hook options, long-form script, shorts pack, and tone selection.</p>
-        </div>
-        <div class="actions">
-          <button class="btn" onclick="jump('core')">Overview</button>
-          <button class="btn primary" onclick="openFounderGate()">Founder Access</button>
-        </div>
-      </div>
+  let url = `${backendUrl}/generate/${type}?topic=${encodeURIComponent(topic)}`;
+  if (type === "video") {
+    url += `&tone=${tone}`;
+  }
 
-      <section id="core" class="page active">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Current stage</div>
-            <h2>Founder Content Factory V2</h2>
-            <p>This version prioritizes real output packages. The video generator is now much stronger and closer to an actual publishing workflow instead of generic filler.</p>
-          </div>
-
-          <div class="grid-3">
-            <div class="stat">
-              <div class="label-sm">Video Engine</div>
-              <div class="value">V2</div>
-              <div class="detail">Multiple titles, hooks, full script, shorts pack, and tone selection.</div>
-            </div>
-            <div class="stat">
-              <div class="label-sm">Founder Access</div>
-              <div class="value">Locked</div>
-              <div class="detail">Unlock the factory to generate full packages.</div>
-            </div>
-            <div class="stat">
-              <div class="label-sm">Publishing Depth</div>
-              <div class="value">Higher</div>
-              <div class="detail">Built for usable output, not just brainstorming.</div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="eyebrow">V2 upgrades</div>
-            <h3>What got better</h3>
-            <div class="module-grid">
-              <div class="module-card">
-                <div class="tag">Video</div>
-                <h4>Title Variants</h4>
-                <p>Three stronger title options instead of one flat title.</p>
-              </div>
-              <div class="module-card">
-                <div class="tag">Video</div>
-                <h4>Hook Variants</h4>
-                <p>Three opening angles so you can choose the sharpest one.</p>
-              </div>
-              <div class="module-card">
-                <div class="tag">Video</div>
-                <h4>Long-Form Script</h4>
-                <p>Structured intro, sections, practical advantage, and outro.</p>
-              </div>
-              <div class="module-card">
-                <div class="tag">Video</div>
-                <h4>Shorts Pack</h4>
-                <p>Three repurposed short-form cutdowns from one topic.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="factory" class="page">
-        <div class="stack">
-          <div class="hero">
-            <div class="eyebrow">Founder factory</div>
-            <h2>One-click generation</h2>
-            <p>Choose an asset type, set a topic, choose a tone, and generate a finished package from the live backend.</p>
-          </div>
-
-          <div class="panel">
-            <div class="factory-controls">
-              <input id="topicInput" type="text" placeholder="Enter a topic, niche, or angle..." value="AI automation" />
-              <select id="generatorType">
-                <option value="video">Full Video Pack v2</option>
-                <option value="minibook">Mini Book Pack</option>
-                <option value="podcast">Podcast Episode Pack</option>
-                <option value="movie">Movie Package</option>
-                <option value="game">Game Package</option>
-              </select>
-              <select id="toneInput">
-                <option value="bold">Bold</option>
-                <option value="dramatic">Dramatic</option>
-                <option value="educational">Educational</option>
-                <option value="luxury">Luxury</option>
-              </select>
-            </div>
-
-            <div class="factory-buttons">
-              <button class="btn primary" onclick="generateAsset()">Generate Full Package</button>
-              <button class="btn" onclick="clearOutput()">Clear Output</button>
-            </div>
-
-            <div id="factoryOutput"></div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <div class="founder-lock" id="founderLock">
-    <div class="lock-card">
-      <div class="eyebrow">Founder authentication</div>
-      <h3>Founder access required</h3>
-      <p>Enter the founder password to unlock the Founder Factory in this browser session.</p>
-      <input id="founderPassword" type="password" placeholder="Enter founder password" />
-      <div class="lock-actions">
-        <button class="btn primary" onclick="unlockFounder()">Unlock Founder Factory</button>
-        <button class="btn" onclick="closeFounderGate()">Cancel</button>
-      </div>
-      <div class="lock-error" id="lockError">Incorrect password.</div>
-    </div>
-  </div>
-
-  <script>
-    const pages = [...document.querySelectorAll('.page')];
-    const navButtons = [...document.querySelectorAll('.nav-link')];
-    const founderLock = document.getElementById('founderLock');
-    const founderPassword = document.getElementById('founderPassword');
-    const lockError = document.getElementById('lockError');
-    const backendUrl = 'https://semantiqai-backend-production-bcab.up.railway.app';
-    let founderUnlocked = false;
-
-    function setActiveNav(label) {
-      navButtons.forEach(btn => btn.classList.remove('active'));
-      const target = navButtons.find(btn => btn.textContent.toLowerCase().includes(label.toLowerCase()));
-      if (target) target.classList.add('active');
-    }
-
-    function jump(id) {
-      if (id === 'factory' && !founderUnlocked) {
-        openFounderGate();
-        return;
-      }
-      pages.forEach(p => p.classList.toggle('active', p.id === id));
-      setActiveNav(id === 'factory' ? 'founder factory' : id);
-      location.hash = id;
-    }
-
-    function openFounderGate() {
-      if (founderUnlocked) {
-        jump('factory');
-        return;
-      }
-      founderLock.classList.add('open');
-      lockError.style.display = 'none';
-      founderPassword.value = '';
-      setTimeout(() => founderPassword.focus(), 50);
-    }
-
-    function closeFounderGate() {
-      founderLock.classList.remove('open');
-    }
-
-    function unlockFounder() {
-      const entered = founderPassword.value;
-      const founderSecret = "ZERENTHIS-FOUNDER";
-      if (entered === founderSecret) {
-        founderUnlocked = true;
-        closeFounderGate();
-        jump('factory');
-      } else {
-        lockError.style.display = 'block';
-      }
-    }
-
-    function clearOutput() {
-      document.getElementById('factoryOutput').innerHTML = '';
-    }
-
-    function renderObject(obj) {
-      let html = '';
-      for (const [key, value] of Object.entries(obj)) {
-        html += `<div class="pill">${key.replaceAll('_', ' ')}</div>`;
-        if (Array.isArray(value)) {
-          html += `<pre>${value.join('\n\n')}</pre>`;
-        } else {
-          html += `<pre>${value}</pre>`;
-        }
-      }
-      return html;
-    }
-
-    async function generateAsset() {
-      const topic = document.getElementById('topicInput').value.trim() || 'AI automation';
-      const type = document.getElementById('generatorType').value;
-      const tone = document.getElementById('toneInput').value;
-      const output = document.getElementById('factoryOutput');
-
-      output.innerHTML = '<pre>Generating full package...</pre>';
-
-      try {
-        let url = `${backendUrl}/generate/${type}?topic=${encodeURIComponent(topic)}`;
-        if (type === 'video') {
-          url += `&tone=${encodeURIComponent(tone)}`;
-        }
-
-        const res = await fetch(url);
-        const data = await res.json();
-        output.innerHTML = renderObject(data);
-      } catch (err) {
-        output.innerHTML = '<pre>Error generating asset. Check backend deployment.</pre>';
-      }
-    }
-
-    founderPassword.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') unlockFounder();
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      window.lastGenerated = data;
+      output.innerHTML = render(data);
+    })
+    .catch(() => {
+      output.innerHTML = "<pre>Error. Backend issue.</pre>";
     });
+}
 
-    const initial = location.hash.replace('#', '');
-    if (initial === 'factory') {
-      openFounderGate();
+function render(obj) {
+  let html = '';
+
+  for (let key in obj) {
+    html += `<h3>${key}</h3>`;
+
+    if (Array.isArray(obj[key])) {
+      html += `<pre>${obj[key].join("\n\n")}</pre>`;
     } else {
-      jump('core');
+      html += `<pre>${obj[key]}</pre>`;
     }
-  </script>
-</body>
-</html>
+  }
+
+  html += `
+    <button onclick="copyAll()" style="margin-top:10px;">Copy All</button>
+    <button onclick="downloadTxt()" style="margin-top:10px;">Download .txt</button>
+  `;
+
+  return html;
+}
+
+function copyAll() {
+  const text = JSON.stringify(window.lastGenerated, null, 2);
+  navigator.clipboard.writeText(text);
+  alert("Copied full package");
+}
+
+function downloadTxt() {
+  const text = JSON.stringify(window.lastGenerated, null, 2);
+  const blob = new Blob([text], { type: "text/plain" });
+  const a = document.createElement("a");
+
+  a.href = URL.createObjectURL(blob);
+  a.download = "zerenthis-output.txt";
+  a.click();
+}
+</script>
