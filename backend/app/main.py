@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from pathlib import Path
 import uuid
 
-app = FastAPI(title="Zerenthis Intelligent Growth Engine")
+app = FastAPI(title="Zerenthis Autonomous Domination System")
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,22 +21,9 @@ BASE = Path(__file__).resolve().parent
 OUT = BASE / "outputs"
 OUT.mkdir(exist_ok=True)
 
-
 # ----------------------------
-# Helpers
+# Core helpers
 # ----------------------------
-def expand_topics(topic: str):
-    angles = [
-        "The hidden truth about",
-        "Why nobody talks about",
-        "The real power of",
-        "What most people miss about",
-        "The future of",
-        "How this changes everything:",
-    ]
-    return [f"{a} {topic}" for a in angles]
-
-
 def generate_script(topic: str, mode: str = "money"):
     if mode == "god":
         return [
@@ -72,7 +59,6 @@ def scene_colors():
 def make_scene(text: str, duration: float, i: int):
     colors = scene_colors()
     bg = ColorClip((1280, 720), color=colors[i % len(colors)]).set_duration(duration)
-
     zoom_bg = bg.resize(lambda t: 1 + 0.02 * t)
 
     main = TextClip(
@@ -98,7 +84,6 @@ def make_scene(text: str, duration: float, i: int):
 
 def build_video(topic: str, mode: str = "money"):
     uid = str(uuid.uuid4())
-
     script_parts = generate_script(topic, mode=mode)
     full_script = " ".join(script_parts)
 
@@ -132,11 +117,8 @@ def make_thumbnail(text: str):
     img = Image.new("RGB", (1280, 720), color=(10, 12, 22))
     draw = ImageDraw.Draw(img)
 
-    headline = text[:30].upper()
-    subline = "WATCH THIS"
-
-    draw.text((90, 250), headline, fill=(255, 255, 255))
-    draw.text((90, 350), subline, fill=(0, 255, 255))
+    draw.text((90, 250), text[:30].upper(), fill=(255, 255, 255))
+    draw.text((90, 350), "WATCH THIS", fill=(0, 255, 255))
 
     img.save(path)
     return path.name
@@ -147,7 +129,7 @@ def make_shorts(parts):
 
 
 # ----------------------------
-# Growth engine
+# Growth intelligence
 # ----------------------------
 def get_growth_topics(niche="ai"):
     base = {
@@ -156,22 +138,29 @@ def get_growth_topics(niche="ai"):
             "making money with AI",
             "AI replacing jobs",
             "AI business ideas",
-            "AI side hustles"
+            "AI side hustles",
         ],
         "business": [
             "making money online",
             "side hustles",
             "passive income",
             "digital products",
-            "scaling a business"
+            "scaling a business",
         ],
         "self": [
             "discipline",
             "focus",
             "dopamine",
             "productivity",
-            "self improvement"
-        ]
+            "self improvement",
+        ],
+        "creator": [
+            "faceless YouTube channels",
+            "how creators grow faster",
+            "why most channels fail",
+            "content systems",
+            "YouTube automation",
+        ],
     }
     return base.get(niche, base["ai"])
 
@@ -194,31 +183,91 @@ def generate_titles(topic):
     ]
 
 
+def lane_map():
+    return {
+        "money": {
+            "niches": ["ai", "business", "creator"],
+            "description": "Fast-output lane focused on views, monetizable content, and scalable video volume."
+        },
+        "brand": {
+            "niches": ["creator", "self", "ai"],
+            "description": "Authority-building lane focused on trust, premium perception, and flagship content."
+        }
+    }
+
+
+def build_lane_recommendations(lane: str):
+    lanes = lane_map()
+    selected = lanes.get(lane, lanes["money"])
+
+    recommendations = []
+    for niche in selected["niches"]:
+        topics = get_growth_topics(niche)[:3]
+        recommendations.append({
+            "niche": niche,
+            "recommended_topics": topics
+        })
+
+    return {
+        "lane": lane,
+        "description": selected["description"],
+        "recommendations": recommendations
+    }
+
+
 def generate_smart_batch(niche="ai", count=5):
     topics = get_growth_topics(niche)
     batch = []
 
     for t in topics[:count]:
         angles = expand_angles(t)
+        chosen = angles[0]
 
-        for a in angles[:1]:
-            video, parts = build_video(a, mode="money")
-            thumb = make_thumbnail(a)
+        video, parts = build_video(chosen, mode="money")
+        thumb = make_thumbnail(chosen)
 
-            batch.append({
-                "title": a,
-                "video_url": f"/files/{video}",
-                "thumbnail_url": f"/files/{thumb}",
-                "hooks": parts[:2],
-                "suggested_titles": generate_titles(t),
-                "script": parts,
-            })
+        batch.append({
+            "title": chosen,
+            "video_url": f"/files/{video}",
+            "thumbnail_url": f"/files/{thumb}",
+            "hooks": parts[:2],
+            "suggested_titles": generate_titles(t),
+            "script": parts,
+        })
+
+    return batch
+
+
+def generate_domination_batch(lane="money", count=5):
+    lanes = lane_map()
+    selected = lanes.get(lane, lanes["money"])
+
+    all_topics = []
+    for niche in selected["niches"]:
+        all_topics.extend(get_growth_topics(niche))
+
+    batch = []
+    for topic in all_topics[:count]:
+        title = expand_angles(topic)[0]
+        mode = "money" if lane == "money" else "god"
+        video, parts = build_video(title, mode=mode)
+        thumb = make_thumbnail(title)
+
+        batch.append({
+            "lane": lane,
+            "topic": topic,
+            "title": title,
+            "video_url": f"/files/{video}",
+            "thumbnail_url": f"/files/{thumb}",
+            "hooks": parts[:2],
+            "script": parts,
+        })
 
     return batch
 
 
 # ----------------------------
-# Single universal creator route
+# Routes
 # ----------------------------
 @app.post("/universal")
 async def universal(req: Request):
@@ -249,39 +298,6 @@ async def universal(req: Request):
     }
 
 
-# ----------------------------
-# Batch factory route
-# ----------------------------
-def generate_batch(topic: str, count: int = 5, mode: str = "money"):
-    if mode == "money":
-        topics = expand_topics(topic)
-    else:
-        topics = [topic]
-
-    batch = []
-
-    for i in range(min(count, len(topics))):
-        t = topics[i]
-        video, parts = build_video(t, mode=mode)
-        thumb = make_thumbnail(t)
-
-        item_title = (
-            t if mode == "money"
-            else f"The Deep Opportunity Behind {t}"
-        )
-
-        batch.append({
-            "title": item_title,
-            "video_url": f"/files/{video}",
-            "thumbnail_url": f"/files/{thumb}",
-            "hooks": parts[:2],
-            "script": parts,
-            "mode": mode,
-        })
-
-    return batch
-
-
 @app.post("/factory")
 async def factory(req: Request):
     data = await req.json()
@@ -289,10 +305,29 @@ async def factory(req: Request):
     count = int(data.get("count", 5))
     mode = data.get("mode", "money")
 
-    if mode == "god":
-        count = min(count, 2)
+    topics = [topic] if mode == "god" else [
+        f"The hidden truth about {topic}",
+        f"Why nobody talks about {topic}",
+        f"The real power of {topic}",
+        f"What most people miss about {topic}",
+        f"The future of {topic}",
+        f"How this changes everything: {topic}",
+    ]
 
-    batch = generate_batch(topic, count=count, mode=mode)
+    batch = []
+    for i in range(min(count, len(topics))):
+        t = topics[i]
+        video, parts = build_video(t, mode=mode)
+        thumb = make_thumbnail(t)
+
+        batch.append({
+            "title": t,
+            "video_url": f"/files/{video}",
+            "thumbnail_url": f"/files/{thumb}",
+            "hooks": parts[:2],
+            "script": parts,
+            "mode": mode,
+        })
 
     return {
         "type": "factory_batch",
@@ -302,9 +337,6 @@ async def factory(req: Request):
     }
 
 
-# ----------------------------
-# Smart growth route
-# ----------------------------
 @app.post("/growth")
 async def growth(req: Request):
     data = await req.json()
@@ -320,9 +352,24 @@ async def growth(req: Request):
     }
 
 
-# ----------------------------
-# File server
-# ----------------------------
+@app.post("/domination")
+async def domination(req: Request):
+    data = await req.json()
+    lane = data.get("lane", "money")
+    count = int(data.get("count", 5))
+
+    plan = build_lane_recommendations(lane)
+    batch = generate_domination_batch(lane, count)
+
+    return {
+        "type": "domination_batch",
+        "lane": lane,
+        "plan": plan,
+        "total": len(batch),
+        "items": batch,
+    }
+
+
 @app.get("/files/{filename}")
 def get_file(filename: str):
     file_path = OUT / filename
