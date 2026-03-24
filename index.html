@@ -1,81 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Zerenthis OS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zerenthis</title>
+
 <style>
-body { background:#0a0a0f; color:white; font-family:Arial; padding:20px; }
-button { width:100%; padding:10px; margin-top:10px; }
-input { width:100%; padding:10px; }
-video { width:100%; margin-top:10px; }
-pre { background:#111; padding:10px; }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0a0a0f;
+  color: white;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: cyan;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary { background: cyan; color: black; }
+.secondary { background: #222; color: white; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.card {
+  background: #111;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+video {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+.loading {
+  color: cyan;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Zerenthis OS ⚡</h2>
+<div class="container">
 
-<input id="topic" placeholder="Enter topic">
+<h1>Zerenthis ⚡</h1>
 
-<button onclick="video()">🎬 Video</button>
-<button onclick="shorts()">⚡ Shorts</button>
-<button onclick="long()">🧠 Long Script</button>
-<button onclick="ebook()">📚 Ebook</button>
-<button onclick="pack()">📦 Content Pack</button>
-<button onclick="banana()">🍌 Banana Mode</button>
+<input id="topic" placeholder="Enter topic..." />
 
-<div id="out"></div>
+<button class="primary" onclick="generateVideo()">🎬 Generate Video</button>
+
+<div class="grid">
+  <button class="secondary" onclick="generateShorts()">⚡ Shorts</button>
+  <button class="secondary" onclick="generateLong()">🧠 Long Script</button>
+  <button class="secondary" onclick="generateEbook()">📚 Ebook</button>
+  <button class="secondary" onclick="generateBatch()">🍌 Batch Mode</button>
+</div>
+
+<div id="output"></div>
+
+</div>
 
 <script>
+
 const API = "https://semantiqai-backend-production-bcab.up.railway.app";
 
-async function video(){
-  let t = topic.value;
-  let r = await fetch(API+"/video",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:t})});
-  let d = await r.json();
-  out.innerHTML = d.script.join("<br>")+"<p>Rendering...</p>";
-  check(d.job_id);
+async function generateVideo() {
+  const topic = document.getElementById("topic").value;
+
+  const res = await fetch(API + "/video", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({topic})
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerHTML = `
+    <div class="card">
+      <h3>Script</h3>
+      <pre>${data.script.join("\n")}</pre>
+      <p class="loading">Rendering video...</p>
+      <div id="videoBox"></div>
+    </div>
+  `;
+
+  checkJob(data.job_id);
 }
 
-async function check(id){
-  let r = await fetch(API+"/job/"+id);
-  let d = await r.json();
-  if(d.status==="done"){
-    out.innerHTML += `<video controls src="${API+d.video_url}"></video>`;
+async function checkJob(id) {
+  const res = await fetch(API + "/job/" + id);
+  const data = await res.json();
+
+  if (data.status === "done") {
+    document.getElementById("videoBox").innerHTML = `
+      <video controls autoplay src="${API + data.video_url}"></video>
+    `;
+  } else if (data.status === "error") {
+    document.getElementById("videoBox").innerHTML = `<p style="color:red;">Render failed</p>`;
   } else {
-    setTimeout(()=>check(id),2000);
+    setTimeout(() => checkJob(id), 2000);
   }
 }
 
-async function shorts(){
-  let r = await fetch(API+"/shorts",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
-  let d = await r.json();
-  out.innerHTML = d.data.join("<br>");
+async function generateShorts() {
+  const topic = document.getElementById("topic").value;
+
+  const res = await fetch(API + "/shorts", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({topic})
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerHTML = `
+    <div class="card">
+      <h3>Short Ideas</h3>
+      <pre>${data.data.join("\n")}</pre>
+    </div>
+  `;
 }
 
-async function long(){
-  let r = await fetch(API+"/long",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
-  let d = await r.json();
-  out.innerHTML = "<pre>"+d.data+"</pre>";
+async function generateLong() {
+  const topic = document.getElementById("topic").value;
+
+  const res = await fetch(API + "/long", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({topic})
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerHTML = `
+    <div class="card">
+      <h3>Long Script</h3>
+      <pre>${data.data}</pre>
+    </div>
+  `;
 }
 
-async function ebook(){
-  let r = await fetch(API+"/ebook",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
-  let d = await r.json();
-  out.innerHTML = "<pre>"+d.data+"</pre>";
+async function generateEbook() {
+  const topic = document.getElementById("topic").value;
+
+  const res = await fetch(API + "/ebook", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({topic})
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerHTML = `
+    <div class="card">
+      <h3>Ebook</h3>
+      <pre>${data.data}</pre>
+    </div>
+  `;
 }
 
-async function pack(){
-  let r = await fetch(API+"/pack",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
-  let d = await r.json();
-  out.innerHTML = "<pre>"+JSON.stringify(d,null,2)+"</pre>";
+async function generateBatch() {
+  const topic = document.getElementById("topic").value;
+
+  const res = await fetch(API + "/banana", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({topic})
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerHTML = `
+    <div class="card">
+      <h3>Batch Output</h3>
+      <pre>${JSON.stringify(data.batch, null, 2)}</pre>
+    </div>
+  `;
 }
 
-async function banana(){
-  let r = await fetch(API+"/banana",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
-  let d = await r.json();
-  out.innerHTML = "<pre>"+JSON.stringify(d,null,2)+"</pre>";
-}
 </script>
 
 </body>
