@@ -97,6 +97,7 @@
       margin-top: 10px;
       border-radius: 10px;
       background: #000;
+      max-height: 800px;
     }
 
     img {
@@ -114,7 +115,7 @@
       letter-spacing: 0.08em;
     }
 
-    .hooks, .script, .titles, .plan {
+    .hooks, .script, .titles {
       background: #171b28;
       border: 1px solid #2b3144;
       padding: 10px;
@@ -138,7 +139,7 @@
 <body>
 <div class="container">
   <h1>Zerenthis Studio</h1>
-  <div class="sub">Money Mode, God Mode, Smart Growth, and Autonomous Domination</div>
+  <div class="sub">Long-form, Factory, Growth, and Shorts Engine</div>
 
   <textarea id="prompt" placeholder="Enter topic, e.g. AI automation"></textarea>
 
@@ -163,17 +164,14 @@
       <option value="creator">Creator</option>
     </select>
 
-    <select id="lane">
-      <option value="money">Money Lane</option>
-      <option value="brand">Brand Lane</option>
-    </select>
+    <div></div>
   </div>
 
   <div class="buttons">
     <button onclick="generateSingle()">Generate Video</button>
     <button onclick="generateBatch()">Auto Generate Factory</button>
     <button onclick="generateGrowth()">Smart Growth</button>
-    <button onclick="generateDomination()">Domination System</button>
+    <button onclick="generateShorts()">Short Content</button>
   </div>
 
   <div class="studio" id="studio"></div>
@@ -306,45 +304,42 @@ async function generateGrowth() {
   studio.innerHTML = html;
 }
 
-async function generateDomination() {
-  const lane = document.getElementById("lane").value;
+async function generateShorts() {
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
   const count = parseInt(document.getElementById("count").value, 10);
   const studio = document.getElementById("studio");
 
-  studio.innerHTML = "Building domination plan...";
+  studio.innerHTML = "Generating short content...";
 
-  const res = await fetch(backend + "/domination", {
+  const res = await fetch(backend + "/shorts", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ lane, count })
+    body: JSON.stringify({ topic: prompt, count })
   });
 
   const data = await res.json();
 
-  let planHtml = `<div class="plan"><strong>${data.plan.lane.toUpperCase()} LANE</strong><br>${data.plan.description}<br><br>`;
-  data.plan.recommendations.forEach(r => {
-    planHtml += `<strong>${r.niche.toUpperCase()}</strong><br>${r.recommended_topics.join("<br>")}<br><br>`;
-  });
-  planHtml += `</div>`;
-
-  let html = `<h2>DOMINATION SYSTEM (${data.total})</h2>${planHtml}`;
+  let html = `<h2>SHORT CONTENT OUTPUT (${data.total})</h2>`;
 
   data.items.forEach(item => {
     html += `
       <div class="card">
-        <div class="badge">${item.lane.toUpperCase()} LANE</div>
+        <div class="badge">${item.style.toUpperCase()} SHORT</div>
         <h3>${item.title}</h3>
 
-        <div class="label">Video</div>
+        <div class="label">Short Video</div>
         <video controls src="${backend}${item.video_url}"></video>
 
         <div class="label">Thumbnail</div>
         <img src="${backend}${item.thumbnail_url}" />
 
-        <div class="label">Hooks</div>
-        <div class="hooks">${item.hooks.join("<br>")}</div>
+        <div class="label">Hook</div>
+        <div class="hooks">${item.hook}</div>
 
-        <div class="label">Script</div>
+        <div class="label">Caption Text</div>
+        <div class="script">${item.caption_text}</div>
+
+        <div class="label">Short Script</div>
         <div class="script">${item.script.join("<br><br>")}</div>
       </div>
     `;
