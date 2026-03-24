@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from pathlib import Path
 import uuid
 
-app = FastAPI(title="Zerenthis Short Content Engine")
+app = FastAPI(title="Zerenthis Speed Optimized Engine")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +22,7 @@ OUT = BASE / "outputs"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ----------------------------
-# Shared helpers
+# Helpers
 # ----------------------------
 def scene_colors():
     return [
@@ -30,8 +30,27 @@ def scene_colors():
         (20, 15, 35),
         (12, 22, 30),
         (25, 18, 40),
-        (16, 12, 28),
-        (12, 18, 22),
+    ]
+
+
+def generate_script(topic: str, mode: str = "money"):
+    if mode == "god":
+        return [
+            f"Stop scrolling. {topic} is bigger than most people realize.",
+            f"Most people misunderstand what {topic} is actually doing beneath the surface.",
+            f"The real advantage is not seeing {topic} late. It is understanding it early and using it deliberately.",
+            f"This is where ordinary people fall behind and strategic people pull ahead.",
+            f"The deeper opportunity inside {topic} is leverage, positioning, and timing.",
+            f"If you move now, you build compound advantage while other people are still hesitating.",
+        ]
+
+    return [
+        f"Stop scrolling. {topic} is about to explode.",
+        f"This is what nobody tells you about {topic}.",
+        f"Most people are already behind.",
+        f"This gives you leverage.",
+        f"The gap is growing fast.",
+        f"Act now or miss it.",
     ]
 
 
@@ -41,11 +60,10 @@ def make_thumbnail(text: str, subline: str = "WATCH THIS"):
 
     img = Image.new("RGB", (1280, 720), color=(10, 12, 22))
     draw = ImageDraw.Draw(img)
-
     draw.text((90, 250), text[:30].upper(), fill=(255, 255, 255))
     draw.text((90, 350), subline[:24].upper(), fill=(0, 255, 255))
-
     img.save(path)
+
     return path.name
 
 
@@ -78,129 +96,19 @@ def make_scene(text: str, duration: float, i: int, vertical: bool = False):
     return CompositeVideoClip([bg, main, caption])
 
 
-# ----------------------------
-# Long-form video helpers
-# ----------------------------
-def generate_script(topic: str, mode: str = "money"):
-    if mode == "god":
-        return [
-            f"Stop scrolling. {topic} is bigger than most people realize.",
-            f"Most people misunderstand what {topic} is actually doing beneath the surface.",
-            f"The real advantage is not seeing {topic} late. It is understanding it early and using it deliberately.",
-            f"This is where ordinary people fall behind and strategic people pull ahead.",
-            f"The deeper opportunity inside {topic} is leverage, positioning, and timing.",
-            f"If you move now, you build compound advantage while other people are still hesitating.",
-        ]
-
-    return [
-        f"Stop scrolling. {topic} is about to explode.",
-        f"This is what nobody tells you about {topic}.",
-        f"Most people are already behind.",
-        f"This gives you leverage.",
-        f"The gap is growing fast.",
-        f"Act now or miss it.",
-    ]
-
-
-def build_video(topic: str, mode: str = "money"):
+def build_video_from_lines(lines, vertical=False):
     uid = str(uuid.uuid4())
-    script_parts = generate_script(topic, mode=mode)
-    full_script = " ".join(script_parts)
+    suffix = "short" if vertical else "long"
 
-    audio_path = OUT / f"{uid}.mp3"
-    video_path = OUT / f"{uid}.mp4"
+    audio_path = OUT / f"{uid}-{suffix}.mp3"
+    video_path = OUT / f"{uid}-{suffix}.mp4"
 
-    gTTS(full_script).save(str(audio_path))
-    audio = AudioFileClip(str(audio_path))
-
-    per = max(audio.duration / max(len(script_parts), 1), 1.5)
-    clips = [make_scene(p, per, i, vertical=False) for i, p in enumerate(script_parts)]
-    final = concatenate_videoclips(clips, method="compose").set_audio(audio)
-
-    final.write_videofile(
-        str(video_path),
-        fps=24,
-        codec="libx264",
-        audio_codec="aac",
-        verbose=False,
-        logger=None,
-    )
-
-    return video_path.name, script_parts
-
-
-# ----------------------------
-# Shorts engine
-# ----------------------------
-def short_title(topic: str, style: str):
-    if style == "contrarian":
-        return f"The truth about {topic}"
-    if style == "shock":
-        return f"{topic} changes everything"
-    if style == "authority":
-        return f"What {topic} really means"
-    return f"{topic} in 30 seconds"
-
-
-def short_hook(topic: str, style: str):
-    if style == "contrarian":
-        return f"Nobody tells you this about {topic}."
-    if style == "shock":
-        return f"Stop scrolling. {topic} is way bigger than you think."
-    if style == "authority":
-        return f"Here is what most people get wrong about {topic}."
-    return f"Here is why {topic} matters right now."
-
-
-def short_script(topic: str, style: str):
-    hook = short_hook(topic, style)
-
-    if style == "contrarian":
-        lines = [
-            hook,
-            f"Most people look at {topic} from the surface.",
-            f"But the real upside is hidden in how early understanding changes your position.",
-            f"That is why people who get this now move faster than everyone else."
-        ]
-    elif style == "authority":
-        lines = [
-            hook,
-            f"{topic} is not just noise or hype.",
-            f"It changes how people learn, act, or earn depending on how they use it.",
-            f"The smart move is to understand the mechanism before the crowd does."
-        ]
-    elif style == "shock":
-        lines = [
-            hook,
-            f"The gap between early users and late users is already growing.",
-            f"What looks small now can become a massive advantage later.",
-            f"If you wait for certainty, you usually arrive too late."
-        ]
-    else:
-        lines = [
-            hook,
-            f"{topic} matters because timing matters.",
-            f"Early understanding gives you more leverage.",
-            f"That is the real opportunity."
-        ]
-
-    return lines
-
-
-def build_short_video(topic: str, style: str = "shock"):
-    uid = str(uuid.uuid4())
-
-    lines = short_script(topic, style)
     full_script = " ".join(lines)
-
-    audio_path = OUT / f"{uid}-short.mp3"
-    video_path = OUT / f"{uid}-short.mp4"
-
     gTTS(full_script).save(str(audio_path))
     audio = AudioFileClip(str(audio_path))
 
     per = max(audio.duration / max(len(lines), 1), 1.0)
-    clips = [make_scene(line, per, i, vertical=True) for i, line in enumerate(lines)]
+    clips = [make_scene(line, per, i, vertical=vertical) for i, line in enumerate(lines)]
     final = concatenate_videoclips(clips, method="compose").set_audio(audio)
 
     final.write_videofile(
@@ -212,42 +120,29 @@ def build_short_video(topic: str, style: str = "shock"):
         logger=None,
     )
 
-    return video_path.name, lines
+    return video_path.name
 
 
-def build_short_package(topic: str, style: str = "shock"):
-    title = short_title(topic, style)
-    hook = short_hook(topic, style)
-    video_name, lines = build_short_video(topic, style)
-    thumb_name = make_thumbnail(topic, subline="SHORTS")
-
-    return {
-        "type": "short",
-        "style": style,
-        "title": title,
-        "hook": hook,
-        "video_url": f"/files/{video_name}",
-        "thumbnail_url": f"/files/{thumb_name}",
-        "caption_text": " ".join(lines),
-        "script": lines,
-    }
-
-
-def build_short_batch(topic: str, count: int = 5):
-    styles = ["shock", "contrarian", "authority", "shock", "authority", "contrarian"]
-    batch = []
-
-    for i in range(min(count, len(styles))):
-        style = styles[i]
-        short_topic = topic if i == 0 else f"{topic}"
-        batch.append(build_short_package(short_topic, style))
-
-    return batch
+def build_short_script(topic: str, style: str = "shock"):
+    if style == "contrarian":
+        return [
+            f"Nobody tells you this about {topic}.",
+            f"Most people look at {topic} the wrong way.",
+            f"The real upside comes from understanding it before everyone else does.",
+        ]
+    if style == "authority":
+        return [
+            f"Here is what most people get wrong about {topic}.",
+            f"{topic} is not just hype.",
+            f"The smart move is to understand the mechanism before the crowd does.",
+        ]
+    return [
+        f"Stop scrolling. {topic} is way bigger than you think.",
+        f"The gap between early users and late users is already growing.",
+        f"If you wait for certainty, you usually arrive too late.",
+    ]
 
 
-# ----------------------------
-# Growth helpers
-# ----------------------------
 def get_growth_topics(niche="ai"):
     base = {
         "ai": [
@@ -282,30 +177,12 @@ def get_growth_topics(niche="ai"):
     return base.get(niche, base["ai"])
 
 
-def expand_angles(topic):
-    return [
-        f"Why {topic} is about to explode",
-        f"The truth about {topic}",
-        f"What nobody tells you about {topic}",
-        f"The hidden opportunity in {topic}",
-        f"How {topic} is changing everything",
-    ]
-
-
-def generate_titles(topic):
-    return [
-        f"{topic} Is About To Explode",
-        f"The Truth About {topic}",
-        f"What Nobody Tells You About {topic}",
-    ]
-
-
 # ----------------------------
-# Routes
+# Instant / Fast / Render routes
 # ----------------------------
 @app.get("/")
 def root():
-    return {"status": "Zerenthis Short Content Engine Live"}
+    return {"status": "Zerenthis Speed Optimized Engine Live"}
 
 
 @app.get("/health")
@@ -313,68 +190,137 @@ def health():
     return {"status": "ok"}
 
 
-@app.post("/universal")
-async def universal(req: Request):
+@app.post("/instant")
+async def instant(req: Request):
     try:
         data = await req.json()
-        prompt = data.get("prompt", "AI automation")
+        topic = data.get("topic", "AI automation")
         mode = data.get("mode", "money")
 
-        video_name, script_parts = build_video(prompt, mode=mode)
-        thumb_name = make_thumbnail(prompt)
-        title = f"{prompt} Is About To Explode" if mode == "money" else f"The Truth About {prompt} Nobody Talks About"
+        script = generate_script(topic, mode=mode)
+        hooks = script[:2]
+        title = f"{topic} Is About To Explode" if mode == "money" else f"The Truth About {topic} Nobody Talks About"
+        thumbnail_text = [topic[:28].upper(), "WATCH THIS", "MOST PEOPLE MISS THIS"]
+        shorts = [
+            {"clip": line, "caption": line.upper()}
+            for line in script[:3]
+        ]
 
         return {
-            "type": "video",
+            "type": "instant_package",
             "mode": mode,
             "title": title,
-            "video_url": f"/files/{video_name}",
-            "thumbnail_url": f"/files/{thumb_name}",
-            "hooks": script_parts[:2],
-            "script": script_parts,
-            "description": f"This changes how you think about {prompt}. Follow for more.",
+            "hooks": hooks,
+            "script": script,
+            "thumbnail_text": thumbnail_text,
+            "description": f"This changes how you think about {topic}. Follow for more.",
+            "shorts": shorts,
         }
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 
-@app.post("/factory")
-async def factory(req: Request):
+@app.post("/fast")
+async def fast(req: Request):
+    try:
+        data = await req.json()
+        topic = data.get("topic", "AI automation")
+        mode = data.get("mode", "money")
+
+        script = generate_script(topic, mode=mode)
+        thumb_name = make_thumbnail(topic)
+
+        return {
+            "type": "fast_package",
+            "mode": mode,
+            "title": f"{topic} Is About To Explode" if mode == "money" else f"The Truth About {topic} Nobody Talks About",
+            "thumbnail_url": f"/files/{thumb_name}",
+            "hooks": script[:2],
+            "script": script,
+            "description": f"This changes how you think about {topic}. Follow for more.",
+        }
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.post("/render")
+async def render(req: Request):
+    try:
+        data = await req.json()
+        topic = data.get("topic", "AI automation")
+        mode = data.get("mode", "money")
+        script = data.get("script")
+
+        lines = script if isinstance(script, list) and script else generate_script(topic, mode=mode)
+        video_name = build_video_from_lines(lines, vertical=False)
+        thumb_name = make_thumbnail(topic)
+
+        return {
+            "type": "rendered_video",
+            "mode": mode,
+            "title": f"{topic} Is About To Explode" if mode == "money" else f"The Truth About {topic} Nobody Talks About",
+            "video_url": f"/files/{video_name}",
+            "thumbnail_url": f"/files/{thumb_name}",
+            "script": lines,
+        }
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.post("/shorts")
+async def shorts(req: Request):
     try:
         data = await req.json()
         topic = data.get("topic", "AI automation")
         count = int(data.get("count", 5))
-        mode = data.get("mode", "money")
-
-        topics = [topic] if mode == "god" else [
-            f"The hidden truth about {topic}",
-            f"Why nobody talks about {topic}",
-            f"The real power of {topic}",
-            f"What most people miss about {topic}",
-            f"The future of {topic}",
-            f"How this changes everything: {topic}",
-        ]
+        styles = ["shock", "contrarian", "authority", "shock", "authority", "contrarian"]
 
         batch = []
-        for i in range(min(count, len(topics))):
-            t = topics[i]
-            video_name, script_parts = build_video(t, mode=mode)
-            thumb_name = make_thumbnail(t)
+        for i in range(min(count, len(styles))):
+            style = styles[i]
+            lines = build_short_script(topic, style)
+            thumb_name = make_thumbnail(topic, subline="SHORTS")
 
             batch.append({
-                "title": t,
-                "video_url": f"/files/{video_name}",
+                "type": "short_package",
+                "style": style,
+                "title": f"{topic} in 30 seconds",
+                "hook": lines[0],
                 "thumbnail_url": f"/files/{thumb_name}",
-                "hooks": script_parts[:2],
-                "script": script_parts,
-                "mode": mode,
+                "script": lines,
+                "caption_text": " ".join(lines),
             })
 
         return {
-            "type": "factory_batch",
-            "mode": mode,
+            "type": "short_batch",
             "total": len(batch),
             "items": batch,
+        }
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.post("/render-short")
+async def render_short(req: Request):
+    try:
+        data = await req.json()
+        topic = data.get("topic", "AI automation")
+        style = data.get("style", "shock")
+        lines = data.get("script")
+
+        if not isinstance(lines, list) or not lines:
+            lines = build_short_script(topic, style)
+
+        video_name = build_video_from_lines(lines, vertical=True)
+        thumb_name = make_thumbnail(topic, subline="SHORTS")
+
+        return {
+            "type": "rendered_short",
+            "style": style,
+            "title": f"{topic} in 30 seconds",
+            "video_url": f"/files/{video_name}",
+            "thumbnail_url": f"/files/{thumb_name}",
+            "script": lines,
         }
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
@@ -388,44 +334,25 @@ async def growth(req: Request):
         count = int(data.get("count", 5))
 
         topics = get_growth_topics(niche)
-        batch = []
+        items = []
 
-        for t in topics[:count]:
-            chosen = expand_angles(t)[0]
-            video_name, script_parts = build_video(chosen, mode="money")
-            thumb_name = make_thumbnail(chosen)
-
-            batch.append({
-                "title": chosen,
-                "video_url": f"/files/{video_name}",
-                "thumbnail_url": f"/files/{thumb_name}",
-                "hooks": script_parts[:2],
-                "suggested_titles": generate_titles(t),
-                "script": script_parts,
+        for topic in topics[:count]:
+            script = generate_script(topic, mode="money")
+            items.append({
+                "title": f"{topic} Is About To Explode",
+                "hooks": script[:2],
+                "script": script,
+                "suggested_titles": [
+                    f"{topic} Is About To Explode",
+                    f"The Truth About {topic}",
+                    f"What Nobody Tells You About {topic}",
+                ],
             })
 
         return {
             "type": "growth_batch",
-            "total": len(batch),
-            "items": batch,
-        }
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)})
-
-
-@app.post("/shorts")
-async def shorts(req: Request):
-    try:
-        data = await req.json()
-        topic = data.get("topic", "AI automation")
-        count = int(data.get("count", 5))
-
-        batch = build_short_batch(topic, count=count)
-
-        return {
-            "type": "short_batch",
-            "total": len(batch),
-            "items": batch,
+            "total": len(items),
+            "items": items,
         }
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
