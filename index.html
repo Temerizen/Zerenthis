@@ -1,181 +1,147 @@
-import React, { useState } from "react";
-
-export default function IndexPage() {
-  const [idea, setIdea] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [activeTab, setActiveTab] = useState("product");
-  const [feedback, setFeedback] = useState("");
-
-  const generate = async () => {
-    if (!idea) return;
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/generate-fast", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ idea }),
-      });
-
-      const data = await res.json();
-      setResult(data);
-    } catch (err) {
-      console.error(err);
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zerenthis Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #05070d;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
     }
 
-    setLoading(false);
-  };
+    h1 {
+      color: #00e5ff;
+      text-align: center;
+    }
 
-  return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#05070d",
-        color: "white",
-        padding: 20,
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-        <h1
-          style={{
-            color: "#00e5ff",
-            textAlign: "center",
-            fontSize: 48,
-            marginTop: 40,
-            marginBottom: 30,
-          }}
-        >
-          Zerenthis Studio ⚡
-        </h1>
+    input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
 
-        <input
-          placeholder="Enter topic..."
-          value={idea}
-          onChange={(e) => setIdea(e.target.value)}
-          style={{
-            width: "100%",
-            padding: 18,
-            borderRadius: 18,
-            border: "none",
-            background: "#111",
-            color: "white",
-            fontSize: 20,
-            marginBottom: 20,
-          }}
-        />
+    button {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        <button
-          onClick={generate}
-          style={{
-            width: "100%",
-            padding: 16,
-            background: "#00e5ff",
-            color: "#000",
-            border: "none",
-            borderRadius: 16,
-            fontSize: 18,
-            fontWeight: 700,
-            cursor: "pointer",
-            marginBottom: 24,
-          }}
-        >
-          {loading ? "Generating..." : "Generate Product"}
-        </button>
+    .generate {
+      width: 100%;
+      background: #00e5ff;
+      color: black;
+      margin-bottom: 20px;
+    }
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 14,
-            marginBottom: 24,
-          }}
-        >
-          <button
-            onClick={() => setActiveTab("product")}
-            style={tabStyle(activeTab === "product")}
-          >
-            📄 Product
-          </button>
-          <button
-            onClick={() => setActiveTab("youtube")}
-            style={tabStyle(activeTab === "youtube")}
-          >
-            🎬 YouTube
-          </button>
-          <button
-            onClick={() => setActiveTab("shorts")}
-            style={tabStyle(activeTab === "shorts")}
-          >
-            ⚡ Shorts
-          </button>
-        </div>
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
 
-        <div
-          style={{
-            background: "#0d1117",
-            borderRadius: 18,
-            padding: 20,
-            minHeight: 220,
-            whiteSpace: "pre-wrap",
-            lineHeight: 1.6,
-            fontSize: 16,
-            border: "1px solid #1f2937",
-          }}
-        >
-          {result ? result[activeTab] : "Your generated output will appear here."}
-        </div>
+    .tab {
+      flex: 1;
+      background: #1a1a1a;
+      color: white;
+    }
 
-        <textarea
-          placeholder="Tell AI what to improve..."
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
-          style={{
-            width: "100%",
-            marginTop: 20,
-            padding: 16,
-            borderRadius: 16,
-            border: "1px solid #1f2937",
-            background: "#111",
-            color: "white",
-            minHeight: 120,
-            fontSize: 16,
-          }}
-        />
+    .active {
+      background: #00e5ff;
+      color: black;
+    }
 
-        <button
-          style={{
-            marginTop: 12,
-            width: "100%",
-            padding: 14,
-            background: "#1f2937",
-            color: "white",
-            border: "none",
-            borderRadius: 14,
-            fontSize: 16,
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
-        >
-          Apply Changes
-        </button>
-      </div>
-    </main>
-  );
+    .output {
+      background: #0d1117;
+      padding: 20px;
+      border-radius: 12px;
+      min-height: 200px;
+      white-space: pre-wrap;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Zerenthis Studio ⚡</h1>
+
+<input id="idea" placeholder="Enter topic..." />
+
+<button class="generate" onclick="generate()">Generate Product</button>
+
+<div class="tabs">
+  <button class="tab active" onclick="setTab('product')">📄 Product</button>
+  <button class="tab" onclick="setTab('youtube')">🎬 YouTube</button>
+  <button class="tab" onclick="setTab('shorts')">⚡ Shorts</button>
+</div>
+
+<div id="output" class="output">
+  Your generated output will appear here.
+</div>
+
+<textarea placeholder="Tell AI what to improve..."></textarea>
+
+<button style="margin-top:10px;background:#222;color:white;">
+  Apply Changes
+</button>
+
+<script>
+let activeTab = "product";
+let result = {};
+
+function setTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+  render();
 }
 
-function tabStyle(active) {
-  return {
-    padding: 16,
-    borderRadius: 16,
-    border: "none",
-    background: active ? "#00e5ff" : "#1a1a1a",
-    color: active ? "#000" : "#fff",
-    fontSize: 18,
-    fontWeight: 700,
-    cursor: "pointer",
-  };
+function render() {
+  document.getElementById("output").innerText =
+    result[activeTab] || "No data yet.";
 }
+
+async function generate() {
+  const idea = document.getElementById("idea").value;
+  if (!idea) return;
+
+  document.getElementById("output").innerText = "Generating...";
+
+  try {
+    const res = await fetch("/api/generate-fast", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ idea })
+    });
+
+    result = await res.json();
+    render();
+
+  } catch (err) {
+    document.getElementById("output").innerText = "Error connecting to AI";
+  }
+}
+</script>
+
+</body>
+</html>
