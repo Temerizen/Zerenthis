@@ -126,7 +126,7 @@ async function generate() {
   document.getElementById("output").innerText = "Generating...";
 
   try {
-    const res = await fetch("/api/generate-fast", {
+    const res = await fetch("https://REPLACE_THIS_WITH_YOUR_RAILWAY_URL/generate-fast", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -134,7 +134,8 @@ async function generate() {
       body: JSON.stringify({ idea })
     });
 
-    result = await res.json();
+    const data = await res.json();
+    result = data;
     render();
 
   } catch (err) {
