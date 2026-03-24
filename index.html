@@ -114,7 +114,7 @@
       letter-spacing: 0.08em;
     }
 
-    .hooks, .script, .titles {
+    .hooks, .script, .titles, .plan {
       background: #171b28;
       border: 1px solid #2b3144;
       padding: 10px;
@@ -138,7 +138,7 @@
 <body>
 <div class="container">
   <h1>Zerenthis Studio</h1>
-  <div class="sub">Money Mode, God Mode, and Smart Growth Mode</div>
+  <div class="sub">Money Mode, God Mode, Smart Growth, and Autonomous Domination</div>
 
   <textarea id="prompt" placeholder="Enter topic, e.g. AI automation"></textarea>
 
@@ -160,15 +160,20 @@
       <option value="ai">AI</option>
       <option value="business">Business</option>
       <option value="self">Self Improvement</option>
+      <option value="creator">Creator</option>
     </select>
 
-    <div></div>
+    <select id="lane">
+      <option value="money">Money Lane</option>
+      <option value="brand">Brand Lane</option>
+    </select>
   </div>
 
   <div class="buttons">
     <button onclick="generateSingle()">Generate Video</button>
     <button onclick="generateBatch()">Auto Generate Factory</button>
     <button onclick="generateGrowth()">Smart Growth</button>
+    <button onclick="generateDomination()">Domination System</button>
   </div>
 
   <div class="studio" id="studio"></div>
@@ -177,9 +182,6 @@
 <script>
 const backend = "https://semantiqai-backend-production-bcab.up.railway.app";
 
-// -------------------------
-// Single video
-// -------------------------
 async function generateSingle() {
   const prompt = document.getElementById("prompt").value.trim() || "AI automation";
   const mode = document.getElementById("mode").value;
@@ -190,10 +192,7 @@ async function generateSingle() {
   const res = await fetch(backend + "/universal", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      prompt,
-      mode
-    })
+    body: JSON.stringify({ prompt, mode })
   });
 
   const data = await res.json();
@@ -221,9 +220,6 @@ async function generateSingle() {
   `;
 }
 
-// -------------------------
-// Batch factory
-// -------------------------
 async function generateBatch() {
   const prompt = document.getElementById("prompt").value.trim() || "AI automation";
   const mode = document.getElementById("mode").value;
@@ -235,11 +231,7 @@ async function generateBatch() {
   const res = await fetch(backend + "/factory", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      topic: prompt,
-      count,
-      mode
-    })
+    body: JSON.stringify({ topic: prompt, count, mode })
   });
 
   const data = await res.json();
@@ -270,9 +262,6 @@ async function generateBatch() {
   studio.innerHTML = html;
 }
 
-// -------------------------
-// Smart growth
-// -------------------------
 async function generateGrowth() {
   const niche = document.getElementById("niche").value;
   const count = parseInt(document.getElementById("count").value, 10);
@@ -283,10 +272,7 @@ async function generateGrowth() {
   const res = await fetch(backend + "/growth", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      niche,
-      count
-    })
+    body: JSON.stringify({ niche, count })
   });
 
   const data = await res.json();
@@ -307,6 +293,53 @@ async function generateGrowth() {
 
         <div class="label">Suggested Titles</div>
         <div class="titles">${item.suggested_titles.join("<br>")}</div>
+
+        <div class="label">Hooks</div>
+        <div class="hooks">${item.hooks.join("<br>")}</div>
+
+        <div class="label">Script</div>
+        <div class="script">${item.script.join("<br><br>")}</div>
+      </div>
+    `;
+  });
+
+  studio.innerHTML = html;
+}
+
+async function generateDomination() {
+  const lane = document.getElementById("lane").value;
+  const count = parseInt(document.getElementById("count").value, 10);
+  const studio = document.getElementById("studio");
+
+  studio.innerHTML = "Building domination plan...";
+
+  const res = await fetch(backend + "/domination", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ lane, count })
+  });
+
+  const data = await res.json();
+
+  let planHtml = `<div class="plan"><strong>${data.plan.lane.toUpperCase()} LANE</strong><br>${data.plan.description}<br><br>`;
+  data.plan.recommendations.forEach(r => {
+    planHtml += `<strong>${r.niche.toUpperCase()}</strong><br>${r.recommended_topics.join("<br>")}<br><br>`;
+  });
+  planHtml += `</div>`;
+
+  let html = `<h2>DOMINATION SYSTEM (${data.total})</h2>${planHtml}`;
+
+  data.items.forEach(item => {
+    html += `
+      <div class="card">
+        <div class="badge">${item.lane.toUpperCase()} LANE</div>
+        <h3>${item.title}</h3>
+
+        <div class="label">Video</div>
+        <video controls src="${backend}${item.video_url}"></video>
+
+        <div class="label">Thumbnail</div>
+        <img src="${backend}${item.thumbnail_url}" />
 
         <div class="label">Hooks</div>
         <div class="hooks">${item.hooks.join("<br>")}</div>
