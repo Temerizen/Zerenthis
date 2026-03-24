@@ -1,203 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zerenthis Studio</title>
+import React, { useState } from "react";
 
-<style>
-body {
-  margin:0;
-  font-family:Arial;
-  background:#0a0a0f;
-  color:white;
+export default function IndexPage() {
+  const [idea, setIdea] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [activeTab, setActiveTab] = useState("product");
+  const [feedback, setFeedback] = useState("");
+
+  const generate = async () => {
+    if (!idea) return;
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/generate-fast", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idea }),
+      });
+
+      const data = await res.json();
+      setResult(data);
+    } catch (err) {
+      console.error(err);
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#05070d",
+        color: "white",
+        padding: 20,
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <h1
+          style={{
+            color: "#00e5ff",
+            textAlign: "center",
+            fontSize: 48,
+            marginTop: 40,
+            marginBottom: 30,
+          }}
+        >
+          Zerenthis Studio ⚡
+        </h1>
+
+        <input
+          placeholder="Enter topic..."
+          value={idea}
+          onChange={(e) => setIdea(e.target.value)}
+          style={{
+            width: "100%",
+            padding: 18,
+            borderRadius: 18,
+            border: "none",
+            background: "#111",
+            color: "white",
+            fontSize: 20,
+            marginBottom: 20,
+          }}
+        />
+
+        <button
+          onClick={generate}
+          style={{
+            width: "100%",
+            padding: 16,
+            background: "#00e5ff",
+            color: "#000",
+            border: "none",
+            borderRadius: 16,
+            fontSize: 18,
+            fontWeight: 700,
+            cursor: "pointer",
+            marginBottom: 24,
+          }}
+        >
+          {loading ? "Generating..." : "Generate Product"}
+        </button>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 14,
+            marginBottom: 24,
+          }}
+        >
+          <button
+            onClick={() => setActiveTab("product")}
+            style={tabStyle(activeTab === "product")}
+          >
+            📄 Product
+          </button>
+          <button
+            onClick={() => setActiveTab("youtube")}
+            style={tabStyle(activeTab === "youtube")}
+          >
+            🎬 YouTube
+          </button>
+          <button
+            onClick={() => setActiveTab("shorts")}
+            style={tabStyle(activeTab === "shorts")}
+          >
+            ⚡ Shorts
+          </button>
+        </div>
+
+        <div
+          style={{
+            background: "#0d1117",
+            borderRadius: 18,
+            padding: 20,
+            minHeight: 220,
+            whiteSpace: "pre-wrap",
+            lineHeight: 1.6,
+            fontSize: 16,
+            border: "1px solid #1f2937",
+          }}
+        >
+          {result ? result[activeTab] : "Your generated output will appear here."}
+        </div>
+
+        <textarea
+          placeholder="Tell AI what to improve..."
+          value={feedback}
+          onChange={(e) => setFeedback(e.target.value)}
+          style={{
+            width: "100%",
+            marginTop: 20,
+            padding: 16,
+            borderRadius: 16,
+            border: "1px solid #1f2937",
+            background: "#111",
+            color: "white",
+            minHeight: 120,
+            fontSize: 16,
+          }}
+        />
+
+        <button
+          style={{
+            marginTop: 12,
+            width: "100%",
+            padding: 14,
+            background: "#1f2937",
+            color: "white",
+            border: "none",
+            borderRadius: 14,
+            fontSize: 16,
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          Apply Changes
+        </button>
+      </div>
+    </main>
+  );
 }
 
-.header {
-  padding:20px;
-  text-align:center;
-  font-size:24px;
-  color:cyan;
+function tabStyle(active) {
+  return {
+    padding: 16,
+    borderRadius: 16,
+    border: "none",
+    background: active ? "#00e5ff" : "#1a1a1a",
+    color: active ? "#000" : "#fff",
+    fontSize: 18,
+    fontWeight: 700,
+    cursor: "pointer",
+  };
 }
-
-.container {
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-input {
-  width:100%;
-  padding:14px;
-  background:#111;
-  border:none;
-  border-radius:10px;
-  color:white;
-  font-size:16px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:15px;
-}
-
-button {
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.primary { background:cyan; color:black; }
-.secondary { background:#222; color:white; }
-
-.card {
-  background:#111;
-  margin-top:15px;
-  padding:15px;
-  border-radius:10px;
-}
-
-pre {
-  white-space:pre-wrap;
-}
-
-video {
-  width:100%;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-.section-title {
-  margin-top:10px;
-  font-size:18px;
-  color:cyan;
-}
-</style>
-</head>
-
-<body>
-
-<div class="header">Zerenthis Studio ⚡</div>
-
-<div class="container">
-
-<input id="topic" placeholder="Enter topic...">
-
-<div class="grid">
-  <button class="primary" onclick="video()">🎬 Video</button>
-  <button class="secondary" onclick="shorts()">⚡ Shorts</button>
-  <button class="secondary" onclick="long()">🧠 Long</button>
-  <button class="secondary" onclick="ebook()">📚 Ebook</button>
-  <button class="secondary" onclick="pack()">📦 Pack</button>
-  <button class="primary" onclick="banana()">🍌 Banana</button>
-</div>
-
-<div id="output"></div>
-
-</div>
-
-<script>
-const API = "https://semantiqai-backend-production-bcab.up.railway.app";
-
-function setOutput(html){
-  document.getElementById("output").innerHTML = html;
-}
-
-async function video(){
-  let topic = document.getElementById("topic").value;
-
-  let res = await fetch(API+"/video",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({topic})
-  });
-
-  let data = await res.json();
-
-  setOutput(`
-    <div class="card">
-      <div class="section-title">Script</div>
-      <pre>${data.script.join("\n")}</pre>
-      <div id="videoBox">Rendering...</div>
-    </div>
-  `);
-
-  check(data.job_id);
-}
-
-async function check(id){
-  let res = await fetch(API+"/job/"+id);
-  let data = await res.json();
-
-  if(data.status==="done"){
-    document.getElementById("videoBox").innerHTML =
-      `<video controls autoplay src="${API + data.video_url}"></video>`;
-  } else if(data.status==="error"){
-    document.getElementById("videoBox").innerHTML = "Render failed";
-  } else {
-    setTimeout(()=>check(id),2000);
-  }
-}
-
-async function shorts(){
-  let topic = topicInput();
-  let res = await fetch(API+"/shorts",{method:"POST",headers:json(),body:JSON.stringify({topic})});
-  let data = await res.json();
-
-  setOutput(`<div class="card"><div class="section-title">Shorts</div><pre>${data.data.join("\n")}</pre></div>`);
-}
-
-async function long(){
-  let topic = topicInput();
-  let res = await fetch(API+"/long",{method:"POST",headers:json(),body:JSON.stringify({topic})});
-  let data = await res.json();
-
-  setOutput(`<div class="card"><div class="section-title">Long Script</div><pre>${data.data}</pre></div>`);
-}
-
-async function ebook(){
-  let topic = topicInput();
-  let res = await fetch(API+"/ebook",{method:"POST",headers:json(),body:JSON.stringify({topic})});
-  let data = await res.json();
-
-  setOutput(`<div class="card"><div class="section-title">Ebook</div><pre>${data.data}</pre></div>`);
-}
-
-async function pack(){
-  let topic = topicInput();
-  let res = await fetch(API+"/pack",{method:"POST",headers:json(),body:JSON.stringify({topic})});
-  let data = await res.json();
-
-  setOutput(`<div class="card"><div class="section-title">Content Pack</div><pre>${JSON.stringify(data,null,2)}</pre></div>`);
-}
-
-async function banana(){
-  let topic = topicInput();
-  let res = await fetch(API+"/banana",{method:"POST",headers:json(),body:JSON.stringify({topic})});
-  let data = await res.json();
-
-  let html = `<div class="card"><div class="section-title">Banana Mode</div>`;
-
-  data.batch.forEach((item,i)=>{
-    html += `<pre>Angle ${i+1}:\n${JSON.stringify(item,null,2)}</pre>`;
-  });
-
-  html += `</div>`;
-  setOutput(html);
-}
-
-function topicInput(){
-  return document.getElementById("topic").value;
-}
-
-function json(){
-  return {"Content-Type":"application/json"};
-}
-</script>
-
-</body>
-</html>
