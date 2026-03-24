@@ -126,7 +126,7 @@ async function generate() {
   document.getElementById("output").innerText = "Generating...";
 
   try {
-    const res = await fetch("https://REPLACE_THIS_WITH_YOUR_RAILWAY_URL/generate-fast", {
+    const res = await fetch("https://your-backend-name.up.railway.app/generate-fast", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
