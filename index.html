@@ -14,7 +14,7 @@
 
     .container {
       padding: 20px;
-      max-width: 950px;
+      max-width: 980px;
       margin: auto;
     }
 
@@ -124,12 +124,24 @@
       line-height: 1.6;
     }
 
+    .small-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .small-actions button {
+      flex: 0 0 auto;
+      padding: 10px 12px;
+    }
+
     @media (max-width: 700px) {
       .row {
         grid-template-columns: 1fr;
       }
 
-      .buttons {
+      .buttons, .small-actions {
         flex-direction: column;
       }
     }
@@ -139,7 +151,7 @@
 <body>
 <div class="container">
   <h1>Zerenthis Studio</h1>
-  <div class="sub">Long-form, Factory, Growth, and Shorts Engine</div>
+  <div class="sub">Instant Mode, Fast Mode, Render Mode, Growth, and Shorts</div>
 
   <textarea id="prompt" placeholder="Enter topic, e.g. AI automation"></textarea>
 
@@ -168,8 +180,9 @@
   </div>
 
   <div class="buttons">
-    <button onclick="generateSingle()">Generate Video</button>
-    <button onclick="generateBatch()">Auto Generate Factory</button>
+    <button onclick="generateInstant()">Instant Package</button>
+    <button onclick="generateFast()">Fast Package</button>
+    <button onclick="renderFinal()">Render Final Video</button>
     <button onclick="generateGrowth()">Smart Growth</button>
     <button onclick="generateShorts()">Short Content</button>
   </div>
@@ -179,25 +192,103 @@
 
 <script>
 const backend = "https://semantiqai-backend-production-bcab.up.railway.app";
+let lastInstantScript = null;
+let lastShortScripts = [];
 
-async function generateSingle() {
+async function generateInstant() {
   const prompt = document.getElementById("prompt").value.trim() || "AI automation";
   const mode = document.getElementById("mode").value;
   const studio = document.getElementById("studio");
 
-  studio.innerHTML = "Generating video...";
+  studio.innerHTML = "Generating instant package...";
 
-  const res = await fetch(backend + "/universal", {
+  const res = await fetch(backend + "/instant", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ prompt, mode })
+    body: JSON.stringify({ topic: prompt, mode })
+  });
+
+  const data = await res.json();
+  lastInstantScript = data.script || null;
+
+  studio.innerHTML = `
+    <div class="card">
+      <div class="badge">${data.mode.toUpperCase()} INSTANT</div>
+      <h2>${data.title}</h2>
+
+      <div class="label">Hooks</div>
+      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
+
+      <div class="label">Thumbnail Text</div>
+      <div class="titles">${(data.thumbnail_text || []).join("<br>")}</div>
+
+      <div class="label">Description</div>
+      <p>${data.description}</p>
+
+      <div class="label">Script</div>
+      <div class="script">${(data.script || []).join("<br><br>")}</div>
+    </div>
+  `;
+}
+
+async function generateFast() {
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
+  const mode = document.getElementById("mode").value;
+  const studio = document.getElementById("studio");
+
+  studio.innerHTML = "Generating fast package...";
+
+  const res = await fetch(backend + "/fast", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ topic: prompt, mode })
+  });
+
+  const data = await res.json();
+  lastInstantScript = data.script || null;
+
+  studio.innerHTML = `
+    <div class="card">
+      <div class="badge">${data.mode.toUpperCase()} FAST</div>
+      <h2>${data.title}</h2>
+
+      <div class="label">Thumbnail</div>
+      <img src="${backend}${data.thumbnail_url}" />
+
+      <div class="label">Hooks</div>
+      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
+
+      <div class="label">Description</div>
+      <p>${data.description}</p>
+
+      <div class="label">Script</div>
+      <div class="script">${(data.script || []).join("<br><br>")}</div>
+    </div>
+  `;
+}
+
+async function renderFinal() {
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
+  const mode = document.getElementById("mode").value;
+  const studio = document.getElementById("studio");
+
+  studio.innerHTML = "Rendering final video...";
+
+  const res = await fetch(backend + "/render", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      topic: prompt,
+      mode,
+      script: lastInstantScript
+    })
   });
 
   const data = await res.json();
 
   studio.innerHTML = `
     <div class="card">
-      <div class="badge">${data.mode.toUpperCase()} MODE</div>
+      <div class="badge">${data.mode.toUpperCase()} RENDER</div>
       <h2>${data.title}</h2>
 
       <div class="label">Video</div>
@@ -206,58 +297,10 @@ async function generateSingle() {
       <div class="label">Thumbnail</div>
       <img src="${backend}${data.thumbnail_url}" />
 
-      <div class="label">Description</div>
-      <p>${data.description}</p>
-
-      <div class="label">Hooks</div>
-      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
-
       <div class="label">Script</div>
       <div class="script">${(data.script || []).join("<br><br>")}</div>
     </div>
   `;
-}
-
-async function generateBatch() {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const mode = document.getElementById("mode").value;
-  const count = parseInt(document.getElementById("count").value, 10);
-  const studio = document.getElementById("studio");
-
-  studio.innerHTML = "Generating batch...";
-
-  const res = await fetch(backend + "/factory", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ topic: prompt, count, mode })
-  });
-
-  const data = await res.json();
-
-  let html = `<h2>${data.mode.toUpperCase()} MODE BATCH (${data.total})</h2>`;
-
-  data.items.forEach(item => {
-    html += `
-      <div class="card">
-        <div class="badge">${item.mode.toUpperCase()} MODE</div>
-        <h3>${item.title}</h3>
-
-        <div class="label">Video</div>
-        <video controls src="${backend}${item.video_url}"></video>
-
-        <div class="label">Thumbnail</div>
-        <img src="${backend}${item.thumbnail_url}" />
-
-        <div class="label">Hooks</div>
-        <div class="hooks">${item.hooks.join("<br>")}</div>
-
-        <div class="label">Script</div>
-        <div class="script">${item.script.join("<br><br>")}</div>
-      </div>
-    `;
-  });
-
-  studio.innerHTML = html;
 }
 
 async function generateGrowth() {
@@ -282,12 +325,6 @@ async function generateGrowth() {
       <div class="card">
         <div class="badge">SMART GROWTH</div>
         <h3>${item.title}</h3>
-
-        <div class="label">Video</div>
-        <video controls src="${backend}${item.video_url}"></video>
-
-        <div class="label">Thumbnail</div>
-        <img src="${backend}${item.thumbnail_url}" />
 
         <div class="label">Suggested Titles</div>
         <div class="titles">${item.suggested_titles.join("<br>")}</div>
@@ -318,17 +355,15 @@ async function generateShorts() {
   });
 
   const data = await res.json();
+  lastShortScripts = data.items || [];
 
   let html = `<h2>SHORT CONTENT OUTPUT (${data.total})</h2>`;
 
-  data.items.forEach(item => {
+  data.items.forEach((item, idx) => {
     html += `
       <div class="card">
         <div class="badge">${item.style.toUpperCase()} SHORT</div>
         <h3>${item.title}</h3>
-
-        <div class="label">Short Video</div>
-        <video controls src="${backend}${item.video_url}"></video>
 
         <div class="label">Thumbnail</div>
         <img src="${backend}${item.thumbnail_url}" />
@@ -341,11 +376,53 @@ async function generateShorts() {
 
         <div class="label">Short Script</div>
         <div class="script">${item.script.join("<br><br>")}</div>
+
+        <div class="small-actions">
+          <button onclick="renderShort(${idx})">Render This Short</button>
+        </div>
       </div>
     `;
   });
 
   studio.innerHTML = html;
+}
+
+async function renderShort(idx) {
+  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
+  const studio = document.getElementById("studio");
+  const item = lastShortScripts[idx];
+
+  if (!item) return;
+
+  studio.innerHTML = "Rendering short...";
+
+  const res = await fetch(backend + "/render-short", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      topic: prompt,
+      style: item.style,
+      script: item.script
+    })
+  });
+
+  const data = await res.json();
+
+  studio.innerHTML = `
+    <div class="card">
+      <div class="badge">${data.style.toUpperCase()} RENDERED SHORT</div>
+      <h2>${data.title}</h2>
+
+      <div class="label">Short Video</div>
+      <video controls src="${backend}${data.video_url}"></video>
+
+      <div class="label">Thumbnail</div>
+      <img src="${backend}${data.thumbnail_url}" />
+
+      <div class="label">Script</div>
+      <div class="script">${(data.script || []).join("<br><br>")}</div>
+    </div>
+  `;
 }
 </script>
 </body>
