@@ -1,137 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zerenthis</title>
-
+<title>Zerenthis OS</title>
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0a0a0f;
-  color: white;
-}
-
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  color: cyan;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-}
-
-input, select {
-  background: #111;
-  color: white;
-}
-
-button {
-  background: cyan;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.card {
-  background: #111;
-  padding: 15px;
-  margin-top: 15px;
-  border-radius: 10px;
-}
-
-.video {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.loading {
-  color: cyan;
-  font-weight: bold;
-}
+body { background:#0a0a0f; color:white; font-family:Arial; padding:20px; }
+button { width:100%; padding:10px; margin-top:10px; }
+input { width:100%; padding:10px; }
+video { width:100%; margin-top:10px; }
+pre { background:#111; padding:10px; }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h2>Zerenthis OS ⚡</h2>
 
-<h1>Zerenthis ⚡</h1>
+<input id="topic" placeholder="Enter topic">
 
-<input id="topic" placeholder="Enter topic..." />
+<button onclick="video()">🎬 Video</button>
+<button onclick="shorts()">⚡ Shorts</button>
+<button onclick="long()">🧠 Long Script</button>
+<button onclick="ebook()">📚 Ebook</button>
+<button onclick="pack()">📦 Content Pack</button>
+<button onclick="banana()">🍌 Banana Mode</button>
 
-<button onclick="generate()">⚡ Generate</button>
-
-<div id="output"></div>
-
-</div>
+<div id="out"></div>
 
 <script>
 const API = "https://semantiqai-backend-production-bcab.up.railway.app";
 
-async function generate() {
-  const topic = document.getElementById("topic").value;
-
-  // STEP 1: INSTANT PACKAGE
-  const res = await fetch(API + "/instant", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({topic})
-  });
-
-  const data = await res.json();
-
-  // Show instantly
-  document.getElementById("output").innerHTML = `
-    <div class="card">
-      <h3>${data.title}</h3>
-      <p>${data.script.join("<br>")}</p>
-
-      <div class="loading">⚡ Generating video...</div>
-
-      <div id="videoContainer"></div>
-    </div>
-  `;
-
-  // STEP 2: START RENDER (BACKGROUND)
-  const renderRes = await fetch(API + "/viral-render", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({topic})
-  });
-
-  const renderData = await renderRes.json();
-
-  checkJob(renderData.job_id);
+async function video(){
+  let t = topic.value;
+  let r = await fetch(API+"/video",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:t})});
+  let d = await r.json();
+  out.innerHTML = d.script.join("<br>")+"<p>Rendering...</p>";
+  check(d.job_id);
 }
 
-async function checkJob(id) {
-  const res = await fetch(API + "/job/" + id);
-  const data = await res.json();
-
-  if (data.status === "done") {
-    document.getElementById("videoContainer").innerHTML = `
-      <video class="video" controls autoplay src="${API + data.video_url}"></video>
-    `;
-  } else if (data.status === "error") {
-    document.getElementById("videoContainer").innerHTML = `
-      <p style="color:red;">Render failed</p>
-    `;
+async function check(id){
+  let r = await fetch(API+"/job/"+id);
+  let d = await r.json();
+  if(d.status==="done"){
+    out.innerHTML += `<video controls src="${API+d.video_url}"></video>`;
   } else {
-    setTimeout(() => checkJob(id), 2000);
+    setTimeout(()=>check(id),2000);
   }
+}
+
+async function shorts(){
+  let r = await fetch(API+"/shorts",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
+  let d = await r.json();
+  out.innerHTML = d.data.join("<br>");
+}
+
+async function long(){
+  let r = await fetch(API+"/long",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
+  let d = await r.json();
+  out.innerHTML = "<pre>"+d.data+"</pre>";
+}
+
+async function ebook(){
+  let r = await fetch(API+"/ebook",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
+  let d = await r.json();
+  out.innerHTML = "<pre>"+d.data+"</pre>";
+}
+
+async function pack(){
+  let r = await fetch(API+"/pack",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
+  let d = await r.json();
+  out.innerHTML = "<pre>"+JSON.stringify(d,null,2)+"</pre>";
+}
+
+async function banana(){
+  let r = await fetch(API+"/banana",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({topic:topic.value})});
+  let d = await r.json();
+  out.innerHTML = "<pre>"+JSON.stringify(d,null,2)+"</pre>";
 }
 </script>
 
