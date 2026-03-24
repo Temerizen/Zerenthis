@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+gTTS
+moviepy==1.0.3
+Pillow
+imageio
+imageio-ffmpeg
+numpy<2
+requests
+python-multipart
