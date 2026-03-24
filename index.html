@@ -1,429 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Zerenthis Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zerenthis</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #0a0d18;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0a0f;
+  color: white;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 980px;
-      margin: auto;
-    }
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
 
-    h1 {
-      color: #7c4dff;
-      text-align: center;
-      margin-bottom: 8px;
-    }
+h1 {
+  text-align: center;
+  color: cyan;
+}
 
-    .sub {
-      text-align: center;
-      color: #8fa0c5;
-      margin-bottom: 20px;
-    }
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
 
-    textarea, select {
-      width: 100%;
-      background: #111;
-      color: white;
-      border: 1px solid #333;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 10px;
-      box-sizing: border-box;
-    }
+input, select {
+  background: #111;
+  color: white;
+}
 
-    textarea {
-      height: 100px;
-    }
+button {
+  background: cyan;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
+button:hover {
+  background: #00dddd;
+}
 
-    .buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
+.card {
+  background: #111;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
 
-    button {
-      flex: 1;
-      padding: 12px;
-      background: linear-gradient(135deg, #7c4dff, #35d6ff);
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .studio {
-      margin-top: 20px;
-    }
-
-    .card {
-      background: #111;
-      border: 1px solid #333;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 12px;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 12px;
-      padding: 6px 10px;
-      border: 1px solid #333;
-      border-radius: 999px;
-      margin-bottom: 8px;
-      color: #8fa0c5;
-    }
-
-    video {
-      width: 100%;
-      margin-top: 10px;
-      border-radius: 10px;
-      background: #000;
-      max-height: 800px;
-    }
-
-    img {
-      width: 100%;
-      margin-top: 10px;
-      border-radius: 10px;
-      background: #000;
-    }
-
-    .label {
-      color: #888;
-      font-size: 12px;
-      margin-top: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .hooks, .script, .titles {
-      background: #171b28;
-      border: 1px solid #2b3144;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 10px;
-      line-height: 1.6;
-    }
-
-    .small-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .small-actions button {
-      flex: 0 0 auto;
-      padding: 10px 12px;
-    }
-
-    @media (max-width: 700px) {
-      .row {
-        grid-template-columns: 1fr;
-      }
-
-      .buttons, .small-actions {
-        flex-direction: column;
-      }
-    }
-  </style>
+.video {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+</style>
 </head>
 
 <body>
+
 <div class="container">
-  <h1>Zerenthis Studio</h1>
-  <div class="sub">Instant Mode, Fast Mode, Render Mode, Growth, and Shorts</div>
 
-  <textarea id="prompt" placeholder="Enter topic, e.g. AI automation"></textarea>
+<h1>Zerenthis ⚡</h1>
 
-  <div class="row">
-    <select id="mode">
-      <option value="money">💰 Money Mode</option>
-      <option value="god">🧠 God Mode</option>
-    </select>
+<input id="topic" placeholder="Enter topic..." />
 
-    <select id="count">
-      <option value="3">Batch 3</option>
-      <option value="5" selected>Batch 5</option>
-      <option value="7">Batch 7</option>
-    </select>
-  </div>
+<select id="mode">
+  <option value="money">Money Mode</option>
+  <option value="god">God Mode</option>
+</select>
 
-  <div class="row">
-    <select id="niche">
-      <option value="ai">AI</option>
-      <option value="business">Business</option>
-      <option value="self">Self Improvement</option>
-      <option value="creator">Creator</option>
-    </select>
+<select id="template">
+  <option value="bold">Bold</option>
+  <option value="dark">Dark</option>
+  <option value="neon">Neon</option>
+</select>
 
-    <div></div>
-  </div>
+<button onclick="instant()">⚡ Instant Generate</button>
+<button onclick="viral()">🔥 Viral Render</button>
+<button onclick="shorts()">🍉 Shorts Batch</button>
 
-  <div class="buttons">
-    <button onclick="generateInstant()">Instant Package</button>
-    <button onclick="generateFast()">Fast Package</button>
-    <button onclick="renderFinal()">Render Final Video</button>
-    <button onclick="generateGrowth()">Smart Growth</button>
-    <button onclick="generateShorts()">Short Content</button>
-  </div>
+<div id="output"></div>
 
-  <div class="studio" id="studio"></div>
 </div>
 
 <script>
-const backend = "https://semantiqai-backend-production-bcab.up.railway.app";
-let lastInstantScript = null;
-let lastShortScripts = [];
+const API = "https://semantiqai-backend-production-bcab.up.railway.app";
 
-async function generateInstant() {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const mode = document.getElementById("mode").value;
-  const studio = document.getElementById("studio");
+async function instant() {
+  const topic = document.getElementById("topic").value;
 
-  studio.innerHTML = "Generating instant package...";
-
-  const res = await fetch(backend + "/instant", {
+  const res = await fetch(API + "/instant", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ topic: prompt, mode })
+    body: JSON.stringify({topic})
   });
 
   const data = await res.json();
-  lastInstantScript = data.script || null;
 
-  studio.innerHTML = `
+  document.getElementById("output").innerHTML = `
     <div class="card">
-      <div class="badge">${data.mode.toUpperCase()} INSTANT</div>
-      <h2>${data.title}</h2>
-
-      <div class="label">Hooks</div>
-      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
-
-      <div class="label">Thumbnail Text</div>
-      <div class="titles">${(data.thumbnail_text || []).join("<br>")}</div>
-
-      <div class="label">Description</div>
-      <p>${data.description}</p>
-
-      <div class="label">Script</div>
-      <div class="script">${(data.script || []).join("<br><br>")}</div>
+      <h3>${data.title}</h3>
+      <p>${data.script.join("<br>")}</p>
     </div>
   `;
 }
 
-async function generateFast() {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const mode = document.getElementById("mode").value;
-  const studio = document.getElementById("studio");
+async function viral() {
+  const topic = document.getElementById("topic").value;
+  const template = document.getElementById("template").value;
 
-  studio.innerHTML = "Generating fast package...";
-
-  const res = await fetch(backend + "/fast", {
+  const res = await fetch(API + "/viral-render", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ topic: prompt, mode })
+    body: JSON.stringify({topic, template})
   });
 
   const data = await res.json();
-  lastInstantScript = data.script || null;
 
-  studio.innerHTML = `
+  document.getElementById("output").innerHTML = `
     <div class="card">
-      <div class="badge">${data.mode.toUpperCase()} FAST</div>
-      <h2>${data.title}</h2>
-
-      <div class="label">Thumbnail</div>
-      <img src="${backend}${data.thumbnail_url}" />
-
-      <div class="label">Hooks</div>
-      <div class="hooks">${(data.hooks || []).join("<br>")}</div>
-
-      <div class="label">Description</div>
-      <p>${data.description}</p>
-
-      <div class="label">Script</div>
-      <div class="script">${(data.script || []).join("<br><br>")}</div>
+      <h3>Rendering... 🔥</h3>
+      <p>Hook: ${data.hook}</p>
+      <p>Score: ${data.score}</p>
+      <p>Job ID: ${data.job_id}</p>
+      <button onclick="checkJob('${data.job_id}')">Check Status</button>
     </div>
   `;
 }
 
-async function renderFinal() {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const mode = document.getElementById("mode").value;
-  const studio = document.getElementById("studio");
-
-  studio.innerHTML = "Rendering final video...";
-
-  const res = await fetch(backend + "/render", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      topic: prompt,
-      mode,
-      script: lastInstantScript
-    })
-  });
-
+async function checkJob(id) {
+  const res = await fetch(API + "/job/" + id);
   const data = await res.json();
 
-  studio.innerHTML = `
-    <div class="card">
-      <div class="badge">${data.mode.toUpperCase()} RENDER</div>
-      <h2>${data.title}</h2>
-
-      <div class="label">Video</div>
-      <video controls src="${backend}${data.video_url}"></video>
-
-      <div class="label">Thumbnail</div>
-      <img src="${backend}${data.thumbnail_url}" />
-
-      <div class="label">Script</div>
-      <div class="script">${(data.script || []).join("<br><br>")}</div>
-    </div>
-  `;
+  if (data.status === "done") {
+    document.getElementById("output").innerHTML = `
+      <div class="card">
+        <h3>Done ✅</h3>
+        <video class="video" controls src="${API + data.video_url}"></video>
+      </div>
+    `;
+  } else {
+    alert("Still processing...");
+  }
 }
 
-async function generateGrowth() {
-  const niche = document.getElementById("niche").value;
-  const count = parseInt(document.getElementById("count").value, 10);
-  const studio = document.getElementById("studio");
+async function shorts() {
+  const topic = document.getElementById("topic").value;
 
-  studio.innerHTML = "Finding best topics...";
-
-  const res = await fetch(backend + "/growth", {
+  const res = await fetch(API + "/shorts", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ niche, count })
+    body: JSON.stringify({topic})
   });
 
   const data = await res.json();
 
-  let html = `<h2>SMART GROWTH OUTPUT (${data.total})</h2>`;
+  let html = `<div class="card"><h3>Shorts Batch 🍉</h3>`;
 
   data.items.forEach(item => {
-    html += `
-      <div class="card">
-        <div class="badge">SMART GROWTH</div>
-        <h3>${item.title}</h3>
-
-        <div class="label">Suggested Titles</div>
-        <div class="titles">${item.suggested_titles.join("<br>")}</div>
-
-        <div class="label">Hooks</div>
-        <div class="hooks">${item.hooks.join("<br>")}</div>
-
-        <div class="label">Script</div>
-        <div class="script">${item.script.join("<br><br>")}</div>
-      </div>
-    `;
+    html += `<p><b>${item.title}</b><br>${item.script.join(" ")}</p><hr>`;
   });
 
-  studio.innerHTML = html;
-}
+  html += "</div>";
 
-async function generateShorts() {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const count = parseInt(document.getElementById("count").value, 10);
-  const studio = document.getElementById("studio");
-
-  studio.innerHTML = "Generating short content...";
-
-  const res = await fetch(backend + "/shorts", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ topic: prompt, count })
-  });
-
-  const data = await res.json();
-  lastShortScripts = data.items || [];
-
-  let html = `<h2>SHORT CONTENT OUTPUT (${data.total})</h2>`;
-
-  data.items.forEach((item, idx) => {
-    html += `
-      <div class="card">
-        <div class="badge">${item.style.toUpperCase()} SHORT</div>
-        <h3>${item.title}</h3>
-
-        <div class="label">Thumbnail</div>
-        <img src="${backend}${item.thumbnail_url}" />
-
-        <div class="label">Hook</div>
-        <div class="hooks">${item.hook}</div>
-
-        <div class="label">Caption Text</div>
-        <div class="script">${item.caption_text}</div>
-
-        <div class="label">Short Script</div>
-        <div class="script">${item.script.join("<br><br>")}</div>
-
-        <div class="small-actions">
-          <button onclick="renderShort(${idx})">Render This Short</button>
-        </div>
-      </div>
-    `;
-  });
-
-  studio.innerHTML = html;
-}
-
-async function renderShort(idx) {
-  const prompt = document.getElementById("prompt").value.trim() || "AI automation";
-  const studio = document.getElementById("studio");
-  const item = lastShortScripts[idx];
-
-  if (!item) return;
-
-  studio.innerHTML = "Rendering short...";
-
-  const res = await fetch(backend + "/render-short", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      topic: prompt,
-      style: item.style,
-      script: item.script
-    })
-  });
-
-  const data = await res.json();
-
-  studio.innerHTML = `
-    <div class="card">
-      <div class="badge">${data.style.toUpperCase()} RENDERED SHORT</div>
-      <h2>${data.title}</h2>
-
-      <div class="label">Short Video</div>
-      <video controls src="${backend}${data.video_url}"></video>
-
-      <div class="label">Thumbnail</div>
-      <img src="${backend}${data.thumbnail_url}" />
-
-      <div class="label">Script</div>
-      <div class="script">${(data.script || []).join("<br><br>")}</div>
-    </div>
-  `;
+  document.getElementById("output").innerHTML = html;
 }
 </script>
+
 </body>
 </html>
