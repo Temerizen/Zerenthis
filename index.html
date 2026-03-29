@@ -412,10 +412,16 @@
           <label for="notes">Extra Notes</label>
           <textarea id="notes" rows="5" placeholder="Optional. Add a specific angle, style note, or subtopic."></textarea>
 
+          <label for="batchCount">Founder Batch Count</label>
+          <input id="batchCount" type="number" min="1" max="10" value="3" />
+
           <div class="btns">
             <button class="primary" onclick="generate()">Generate</button>
             <button class="secondary" onclick="copyOutput()">Copy Output</button>
             <button class="secondary" onclick="saveApiBase()">Save Backend URL</button>
+            <button class="secondary" onclick="generateBatch('product')">Founder Product Batch</button>
+            <button class="secondary" onclick="generateBatch('shorts')">Founder Shorts Batch</button>
+            <button class="secondary" onclick="loadGallery()">Load Gallery</button>
             <button class="danger" onclick="clearAll()">Clear</button>
           </div>
 
@@ -515,7 +521,7 @@
 
       if (data.file_url) {
         const a = document.createElement("a");
-        a.href = data.file_url;
+        a.href = data.file_url.startsWith("http") ? data.file_url : getApiBase() + data.file_url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.textContent = "Open generated file";
@@ -524,11 +530,33 @@
 
       if (data.preview_url) {
         const a = document.createElement("a");
-        a.href = data.preview_url;
+        a.href = data.preview_url.startsWith("http") ? data.preview_url : getApiBase() + data.preview_url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.textContent = "Preview";
         box.appendChild(a);
+      }
+
+      if (data.thumbnail_url) {
+        const a = document.createElement("a");
+        a.href = data.thumbnail_url.startsWith("http") ? data.thumbnail_url : getApiBase() + data.thumbnail_url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Open thumbnail";
+        box.appendChild(a);
+      }
+
+      if (Array.isArray(data.items)) {
+        data.items.forEach((item, idx) => {
+          if (item.file_url) {
+            const a = document.createElement("a");
+            a.href = item.file_url.startsWith("http") ? item.file_url : getApiBase() + item.file_url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.textContent = item.file_name || ("Item " + (idx + 1));
+            box.appendChild(a);
+          }
+        });
       }
     }
 
@@ -625,6 +653,100 @@
           setStatus(err.message || "Polling failed.", "bad");
         }
       }, 2000);
+    }
+
+    async function generateBatch(kind) {
+      const apiBase = getApiBase();
+      if (!apiBase) {
+        setStatus("Enter your backend URL first.", "bad");
+        return;
+      }
+
+      const topic = $("topic").value.trim();
+      if (!topic) {
+        setStatus("Enter a topic.", "bad");
+        return;
+      }
+
+      const payload = {
+        topic,
+        niche: $("niche").value,
+        tone: $("tone").value,
+        buyer: $("buyer").value,
+        promise: $("promise").value.trim(),
+        bonus: $("bonus").value.trim(),
+        notes: $("notes").value.trim(),
+        duration_seconds: Number($("duration").value || 35),
+        count: Number($("batchCount").value || 3)
+      };
+
+      const endpoint = kind === "product"
+        ? "/api/founder/product-batch"
+        : "/api/founder/shorts-batch";
+
+      $("fileLinks").innerHTML = "";
+      $("output").value = "";
+      setStatus("Submitting founder batch...", "");
+
+      try {
+        const res = await fetch(apiBase + endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || data.error || "Batch request failed.");
+        }
+
+        if (data.job_id) {
+          setStatus("Founder batch accepted. Polling...", "");
+          pollJob(apiBase, data.job_id);
+          return;
+        }
+
+        $("output").value = JSON.stringify(data, null, 2);
+        renderLinks(data);
+        setStatus("Batch complete.", "good");
+      } catch (err) {
+        setStatus(err.message || "Batch failed.", "bad");
+      }
+    }
+
+    async function loadGallery() {
+      const apiBase = getApiBase();
+      if (!apiBase) {
+        setStatus("Enter your backend URL first.", "bad");
+        return;
+      }
+
+      try {
+        const res = await fetch(apiBase + "/api/gallery");
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.detail || "Gallery failed.");
+        }
+
+        $("output").value = JSON.stringify(data, null, 2);
+
+        const box = $("fileLinks");
+        box.innerHTML = "";
+
+        (data.items || []).slice(0, 20).forEach(item => {
+          const a = document.createElement("a");
+          a.href = apiBase + item.url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = item.name;
+          box.appendChild(a);
+        });
+
+        setStatus("Gallery loaded.", "good");
+      } catch (err) {
+        setStatus(err.message || "Gallery failed.", "bad");
+      }
     }
 
     loadApiBase();
