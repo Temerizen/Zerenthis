@@ -9157,8 +9157,10 @@
         "replace": "    quality = _score_youtube_pack(title, script, promise, bonus)\n    monetization = _build_offer_stack(topic, buyer, promise, bonus)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"monetization\": monetization,\n        \"recommended_next_action\": monetization[\"cta\"],\n    }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826301.771403
+    "status": "applied",
+    "created_at": 1774826301.771403,
+    "approved_at": 1774826306.570542,
+    "applied_at": 1774826306.6778092
   },
   {
     "id": "prop_1774826301_b33248a6",

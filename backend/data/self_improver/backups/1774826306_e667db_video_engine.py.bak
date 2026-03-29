@@ -151,7 +151,6 @@ NOTES:
 """.strip()
 
     quality = _score_youtube_pack(title, script, promise, bonus)
-    monetization = _build_offer_stack(topic, buyer, promise, bonus)
 
     return {
         "status": "done",
@@ -159,8 +158,6 @@ NOTES:
         "title": title,
         "script": script,
         "quality": quality,
-        "monetization": monetization,
-        "recommended_next_action": monetization["cta"],
     }
 
 
