@@ -14,63 +14,6 @@ BACKUPS.mkdir(parents=True, exist_ok=True)
 PROTECTED = [".env", ".git", "node_modules", "venv", "backend/data"]
 ALLOWED_ACTIONS = {"create_file", "edit_file", "delete_file"}
 TEXT_FILE_SUFFIXES = {".py", ".tsx", ".ts", ".js", ".jsx", ".json", ".css", ".md", ".toml", ".yml", ".yaml", ".txt"}
-HIGH_RISK_PATH_HINTS = ["main.py", "routes.py", "engine.py", "requirements.txt", "Procfile", "nixpacks.toml"]
-
-
-def summarize_steps(steps):
-    action_counts = {}
-    touched_paths = []
-    for step in steps:
-        action = step.get("action", "unknown")
-        action_counts[action] = action_counts.get(action, 0) + 1
-        path = step.get("path")
-        if isinstance(path, str):
-            touched_paths.append(path)
-    return {
-        "step_count": len(steps),
-        "action_counts": action_counts,
-        "touched_paths": touched_paths,
-    }
-
-
-def assess_proposal_risk(steps):
-    summary = summarize_steps(steps)
-    touched_paths = summary["touched_paths"]
-    reasons = []
-    score = 0
-
-    if summary["action_counts"].get("delete_file", 0) > 0:
-        score += 35
-        reasons.append("contains delete_file action")
-    if summary["action_counts"].get("create_file", 0) > 0:
-        score += 10
-        reasons.append("contains create_file action")
-    if summary["step_count"] >= 5:
-        score += 15
-        reasons.append("has 5 or more actions")
-
-    high_risk_paths = [p for p in touched_paths if any(hint in p for hint in HIGH_RISK_PATH_HINTS)]
-    if high_risk_paths:
-        score += min(30, 10 * len(high_risk_paths))
-        reasons.append("touches core runtime files")
-
-    if any(p.endswith(".json") for p in touched_paths):
-        score += 10
-        reasons.append("touches json files")
-
-    score = min(score, 100)
-    if score >= 60:
-        level = "high"
-    elif score >= 25:
-        level = "medium"
-    else:
-        level = "low"
-
-    return {
-        "score": score,
-        "level": level,
-        "reasons": reasons,
-    }
 
 
 def load():
@@ -194,9 +137,7 @@ def propose(title, reason, steps):
         "steps": steps,
         "status": "pending",
         "fingerprint": fingerprint,
-        "created_at": int(time.time()),
-        "summary": summarize_steps(steps),
-        "risk": assess_proposal_risk(steps)
+        "created_at": int(time.time())
     }
     d.append(p)
     save(d)

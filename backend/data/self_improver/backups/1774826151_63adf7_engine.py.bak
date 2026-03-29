@@ -194,9 +194,7 @@ def propose(title, reason, steps):
         "steps": steps,
         "status": "pending",
         "fingerprint": fingerprint,
-        "created_at": int(time.time()),
-        "summary": summarize_steps(steps),
-        "risk": assess_proposal_risk(steps)
+        "created_at": int(time.time())
     }
     d.append(p)
     save(d)

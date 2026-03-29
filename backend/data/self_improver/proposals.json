@@ -8590,8 +8590,10 @@
         "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    risk_counts = {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 0,\n    }\n    total_steps = 0\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        steps = item.get(\"steps\", [])\n        summary = item.get(\"summary\") or summarize_steps(steps)\n        risk = item.get(\"risk\") or assess_proposal_risk(steps)\n        total_steps += summary[\"step_count\"]\n        if risk.get(\"level\") in risk_counts:\n            risk_counts[risk[\"level\"]] += 1\n    counts[\"total\"] = len(items)\n    counts[\"avg_steps\"] = round(total_steps / len(items), 2) if items else 0\n    counts[\"risk_counts\"] = risk_counts\n    return counts\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826149.7348845
+    "status": "applied",
+    "created_at": 1774826149.7348845,
+    "approved_at": 1774826151.8148577,
+    "applied_at": 1774826151.9493048
   },
   {
     "id": "prop_1774826149_fcab3fe2",

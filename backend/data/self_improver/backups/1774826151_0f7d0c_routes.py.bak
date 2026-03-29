@@ -34,14 +34,19 @@ def history_route():
     enriched = []
     for item in items:
         steps = item.get("steps", [])
-        summary = item.get("summary") or summarize_steps(steps)
-        risk = item.get("risk") or assess_proposal_risk(steps)
+        action_counts = {}
+        touched_paths = []
+        for step in steps:
+            action = step.get("action", "unknown")
+            action_counts[action] = action_counts.get(action, 0) + 1
+            path = step.get("path")
+            if isinstance(path, str):
+                touched_paths.append(path)
         enriched.append({
             **item,
-            "step_count": summary["step_count"],
-            "action_counts": summary["action_counts"],
-            "touched_paths": summary["touched_paths"],
-            "risk": risk,
+            "step_count": len(steps),
+            "action_counts": action_counts,
+            "touched_paths": touched_paths,
         })
     return sorted(enriched, key=lambda x: x.get("created_at", 0), reverse=True)
 
@@ -62,25 +67,11 @@ def stats_route():
         "rejected": 0,
         "failed": 0,
     }
-    risk_counts = {
-        "low": 0,
-        "medium": 0,
-        "high": 0,
-    }
-    total_steps = 0
     for item in items:
         status = item.get("status")
         if status in counts:
             counts[status] += 1
-        steps = item.get("steps", [])
-        summary = item.get("summary") or summarize_steps(steps)
-        risk = item.get("risk") or assess_proposal_risk(steps)
-        total_steps += summary["step_count"]
-        if risk.get("level") in risk_counts:
-            risk_counts[risk["level"]] += 1
     counts["total"] = len(items)
-    counts["avg_steps"] = round(total_steps / len(items), 2) if items else 0
-    counts["risk_counts"] = risk_counts
     return counts
 
 
