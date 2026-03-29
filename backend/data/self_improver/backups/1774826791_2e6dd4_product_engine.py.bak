@@ -21,10 +21,9 @@ def _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dic
         "has_promise": bool((promise or "").strip()),
         "has_bonus": bool((bonus or "").strip()),
         "has_notes": bool((notes or "").strip()),
-        "has_outcome_language": any(word in (promise or "").lower() for word in ["get", "build", "launch", "grow", "improve", "start"]),
     }
     score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    verdict = "strong" if score >= 80 else "good" if score >= 60 else "needs_improvement"
+    verdict = "strong" if score >= 75 else "good" if score >= 50 else "needs_improvement"
     return {"score": score, "verdict": verdict, "checks": checks}
 
 

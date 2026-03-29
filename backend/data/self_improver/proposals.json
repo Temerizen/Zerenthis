@@ -9868,7 +9868,9 @@
         "replace": "def _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dict:\n    checks = {\n        \"has_specific_topic\": len((topic or \"\").strip()) >= 4,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_notes\": bool((notes or \"\").strip()),\n        \"has_outcome_language\": any(word in (promise or \"\").lower() for word in [\"get\", \"build\", \"launch\", \"grow\", \"improve\", \"start\"]),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    verdict = \"strong\" if score >= 80 else \"good\" if score >= 60 else \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826787.3156505
+    "status": "applied",
+    "created_at": 1774826787.3156505,
+    "approved_at": 1774826791.5401373,
+    "applied_at": 1774826791.5881639
   }
 ]
