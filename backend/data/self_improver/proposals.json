@@ -282,7 +282,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822856.1153374
   },
   {
@@ -357,7 +357,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822916.212594
   },
   {
@@ -372,7 +372,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    counts = {\"pdf\": 0, \"video\": 0, \"image\": 0, \"other\": 0}\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"other\"\n        if ext == \".pdf\":\n            kind = \"pdf\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            kind = \"image\"\n\n        counts[kind] += 1\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"kind\": kind,\n                \"display_name\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n            }\n        )\n\n    return {\"items\": items[:200], \"counts\": counts, \"total\": len(items)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822916.223644
   },
   {
@@ -423,7 +423,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    base_url = get_base_url(request)\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        file_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"absolute_url\": f\"{base_url}{file_url}\" if base_url else file_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822986.316452
   },
   {
@@ -479,7 +479,7 @@
         "replace": "        relative_url = f\"/api/file/{path.name}\"\n        base_url = get_base_url()\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"absolute_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823053.3131356
   },
   {
@@ -547,7 +547,7 @@
         "replace": "def _classify_output(path: Path) -> str:\n    ext = path.suffix.lower()\n    if ext == \".pdf\":\n        return \"product\"\n    if ext == \".mp4\":\n        return \"video\"\n    if ext == \".png\":\n        return \"image\"\n    if ext == \".mp3\":\n        return \"audio\"\n    return \"other\"\n\n\n@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = Query(default=None)):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        output_kind = _classify_output(path)\n        if kind and output_kind != kind:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n                \"kind\": output_kind,\n                \"is_sellable\": output_kind in {\"product\", \"video\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823126.6621754
   },
   {
@@ -652,7 +652,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    request_id = uuid.uuid4().hex[:12]\n    job_id = create_job(\n        \"shorts_batch\",\n        {**payload.model_dump(), \"request_id\": request_id},\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"request_id\": request_id, \"status\": \"queued\"}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823194.2594662
   },
   {
@@ -667,7 +667,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"file\"\n        if ext == \".pdf\":\n            kind = \"digital_product\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"kind\": kind,\n                \"label\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"is_downloadable\": ext in {\".pdf\", \".mp4\"},\n                \"preview_url\": f\"/api/file/{path.name}\" if ext in {\".png\", \".pdf\", \".mp4\"} else None,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823194.2766647
   },
   {
@@ -724,7 +724,7 @@
         "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823265.992969
   },
   {
@@ -739,7 +739,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"document\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n        elif extension == \".mp3\":\n            kind = \"audio\"\n\n        file_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"download_url\": file_url,\n                \"preview_url\": file_url if kind in {\"document\", \"video\", \"image\", \"audio\"} else None,\n                \"extension\": extension,\n                \"kind\": kind,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823266.004555
   },
   {
@@ -790,7 +790,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823333.3133836
   },
   {
@@ -805,7 +805,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        item_type = \"other\"\n        if ext == \".pdf\":\n            item_type = \"product\"\n        elif ext == \".mp4\":\n            item_type = \"video\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            item_type = \"image\"\n\n        rel_url = f\"/api/file/{path.name}\"\n        abs_url = f\"{base_url}{rel_url}\" if base_url else rel_url\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"title\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"type\": item_type,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": rel_url,\n                \"download_url\": abs_url,\n                \"extension\": ext,\n                \"is_previewable\": ext in {\".pdf\", \".mp4\", \".png\", \".jpg\", \".jpeg\"},\n            }\n        )\n\n    summary = {\n        \"total\": len(items),\n        \"products\": sum(1 for x in items if x[\"type\"] == \"product\"),\n        \"videos\": sum(1 for x in items if x[\"type\"] == \"video\"),\n        \"images\": sum(1 for x in items if x[\"type\"] == \"image\"),\n    }\n\n    return {\"items\": items[:200], \"summary\": summary}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823333.3179097
   },
   {
@@ -844,7 +844,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = None, limit: int = 200):\n    limit = max(1, min(limit, 500))\n    base_url = get_base_url()\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        if kind == \"pdf\" and extension != \".pdf\":\n            continue\n        if kind == \"video\" and extension != \".mp4\":\n            continue\n        if kind == \"image\" and extension not in {\".png\", \".jpg\", \".jpeg\"}:\n            continue\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"public_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items), \"kind\": kind or \"all\"}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823345.5318136
   },
   {
@@ -895,7 +895,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=base_url,\n        count=payload.count,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{base_url}/api/job/{job_id}\",\n        \"category\": \"shorts_batch\",\n        \"topic\": payload.topic,\n        \"count\": payload.count,\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823408.516447
   },
   {
@@ -910,7 +910,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = None, limit: int = 200):\n    normalized_kind = (kind or \"\").strip().lower()\n    limit = max(1, min(limit, 500))\n\n    type_map = {\n        \".pdf\": \"document\",\n        \".mp4\": \"video\",\n        \".png\": \"image\",\n    }\n\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        asset_type = type_map.get(extension, \"file\")\n        if normalized_kind and normalized_kind != asset_type:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"type\": asset_type,\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\n        \"items\": items[:limit],\n        \"count\": min(len(items), limit),\n        \"filters\": {\n            \"kind\": normalized_kind or None,\n            \"limit\": limit,\n        },\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823408.5209725
   },
   {
@@ -925,7 +925,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        lower_name = path.name.lower()\n\n        product_type = \"file\"\n        if ext == \".pdf\":\n            product_type = \"digital_product\"\n        elif ext == \".mp4\":\n            product_type = \"video_asset\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            product_type = \"image_asset\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"product_type\": product_type,\n                \"previewable\": ext in {\".pdf\", \".mp4\", \".png\", \".jpg\", \".jpeg\"},\n                \"suggested_channel\": \"gumroad\" if ext == \".pdf\" else \"social\" if ext == \".mp4\" else \"asset\",\n                \"monetization_ready\": ext in {\".pdf\", \".mp4\"},\n                \"title\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"has_ai_theme\": any(token in lower_name for token in [\"ai\", \"youtube\", \"shorts\", \"money\", \"prompt\", \"pack\"]),\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823456.186582
   },
   {
@@ -940,7 +940,7 @@
         "replace": "@app.get(\"/\")\ndef root():\n    output_count = len([p for p in OUTPUT_DIR.iterdir() if p.is_file()])\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"product\": \"Zerenthis\",\n        \"outputs\": output_count,\n        \"routes\": {\n            \"product_pack\": \"/api/product-pack\",\n            \"shorts_pack\": \"/api/shorts-pack\",\n            \"youtube_pack\": \"/api/youtube-pack\",\n            \"job_status\": \"/api/job/{job_id}\",\n            \"gallery\": \"/api/gallery\",\n            \"self_pending\": \"/self/pending\"\n        }\n    }\n\n\n@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"outputs_dir\": str(OUTPUT_DIR),\n        \"outputs_dir_exists\": OUTPUT_DIR.exists(),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()])\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823456.190097
   },
   {
@@ -967,7 +967,7 @@
         "replace": "    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"/api/job/{job_id}\",\n        \"upsell\": {\n            \"suggested_offer\": \"Premium Product Pack\",\n            \"price_range\": \"$9-$49\"\n        }\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823490.8408432
   },
   {
@@ -982,7 +982,7 @@
         "replace": "        extension = path.suffix.lower()\n        kind = \"file\"\n        if extension == \".pdf\":\n            kind = \"document\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension in {\".png\", \".jpg\", \".jpeg\", \".webp\"}:\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"kind\": kind,\n                \"is_previewable\": kind in {\"document\", \"video\", \"image\"},\n            }\n        )\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823490.844049
   },
   {
@@ -1015,7 +1015,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True, \"base_url_configured\": bool(get_base_url())}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823510.2095199
   },
   {
@@ -1036,7 +1036,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"product\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"download_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n                \"kind\": kind,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823510.213892
   },
   {
@@ -1117,7 +1117,7 @@
         "replace": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str, x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    result = execute(pid)\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823572.3832245
   },
   {
@@ -1132,7 +1132,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(q: str = \"\", ext: str = \"\"):\n    items = []\n    query = q.strip().lower()\n    ext_filter = ext.strip().lower()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        if query and query not in path.name.lower():\n            continue\n        if ext_filter and suffix != ext_filter:\n            continue\n\n        kind = \"file\"\n        if suffix == \".pdf\":\n            kind = \"document\"\n        elif suffix == \".mp4\":\n            kind = \"video\"\n        elif suffix in {\".png\", \".jpg\", \".jpeg\"}:\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": suffix,\n                \"kind\": kind,\n                \"preview_url\": f\"/api/file/{path.name}\" if kind in {\"image\", \"video\", \"document\"} else None,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": len(items[:200]), \"query\": query, \"ext\": ext_filter}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823572.386266
   },
   {
@@ -1159,7 +1159,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n\n\n@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Product Pack\",\n                \"endpoint\": \"/api/product-pack\",\n                \"job_type\": \"product\",\n                \"starting_price\": 19,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"PDF pack\", \"offer ideas\", \"launch plan\"],\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Pack\",\n                \"endpoint\": \"/api/shorts-pack\",\n                \"job_type\": \"shorts\",\n                \"starting_price\": 29,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"MP4 video\", \"thumbnail\", \"script\"],\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Pack\",\n                \"endpoint\": \"/api/youtube-pack\",\n                \"job_type\": \"youtube\",\n                \"starting_price\": 39,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"title\", \"thumbnail brief\", \"long-form script\"],\n            },\n        ],\n        \"base_url\": get_base_url(),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823638.0362213
   },
   {
@@ -1180,7 +1180,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(extension: str | None = Query(default=None), limit: int = Query(default=50, ge=1, le=200)):\n    items = []\n    normalized_extension = (extension or \"\").strip().lower()\n    if normalized_extension and not normalized_extension.startswith(\".\"):\n        normalized_extension = f\".{normalized_extension}\"\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n        if normalized_extension and path.suffix.lower() != normalized_extension:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items[:limit]), \"filters\": {\"extension\": normalized_extension or None, \"limit\": limit}}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823638.0407362
   },
   {
@@ -1231,7 +1231,7 @@
         "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, request: Request):\n    request_id = str(uuid.uuid4())\n    result = build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    result[\"request_id\"] = request_id\n    result[\"client_host\"] = request.client.host if request.client else None\n    return result\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823649.8559616
   },
   {
@@ -1246,7 +1246,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        asset_type = \"other\"\n        previewable = False\n\n        if extension == \".pdf\":\n            asset_type = \"product\"\n            previewable = True\n        elif extension == \".mp4\":\n            asset_type = \"video\"\n            previewable = True\n        elif extension in {\".png\", \".jpg\", \".jpeg\", \".webp\"}:\n            asset_type = \"image\"\n            previewable = True\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"asset_type\": asset_type,\n                \"previewable\": previewable,\n                \"download_name\": path.name,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823649.88168
   },
   {
@@ -1344,7 +1344,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        public_url = build_public_file_url(path.name, request)\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": public_url,\n                \"download_url\": public_url,\n                \"extension\": extension,\n                \"kind\": \"document\" if extension == \".pdf\" else \"video\" if extension == \".mp4\" else \"image\" if extension == \".png\" else \"other\",\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823721.7249022
   },
   {
@@ -1448,7 +1448,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery(\n    request: Request,\n    extension: str | None = Query(default=None),\n    limit: int = Query(default=50, ge=1, le=200),\n):\n    items = []\n    wanted_extension = extension.lower().strip() if extension else None\n    if wanted_extension and not wanted_extension.startswith(\".\"):\n        wanted_extension = f\".{wanted_extension}\"\n\n    base_url = get_base_url(request)\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        if wanted_extension and suffix != wanted_extension:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"absolute_url\": f\"{base_url}/api/file/{path.name}\" if base_url else f\"/api/file/{path.name}\",\n                \"extension\": suffix,\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items[:limit]), \"base_url\": base_url}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823787.4871905
   },
   {
@@ -1540,7 +1540,7 @@
         "replace": "@app.get(\"/api/file/{name}\")\ndef serve_file(name: str):\n    if \"/\" in name or \"\\\\\" in name:\n        raise HTTPException(status_code=400, detail=\"Invalid file name\")\n\n    path = OUTPUT_DIR / name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File missing\")\n\n    media_type = None\n    if path.suffix.lower() == \".pdf\":\n        media_type = \"application/pdf\"\n    elif path.suffix.lower() == \".mp4\":\n        media_type = \"video/mp4\"\n    elif path.suffix.lower() == \".png\":\n        media_type = \"image/png\"\n\n    return FileResponse(path, media_type=media_type, filename=path.name)\n\n\n@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    base_url = get_base_url(request)\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"product\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"display_name\": path.stem.replace(\"_\", \" \"),\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"absolute_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n                \"kind\": kind,\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774823820.3226733
   },
   {
@@ -1578,7 +1578,7 @@
         "replace": "def execute(pid: str) -> dict[str, Any]:\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p.get(\"steps\", []))\n\n    backups: list[tuple[Path, Path]] = []\n    created: list[Path] = []\n\n    try:\n        for s in p[\"steps\"]:\n            path = _normalize_path(s[\"path\"])\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    b = backup(path)\n                    if b:\n                        backups.append((path, b))\n                else:\n                    created.append(path)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                original = path.read_text(encoding=\"utf-8\", errors=\"ignore\")\n                find_text = s[\"find\"]\n                replace_text = s[\"replace\"]\n\n                if find_text not in original:\n                    raise ValueError(f\"find text not found in: {s['path']}\")\n\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n\n                updated = original.replace(find_text, replace_text, 1)\n                if updated == original:\n                    raise ValueError(f\"edit produced no change for: {s['path']}\")\n\n                path.write_text(updated, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        if not verify():\n            raise RuntimeError(\"verification failed\")\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = time.time()\n        p[\"result\"] = {\n            \"ok\": True,\n            \"applied_steps\": len(p.get(\"steps\", [])),\n            \"backup_count\": len(backups),\n            \"created_count\": len(created),\n        }\n        save(d)\n        return {\n            \"ok\": True,\n            \"id\": pid,\n            \"status\": \"applied\",\n            \"applied_steps\": len(p.get(\"steps\", [])),\n            \"backups\": [str(b.relative_to(ROOT)) for _, b in backups],\n            \"created\": [str(c.relative_to(ROOT)) for c in created],\n        }\n    except Exception as e:\n        rollback_errors: list[str] = []\n\n        for path in created:\n            try:\n                if path.exists():\n                    path.unlink()\n            except Exception as re:\n                rollback_errors.append(f\"failed removing created file {path}: {re}\")\n\n        for path, backup_path in reversed(backups):\n            try:\n                path.parent.mkdir(parents=True, exist_ok=True)\n                shutil.copy2(backup_path, path)\n            except Exception as re:\n                rollback_errors.append(f\"failed restoring {path} from {backup_path}: {re}\")\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = time.time()\n        p[\"error\"] = str(e)\n        if rollback_errors:\n            p[\"rollback_errors\"] = rollback_errors\n        save(d)\n\n        return {\n            \"ok\": False,\n            \"error\": str(e),\n            \"status\": \"failed\",\n            \"rollback_errors\": rollback_errors,\n        }\n"
       }
     ],
-    "status": "pending",
+    "status": "applied",
     "created_at": 1774823847.919855
   },
   {
@@ -1919,6 +1919,1044 @@
         "path": "backend/app/main.py",
         "find": "        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n",
         "replace": "        file_url = f\"/api/file/{path.name}\"\n        base_url = get_base_url()\n        if base_url:\n            file_url = f\"{base_url}{file_url}\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Make generated asset URLs production-ready and improve API health metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns empty base URLs, which weakens product usability and monetization readiness because generated outputs cannot reliably link back to hosted files. Adding a real base URL resolver and richer health info improves user flow, deployment readiness, and downstream product quality.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return \"\"\n",
+        "replace": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url(request: Request | None = None) -> str:\n    env_url = (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"BASE_URL\") or \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"outputs_dir\": str(OUTPUT_DIR),\n        \"outputs_exists\": OUTPUT_DIR.exists(),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add API key gating and real base URL generation [safe-prep]",
+    "reason": "Safe preparation extracted from: The product is not monetization-ready if every generation endpoint is publicly callable and asset URLs are inconsistent. Adding optional API key enforcement for paid endpoints and a real base URL improves security, monetization readiness, and downstream output linking with minimal code change.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, Header, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"\").rstrip(\"/\")\n\n\ndef require_api_key(x_api_key: str | None) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    return build_youtube_pack(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Improve gallery output for better user flow and selling presentation [safe-prep]",
+    "reason": "Safe preparation extracted from: Users need a clean way to browse outputs by type and preview what was generated. Adding lightweight labels and counts to the gallery improves UX immediately and makes the product feel more polished for demos and paid use.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    counts = {\"pdf\": 0, \"video\": 0, \"image\": 0, \"other\": 0}\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"other\"\n        if ext == \".pdf\":\n            kind = \"pdf\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            kind = \"image\"\n\n        counts[kind] += 1\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"kind\": kind,\n                \"display_name\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n            }\n        )\n\n    return {\"items\": items[:200], \"counts\": counts, \"total\": len(items)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add production-safe API metadata and job/file URLs [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns an empty base URL, which weakens frontend flow, external integrations, and monetization readiness. Adding a configurable public base URL plus richer response metadata makes the product easier to deploy, embed, and sell.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=base_url,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"job_url\": f\"{base_url}/api/job/{job_id}\" if base_url else f\"/api/job/{job_id}\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=base_url,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"job_url\": f\"{base_url}/api/job/{job_id}\" if base_url else f\"/api/job/{job_id}\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=base_url,\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"job_url\": f\"{base_url}/api/job/{job_id}\" if base_url else f\"/api/job/{job_id}\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=base_url,\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"job_url\": f\"{base_url}/api/job/{job_id}\" if base_url else f\"/api/job/{job_id}\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    base_url = get_base_url(request)\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        file_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"absolute_url\": f\"{base_url}{file_url}\" if base_url else file_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add safer API contracts and monetization-ready job metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API currently has permissive CORS, no request metadata for leads/orders, and no useful base URL generation for downloadable assets. Adding structured request fields, environment-based base URL, and gallery/job metadata improves product output usability, monetization readiness, and frontend flow without major architecture changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from pydantic import BaseModel, Field\n",
+        "replace": "from pydantic import BaseModel, Field, EmailStr\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    customer_email: EmailStr | None = Field(default=None)\n    product_tier: str = Field(default=\"starter\", min_length=3, max_length=40)\n    cta_url: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"\").rstrip(\"/\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"base_url\": get_base_url(),\n        \"output_dir\": str(OUTPUT_DIR),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n",
+        "replace": "        relative_url = f\"/api/file/{path.name}\"\n        base_url = get_base_url()\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"absolute_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add API readiness, gallery filtering, and monetization metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The backend currently returns an empty base_url and the gallery lacks useful metadata for product display and selling workflows. Adding base URL resolution, file classification, and basic download hints improves user flow, product output usability, and monetization readiness without large structural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Query, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "def _classify_output(path: Path) -> str:\n    ext = path.suffix.lower()\n    if ext == \".pdf\":\n        return \"product\"\n    if ext == \".mp4\":\n        return \"video\"\n    if ext == \".png\":\n        return \"image\"\n    if ext == \".mp3\":\n        return \"audio\"\n    return \"other\"\n\n\n@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = Query(default=None)):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        output_kind = _classify_output(path)\n        if kind and output_kind != kind:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n                \"kind\": output_kind,\n                \"is_sellable\": output_kind in {\"product\", \"video\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add production-safe API metadata and monetization-ready request tracing [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns an empty base URL and lacks request correlation, which weakens asset links, checkout/readiness, debugging, and user trust. Adding a real base URL resolver plus request IDs improves product output quality, reliability, and monetization readiness without changing core architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\nimport uuid\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    request_id = uuid.uuid4().hex[:12]\n    job_id = create_job(\n        \"product\",\n        {**payload.model_dump(), \"request_id\": request_id},\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"request_id\": request_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    request_id = uuid.uuid4().hex[:12]\n    job_id = create_job(\n        \"shorts\",\n        {**payload.model_dump(), \"request_id\": request_id},\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"request_id\": request_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    request_id = uuid.uuid4().hex[:12]\n    job_id = create_job(\n        \"product_batch\",\n        {**payload.model_dump(), \"request_id\": request_id},\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"request_id\": request_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    request_id = uuid.uuid4().hex[:12]\n    job_id = create_job(\n        \"shorts_batch\",\n        {**payload.model_dump(), \"request_id\": request_id},\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"request_id\": request_id, \"status\": \"queued\"}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Return monetization metadata in gallery for better product browsing [safe-prep]",
+    "reason": "Safe preparation extracted from: Users currently get a raw file list with no sales-oriented presentation. Adding ready-to-render metadata like file type labels, previews, and downloadable flags improves user flow, perceived product quality, and storefront readiness using the existing gallery endpoint.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"file\"\n        if ext == \".pdf\":\n            kind = \"digital_product\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"kind\": kind,\n                \"label\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"is_downloadable\": ext in {\".pdf\", \".mp4\"},\n                \"preview_url\": f\"/api/file/{path.name}\" if ext in {\".png\", \".pdf\", \".mp4\"} else None,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add API key gating and production-aware base URL [safe-prep]",
+    "reason": "Safe preparation extracted from: Core generation endpoints are fully open and get_base_url() always returns an empty string. Adding lightweight API key protection for monetization-sensitive routes and generating a real base URL improves monetization readiness, deployment quality, and downstream output links without requiring a large rewrite.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, Header, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return \"\"\n",
+        "replace": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url(request: Request | None = None) -> str:\n    env_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()\n    if env_url:\n        return env_url.rstrip(\"/\")\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n\n\ndef require_api_key(x_api_key: str | None = Header(default=None)) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    return build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Make gallery and job responses more user-ready with direct preview metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: Users need a clearer post-generation flow after creation. Adding preview/download URLs and lightweight type labels to gallery output improves browsing and conversion to usable assets, while staying realistic within the current API structure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"document\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n        elif extension == \".mp3\":\n            kind = \"audio\"\n\n        file_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"download_url\": file_url,\n                \"preview_url\": file_url if kind in {\"document\", \"video\", \"image\", \"audio\"} else None,\n                \"extension\": extension,\n                \"kind\": kind,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add API key gate and proper base URL generation [safe-prep]",
+    "reason": "Safe preparation extracted from: The current API is fully open with wildcard CORS and blank file URLs, which hurts monetization readiness and product delivery. A lightweight API key gate for paid-generation endpoints plus environment-aware base URL generation makes the system safer to expose and easier to integrate into a paid frontend.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, Header, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return \"\"\n",
+        "replace": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    explicit = (os.getenv(\"PUBLIC_BASE_URL\") or \"\").strip()\n    if explicit:\n        return explicit.rstrip(\"/\")\n\n    render_url = (os.getenv(\"RENDER_EXTERNAL_URL\") or \"\").strip()\n    if render_url:\n        return render_url.rstrip(\"/\")\n\n    return \"http://localhost:8000\"\n\n\ndef require_api_key(x_api_key: str | None = Header(default=None)) -> None:\n    expected = (os.getenv(\"ZERENTHIS_API_KEY\") or \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Upgrade gallery into a conversion-ready output index [safe-prep]",
+    "reason": "Safe preparation extracted from: Generated assets are monetizable, but the current gallery only exposes raw files. Adding previews, file categories, and direct download URLs improves user flow, perceived product quality, and storefront readiness without needing a new service.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        item_type = \"other\"\n        if ext == \".pdf\":\n            item_type = \"product\"\n        elif ext == \".mp4\":\n            item_type = \"video\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            item_type = \"image\"\n\n        rel_url = f\"/api/file/{path.name}\"\n        abs_url = f\"{base_url}{rel_url}\" if base_url else rel_url\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"title\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"type\": item_type,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": rel_url,\n                \"download_url\": abs_url,\n                \"extension\": ext,\n                \"is_previewable\": ext in {\".pdf\", \".mp4\", \".png\", \".jpg\", \".jpeg\"},\n            }\n        )\n\n    summary = {\n        \"total\": len(items),\n        \"products\": sum(1 for x in items if x[\"type\"] == \"product\"),\n        \"videos\": sum(1 for x in items if x[\"type\"] == \"video\"),\n        \"images\": sum(1 for x in items if x[\"type\"] == \"image\"),\n    }\n\n    return {\"items\": items[:200], \"summary\": summary}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Upgrade API output metadata for better frontend flow and monetization readiness [safe-prep]",
+    "reason": "Safe preparation extracted from: The generation endpoints currently only return queued job IDs and use an empty base URL. Adding environment-based public URLs plus gallery filters and counts makes generated assets easier to present in a product UI, improves customer flow, and supports paid delivery pages and sharing.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"BASE_URL\") or \"\").rstrip(\"/\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = None, limit: int = 200):\n    limit = max(1, min(limit, 500))\n    base_url = get_base_url()\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        if kind == \"pdf\" and extension != \".pdf\":\n            continue\n        if kind == \"video\" and extension != \".mp4\":\n            continue\n        if kind == \"image\" and extension not in {\".png\", \".jpg\", \".jpeg\"}:\n            continue\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"public_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items), \"kind\": kind or \"all\"}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823959",
+    "title": "Add request validation, monetization metadata, and job UX fields to API responses [safe-prep]",
+    "reason": "Safe preparation extracted from: The core API currently returns minimal queue responses and uses an empty base URL, which weakens user flow, monetization readiness, and downstream product usability. Adding a real base URL, better health info, and richer response metadata improves frontend integration, shareability, polling UX, and readiness for paid product delivery.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"BASE_URL\") or \"\").strip()\n    if env_url:\n        return env_url.rstrip(\"/\")\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"http://localhost:8000\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"outputs_dir\": str(OUTPUT_DIR),\n        \"outputs_dir_exists\": OUTPUT_DIR.exists(),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=base_url,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{base_url}/api/job/{job_id}\",\n        \"category\": \"product\",\n        \"topic\": payload.topic,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=base_url,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{base_url}/api/job/{job_id}\",\n        \"category\": \"shorts\",\n        \"topic\": payload.topic,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=base_url,\n        count=payload.count,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{base_url}/api/job/{job_id}\",\n        \"category\": \"product_batch\",\n        \"topic\": payload.topic,\n        \"count\": payload.count,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    base_url = get_base_url(request)\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=base_url,\n        count=payload.count,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{base_url}/api/job/{job_id}\",\n        \"category\": \"shorts_batch\",\n        \"topic\": payload.topic,\n        \"count\": payload.count,\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Upgrade gallery output with monetization-friendly previews and safer filtering [safe-prep]",
+    "reason": "Safe preparation extracted from: The gallery is a key user-flow surface for discovering generated assets, but it currently returns only raw file data. Adding file type labels, preview/download hints, and optional filtering improves output quality perception, makes the product feel more polished, and supports monetization use cases like browsing sellable assets quickly.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(kind: str | None = None, limit: int = 200):\n    normalized_kind = (kind or \"\").strip().lower()\n    limit = max(1, min(limit, 500))\n\n    type_map = {\n        \".pdf\": \"document\",\n        \".mp4\": \"video\",\n        \".png\": \"image\",\n    }\n\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        asset_type = type_map.get(extension, \"file\")\n        if normalized_kind and normalized_kind != asset_type:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"type\": asset_type,\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\n        \"items\": items[:limit],\n        \"count\": min(len(items), limit),\n        \"filters\": {\n            \"kind\": normalized_kind or None,\n            \"limit\": limit,\n        },\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add monetization-ready product metadata to gallery output [safe-prep]",
+    "reason": "Safe preparation extracted from: The current gallery only lists files, which limits user flow and sales readiness. Adding product type hints, previewability, and simple monetization metadata makes the output gallery more usable for a storefront or upsell UI without requiring major architectural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        lower_name = path.name.lower()\n\n        product_type = \"file\"\n        if ext == \".pdf\":\n            product_type = \"digital_product\"\n        elif ext == \".mp4\":\n            product_type = \"video_asset\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\"}:\n            product_type = \"image_asset\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"product_type\": product_type,\n                \"previewable\": ext in {\".pdf\", \".mp4\", \".png\", \".jpg\", \".jpeg\"},\n                \"suggested_channel\": \"gumroad\" if ext == \".pdf\" else \"social\" if ext == \".mp4\" else \"asset\",\n                \"monetization_ready\": ext in {\".pdf\", \".mp4\"},\n                \"title\": path.stem.replace(\"_\", \" \").replace(\"-\", \" \").strip(),\n                \"has_ai_theme\": any(token in lower_name for token in [\"ai\", \"youtube\", \"shorts\", \"money\", \"prompt\", \"pack\"]),\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Make API root and health endpoints user-flow friendly [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently exposes minimal status information. Returning route hints and output counts improves usability for local operators, helps frontends boot faster, and reduces friction when testing generation flows.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    output_count = len([p for p in OUTPUT_DIR.iterdir() if p.is_file()])\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"product\": \"Zerenthis\",\n        \"outputs\": output_count,\n        \"routes\": {\n            \"product_pack\": \"/api/product-pack\",\n            \"shorts_pack\": \"/api/shorts-pack\",\n            \"youtube_pack\": \"/api/youtube-pack\",\n            \"job_status\": \"/api/job/{job_id}\",\n            \"gallery\": \"/api/gallery\",\n            \"self_pending\": \"/self/pending\"\n        }\n    }\n\n\n@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"outputs_dir\": str(OUTPUT_DIR),\n        \"outputs_dir_exists\": OUTPUT_DIR.exists(),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()])\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add API-level monetization and job UX metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The current API gives little product context to a frontend or checkout-ready flow. Adding a stable base URL, pricing metadata, and clearer health/root responses improves user flow, frontend integration, and monetization readiness without changing core generation behavior.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"http://localhost:8000\").rstrip(\"/\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"product\": \"Zerenthis\",\n        \"base_url\": get_base_url(),\n        \"routes\": {\n            \"health\": \"/health\",\n            \"product_pack\": \"/api/product-pack\",\n            \"shorts_pack\": \"/api/shorts-pack\",\n            \"youtube_pack\": \"/api/youtube-pack\",\n            \"gallery\": \"/api/gallery\",\n            \"job\": \"/api/job/{job_id}\",\n        },\n    }\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True, \"base_url\": get_base_url()}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"/api/job/{job_id}\",\n        \"upsell\": {\n            \"suggested_offer\": \"Premium Product Pack\",\n            \"price_range\": \"$9-$49\"\n        }\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Expose richer gallery metadata for better product presentation [safe-prep]",
+    "reason": "Safe preparation extracted from: The gallery is the main proof-of-output surface, but it lacks useful metadata for sorting, previews, and storefront-like presentation. Adding file type labels and simple preview/download hints improves output quality perception, frontend usability, and monetization readiness with minimal risk.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n",
+        "replace": "        extension = path.suffix.lower()\n        kind = \"file\"\n        if extension == \".pdf\":\n            kind = \"document\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension in {\".png\", \".jpg\", \".jpeg\", \".webp\"}:\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"kind\": kind,\n                \"is_previewable\": kind in {\"document\", \"video\", \"image\"},\n            }\n        )\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add monetization-ready request validation and environment-based base URL [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently accepts weak product inputs and returns empty base URLs, which hurts output quality, downstream file links, and monetization readiness. Adding stronger validation and a configurable public base URL improves generated product quality, cleaner user flow, and deploy-readiness without expanding the architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from pydantic import BaseModel, Field\n",
+        "replace": "from pydantic import BaseModel, Field, field_validator\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=3, max_length=200)\n    niche: str = Field(default=\"Make Money Online\", min_length=3, max_length=120)\n    tone: str = Field(default=\"Premium\", min_length=3, max_length=60)\n    buyer: str = Field(default=\"Beginners starting from zero\", min_length=5, max_length=160)\n    promise: str = Field(default=\"\", max_length=200)\n    bonus: str = Field(default=\"\", max_length=200)\n    notes: str = Field(default=\"\", max_length=1000)\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n    @field_validator(\"topic\", \"niche\", \"tone\", \"buyer\", \"promise\", \"bonus\", \"notes\")\n    @classmethod\n    def normalize_text(cls, value: str) -> str:\n        return \" \".join((value or \"\").split()).strip()\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    base_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    return base_url\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True, \"base_url_configured\": bool(get_base_url())}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Improve gallery and file responses with product-ready metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: Users need a clearer post-generation flow to access, preview, and trust outputs. Adding download-friendly metadata and simple file categorization to existing endpoints improves user flow, reliability, and monetization readiness by making outputs easier to present in a storefront or dashboard.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/file/{name}\")\ndef serve_file(name: str):\n    if \"/\" in name or \"\\\\\" in name:\n        raise HTTPException(status_code=400, detail=\"Invalid file name\")\n\n    path = OUTPUT_DIR / name\n    if not path.exists():\n        raise HTTPException(status_code=404, detail=\"File missing\")\n\n    media_type = None\n    if path.suffix.lower() == \".pdf\":\n        media_type = \"application/pdf\"\n    elif path.suffix.lower() == \".mp4\":\n        media_type = \"video/mp4\"\n    elif path.suffix.lower() == \".png\":\n        media_type = \"image/png\"\n\n    return FileResponse(path, media_type=media_type, filename=path.name)\n",
+        "replace": "@app.get(\"/api/file/{name}\")\ndef serve_file(name: str):\n    if \"/\" in name or \"\\\\\" in name:\n        raise HTTPException(status_code=400, detail=\"Invalid file name\")\n\n    path = OUTPUT_DIR / name\n    if not path.exists():\n        raise HTTPException(status_code=404, detail=\"File missing\")\n\n    media_type = None\n    if path.suffix.lower() == \".pdf\":\n        media_type = \"application/pdf\"\n    elif path.suffix.lower() == \".mp4\":\n        media_type = \"video/mp4\"\n    elif path.suffix.lower() == \".png\":\n        media_type = \"image/png\"\n\n    return FileResponse(\n        path,\n        media_type=media_type,\n        filename=path.name,\n        headers={\"Cache-Control\": \"public, max-age=3600\"},\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"product\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"download_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n                \"kind\": kind,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add API key protection, better health data, and monetization-ready metadata endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: Right now every route is open via permissive CORS and there is no lightweight way to expose plan/branding/status information to a frontend. Adding optional API key protection for sensitive self-improver and founder routes improves safety and monetization readiness, while richer health and config endpoints improve user flow for a local product UI.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, Header, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"\").rstrip(\"/\")\n\n\ndef require_api_key(x_api_key: str | None = Header(default=None)) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"app\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"base_url\": get_base_url(),\n        \"api_key_required\": bool(os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()),\n    }\n\n\n@app.get(\"/api/config\")\ndef config():\n    return {\n        \"app_name\": \"Zerenthis\",\n        \"tagline\": \"Local AI product and content automation\",\n        \"base_url\": get_base_url(),\n        \"api_key_required\": bool(os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()),\n        \"plans\": [\n            {\"id\": \"starter\", \"name\": \"Starter\", \"price\": \"$19\", \"features\": [\"Product pack generation\", \"Shorts generation\"]},\n            {\"id\": \"creator\", \"name\": \"Creator\", \"price\": \"$49\", \"features\": [\"Batch product generation\", \"Batch shorts generation\", \"Gallery access\"]},\n            {\"id\": \"founder\", \"name\": \"Founder\", \"price\": \"$99\", \"features\": [\"Self-improver access\", \"Priority experimentation\", \"Advanced workflows\"]},\n        ],\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel, Field\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n",
+        "replace": "import os\n\nfrom fastapi import APIRouter, Header, HTTPException\nfrom pydantic import BaseModel, Field\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "router = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n",
+        "replace": "router = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\ndef _require_api_key(x_api_key: str | None) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest, x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    return propose(data.title, data.reason, data.steps)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/pending\")\ndef pending_route():\n    return pending()\n",
+        "replace": "@router.get(\"/pending\")\ndef pending_route(x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    return pending()\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n    ok = approve(pid)\n",
+        "replace": "@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str, x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    ok = approve(pid)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/reject/{pid}\")\ndef reject_route(pid: str):\n    ok = reject(pid)\n",
+        "replace": "@router.post(\"/reject/{pid}\")\ndef reject_route(pid: str, x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    ok = reject(pid)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    result = execute(pid)\n",
+        "replace": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str, x_api_key: str | None = Header(default=None)):\n    _require_api_key(x_api_key)\n    result = execute(pid)\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Improve gallery output with previews, type labels, and simple search [safe-prep]",
+    "reason": "Safe preparation extracted from: The gallery is a key user-facing surface for reviewing generated assets. Adding type labels, preview support, and query filtering makes the product feel much more usable immediately, improves output discoverability, and supports future paid workflows where users need to browse and retrieve generated assets quickly.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(q: str = \"\", ext: str = \"\"):\n    items = []\n    query = q.strip().lower()\n    ext_filter = ext.strip().lower()\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        if query and query not in path.name.lower():\n            continue\n        if ext_filter and suffix != ext_filter:\n            continue\n\n        kind = \"file\"\n        if suffix == \".pdf\":\n            kind = \"document\"\n        elif suffix == \".mp4\":\n            kind = \"video\"\n        elif suffix in {\".png\", \".jpg\", \".jpeg\"}:\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": suffix,\n                \"kind\": kind,\n                \"preview_url\": f\"/api/file/{path.name}\" if kind in {\"image\", \"video\", \"document\"} else None,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": len(items[:200]), \"query\": query, \"ext\": ext_filter}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add product request validation and monetization-ready metadata endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns an empty base URL and lacks any pricing, CTA, or capability metadata for frontend and checkout flows. Adding environment-aware URLs, public product capability metadata, and basic topic normalization improves user flow, monetization readiness, and output consistency without major structural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"http://localhost:8000\").rstrip(\"/\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n    def model_post_init(self, __context) -> None:\n        self.topic = self.topic.strip()\n        self.niche = self.niche.strip() or \"Make Money Online\"\n        self.tone = self.tone.strip() or \"Premium\"\n        self.buyer = self.buyer.strip() or \"Beginners starting from zero\"\n        self.promise = self.promise.strip()\n        self.bonus = self.bonus.strip()\n        self.notes = self.notes.strip()\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n\n\n@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Product Pack\",\n                \"endpoint\": \"/api/product-pack\",\n                \"job_type\": \"product\",\n                \"starting_price\": 19,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"PDF pack\", \"offer ideas\", \"launch plan\"],\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Pack\",\n                \"endpoint\": \"/api/shorts-pack\",\n                \"job_type\": \"shorts\",\n                \"starting_price\": 29,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"MP4 video\", \"thumbnail\", \"script\"],\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Pack\",\n                \"endpoint\": \"/api/youtube-pack\",\n                \"job_type\": \"youtube\",\n                \"starting_price\": 39,\n                \"currency\": \"USD\",\n                \"deliverables\": [\"title\", \"thumbnail brief\", \"long-form script\"],\n            },\n        ],\n        \"base_url\": get_base_url(),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Harden file gallery UX with filtering and safer downloads [safe-prep]",
+    "reason": "Safe preparation extracted from: Users need a cleaner output browsing flow as generated files grow. Adding extension filtering, item limits, and download-ready metadata improves discovery and frontend integration, while preserving safe local file serving.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Query\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(extension: str | None = Query(default=None), limit: int = Query(default=50, ge=1, le=200)):\n    items = []\n    normalized_extension = (extension or \"\").strip().lower()\n    if normalized_extension and not normalized_extension.startswith(\".\"):\n        normalized_extension = f\".{normalized_extension}\"\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n        if normalized_extension and path.suffix.lower() != normalized_extension:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"download_url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items[:limit]), \"filters\": {\"extension\": normalized_extension or None, \"limit\": limit}}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add monetization-ready request tracking and stronger API metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The product needs basic monetization readiness and operational visibility. Adding request IDs, environment-aware base URLs, and response metadata improves debugging, user trust, and prepares the API for plan-gated frontend flows and hosted deployments.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\nimport uuid\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\napp = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    version=\"0.1.0\",\n    description=\"Local AI automation API for product packs, shorts, YouTube assets, and self-improvement workflows.\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"BASE_URL\") or \"\").rstrip(\"/\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"version\": app.version,\n        \"base_url\": get_base_url(),\n    }\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True, \"version\": app.version}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    request_id = str(uuid.uuid4())\n    job_id = create_job(\n        \"product\",\n        {**payload.model_dump(), \"request_id\": request_id, \"client_host\": request.client.host if request.client else None},\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"request_id\": request_id, \"mode\": \"product\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    request_id = str(uuid.uuid4())\n    job_id = create_job(\n        \"shorts\",\n        {**payload.model_dump(), \"request_id\": request_id, \"client_host\": request.client.host if request.client else None},\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\", \"request_id\": request_id, \"mode\": \"shorts\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, request: Request):\n    request_id = str(uuid.uuid4())\n    result = build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    result[\"request_id\"] = request_id\n    result[\"client_host\"] = request.client.host if request.client else None\n    return result\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Improve gallery UX with file categorization and preview-ready metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The current output gallery is functional but weak for user flow. Adding type labels and preview hints makes browsing generated assets easier, supports future paid dashboards, and improves perceived product quality without risky architecture changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        asset_type = \"other\"\n        previewable = False\n\n        if extension == \".pdf\":\n            asset_type = \"product\"\n            previewable = True\n        elif extension == \".mp4\":\n            asset_type = \"video\"\n            previewable = True\n        elif extension in {\".png\", \".jpg\", \".jpeg\", \".webp\"}:\n            asset_type = \"image\"\n            previewable = True\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": extension,\n                \"asset_type\": asset_type,\n                \"previewable\": previewable,\n                \"download_name\": path.name,\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add production-safe API metadata, base URL resolution, and monetization-ready gallery links [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns empty base URLs and permissive CORS, which weakens user flow and deployment readiness. Tightening origin handling, adding request-aware absolute URLs, and enriching gallery items with preview/download metadata improves frontend integration, output usability, and monetization readiness without changing core product behavior.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n\n# \u2705 Register self-improver routes\napp.include_router(self_router)\n\n# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n\n# \u2705 Register self-improver routes\napp.include_router(self_router)\n\n# \u2705 Middleware\ncors_origins = [o.strip() for o in os.getenv(\"CORS_ORIGINS\", \"*\").split(\",\") if o.strip()]\nallow_all_origins = cors_origins == [\"*\"]\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if allow_all_origins else cors_origins,\n    allow_credentials=not allow_all_origins,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return \"\"\n",
+        "replace": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url(request: Request | None = None) -> str:\n    configured = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if configured:\n        return configured\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n\n\ndef build_public_file_url(name: str, request: Request | None = None) -> str:\n    base = get_base_url(request)\n    relative = f\"/api/file/{name}\"\n    return f\"{base}{relative}\" if base else relative\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n",
+        "replace": "        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n",
+        "replace": "        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n",
+        "replace": "        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n",
+        "replace": "        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        public_url = build_public_file_url(path.name, request)\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": public_url,\n                \"download_url\": public_url,\n                \"extension\": extension,\n                \"kind\": \"document\" if extension == \".pdf\" else \"video\" if extension == \".mp4\" else \"image\" if extension == \".png\" else \"other\",\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823960",
+    "title": "Add monetization-ready job polling, gallery filters, and environment-aware file URLs [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently returns empty base URLs and limited browsing metadata, which hurts frontend flow, hosted deployments, and productization. Adding environment-aware URLs plus lightweight filtering and limits improves UX, API usefulness, and monetization readiness without changing core architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Query, Request\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"BASE_URL\") or \"\").strip()\n    if env_url:\n        return env_url.rstrip(\"/\")\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(\n    request: Request,\n    extension: str | None = Query(default=None),\n    limit: int = Query(default=50, ge=1, le=200),\n):\n    items = []\n    wanted_extension = extension.lower().strip() if extension else None\n    if wanted_extension and not wanted_extension.startswith(\".\"):\n        wanted_extension = f\".{wanted_extension}\"\n\n    base_url = get_base_url(request)\n\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        if wanted_extension and suffix != wanted_extension:\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"absolute_url\": f\"{base_url}/api/file/{path.name}\" if base_url else f\"/api/file/{path.name}\",\n                \"extension\": suffix,\n            }\n        )\n\n    return {\"items\": items[:limit], \"count\": len(items[:limit]), \"base_url\": base_url}\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823961",
+    "title": "Add API validation, base URL generation, and monetization-ready gallery metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API currently returns an empty base_url, allows weak input quality, and gives the frontend little metadata to present sellable assets cleanly. Tightening request normalization and enriching gallery/file responses improves output quality, user flow, and monetization readiness without changing the overall product shape.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field, field_validator\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\", max_length=120)\n    tone: str = Field(default=\"Premium\", max_length=60)\n    buyer: str = Field(default=\"Beginners starting from zero\", max_length=160)\n    promise: str = Field(default=\"\", max_length=200)\n    bonus: str = Field(default=\"\", max_length=200)\n    notes: str = Field(default=\"\", max_length=1000)\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n    @field_validator(\"topic\", \"niche\", \"tone\", \"buyer\", \"promise\", \"bonus\", \"notes\")\n    @classmethod\n    def clean_text(cls, value: str) -> str:\n        value = \" \".join((value or \"\").split()).strip()\n        return value\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = (os.getenv(\"PUBLIC_BASE_URL\") or \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(request),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/file/{name}\")\ndef serve_file(name: str):\n    if \"/\" in name or \"\\\\\" in name:\n        raise HTTPException(status_code=400, detail=\"Invalid file name\")\n\n    path = OUTPUT_DIR / name\n    if not path.exists():\n        raise HTTPException(status_code=404, detail=\"File missing\")\n\n    media_type = None\n    if path.suffix.lower() == \".pdf\":\n        media_type = \"application/pdf\"\n    elif path.suffix.lower() == \".mp4\":\n        media_type = \"video/mp4\"\n    elif path.suffix.lower() == \".png\":\n        media_type = \"image/png\"\n\n    return FileResponse(path, media_type=media_type, filename=path.name)\n\n\n@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/file/{name}\")\ndef serve_file(name: str):\n    if \"/\" in name or \"\\\\\" in name:\n        raise HTTPException(status_code=400, detail=\"Invalid file name\")\n\n    path = OUTPUT_DIR / name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File missing\")\n\n    media_type = None\n    if path.suffix.lower() == \".pdf\":\n        media_type = \"application/pdf\"\n    elif path.suffix.lower() == \".mp4\":\n        media_type = \"video/mp4\"\n    elif path.suffix.lower() == \".png\":\n        media_type = \"image/png\"\n\n    return FileResponse(path, media_type=media_type, filename=path.name)\n\n\n@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    base_url = get_base_url(request)\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        extension = path.suffix.lower()\n        kind = \"other\"\n        if extension == \".pdf\":\n            kind = \"product\"\n        elif extension == \".mp4\":\n            kind = \"video\"\n        elif extension == \".png\":\n            kind = \"image\"\n\n        relative_url = f\"/api/file/{path.name}\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"display_name\": path.stem.replace(\"_\", \" \"),\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"absolute_url\": f\"{base_url}{relative_url}\" if base_url else relative_url,\n                \"extension\": extension,\n                \"kind\": kind,\n                \"is_previewable\": extension in {\".pdf\", \".mp4\", \".png\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
       }
     ],
     "status": "pending"

@@ -36,5 +36,225 @@
       "ok": true,
       "id": "prop_1774822785_bb973c80"
     }
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822856_b2be030d",
+    "title": "Make generated asset URLs production-ready and improve API health metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822916_ac611c3b",
+    "title": "Add API key gating and real base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822916_e9050282",
+    "title": "Improve gallery output for better user flow and selling presentation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822986_4225755a",
+    "title": "Add production-safe API metadata and job/file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823053_09772023",
+    "title": "Add safer API contracts and monetization-ready job metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823126_9954e049",
+    "title": "Add API readiness, gallery filtering, and monetization metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823194_59c77513",
+    "title": "Add production-safe API metadata and monetization-ready request tracing",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823194_2cc2e217",
+    "title": "Return monetization metadata in gallery for better product browsing",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823265_01660a5e",
+    "title": "Add API key gating and production-aware base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823266_86cedb09",
+    "title": "Make gallery and job responses more user-ready with direct preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823333_e1952aa2",
+    "title": "Add API key gate and proper base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823333_b5ea22f8",
+    "title": "Upgrade gallery into a conversion-ready output index",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823345_9acd56e4",
+    "title": "Upgrade API output metadata for better frontend flow and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823408_f34f5e90",
+    "title": "Add request validation, monetization metadata, and job UX fields to API responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823408_c31d0cd1",
+    "title": "Upgrade gallery output with monetization-friendly previews and safer filtering",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823456_fd5b8fc3",
+    "title": "Add monetization-ready product metadata to gallery output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823456_ca6c791f",
+    "title": "Make API root and health endpoints user-flow friendly",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823490_bd20c257",
+    "title": "Add API-level monetization and job UX metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823490_502ac326",
+    "title": "Expose richer gallery metadata for better product presentation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823510_ec4b20d5",
+    "title": "Add monetization-ready request validation and environment-based base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823510_9cfdcc85",
+    "title": "Improve gallery and file responses with product-ready metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823572_aa17c4fc",
+    "title": "Add API key protection, better health data, and monetization-ready metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823572_9a8454ff",
+    "title": "Improve gallery output with previews, type labels, and simple search",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823638_2104f64b",
+    "title": "Add product request validation and monetization-ready metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823638_b68c0a23",
+    "title": "Harden file gallery UX with filtering and safer downloads",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823649_b94e4653",
+    "title": "Add monetization-ready request tracking and stronger API metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823649_4f9fc4e5",
+    "title": "Improve gallery UX with file categorization and preview-ready metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823721_3a531f76",
+    "title": "Add production-safe API metadata, base URL resolution, and monetization-ready gallery links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823787_bda4c0c0",
+    "title": "Add monetization-ready job polling, gallery filters, and environment-aware file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823820_f5c23f7c",
+    "title": "Add API validation, base URL generation, and monetization-ready gallery metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823847_fdeb08dd",
+    "title": "Fix self-improver execution reliability and add rollback-safe result reporting",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774823847_fdeb08dd"
+    }
   }
 ]
