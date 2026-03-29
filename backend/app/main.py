@@ -183,65 +183,6 @@ def health():
         "has_video_outputs": any(ext in output_breakdown for ext in [".mp4", ".mov"]),
         "lead_capture_active": LEADS_FILE.exists(),
         "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
-        "lead_count": lead_metrics["total"],
-        "email_lead_count": lead_metrics["with_email"],
-        "marketing_consented_count": lead_metrics["marketing_consented"],
-    }
-
-    return {
-        "status": "ok",
-        "app": "Zerenthis Automation Core",
-        "base_url": get_base_url(),
-        "outputs": {
-            "total": len(outputs),
-            "latest": latest_output,
-            "recent": recent_output_names,
-            "by_extension": output_breakdown,
-        },
-        "leads": lead_metrics,
-        "product_readiness": product_readiness,
-    }
-
-
-@app.get("/catalog")
-def catalog():
-    outputs = sorted(
-        [p for p in OUTPUT_DIR.iterdir() if p.is_file()],
-        key=lambda p: p.stat().st_mtime,
-        reverse=True,
-    )
-
-    items = []
-    for output in outputs[:50]:
-        ext = output.suffix.lower()
-        items.append({
-            "name": output.name,
-            "type": ext or "[no_ext]",
-            "size_bytes": output.stat().st_size,
-            "download_url": f"{get_base_url()}/download/{quote(output.name)}",
-        })
-
-    return {
-        "count": len(items),
-        "items": items,
-    }
-
-
-@app.get("/download/{filename}")
-def download_file(filename: str):
-    path = OUTPUT_DIR / filename
-    if not path.exists() or not path.is_file():
-        raise HTTPException(status_code=404, detail="File not found")
-    return FileResponse(path, filename=path.name)
-
-
-@app.get("/leads")
-def leads_summary():
-    return {
-        "metrics": get_lead_metrics(),
-        "file": str(LEADS_FILE),
-    }
-UBLIC_BASE_URL", "").strip()),
         "has_consented_leads": lead_metrics["marketing_consented"] > 0,
     }
 

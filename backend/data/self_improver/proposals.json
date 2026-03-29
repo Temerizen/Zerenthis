@@ -9982,7 +9982,7 @@
         "replace": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"lead_capture\": {\n            \"supported\": True,\n            \"fields\": [\"customer_name\", \"customer_email\", \"marketing_consent\"],\n            \"value_exchange\": \"Get your generated asset plus follow-up offers and bonuses.\"\n        },\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"recommended_price_range\": [19, 29],\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\",\n                \"primary_cta\": \"Generate My Pack\",\n                \"upsell_path\": [\"shorts-pack\", \"youtube-pack\"]\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"recommended_price_range\": [29, 49],\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"audience growth and social proof\",\n                \"primary_cta\": \"Generate Shorts Pack\",\n                \"upsell_path\": [\"youtube-pack\"]\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Growth Pack\",\n                \"category\": \"content-strategy\",\n                \"starting_price\": 39,\n                \"recommended_price_range\": [39, 79],\n                \"deliverable\": \"script-package\",\n                \"best_for\": \"authority building and higher-ticket funnel setup\",\n                \"primary_cta\": \"Generate YouTube Pack\",\n                \"upsell_path\": []\n            }\n        ]\n    }"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774826864.1036577
   },
   {
@@ -10026,7 +10026,7 @@
         "replace": "from typing import Dict, List\n\nfrom Engine.product_pack_enhancers import (\n    build_checkout_assets,\n    build_launch_angles,\n    build_objection_handlers,\n    build_positioning_block,\n)\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774826919_244524",
@@ -10046,7 +10046,7 @@
         "replace": ".premium-preview-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 16px;\n  margin-top: 24px;\n}\n\n.premium-preview-card {\n  border: 1px solid rgba(255,255,255,0.08);\n  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));\n  border-radius: 18px;\n  padding: 18px;\n}\n\n.premium-preview-card h3 {\n  margin: 0 0 8px;\n}\n\n.premium-preview-card p,\n.trust-list li {\n  color: #a7b0c5;\n}\n\n.trust-list {\n  margin-top: 18px;\n  padding-left: 18px;\n}\n\nbody {\n"
       }
     ],
-    "status": "pending"
+    "status": "applied"
   },
   {
     "id": "prop_1774826934_dece14b6",
@@ -10110,8 +10110,11 @@
         "replace": "def _prompt_bank(topic, niche, buyer, promise):\n    topic = _clean(topic, \"digital products\")\n    niche = _clean(niche, \"online business\")\n    buyer_text = _clean(buyer, \"beginners\").lower()\n    promise_text = _clean(promise, f\"make progress with {topic}\")\n    return [\n        {\n            \"label\": \"Offer Creation\",\n            \"prompt\": f\"Create a low-ticket digital product offer about {topic} for {buyer_text} in {niche}. The offer should help them {promise_text}. Include deliverables, pricing, and a clear promise.\",\n        },\n        {\n            \"label\": \"Sales Page Draft\",\n            \"prompt\": f\"Write a short sales page for a premium but beginner-friendly {topic} product. Target {buyer_text}. Focus on the outcome of helping them {promise_text}. Include headline, bullets, CTA, and objection handling.\",\n        },\n        {\n            \"label\": \"Email Sequence\",\n            \"prompt\": f\"Write a 3-email welcome and conversion sequence for buyers interested in {topic}. Audience: {buyer_text} in {niche}. Move them toward an action where they can {promise_text}.\",\n        },\n        {\n            \"label\": \"Upsell Ideas\",\n            \"prompt\": f\"Generate 5 upsell ideas related to {topic} that naturally follow a starter product. Keep them useful for {buyer_text} and aligned with the promise to {promise_text}.\",\n        },\n        {\n            \"label\": \"Content Repurposing\",\n            \"prompt\": f\"Turn this {topic} product into 10 content ideas for short-form social media. Audience: {buyer_text}. Each idea should support the promise to {promise_text} and lead toward a paid offer.\",\n        },\n    ]\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826934.7831786
+    "status": "failed",
+    "created_at": 1774826934.7831786,
+    "approved_at": 1774826962.061194,
+    "failed_at": 1774826962.0959384,
+    "error": "find text not found in: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774826958_326f91b6",
@@ -10125,8 +10128,11 @@
         "replace": "def _prompt_bank(topic, niche, buyer, promise):\n    topic = _clean(topic, \"digital products\")\n    niche = _clean(niche, \"online business\")\n    buyer_text = _clean(buyer, \"beginners\").lower()\n    promise_text = _clean(promise, f\"make progress with {topic}\")\n    return [\n        f\"Write a premium one-page offer for {buyer_text} who want to {promise_text} with {topic} in {niche}.\",\n        f\"Generate 10 hooks for a low-ticket digital product about {topic} for {buyer_text}.\",\n        f\"Create a landing page outline for a {topic} execution pack with a clear promise and CTA.\",\n        f\"List 5 order bump ideas and 3 upsell ideas related to {topic}.\",\n        f\"Write an email sequence that helps {buyer_text} buy a {topic} starter product.\",\n    ]\n\n\ndef build_product_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = _premium_title(topic, promise)\n    quality = _score_product_pack(topic, promise, bonus, notes)\n    monetization = _build_product_offer_stack(topic, buyer, promise, bonus)\n    offers = _offer_ideas(topic, buyer, promise)\n    prompts = _prompt_bank(topic, niche, buyer, promise)\n    return {\n        \"status\": \"done\",\n        \"mode\": \"product_pack\",\n        \"title\": title,\n        \"topic\": _clean(topic, \"Digital Product\"),\n        \"niche\": _clean(niche, \"Make Money Online\"),\n        \"tone\": _clean(tone, \"Premium\"),\n        \"buyer\": _clean(buyer, \"Beginners starting from zero\"),\n        \"promise\": _clean(promise, f\"get better results with {topic}\"),\n        \"bonus\": _clean(bonus, \"Bonus Prompt Pack\"),\n        \"notes\": _clean(notes, \"Keep it premium and practical.\"),\n        \"quality\": quality,\n        \"monetization\": monetization,\n        \"offers\": offers,\n        \"prompt_bank\": prompts,\n        \"recommended_next_action\": monetization[\"cta\"],\n    }\n\n\ndef build_product_batch(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str, count: int = 3) -> Dict:\n    count = max(1, min(int(count or 3), 10))\n    items = []\n    base_pack = build_product_pack(topic, niche, tone, buyer, promise, bonus, notes)\n    offer_pool = base_pack[\"offers\"][:count]\n    for offer in offer_pool:\n        item = {\n            \"title\": offer[\"title\"],\n            \"price\": offer[\"price\"],\n            \"description\": offer[\"description\"],\n            \"best_for\": offer[\"best_for\"],\n            \"cta\": offer[\"cta\"],\n        }\n        items.append(item)\n    return {\n        \"status\": \"done\",\n        \"mode\": \"product_batch\",\n        \"topic\": base_pack[\"topic\"],\n        \"count\": len(items),\n        \"quality\": base_pack[\"quality\"],\n        \"monetization\": base_pack[\"monetization\"],\n        \"items\": items,\n        \"recommended_next_action\": base_pack[\"recommended_next_action\"],\n    }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826958.0025125
+    "status": "failed",
+    "created_at": 1774826958.0025125,
+    "approved_at": 1774826962.1308298,
+    "failed_at": 1774826962.1644325,
+    "error": "find text not found in: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774826958_d5ce27c9",
@@ -10142,5 +10148,132 @@
     ],
     "status": "pending",
     "created_at": 1774826958.0388548
+  },
+  {
+    "id": "prop_1774826995_eecf75c0",
+    "title": "Complete health endpoint with monetization and funnel diagnostics",
+    "reason": "The main API file appears truncated inside /health, which is a reliability risk and blocks a clean product-readiness signal. Finishing this endpoint adds a stable operator dashboard for output quality, monetization readiness, and user flow health without introducing new files.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    product_readiness = {\n        \"has_pdf_outputs\": output_breakdown.get(\".pdf\", 0) > 0,\n        \"has_video_outputs\": any(ext in output_breakdown for ext in [\".mp4\", \".mov\"]),\n        \"lead_capture_active\": LEADS_FILE.exists(),\n        \"has_public_base_url\": bool(os.getenv(\"P",
+        "replace": "    product_readiness = {\n        \"has_pdf_outputs\": output_breakdown.get(\".pdf\", 0) > 0,\n        \"has_video_outputs\": any(ext in output_breakdown for ext in [\".mp4\", \".mov\"]),\n        \"lead_capture_active\": LEADS_FILE.exists(),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"has_leads\": lead_metrics[\"total\"] > 0,\n        \"has_email_leads\": lead_metrics[\"with_email\"] > 0,\n        \"has_consented_leads\": lead_metrics[\"marketing_consented\"] > 0,\n    }\n\n    return {\n        \"status\": \"ok\",\n        \"service\": \"Zerenthis Automation Core\",\n        \"base_url\": get_base_url(),\n        \"lead_metrics\": lead_metrics,\n        \"outputs\": {\n            \"total\": len(outputs),\n            \"latest\": latest_output,\n            \"breakdown\": output_breakdown,\n            \"recent\": recent_output_names,\n        },\n        \"product_readiness\": product_readiness,\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826995.5234332
+  },
+  {
+    "id": "prop_1774826995_4e6d3d50",
+    "title": "Improve product-pack scoring with monetization and actionability signals",
+    "reason": "Current product scoring is lightweight and may overrate weak offers. Tightening the quality rubric around outcomes, specificity, monetization, and execution usefulness will improve product output quality and make generated packs more sellable.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dict:\n    checks = {\n        \"has_specific_topic\": len((topic or \"\").strip()) >= 4,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_notes\": bool((notes or \"\").strip()),\n        \"has_outcome_language\": any(word in (promise or \"\").lower() for word in [\"get\", \"build\", \"launch\", \"grow\", \"improve\", \"start\"]),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    verdict = \"strong\" if score >= 80 else \"good\" if score >= 60 else \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n",
+        "replace": "def _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dict:\n    topic_text = (topic or \"\").strip()\n    promise_text = (promise or \"\").strip().lower()\n    bonus_text = (bonus or \"\").strip().lower()\n    notes_text = (notes or \"\").strip().lower()\n\n    checks = {\n        \"has_specific_topic\": len(topic_text) >= 4,\n        \"has_clear_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"has_outcome_language\": any(word in promise_text for word in [\"get\", \"build\", \"launch\", \"grow\", \"improve\", \"start\", \"sell\", \"earn\", \"save\"]),\n        \"has_specificity\": any(token in promise_text for token in [\"days\", \"weeks\", \"steps\", \"system\", \"checklist\", \"template\", \"framework\"]),\n        \"has_monetization_signal\": any(word in bonus_text + \" \" + notes_text for word in [\"offer\", \"price\", \"bundle\", \"upsell\", \"order bump\", \"lead\", \"cta\", \"checkout\"]),\n        \"has_execution_signal\": any(word in notes_text + \" \" + promise_text for word in [\"execute\", \"implementation\", \"action\", \"workflow\", \"launch\", \"plan\"]),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    verdict = \"strong\" if score >= 85 else \"good\" if score >= 65 else \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826995.5508902
+  },
+  {
+    "id": "prop_1774827026",
+    "title": "Add product catalog and lead-ready generation metadata to the API",
+    "reason": "A simple monetization surface dramatically improves user flow and sales readiness. Exposing a catalog endpoint and enriching generation requests with monetization-focused metadata creates a clearer path from idea generation to purchase intent, while also making the system easier to integrate into a landing page or checkout funnel.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "OUT_DIR.mkdir(parents=True, exist_ok=True)\n\n\ndef _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dict:",
+        "replace": "OUT_DIR.mkdir(parents=True, exist_ok=True)\n\n\ndef get_catalog_snapshot(topic: str = \"AI Productivity\", buyer: str = \"Beginners starting from zero\", promise: str = \"launch faster\", bonus: str = \"Bonus Prompt Pack\") -> Dict:\n    offer_stack = _build_product_offer_stack(topic, buyer, promise, bonus)\n    ideas = _offer_ideas(topic, buyer, promise)\n    return {\n        \"topic\": topic,\n        \"buyer\": buyer,\n        \"promise\": promise,\n        \"bonus\": bonus,\n        \"primary_offer\": offer_stack[\"front_end\"],\n        \"order_bump\": offer_stack[\"order_bump\"],\n        \"upsell\": offer_stack[\"upsell\"],\n        \"pricing_notes\": offer_stack[\"pricing_notes\"],\n        \"cta\": offer_stack[\"cta\"],\n        \"offer_ideas\": ideas,\n    }\n\n\ndef _score_product_pack(topic: str, promise: str, bonus: str, notes: str) -> Dict:"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from Engine.product_engine import build_product_batch, build_product_pack\n",
+        "replace": "from Engine.product_engine import build_product_batch, build_product_pack, get_catalog_snapshot\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_lead_metrics() -> dict:\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n    by_source = {}\n    for item in items:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n\n    return {\n        \"total\": len(items),\n        \"with_email\": with_email,\n        \"marketing_consented\": consented,\n        \"by_source\": by_source,\n    }\n",
+        "replace": "def get_lead_metrics() -> dict:\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n    by_source = {}\n    for item in items:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n\n    return {\n        \"total\": len(items),\n        \"with_email\": with_email,\n        \"marketing_consented\": consented,\n        \"by_source\": by_source,\n    }\n\n\ndef build_response_meta(payload: GenerateRequest, source: str, job_id: str | None = None) -> dict:\n    catalog = get_catalog_snapshot(\n        topic=payload.topic,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n    )\n    return {\n        \"source\": source,\n        \"job_id\": job_id,\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n        \"catalog\": catalog,\n        \"checkout_hint\": catalog[\"cta\"],\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n\n\n@app.get(\"/catalog\")\ndef catalog(topic: str = \"AI Productivity\", buyer: str = \"Beginners starting from zero\", promise: str = \"launch faster\", bonus: str = \"Bonus Prompt Pack\"):\n    return get_catalog_snapshot(topic=topic, buyer=buyer, promise=promise, bonus=bonus)\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774827026",
+    "title": "Improve output quality with deterministic quality guards for video and product offers",
+    "reason": "The engines already contain scoring helpers, but quality checks are not consistently exposed as first-class output signals. Surfacing stronger recommendation metadata and fallback defaults improves product output quality, user trust, and the chance generated assets are usable and monetizable on the first pass.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    topic = (topic or \"AI Productivity\").strip()\n    niche = (niche or \"online business\").strip()\n    tone = (tone or \"Premium\").strip()\n    buyer = (buyer or \"Beginners starting from zero\").strip()\n    promise = (promise or f\"build a better system for {topic}\").strip()\n    bonus = (bonus or \"Prompt pack\").strip()\n    notes = (notes or \"Keep it premium and direct.\").strip()\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"monetization\": monetization,\n        \"recommended_next_action\": monetization[\"cta\"],\n    }\n",
+        "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"monetization\": monetization,\n        \"recommended_next_action\": monetization[\"cta\"],\n        \"publish_readiness\": {\n            \"score\": quality[\"score\"],\n            \"verdict\": quality[\"verdict\"],\n            \"needs_revision\": quality[\"verdict\"] == \"needs_improvement\",\n        },\n        \"improvement_hints\": [\n            \"Add a sharper promise if the title feels generic.\",\n            \"Keep the CTA aligned to the front-end execution pack.\",\n            \"Use the bonus as an order bump instead of burying it in the description.\"\n        ],\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _build_product_offer_stack(topic: str, buyer: str, promise: str, bonus: str) -> Dict:\n    topic_text = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get better results with {topic_text}\")\n    bonus_text = _clean(bonus, \"Bonus Prompt Pack\")\n    return {\n",
+        "replace": "def _build_product_offer_stack(topic: str, buyer: str, promise: str, bonus: str) -> Dict:\n    topic_text = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get better results with {topic_text}\")\n    bonus_text = _clean(bonus, \"Bonus Prompt Pack\")\n    scorecard = _score_product_pack(topic_text, promise_text, bonus_text, \"offer stack\")\n    return {\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "        \"pricing_notes\": [\n            \"Anchor the bundle against buying each asset separately.\",\n            \"Keep the front-end low friction and outcome-focused.\",\n            \"Use the order bump to increase average order value without adding complexity.\"\n        ],\n        \"cta\": \"Sell the execution pack first, add the bonus as an order bump, and position the bundle as the complete implementation path.\",\n    }\n",
+        "replace": "        \"pricing_notes\": [\n            \"Anchor the bundle against buying each asset separately.\",\n            \"Keep the front-end low friction and outcome-focused.\",\n            \"Use the order bump to increase average order value without adding complexity.\"\n        ],\n        \"cta\": \"Sell the execution pack first, add the bonus as an order bump, and position the bundle as the complete implementation path.\",\n        \"quality\": scorecard,\n        \"recommended_pricing_move\": \"Lead with the front-end, use the bump to raise AOV, and present the bundle as the best-value upgrade.\",\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774827026",
+    "title": "Expose funnel-ready pricing and lead capture guidance in catalog [safe-prep]",
+    "reason": "Safe preparation extracted from: This improves monetization readiness and user flow by making product offers clearer, adding checkout intent signals, and turning the catalog into a more actionable sales surface for frontend use.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\"\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_fo",
+        "replace": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"lead_capture\": {\n            \"supported\": True,\n            \"fields\": [\"customer_name\", \"customer_email\", \"marketing_consent\"],\n            \"value_exchange\": \"Get your generated asset plus follow-up offers and bonuses.\"\n        },\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"recommended_price_range\": [19, 29],\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\",\n                \"primary_cta\": \"Generate My Pack\",\n                \"upsell_path\": [\"shorts-pack\", \"youtube-pack\"]\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"recommended_price_range\": [29, 49],\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"audience growth and social proof\",\n                \"primary_cta\": \"Generate Shorts Pack\",\n                \"upsell_path\": [\"youtube-pack\"]\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Growth Pack\",\n                \"category\": \"content-strategy\",\n                \"starting_price\": 39,\n                \"recommended_price_range\": [39, 79],\n                \"deliverable\": \"script-package\",\n                \"best_for\": \"authority building and higher-ticket funnel setup\",\n                \"primary_cta\": \"Generate YouTube Pack\",\n                \"upsell_path\": []\n            }\n        ]\n    }"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774827026",
+    "title": "Add premium monetization layers to product pack outputs [safe-prep]",
+    "reason": "Safe preparation extracted from: The strongest next move is to make generated product assets feel more sellable out of the box. product_engine.py already contains offer-stack and scoring concepts, so expanding the actual output with positioning, objections, CTA copy, checkout bullets, and launch angles will increase perceived value and monetization readiness without touching core runtime files.",
+    "steps": [
+      {
+        "action": "create_file",
+        "path": "backend/Engine/product_pack_enhancers.py",
+        "content": "from __future__ import annotations\n\nfrom typing import Dict, List\n\n\ndef _clean(text: str | None, fallback: str = \"\") -> str:\n    text = (text or \"\").strip()\n    return text if text else fallback\n\n\ndef build_positioning_block(topic: str, niche: str, buyer: str, promise: str) -> Dict:\n    topic_text = _clean(topic, \"digital product\")\n    niche_text = _clean(niche, \"online business\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return {\n        \"one_liner\": f\"A premium {topic_text} product designed for {buyer_text} who want to {promise_text} in the {niche_text} space.\",\n        \"positioning\": [\n            \"Sell implementation speed, not just information.\",\n            \"Frame the product as a shortcut to clarity, momentum, and cleaner execution.\",\n            \"Make the buyer feel like they are purchasing a system, not a document.\"\n        ],\n        \"best_fit_buyer\": buyer_text,\n        \"core_outcome\": promise_text,\n    }\n\n\ndef build_checkout_assets(topic: str, buyer: str, promise: str, bonus: str) -> Dict:\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"make faster progress with {topic_text}\")\n    bonus_text = _clean(bonus, \"Bonus Prompt Pack\")\n    return {\n        \"headline\": f\"Get the {topic_text.title()} execution system for {buyer_text}\",\n        \"subheadline\": f\"A cleaner path to {promise_text} without wasting time on scattered advice.\",\n        \"bullets\": [\n            \"Step-by-step execution path built for fast implementation\",\n            \"Templates and prompts that reduce thinking time\",\n            \"Clear action sequence for beginners who want momentum\",\n            f\"Includes {bonus_text} to increase speed and perceived value\"\n        ],\n        \"cta_buttons\": [\n            \"Get Instant Access\",\n            \"Download The Execution Pack\",\n            \"Start Building Faster\"\n        ]\n    }\n\n\ndef build_objection_handlers(topic: str, buyer: str) -> List[Dict]:\n    topic_text = _clean(topic, \"this system\")\n    buyer_text = _clean(buyer, \"beginners\")\n    return [\n        {\n            \"objection\": \"I am still a beginner.\",\n            \"answer\": f\"That is exactly why this was designed for {buyer_text}. The product should reduce confusion and give a simple first path.\"\n        },\n        {\n            \"objection\": \"I do not want more theory.\",\n            \"answer\": f\"Position {topic_text} as an action-first resource with templates, prompts, and concrete next steps instead of fluff.\"\n        },\n        {\n            \"objection\": \"I am not sure it will be worth it.\",\n            \"answer\": \"Anchor the value against time saved, mistakes avoided, and the cost of piecing everything together manually.\"\n        }\n    ]\n\n\ndef build_launch_angles(topic: str, promise: str) -> List[str]:\n    topic_text = _clean(topic, \"digital product\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return [\n        f\"The faster way to {promise_text}\",\n        f\"A beginner-friendly system for {topic_text}\",\n        f\"The execution pack that helps buyers move on {topic_text} without overwhelm\",\n        f\"A premium shortcut for people who want to {promise_text}\"\n    ]\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "from typing import Dict, List\n",
+        "replace": "from typing import Dict, List\n\nfrom Engine.product_pack_enhancers import (\n    build_checkout_assets,\n    build_launch_angles,\n    build_objection_handlers,\n    build_positioning_block,\n)\n"
+      }
+    ],
+    "status": "pending"
   }
 ]

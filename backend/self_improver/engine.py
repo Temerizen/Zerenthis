@@ -6,123 +6,11 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "backend" / "data" / "self_improver"
 BACKUPS = DATA / "backups"
 FILE = DATA / "proposals.json"
-EXECUTION_LOG = DATA / "autopilot_log.json"
 
 DATA.mkdir(parents=True, exist_ok=True)
 BACKUPS.mkdir(parents=True, exist_ok=True)
 
 PROTECTED = {".env",".git","node_modules","venv","backend/data"}
-ALLOWED_ACTIONS = {"create_file", "edit_file", "delete_file"}
-
-
-def _load_json_file(path, default):
-    if not path.exists():
-        return default
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return data if isinstance(data, type(default)) else default
-    except Exception:
-        return default
-
-
-def _save_json_file(path, data):
-    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
-
-
-def _load_execution_log():
-    return _load_json_file(EXECUTION_LOG, [])
-
-
-def _append_execution_log(entry):
-    items = _load_execution_log()
-    items.append(entry)
-    _save_json_file(EXECUTION_LOG, items)
-
-
-def summarize_steps(steps):
-    action_counts = {}
-    touched_paths = []
-    for step in steps:
-        action = step.get("action", "unknown")
-        action_counts[action] = action_counts.get(action, 0) + 1
-        path = step.get("path")
-        if isinstance(path, str) and path not in touched_paths:
-            touched_paths.append(path)
-    return {
-        "step_count": len(steps),
-        "action_counts": action_counts,
-        "touched_paths": touched_paths,
-    }
-
-
-def assess_proposal_risk(steps):
-    risk_score = 0
-    reasons = []
-    for step in steps:
-        action = step.get("action")
-        path = str(step.get("path", ""))
-        if action == "delete_file":
-            risk_score += 3
-            reasons.append("contains delete_file action")
-        if path.startswith("backend/app/main.py") or path.startswith("backend/self_improver/"):
-            risk_score += 2
-            reasons.append(f"touches sensitive path: {path}")
-        if any(blocked in path for blocked in PROTECTED):
-            risk_score += 5
-            reasons.append(f"touches protected path: {path}")
-    level = "low"
-    if risk_score >= 5:
-        level = "high"
-    elif risk_score >= 2:
-        level = "medium"
-    return {
-        "level": level,
-        "score": risk_score,
-        "reasons": sorted(set(reasons)),
-    }
-
-
-def _validate_steps(steps):
-    if not isinstance(steps, list) or not steps:
-        raise ValueError("steps must be a non-empty list")
-    for idx, step in enumerate(steps):
-        if not isinstance(step, dict):
-            raise ValueError(f"step {idx} must be an object")
-        action = step.get("action")
-        path = step.get("path")
-        if action not in ALLOWED_ACTIONS:
-            raise ValueError(f"step {idx} has invalid action")
-        if not isinstance(path, str) or not path.strip():
-            raise ValueError(f"step {idx} must include a valid path")
-        if any(blocked in path for blocked in PROTECTED):
-            raise ValueError(f"step {idx} touches a protected path")
-        if action == "create_file":
-            if "content" not in step or not isinstance(step.get("content"), str):
-                raise ValueError(f"step {idx} create_file requires string content")
-        elif action == "edit_file":
-            if not isinstance(step.get("find"), str) or not step.get("find"):
-                raise ValueError(f"step {idx} edit_file requires non-empty find")
-            if not isinstance(step.get("replace"), str):
-                raise ValueError(f"step {idx} edit_file requires string replace")
-        elif action == "delete_file":
-            pass
-    return True
-
-
-def validate_proposal_payload(title, reason, steps):
-    if not isinstance(title, str) or len(title.strip()) < 3:
-        raise ValueError("title must be at least 3 characters")
-    if not isinstance(reason, str) or len(reason.strip()) < 10:
-        raise ValueError("reason must be at least 10 characters")
-    _validate_steps(steps)
-    summary = summarize_steps(steps)
-    risk = assess_proposal_risk(steps)
-    fingerprint = f"{summary['step_count']}:{'|'.join(summary['touched_paths'])}"
-    return {
-        "summary": summary,
-        "risk": risk,
-        "fingerprint": fingerprint,
-    }
 
 def load():
     if not FILE.exists():
@@ -139,17 +27,12 @@ def new_id():
     return f"prop_{int(time.time())}_{uuid.uuid4().hex[:6]}"
 
 def propose(title, reason, steps):
-    validation = validate_proposal_payload(title, reason, steps)
     p = {
         "id": new_id(),
         "title": title,
         "reason": reason,
         "steps": steps,
-        "status": "pending",
-        "created_at": int(time.time()),
-        "summary": validation["summary"],
-        "risk": validation["risk"],
-        "fingerprint": validation["fingerprint"],
+        "status": "pending"
     }
     d = load()
     d.append(p)
@@ -161,23 +44,17 @@ def pending():
 
 def approve(pid):
     d = load()
-    found = False
     for x in d:
         if x["id"] == pid:
             x["status"] = "approved"
-            found = True
     save(d)
-    return found
 
 def reject(pid):
     d = load()
-    found = False
     for x in d:
         if x["id"] == pid:
             x["status"] = "rejected"
-            found = True
     save(d)
-    return found
 
 def backup(path):
     if not path.exists():
@@ -190,16 +67,12 @@ def execute(pid):
     d = load()
     p = next((x for x in d if x["id"] == pid), None)
 
-    if not p:
-        return {"ok": False, "error": "proposal not found"}
-    if p["status"] != "approved":
-        return {"ok": False, "error": "not approved"}
+    if not p or p["status"] != "approved":
+        return {"error": "not approved"}
 
     backups = []
-    started_at = int(time.time())
 
     try:
-        _validate_steps(p.get("steps", []))
         for s in p["steps"]:
             path = ROOT / s["path"]
 
@@ -208,50 +81,31 @@ def execute(pid):
 
             if s["action"] == "create_file":
                 path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text(s.get("content", ""), encoding="utf-8")
+                path.write_text(s.get("content",""))
 
             elif s["action"] == "edit_file":
                 b = backup(path)
                 if b:
-                    backups.append((path, b))
-                txt = path.read_text(encoding="utf-8")
+                    backups.append((path,b))
+                txt = path.read_text()
                 if s["find"] not in txt:
                     raise Exception(f"find text not found in {s['path']}")
                 txt = txt.replace(s["find"], s["replace"], 1)
-                path.write_text(txt, encoding="utf-8")
+                path.write_text(txt)
 
             elif s["action"] == "delete_file":
                 b = backup(path)
                 if b:
-                    backups.append((path, b))
+                    backups.append((path,b))
                 path.unlink()
 
         p["status"] = "applied"
-        p["applied_at"] = int(time.time())
         save(d)
-        _append_execution_log({
-            "proposal_id": pid,
-            "title": p.get("title"),
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "status": "applied",
-            "step_count": len(p.get("steps", [])),
-        })
         return {"ok": True}
 
     except Exception as e:
-        for orig, b in backups:
-            shutil.copy2(b, orig)
+        for orig,b in backups:
+            shutil.copy2(b,orig)
         p["status"] = "failed"
-        p["failed_at"] = int(time.time())
         save(d)
-        _append_execution_log({
-            "proposal_id": pid,
-            "title": p.get("title"),
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "status": "failed",
-            "error": str(e),
-            "step_count": len(p.get("steps", [])),
-        })
-        return {"ok": False, "error": str(e)}
+        return {"error": str(e)}

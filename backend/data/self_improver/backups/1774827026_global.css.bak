@@ -13,35 +13,7 @@
   box-sizing: border-box;
 }
 
-html, .premium-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.premium-preview-card {
-  border: 1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border-radius: 18px;
-  padding: 18px;
-}
-
-.premium-preview-card h3 {
-  margin: 0 0 8px;
-}
-
-.premium-preview-card p,
-.trust-list li {
-  color: #a7b0c5;
-}
-
-.trust-list {
-  margin-top: 18px;
-  padding-left: 18px;
-}
-
-body {
+html, body {
   margin: 0;
   padding: 0;
   background: radial-gradient(circle at top left, rgba(0,229,255,0.14), transparent 24%), var(--bg);

@@ -1254,5 +1254,29 @@
     "title": "Add product output metadata for quality scoring and sales follow-up",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826864_0359389b",
+    "title": "Expose funnel-ready pricing and lead capture guidance in catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826919_900180",
+    "title": "Add premium monetization layers to product pack outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826919_244524",
+    "title": "Upgrade frontend homepage with outcome-led product previews and trust cues",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826919_244524"
+    }
   }
 ]
