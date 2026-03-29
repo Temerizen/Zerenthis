@@ -145,22 +145,6 @@ def pending() -> list[dict[str, Any]]:
     return [x for x in load() if x.get("status") == "pending"]
 
 
-def _restore(backups: list[tuple[Path, Path]], created: list[Path]) -> None:
-    for path in reversed(created):
-        try:
-            if path.exists():
-                path.unlink()
-        except Exception:
-            pass
-
-    for path, backup_path in reversed(backups):
-        try:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(backup_path, path)
-        except Exception:
-            pass
-
-
 def execute(pid: str) -> dict[str, Any]:
     d = load()
     p = next((x for x in d if x["id"] == pid), None)
@@ -174,12 +158,10 @@ def execute(pid: str) -> dict[str, Any]:
 
     backups: list[tuple[Path, Path]] = []
     created: list[Path] = []
-    touched_paths: list[str] = []
 
     try:
         for s in p["steps"]:
             path = _normalize_path(s["path"])
-            touched_paths.append(s["path"])
 
             if s["action"] == "create_file":
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -224,27 +206,8 @@ def execute(pid: str) -> dict[str, Any]:
 
         p["status"] = "applied"
         p["applied_at"] = time.time()
-        p["result"] = {
-            "ok": True,
-            "changed_files": touched_paths,
-            "backup_count": len(backups),
-        }
         save(d)
-        return {
-            "ok": True,
-            "id": pid,
-            "status": "applied",
-            "changed_files": touched_paths,
-            "backup_count": len(backups),
-        }
-    except Exception as e:
-        _restore(backups, created)
-        p["status"] = "approved"
-        p["last_error"] = str(e)
-        p["last_error_at"] = time.time()
-        save(d)
-        return {"ok": False, "error": str(e), "id": pid}
-urn {"ok": True, "id": pid, "status": "applied"}
+        return {"ok": True, "id": pid, "status": "applied"}
 
     except Exception as e:
         for path in reversed(created):

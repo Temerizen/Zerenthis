@@ -1,7 +1,6 @@
 from pathlib import Path
 import uuid
 import re
-from typing import Dict
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -174,7 +173,7 @@ def _add_bullets(story, items, style):
     story.append(Spacer(1, 10))
 
 
-def build_product_pack(**kwargs) -> Dict:
+def build_product_pack(**kwargs):
     topic = _clean(kwargs.get("topic"), "AI System")
     promise = _clean(kwargs.get("promise"), "get results faster")
     buyer = _clean(kwargs.get("buyer"), "beginners")
@@ -182,12 +181,10 @@ def build_product_pack(**kwargs) -> Dict:
     tone = _clean(kwargs.get("tone"), "Premium")
     bonus = _clean(kwargs.get("bonus"), "prompts, templates, and checklists")
     notes = _clean(kwargs.get("notes"), "")
-    base_url = _clean(kwargs.get("base_url"), "")
 
     title = _premium_title(topic, promise)
     filename = f"{_safe_filename(topic)}_{uuid.uuid4().hex[:6]}.pdf"
     path = OUT_DIR / filename
-    primary_offer = _offer_ideas(topic, buyer, promise)[0]
 
     styles = getSampleStyleSheet()
 

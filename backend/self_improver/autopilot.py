@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
@@ -9,51 +10,31 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 from backend.self_improver.worker import run_ai_cycle
-from backend.self_improver.engine import pending, approve, execute
+from backend.self_improver.engine import pending, approve, execute, propose
+from backend.self_improver.risk_engine import score_proposal, LOW, MEDIUM, HIGH
+from backend.self_improver.decomposer import decompose_proposal
+from backend.self_improver.mitigation_planner import build_mitigation_notes
 
 ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = ROOT / "backend" / "data" / "self_improver"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+AUTOPILOT_LOG = DATA_DIR / "autopilot_log.json"
 
-SAFE_PATH_PREFIXES = [
-    "backend/self_improver/",
-    "backend/Engine/product_engine.py",
-    "backend/Engine/video_engine.py",
-    "index.html",
-]
+def _load_log() -> list[dict]:
+    if not AUTOPILOT_LOG.exists():
+        return []
+    try:
+        return json.loads(AUTOPILOT_LOG.read_text(encoding="utf-8"))
+    except Exception:
+        return []
 
-BLOCKED_TOKENS = {
-    ".env",
-    ".git",
-    "node_modules",
-    "venv",
-    "backend/data",
-    "auth",
-    "billing",
-    "payment",
-    "secret",
-    "deploy",
-    "railway",
-    "vercel",
-}
+def _save_log(items: list[dict]) -> None:
+    AUTOPILOT_LOG.write_text(json.dumps(items, indent=2), encoding="utf-8")
 
-def _path_is_safe(path: str) -> bool:
-    norm = path.replace("\\", "/").strip()
-    if any(token in norm.lower() for token in BLOCKED_TOKENS):
-        return False
-    return any(norm.startswith(prefix) or norm == prefix for prefix in SAFE_PATH_PREFIXES)
-
-def _proposal_is_safe(proposal: dict) -> tuple[bool, str]:
-    steps = proposal.get("steps", [])
-    if not isinstance(steps, list) or not steps:
-        return False, "no steps"
-
-    for step in steps:
-        action = step.get("action")
-        path = str(step.get("path", ""))
-        if action not in {"create_file", "edit_file", "delete_file"}:
-            return False, f"unsupported action: {action}"
-        if not _path_is_safe(path):
-            return False, f"unsafe path: {path}"
-    return True, "safe"
+def _log(event: dict) -> None:
+    items = _load_log()
+    items.append(event)
+    _save_log(items)
 
 def _git_commit_and_push() -> None:
     if os.getenv("AUTO_PUSH", "true").lower() not in {"1", "true", "yes", "on"}:
@@ -79,6 +60,10 @@ def _git_commit_and_push() -> None:
     except Exception as e:
         print("Git push error:", e)
 
+def _already_split_title(title: str) -> bool:
+    t = title.lower()
+    return "[safe-prep]" in t or "[approval-needed]" in t
+
 def process_pending() -> None:
     items = pending()
     if not items:
@@ -88,20 +73,104 @@ def process_pending() -> None:
     for proposal in items:
         pid = proposal.get("id")
         title = proposal.get("title", "(untitled)")
-        safe, reason = _proposal_is_safe(proposal)
 
-        if not safe:
-            print(f"Skipping risky proposal {pid}: {title} | {reason}")
+        if _already_split_title(title):
+            print(f"Leaving split proposal in queue: {pid} | {title}")
             continue
 
-        print(f"Auto-approving: {pid} | {title}")
-        approve(pid)
+        score = score_proposal(proposal)
+        risk = score["risk"]
 
-        result = execute(pid)
-        print("Execution result:", result)
+        if risk == LOW:
+            print(f"Auto-approving LOW risk: {pid} | {title}")
+            approve(pid)
+            result = execute(pid)
+            print("Execution result:", result)
+            _log({
+                "time": int(time.time()),
+                "id": pid,
+                "title": title,
+                "risk": risk,
+                "result": result,
+            })
+            if result.get("ok"):
+                _git_commit_and_push()
+            continue
 
-        if result.get("ok"):
-            _git_commit_and_push()
+        if risk == MEDIUM:
+            print(f"MEDIUM risk proposal detected: {pid} | {title}")
+            parts = decompose_proposal(proposal)
+
+            safe_part = parts.get("safe_proposal")
+            risky_part = parts.get("risky_remainder")
+
+            if safe_part and safe_part.get("steps"):
+                try:
+                    created = propose(safe_part["title"], safe_part["reason"], safe_part["steps"])
+                    print("Created safe-prep proposal:", created.get("id"))
+                except Exception as e:
+                    print("Safe-prep creation failed:", e)
+
+            if risky_part and risky_part.get("steps"):
+                notes = build_mitigation_notes(risky_part)
+                risky_reason = risky_part["reason"] + " | " + " ; ".join(notes["mitigation_notes"])
+                try:
+                    created = propose(risky_part["title"], risky_reason, risky_part["steps"])
+                    print("Created approval-needed proposal:", created.get("id"))
+                except Exception as e:
+                    print("Remainder creation failed:", e)
+
+            try:
+                from backend.self_improver.engine import reject
+                reject(pid)
+            except Exception:
+                pass
+
+            _log({
+                "time": int(time.time()),
+                "id": pid,
+                "title": title,
+                "risk": risk,
+                "result": "split_into_safe_and_risky",
+            })
+            continue
+
+        if risk == HIGH:
+            print(f"HIGH risk proposal detected: {pid} | {title}")
+            parts = decompose_proposal(proposal)
+
+            safe_part = parts.get("safe_proposal")
+            risky_part = parts.get("risky_remainder")
+
+            if safe_part and safe_part.get("steps"):
+                try:
+                    created = propose(safe_part["title"], safe_part["reason"], safe_part["steps"])
+                    print("Created safe-prep proposal:", created.get("id"))
+                except Exception as e:
+                    print("Safe-prep creation failed:", e)
+
+            if risky_part and risky_part.get("steps"):
+                notes = build_mitigation_notes(risky_part)
+                risky_reason = risky_part["reason"] + " | " + " ; ".join(notes["mitigation_notes"])
+                try:
+                    created = propose(risky_part["title"], risky_reason, risky_part["steps"])
+                    print("Created approval-needed proposal:", created.get("id"))
+                except Exception as e:
+                    print("Remainder creation failed:", e)
+
+            try:
+                from backend.self_improver.engine import reject
+                reject(pid)
+            except Exception:
+                pass
+
+            _log({
+                "time": int(time.time()),
+                "id": pid,
+                "title": title,
+                "risk": risk,
+                "result": "reduced_risk_and_queued_remainder",
+            })
 
 def run() -> None:
     interval = int(os.getenv("AUTOPILOT_INTERVAL_SECONDS", "120"))
