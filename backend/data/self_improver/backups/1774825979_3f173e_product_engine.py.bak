@@ -101,9 +101,6 @@ def _prompt_bank(topic, niche, buyer, promise):
         f'Create 5 short-form content ideas that promote a {topic} digital product.',
         f'Create 3 value-stack versions of a {topic} offer with pricing anchors and bonus ideas.',
         f'Write a short checkout page section that explains why this {topic} pack saves time for {buyer_text}.',
-        f'Create 5 testimonials-style outcome statements a buyer could realistically experience after using a {topic} pack.',
-        f'Write 3 refund-risk reducers for a {topic} product so the offer feels clearer and safer to buy.',
-        f'Generate 10 FAQ questions and answers for a {topic} digital offer aimed at {buyer_text}.',
     ]
 
 
@@ -112,22 +109,11 @@ def _launch_plan(topic):
         ["Day 1", f"Generate 3 product variations around {topic}."],
         ["Day 2", "Pick the strongest one and upload it to Gumroad."],
         ["Day 3", "Create 3 short-form promo posts or scripts."],
-        ["Day 4", "Improve the listing title, thumbnail, description, and first CTA."],
+        ["Day 4", "Improve the listing title, thumbnail, and description."],
         ["Day 5", "Create a second product using the same niche."],
         ["Day 6", "Bundle two products together for a higher-priced offer."],
-        ["Day 7", "Review clicks, saves, and buyer questions, then double down on the best-performing angle."],
+        ["Day 7", "Double down on the best-performing angle and repeat."],
     ]
-
-
-def _score_product_pack(topic, promise, bonus, notes):
-    checks = {
-        "has_specific_topic": bool(_clean(topic)),
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
 
 
 def _distribution_ideas(topic):

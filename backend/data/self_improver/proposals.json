@@ -8061,8 +8061,11 @@
         "replace": "        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n            \"quality\": item.get(\"quality\") or score_proposal_quality(item.get(\"title\", \"\"), item.get(\"reason\", \"\"), steps),\n        })\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825952.6046283
+    "status": "failed",
+    "created_at": 1774825952.6046283,
+    "approved_at": 1774825979.1697774,
+    "failed_at": 1774825979.281795,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774825952_1c05e95b",
@@ -8097,8 +8100,10 @@
         "replace": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825952.6614387
+    "status": "applied",
+    "created_at": 1774825952.6614387,
+    "approved_at": 1774825979.365771,
+    "applied_at": 1774825979.4674568
   },
   {
     "id": "prop_1774825975_58cf5f0d",
