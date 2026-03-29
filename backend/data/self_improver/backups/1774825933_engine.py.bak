@@ -116,13 +116,7 @@ def _validate_steps(steps):
 
 
 def propose(title, reason, steps):
-    if not isinstance(title, str) or not title.strip():
-        raise ValueError("title is required")
-    if not isinstance(reason, str) or len(reason.strip()) < 10:
-        raise ValueError("reason must be at least 10 characters")
     _validate_steps(steps)
-    title = title.strip()
-    reason = reason.strip()
     d = load()
     fingerprint = _fingerprint(title, steps)
 

@@ -948,5 +948,29 @@
       "ok": true,
       "id": "prop_1774825879_a3745a89"
     }
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825879_ac419c07",
+    "title": "Expose monetization-ready metrics and product catalog on the API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825879_b09f2886",
+    "title": "Raise generated product quality with built-in QA scoring",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825931",
+    "title": "Add safer self-improver step validation and edit targeting",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825931"
+    }
   }
 ]
