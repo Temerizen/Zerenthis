@@ -458,5 +458,47 @@
       "ok": true,
       "id": "prop_1774824468_2a618e43"
     }
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824522_b9ff099c",
+    "title": "Finish file serving and add download metadata for cleaner user flow and monetization delivery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824522_0dd4b413",
+    "title": "Add request validation and package metadata endpoints to improve frontend reliability and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824557_b4057504",
+    "title": "Add API response models and job polling metadata for better frontend flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824557_2f60cba3",
+    "title": "Improve product output with stronger monetization sections in YouTube packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824627",
+    "title": "Complete file serving and add download-safe metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824627",
+    "title": "Upgrade product output with monetization-focused offer summary",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

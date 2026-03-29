@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps
+from backend.self_improver.engine import approve, execute, pending, propose, reject
 
 router = APIRouter(prefix="/self", tags=["Self Improver"])
 
@@ -16,10 +16,6 @@ class ProposalRequest(BaseModel):
 
 @router.post("/propose")
 def propose_route(data: ProposalRequest):
-    try:
-        _validate_steps(data.steps)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
     return propose(data.title, data.reason, data.steps)
 
 

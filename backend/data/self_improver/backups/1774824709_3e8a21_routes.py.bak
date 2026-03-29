@@ -16,10 +16,6 @@ class ProposalRequest(BaseModel):
 
 @router.post("/propose")
 def propose_route(data: ProposalRequest):
-    try:
-        _validate_steps(data.steps)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
     return propose(data.title, data.reason, data.steps)
 
 
