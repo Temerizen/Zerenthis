@@ -694,5 +694,19 @@
       "ok": true,
       "id": "prop_1774825121"
     }
+  },
+  {
+    "time": 1774825126,
+    "id": "prop_1774825121",
+    "title": "Add atomic lead logging and monetization visibility endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825126,
+    "id": "prop_1774825121",
+    "title": "Strengthen product-pack output with clearer monetization assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

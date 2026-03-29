@@ -142,49 +142,11 @@ def root():
 
 @app.get("/health")
 def health():
-    lead_count = 0
-    if LEADS_FILE.exists():
-        try:
-            lead_items = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
-            if isinstance(lead_items, list):
-                lead_count = len(lead_items)
-        except Exception:
-            lead_count = 0
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
         "output_dir": str(OUTPUT_DIR),
         "output_count": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),
-        "lead_count": lead_count,
-    }
-
-
-@app.get("/api/metrics")
-def metrics():
-    leads = []
-    if LEADS_FILE.exists():
-        try:
-            loaded = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
-            if isinstance(loaded, list):
-                leads = loaded
-        except Exception:
-            leads = []
-
-    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
-    by_source = {}
-    consented = 0
-    for item in leads:
-        source = item.get("source", "unknown")
-        by_source[source] = by_source.get(source, 0) + 1
-        if item.get("marketing_consent"):
-            consented += 1
-
-    return {
-        "ok": True,
-        "total_leads": len(leads),
-        "marketing_consented_leads": consented,
-        "leads_by_source": by_source,
-        "total_outputs": len(outputs),
     }
 
 

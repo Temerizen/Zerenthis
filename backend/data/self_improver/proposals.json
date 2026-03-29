@@ -6370,7 +6370,7 @@
         "replace": "    except Exception as e:\n        for orig, b in backups:\n            shutil.copy2(b, orig)\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = int(time.time())\n        p[\"error\"] = str(e)\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"error\": str(e),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"error\": str(e)}"
       }
     ],
-    "status": "applied"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825121",
@@ -6390,7 +6390,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }"
       }
     ],
-    "status": "approved"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825121",
@@ -6404,7 +6404,7 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _checkout_assets(topic, buyer, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Bonus prompt pack\")\n    return {\n        \"headline\": f\"A faster way for {buyer_text.lower()} to {promise_text}\",\n        \"subheadline\": f\"Use the {topic_tc} pack to skip blank-page syndrome and move with a clearer execution system.\",\n        \"bullets\": [\n            \"Clear offer idea and positioning\",\n            \"Templates and prompts to reduce thinking time\",\n            \"Launch steps that are realistic for a beginner\",\n            f\"Fast-action bonus: {bonus_text}\",\n        ],\n        \"objections\": [\n            \"I am starting from zero\",\n            \"I do not know what to sell first\",\n            \"I need something practical, not generic motivation\",\n        ],\n        \"upsell\": f\"Offer a premium {topic_tc} bundle with extra templates, examples, and a swipe file.\",\n    }\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):"
       }
     ],
-    "status": "approved"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825121",
@@ -6424,7 +6424,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"cors_allow_origins\": ALLOWED_ORIGINS,\n        \"public_base_url\": get_base_url(),\n    }\n\n\n@app.post(\"/api/preview-request\")\ndef preview_request(payload: GenerateRequest):\n    return {\n        \"ok\": True,\n        \"summary\": summarize_request(payload),\n        \"recommended_endpoints\": {\n            \"product_pack\": f\"{get_base_url()}/api/product-pack\",\n            \"shorts_pack\": f\"{get_base_url()}/api/shorts-pack\",\n            \"youtube_pack\": f\"{get_base_url()}/api/youtube-pack\",\n        },\n    }\n"
       }
     ],
-    "status": "approved"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825121",
@@ -6456,7 +6456,7 @@
         "replace": "@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    data = get_job(job_id)\n    if data.get(\"status\") == \"not_found\":\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return _normalize_job_payload(data)\n"
       }
     ],
-    "status": "approved"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825123",
@@ -6531,5 +6531,162 @@
       }
     ],
     "status": "pending"
+  },
+  {
+    "id": "prop_1774825126",
+    "title": "Add atomic lead logging and monetization visibility endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: Lead capture is core to monetization readiness, but the current intake log writes directly to one JSON file without atomic protection and has no simple analytics endpoint. Making writes safer and exposing lead/output counts improves reliability, supports growth tracking, and gives operators immediate monetization visibility without large architectural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }"
+      }
+    ],
+    "status": "applied",
+    "approved_at": 1774825194.9308941,
+    "applied_at": 1774825194.9700496
+  },
+  {
+    "id": "prop_1774825126",
+    "title": "Strengthen product-pack output with clearer monetization assets [safe-prep]",
+    "reason": "Safe preparation extracted from: The product engine already generates useful assets, but monetization readiness improves when offers include stronger conversion components like positioning, upsells, objections, and checkout copy. Enhancing the generated pack directly improves product output quality and makes Zerenthis outputs easier to sell immediately.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):",
+        "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _checkout_assets(topic, buyer, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Bonus prompt pack\")\n    return {\n        \"headline\": f\"A faster way for {buyer_text.lower()} to {promise_text}\",\n        \"subheadline\": f\"Use the {topic_tc} pack to skip blank-page syndrome and move with a clearer execution system.\",\n        \"bullets\": [\n            \"Clear offer idea and positioning\",\n            \"Templates and prompts to reduce thinking time\",\n            \"Launch steps that are realistic for a beginner\",\n            f\"Fast-action bonus: {bonus_text}\",\n        ],\n        \"objections\": [\n            \"I am starting from zero\",\n            \"I do not know what to sell first\",\n            \"I need something practical, not generic motivation\",\n        ],\n        \"upsell\": f\"Offer a premium {topic_tc} bundle with extra templates, examples, and a swipe file.\",\n    }\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825194.9308941
+  },
+  {
+    "id": "prop_1774825178_a473d6ee",
+    "title": "Complete and harden API routes with job polling and monetization endpoints",
+    "reason": "The main API file is visibly truncated, which risks broken startup or incomplete user flows. Finishing the generation routes, adding a reliable job status endpoint, file download endpoint, and a simple lead export endpoint directly improves reliability, user flow, and monetization readiness without introducing new architectural complexity.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    log_lead(\"youtube-pa",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"youtube\",\n        payload.model_dump(),\n        build_youtube_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    log_lead(\"youtube-pack\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/product-batch\")\ndef product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"product-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/shorts-batch\")\ndef shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"shorts-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return job\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_file(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=quote(path.name))\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    files = []\n    for path in sorted(OUTPUT_DIR.glob(\"*\"), key=lambda p: p.stat().st_mtime, reverse=True):\n        if path.is_file():\n            files.append({\n                \"name\": path.name,\n                \"size\": path.stat().st_size,\n                \"download_url\": f\"{get_base_url()}/api/download/{quote(path.name)}\",\n            })\n    return {\"items\": files}\n\n\n@app.get(\"/api/leads\")\ndef list_leads():\n    if not LEADS_FILE.exists():\n        return {\"items\": [], \"count\": 0}\n    try:\n        items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(items, list):\n            items = []\n    except Exception:\n        items = []\n    return {\"items\": items, \"count\": len(items)}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825178.2867584
+  },
+  {
+    "id": "prop_1774825178_65e72471",
+    "title": "Make self-improver execution atomic with rollback and UTF-8-safe file IO",
+    "reason": "The self-improver is one of the highest-risk parts of the system. Right now execution is incomplete in the exception path and uses default file encoding. Completing rollback, marking failed proposals clearly, and using explicit UTF-8 reads/writes will substantially improve self-improver quality and overall reliability.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def load():\n    if not FILE.exists():\n        return []\n    return json.loads(FILE.read_text())\n\n\ndef save(d):\n    FILE.write_text(json.dumps(d, indent=2))\n",
+        "replace": "def load():\n    if not FILE.exists():\n        return []\n    return json.loads(FILE.read_text(encoding=\"utf-8\"))\n\n\ndef save(d):\n    FILE.write_text(json.dumps(d, indent=2), encoding=\"utf-8\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def _load_execution_log():\n    if not EXECUTION_LOG.exists():\n        return []\n    return json.loads(EXECUTION_LOG.read_text())\n\n\ndef _save_execution_log(items):\n    EXECUTION_LOG.write_text(json.dumps(items, indent=2))\n",
+        "replace": "def _load_execution_log():\n    if not EXECUTION_LOG.exists():\n        return []\n    return json.loads(EXECUTION_LOG.read_text(encoding=\"utf-8\"))\n\n\ndef _save_execution_log(items):\n    EXECUTION_LOG.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"))\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text()\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt)\n",
+        "replace": "            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text(encoding=\"utf-8\")\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt, encoding=\"utf-8\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "    except Exception as e:\n        for\n",
+        "replace": "    except Exception as e:\n        for path, backup_path in reversed(backups):\n            if backup_path.exists():\n                shutil.copy2(backup_path, path)\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = int(time.time())\n        p[\"error\"] = str(e)\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"error\": str(e),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"error\": str(e)}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825178.3038666
+  },
+  {
+    "id": "prop_1774825178_b545d616",
+    "title": "Expose self-improver history and health signals for safer iteration",
+    "reason": "The self-improver currently exposes only pending proposals and execution actions. Adding read-only history and a compact stats endpoint makes it much easier to monitor proposal quality, spot failure loops, and operate the product safely, which improves self-improver quality and reliability with minimal code change.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/pending\")\ndef pending_route():\n    return pending()\n",
+        "replace": "@router.get(\"/pending\")\ndef pending_route():\n    return pending()\n\n\n@router.get(\"/history\")\ndef history_route():\n    items = load()\n    return sorted(items, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n\n\n@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825178.37332
+  },
+  {
+    "id": "prop_1774825194_2916da44",
+    "title": "Make self-improver execution transactional and observable",
+    "reason": "The self-improver is currently fragile: engine.py has a duplicated pending() function, an incomplete exception block, and no rollback metadata in API responses. Hardening execution directly improves self-improver quality, repo safety, and reliability while making failures easier to inspect and recover from.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def pending():\n    return [x for x in load() if x.get(\"status\") == \"pending\"]\n\n\ndef backup(path):\n    if not path.exists():\n        return None\n    b = BACKUPS / f\"{int(time.time())}_{uuid.uuid4().hex[:6]}_{path.name}.bak\"\n    shutil.copy2(path, b)\n    return b\n\n\ndef execute(pid):\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p[\"steps\"])\n    backups = []\n    execution_log = _load_execution_log()\n    started_at = int(time.time())\n\n    try:\n        for s in p[\"steps\"]:\n            path = ROOT / s[\"path\"]\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"))\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text()\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt)\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = int(time.time())\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"applied\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": True, \"id\": pid}\n\n    except Exception as e:\n        for\n",
+        "replace": "def backup(path):\n    if not path.exists():\n        return None\n    b = BACKUPS / f\"{int(time.time())}_{uuid.uuid4().hex[:6]}_{path.name}.bak\"\n    shutil.copy2(path, b)\n    return b\n\n\ndef execute(pid):\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p[\"steps\"])\n    backups = []\n    created_files = []\n    execution_log = _load_execution_log()\n    started_at = int(time.time())\n\n    try:\n        for s in p[\"steps\"]:\n            path = ROOT / s[\"path\"]\n\n            if s[\"action\"] == \"create_file\":\n                if path.exists():\n                    raise Exception(f\"file already exists: {s['path']}\")\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n                created_files.append(path)\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text(encoding=\"utf-8\")\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        finished_at = int(time.time())\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = finished_at\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"applied\",\n            \"started_at\": started_at,\n            \"finished_at\": finished_at,\n            \"steps\": p.get(\"steps\", []),\n            \"backups\": [{\"path\": str(path), \"backup\": str(backup_path)} for path, backup_path in backups],\n            \"created_files\": [str(path) for path in created_files]\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": True, \"id\": pid, \"status\": \"applied\"}\n\n    except Exception as e:\n        for path in created_files:\n            try:\n                if path.exists():\n                    path.unlink()\n            except Exception:\n                pass\n\n        for path, backup_path in reversed(backups):\n            try:\n                shutil.copy2(backup_path, path)\n            except Exception:\n                pass\n\n        p[\"status\"] = \"approved\"\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", []),\n            \"error\": str(e)\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"id\": pid, \"error\": str(e)}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825194.7861516
+  },
+  {
+    "id": "prop_1774825194_03b00418",
+    "title": "Add lead-ready intake metadata and cleaner health visibility",
+    "reason": "Zerenthis already captures leads, but the API does not expose monetization readiness or intake stats. Adding lightweight metadata to health and lead logging improves operational visibility, conversion readiness, and trust without changing the product flow or requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"captured_at\": int(__import__(\"time\").time()),\n        \"lead_quality\": \"high\" if payload.customer_email and payload.marketing_consent else \"medium\" if payload.customer_email or payload.customer_name else \"low\",\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            leads = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(leads, list):\n                leads = []\n        except Exception:\n            leads = []\n\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"leads_count\": len(leads),\n        \"monetization_ready\": True,\n        \"capture_enabled\": LEADS_DIR.exists(),\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825194.8554611
+  },
+  {
+    "id": "prop_1774825194_ac4391ef",
+    "title": "Raise product output quality with stronger validation-driven content scoring",
+    "reason": "The product engine already computes quality, but stronger scoring criteria can steer better outputs and make premium packs feel more deliberate. Improving these checks increases output quality, supports monetization, and gives the system a more objective standard for self-improver iterations.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_buyer\": bool(_clean(buyer)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_buyer\": bool(buyer_text),\n        \"has_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"topic_is_specific\": len(topic_text) >= 8,\n        \"buyer_is_specific\": len(buyer_text) >= 12,\n        \"promise_is_specific\": len(promise_text) >= 12,\n        \"premium_positioning_ready\": bool(topic_text and buyer_text and promise_text),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825194.8811765
   }
 ]
