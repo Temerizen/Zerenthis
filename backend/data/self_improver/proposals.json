@@ -7560,7 +7560,7 @@
         "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return [\n        f\"Primary buyer: {buyer_text}\",\n        f\"Core promise: {promise_text}\",\n        \"Entry offer: use a low-friction starter price to maximize first purchases.\",\n        \"Upsell path: offer a premium blueprint, bundle, or prompt vault immediately after checkout.\",\n        \"Retention angle: collect emails with a bonus and follow up with adjacent packs in the same niche.\",\n        f\"Fast positioning: sell this as a shortcut to help {buyer_text.lower()} get results faster with {topic_text}.\",\n    ]\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_specific_buyer\": len(_clean(buyer)) >= 10,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825703.1796985
   },
   {
@@ -7575,7 +7575,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"lead_count\": len(leads),\n        \"output_count\": len(outputs),\n        \"conversion_rate\": conversion_rate,\n        \"consent_rate\": consent_rate,\n        \"contact_rate\": contact_rate,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    if not LEADS_FILE.exists():\n        return {\"ok\": True, \"count\": 0, \"items\": []}\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(loaded, list):\n            loaded = []\n    except Exception:\n        loaded = []\n    return {\"ok\": True, \"count\": len(loaded), \"items\": loaded}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825759.411947
   },
   {
@@ -7596,7 +7596,7 @@
         "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"offer_ready\": quality[\"score\"] >= 60,\n        \"monetization\": {\n            \"recommended_primary_offer\": \"execution pack\",\n            \"recommended_upsell\": bonus or \"prompt pack\",\n            \"cta_count\": script.count(\"- \"),\n        },\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825759.4322233
   },
   {
@@ -7611,7 +7611,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    recent_leads = list(reversed(leads[-10:]))\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"by_source\": by_source,\n        \"consented\": consented,\n        \"contactable\": contactable,\n        \"named\": named,\n        \"recent_leads\": recent_leads,\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    total = len(items)\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n\n    return {\n        \"ok\": True,\n        \"total\": total,\n        \"consented\": consented,\n        \"with_email\": with_email,\n        \"items\": list(reversed(items[-50:])),\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825768",
@@ -7660,5 +7660,108 @@
       }
     ],
     "status": "pending"
+  },
+  {
+    "id": "prop_1774825770",
+    "title": "Upgrade product packs with built-in quality scoring and monetization sections [safe-prep]",
+    "reason": "Safe preparation extracted from: The product engine already generates assets, but adding explicit quality checks and sales-focused sections improves output consistency, perceived value, and monetization readiness. This makes generated products easier to sell and easier to evaluate programmatically.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n",
+        "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return [\n        f\"Primary buyer: {buyer_text}\",\n        f\"Core promise: {promise_text}\",\n        \"Entry offer: use a low-friction starter price to maximize first purchases.\",\n        \"Upsell path: offer a premium blueprint, bundle, or prompt vault immediately after checkout.\",\n        \"Retention angle: collect emails with a bonus and follow up with adjacent packs in the same niche.\",\n        f\"Fast positioning: sell this as a shortcut to help {buyer_text.lower()} get results faster with {topic_text}.\",\n    ]\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_specific_buyer\": len(_clean(buyer)) >= 10,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "applied",
+    "approved_at": 1774825809.323089,
+    "applied_at": 1774825809.3517134
+  },
+  {
+    "id": "prop_1774825770",
+    "title": "Complete API responses with quality scoring and monetization metrics [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API file appears truncated at the /api/metrics route, which risks runtime failure and weakens product readiness. Completing metrics and adding a lead-export endpoint improves reliability, gives immediate business visibility, and makes Zerenthis more monetization-ready without large structural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"lead_count\": len(leads),\n        \"output_count\": len(outputs),\n        \"conversion_rate\": conversion_rate,\n        \"consent_rate\": consent_rate,\n        \"contact_rate\": contact_rate,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    if not LEADS_FILE.exists():\n        return {\"ok\": True, \"count\": 0, \"items\": []}\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(loaded, list):\n            loaded = []\n    except Exception:\n        loaded = []\n    return {\"ok\": True, \"count\": len(loaded), \"items\": loaded}\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825809.323089
+  },
+  {
+    "id": "prop_1774825770",
+    "title": "Add product quality metadata to generated YouTube packs [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already computes quality checks for YouTube packs, but the output is basic. Exposing a clearer quality summary and monetization signals improves product output quality, helps future self-improver evaluation loops, and creates a cleaner user-facing artifact for premium offers.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n",
+        "replace": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    if score >= 85:\n        verdict = \"strong\"\n    elif score >= 60:\n        verdict = \"usable\"\n    else:\n        verdict = \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"offer_ready\": quality[\"score\"] >= 60,\n        \"monetization\": {\n            \"recommended_primary_offer\": \"execution pack\",\n            \"recommended_upsell\": bonus or \"prompt pack\",\n            \"cta_count\": script.count(\"- \"),\n        },\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825809.323089
+  },
+  {
+    "id": "prop_1774825770",
+    "title": "Complete metrics and add monetization-ready lead analytics API [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API file appears to have a truncated /api/metrics implementation, which risks runtime failure and blocks visibility into lead capture performance. Completing this route improves reliability, gives the product measurable conversion signals, and makes Zerenthis more monetization-ready by exposing consented/contactable lead stats and recent lead activity.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    recent_leads = list(reversed(leads[-10:]))\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"by_source\": by_source,\n        \"consented\": consented,\n        \"contactable\": contactable,\n        \"named\": named,\n        \"recent_leads\": recent_leads,\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    total = len(items)\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n\n    return {\n        \"ok\": True,\n        \"total\": total,\n        \"consented\": consented,\n        \"with_email\": with_email,\n        \"items\": list(reversed(items[-50:])),\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825809.323089
+  },
+  {
+    "id": "prop_1774825809_f038c80c",
+    "title": "Complete metrics and add monetization-ready intake analytics endpoints",
+    "reason": "The main API currently appears truncated around the metrics route, which risks runtime failures and leaves monetization visibility incomplete. Finishing metrics plus adding a leads export endpoint improves reliability, product observability, and sales-readiness without changing the overall architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"consent_rate\": consent_rate,\n        \"contactable_leads\": contactable,\n        \"contact_rate\": contact_rate,\n        \"named_leads\": named,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/leads\")\ndef list_leads():\n    if not LEADS_FILE.exists():\n        return {\"ok\": True, \"count\": 0, \"items\": []}\n\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(loaded, list):\n            loaded = []\n    except Exception:\n        loaded = []\n\n    return {\n        \"ok\": True,\n        \"count\": len(loaded),\n        \"items\": list(reversed(loaded[-250:])),\n    }\n\n\n@app.get(\"/api/leads/export\")\ndef export_leads():\n    if not LEADS_FILE.exists():\n        raise HTTPException(status_code=404, detail=\"No leads available\")\n    return FileResponse(\n        LEADS_FILE,\n        media_type=\"application/json\",\n        filename=quote(\"zerenthis_leads.json\"),\n    )\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825809.2500343
+  },
+  {
+    "id": "prop_1774825809_915fcc3c",
+    "title": "Add product output quality scoring to generated offers",
+    "reason": "Zerenthis is monetization-focused, but the product engine currently generates content without any visible quality gate. Adding a lightweight score and checklist improves output quality, gives users confidence, and creates a foundation for premium tiers or internal QA.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "from pathlib import Path\nimport uuid\nimport re\nfrom typing import Dict\n",
+        "replace": "from pathlib import Path\nimport uuid\nimport re\nfrom typing import Dict\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n ",
+        "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return {\n        \"audience\": buyer_text,\n        \"core_offer\": f\"A premium {topic_text} execution pack\",\n        \"promise\": promise_text,\n        \"entry_price_range\": \"$9\u2013$29\",\n        \"upsell_path\": \"Bundle templates, prompts, and bonus assets into a higher-value offer\",\n        \"positioning\": f\"Help {buyer_text.lower()} achieve a faster win with less confusion\",\n    }\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": len(_clean(topic)) >= 4,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825809.2688985
   }
 ]

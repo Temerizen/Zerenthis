@@ -896,5 +896,33 @@
       "ok": true,
       "id": "prop_1774825703_d1db7ce9"
     }
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825703_23f3223e",
+    "title": "Upgrade product packs with built-in quality scoring and monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825759_0c411670",
+    "title": "Complete API responses with quality scoring and monetization metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825759_1592989f",
+    "title": "Add product quality metadata to generated YouTube packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825767",
+    "title": "Complete metrics and add monetization-ready lead analytics API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

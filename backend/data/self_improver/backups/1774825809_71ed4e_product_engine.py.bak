@@ -132,26 +132,6 @@ def _monetization_summary(topic, buyer, promise):
     topic_text = _clean(topic, "digital product")
     buyer_text = _clean(buyer, "beginners")
     promise_text = _clean(promise, f"get results with {topic_text}")
-    return [
-        f"Primary buyer: {buyer_text}",
-        f"Core promise: {promise_text}",
-        "Entry offer: use a low-friction starter price to maximize first purchases.",
-        "Upsell path: offer a premium blueprint, bundle, or prompt vault immediately after checkout.",
-        "Retention angle: collect emails with a bonus and follow up with adjacent packs in the same niche.",
-        f"Fast positioning: sell this as a shortcut to help {buyer_text.lower()} get results faster with {topic_text}.",
-    ]
-
-
-def _quality_score(topic, buyer, promise, bonus, notes):
-    checks = {
-        "has_topic": bool(_clean(topic)),
-        "has_specific_buyer": len(_clean(buyer)) >= 10,
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
  
 
 def _score_product_pack(topic, buyer, promise, bonus, notes):
