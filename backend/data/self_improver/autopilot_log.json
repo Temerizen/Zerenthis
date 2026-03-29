@@ -256,5 +256,47 @@
       "ok": true,
       "id": "prop_1774823847_fdeb08dd"
     }
+  },
+  {
+    "time": 1774823962,
+    "id": "prop_1774823847_c2fa8de7",
+    "title": "Add API metadata, environment-based base URL, and monetization-ready gallery fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823847_2bd46863",
+    "title": "Improve product pack quality with clearer sales copy and built-in monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823907_0760bcc9",
+    "title": "Add API validation, monetization metadata, and safer CORS configuration",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823907_d47b76c0",
+    "title": "Repair truncated product engine sales copy to restore output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823957",
+    "title": "Add API metadata, request IDs, and monetization-ready intake fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823957",
+    "title": "Make YouTube pack output more sellable with embedded offer and CTA guidance",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

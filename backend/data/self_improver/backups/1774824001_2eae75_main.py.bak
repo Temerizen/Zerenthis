@@ -30,8 +30,6 @@ OUTPUT_DIR = BACKEND_DIR / "data" / "outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ✅ Initialize app PROPERLY
-ALLOWED_ORIGINS = [o.strip() for o in os.getenv("CORS_ALLOW_ORIGINS", "*").split(",") if o.strip()]
-
 app = FastAPI(title="Zerenthis Automation Core")
 
 # ✅ Register self-improver routes

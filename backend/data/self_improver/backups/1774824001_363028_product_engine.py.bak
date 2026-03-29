@@ -29,7 +29,7 @@ def _title_case(text):
 
 
 def _premium_title(topic, promise):
-    topic_tc = _title_case(_clean(topic, "Digital Product"))
+    topic_tc = _title_case(topic)
     promise = _clean(promise)
     if promise:
         return f"{topic_tc} Execution Pack for {promise}"
@@ -37,10 +37,9 @@ def _premium_title(topic, promise):
 
 
 def _offer_ideas(topic, buyer, promise):
-    topic = _clean(topic, "digital product")
     topic_tc = _title_case(topic)
-    buyer_text = _clean(buyer, "Beginners")
-    promise_text = _clean(promise, f"get better results with {topic}")
+    buyer_text = (buyer or "Beginners").strip()
+    promise_text = promise or f"get better results with {topic}"
     return [
         {
             "name": f"{topic_tc} Starter Kit",
@@ -76,10 +75,8 @@ def _offer_ideas(topic, buyer, promise):
 
 
 def _prompt_bank(topic, niche, buyer, promise):
-    topic = _clean(topic, "digital products")
-    niche = _clean(niche, "online business")
-    buyer_text = _clean(buyer, "beginners").lower()
-    promise_text = _clean(promise, f"make progress with {topic}")
+    buyer_text = (buyer or "beginners").lower()
+    promise_text = promise or f"make progress with {topic}"
     return [
         f'Create a premium digital product about {topic} for {buyer_text} in the {niche} niche.',
         f'Write 10 high-converting Gumroad product titles for {topic}.',
@@ -116,8 +113,8 @@ def _distribution_ideas(topic):
 
 
 def _value_stack(topic, bonus):
-    topic_tc = _title_case(_clean(topic, "Digital Product"))
-    bonus_text = _clean(bonus, "Bonus prompt and checklist pack")
+    topic_tc = _title_case(topic)
+    bonus_text = bonus or "Bonus prompt and checklist pack"
     return [
         [f"{topic_tc} core guide", "$19 value"],
         [f"{topic_tc} prompt pack", "$9 value"],
