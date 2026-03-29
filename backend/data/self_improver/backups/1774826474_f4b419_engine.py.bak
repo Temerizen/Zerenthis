@@ -121,15 +121,10 @@ def validate_proposal_payload(title, reason, steps):
     if any(phrase == lowered_title for phrase in blocked_title_phrases):
         raise ValueError("title is too low-signal")
 
-    reason_lower = reason.strip().lower()
-    blocked_reason_phrases = ["because it is better", "general improvement", "misc changes", "random cleanup"]
-    if any(phrase in reason_lower for phrase in blocked_reason_phrases):
-        raise ValueError("reason must be specific and high-signal")
-
     _validate_steps(steps)
 
     summary = summarize_steps(steps)
-    touched = [p.strip() for p in summary["touched_paths"]]
+    touched = summary["touched_paths"]
     if len(touched) != len(set(touched)):
         raise ValueError("proposal contains duplicate target paths")
 
@@ -185,26 +180,6 @@ def _validate_steps(steps):
 
         if action == "delete_file" and suffix == ".json":
             raise ValueError(f"step {i} cannot delete json data files")
-
-        if action == "edit_file":
-            find = step.get("find")
-            replace = step.get("replace")
-            if not isinstance(find, str) or not find:
-                raise ValueError(f"step {i} edit_file requires non-empty find text")
-            if not isinstance(replace, str):
-                raise ValueError(f"step {i} edit_file requires replace text")
-            if find == replace:
-                raise ValueError(f"step {i} edit_file find and replace cannot match")
-
-        if action == "create_file":
-            content = step.get("content")
-            if not isinstance(content, str) or not content.strip():
-                raise ValueError(f"step {i} create_file requires non-empty content")
-
-        if action == "delete_file":
-            extra_keys = {"find", "replace", "content"}.intersection(step.keys())
-            if extra_keys:
-                raise ValueError(f"step {i} delete_file cannot include content mutation fields")
 
         if action == "edit_file":
             find_text = step.get("find")
