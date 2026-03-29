@@ -1,159 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Zerenthis — Cash Engine</title>
+  <title>Zerenthis — Content Engine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
-      background: radial-gradient(circle at top, #0a0f1f, #05070d);
+      background: #05070d;
       color: white;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 800px;
+      font-family: Arial;
+      max-width: 900px;
       margin: auto;
+      padding: 20px;
     }
 
     h1 {
+      text-align: center;
       color: #00e5ff;
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 10px;
     }
 
-    .subtitle {
-      text-align: center;
-      opacity: 0.7;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: #0e1325;
-      padding: 20px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 20px rgba(0,229,255,0.05);
-    }
-
-    input, textarea {
+    input {
       width: 100%;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 15px;
+      border-radius: 10px;
       border: none;
+      margin-bottom: 15px;
       background: #111;
       color: white;
-      font-size: 15px;
-      margin-bottom: 12px;
     }
 
     button {
       width: 100%;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 15px;
+      border-radius: 10px;
       border: none;
       background: #00e5ff;
-      color: black;
       font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
-    }
-
-    .output {
-      white-space: pre-wrap;
-      margin-top: 15px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .cta a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 14px 20px;
-      border-radius: 12px;
-      background: #00e5ff;
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .steps {
-      font-size: 14px;
-      opacity: 0.8;
-      line-height: 1.6;
+    textarea {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      background: #111;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Zerenthis</h1>
-  <div class="subtitle">Turn ideas into sellable products in minutes</div>
+<h1>Zerenthis Content Engine</h1>
 
-  <div class="card">
-    <h3>Generate a Product</h3>
+<input id="topic" placeholder="Enter product topic (ex: AI money system, fitness plan, dating guide)" />
 
-    <input id="idea" placeholder="Example: AI side hustle system" />
-    <button onclick="generate()">Generate Product</button>
+<button onclick="generate()">Generate Premium Product</button>
 
-    <div id="output" class="output"></div>
-  </div>
-
-  <div class="card">
-    <h3>How to Make Money (Do This)</h3>
-    <div class="steps">
-      1. Enter an idea (ex: “resume pack”, “AI money system”)<br>
-      2. Click generate<br>
-      3. Copy the output<br>
-      4. Go to Gumroad<br>
-      5. Create product → paste description<br>
-      6. Upload a simple PDF<br>
-      7. Publish → sell<br>
-    </div>
-  </div>
-
-  <div class="cta">
-    <div>Ready to sell?</div>
-    <a href="https://gumroad.com" target="_blank">Go to Gumroad</a>
-  </div>
+<textarea id="output"></textarea>
 
 <script>
 function generate() {
-  const idea = document.getElementById("idea").value;
+  const topic = document.getElementById("topic").value;
 
-  const output = `
-🔥 PRODUCT TITLE:
-${idea.charAt(0).toUpperCase() + idea.slice(1)} — Complete System
+  let content = `
+🔥 ${topic.toUpperCase()} — COMPLETE SYSTEM
 
-💰 DESCRIPTION:
-If you're struggling with ${idea}, this system gives you a step-by-step method to start immediately.
+============================
 
-This is not theory — it's built for execution.
+INTRODUCTION
 
-📦 WHAT’S INCLUDED:
-• Step-by-step system  
-• Copy/paste templates  
-• Execution plan  
-• Tools + workflow  
-• Bonus tips  
+If you're struggling with ${topic}, this system gives you a clear, step-by-step method to start immediately.
 
-🎯 TARGET:
-Beginners / people who want fast results
+This is not theory.
+This is execution.
 
-💵 PRICE:
-$19–$49 recommended
+============================
+
+CORE STRATEGY
+
+You are not consuming information.
+You are applying systems.
+
+The goal is simple:
+Turn ${topic} into results.
+
+============================
+
+SECTION 1 — FOUNDATIONS
+
+To succeed in ${topic}, you must understand:
+
+- Speed over perfection
+- Execution over planning
+- Output over learning
+
+============================
+
+SECTION 2 — STEP-BY-STEP SYSTEM
+
+STEP 1:
+Define your goal clearly.
+
+STEP 2:
+Use AI tools to generate ideas, scripts, or structure.
+
+STEP 3:
+Organize into a usable format.
+
+STEP 4:
+Take action immediately.
+
+============================
+
+SECTION 3 — TEMPLATES
+
+TEMPLATE 1:
+“Give me a complete system for ${topic} with steps, tools, and examples”
+
+TEMPLATE 2:
+“Create 20 actionable ideas for ${topic}”
+
+TEMPLATE 3:
+“Turn this into a monetizable system”
+
+============================
+
+SECTION 4 — EXECUTION PLAN
+
+DAY 1:
+Create your system
+
+DAY 2:
+Package it
+
+DAY 3:
+Sell it
+
+============================
+
+SECTION 5 — ADVANCED STRATEGY
+
+- Focus on results people want
+- Package solutions, not information
+- Keep things simple and actionable
+
+============================
+
+SECTION 6 — SCALING
+
+Once this works:
+- Improve quality
+- Increase price
+- Create more products
+
+============================
+
+FINAL NOTE
+
+Execution wins.
+
+If you apply this system, you can create results using ${topic} starting today.
+
+============================
 `;
 
-  document.getElementById("output").innerText = output;
+  // ADD EXTRA LENGTH (IMPORTANT)
+  for (let i = 1; i <= 20; i++) {
+    content += `
+EXTRA INSIGHT ${i}
+
+The key to ${topic} is consistency and action.
+The more you execute, the faster you improve.
+Avoid overthinking and focus on output.
+
+`;
+  }
+
+  document.getElementById("output").value = content;
 }
 </script>
 
