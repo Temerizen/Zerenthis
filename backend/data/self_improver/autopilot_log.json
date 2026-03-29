@@ -1278,5 +1278,47 @@
       "ok": true,
       "id": "prop_1774826919_244524"
     }
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826934_9157bd69",
+    "title": "Complete health endpoint with product readiness and monetization diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826958_d5ce27c9",
+    "title": "Improve API health visibility for user flow and operations",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826995_eecf75c0",
+    "title": "Complete health endpoint with monetization and funnel diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826995_4e6d3d50",
+    "title": "Improve product-pack scoring with monetization and actionability signals",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774827026",
+    "title": "Add product catalog and lead-ready generation metadata to the API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774827026",
+    "title": "Improve output quality with deterministic quality guards for video and product offers",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]
