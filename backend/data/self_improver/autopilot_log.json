@@ -632,5 +632,29 @@
     "title": "Add product quality scoring and stronger commercialization sections to generated packs",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825020_5c138b9e",
+    "title": "Improve API reliability and user flow with request validation summaries and self-serve capability discovery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825038_0c07aae9",
+    "title": "Add job metadata, timestamps, and download readiness to API responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825070_33e3bf1c",
+    "title": "Fix self-improver execution reliability and add missing proposal listing",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825070_33e3bf1c"
+    }
   }
 ]

@@ -209,17 +209,6 @@ def execute(pid):
             "steps": p.get("steps", [])
         })
         _save_execution_log(execution_log)
-        return {"ok": False, "error": str(e), "id": pid}
-n_log.append({
-            "id": pid,
-            "title": p.get("title"),
-            "status": "failed",
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "error": str(e),
-            "steps": p.get("steps", [])
-        })
-        _save_execution_log(execution_log)
         return {"ok": False, "id": pid, "error": str(e)}
 
 
