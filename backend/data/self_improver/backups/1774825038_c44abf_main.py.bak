@@ -167,12 +167,10 @@ def product_pack(payload: GenerateRequest):
         notes=payload.notes,
         base_url=get_base_url(),
     )
-    log_lead("product-pack", payload, job_id)
     return {
         "job_id": job_id,
         "status": "queued",
         "job_url": f"{get_base_url()}/api/job/{job_id}",
-        "lead_captured": bool(payload.customer_email or payload.customer_name),
     }
 
 
@@ -188,19 +186,16 @@ def shorts_pack(payload: GenerateRequest):
         duration_seconds=payload.duration_seconds,
         base_url=get_base_url(),
     )
-    log_lead("shorts-pack", payload, job_id)
     return {
         "job_id": job_id,
         "status": "queued",
         "job_url": f"{get_base_url()}/api/job/{job_id}",
-        "lead_captured": bool(payload.customer_email or payload.customer_name),
     }
 
 
 @app.post("/api/youtube-pack")
 def youtube_pack(payload: GenerateRequest):
-    log_lead("youtube-pack", payload)
-    result = build_youtube_pack(
+    return build_youtube_pack(
         topic=payload.topic,
         niche=payload.niche,
         tone=payload.tone,
@@ -209,8 +204,6 @@ def youtube_pack(payload: GenerateRequest):
         bonus=payload.bonus,
         notes=payload.notes,
     )
-    result["lead_captured"] = bool(payload.customer_email or payload.customer_name)
-    return result
 
 
 # =========================

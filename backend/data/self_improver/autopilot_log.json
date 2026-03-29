@@ -618,5 +618,19 @@
       "ok": true,
       "id": "prop_1774824972"
     }
+  },
+  {
+    "time": 1774824976,
+    "id": "prop_1774824972",
+    "title": "Add request validation and monetization-ready lead capture to generation APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824977,
+    "id": "prop_1774824972",
+    "title": "Add product quality scoring and stronger commercialization sections to generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

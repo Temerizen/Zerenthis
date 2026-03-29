@@ -56,37 +56,14 @@ app.add_middleware(
 # =========================
 
 class GenerateRequest(BaseModel):
-    topic: str = Field(min_length=3, max_length=200)
-    niche: str = Field(default="Make Money Online", max_length=120)
-    tone: str = Field(default="Premium", max_length=60)
-    buyer: str = Field(default="Beginners starting from zero", max_length=160)
-    promise: str = Field(default="", max_length=200)
-    bonus: str = Field(default="", max_length=200)
-    notes: str = Field(default="", max_length=1000)
+    topic: str = Field(min_length=1, max_length=200)
+    niche: str = Field(default="Make Money Online")
+    tone: str = Field(default="Premium")
+    buyer: str = Field(default="Beginners starting from zero")
+    promise: str = Field(default="")
+    bonus: str = Field(default="")
+    notes: str = Field(default="")
     duration_seconds: int = Field(default=35, ge=10, le=90)
-    customer_name: str = Field(default="", max_length=120)
-    customer_email: EmailStr | None = None
-    marketing_consent: bool = False
-
-    @field_validator("topic", "niche", "tone", "buyer", "promise", "bonus", "notes", "customer_name", mode="before")
-    @classmethod
-    def normalize_text(cls, value):
-        if value is None:
-            return ""
-        if not isinstance(value, str):
-            return value
-        return " ".join(value.strip().split())
-
-    @field_validator("topic")
-    @classmethod
-    def validate_topic(cls, value: str):
-        if len(value) < 3:
-            raise ValueError("topic must be at least 3 characters")
-        lowered = value.lower()
-        blocked = ["test", "asdf", "qwerty", "lorem ipsum"]
-        if lowered in blocked:
-            raise ValueError("topic is too low-signal")
-        return value
 
 
 class BatchRequest(GenerateRequest):
@@ -102,31 +79,6 @@ def get_base_url() -> str:
     if public_base:
         return public_base
     return "http://localhost:8000"
-
-
-def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:
-    if not payload.customer_email and not payload.customer_name:
-        return
-
-    items = []
-    if LEADS_FILE.exists():
-        try:
-            items = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
-            if not isinstance(items, list):
-                items = []
-        except Exception:
-            items = []
-
-    items.append({
-        "source": source,
-        "job_id": job_id,
-        "topic": payload.topic,
-        "niche": payload.niche,
-        "customer_name": payload.customer_name,
-        "customer_email": str(payload.customer_email) if payload.customer_email else "",
-        "marketing_consent": payload.marketing_consent,
-    })
-    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding="utf-8")
 
 
 # =========================
@@ -167,12 +119,10 @@ def product_pack(payload: GenerateRequest):
         notes=payload.notes,
         base_url=get_base_url(),
     )
-    log_lead("product-pack", payload, job_id)
     return {
         "job_id": job_id,
         "status": "queued",
         "job_url": f"{get_base_url()}/api/job/{job_id}",
-        "lead_captured": bool(payload.customer_email or payload.customer_name),
     }
 
 
@@ -188,19 +138,16 @@ def shorts_pack(payload: GenerateRequest):
         duration_seconds=payload.duration_seconds,
         base_url=get_base_url(),
     )
-    log_lead("shorts-pack", payload, job_id)
     return {
         "job_id": job_id,
         "status": "queued",
         "job_url": f"{get_base_url()}/api/job/{job_id}",
-        "lead_captured": bool(payload.customer_email or payload.customer_name),
     }
 
 
 @app.post("/api/youtube-pack")
 def youtube_pack(payload: GenerateRequest):
-    log_lead("youtube-pack", payload)
-    result = build_youtube_pack(
+    return build_youtube_pack(
         topic=payload.topic,
         niche=payload.niche,
         tone=payload.tone,
@@ -209,8 +156,6 @@ def youtube_pack(payload: GenerateRequest):
         bonus=payload.bonus,
         notes=payload.notes,
     )
-    result["lead_captured"] = bool(payload.customer_email or payload.customer_name)
-    return result
 
 
 # =========================
