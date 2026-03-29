@@ -9448,8 +9448,10 @@
         "replace": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _value_stack(topic: str, promise: str, bonus: str) -> List[List[str]]:\n    topic_text = _title_case(_clean(topic, \"Digital Product\"))\n    promise_text = _clean(promise, f\"get better results with {topic_text}\")\n    bonus_text = _clean(bonus, \"Bonus Prompt Pack\")\n    return [\n        [f\"{topic_text} Core Guide\", \"$19\", f\"Main execution system to help buyers {promise_text}.\"],\n        [\"Quick-Start Checklist\", \"$9\", \"A fast implementation path that reduces overwhelm and increases action.\"],\n        [bonus_text, \"$9\", \"Extra templates, prompts, or support assets that increase perceived value.\"],\n        [\"Offer Positioning Notes\", \"$7\", \"Messaging guidance that makes the product feel clearer and easier to buy.\"],\n    ]\n\n\ndef _implementation_checklist(topic: str, buyer: str) -> List[str]:\n    topic_text = _clean(topic, \"your product\")\n    buyer_text = _clean(buyer, \"the buyer\")\n    return [\n        f\"Define the single outcome {buyer_text.lower()} wants from {topic_text}.\",\n        \"Choose one entry offer and one obvious bonus.\",\n        \"Turn the strongest ideas into a simple PDF buyers can consume quickly.\",\n        \"Write a title and subtitle focused on speed, clarity, and outcome.\",\n        \"Add 3 short-form promo angles and one direct CTA.\",\n        \"Publish fast, then improve based on buyer questions and clicks.\",\n    ]\n\n\ndef _score_product_pack(topic: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826416.695577
+    "status": "applied",
+    "created_at": 1774826416.695577,
+    "approved_at": 1774826472.0407276,
+    "applied_at": 1774826472.1406367
   },
   {
     "id": "prop_1774826467_9dc46cda",

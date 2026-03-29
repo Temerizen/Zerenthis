@@ -119,31 +119,6 @@ def _launch_plan(topic):
     ]
 
 
-def _value_stack(topic: str, promise: str, bonus: str) -> List[List[str]]:
-    topic_text = _title_case(_clean(topic, "Digital Product"))
-    promise_text = _clean(promise, f"get better results with {topic_text}")
-    bonus_text = _clean(bonus, "Bonus Prompt Pack")
-    return [
-        [f"{topic_text} Core Guide", "$19", f"Main execution system to help buyers {promise_text}."],
-        ["Quick-Start Checklist", "$9", "A fast implementation path that reduces overwhelm and increases action."],
-        [bonus_text, "$9", "Extra templates, prompts, or support assets that increase perceived value."],
-        ["Offer Positioning Notes", "$7", "Messaging guidance that makes the product feel clearer and easier to buy."],
-    ]
-
-
-def _implementation_checklist(topic: str, buyer: str) -> List[str]:
-    topic_text = _clean(topic, "your product")
-    buyer_text = _clean(buyer, "the buyer")
-    return [
-        f"Define the single outcome {buyer_text.lower()} wants from {topic_text}.",
-        "Choose one entry offer and one obvious bonus.",
-        "Turn the strongest ideas into a simple PDF buyers can consume quickly.",
-        "Write a title and subtitle focused on speed, clarity, and outcome.",
-        "Add 3 short-form promo angles and one direct CTA.",
-        "Publish fast, then improve based on buyer questions and clicks.",
-    ]
-
-
 def _score_product_pack(topic: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:
     checks = {
         "has_specific_topic": len(_clean(topic)) >= 4,
