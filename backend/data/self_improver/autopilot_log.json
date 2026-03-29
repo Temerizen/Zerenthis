@@ -750,5 +750,36 @@
     "title": "Add conversion-focused generation metrics for monetization and user flow",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825328_55bb4944",
+    "title": "Add conversion-ready job status, downloads, and monetization metrics to API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825350_39526613",
+    "title": "Add monetization-ready conversion metrics to product API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825402_23ba5804",
+    "title": "Add conversion-oriented intake endpoint with offer preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825402_175532e4",
+    "title": "Upgrade homepage into a clear lead-capture and product preview flow",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825402_175532e4"
+    }
   }
 ]
