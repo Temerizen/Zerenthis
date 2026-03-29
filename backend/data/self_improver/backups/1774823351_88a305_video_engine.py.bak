@@ -70,12 +70,6 @@ Colors: Black, cyan, white
 DESCRIPTION:
 A premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.
 
-POSITIONING:
-Primary audience: {buyer}
-Core promise: {promise or f'Get better results with {topic}'}
-Tone: {tone}
-Suggested offer: low-ticket digital product + upsell bundle
-
 STRUCTURE:
 1. Hook
 2. Why people stay stuck
@@ -84,22 +78,10 @@ STRUCTURE:
 5. Mistakes
 6. CTA
 
-HOOK OPTIONS:
-- Most people are making {topic} harder than it needs to be.
-- If you have been stuck trying to win with {topic}, this is the reset.
-- Here is the cleaner system for {buyer.lower()} who want real momentum.
-
 LONG-FORM SCRIPT:
 If you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.
 Most people stay stuck because they collect ideas instead of using a system.
 The better move is clarity, repetition, and cleaner execution.
-Use one framework, track what works, and turn small wins into a repeatable process.
-That is how beginners stop consuming and start compounding results.
-
-CTA IDEAS:
-- Download the companion execution pack.
-- Grab the prompt bundle linked below.
-- Use the checklist and templates to implement this faster.
 
 BONUSES:
 - {bonus or 'Prompt pack'}
