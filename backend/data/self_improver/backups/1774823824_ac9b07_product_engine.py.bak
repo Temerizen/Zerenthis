@@ -112,25 +112,6 @@ def _distribution_ideas(topic):
     ]
 
 
-def _value_stack(topic, bonus):
-    topic_tc = _title_case(topic)
-    bonus_text = bonus or "Bonus prompt and checklist pack"
-    return [
-        [f"{topic_tc} core guide", "$19 value"],
-        [f"{topic_tc} prompt pack", "$9 value"],
-        [f"{topic_tc} launch checklist", "$7 value"],
-        [bonus_text, "$9 value"],
-    ]
-
-
-def _pricing_recommendation():
-    return [
-        ["Front-end offer", "$9-$19"],
-        ["Premium version", "$19-$29"],
-        ["Bundle / order bump", "$29-$49"],
-    ]
-
-
 def _mistakes():
     return [
         "Making the product too broad",

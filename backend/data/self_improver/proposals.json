@@ -1463,8 +1463,10 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n    ]\n\n\ndef _value_stack(topic, bonus):\n    topic_tc = _title_case(topic)\n    bonus_text = bonus or \"Bonus prompt and checklist pack\"\n    return [\n        [f\"{topic_tc} core guide\", \"$19 value\"],\n        [f\"{topic_tc} prompt pack\", \"$9 value\"],\n        [f\"{topic_tc} launch checklist\", \"$7 value\"],\n        [bonus_text, \"$9 value\"],\n    ]\n\n\ndef _pricing_recommendation():\n    return [\n        [\"Front-end offer\", \"$9-$19\"],\n        [\"Premium version\", \"$19-$29\"],\n        [\"Bundle / order bump\", \"$29-$49\"],\n    ]\n\n\ndef _mistakes():\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774823787.4927702
+    "status": "applied",
+    "created_at": 1774823787.4927702,
+    "approved_at": 1774823824.0402598,
+    "applied_at": 1774823824.0674584
   },
   {
     "id": "prop_1774823820_42022e32",
