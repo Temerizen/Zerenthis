@@ -12,13 +12,13 @@ _LOCK = threading.Lock()
 def create_job(kind: str, payload: dict, worker: Callable[..., dict], *args, **kwargs) -> str:
     job_id = str(uuid.uuid4())
     with _LOCK:
-      JOBS[job_id] = {
-          "job_id": job_id,
-          "kind": kind,
-          "status": "queued",
-          "created_at": time.time(),
-          "payload": payload,
-      }
+        JOBS[job_id] = {
+            "job_id": job_id,
+            "kind": kind,
+            "status": "queued",
+            "created_at": time.time(),
+            "payload": payload,
+        }
 
     thread = threading.Thread(
         target=_run_job,
@@ -49,3 +49,9 @@ def _run_job(job_id: str, worker: Callable[..., dict], args: tuple, kwargs: dict
 
 def get_job(job_id: str) -> dict:
     return JOBS.get(job_id, {"job_id": job_id, "status": "not_found"})
+
+
+def list_jobs(limit: int = 100) -> list[dict]:
+    items = list(JOBS.values())
+    items.sort(key=lambda x: x.get("created_at", 0), reverse=True)
+    return items[:limit]
