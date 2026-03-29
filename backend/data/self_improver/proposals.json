@@ -6581,7 +6581,7 @@
         "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"youtube\",\n        payload.model_dump(),\n        build_youtube_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    log_lead(\"youtube-pack\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/product-batch\")\ndef product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"product-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/shorts-batch\")\ndef shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"shorts-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return job\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_file(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=quote(path.name))\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    files = []\n    for path in sorted(OUTPUT_DIR.glob(\"*\"), key=lambda p: p.stat().st_mtime, reverse=True):\n        if path.is_file():\n            files.append({\n                \"name\": path.name,\n                \"size\": path.stat().st_size,\n                \"download_url\": f\"{get_base_url()}/api/download/{quote(path.name)}\",\n            })\n    return {\"items\": files}\n\n\n@app.get(\"/api/leads\")\ndef list_leads():\n    if not LEADS_FILE.exists():\n        return {\"items\": [], \"count\": 0}\n    try:\n        items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(items, list):\n            items = []\n    except Exception:\n        items = []\n    return {\"items\": items, \"count\": len(items)}\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825178.2867584
   },
   {
@@ -6679,7 +6679,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            leads = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(leads, list):\n                leads = []\n        except Exception:\n            leads = []\n\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"leads_count\": len(leads),\n        \"monetization_ready\": True,\n        \"capture_enabled\": LEADS_DIR.exists(),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825194.8554611
   },
   {
@@ -6698,5 +6698,298 @@
     "created_at": 1774825194.8811765,
     "approved_at": 1774825198.469021,
     "applied_at": 1774825198.4947085
+  },
+  {
+    "id": "prop_1774825239_7f55f902",
+    "title": "Add conversion-focused intake and monetization metrics to leads",
+    "reason": "Zerenthis already captures leads, but the stored data is too thin to support monetization readiness or funnel analysis. Expanding lead logging with buyer intent fields and timestamps creates a usable local CRM trail, improves product iteration quality, and enables better measurement of what offer inputs correlate with outputs and conversions.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"tone\": payload.tone,\n        \"buyer\": payload.buyer,\n        \"promise\": payload.promise,\n        \"bonus\": payload.bonus,\n        \"duration_seconds\": payload.duration_seconds,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"captured_at\": __import__(\"time\").time(),\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    by_niche = {}\n    by_tone = {}\n    consented = 0\n    identified = 0\n    with_email = 0\n    with_promise = 0\n    with_bonus = 0\n\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        niche = item.get(\"niche\", \"unknown\") or \"unknown\"\n        tone = item.get(\"tone\", \"unknown\") or \"unknown\"\n        by_source[source] = by_source.get(source, 0) + 1\n        by_niche[niche] = by_niche.get(niche, 0) + 1\n        by_tone[tone] = by_tone.get(tone, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_name\") or item.get(\"customer_email\"):\n            identified += 1\n        if item.get(\"customer_email\"):\n            with_email += 1\n        if item.get(\"promise\"):\n            with_promise += 1\n        if item.get(\"bonus\"):\n            with_bonus += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"identified_leads\": identified,\n        \"email_leads\": with_email,\n        \"promise_filled_leads\": with_promise,\n        \"bonus_filled_leads\": with_bonus,\n        \"leads_by_source\": by_source,\n        \"leads_by_niche\": by_niche,\n        \"leads_by_tone\": by_tone,\n        \"total_outputs\": len(outputs),\n        \"lead_to_output_ratio\": round(len(leads) / max(len(outputs), 1), 2),\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825239.0452018
+  },
+  {
+    "id": "prop_1774825239_859cf9cb",
+    "title": "Add product quality scoring to generated packs",
+    "reason": "The product engine appears to already be moving toward quality evaluation, but the visible file is cut off near _quality_score. Finishing this path and returning explicit quality metadata will improve product output quality, give the self-improver measurable targets, and create a stronger user-facing signal for premium readiness.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes\n",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_specific_buyer\": len(buyer_text) >= 10,\n        \"has_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 3,\n        \"has_notes\": len(notes_text) >= 8,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825239.0618794
+  },
+  {
+    "id": "prop_1774825290",
+    "title": "Expose execution log and failure detail in self-improver API",
+    "reason": "The self-improver currently surfaces proposal history but not actual execution outcomes. Adding a read-only execution log endpoint and returning failed execution details as proper API errors improves debugging, operator trust, and self-improvement iteration quality without expanding the approval surface.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n\n\n@router.get(\"/execution-log\")\ndef execution_log_route():\n    items = _load_execution_log()\n    return sorted(items, key=lambda x: x.get(\"started_at\", 0), reverse=True)\n\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    result = execute(pid)\n    if not result.get(\"ok\") and result.get(\"error\") == \"proposal not found\":\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    if not result.get(\"ok\") and result.get(\"error\") == \"not approved\":\n        raise HTTPException(status_code=400, detail=\"Proposal is not approved\")\n    return result\n",
+        "replace": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    result = execute(pid)\n    if not result.get(\"ok\") and result.get(\"error\") == \"proposal not found\":\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    if not result.get(\"ok\") and result.get(\"error\") == \"not approved\":\n        raise HTTPException(status_code=400, detail=\"Proposal is not approved\")\n    if not result.get(\"ok\"):\n        raise HTTPException(status_code=500, detail=result)\n    return result\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774825290",
+    "title": "Add conversion-focused generation metrics for monetization and user flow",
+    "reason": "Zerenthis already logs leads, but it does not connect leads to output generation funnels. Adding lightweight conversion metrics to the main API improves monetization readiness, reveals drop-off points, and helps prioritize product improvements without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n",
+        "replace": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nMETRICS_FILE = LEADS_DIR / \"generation_metrics.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n\n\ndef track_generation_event(source: str, payload: GenerateRequest, event: str, job_id: str | None = None) -> None:\n    items = []\n    if METRICS_FILE.exists():\n        try:\n            items = json.loads(METRICS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"event\": event,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"has_email\": bool(payload.customer_email),\n        \"has_name\": bool(payload.customer_name),\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = METRICS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(METRICS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    generation_events = []\n    if METRICS_FILE.exists():\n        try:\n            loaded = json.loads(METRICS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                generation_events = loaded\n        except Exception:\n            generation_events = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    events_by_source = {}\n    event_counts = {}\n    for item in generation_events:\n        source = item.get(\"source\", \"unknown\")\n        event = item.get(\"event\", \"unknown\")\n        events_by_source[source] = events_by_source.get(source, 0) + 1\n        event_counts[event] = event_counts.get(event, 0) + 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"generation_events\": len(generation_events),\n        \"generation_events_by_source\": events_by_source,\n        \"generation_event_counts\": event_counts,\n        \"total_outputs\": len(outputs),\n        \"lead_capture_rate\": round((len(leads) / len(generation_events)) * 100, 2) if generation_events else 0,\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Complete and harden API routes with job polling and monetization endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API file is visibly truncated, which risks broken startup or incomplete user flows. Finishing the generation routes, adding a reliable job status endpoint, file download endpoint, and a simple lead export endpoint directly improves reliability, user flow, and monetization readiness without introducing new architectural complexity.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    log_lead(\"youtube-pa",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"youtube\",\n        payload.model_dump(),\n        build_youtube_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    log_lead(\"youtube-pack\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/product-batch\")\ndef product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"product-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/shorts-batch\")\ndef shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"shorts-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return job\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_file(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=quote(path.name))\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    files = []\n    for path in sorted(OUTPUT_DIR.glob(\"*\"), key=lambda p: p.stat().st_mtime, reverse=True):\n        if path.is_file():\n            files.append({\n                \"name\": path.name,\n                \"size\": path.stat().st_size,\n                \"download_url\": f\"{get_base_url()}/api/download/{quote(path.name)}\",\n            })\n    return {\"items\": files}\n\n\n@app.get(\"/api/leads\")\ndef list_leads():\n    if not LEADS_FILE.exists():\n        return {\"items\": [], \"count\": 0}\n    try:\n        items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(items, list):\n            items = []\n    except Exception:\n        items = []\n    return {\"items\": items, \"count\": len(items)}\n"
+      }
+    ],
+    "status": "applied",
+    "approved_at": 1774825350.569923,
+    "applied_at": 1774825350.6423972
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Add lead-ready intake metadata and cleaner health visibility [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already captures leads, but the API does not expose monetization readiness or intake stats. Adding lightweight metadata to health and lead logging improves operational visibility, conversion readiness, and trust without changing the product flow or requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"captured_at\": int(__import__(\"time\").time()),\n        \"lead_quality\": \"high\" if payload.customer_email and payload.marketing_consent else \"medium\" if payload.customer_email or payload.customer_name else \"low\",\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            leads = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(leads, list):\n                leads = []\n        except Exception:\n            leads = []\n\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"leads_count\": len(leads),\n        \"monetization_ready\": True,\n        \"capture_enabled\": LEADS_DIR.exists(),\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825350.569923
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Add conversion-focused intake and monetization metrics to leads [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already captures leads, but the stored data is too thin to support monetization readiness or funnel analysis. Expanding lead logging with buyer intent fields and timestamps creates a usable local CRM trail, improves product iteration quality, and enables better measurement of what offer inputs correlate with outputs and conversions.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"tone\": payload.tone,\n        \"buyer\": payload.buyer,\n        \"promise\": payload.promise,\n        \"bonus\": payload.bonus,\n        \"duration_seconds\": payload.duration_seconds,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"captured_at\": __import__(\"time\").time(),\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    by_niche = {}\n    by_tone = {}\n    consented = 0\n    identified = 0\n    with_email = 0\n    with_promise = 0\n    with_bonus = 0\n\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        niche = item.get(\"niche\", \"unknown\") or \"unknown\"\n        tone = item.get(\"tone\", \"unknown\") or \"unknown\"\n        by_source[source] = by_source.get(source, 0) + 1\n        by_niche[niche] = by_niche.get(niche, 0) + 1\n        by_tone[tone] = by_tone.get(tone, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_name\") or item.get(\"customer_email\"):\n            identified += 1\n        if item.get(\"customer_email\"):\n            with_email += 1\n        if item.get(\"promise\"):\n            with_promise += 1\n        if item.get(\"bonus\"):\n            with_bonus += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"identified_leads\": identified,\n        \"email_leads\": with_email,\n        \"promise_filled_leads\": with_promise,\n        \"bonus_filled_leads\": with_bonus,\n        \"leads_by_source\": by_source,\n        \"leads_by_niche\": by_niche,\n        \"leads_by_tone\": by_tone,\n        \"total_outputs\": len(outputs),\n        \"lead_to_output_ratio\": round(len(leads) / max(len(outputs), 1), 2),\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825350.569923
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Add product quality scoring to generated packs [safe-prep]",
+    "reason": "Safe preparation extracted from: The product engine appears to already be moving toward quality evaluation, but the visible file is cut off near _quality_score. Finishing this path and returning explicit quality metadata will improve product output quality, give the self-improver measurable targets, and create a stronger user-facing signal for premium readiness.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes\n",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_specific_buyer\": len(buyer_text) >= 10,\n        \"has_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 3,\n        \"has_notes\": len(notes_text) >= 8,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825350.569923
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Expose execution log and failure detail in self-improver API [safe-prep]",
+    "reason": "Safe preparation extracted from: The self-improver currently surfaces proposal history but not actual execution outcomes. Adding a read-only execution log endpoint and returning failed execution details as proper API errors improves debugging, operator trust, and self-improvement iteration quality without expanding the approval surface.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n\n\n@router.get(\"/execution-log\")\ndef execution_log_route():\n    items = _load_execution_log()\n    return sorted(items, key=lambda x: x.get(\"started_at\", 0), reverse=True)\n\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    result = execute(pid)\n    if not result.get(\"ok\") and result.get(\"error\") == \"proposal not found\":\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    if not result.get(\"ok\") and result.get(\"error\") == \"not approved\":\n        raise HTTPException(status_code=400, detail=\"Proposal is not approved\")\n    return result\n",
+        "replace": "@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    result = execute(pid)\n    if not result.get(\"ok\") and result.get(\"error\") == \"proposal not found\":\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    if not result.get(\"ok\") and result.get(\"error\") == \"not approved\":\n        raise HTTPException(status_code=400, detail=\"Proposal is not approved\")\n    if not result.get(\"ok\"):\n        raise HTTPException(status_code=500, detail=result)\n    return result\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825350.569923
+  },
+  {
+    "id": "prop_1774825291",
+    "title": "Add conversion-focused generation metrics for monetization and user flow [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already logs leads, but it does not connect leads to output generation funnels. Adding lightweight conversion metrics to the main API improves monetization readiness, reveals drop-off points, and helps prioritize product improvements without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n",
+        "replace": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nMETRICS_FILE = LEADS_DIR / \"generation_metrics.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n\n\ndef track_generation_event(source: str, payload: GenerateRequest, event: str, job_id: str | None = None) -> None:\n    items = []\n    if METRICS_FILE.exists():\n        try:\n            items = json.loads(METRICS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"event\": event,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"has_email\": bool(payload.customer_email),\n        \"has_name\": bool(payload.customer_name),\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = METRICS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(METRICS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    generation_events = []\n    if METRICS_FILE.exists():\n        try:\n            loaded = json.loads(METRICS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                generation_events = loaded\n        except Exception:\n            generation_events = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    events_by_source = {}\n    event_counts = {}\n    for item in generation_events:\n        source = item.get(\"source\", \"unknown\")\n        event = item.get(\"event\", \"unknown\")\n        events_by_source[source] = events_by_source.get(source, 0) + 1\n        event_counts[event] = event_counts.get(event, 0) + 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"generation_events\": len(generation_events),\n        \"generation_events_by_source\": events_by_source,\n        \"generation_event_counts\": event_counts,\n        \"total_outputs\": len(outputs),\n        \"lead_capture_rate\": round((len(leads) / len(generation_events)) * 100, 2) if generation_events else 0,\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825350.569923
+  },
+  {
+    "id": "prop_1774825328_55bb4944",
+    "title": "Add conversion-ready job status, downloads, and monetization metrics to API",
+    "reason": "The product already captures leads, but user flow and monetization readiness are weak without a clear post-submit status path. Exposing stable job-status and downloadable output links improves completion UX, reduces confusion, and makes lead/output conversion measurable. This also increases product reliability because clients no longer have to guess job state.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n",
+        "replace": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom fastapi.encoders import jsonable_encoder\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    lead_emails = {\n        (item.get(\"customer_email\") or \"\").strip().lower()\n        for item in leads\n        if (item.get(\"customer_email\") or \"\").strip()\n    }\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n        \"unique_lead_emails\": len(lead_emails),\n        \"lead_to_output_ratio\": round((len(leads) / len(outputs)), 2) if outputs else None,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n",
+        "replace": "@app.get(\"/api/jobs/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n\n    data = jsonable_encoder(job)\n    result = data.get(\"result\") if isinstance(data, dict) else None\n\n    if isinstance(result, dict):\n        filename = result.get(\"filename\") or result.get(\"file\") or result.get(\"output_file\")\n        if isinstance(filename, str) and filename.strip():\n            safe_name = Path(filename).name\n            result[\"download_url\"] = f\"{get_base_url()}/api/download/{quote(safe_name)}\"\n\n    return {\"ok\": True, \"job\": data}\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_output(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=safe_name)\n\n\n@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825328.692037
+  },
+  {
+    "id": "prop_1774825328_3f8b6a63",
+    "title": "Upgrade product output with stronger commercial scoring and offer recommendations",
+    "reason": "Product quality and monetization readiness improve when generated packs self-evaluate against commercial criteria like specificity, promise clarity, and upsell potential. This makes outputs more sellable and gives users clearer next actions instead of just raw content.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_specific_topic\": len(topic_text) >= 6,\n        \"has_defined_buyer\": len(buyer_text) >= 8,\n        \"has_clear_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 4,\n        \"has_notes\": len(notes_text) >= 10,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n\n    recommendations = []\n    if not checks[\"has_clear_promise\"]:\n        recommendations.append(\"Add a sharper end-result promise to increase conversion clarity.\")\n    if not checks[\"has_bonus\"]:\n        recommendations.append(\"Include a fast-action bonus to raise perceived value.\")\n    if not checks[\"has_defined_buyer\"]:\n        recommendations.append(\"Define the buyer more specifically so the offer feels tailored.\")\n    if score >= 80:\n        recommendations.append(\"This pack is commercially strong enough to position as a premium starter offer.\")\n\n    return {\n        \"score\": score,\n        \"checks\": checks,\n        \"recommendations\": recommendations,\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825328.7183049
+  },
+  {
+    "id": "prop_1774825350_0d5f3a8e",
+    "title": "Expose richer proposal diagnostics for safer approvals and faster operator flow",
+    "reason": "Right now the self-improver API exposes pending/history/stats, but not the execution log or proposal-level diagnostics. Adding lightweight metadata like step counts, action summaries, and execution history makes approvals safer, shortens review time, and improves self-improver quality by giving human operators feedback on what kinds of changes are actually succeeding.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    return sorted(items, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n",
+        "replace": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n\n\n@router.get(\"/execution-log\")\ndef execution_log_route():\n    items = _load_execution_log()\n    return sorted(items, key=lambda x: x.get(\"started_at\", 0), reverse=True)\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825350.4029267
+  },
+  {
+    "id": "prop_1774825350_39526613",
+    "title": "Add monetization-ready conversion metrics to product API health surface",
+    "reason": "Zerenthis already logs leads and outputs, but it does not expose funnel-style conversion signals. Expanding /api/metrics to include lead capture rate and source efficiency helps prioritize monetization experiments, improves product decision-making, and strengthens user flow by showing which entry points convert into actual generated assets.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    identified_leads = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\") or item.get(\"customer_name\"):\n            identified_leads += 1\n\n    total_outputs = len(outputs)\n    total_leads = len(leads)\n    lead_capture_rate = round((identified_leads / total_outputs) * 100, 2) if total_outputs else 0.0\n    consent_rate = round((consented / total_leads) * 100, 2) if total_leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": total_leads,\n        \"identified_leads\": identified_leads,\n        \"marketing_consented_leads\": consented,\n        \"consent_rate_percent\": consent_rate,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": total_outputs,\n        \"lead_capture_rate_percent\": lead_capture_rate,\n        \"outputs_per_lead\": round((total_outputs / total_leads), 2) if total_leads else None,\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825350.4292386
   }
 ]

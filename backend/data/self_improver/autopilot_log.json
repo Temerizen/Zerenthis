@@ -708,5 +708,47 @@
     "title": "Strengthen product-pack output with clearer monetization assets",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825178_a473d6ee",
+    "title": "Complete and harden API routes with job polling and monetization endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825194_03b00418",
+    "title": "Add lead-ready intake metadata and cleaner health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825239_7f55f902",
+    "title": "Add conversion-focused intake and monetization metrics to leads",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825239_859cf9cb",
+    "title": "Add product quality scoring to generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825290",
+    "title": "Expose execution log and failure detail in self-improver API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825290",
+    "title": "Add conversion-focused generation metrics for monetization and user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]
