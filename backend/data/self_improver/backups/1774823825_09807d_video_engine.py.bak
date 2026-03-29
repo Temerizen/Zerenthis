@@ -32,28 +32,27 @@ def _font(size: int):
 
 def build_shorts_script(topic: str, tone: str, promise: str) -> List[str]:
     promise_text = promise or f"improve faster with {topic}"
-    tone = (tone or "Premium").lower().strip()
-    topic = topic.strip()
+    tone = (tone or "Premium").lower()
 
     if tone == "aggressive":
         return [
-            f"Stop scrolling if you want better results with {topic}.",
-            f"Most people stay stuck because they make {topic} more complicated than it needs to be.",
-            "Pick one tactic, repeat it daily, and cut everything that does not move the needle.",
-            f"If you want to {promise_text}, start simple and start now.",
+            f"Stop wasting time on {topic}.",
+            f"Most people fail because they overcomplicate everything.",
+            "The fix is simple: choose one move, repeat it, and cut the noise.",
+            f"If you want to {promise_text}, start today.",
         ]
     if tone == "motivational":
         return [
-            f"If {topic} feels overwhelming right now, that does not mean you are behind.",
-            "Real momentum starts when you stop chasing perfect and commit to one clean move.",
-            "Build proof first, then improve the system after you see what works.",
-            f"If you want to {promise_text}, consistency will beat doubt every time.",
+            f"If you feel behind with {topic}, you are not out of the game.",
+            "Momentum starts with one clean action, not a perfect plan.",
+            "Do the simple version first, then improve after proof.",
+            f"If you want to {promise_text}, movement beats doubt.",
         ]
     return [
-        f"Here is the simpler way to win with {topic}.",
-        f"Most people consume more information about {topic} than they ever execute.",
-        "The edge is choosing a small repeatable system and sticking to it long enough to compound.",
-        f"If you want to {promise_text}, use this as your sign to move today.",
+        f"{topic} is moving faster than most people realize.",
+        "The winners are not doing everything. They are doing the right few things repeatedly.",
+        "Keep it simple, move fast, and stay consistent.",
+        f"If you want to {promise_text}, this is the direction.",
     ]
 
 
@@ -156,7 +155,7 @@ def _draw_slide(text: str, image_path: Path, topic: str, index: int, total: int)
     draw.multiline_text((x + 3, y + 3), wrapped, fill=(0, 0, 0), font=body_font, spacing=10, align="center")
     draw.multiline_text((x, y), wrapped, fill=(255, 255, 255), font=body_font, spacing=10, align="center")
 
-    draw.text((50, 1180), "Download the execution pack", fill=(220, 230, 240), font=cta_font)
+    draw.text((50, 1180), "Follow for more", fill=(220, 230, 240), font=cta_font)
 
     img.save(str(image_path))
 

@@ -156,7 +156,7 @@ def _draw_slide(text: str, image_path: Path, topic: str, index: int, total: int)
     draw.multiline_text((x + 3, y + 3), wrapped, fill=(0, 0, 0), font=body_font, spacing=10, align="center")
     draw.multiline_text((x, y), wrapped, fill=(255, 255, 255), font=body_font, spacing=10, align="center")
 
-    draw.text((50, 1180), "Download the execution pack", fill=(220, 230, 240), font=cta_font)
+    draw.text((50, 1180), "Follow for more", fill=(220, 230, 240), font=cta_font)
 
     img.save(str(image_path))
 

@@ -1480,8 +1480,11 @@
         "replace": "def verify() -> bool:\n    return True\n\n\ndef pending() -> list[dict[str, Any]]:\n    return [x for x in load() if x.get(\"status\") == \"pending\"]\n\n\ndef execute(pid: str) -> dict[str, Any]:\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p.get(\"steps\", []))\n\n    backups: list[tuple[Path, Path]] = []\n    created: list[Path] = []\n\n    try:\n        for s in p[\"steps\"]:\n            path = _normalize_path(s[\"path\"])\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    b = backup(path)\n                    if b:\n                        backups.append((path, b))\n                else:\n                    created.append(path)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                original = path.read_text(encoding=\"utf-8\", errors=\"ignore\")\n                find_text = s[\"find\"]\n                replace_text = s[\"replace\"]\n\n                if find_text not in original:\n                    raise ValueError(f\"find text not found in: {s['path']}\")\n\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n\n                updated = original.replace(find_text, replace_text, 1)\n                if updated == original:\n                    raise ValueError(f\"edit produced no change for: {s['path']}\")\n\n                path.write_text(updated, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        if not verify():\n            raise RuntimeError(\"verification failed\")\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = time.time()\n        save(d)\n        return {\n            \"ok\": True,\n            \"id\": pid,\n            \"status\": \"applied\",\n            \"steps_applied\": len(p.get(\"steps\", [])),\n        }\n    except Exception as e:\n        for path in reversed(created):\n            try:\n                if path.exists():\n                    path.unlink()\n            except Exception:\n                pass\n\n        for original_path, backup_path in reversed(backups):\n            try:\n                original_path.parent.mkdir(parents=True, exist_ok=True)\n                shutil.copy2(backup_path, original_path)\n            except Exception:\n                pass\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = time.time()\n        p[\"error\"] = str(e)\n        save(d)\n        return {\n            \"ok\": False,\n            \"id\": pid,\n            \"error\": str(e),\n            \"status\": \"failed\",\n        }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774823820.3167057
+    "status": "failed",
+    "created_at": 1774823820.3167057,
+    "approved_at": 1774823825.722545,
+    "failed_at": 1774823825.7486563,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774823820_f5c23f7c",
@@ -1558,7 +1561,9 @@
         "replace": "    draw.text((50, 1180), \"Download the execution pack\", fill=(220, 230, 240), font=cta_font)\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774823820.3355556
+    "status": "applied",
+    "created_at": 1774823820.3355556,
+    "approved_at": 1774823825.764366,
+    "applied_at": 1774823825.791557
   }
 ]
