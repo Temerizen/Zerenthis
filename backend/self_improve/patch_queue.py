@@ -1,22 +1,42 @@
-import json, uuid, os
+import json
+import uuid
+from pathlib import Path
 
-QUEUE_FILE = "backend/self_improve/queue.json"
+BASE = Path("backend/self_improve")
+BASE.mkdir(parents=True, exist_ok=True)
+
+QUEUE_FILE = BASE / "queue.json"
+
 
 def load_queue():
-    if not os.path.exists(QUEUE_FILE):
+    if not QUEUE_FILE.exists():
         return []
-    return json.load(open(QUEUE_FILE))
+    try:
+        return json.loads(QUEUE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return []
 
-def save_queue(q):
-    json.dump(q, open(QUEUE_FILE, "w"), indent=2)
+
+def save_queue(queue):
+    QUEUE_FILE.write_text(json.dumps(queue, indent=2), encoding="utf-8")
+
 
 def add_patch(patch):
-    q = load_queue()
+    queue = load_queue()
     patch["id"] = str(uuid.uuid4())
     patch["status"] = "pending"
-    q.append(patch)
-    save_queue(q)
+    queue.append(patch)
+    save_queue(queue)
     return patch["id"]
 
+
 def get_pending():
-    return [p for p in load_queue() if p["status"] == "pending"]
+    return [p for p in load_queue() if p.get("status") == "pending"]
+
+
+def mark_status(patch_id, status):
+    queue = load_queue()
+    for patch in queue:
+        if patch.get("id") == patch_id:
+            patch["status"] = status
+    save_queue(queue)
