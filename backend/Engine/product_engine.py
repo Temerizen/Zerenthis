@@ -1,153 +1,380 @@
-from reportlab.platypus import *
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.pagesizes import letter
 from pathlib import Path
 import uuid
+import re
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.units import inch
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 OUT_DIR = BASE_DIR / "data" / "outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-def build_product_pack(**kwargs):
-    topic = kwargs.get("topic", "AI System")
-    promise = kwargs.get("promise", "get results fast")
-    buyer = kwargs.get("buyer", "beginners")
 
-    safe_topic = topic.replace(" ", "_").replace("/", "_")
-    filename = f"{safe_topic}_{uuid.uuid4().hex[:6]}.pdf"
+def _clean(text, fallback=""):
+    text = (text or "").strip()
+    return text if text else fallback
+
+
+def _safe_filename(text):
+    text = re.sub(r"[^a-zA-Z0-9]+", "_", text).strip("_")
+    return text or "zerenthis_product"
+
+
+def _title_case(text):
+    return " ".join(word.capitalize() for word in text.split())
+
+
+def _premium_title(topic, promise):
+    topic_tc = _title_case(topic)
+    promise = _clean(promise)
+    if promise:
+        return f"{topic_tc} Execution Pack for {promise}"
+    return f"{topic_tc} Execution Pack"
+
+
+def _offer_ideas(topic, buyer, promise):
+    topic_tc = _title_case(topic)
+    promise_text = promise or f"get better results with {topic}"
+    return [
+        {
+            "name": f"{topic_tc} Starter Kit",
+            "price": "$9–$19",
+            "title": f"The {topic_tc} Starter Kit",
+            "description": f"A beginner-friendly pack for {buyer.lower()} who want to {promise_text}. Includes steps, templates, prompts, and a simple launch path."
+        },
+        {
+            "name": f"{topic_tc} Premium Blueprint",
+            "price": "$19–$29",
+            "title": f"{topic_tc} Premium Blueprint",
+            "description": f"A more detailed system with examples, pricing ideas, execution checklists, and copy-paste assets for someone who wants faster progress."
+        },
+        {
+            "name": f"{topic_tc} Prompt Pack",
+            "price": "$7–$17",
+            "title": f"{topic_tc} Prompt Vault",
+            "description": f"A focused collection of prompts, templates, and workflows to reduce thinking time and speed up execution."
+        },
+        {
+            "name": f"{topic_tc} Fast-Start Pack",
+            "price": "$9–$19",
+            "title": f"{topic_tc} Fast-Start Pack",
+            "description": f"A simplified action-oriented system designed to help overwhelmed beginners start quickly and avoid wasted time."
+        },
+        {
+            "name": f"{topic_tc} Bundle",
+            "price": "$29–$49",
+            "title": f"The Complete {topic_tc} Bundle",
+            "description": f"A bundled premium offer that combines guide, prompts, templates, and bonus ideas into one higher-value product."
+        },
+    ]
+
+
+def _prompt_bank(topic, niche, buyer, promise):
+    promise_text = promise or f"make progress with {topic}"
+    return [
+        f'Create a premium digital product about {topic} for {buyer.lower()} in the {niche} niche.',
+        f'Write 10 high-converting Gumroad product titles for {topic}.',
+        f'Generate 25 practical prompts someone can use to {promise_text}.',
+        f'Create a 7-day action plan for a beginner trying to succeed with {topic}.',
+        f'Write a Gumroad description that makes {topic} feel actionable and worth paying for.',
+        f'List 10 bundle ideas related to {topic} that can increase average order value.',
+        f'Create 5 short-form content ideas that promote a {topic} digital product.',
+    ]
+
+
+def _launch_plan(topic):
+    return [
+        ["Day 1", f"Generate 3 product variations around {topic}."],
+        ["Day 2", "Pick the strongest one and upload it to Gumroad."],
+        ["Day 3", "Create 3 short-form promo posts or scripts."],
+        ["Day 4", "Improve the listing title, thumbnail, and description."],
+        ["Day 5", "Create a second product using the same niche."],
+        ["Day 6", "Bundle two products together for a higher-priced offer."],
+        ["Day 7", "Double down on the best-performing angle and repeat."],
+    ]
+
+
+def _distribution_ideas(topic):
+    return [
+        f"Short-form videos about {topic} with a CTA to your product",
+        f"Reddit discussion posts around pain points in {topic}",
+        "X/Twitter threads that summarize one useful idea from the pack",
+        "A free mini-post that leads into the paid version",
+        "Bundle promotions and launch discounts",
+    ]
+
+
+def _mistakes():
+    return [
+        "Making the product too broad",
+        "Using weak, vague titles",
+        "Padding pages instead of adding practical value",
+        "Uploading once and never testing more offers",
+        "Waiting for perfection before listing",
+    ]
+
+
+def _bundle_ideas(topic):
+    topic_tc = _title_case(topic)
+    return [
+        f"{topic_tc} Guide + Prompt Pack",
+        f"{topic_tc} Guide + Checklist Pack",
+        f"{topic_tc} Guide + Template Vault",
+        f"{topic_tc} Bundle + Bonus Mini Guide",
+        f"{topic_tc} Complete Creator Pack",
+    ]
+
+
+def _add_heading(story, text, style):
+    story.append(Paragraph(text, style))
+    story.append(Spacer(1, 8))
+
+
+def _add_body(story, text, style):
+    story.append(Paragraph(text, style))
+    story.append(Spacer(1, 10))
+
+
+def _add_bullets(story, items, style):
+    for item in items:
+        story.append(Paragraph(f"• {item}", style))
+    story.append(Spacer(1, 10))
+
+
+def build_product_pack(**kwargs):
+    topic = _clean(kwargs.get("topic"), "AI System")
+    promise = _clean(kwargs.get("promise"), "get results faster")
+    buyer = _clean(kwargs.get("buyer"), "beginners")
+    niche = _clean(kwargs.get("niche"), "Make Money Online")
+    tone = _clean(kwargs.get("tone"), "Premium")
+    bonus = _clean(kwargs.get("bonus"), "prompts, templates, and checklists")
+    notes = _clean(kwargs.get("notes"), "")
+
+    title = _premium_title(topic, promise)
+    filename = f"{_safe_filename(topic)}_{uuid.uuid4().hex[:6]}.pdf"
     path = OUT_DIR / filename
 
     styles = getSampleStyleSheet()
-    doc = SimpleDocTemplate(str(path), pagesize=letter)
 
-    content = []
-
-    def section(title, text):
-        content.append(Paragraph(f"<b>{title}</b>", styles["Heading2"]))
-        content.append(Spacer(1, 10))
-        content.append(Paragraph(text, styles["BodyText"]))
-        content.append(Spacer(1, 20))
-
-    content.append(Paragraph(f"<b>{topic.upper()} SYSTEM</b>", styles["Title"]))
-    content.append(Spacer(1, 20))
-    content.append(Paragraph(f"A complete system to help {buyer} {promise}", styles["BodyText"]))
-    content.append(PageBreak())
-
-    section(
-        "The Core Idea",
-        "This system focuses on using AI to generate high-value assets quickly and monetize them. "
-        "Instead of building slowly, you create and sell immediately."
+    title_style = ParagraphStyle(
+        "ZTTitle",
+        parent=styles["Title"],
+        fontName="Helvetica-Bold",
+        fontSize=24,
+        leading=30,
+        textColor=colors.HexColor("#111827"),
+        spaceAfter=8,
+    )
+    subtitle_style = ParagraphStyle(
+        "ZTSubtitle",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=11,
+        leading=16,
+        textColor=colors.HexColor("#334155"),
+        spaceAfter=18,
+    )
+    heading_style = ParagraphStyle(
+        "ZTHeading",
+        parent=styles["Heading2"],
+        fontName="Helvetica-Bold",
+        fontSize=15,
+        leading=20,
+        textColor=colors.HexColor("#111827"),
+        spaceAfter=6,
+    )
+    body_style = ParagraphStyle(
+        "ZTBody",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=10.8,
+        leading=16,
+        textColor=colors.HexColor("#1E293B"),
+        spaceAfter=8,
+    )
+    bullet_style = ParagraphStyle(
+        "ZTBullet",
+        parent=body_style,
+        leftIndent=12,
+        bulletIndent=0,
+        spaceAfter=5,
     )
 
-    section(
-        "Model 1: Digital Product Engine",
-        f"Create and sell PDFs using AI.\n\n"
-        f"Steps:\n"
-        f"1. Choose a problem in {topic}\n"
-        f"2. Generate a premium guide\n"
-        f"3. Upload to Gumroad\n"
-        f"4. Price between $9–$29\n"
-        f"5. Repeat daily\n\n"
-        f"Goal: First sale within days"
+    doc = SimpleDocTemplate(
+        str(path),
+        pagesize=letter,
+        leftMargin=0.72 * inch,
+        rightMargin=0.72 * inch,
+        topMargin=0.72 * inch,
+        bottomMargin=0.72 * inch,
+        title=title,
+        author="Zerenthis",
     )
 
-    section(
-        "Model 2: Faceless Content System",
-        "Use AI to create viral short videos.\n\n"
-        "Steps:\n"
-        "1. Generate scripts\n"
-        "2. Add AI voice\n"
-        "3. Add captions\n"
-        "4. Post daily\n\n"
-        "Monetization:\n"
-        "- Affiliate links\n"
-        "- Product funnels\n"
-        "- Traffic conversion"
+    story = []
+
+    # Cover
+    story.append(Paragraph("ZERENTHIS", heading_style))
+    story.append(Spacer(1, 12))
+    story.append(Paragraph(title, title_style))
+    story.append(Paragraph(
+        f"A premium execution pack for {buyer.lower()} in the {niche.lower()} niche.",
+        subtitle_style
+    ))
+    _add_body(
+        story,
+        f"Primary Outcome: Help the buyer {promise}. This pack is built in a {tone.lower()} tone and designed to feel practical, fast, and sellable.",
+        body_style,
+    )
+    _add_bullets(
+        story,
+        [
+            "Concrete offer ideas",
+            "Done-for-you titles and descriptions",
+            "Copy-paste prompts",
+            "7-day launch plan",
+            "Bundle and scaling ideas",
+        ],
+        bullet_style,
+    )
+    story.append(PageBreak())
+
+    # What this pack is
+    _add_heading(story, "What This Pack Is", heading_style)
+    _add_body(
+        story,
+        f"This is not just a guide about {topic}. It is an execution pack. The goal is to turn the topic into usable products, clearer offers, and faster momentum. "
+        f"It is designed for {buyer.lower()} who want to {promise} without drowning in vague advice.",
+        body_style,
     )
 
-    section(
-        "Model 3: AI Service System",
-        "Sell services using AI.\n\n"
-        "Examples:\n"
-        "- Resume writing\n"
-        "- Content creation\n"
-        "- Social posts\n\n"
-        "Steps:\n"
-        "1. Find client\n"
-        "2. Generate work using AI\n"
-        "3. Deliver fast\n"
-        "4. Scale"
+    # Offer ideas
+    _add_heading(story, "Five Product Angles You Can Sell", heading_style)
+
+    offer_rows = [["Offer", "Suggested Price", "Use Case"]]
+    offers = _offer_ideas(topic, buyer, promise)
+    for offer in offers:
+        offer_rows.append([offer["name"], offer["price"], offer["description"]])
+
+    offer_table = Table(offer_rows, colWidths=[1.8 * inch, 1.2 * inch, 3.3 * inch])
+    offer_table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#111827")),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#CBD5E1")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.whitesmoke, colors.HexColor("#F8FAFC")]),
+        ("LEFTPADDING", (0, 0), (-1, -1), 6),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
+    story.append(offer_table)
+    story.append(Spacer(1, 14))
+
+    # Ready-to-use titles
+    _add_heading(story, "Done-for-You Product Titles", heading_style)
+    _add_bullets(
+        story,
+        [offer["title"] for offer in offers],
+        bullet_style,
     )
 
-    section(
-        "7-Day Execution Plan",
-        "Day 1: Generate 3 products\n"
-        "Day 2: Upload listings\n"
-        "Day 3: Create videos\n"
-        "Day 4: Post content\n"
-        "Day 5: Improve\n"
-        "Day 6: Expand\n"
-        "Day 7: Scale"
+    # Descriptions
+    _add_heading(story, "Ready-to-Use Gumroad Descriptions", heading_style)
+    for idx, offer in enumerate(offers, start=1):
+        _add_body(
+            story,
+            f"<b>{idx}. {offer['title']}</b><br/>{offer['description']}",
+            body_style,
+        )
+
+    # Prompt bank
+    _add_heading(story, "Copy-Paste Prompt Bank", heading_style)
+    _add_bullets(story, _prompt_bank(topic, niche, buyer, promise), bullet_style)
+
+    # 7-day plan
+    _add_heading(story, "7-Day Launch Plan", heading_style)
+    plan_rows = [["Day", "Action"]]
+    for row in _launch_plan(topic):
+        plan_rows.append(row)
+
+    plan_table = Table(plan_rows, colWidths=[1.0 * inch, 5.3 * inch])
+    plan_table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#111827")),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#CBD5E1")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.whitesmoke, colors.HexColor("#F8FAFC")]),
+        ("LEFTPADDING", (0, 0), (-1, -1), 6),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
+    story.append(plan_table)
+    story.append(Spacer(1, 14))
+
+    # Distribution
+    _add_heading(story, "Distribution Ideas", heading_style)
+    _add_bullets(story, _distribution_ideas(topic), bullet_style)
+
+    # Mistakes
+    _add_heading(story, "Mistakes to Avoid", heading_style)
+    _add_bullets(story, _mistakes(), bullet_style)
+
+    # Bonus
+    _add_heading(story, "Bonus Expansion Ideas", heading_style)
+    _add_body(
+        story,
+        f"Use this bonus layer to increase perceived value. Suggested bonus theme: {bonus}.",
+        body_style,
+    )
+    _add_bullets(story, _bundle_ideas(topic), bullet_style)
+
+    # Custom notes
+    if notes:
+        _add_heading(story, "Custom Notes", heading_style)
+        _add_body(story, notes, body_style)
+
+    # Closing
+    _add_heading(story, "Closing Positioning Note", heading_style)
+    _add_body(
+        story,
+        f"The strongest version of a {topic} product is not the longest one. It is the one that helps the buyer move fastest. "
+        f"This execution pack is built to reduce confusion, create momentum, and give {buyer.lower()} a cleaner way to {promise}.",
+        body_style,
     )
 
-    section(
-        "Copy-Paste Prompts",
-        f"\"Create a premium guide about {topic}\"\n\n"
-        "\"Generate viral content ideas\"\n\n"
-        "\"Write a product description that converts\""
-    )
-
-    section(
-        "Pricing Strategy",
-        "Start: $7–$19\n"
-        "Scale: $29–$49\n"
-        "Bundles: $79+"
-    )
-
-    section(
-        "Mistakes to Avoid",
-        "- Overthinking\n"
-        "- Waiting too long\n"
-        "- Not posting\n"
-        "- Making things too complex"
-    )
-
-    section(
-        "Bonus Ideas",
-        "- Bundle products\n"
-        "- Sell templates\n"
-        "- Sell prompts\n"
-        "- Create mini courses"
-    )
-
-    doc.build(content)
+    doc.build(story)
 
     return {
         "status": "done",
         "mode": "product",
-        "title": f"{topic} System",
+        "title": title,
         "file_name": filename,
         "file_url": f"/api/file/{filename}",
-        "preview_url": f"/api/file/{filename}"
+        "preview_url": f"/api/file/{filename}",
     }
 
 
 def build_product_batch(**kwargs):
-    topic = kwargs.get("topic", "AI System")
+    topic = _clean(kwargs.get("topic"), "AI System")
     count = int(kwargs.get("count", 3))
-    items = []
+    count = max(1, min(count, 10))
 
-    for i in range(max(1, min(count, 10))):
-        result = build_product_pack(
-            topic=f"{topic} {i+1}",
-            promise=kwargs.get("promise", "get results fast"),
-            buyer=kwargs.get("buyer", "beginners"),
-        )
-        items.append(result)
+    items = []
+    for i in range(count):
+        item_kwargs = dict(kwargs)
+        item_kwargs["topic"] = f"{topic} {i+1}"
+        items.append(build_product_pack(**item_kwargs))
 
     return {
         "status": "done",
         "mode": "product_batch",
         "count": len(items),
-        "items": items
+        "items": items,
     }
