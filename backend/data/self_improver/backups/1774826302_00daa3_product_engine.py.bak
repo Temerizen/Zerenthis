@@ -154,19 +154,13 @@ def _fulfillment_checklist(topic):
 
 
 def _score_product_pack(topic, promise, bonus, notes):
-    clean_topic = _clean(topic)
-    clean_promise = _clean(promise)
-    clean_bonus = _clean(bonus)
-    clean_notes = _clean(notes)
     checks = {
-        "has_specific_topic": bool(clean_topic) and len(clean_topic) >= 6,
-        "has_promise": bool(clean_promise) and len(clean_promise) >= 8,
-        "has_bonus": bool(clean_bonus),
-        "has_notes": bool(clean_notes),
-        "title_is_specific": len(_premium_title(clean_topic or "Digital Product", clean_promise or "").strip()) >= 20,
-        "commercial_inputs_present": sum(1 for v in [clean_promise, clean_bonus, clean_notes] if v) >= 2,
+        "has_specific_topic": bool(_clean(topic)),
+        "has_promise": bool(_clean(promise)),
+        "has_bonus": bool(_clean(bonus)),
+        "has_notes": bool(_clean(notes)),
     }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks)) * 100)
+    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
     return {"score": score, "checks": checks}
 
 

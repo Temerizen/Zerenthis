@@ -1073,5 +1073,54 @@
       "ok": true,
       "id": "prop_1774826162_557bd1f6"
     }
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826162_c83c984d",
+    "title": "Add monetization-ready lead funnel metrics and stronger health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826162_b6a3daaf",
+    "title": "Raise product output quality with clearer PDF scoring and commercialization checks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826208_e68d185e",
+    "title": "Add product quality scoring and monetization metadata to PDF outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826208_586c7e1b",
+    "title": "Add conversion-focused intake and offer guidance to API catalog and health flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826235",
+    "title": "Add deterministic proposal quality gates and duplicate suppression",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826235",
+    "title": "Add lead analytics and monetization-ready intake metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826239,
+    "id": "prop_1774826235",
+    "title": "Embed product quality scoring into generated PDF outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]
