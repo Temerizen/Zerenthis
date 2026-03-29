@@ -166,12 +166,7 @@ def _validate_steps(steps):
             target_path = ROOT / normalized_path
             if not target_path.exists():
                 raise ValueError(f"step {i} edit target does not exist: {normalized_path}")
-            try:
-                original = target_path.read_text(encoding="utf-8")
-            except UnicodeDecodeError:
-                raise ValueError(f"step {i} edit target is not a valid utf-8 text file: {normalized_path}")
-            except Exception as e:
-                raise ValueError(f"step {i} could not read edit target: {normalized_path} ({e})")
+            original = target_path.read_text(encoding="utf-8")
             occurrences = original.count(step.get("find"))
             if occurrences == 0:
                 raise ValueError(f"step {i} find text does not exist in file: {normalized_path}")

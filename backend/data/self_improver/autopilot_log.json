@@ -1042,5 +1042,36 @@
     "title": "Expose conversion-friendly metrics and catalog completeness in API",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826107_0676fbb3",
+    "title": "Add atomic lead logging and operational metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826149_fcab3fe2",
+    "title": "Add product deliverable quality metadata and monetization copy",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826149_9d06be11",
+    "title": "Strengthen API health and lead logging for better user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826236,
+    "id": "prop_1774826162_557bd1f6",
+    "title": "Make self-improver edits safer with binary-file guard and atomic proposal writes",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826162_557bd1f6"
+    }
   }
 ]
