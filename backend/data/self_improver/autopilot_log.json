@@ -1122,5 +1122,47 @@
     "title": "Embed product quality scoring into generated PDF outputs",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826282_051c193f",
+    "title": "Expose monetization and lead metrics in health and catalog responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826301_b33248a6",
+    "title": "Add API metrics endpoint for health, usage, and monetization visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826348_49a88c06",
+    "title": "Add intake analytics and conversion-ready lead metrics to health and catalog APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826348_633539eb",
+    "title": "Expose product quality scoring and monetization hooks in generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826399",
+    "title": "Add durable lead analytics and monetization endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826401,
+    "id": "prop_1774826399",
+    "title": "Expose product and video quality scores in API catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

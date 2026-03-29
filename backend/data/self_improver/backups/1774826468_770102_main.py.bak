@@ -194,8 +194,6 @@ def health():
 def catalog():
     return {
         "brand": "Zerenthis",
-        "currency": "USD",
-        "positioning": "AI-powered digital product and content generation",
         "products": [
             {
                 "id": "product-pack",
@@ -203,8 +201,7 @@ def catalog():
                 "category": "digital-product",
                 "starting_price": 19,
                 "deliverable": "pdf",
-                "best_for": "lead capture and low-ticket monetization",
-                "cta": "Generate a monetizable PDF pack"
+                "best_for": "lead capture and low-ticket monetization"
             },
             {
                 "id": "shorts-pack",

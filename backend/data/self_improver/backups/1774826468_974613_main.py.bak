@@ -131,31 +131,6 @@ def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -
     temp_file.replace(LEADS_FILE)
 
 
-def get_lead_metrics() -> dict:
-    items = []
-    if LEADS_FILE.exists():
-        try:
-            loaded = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
-            if isinstance(loaded, list):
-                items = loaded
-        except Exception:
-            items = []
-
-    consented = sum(1 for item in items if item.get("marketing_consent"))
-    with_email = sum(1 for item in items if item.get("customer_email"))
-    by_source = {}
-    for item in items:
-        source = item.get("source", "unknown")
-        by_source[source] = by_source.get(source, 0) + 1
-
-    return {
-        "total": len(items),
-        "with_email": with_email,
-        "marketing_consented": consented,
-        "by_source": by_source,
-    }
-
-
 # =========================
 # 🌐 CORE ROUTES
 # =========================
@@ -167,21 +142,22 @@ def root():
 
 @app.get("/health")
 def health():
-    lead_metrics = get_lead_metrics()
+    lead_items = []
+    if LEADS_FILE.exists():
+        try:
+            loaded = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
+            if isinstance(loaded, list):
+                lead_items = loaded
+        except Exception:
+            lead_items = []
     outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
     latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None
-    output_breakdown = {}
-    for output in outputs:
-        ext = output.suffix.lower() or "[no_ext]"
-        output_breakdown[ext] = output_breakdown.get(ext, 0) + 1
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
         "output_dir": str(OUTPUT_DIR),
         "output_count": len(outputs),
-        "output_breakdown": output_breakdown,
-        "lead_count": lead_metrics["total"],
-        "lead_metrics": lead_metrics,
+        "lead_count": len(lead_items),
         "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
         "cors_origin_count": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,
         "latest_output": latest_output,
@@ -194,8 +170,6 @@ def health():
 def catalog():
     return {
         "brand": "Zerenthis",
-        "currency": "USD",
-        "positioning": "AI-powered digital product and content generation",
         "products": [
             {
                 "id": "product-pack",
@@ -203,8 +177,7 @@ def catalog():
                 "category": "digital-product",
                 "starting_price": 19,
                 "deliverable": "pdf",
-                "best_for": "lead capture and low-ticket monetization",
-                "cta": "Generate a monetizable PDF pack"
+                "best_for": "lead capture and low-ticket monetization"
             },
             {
                 "id": "shorts-pack",
