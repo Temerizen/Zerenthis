@@ -6,7 +6,10 @@ import os, uuid
 OUT_DIR = "backend/data/outputs"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-def generate_product(topic):
+def build_product_pack(**kwargs):
+    topic = kwargs.get("topic", "AI System")
+    promise = kwargs.get("promise", "get results fast")
+    buyer = kwargs.get("buyer", "beginners")
 
     filename = f"{topic.replace(' ','_')}_{uuid.uuid4().hex[:6]}.pdf"
     path = os.path.join(OUT_DIR, filename)
@@ -22,129 +25,141 @@ def generate_product(topic):
         content.append(Paragraph(text, styles["BodyText"]))
         content.append(Spacer(1,20))
 
-    # 🔥 COVER
+    # COVER
     content.append(Paragraph(f"<b>{topic.upper()} SYSTEM</b>", styles["Title"]))
     content.append(Spacer(1,20))
-    content.append(Paragraph("A Complete Execution Blueprint to Make Money Fast", styles["BodyText"]))
+    content.append(Paragraph(f"A complete system to help {buyer} {promise}", styles["BodyText"]))
     content.append(PageBreak())
 
-    # 🔥 CORE STRATEGY
+    # CORE IDEA
     section("The Core Idea",
     f"""
-This system focuses on using AI to generate high-value assets quickly and sell them.
-Instead of building a brand slowly, you create products instantly and monetize immediately.
+This system focuses on using AI to generate high-value assets quickly and monetize them.
+Instead of building slowly, you create and sell immediately.
     """)
 
-    # 🔥 MODEL 1
-    section("Model 1: Digital Product Flipping",
-    """
-Use AI to generate premium PDFs (guides, playbooks, templates).
+    # MODEL 1
+    section("Model 1: Digital Product Engine",
+    f"""
+Create and sell PDFs using AI.
 
 Steps:
-1. Pick a problem (money, fitness, dating)
-2. Generate a full premium guide
+1. Choose a problem in {topic}
+2. Generate a premium guide
 3. Upload to Gumroad
-4. Price at $9–$29
+4. Price between $9–$29
 5. Repeat daily
 
-Tools:
-- ChatGPT / Zerenthis
-- Gumroad
-
-Goal: First sale within 24–72 hours
+Goal: First sale within days
     """)
 
-    # 🔥 MODEL 2
-    section("Model 2: Faceless Content Engine",
+    # MODEL 2
+    section("Model 2: Faceless Content System",
     """
-Create short-form videos using AI.
+Use AI to create viral short videos.
 
 Steps:
 1. Generate scripts
-2. Use AI voice
-3. Use captions
-4. Post to TikTok + YouTube Shorts
+2. Add AI voice
+3. Add captions
+4. Post daily
 
 Monetization:
 - Affiliate links
-- Digital products
-- Traffic funnel
-
-Goal: Build attention → convert to money
+- Product funnels
+- Traffic conversion
     """)
 
-    # 🔥 MODEL 3
-    section("Model 3: Service Arbitrage",
+    # MODEL 3
+    section("Model 3: AI Service System",
     """
-Sell AI services without doing the work manually.
+Sell services using AI.
 
 Examples:
 - Resume writing
-- Content writing
-- Social media posts
+- Content creation
+- Social posts
 
 Steps:
 1. Find client
 2. Generate work using AI
 3. Deliver fast
 4. Scale
-
-Goal: $100–$500 per client
     """)
 
-    # 🔥 EXECUTION PLAN
+    # EXECUTION PLAN
     section("7-Day Execution Plan",
     """
-Day 1: Pick niche + generate 3 products  
-Day 2: Upload + optimize listings  
-Day 3: Create 5 videos  
-Day 4: Post + track  
-Day 5: Improve content  
-Day 6: Add more products  
-Day 7: Double down on what works  
+Day 1: Generate 3 products  
+Day 2: Upload listings  
+Day 3: Create videos  
+Day 4: Post content  
+Day 5: Improve  
+Day 6: Expand  
+Day 7: Scale  
     """)
 
-    # 🔥 PROMPTS
-    section("Copy-Paste AI Prompts",
-    """
-"Create a premium guide about [topic] that people would pay for."
+    # PROMPTS
+    section("Copy-Paste Prompts",
+    f"""
+"Create a premium guide about {topic}"
 
-"Generate 10 viral TikTok ideas about [topic]."
+"Generate viral content ideas"
 
-"Write a high-converting product description."
+"Write a product description that converts"
     """)
 
-    # 🔥 PRICING
+    # PRICING
     section("Pricing Strategy",
     """
-Start:
-$7–$19 for fast conversions
-
-Scale:
-$29–$49 for premium packs
-
-Bundle:
-Multiple products → $79+
+Start: $7–$19  
+Scale: $29–$49  
+Bundles: $79+  
     """)
 
-    # 🔥 MISTAKES
+    # MISTAKES
     section("Mistakes to Avoid",
     """
 - Overthinking
+- Waiting too long
+- Not posting
 - Making things too complex
-- Waiting for perfection
-- Not uploading consistently
     """)
 
-    # 🔥 BONUS
+    # BONUS
     section("Bonus Ideas",
     """
-- Bundle 5 PDFs together
+- Bundle products
 - Sell templates
-- Sell prompt packs
-- Create mini-courses
+- Sell prompts
+- Create mini courses
     """)
 
     doc.build(content)
 
-    return path
+    return {
+        "status": "done",
+        "mode": "product",
+        "title": f"{topic} System",
+        "file_name": filename,
+        "file_url": f"/api/file/{filename}",
+        "preview_url": f"/api/file/{filename}"
+    }
+
+
+def build_product_batch(**kwargs):
+    topic = kwargs.get("topic", "AI System")
+    count = int(kwargs.get("count", 3))
+
+    items = []
+
+    for i in range(count):
+        result = build_product_pack(topic=f"{topic} {i+1}")
+        items.append(result)
+
+    return {
+        "status": "done",
+        "mode": "product_batch",
+        "count": len(items),
+        "items": items
+    }
