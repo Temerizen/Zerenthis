@@ -86,10 +86,6 @@ def save(d):
     temp.replace(FILE)
 
 
-def _now():
-    return int(time.time())
-
-
 def new_id():
     return f"prop_{int(time.time())}_{uuid.uuid4().hex[:6]}"
 
@@ -150,39 +146,6 @@ def validate_proposal_payload(title, reason, steps):
         "summary": summary,
         "risk": risk,
         "fingerprint": title_fp,
-    }
-
-
-def proposal_metrics(items):
-    total = len(items)
-    by_status = {"pending": 0, "approved": 0, "applied": 0, "rejected": 0, "failed": 0}
-    by_risk = {"low": 0, "medium": 0, "high": 0}
-    total_steps = 0
-    duplicate_fingerprints = 0
-    seen = set()
-
-    for item in items:
-        status = item.get("status")
-        if status in by_status:
-            by_status[status] += 1
-        steps = item.get("steps", [])
-        summary = item.get("summary") or summarize_steps(steps)
-        risk = item.get("risk") or assess_proposal_risk(steps)
-        total_steps += summary.get("step_count", 0)
-        level = risk.get("level")
-        if level in by_risk:
-            by_risk[level] += 1
-        fp = item.get("fingerprint") or _fingerprint(item.get("title", ""), steps)
-        if fp in seen:
-            duplicate_fingerprints += 1
-        seen.add(fp)
-
-    return {
-        "total": total,
-        "avg_steps": round(total_steps / total, 2) if total else 0,
-        "by_status": by_status,
-        "by_risk": by_risk,
-        "duplicate_fingerprints": duplicate_fingerprints,
     }
 
 
