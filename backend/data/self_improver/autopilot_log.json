@@ -1,0 +1,40 @@
+[
+  {
+    "time": 1774823957,
+    "id": "prop_1774822653_fe21f917",
+    "title": "Add API key protection and richer health status",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822653_5e45546c",
+    "title": "Protect self-improver routes with typed validation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822713_0e40884d",
+    "title": "Add API key gate and real base URL generation for monetization-safe output links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822785_4a9bfc4a",
+    "title": "Add API key gating and proper base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822785_bb973c80",
+    "title": "Improve frontend user flow with a working generation console",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774822785_bb973c80"
+    }
+  }
+]

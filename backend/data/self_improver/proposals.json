@@ -46,7 +46,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    proposal_count = len(load_proposals())\n    output_count = sum(1 for p in OUTPUT_DIR.iterdir() if p.is_file()) if OUTPUT_DIR.exists() else 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"outputs\": output_count,\n        \"self_improver_proposals\": proposal_count,\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822653.2390647
   },
   {
@@ -67,7 +67,7 @@
         "replace": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\napp.state.api_key = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822653.2501678
   },
   {
@@ -124,7 +124,7 @@
         "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822713.755666
   },
   {
@@ -199,7 +199,7 @@
         "replace": "        file_url = f\"/api/file/{path.name}\"\n        base_url = get_base_url()\n        if base_url:\n            file_url = f\"{base_url}{file_url}\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774822785.7613437
   },
   {
@@ -214,7 +214,7 @@
         "replace": "\"use client\"\n\nimport { useEffect, useMemo, useState } from \"react\"\n\ntype JobResponse = {\n  job_id?: string\n  status?: string\n  file_url?: string\n  [key: string]: any\n}\n\ntype GalleryItem = {\n  name: string\n  url: string\n  extension: string\n  size_bytes: number\n  modified_ts: number\n}\n\nexport default function Page() {\n  const [topic, setTopic] = useState(\"How to make money with AI in 2026\")\n  const [mode, setMode] = useState(\"product\")\n  const [jobId, setJobId] = useState(\"\")\n  const [job, setJob] = useState<JobResponse | null>(null)\n  const [loading, setLoading] = useState(false)\n  const [gallery, setGallery] = useState<GalleryItem[]>([])\n\n  const endpoint = useMemo(() => {\n    if (mode === \"shorts\") return \"/api/shorts-pack\"\n    if (mode === \"youtube\") return \"/api/youtube-pack\"\n    return \"/api/product-pack\"\n  }, [mode])\n\n  async function loadGallery() {\n    const res = await fetch(\"/api/gallery\", { cache: \"no-store\" })\n    const data = await res.json()\n    setGallery(data.items || [])\n  }\n\n  async function generate() {\n    setLoading(true)\n    setJob(null)\n    setJobId(\"\")\n\n    const res = await fetch(endpoint, {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({\n        topic,\n        niche: \"Make Money Online\",\n        tone: \"Premium\",\n        buyer: \"Beginners starting from zero\",\n        promise: \"get results faster\",\n        bonus: \"templates and prompts\",\n        notes: \"Keep it practical and premium\",\n        duration_seconds: 35,\n      }),\n    })\n\n    const data = await res.json()\n    setJob(data)\n    if (data.job_id) {\n      setJobId(data.job_id)\n    } else {\n      setLoading(false)\n      loadGallery()\n    }\n  }\n\n  useEffect(() => {\n    loadGallery()\n  }, [])\n\n  useEffect(() => {\n    if (!jobId) return\n\n    const timer = setInterval(async () => {\n      const res = await fetch(`/api/job/${jobId}`, { cache: \"no-store\" })\n      const data = await res.json()\n      setJob(data)\n\n      if (data.status && [\"done\", \"failed\", \"completed\"].includes(String(data.status).toLowerCase())) {\n        clearInterval(timer)\n        setLoading(false)\n        loadGallery()\n      }\n    }, 2000)\n\n    return () => clearInterval(timer)\n  }, [jobId])\n\n  return (\n    <main style={{ maxWidth: 980, margin: \"0 auto\", padding: 24, fontFamily: \"Arial, sans-serif\" }}>\n      <h1 style={{ fontSize: 36, marginBottom: 8 }}>Zerenthis</h1>\n      <p style={{ opacity: 0.8, marginBottom: 24 }}>Generate digital product packs, shorts, and YouTube assets from one simple console.</p>\n\n      <div style={{ display: \"grid\", gap: 12, marginBottom: 24 }}>\n        <input\n          value={topic}\n          onChange={(e) => setTopic(e.target.value)}\n          placeholder=\"Enter a topic\"\n          style={{ padding: 12, fontSize: 16, borderRadius: 10, border: \"1px solid #ccc\" }}\n        />\n\n        <div style={{ display: \"flex\", gap: 12, flexWrap: \"wrap\" }}>\n          <button onClick={() => setMode(\"product\")} style={{ padding: \"10px 14px\", borderRadius: 10 }}>{mode === \"product\" ? \"\u2713 \" : \"\"}Product Pack</button>\n          <button onClick={() => setMode(\"shorts\")} style={{ padding: \"10px 14px\", borderRadius: 10 }}>{mode === \"shorts\" ? \"\u2713 \" : \"\"}Shorts Pack</button>\n          <button onClick={() => setMode(\"youtube\")} style={{ padding: \"10px 14px\", borderRadius: 10 }}>{mode === \"youtube\" ? \"\u2713 \" : \"\"}YouTube Pack</button>\n          <button onClick={generate} disabled={loading || !topic.trim()} style={{ padding: \"10px 14px\", borderRadius: 10 }}>\n            {loading ? \"Generating...\" : \"Generate\"}\n          </button>\n        </div>\n      </div>\n\n      {job && (\n        <section style={{ marginBottom: 32, padding: 16, border: \"1px solid #ddd\", borderRadius: 12 }}>\n          <h2 style={{ marginTop: 0 }}>Latest Result</h2>\n          <pre style={{ whiteSpace: \"pre-wrap\", overflowX: \"auto\" }}>{JSON.stringify(job, null, 2)}</pre>\n        </section>\n      )}\n\n      <section>\n        <h2>Output Gallery</h2>\n        <div style={{ display: \"grid\", gap: 12 }}>\n          {gallery.map((item) => (\n            <a key={item.name} href={item.url} target=\"_blank\" rel=\"noreferrer\" style={{ padding: 14, border: \"1px solid #ddd\", borderRadius: 12, textDecoration: \"none\", color: \"inherit\" }}>\n              <strong>{item.name}</strong>\n              <div style={{ opacity: 0.7, marginTop: 4 }}>{item.extension} \u2022 {Math.round(item.size_bytes / 1024)} KB</div>\n            </a>\n          ))}\n        </div>\n      </section>\n    </main>\n  )\n}\n"
       }
     ],
-    "status": "pending",
+    "status": "applied",
     "created_at": 1774822785.7711408
   },
   {
@@ -1565,5 +1565,362 @@
     "created_at": 1774823820.3355556,
     "approved_at": 1774823825.764366,
     "applied_at": 1774823825.791557
+  },
+  {
+    "id": "prop_1774823847_fdeb08dd",
+    "title": "Fix self-improver execution reliability and add rollback-safe result reporting",
+    "reason": "The self-improver engine is currently truncated and unsafe to trust in production. Repairing execute() is the single highest-impact change for self-improver quality, approval safety, and overall reliability because proposals cannot be safely applied or audited without a complete execution path, rollback handling, and explicit result metadata.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def execute(pid: str) -> dict[str, Any]:\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p.get(\"steps\", []))\n\n    backups: list[tuple[Path, Path]] = []\n    created: list[Path] = []\n\n    try:\n        for s in p[\"steps\"]:\n            path = _normalize_path(s[\"path\"])\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    b = backup(path)\n                    if b:\n                        backups.append((path, b))\n                else:\n                    created.append(path)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                original = path.read_text(encoding=\"utf-8\", errors=\"ignore\")\n                find_text = s[\"find\"]\n                replace_text = s[\"replace\"]\n\n                if find_text not in original:\n                    raise ValueError(f\"find text not found in: {s['path']}\")\n\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n\n                updated = original.replace(find_text, replace_text, 1)\n                if updated == original:\n                    raise ValueError(f\"edit produced no change for: {s['path']}\")\n\n                path.write_text(updated, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        if not verify():\n            raise RuntimeError(\"verification failed\")\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = time.time()\n        save(d)\n        retu",
+        "replace": "def execute(pid: str) -> dict[str, Any]:\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p.get(\"steps\", []))\n\n    backups: list[tuple[Path, Path]] = []\n    created: list[Path] = []\n\n    try:\n        for s in p[\"steps\"]:\n            path = _normalize_path(s[\"path\"])\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    b = backup(path)\n                    if b:\n                        backups.append((path, b))\n                else:\n                    created.append(path)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                original = path.read_text(encoding=\"utf-8\", errors=\"ignore\")\n                find_text = s[\"find\"]\n                replace_text = s[\"replace\"]\n\n                if find_text not in original:\n                    raise ValueError(f\"find text not found in: {s['path']}\")\n\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n\n                updated = original.replace(find_text, replace_text, 1)\n                if updated == original:\n                    raise ValueError(f\"edit produced no change for: {s['path']}\")\n\n                path.write_text(updated, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        if not verify():\n            raise RuntimeError(\"verification failed\")\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = time.time()\n        p[\"result\"] = {\n            \"ok\": True,\n            \"applied_steps\": len(p.get(\"steps\", [])),\n            \"backup_count\": len(backups),\n            \"created_count\": len(created),\n        }\n        save(d)\n        return {\n            \"ok\": True,\n            \"id\": pid,\n            \"status\": \"applied\",\n            \"applied_steps\": len(p.get(\"steps\", [])),\n            \"backups\": [str(b.relative_to(ROOT)) for _, b in backups],\n            \"created\": [str(c.relative_to(ROOT)) for c in created],\n        }\n    except Exception as e:\n        rollback_errors: list[str] = []\n\n        for path in created:\n            try:\n                if path.exists():\n                    path.unlink()\n            except Exception as re:\n                rollback_errors.append(f\"failed removing created file {path}: {re}\")\n\n        for path, backup_path in reversed(backups):\n            try:\n                path.parent.mkdir(parents=True, exist_ok=True)\n                shutil.copy2(backup_path, path)\n            except Exception as re:\n                rollback_errors.append(f\"failed restoring {path} from {backup_path}: {re}\")\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = time.time()\n        p[\"error\"] = str(e)\n        if rollback_errors:\n            p[\"rollback_errors\"] = rollback_errors\n        save(d)\n\n        return {\n            \"ok\": False,\n            \"error\": str(e),\n            \"status\": \"failed\",\n            \"rollback_errors\": rollback_errors,\n        }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774823847.919855
+  },
+  {
+    "id": "prop_1774823847_c2fa8de7",
+    "title": "Add API metadata, environment-based base URL, and monetization-ready gallery fields",
+    "reason": "The API currently returns blank base URLs and minimal output metadata, which weakens product usability, download flow, and monetization readiness. Adding public URL generation plus file-type and inline preview hints improves frontend UX, supports selling/downloading outputs, and reduces friction for founder workflows.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    public_base = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if public_base:\n        return public_base\n    return \"http://localhost:8000\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"base_url\": get_base_url(),\n        \"output_dir\": str(OUTPUT_DIR),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        relative_url = f\"/api/file/{path.name}\"\n        file_kind = \"other\"\n        if ext == \".pdf\":\n            file_kind = \"document\"\n        elif ext == \".mp4\":\n            file_kind = \"video\"\n        elif ext in {\".png\", \".jpg\", \".jpeg\", \".webp\"}:\n            file_kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": relative_url,\n                \"absolute_url\": f\"{base_url}{relative_url}\",\n                \"extension\": ext,\n                \"kind\": file_kind,\n                \"download_name\": path.name,\n                \"is_previewable\": file_kind in {\"document\", \"video\", \"image\"},\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200)}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774823847.9349217
+  },
+  {
+    "id": "prop_1774823847_2bd46863",
+    "title": "Improve product pack quality with clearer sales copy and built-in monetization sections",
+    "reason": "The product engine is the monetization core, and its content quality directly affects perceived value and conversion. Strengthening the generated listing copy with outcome-focused language, buyer clarity, and offer framing raises output quality and makes the resulting PDFs more sellable without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _listing_copy(title, buyer, promise, bonus):\n    promise_text = promise or \"move faster with a clear system\"\n    bonus_text = bonus or \"prompts, templates, and checklists\"\n    return [\n        f\"{title} is a practical digital product for {buyer.lower()} who want to {promise_",
+        "replace": "def _listing_copy(title, buyer, promise, bonus):\n    promise_text = promise or \"move faster with a clear system\"\n    bonus_text = bonus or \"prompts, templates, and checklists\"\n    buyer_text = (buyer or \"beginners\").lower()\n    return [\n        f\"{title} is a practical digital product for {buyer_text} who want to {promise_text}.\",\n        \"It is built to remove overwhelm and turn vague intent into a step-by-step execution path.\",\n        f\"Inside, the buyer gets a focused system, action prompts, and {bonus_text} they can use immediately.\",\n        \"Position it as a shortcut offer: simple to start, premium in feel, and fast to apply.\",\n        \"The strongest angle is clarity + speed + actionability, not theory.\",\n        \"Use outcome-based copy on the sales page and show exactly what the buyer can do in the first 30 minutes.\",\n    ]\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774823847.9483426
+  },
+  {
+    "id": "prop_1774823907_0760bcc9",
+    "title": "Add API validation, monetization metadata, and safer CORS configuration",
+    "reason": "The main API currently exposes permissive CORS, lacks a usable base URL, and does not surface any monetization-oriented metadata to clients. Tightening configuration and enriching responses improves reliability, product output usability, and monetization readiness without changing the architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\nALLOWED_ORIGINS = [o.strip() for o in os.getenv(\"CORS_ALLOW_ORIGINS\", \"*\").split(\",\") if o.strip()]\n\napp = FastAPI(title=\"Zerenthis Automation Core\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=ALLOWED_ORIGINS,\n    allow_credentials=False if ALLOWED_ORIGINS == [\"*\"] else True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url(request: Request | None = None) -> str:\n    env_url = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if env_url:\n        return env_url\n    if request is not None:\n        return str(request.base_url).rstrip(\"/\")\n    return \"\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, request: Request):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        base_url=get_base_url(),\n",
+        "replace": "        base_url=get_base_url(request),\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True, \"output_dir\": str(OUTPUT_DIR), \"outputs_ready\": OUTPUT_DIR.exists()}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n\n    return {\"items\": items[:200]}\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    base_url = get_base_url(request)\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        monetization_type = \"digital_download\" if ext == \".pdf\" else \"video_asset\" if ext == \".mp4\" else \"image_asset\" if ext == \".png\" else \"file\"\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"absolute_url\": f\"{base_url}/api/file/{path.name}\" if base_url else f\"/api/file/{path.name}\",\n                \"extension\": ext,\n                \"monetization_type\": monetization_type,\n                \"recommended_channel\": \"Gumroad\" if ext == \".pdf\" else \"Short-form social\" if ext == \".mp4\" else \"Listing thumbnail\",\n            }\n        )\n\n    return {\"items\": items[:200], \"count\": min(len(items), 200), \"base_url\": base_url}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774823907.4937441
+  },
+  {
+    "id": "prop_1774823907_d47b76c0",
+    "title": "Repair truncated product engine sales copy to restore output quality",
+    "reason": "The product engine file is visibly truncated inside _sales_angles, which risks syntax/runtime failures and weakens the quality of generated paid-product content. Repairing that section is a high-impact, realistic fix for product output quality and overall reliability.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _sales_angles(topic, buyer, promise):\n    promise_text = promise or f\"get results with {topic}\"\n    return [\n        f\"Built for {buyer.lower()} who want to {promise_text} without \n",
+        "replace": "def _sales_angles(topic, buyer, promise):\n    buyer_text = (buyer or \"beginners\").lower()\n    promise_text = promise or f\"get results with {topic}\"\n    return [\n        f\"Built for {buyer_text} who want to {promise_text} without wasting weeks on trial and error.\",\n        f\"A practical system to help {buyer_text} make faster progress with {topic} using clear steps and assets.\",\n        f\"Designed to turn {topic} into a simpler, more actionable process instead of more overwhelming information.\",\n        f\"Helps buyers {promise_text} with templates, prompts, and execution support they can use immediately.\",\n        f\"A premium but beginner-friendly shortcut for people serious about improving results with {topic}.\",\n    ]\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774823907.498807
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Add API metadata, request IDs, and monetization-ready intake fields",
+    "reason": "The current API lacks user-facing context, traceability, and monetization inputs. Adding request IDs, structured error handling, richer health/root metadata, and optional CTA/brand/offer_url fields improves user flow, supportability, product output consistency, and readiness for paid distribution workflows.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from dotenv import load_dotenv\nload_dotenv()\n\nfrom fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from dotenv import load_dotenv\nload_dotenv()\n\nimport time\nimport uuid\nfrom fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse, JSONResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\napp = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    version=\"1.0.0\",\n    description=\"Local AI automation API for product packs, shorts, YouTube assets, gallery delivery, and self-improvement workflows.\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    brand_name: str = Field(default=\"Zerenthis\", max_length=100)\n    cta_text: str = Field(default=\"Download the execution pack\", max_length=160)\n    offer_url: str = Field(default=\"\", max_length=500)\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83c\udf10 CORE ROUTES\n# =========================\n\n@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "# =========================\n# \ud83c\udf10 CORE ROUTES\n# =========================\n\n@app.middleware(\"http\")\nasync def add_request_id(request: Request, call_next):\n    request_id = request.headers.get(\"x-request-id\", str(uuid.uuid4()))\n    start = time.time()\n    response = await call_next(request)\n    response.headers[\"x-request-id\"] = request_id\n    response.headers[\"x-process-time-ms\"] = str(int((time.time() - start) * 1000))\n    return response\n\n\n@app.exception_handler(HTTPException)\nasync def http_exception_handler(request: Request, exc: HTTPException):\n    return JSONResponse(\n        status_code=exc.status_code,\n        content={\n            \"ok\": False,\n            \"error\": exc.detail,\n            \"path\": str(request.url.path),\n        },\n    )\n\n\n@app.get(\"/\")\ndef root():\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"version\": app.version,\n        \"docs\": \"/docs\",\n        \"routes\": [\n            \"/api/product-pack\",\n            \"/api/shorts-pack\",\n            \"/api/youtube-pack\",\n            \"/api/gallery\",\n            \"/api/job/{job_id}\",\n            \"/self/pending\",\n        ],\n    }\n\n\n@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": app.title,\n        \"version\": app.version,\n        \"outputs_dir\": str(OUTPUT_DIR),\n        \"outputs_ready\": OUTPUT_DIR.exists(),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Make YouTube pack output more sellable with embedded offer and CTA guidance",
+    "reason": "YouTube pack generation is a direct product output surface. Right now it ignores monetization-specific fields and returns a generic script. Passing CTA/brand/offer_url into the generator and embedding a stronger conversion section will improve output quality and monetization readiness without changing architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        brand_name=payload.brand_name,\n        cta_text=payload.cta_text,\n        offer_url=payload.offer_url,\n    )\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nCTA IDEAS:\n- Download the companion execution pack.\n- Grab the prompt bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n    }\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str, brand_name: str = \"Zerenthis\", cta_text: str = \"Download the execution pack\", offer_url: str = \"\") -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    offer_line = offer_url or \"Add your store or checkout link here\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nBRAND:\n{brand_name}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\nPrimary CTA: {cta_text}\nOffer URL: {offer_line}\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\nBrand voice: premium, direct, useful\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nCTA IDEAS:\n- {cta_text}\n- Grab the companion bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nMONETIZATION BLOCK:\nLead magnet: free checklist or mini guide\nFront-end offer: execution pack\nUpsell: prompt vault or bundle\nOn-screen CTA: {cta_text}\nPinned comment CTA: {cta_text} \u2192 {offer_line}\nDescription CTA: {cta_text} \u2192 {offer_line}\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"brand_name\": brand_name,\n        \"cta_text\": cta_text,\n        \"offer_url\": offer_url,\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Add API key protection and richer health status [safe-prep]",
+    "reason": "Safe preparation extracted from: Self-improver approval and execution endpoints are currently open, which is risky for monetization readiness and production reliability. Adding optional API key protection plus a health endpoint that reports output and proposal counts makes the system safer to operate and easier to commercialize.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from backend.self_improver.routes import router as self_router\n",
+        "replace": "from backend.self_improver.routes import router as self_router\nfrom backend.self_improver.engine import load as load_proposals\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return os.getenv(\"ZERENTHIS_BASE_URL\", \"\").rstrip(\"/\")\n\n\ndef _require_api_key(request: Request) -> None:\n    configured = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not configured:\n        return\n\n    provided = request.headers.get(\"x-api-key\", \"\").strip()\n    if provided != configured:\n        raise HTTPException(status_code=401, detail=\"Unauthorized\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    proposal_count = len(load_proposals())\n    output_count = sum(1 for p in OUTPUT_DIR.iterdir() if p.is_file()) if OUTPUT_DIR.exists() else 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"outputs\": output_count,\n        \"self_improver_proposals\": proposal_count,\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Protect self-improver routes with typed validation [safe-prep]",
+    "reason": "Safe preparation extracted from: The self-improver propose/approve/execute flow currently accepts raw dicts and wildcard imports, which weakens reliability and operator safety. Strong request models and centralized API-key gating improve user flow for operators, reduce malformed proposals, and make the system safer for paid deployment.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from fastapi import APIRouter\nfrom backend.self_improver.engine import *\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n@router.post(\"/propose\")\ndef propose_route(data: dict):\n    return propose(data[\"title\"], data[\"reason\"], data[\"steps\"])\n\n@router.get(\"/pending\")\ndef pending_route():\n    return pending()\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str):\n    approve(pid)\n    return {\"ok\": True}\n\n@router.post(\"/reject/{pid}\")\ndef reject_route(pid: str):\n    reject(pid)\n    return {\"ok\": True}\n\n@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str):\n    return execute(pid)\n",
+        "replace": "from typing import Any\n\nfrom fastapi import APIRouter, HTTPException, Request\nfrom pydantic import BaseModel, Field\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\nclass ProposalRequest(BaseModel):\n    title: str = Field(min_length=3, max_length=200)\n    reason: str = Field(min_length=5, max_length=2000)\n    steps: list[dict[str, Any]] = Field(min_length=1, max_length=20)\n\n\ndef _guard(request: Request) -> None:\n    expected = request.app.state.api_key if hasattr(request.app.state, \"api_key\") else \"\"\n    if not expected:\n        return\n    provided = request.headers.get(\"x-api-key\", \"\").strip()\n    if provided != expected:\n        raise HTTPException(status_code=401, detail=\"Unauthorized\")\n\n\n@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest, request: Request):\n    _guard(request)\n    return propose(data.title, data.reason, data.steps)\n\n\n@router.get(\"/pending\")\ndef pending_route(request: Request):\n    _guard(request)\n    return pending()\n\n\n@router.post(\"/approve/{pid}\")\ndef approve_route(pid: str, request: Request):\n    _guard(request)\n    ok = approve(pid)\n    if not ok:\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    return {\"ok\": True}\n\n\n@router.post(\"/reject/{pid}\")\ndef reject_route(pid: str, request: Request):\n    _guard(request)\n    ok = reject(pid)\n    if not ok:\n        raise HTTPException(status_code=404, detail=\"Proposal not found\")\n    return {\"ok\": True}\n\n\n@router.post(\"/execute/{pid}\")\ndef execute_route(pid: str, request: Request):\n    _guard(request)\n    return execute(pid)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\napp = FastAPI(title=\"Zerenthis Automation Core\")\napp.state.api_key = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Add API key gate and real base URL generation for monetization-safe output links [safe-prep]",
+    "reason": "Safe preparation extracted from: The product currently has open founder/self-improver control surfaces and returns empty base URLs, which hurts security, monetization readiness, and shareable output quality. A simple optional API key gate plus environment-aware base URL generation is realistic, approval-safe, and immediately valuable for deployments and paid access control.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, Header, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    return \"\"\n",
+        "replace": "def get_base_url() -> str:\n    return (os.getenv(\"PUBLIC_BASE_URL\") or os.getenv(\"RENDER_EXTERNAL_URL\") or \"\").rstrip(\"/\")\n\n\ndef require_api_key(x_api_key: str | None) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Unauthorized\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774823957",
+    "title": "Add API key gating and proper base URL generation [safe-prep]",
+    "reason": "Safe preparation extracted from: The current API is fully open with wildcard CORS and empty base URLs, which hurts monetization readiness, deployment quality, and product output usability. A lightweight API key check for generation endpoints plus environment-based file URLs makes the product safer to expose and easier to sell.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Header\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return \"\"\n",
+        "replace": "# =========================\n# \ud83e\udde0 HELPERS\n# =========================\n\ndef get_base_url() -> str:\n    return os.getenv(\"PUBLIC_BASE_URL\", \"\").rstrip(\"/\")\n\n\ndef require_api_key(x_api_key: str | None) -> None:\n    expected = os.getenv(\"ZERENTHIS_API_KEY\", \"\").strip()\n    if not expected:\n        return\n    if x_api_key != expected:\n        raise HTTPException(status_code=401, detail=\"Invalid API key\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    return build_youtube_pack(\n",
+        "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    return build_youtube_pack(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest, x_api_key: str | None = Header(default=None)):\n    require_api_key(x_api_key)\n    job_id = create_job(\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": f\"/api/file/{path.name}\",\n                \"extension\": path.suffix.lower(),\n            }\n        )\n",
+        "replace": "        file_url = f\"/api/file/{path.name}\"\n        base_url = get_base_url()\n        if base_url:\n            file_url = f\"{base_url}{file_url}\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"url\": file_url,\n                \"extension\": path.suffix.lower(),\n            }\n        )\n"
+      }
+    ],
+    "status": "pending"
   }
 ]
