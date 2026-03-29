@@ -6248,7 +6248,9 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_buyer\": bool(_clean(buyer)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _monetization_notes(topic, niche):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    niche_text = _clean(niche, \"online business\")\n    return [\n        f\"Lead with a low-friction {topic_tc} entry offer to maximize first-time conversions.\",\n        \"Use order bumps for templates, checklists, or prompt packs to lift average order value.\",\n        \"Bundle related assets into a premium tier so buyers can self-select into a higher spend option.\",\n        f\"Position the offer around time saved and clarity gained for buyers in {niche_text}.\",\n    ]\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825038.4888864
+    "status": "applied",
+    "created_at": 1774825038.4888864,
+    "approved_at": 1774825042.120732,
+    "applied_at": 1774825042.155657
   }
 ]

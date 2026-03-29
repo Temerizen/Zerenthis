@@ -128,29 +128,6 @@ def _distribution_ideas(topic):
     ]
 
 
-def _quality_score(topic, buyer, promise, bonus, notes):
-    checks = {
-        "has_topic": bool(_clean(topic)),
-        "has_buyer": bool(_clean(buyer)),
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-
-
-def _monetization_notes(topic, niche):
-    topic_tc = _title_case(_clean(topic, "Digital Product"))
-    niche_text = _clean(niche, "online business")
-    return [
-        f"Lead with a low-friction {topic_tc} entry offer to maximize first-time conversions.",
-        "Use order bumps for templates, checklists, or prompt packs to lift average order value.",
-        "Bundle related assets into a premium tier so buyers can self-select into a higher spend option.",
-        f"Position the offer around time saved and clarity gained for buyers in {niche_text}.",
-    ]
-
-
 def _value_stack(topic, bonus):
     topic_tc = _title_case(_clean(topic, "Digital Product"))
     bonus_text = _clean(bonus, "Bonus prompt and checklist pack")
