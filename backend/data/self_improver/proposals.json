@@ -6614,8 +6614,11 @@
         "replace": "    except Exception as e:\n        for path, backup_path in reversed(backups):\n            if backup_path.exists():\n                shutil.copy2(backup_path, path)\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = int(time.time())\n        p[\"error\"] = str(e)\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"error\": str(e),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"error\": str(e)}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825178.3038666
+    "status": "failed",
+    "created_at": 1774825178.3038666,
+    "approved_at": 1774825196.6589093,
+    "failed_at": 1774825196.7210956,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774825178_b545d616",
@@ -6635,8 +6638,10 @@
         "replace": "@router.get(\"/pending\")\ndef pending_route():\n    return pending()\n\n\n@router.get(\"/history\")\ndef history_route():\n    items = load()\n    return sorted(items, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n\n\n@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825178.37332
+    "status": "applied",
+    "created_at": 1774825178.37332,
+    "approved_at": 1774825196.746354,
+    "applied_at": 1774825196.786156
   },
   {
     "id": "prop_1774825194_2916da44",

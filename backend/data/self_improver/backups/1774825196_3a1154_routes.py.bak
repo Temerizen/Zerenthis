@@ -28,30 +28,6 @@ def pending_route():
     return pending()
 
 
-@router.get("/history")
-def history_route():
-    items = load()
-    return sorted(items, key=lambda x: x.get("created_at", 0), reverse=True)
-
-
-@router.get("/stats")
-def stats_route():
-    items = load()
-    counts = {
-        "pending": 0,
-        "approved": 0,
-        "applied": 0,
-        "rejected": 0,
-        "failed": 0,
-    }
-    for item in items:
-        status = item.get("status")
-        if status in counts:
-            counts[status] += 1
-    counts["total"] = len(items)
-    return counts
-
-
 @router.post("/approve/{pid}")
 def approve_route(pid: str):
     ok = approve(pid)

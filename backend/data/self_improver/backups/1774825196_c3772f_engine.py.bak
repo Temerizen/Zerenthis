@@ -38,11 +38,11 @@ def _fingerprint(title, steps):
 def _load_execution_log():
     if not EXECUTION_LOG.exists():
         return []
-    return json.loads(EXECUTION_LOG.read_text(encoding="utf-8"))
+    return json.loads(EXECUTION_LOG.read_text())
 
 
 def _save_execution_log(items):
-    EXECUTION_LOG.write_text(json.dumps(items, indent=2), encoding="utf-8")
+    EXECUTION_LOG.write_text(json.dumps(items, indent=2))
 
 
 def _validate_steps(steps):
