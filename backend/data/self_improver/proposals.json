@@ -9661,8 +9661,10 @@
         "replace": "from reportlab.lib.units import inch\nimport json\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826627.3625748
+    "status": "applied",
+    "created_at": 1774826627.3625748,
+    "approved_at": 1774826629.6599817,
+    "applied_at": 1774826629.7858245
   },
   {
     "id": "prop_1774826627_71f5c8fa",
