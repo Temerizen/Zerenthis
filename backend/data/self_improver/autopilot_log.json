@@ -347,5 +347,47 @@
     "title": "Lock down CORS and improve health visibility for deployment reliability",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824155_8f4fafca",
+    "title": "Make API responses production-ready with request validation and secure CORS",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824178_4939e914",
+    "title": "Add request validation, safer CORS, and gallery metadata for better UX and production readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824222_d920c456",
+    "title": "Add product-ready API metadata, better CORS handling, and monetization-friendly endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824222_5d6f88e8",
+    "title": "Improve output quality with stronger gallery metadata and file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824294",
+    "title": "Add proposal schema validation at the API boundary",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824294",
+    "title": "Improve API trust and monetization readiness with metadata, CORS config, and request-safe gallery output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

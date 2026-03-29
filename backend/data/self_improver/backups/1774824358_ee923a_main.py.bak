@@ -194,11 +194,7 @@ def founder_shorts_batch(payload: BatchRequest):
         base_url=get_base_url(),
         count=payload.count,
     )
-    return {
-        "job_id": job_id,
-        "status": "queued",
-        "job_url": f"{get_base_url()}/api/job/{job_id}",
-    }
+    return {"job_id": job_id, "status": "queued"}
 
 
 # =========================
@@ -249,7 +245,6 @@ def gallery():
                 "name": path.name,
                 "size_bytes": path.stat().st_size,
                 "modified_ts": path.stat().st_mtime,
-                "download_url": f"{get_base_url()}/api/file/{quote(path.name)}",
                 "url": f"/api/file/{path.name}",
                 "extension": path.suffix.lower(),
             }

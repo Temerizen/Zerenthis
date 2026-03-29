@@ -13,7 +13,6 @@ load_dotenv()
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from urllib.parse import quote
 from pydantic import BaseModel, Field
 
 # ✅ Routers
@@ -41,8 +40,8 @@ app.include_router(self_router)
 # ✅ Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS if ALLOWED_ORIGINS else ["*"],
-    allow_credentials=False if "*" in ALLOWED_ORIGINS else True,
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -88,12 +87,7 @@ def root():
 
 @app.get("/health")
 def health():
-    return {
-        "ok": True,
-        "service": "Zerenthis Automation Core",
-        "output_dir": str(OUTPUT_DIR),
-        "output_count": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),
-    }
+    return {"ok": True}
 
 
 # =========================
@@ -115,11 +109,7 @@ def product_pack(payload: GenerateRequest):
         notes=payload.notes,
         base_url=get_base_url(),
     )
-    return {
-        "job_id": job_id,
-        "status": "queued",
-        "job_url": f"{get_base_url()}/api/job/{job_id}",
-    }
+    return {"job_id": job_id, "status": "queued"}
 
 
 @app.post("/api/shorts-pack")
@@ -134,11 +124,7 @@ def shorts_pack(payload: GenerateRequest):
         duration_seconds=payload.duration_seconds,
         base_url=get_base_url(),
     )
-    return {
-        "job_id": job_id,
-        "status": "queued",
-        "job_url": f"{get_base_url()}/api/job/{job_id}",
-    }
+    return {"job_id": job_id, "status": "queued"}
 
 
 @app.post("/api/youtube-pack")
@@ -174,11 +160,7 @@ def founder_product_batch(payload: BatchRequest):
         base_url=get_base_url(),
         count=payload.count,
     )
-    return {
-        "job_id": job_id,
-        "status": "queued",
-        "job_url": f"{get_base_url()}/api/job/{job_id}",
-    }
+    return {"job_id": job_id, "status": "queued"}
 
 
 @app.post("/api/founder/shorts-batch")
@@ -194,11 +176,7 @@ def founder_shorts_batch(payload: BatchRequest):
         base_url=get_base_url(),
         count=payload.count,
     )
-    return {
-        "job_id": job_id,
-        "status": "queued",
-        "job_url": f"{get_base_url()}/api/job/{job_id}",
-    }
+    return {"job_id": job_id, "status": "queued"}
 
 
 # =========================
@@ -249,7 +227,6 @@ def gallery():
                 "name": path.name,
                 "size_bytes": path.stat().st_size,
                 "modified_ts": path.stat().st_mtime,
-                "download_url": f"{get_base_url()}/api/file/{quote(path.name)}",
                 "url": f"/api/file/{path.name}",
                 "extension": path.suffix.lower(),
             }

@@ -249,7 +249,6 @@ def gallery():
                 "name": path.name,
                 "size_bytes": path.stat().st_size,
                 "modified_ts": path.stat().st_mtime,
-                "download_url": f"{get_base_url()}/api/file/{quote(path.name)}",
                 "url": f"/api/file/{path.name}",
                 "extension": path.suffix.lower(),
             }

@@ -3747,7 +3747,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"download_url\": f\"{get_base_url()}/api/file/{quote(path.name)}\",\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774824155.2904797
   },
   {
@@ -3815,7 +3815,7 @@
         "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        if ext == \".pdf\":\n            kind = \"product\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n        else:\n            kind = \"file\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"kind\": kind,\n                \"download_url\": f\"{get_base_url()}/api/file/{path.name}\",\n             "
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774824178.9261138
   },
   {
@@ -3830,7 +3830,453 @@
         "replace": "def _pricing_recommendation():\n    return [\n        [\"Front-end offer\", \"$9-$19\"],\n        [\"Premium version\", \"$19-$29\"],\n        [\"Bundle / order bump\", \"$29-$49\"],\n    ]\n\n\ndef _order_bump_ideas(topic):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    return [\n        f\"Add a {topic_tc} checklist as a $7 order bump.\",\n        f\"Add a {topic_tc} prompt vault as a $9 upsell.\",\n        f\"Bundle templates + guide + prompts into a premium version.\",\n        \"Offer a limited-time launch discount for the first buyers.\",\n    ]\n\n\ndef _checkout_copy(topic, buyer, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic}\")\n    return [\n        f\"Built for {buyer_text.lower()} who want to {promise_text} without wasting time.\",\n        f\"This {topic_tc} pack gives you a faster path with practical assets, not fluff.\",\n        \"Use it to launch faster, create clearer offers, and reduce decision fatigue.\",\n    ]\n\n\ndef _cta_assets(topic):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    return [\n        f\"Download the {topic_tc} execution pack.\",\n        f\"Grab the {topic_tc} prompt vault.\",\n        f\"Start with the {topic_tc} starter kit today.\",\n    ]\n\n\ndef _mistakes():\n    return [\n        \"Making the product too broad\",\n        \"Using weak, vague titles\",\n        \"Padding pages instead of adding practical value\",\n        \"Uploading once and never testing more offers\",\n        \"Waiting for perfection before listing\",\n    ]\n"
       }
     ],
+    "status": "failed",
+    "created_at": 1774824178.9715989,
+    "approved_at": 1774824180.7825766,
+    "failed_at": 1774824180.832549,
+    "error": "find text not found in: backend/Engine/product_engine.py"
+  },
+  {
+    "id": "prop_1774824222_d920c456",
+    "title": "Add product-ready API metadata, better CORS handling, and monetization-friendly endpoints",
+    "reason": "The main API currently ignores configured allowed origins, has a minimal health check, and lacks any endpoint that exposes product capabilities or pricing-ready catalog data. Improving API metadata, CORS behavior, and adding a lightweight catalog endpoint will improve reliability, frontend integration, monetization readiness, and user flow without changing core generation behavior.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n",
+        "replace": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "app = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    version=\"1.0.0\",\n    description=\"Local AI automation API for product packs, shorts, YouTube packs, and self-improver workflows.\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "allow_all_origins = ALLOWED_ORIGINS == [\"*\"]\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if allow_all_origins else ALLOWED_ORIGINS,\n    allow_credentials=not allow_all_origins,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_dir_exists\": OUTPUT_DIR.exists(),\n        \"allowed_origins\": ALLOWED_ORIGINS,\n    }\n\n\n@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"offers\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Product Execution Pack\",\n                \"endpoint\": \"/api/product-pack\",\n                \"starting_price\": 19,\n                \"delivery\": \"async_job\",\n                \"best_for\": \"lead magnets, PDFs, starter digital products\",\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Video Pack\",\n                \"endpoint\": \"/api/shorts-pack\",\n                \"starting_price\": 29,\n                \"delivery\": \"async_job\",\n                \"best_for\": \"short-form content and top-of-funnel promotion\",\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Strategy Pack\",\n                \"endpoint\": \"/api/youtube-pack\",\n                \"starting_price\": 39,\n                \"delivery\": \"sync_response\",\n                \"best_for\": \"long-form authority content and offer promotion\",\n            },\n        ],\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774824222.054527
+  },
+  {
+    "id": "prop_1774824222_5d6f88e8",
+    "title": "Improve output quality with stronger gallery metadata and file URLs",
+    "reason": "Generated output is more usable when the frontend can immediately classify and link files. Enriching gallery responses with file type and direct URLs improves user flow, reduces frontend guesswork, and makes the product feel more polished and marketplace-ready.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n             ",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        file_type = \"other\"\n        if suffix == \".pdf\":\n            file_type = \"pdf\"\n        elif suffix == \".mp4\":\n            file_type = \"video\"\n        elif suffix in {\".png\", \".jpg\", \".jpeg\"}:\n            file_type = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"file_type\": file_type,\n                \"download_url\": f\"{base_url}/api/file/{path.name}\",\n             "
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774824222.0649781
+  },
+  {
+    "id": "prop_1774824294",
+    "title": "Add proposal schema validation at the API boundary",
+    "reason": "The self-improver route accepts unstructured step payloads today, which lowers proposal quality and increases runtime failures. Enforcing an explicit, approval-safe step schema at request time improves self-improver output quality, user flow, and reliability before proposals are even stored.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from typing import Any\n\nfrom fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel, Field\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\nclass ProposalRequest(BaseModel):\n    title: str = Field(min_length=3, max_length=200)\n    reason: str = Field(min_length=10, max_length=2000)\n    steps: list[dict[str, Any]]\n\n\n@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "from typing import Literal\n\nfrom fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel, Field, model_validator\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\nclass ProposalStep(BaseModel):\n    action: Literal[\"create_file\", \"edit_file\", \"delete_file\"]\n    path: str = Field(min_length=1, max_length=300)\n    find: str | None = None\n    replace: str | None = None\n    content: str | None = None\n\n    @model_validator(mode=\"after\")\n    def validate_by_action(self):\n        if self.action == \"create_file\" and self.content is None:\n            raise ValueError(\"create_file requires content\")\n        if self.action == \"edit_file\" and (self.find is None or self.replace is None):\n            raise ValueError(\"edit_file requires find and replace\")\n        return self\n\n\nclass ProposalRequest(BaseModel):\n    title: str = Field(min_length=3, max_length=200)\n    reason: str = Field(min_length=10, max_length=2000)\n    steps: list[ProposalStep] = Field(min_length=1, max_length=20)\n\n\n@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    return propose(data.title, data.reason, [step.model_dump(exclude_none=True) for step in data.steps])\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774824294",
+    "title": "Improve API trust and monetization readiness with metadata, CORS config, and request-safe gallery output",
+    "reason": "The product API is missing polished metadata, uses permissive CORS regardless of environment, and exposes raw gallery files without a direct URL field. Tightening CORS and returning richer gallery metadata improves reliability and frontend flow, while better API descriptions and status details improve monetization readiness for demos, integrations, and customer-facing use.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\nALLOWED_ORIGINS = [o.strip() for o in os.getenv(\"CORS_ALLOW_ORIGINS\", \"*\").split(\",\") if o.strip()]\n\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\nALLOWED_ORIGINS = [o.strip() for o in os.getenv(\"CORS_ALLOW_ORIGINS\", \"*\").split(\",\") if o.strip()]\nALLOW_ALL_ORIGINS = ALLOWED_ORIGINS == [\"*\"]\n\napp = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    description=\"Local AI product and content generation API for digital products, shorts, YouTube packs, and self-improvement workflows.\",\n    version=\"0.1.0\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if ALLOW_ALL_ORIGINS else ALLOWED_ORIGINS,\n    allow_credentials=not ALLOW_ALL_ORIGINS,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"allowed_origins\": ALLOWED_ORIGINS,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"other\"\n        if ext == \".pdf\":\n            kind = \"pdf\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"kind\": kind,\n                \"download_url\": f\"{get_base_url()}/api/file/{path.name}\",\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Make API responses production-ready with request validation and secure CORS [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API currently accepts permissive CORS regardless of environment and lacks clear monetization-ready metadata such as job polling URLs, gallery asset URLs, and stronger health diagnostics. Improving this boosts reliability, frontend integration quality, and deployment readiness.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom urllib.parse import quote\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=ALLOWED_ORIGINS if ALLOWED_ORIGINS else [\"*\"],\n    allow_credentials=False if \"*\" in ALLOWED_ORIGINS else True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/shorts-pack\")\ndef shorts_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"shorts\",\n        payload.model_dump(),\n        build_shorts_video,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/product-batch\")\ndef founder_product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"download_url\": f\"{get_base_url()}/api/file/{quote(path.name)}\",\n"
+      }
+    ],
+    "status": "applied",
+    "approved_at": 1774824358.3017735,
+    "applied_at": 1774824358.3985698
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Add request validation, safer CORS, and gallery metadata for better UX and production readiness [safe-prep]",
+    "reason": "Safe preparation extracted from: The API currently accepts mostly unchecked freeform inputs, always exposes wildcard CORS, and returns limited file metadata. Adding lightweight sanitization and richer output metadata improves product quality, reliability, and user flow while making the system more deployment- and monetization-ready for hosted frontends.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from __future__ import annotations\n\nimport sys\nfrom pathlib import Path\nimport os\n\n# \u2705 Fix import paths\nsys.path.append(str(Path(__file__).resolve().parents[1]))\n\nfrom dotenv import load_dotenv\nload_dotenv()\n\nfrom fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from __future__ import annotations\n\nimport sys\nfrom pathlib import Path\nimport os\n\n# \u2705 Fix import paths\nsys.path.append(str(Path(__file__).resolve().parents[1]))\n\nfrom dotenv import load_dotenv\nload_dotenv()\n\nfrom fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field, field_validator\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Middleware\nallow_all_origins = ALLOWED_ORIGINS == [\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if allow_all_origins else ALLOWED_ORIGINS,\n    allow_credentials=not allow_all_origins,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\", max_length=200)\n    tone: str = Field(default=\"Premium\", max_length=50)\n    buyer: str = Field(default=\"Beginners starting from zero\", max_length=200)\n    promise: str = Field(default=\"\", max_length=300)\n    bonus: str = Field(default=\"\", max_length=300)\n    notes: str = Field(default=\"\", max_length=1000)\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n    @field_validator(\"topic\", \"niche\", \"tone\", \"buyer\", \"promise\", \"bonus\", \"notes\")\n    @classmethod\n    def normalize_text(cls, value: str) -> str:\n        value = (value or \"\").replace(\"\\x00\", \" \").strip()\n        return \" \".join(value.split())\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis-core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"public_base_url\": get_base_url(),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n             ",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        if ext == \".pdf\":\n            kind = \"product\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n        else:\n            kind = \"file\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"kind\": kind,\n                \"download_url\": f\"{get_base_url()}/api/file/{path.name}\",\n             "
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774824358.3017735
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Add product-ready API metadata, better CORS handling, and monetization-friendly endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API currently ignores configured allowed origins, has a minimal health check, and lacks any endpoint that exposes product capabilities or pricing-ready catalog data. Improving API metadata, CORS behavior, and adding a lightweight catalog endpoint will improve reliability, frontend integration, monetization readiness, and user flow without changing core generation behavior.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n",
+        "replace": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "app = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    version=\"1.0.0\",\n    description=\"Local AI automation API for product packs, shorts, YouTube packs, and self-improver workflows.\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "allow_all_origins = ALLOWED_ORIGINS == [\"*\"]\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if allow_all_origins else ALLOWED_ORIGINS,\n    allow_credentials=not allow_all_origins,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_dir_exists\": OUTPUT_DIR.exists(),\n        \"allowed_origins\": ALLOWED_ORIGINS,\n    }\n\n\n@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"offers\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Product Execution Pack\",\n                \"endpoint\": \"/api/product-pack\",\n                \"starting_price\": 19,\n                \"delivery\": \"async_job\",\n                \"best_for\": \"lead magnets, PDFs, starter digital products\",\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Video Pack\",\n                \"endpoint\": \"/api/shorts-pack\",\n                \"starting_price\": 29,\n                \"delivery\": \"async_job\",\n                \"best_for\": \"short-form content and top-of-funnel promotion\",\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Strategy Pack\",\n                \"endpoint\": \"/api/youtube-pack\",\n                \"starting_price\": 39,\n                \"delivery\": \"sync_response\",\n                \"best_for\": \"long-form authority content and offer promotion\",\n            },\n        ],\n    }\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774824358.3017735
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Improve output quality with stronger gallery metadata and file URLs [safe-prep]",
+    "reason": "Safe preparation extracted from: Generated output is more usable when the frontend can immediately classify and link files. Enriching gallery responses with file type and direct URLs improves user flow, reduces frontend guesswork, and makes the product feel more polished and marketplace-ready.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n             ",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    base_url = get_base_url()\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        suffix = path.suffix.lower()\n        file_type = \"other\"\n        if suffix == \".pdf\":\n            file_type = \"pdf\"\n        elif suffix == \".mp4\":\n            file_type = \"video\"\n        elif suffix in {\".png\", \".jpg\", \".jpeg\"}:\n            file_type = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"file_type\": file_type,\n                \"download_url\": f\"{base_url}/api/file/{path.name}\",\n             "
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774824358.3017735
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Add proposal schema validation at the API boundary [safe-prep]",
+    "reason": "Safe preparation extracted from: The self-improver route accepts unstructured step payloads today, which lowers proposal quality and increases runtime failures. Enforcing an explicit, approval-safe step schema at request time improves self-improver output quality, user flow, and reliability before proposals are even stored.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from typing import Any\n\nfrom fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel, Field\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\nclass ProposalRequest(BaseModel):\n    title: str = Field(min_length=3, max_length=200)\n    reason: str = Field(min_length=10, max_length=2000)\n    steps: list[dict[str, Any]]\n\n\n@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "from typing import Literal\n\nfrom fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel, Field, model_validator\n\nfrom backend.self_improver.engine import approve, execute, pending, propose, reject\n\nrouter = APIRouter(prefix=\"/self\", tags=[\"Self Improver\"])\n\n\nclass ProposalStep(BaseModel):\n    action: Literal[\"create_file\", \"edit_file\", \"delete_file\"]\n    path: str = Field(min_length=1, max_length=300)\n    find: str | None = None\n    replace: str | None = None\n    content: str | None = None\n\n    @model_validator(mode=\"after\")\n    def validate_by_action(self):\n        if self.action == \"create_file\" and self.content is None:\n            raise ValueError(\"create_file requires content\")\n        if self.action == \"edit_file\" and (self.find is None or self.replace is None):\n            raise ValueError(\"edit_file requires find and replace\")\n        return self\n\n\nclass ProposalRequest(BaseModel):\n    title: str = Field(min_length=3, max_length=200)\n    reason: str = Field(min_length=10, max_length=2000)\n    steps: list[ProposalStep] = Field(min_length=1, max_length=20)\n\n\n@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    return propose(data.title, data.reason, [step.model_dump(exclude_none=True) for step in data.steps])\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774824358.3017735
+  },
+  {
+    "id": "prop_1774824295",
+    "title": "Improve API trust and monetization readiness with metadata, CORS config, and request-safe gallery output [safe-prep]",
+    "reason": "Safe preparation extracted from: The product API is missing polished metadata, uses permissive CORS regardless of environment, and exposes raw gallery files without a direct URL field. Tightening CORS and returning richer gallery metadata improves reliability and frontend flow, while better API descriptions and status details improve monetization readiness for demos, integrations, and customer-facing use.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Initialize app PROPERLY\nALLOWED_ORIGINS = [o.strip() for o in os.getenv(\"CORS_ALLOW_ORIGINS\", \"*\").split(\",\") if o.strip()]\n\napp = FastAPI(title=\"Zerenthis Automation Core\")\n",
+        "replace": "# \u2705 Initialize app PROPERLY\nALLOWED_ORIGINS = [o.strip() for o in os.getenv(\"CORS_ALLOW_ORIGINS\", \"*\").split(\",\") if o.strip()]\nALLOW_ALL_ORIGINS = ALLOWED_ORIGINS == [\"*\"]\n\napp = FastAPI(\n    title=\"Zerenthis Automation Core\",\n    description=\"Local AI product and content generation API for digital products, shorts, YouTube packs, and self-improvement workflows.\",\n    version=\"0.1.0\",\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if ALLOW_ALL_ORIGINS else ALLOWED_ORIGINS,\n    allow_credentials=not ALLOW_ALL_ORIGINS,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"allowed_origins\": ALLOWED_ORIGINS,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/gallery\")\ndef gallery():\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n",
+        "replace": "@app.get(\"/api/gallery\")\ndef gallery(request: Request):\n    items = []\n    for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):\n        if not path.is_file():\n            continue\n\n        ext = path.suffix.lower()\n        kind = \"other\"\n        if ext == \".pdf\":\n            kind = \"pdf\"\n        elif ext == \".mp4\":\n            kind = \"video\"\n        elif ext == \".png\":\n            kind = \"image\"\n\n        items.append(\n            {\n                \"name\": path.name,\n                \"size_bytes\": path.stat().st_size,\n                \"modified_ts\": path.stat().st_mtime,\n                \"kind\": kind,\n                \"download_url\": f\"{get_base_url()}/api/file/{path.name}\",\n"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774824358.3017735
+  },
+  {
+    "id": "prop_1774824299_f7d3c9ea",
+    "title": "Add API request validation, useful health metadata, and monetization-ready lead capture endpoint",
+    "reason": "The backend currently allows any origin despite an env-based config, has only a shallow health route, and lacks any monetization capture flow. Tightening CORS, exposing operational metadata, and adding a lightweight email waitlist endpoint improves reliability, launch readiness, and user flow without large structural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, EmailStr, Field\nimport json\nimport time\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "OUTPUT_DIR = BACKEND_DIR / \"data\" / \"outputs\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n",
+        "replace": "OUTPUT_DIR = BACKEND_DIR / \"data\" / \"outputs\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_FILE = BACKEND_DIR / \"data\" / \"leads.json\"\nif not LEADS_FILE.exists():\n    LEADS_FILE.write_text(\"[]\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=ALLOWED_ORIGINS,\n    allow_credentials=False if ALLOWED_ORIGINS == [\"*\"] else True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n",
+        "replace": "class BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n\n\nclass LeadRequest(BaseModel):\n    email: EmailStr\n    interest: str = Field(default=\"general\", min_length=2, max_length=100)\n    source: str = Field(default=\"site\", min_length=2, max_length=100)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def get_base_url() -> str:\n    public_base = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if public_base:\n        return public_base\n    return \"http://localhost:8000\"\n",
+        "replace": "def get_base_url() -> str:\n    public_base = os.getenv(\"PUBLIC_BASE_URL\", \"\").strip().rstrip(\"/\")\n    if public_base:\n        return public_base\n    return \"http://localhost:8000\"\n\n\ndef _read_json_file(path: Path, fallback):\n    try:\n        return json.loads(path.read_text())\n    except Exception:\n        return fallback\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    output_count = sum(1 for p in OUTPUT_DIR.iterdir() if p.is_file()) if OUTPUT_DIR.exists() else 0\n    leads_count = len(_read_json_file(LEADS_FILE, []))\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"public_base_url\": get_base_url(),\n        \"output_count\": output_count,\n        \"lead_count\": leads_count,\n    }\n\n\n@app.post(\"/api/lead\")\ndef capture_lead(payload: LeadRequest, request: Request):\n    leads = _read_json_file(LEADS_FILE, [])\n    normalized_email = payload.email.strip().lower()\n\n    existing = next((x for x in leads if x.get(\"email\") == normalized_email), None)\n    if existing:\n        return {\"ok\": True, \"status\": \"exists\", \"email\": normalized_email}\n\n    leads.append(\n        {\n            \"email\": normalized_email,\n            \"interest\": payload.interest.strip(),\n            \"source\": payload.source.strip(),\n            \"captured_at\": int(time.time()),\n            \"user_agent\": request.headers.get(\"user-agent\", \"\"),\n        }\n    )\n    LEADS_FILE.write_text(json.dumps(leads, indent=2))\n    return {\"ok\": True, \"status\": \"captured\", \"email\": normalized_email}\n"
+      }
+    ],
     "status": "pending",
-    "created_at": 1774824178.9715989
+    "created_at": 1774824299.3842194
+  },
+  {
+    "id": "prop_1774824299_89abadb1",
+    "title": "Improve frontend user flow with lead capture and clearer product CTA",
+    "reason": "Zerenthis already generates outputs, but the current frontend likely misses conversion steps for users who are not ready to generate immediately. Adding a simple lead form and stronger value messaging on the landing page improves perceived product quality, monetization readiness, and user flow with minimal code churn.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "\"use client\";\n",
+        "replace": "\"use client\";\nimport { FormEvent, useState } from \"react\";\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "export default function Home() {\n",
+        "replace": "export default function Home() {\n  const [email, setEmail] = useState(\"\");\n  const [leadStatus, setLeadStatus] = useState(\"\");\n\n  async function submitLead(e: FormEvent<HTMLFormElement>) {\n    e.preventDefault();\n    setLeadStatus(\"Saving...\");\n\n    try {\n      const res = await fetch(\"/api/lead\", {\n        method: \"POST\",\n        headers: { \"Content-Type\": \"application/json\" },\n        body: JSON.stringify({ email, interest: \"waitlist\", source: \"homepage\" }),\n      });\n      const data = await res.json();\n      setLeadStatus(data?.status === \"captured\" || data?.status === \"exists\" ? \"You\u2019re on the list.\" : \"Could not save your email.\");\n      if (data?.status === \"captured\") setEmail(\"\");\n    } catch {\n      setLeadStatus(\"Could not save your email.\");\n    }\n  }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "</main>",
+        "replace": "<section style={{ marginTop: 32, padding: 20, border: \"1px solid #2a2a2a\", borderRadius: 16 }}>\n        <h2 style={{ marginBottom: 8 }}>Get launch updates</h2>\n        <p style={{ marginBottom: 16, opacity: 0.8 }}>\n          Join the Zerenthis waitlist for new product packs, shorts automation, and premium creator workflows.\n        </p>\n        <form onSubmit={submitLead} style={{ display: \"flex\", gap: 12, flexWrap: \"wrap\" }}>\n          <input\n            type=\"email\"\n            required\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            placeholder=\"you@example.com\"\n            style={{ flex: \"1 1 260px\", padding: \"12px 14px\", borderRadius: 10, border: \"1px solid #3a3a3a\", background: \"transparent\", color: \"inherit\" }}\n          />\n          <button\n            type=\"submit\"\n            style={{ padding: \"12px 18px\", borderRadius: 10, border: 0, cursor: \"pointer\" }}\n          >\n            Join waitlist\n          </button>\n        </form>\n        {leadStatus ? <p style={{ marginTop: 12, fontSize: 14, opacity: 0.85 }}>{leadStatus}</p> : null}\n      </section>\n    </main>"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774824299.4288194
+  },
+  {
+    "id": "prop_1774824358_e0e833ac",
+    "title": "Add API request validation, better health info, and monetization-ready lead capture endpoint",
+    "reason": "The main API has permissive CORS, minimal health visibility, and no lightweight way to capture buyer intent. Tightening CORS to the configured origins, validating incoming payload quality, and adding a simple lead-capture endpoint improves reliability, user flow, and monetization readiness without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, Field\n",
+        "replace": "from fastapi import FastAPI, HTTPException, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom pydantic import BaseModel, EmailStr, Field, field_validator\nimport json\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Paths\nAPP_DIR = Path(__file__).resolve().parent\nBACKEND_DIR = APP_DIR.parent\nOUTPUT_DIR = BACKEND_DIR / \"data\" / \"outputs\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n",
+        "replace": "# \u2705 Paths\nAPP_DIR = Path(__file__).resolve().parent\nBACKEND_DIR = APP_DIR.parent\nOUTPUT_DIR = BACKEND_DIR / \"data\" / \"outputs\"\nLEADS_DIR = BACKEND_DIR / \"data\" / \"leads\"\nLEADS_FILE = LEADS_DIR / \"waitlist.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\nif not LEADS_FILE.exists():\n    LEADS_FILE.write_text(\"[]\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "# \u2705 Middleware\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n",
+        "replace": "# \u2705 Middleware\nallow_all_origins = ALLOWED_ORIGINS == [\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if allow_all_origins else ALLOWED_ORIGINS,\n    allow_credentials=not allow_all_origins,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\")\n    tone: str = Field(default=\"Premium\")\n    buyer: str = Field(default=\"Beginners starting from zero\")\n    promise: str = Field(default=\"\")\n    bonus: str = Field(default=\"\")\n    notes: str = Field(default=\"\")\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n",
+        "replace": "class GenerateRequest(BaseModel):\n    topic: str = Field(min_length=1, max_length=200)\n    niche: str = Field(default=\"Make Money Online\", max_length=120)\n    tone: str = Field(default=\"Premium\", max_length=50)\n    buyer: str = Field(default=\"Beginners starting from zero\", max_length=200)\n    promise: str = Field(default=\"\", max_length=200)\n    bonus: str = Field(default=\"\", max_length=200)\n    notes: str = Field(default=\"\", max_length=1000)\n    duration_seconds: int = Field(default=35, ge=10, le=90)\n\n    @field_validator(\"topic\", \"niche\", \"tone\", \"buyer\", \"promise\", \"bonus\", \"notes\")\n    @classmethod\n    def strip_text(cls, value: str):\n        return value.strip() if isinstance(value, str) else value\n\n\nclass BatchRequest(GenerateRequest):\n    count: int = Field(default=3, ge=1, le=10)\n\n\nclass LeadRequest(BaseModel):\n    email: EmailStr\n    interest: str = Field(default=\"product_pack\", max_length=100)\n    topic: str = Field(default=\"\", max_length=200)\n\n    @field_validator(\"interest\", \"topic\")\n    @classmethod\n    def strip_optional_text(cls, value: str):\n        return value.strip() if isinstance(value, str) else value\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    output_count = len([p for p in OUTPUT_DIR.iterdir() if p.is_file()])\n    return {\n        \"ok\": True,\n        \"service\": \"zerenthis\",\n        \"outputs\": output_count,\n        \"cors_mode\": \"open\" if ALLOWED_ORIGINS == [\"*\"] else \"restricted\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n# =========================\n# \ud83d\udcca JOB SYSTEM\n# =========================\n",
+        "replace": "@app.post(\"/api/founder/shorts-batch\")\ndef founder_shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        base_url=get_base_url(),\n        count=payload.count,\n    )\n    return {\"job_id\": job_id, \"status\": \"queued\"}\n\n\n@app.post(\"/api/waitlist\")\ndef join_waitlist(payload: LeadRequest, request: Request):\n    leads = json.loads(LEADS_FILE.read_text())\n    email = payload.email.lower()\n\n    existing = next((lead for lead in leads if lead.get(\"email\") == email), None)\n    if existing:\n        return {\"ok\": True, \"status\": \"exists\", \"email\": email}\n\n    lead = {\n        \"email\": email,\n        \"interest\": payload.interest or \"product_pack\",\n        \"topic\": payload.topic,\n        \"source\": request.headers.get(\"origin\") or request.client.host if request.client else \"unknown\",\n    }\n    leads.append(lead)\n    LEADS_FILE.write_text(json.dumps(leads, indent=2))\n    return {\"ok\": True, \"status\": \"saved\", \"email\": email}\n\n\n# =========================\n# \ud83d\udcca JOB SYSTEM\n# =========================\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774824358.254149
+  },
+  {
+    "id": "prop_1774824358_bd79b82b",
+    "title": "Upgrade generated product packs with stronger buyer outcomes and monetization sections",
+    "reason": "Product quality directly affects perceived value and conversion. The product engine already generates useful assets, but sharper offer positioning, buyer-specific outcomes, and built-in monetization guidance will produce more sellable outputs and improve downstream user satisfaction.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _offer_ideas(topic, buyer, promise):\n    topic = _clean(topic, \"digital product\")\n    topic_tc = _title_case(topic)\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get better results with {topic}\")\n    return [\n        {\n            \"name\": f\"{topic_tc} Starter Kit\",\n            \"price\": \"$9\u2013$19\",\n            \"title\": f\"The {topic_tc} Starter Kit\",\n            \"description\": f\"A beginner-friendly pack for {buyer_text.lower()} who want to {promise_text}. Includes quick-start steps, templates, prompts, and a low-friction launch path.\"\n        },\n        {\n            \"name\": f\"{topic_tc} Premium Blueprint\",\n            \"price\": \"$19\u2013$29\",\n            \"title\": f\"{topic_tc} Premium Blueprint\",\n            \"description\": f\"A deeper system with examples, pricing ideas, execution checklists, and copy-paste assets for buyers who want faster and cleaner progress.\"\n        },\n        {\n            \"name\": f\"{topic_tc} Prompt Pack\",\n            \"price\": \"$7\u2013$17\",\n            \"title\": f\"{topic_tc} Prompt Vault\",\n            \"description\": f\"A focused library of prompts, templates, and workflows designed to reduce thinking time and increase implementation speed.\"\n        },\n        {\n            \"name\": f\"{topic_tc} Fast-Start Pack\",\n            \"price\": \"$9\u2013$19\",\n            \"title\": f\"{topic_tc} Fast-Start Pack\",\n            \"description\": f\"An action-first pack built for overwhelmed beginners who need clarity, momentum, and a simple path to their first result.\"\n        },\n        {\n            \"name\": f\"{topic_tc} Bundle\",\n            \"price\": \"$29\u2013$49\",\n            \"title\": f\"The Complete {topic_tc} Bundle\",\n            \"description\": f\"A premium bundled offer combining guide, prompts, templates, and bonus assets into a stronger high-value package.\"\n        },\n    ]\n",
+        "replace": "def _offer_ideas(topic, buyer, promise):\n    topic = _clean(topic, \"digital product\")\n    topic_tc = _title_case(topic)\n    buyer_text = _clean(buyer, \"Beginners\")\n    buyer_lower = buyer_text.lower()\n    promise_text = _clean(promise, f\"get better results with {topic}\")\n    return [\n        {\n            \"name\": f\"{topic_tc} Starter Kit\",\n            \"price\": \"$9\u2013$19\",\n            \"title\": f\"The {topic_tc} Starter Kit\",\n            \"description\": f\"A beginner-friendly pack for {buyer_lower} who want to {promise_text}. Includes quick-start steps, templates, prompts, and a low-friction launch path.\",\n            \"best_for\": \"First-time buyers who want speed and clarity\",\n            \"cta\": \"Start with the entry offer and add a fast-action bonus\"\n        },\n        {\n            \"name\": f\"{topic_tc} Premium Blueprint\",\n            \"price\": \"$19\u2013$29\",\n            \"title\": f\"{topic_tc} Premium Blueprint\",\n            \"description\": f\"A deeper system with examples, pricing ideas, execution checklists, and copy-paste assets for buyers who want faster and cleaner progress.\",\n            \"best_for\": \"Buyers who want a fuller implementation system\",\n            \"cta\": \"Position as the most complete done-with-you roadmap\"\n        },\n        {\n            \"name\": f\"{topic_tc} Prompt Pack\",\n            \"price\": \"$7\u2013$17\",\n            \"title\": f\"{topic_tc} Prompt Vault\",\n            \"description\": f\"A focused library of prompts, templates, and workflows designed to reduce thinking time and increase implementation speed.\",\n            \"best_for\": \"Action-takers who value templates over theory\",\n            \"cta\": \"Use as an impulse buy, bump, or bundle enhancer\"\n        },\n        {\n            \"name\": f\"{topic_tc} Fast-Start Pack\",\n            \"price\": \"$9\u2013$19\",\n            \"title\": f\"{topic_tc} Fast-Start Pack\",\n            \"description\": f\"An action-first pack built for overwhelmed beginners who need clarity, momentum, and a simple path to their first result.\",\n            \"best_for\": \"New buyers who need immediate momentum\",\n            \"cta\": \"Sell the transformation of fast clarity, not just pages\"\n        },\n        {\n            \"name\": f\"{topic_tc} Bundle\",\n            \"price\": \"$29\u2013$49\",\n            \"title\": f\"The Complete {topic_tc} Bundle\",\n            \"description\": f\"A premium bundled offer combining guide, prompts, templates, and bonus assets into a stronger high-value package.\",\n            \"best_for\": \"Customers already convinced and ready to spend more\",\n            \"cta\": \"Anchor against buying each asset separately\"\n        },\n    ]\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _pricing_recommendation():\n    return [\n        [\"Front-end offer\", \"$9-$19\"],\n        [\"Premium version\", \"$19-$29\"],\n        [\"Bundle / order bump\", \"$29-$49\"],\n        [\"Fast-action launch price\", \"$7-$14 for first 48 hours\"],\n        [\"Upsell / implementation add-on\", \"$27-$49\"],\n    ]\n",
+        "replace": "def _pricing_recommendation():\n    return [\n        [\"Front-end offer\", \"$9-$19\"],\n        [\"Premium version\", \"$19-$29\"],\n        [\"Bundle / order bump\", \"$29-$49\"],\n        [\"Fast-action launch price\", \"$7-$14 for first 48 hours\"],\n        [\"Upsell / implementation add-on\", \"$27-$49\"],\n        [\"Founding customer pre-sale\", \"$5-$9 before the full version ships\"],\n        [\"Done-with-you audit add-on\", \"$49-$99\"],\n    ]\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _mistakes():\n    return [\n        \"Making the product too broad\",\n        \"Using weak, vague titles\",\n        \"Padding pages instead of adding practical value\",\n        \"Uploading once and never testing more offers\",\n        \"Waiting for perfection before listing\",\n        \"Not adding an upsell, bundle, o",
+        "replace": "def _mistakes():\n    return [\n        \"Making the product too broad\",\n        \"Using weak, vague titles\",\n        \"Padding pages instead of adding practical value\",\n        \"Uploading once and never testing more offers\",\n        \"Waiting for perfection before listing\",\n        \"Not adding an upsell, bundle, or email capture\",\n        \"Selling features instead of the buyer's next concrete outcome\",\n        \"Ignoring fast feedback from early buyers\",\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774824358.2655053
   }
 ]
