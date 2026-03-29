@@ -141,10 +141,6 @@ def verify() -> bool:
     return True
 
 
-def pending() -> list[dict[str, Any]]:
-    return [x for x in load() if x.get("status") == "pending"]
-
-
 def execute(pid: str) -> dict[str, Any]:
     d = load()
     p = next((x for x in d if x["id"] == pid), None)
@@ -210,25 +206,7 @@ def execute(pid: str) -> dict[str, Any]:
         return {"ok": True, "id": pid, "status": "applied"}
 
     except Exception as e:
-        for path in reversed(created):
-            try:
-                if path.exists():
-                    path.unlink()
-            except Exception:
-                pass
-
-        for orig, b in reversed(backups):
-            try:
-                orig.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(b, orig)
-            except Exception:
-                pass
-
-        p["status"] = "failed"
-        p["failed_at"] = time.time()
-        p["error"] = str(e)
-        save(d)
-        return {"ok": False, "id": pid, "error": str(e)}ups:
+        for orig, b in backups:
             try:
                 shutil.copy2(b, orig)
             except Exception:
