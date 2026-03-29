@@ -389,5 +389,22 @@
     "title": "Improve API trust and monetization readiness with metadata, CORS config, and request-safe gallery output",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824463,
+    "id": "prop_1774824299_f7d3c9ea",
+    "title": "Add API request validation, useful health metadata, and monetization-ready lead capture endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824463,
+    "id": "prop_1774824299_89abadb1",
+    "title": "Improve frontend user flow with lead capture and clearer product CTA",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824299_89abadb1"
+    }
   }
 ]
