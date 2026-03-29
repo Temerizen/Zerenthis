@@ -129,25 +129,11 @@ def _distribution_ideas(topic):
 
 
 def _quality_score(topic, buyer, promise, bonus, notes):
-    topic_text = _clean(topic)
-    buyer_text = _clean(buyer)
-    promise_text = _clean(promise)
-    bonus_text = _clean(bonus)
-    notes_text = _clean(notes)
     checks = {
-        "has_topic": bool(topic_text),
-        "has_buyer": bool(buyer_text),
-        "has_promise": bool(promise_text),
-        "has_bonus": bool(bonus_text),
-        "has_notes": bool(notes_text),
-        "topic_is_specific": len(topic_text) >= 8,
-        "buyer_is_specific": len(buyer_text) >= 12,
-        "promise_is_specific": len(promise_text) >= 12,
-        "premium_positioning_ready": bool(topic_text and buyer_text and promise_text),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-_bonus": bool(_clean(bonus)),
+        "has_topic": bool(_clean(topic)),
+        "has_buyer": bool(_clean(buyer)),
+        "has_promise": bool(_clean(promise)),
+        "has_bonus": bool(_clean(bonus)),
         "has_notes": bool(_clean(notes)),
     }
     score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)

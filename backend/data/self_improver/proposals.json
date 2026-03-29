@@ -6655,8 +6655,11 @@
         "replace": "def backup(path):\n    if not path.exists():\n        return None\n    b = BACKUPS / f\"{int(time.time())}_{uuid.uuid4().hex[:6]}_{path.name}.bak\"\n    shutil.copy2(path, b)\n    return b\n\n\ndef execute(pid):\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p[\"steps\"])\n    backups = []\n    created_files = []\n    execution_log = _load_execution_log()\n    started_at = int(time.time())\n\n    try:\n        for s in p[\"steps\"]:\n            path = ROOT / s[\"path\"]\n\n            if s[\"action\"] == \"create_file\":\n                if path.exists():\n                    raise Exception(f\"file already exists: {s['path']}\")\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n                created_files.append(path)\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text(encoding=\"utf-8\")\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        finished_at = int(time.time())\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = finished_at\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"applied\",\n            \"started_at\": started_at,\n            \"finished_at\": finished_at,\n            \"steps\": p.get(\"steps\", []),\n            \"backups\": [{\"path\": str(path), \"backup\": str(backup_path)} for path, backup_path in backups],\n            \"created_files\": [str(path) for path in created_files]\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": True, \"id\": pid, \"status\": \"applied\"}\n\n    except Exception as e:\n        for path in created_files:\n            try:\n                if path.exists():\n                    path.unlink()\n            except Exception:\n                pass\n\n        for path, backup_path in reversed(backups):\n            try:\n                shutil.copy2(backup_path, path)\n            except Exception:\n                pass\n\n        p[\"status\"] = \"approved\"\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", []),\n            \"error\": str(e)\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"id\": pid, \"error\": str(e)}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825194.7861516
+    "status": "failed",
+    "created_at": 1774825194.7861516,
+    "approved_at": 1774825198.4191465,
+    "failed_at": 1774825198.44359,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774825194_03b00418",
@@ -6691,7 +6694,9 @@
         "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_buyer\": bool(buyer_text),\n        \"has_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"topic_is_specific\": len(topic_text) >= 8,\n        \"buyer_is_specific\": len(buyer_text) >= 12,\n        \"promise_is_specific\": len(promise_text) >= 12,\n        \"premium_positioning_ready\": bool(topic_text and buyer_text and promise_text),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825194.8811765
+    "status": "applied",
+    "created_at": 1774825194.8811765,
+    "approved_at": 1774825198.469021,
+    "applied_at": 1774825198.4947085
   }
 ]
