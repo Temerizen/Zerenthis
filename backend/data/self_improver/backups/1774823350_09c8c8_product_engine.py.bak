@@ -128,35 +128,6 @@ def _bundle_ideas(topic):
     ]
 
 
-def _sales_angles(topic, buyer, promise):
-    promise_text = promise or f"get results with {topic}"
-    return [
-        f"Built for {buyer.lower()} who want to {promise_text} without wasting weeks on trial and error.",
-        f"Position this as a shortcut offer: practical, fast to use, and immediately actionable.",
-        f"Lead with transformation, not features: what changes after the buyer uses the pack?",
-        f"Use beginner-safe language and emphasize speed, clarity, and simplicity.",
-    ]
-
-
-def _cta_lines(topic):
-    return [
-        f"Get the {topic} pack now and start executing today.",
-        "Use the templates, prompts, and checklist in one focused sitting.",
-        "Launch the first version fast, then improve based on buyer response.",
-    ]
-
-
-def _listing_copy(title, buyer, promise, bonus):
-    promise_text = promise or "move faster with a clear system"
-    bonus_text = bonus or "prompts, templates, and checklists"
-    return [
-        f"{title} is a practical digital product for {buyer.lower()} who want to {promise_text}.",
-        "It is designed to remove confusion and replace it with a cleaner execution path.",
-        f"Inside, buyers get implementation guidance plus {bonus_text}.",
-        "This is ideal for Gumroad, Stan, Payhip, or a simple landing-page offer.",
-    ]
-
-
 def _add_heading(story, text, style):
     story.append(Paragraph(text, style))
     story.append(Spacer(1, 8))

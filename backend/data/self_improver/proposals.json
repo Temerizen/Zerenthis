@@ -303,8 +303,11 @@
         "replace": "def verify() -> bool:\n    return FILE.exists() and BACKUPS.exists()\n\n\ndef execute(pid: str) -> dict[str, Any]:\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p.get(\"steps\", []))\n\n    backups: list[tuple[Path, Path]] = []\n    created: list[Path] = []\n\n    try:\n        for s in p[\"steps\"]:\n            path = _normalize_path(s[\"path\"])\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    b = backup(path)\n                    if b:\n                        backups.append((path, b))\n                else:\n                    created.append(path)\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                original = path.read_text(encoding=\"utf-8\", errors=\"ignore\")\n                find_text = s[\"find\"]\n                replace_text = s[\"replace\"]\n\n                if find_text not in original:\n                    raise ValueError(f\"find text not found in: {s['path']}\")\n\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n\n                updated = original.replace(find_text, replace_text, 1)\n                if updated == original:\n                    raise ValueError(f\"edit produced no change for: {s['path']}\")\n\n                path.write_text(updated, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise FileNotFoundError(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        if not verify():\n            raise RuntimeError(\"verification failed\")\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = time.time()\n        save(d)\n        return {\"ok\": True, \"id\": pid, \"status\": \"applied\"}\n\n    except Exception as e:\n        for path in created:\n            if path.exists():\n                path.unlink()\n        for orig, b in reversed(backups):\n            if b.exists():\n                shutil.copy2(b, orig)\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = time.time()\n        p[\"error\"] = str(e)\n        save(d)\n        return {\"ok\": False, \"id\": pid, \"status\": \"failed\", \"error\": str(e)}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774822916.209377
+    "status": "failed",
+    "created_at": 1774822916.209377,
+    "approved_at": 1774823350.1688817,
+    "failed_at": 1774823350.2035916,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774822916_ac611c3b",
@@ -435,8 +438,10 @@
         "replace": "def _bundle_ideas(topic):\n    topic_tc = _title_case(topic)\n    return [\n        f\"{topic_tc} Guide + Prompt Pack\",\n        f\"{topic_tc} Guide + Checklist Pack\",\n        f\"{topic_tc} Guide + Template Vault\",\n        f\"{topic_tc} Bundle + Bonus Mini Guide\",\n        f\"{topic_tc} Complete Creator Pack\",\n    ]\n\n\ndef _sales_angles(topic, buyer, promise):\n    promise_text = promise or f\"get results with {topic}\"\n    return [\n        f\"Built for {buyer.lower()} who want to {promise_text} without wasting weeks on trial and error.\",\n        f\"Position this as a shortcut offer: practical, fast to use, and immediately actionable.\",\n        f\"Lead with transformation, not features: what changes after the buyer uses the pack?\",\n        f\"Use beginner-safe language and emphasize speed, clarity, and simplicity.\",\n    ]\n\n\ndef _cta_lines(topic):\n    return [\n        f\"Get the {topic} pack now and start executing today.\",\n        \"Use the templates, prompts, and checklist in one focused sitting.\",\n        \"Launch the first version fast, then improve based on buyer response.\",\n    ]\n\n\ndef _listing_copy(title, buyer, promise, bonus):\n    promise_text = promise or \"move faster with a clear system\"\n    bonus_text = bonus or \"prompts, templates, and checklists\"\n    return [\n        f\"{title} is a practical digital product for {buyer.lower()} who want to {promise_text}.\",\n        \"It is designed to remove confusion and replace it with a cleaner execution path.\",\n        f\"Inside, buyers get implementation guidance plus {bonus_text}.\",\n        \"This is ideal for Gumroad, Stan, Payhip, or a simple landing-page offer.\",\n    ]\n\n\ndef _add_heading(story, text, style):\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774822986.3236022
+    "status": "applied",
+    "created_at": 1774822986.3236022,
+    "approved_at": 1774823350.2241273,
+    "applied_at": 1774823350.245741
   },
   {
     "id": "prop_1774823053_09772023",
