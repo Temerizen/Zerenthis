@@ -1,146 +1,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Zerenthis Studio</title>
+  <title>Zerenthis — Cash Engine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      background: #05070d;
+      background: radial-gradient(circle at top, #0a0f1f, #05070d);
       color: white;
       font-family: Arial, sans-serif;
       padding: 20px;
+      max-width: 800px;
+      margin: auto;
     }
 
     h1 {
       color: #00e5ff;
       text-align: center;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
-    input {
+    .subtitle {
+      text-align: center;
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #0e1325;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(0,229,255,0.05);
+    }
+
+    input, textarea {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border-radius: 12px;
       border: none;
       background: #111;
       color: white;
-      font-size: 16px;
-      margin-bottom: 15px;
+      font-size: 15px;
+      margin-bottom: 12px;
     }
 
     button {
-      padding: 12px;
+      width: 100%;
+      padding: 14px;
       border-radius: 12px;
       border: none;
+      background: #00e5ff;
+      color: black;
       font-weight: bold;
       cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
     }
 
-    .generate {
-      width: 100%;
-      background: #00e5ff;
-      color: black;
-      margin-bottom: 20px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .tab {
-      flex: 1;
-      background: #1a1a1a;
-      color: white;
-    }
-
-    .active {
-      background: #00e5ff;
-      color: black;
+    button:hover {
+      opacity: 0.85;
     }
 
     .output {
-      background: #0d1117;
-      padding: 20px;
-      border-radius: 12px;
-      min-height: 200px;
       white-space: pre-wrap;
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    textarea {
-      width: 100%;
-      margin-top: 15px;
-      padding: 12px;
+    .cta {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 14px 20px;
       border-radius: 12px;
-      background: #111;
-      color: white;
-      border: none;
+      background: #00e5ff;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .steps {
+      font-size: 14px;
+      opacity: 0.8;
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
 
-<h1>Zerenthis Studio ⚡</h1>
+  <h1>Zerenthis</h1>
+  <div class="subtitle">Turn ideas into sellable products in minutes</div>
 
-<input id="idea" placeholder="Enter topic..." />
+  <div class="card">
+    <h3>Generate a Product</h3>
 
-<button class="generate" onclick="generate()">Generate Product</button>
+    <input id="idea" placeholder="Example: AI side hustle system" />
+    <button onclick="generate()">Generate Product</button>
 
-<div class="tabs">
-  <button class="tab active" onclick="setTab('product')">📄 Product</button>
-  <button class="tab" onclick="setTab('youtube')">🎬 YouTube</button>
-  <button class="tab" onclick="setTab('shorts')">⚡ Shorts</button>
-</div>
+    <div id="output" class="output"></div>
+  </div>
 
-<div id="output" class="output">
-  Your generated output will appear here.
-</div>
+  <div class="card">
+    <h3>How to Make Money (Do This)</h3>
+    <div class="steps">
+      1. Enter an idea (ex: “resume pack”, “AI money system”)<br>
+      2. Click generate<br>
+      3. Copy the output<br>
+      4. Go to Gumroad<br>
+      5. Create product → paste description<br>
+      6. Upload a simple PDF<br>
+      7. Publish → sell<br>
+    </div>
+  </div>
 
-<textarea placeholder="Tell AI what to improve..."></textarea>
-
-<button style="margin-top:10px;background:#222;color:white;">
-  Apply Changes
-</button>
+  <div class="cta">
+    <div>Ready to sell?</div>
+    <a href="https://gumroad.com" target="_blank">Go to Gumroad</a>
+  </div>
 
 <script>
-let activeTab = "product";
-let result = {};
-
-function setTab(tab) {
-  activeTab = tab;
-  document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
-  render();
-}
-
-function render() {
-  document.getElementById("output").innerText =
-    result[activeTab] || "No data yet.";
-}
-
-async function generate() {
+function generate() {
   const idea = document.getElementById("idea").value;
-  if (!idea) return;
 
-  document.getElementById("output").innerText = "Generating...";
+  const output = `
+🔥 PRODUCT TITLE:
+${idea.charAt(0).toUpperCase() + idea.slice(1)} — Complete System
 
-  try {
-    const res = await fetch("https://your-backend-name.up.railway.app/generate-fast", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ idea })
-    });
+💰 DESCRIPTION:
+If you're struggling with ${idea}, this system gives you a step-by-step method to start immediately.
 
-    const data = await res.json();
-    result = data;
-    render();
+This is not theory — it's built for execution.
 
-  } catch (err) {
-    document.getElementById("output").innerText = "Error connecting to AI";
-  }
+📦 WHAT’S INCLUDED:
+• Step-by-step system  
+• Copy/paste templates  
+• Execution plan  
+• Tools + workflow  
+• Bonus tips  
+
+🎯 TARGET:
+Beginners / people who want fast results
+
+💵 PRICE:
+$19–$49 recommended
+`;
+
+  document.getElementById("output").innerText = output;
 }
 </script>
 
