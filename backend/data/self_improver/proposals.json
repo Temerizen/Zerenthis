@@ -9433,7 +9433,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = load_leads()\n    outputs = load_outputs()\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = load_leads()\n    outputs = load_outputs()\n    extension_counts = Counter((p.suffix.lower() or \"no_extension\") for p in outputs)\n    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n    consented_leads = [item for item in leads if item.get(\"marketing_consent\")]\n    email_leads = [item for item in leads if item.get(\"customer_email\")]\n\n    return {\n        \"brand\": \"Zerenthis\",\n        \"service\": \"automation-core\",\n        \"totals\": {\n            \"outputs\": len(outputs),\n            \"leads\": len(leads),\n            \"consented_leads\": len(consented_leads),\n            \"email_leads\": len(email_leads),\n            \"lead_conversion_readiness\": round((len(consented_leads) / len(leads)) * 100, 2) if leads else 0,\n        },\n        \"outputs_by_type\": dict(extension_counts),\n        \"recent_outputs\": [\n            {\n                \"name\": p.name,\n                \"size_bytes\": p.stat().st_size,\n                \"modified_at\": int(p.stat().st_mtime),\n            }\n            for p in recent_outputs\n        ],\n        \"top_topics\": Counter(item.get(\"topic\", \"\") for item in leads if item.get(\"topic\")).most_common(5),\n        \"top_sources\": Counter(item.get(\"source\", \"\") for item in leads if item.get(\"source\")).most_common(5),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774826416.6635883
   },
   {
@@ -9488,8 +9488,11 @@
         "replace": "def _score_product_pack(topic: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    checks = {\n        \"has_specific_topic\": len(_clean(topic)) >= 4,\n        \"has_buyer\": bool(_clean(buyer)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    verdict = \"strong\" if score >= 80 else \"good\" if score >= 60 else \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826467.9779634
+    "status": "failed",
+    "created_at": 1774826467.9779634,
+    "approved_at": 1774826475.7622654,
+    "failed_at": 1774826475.8719292,
+    "error": "find text not found in: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774826468_ea21e47e",
@@ -9503,7 +9506,101 @@
         "replace": "def health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output_path = max(outputs, key=lambda p: p.stat().st_mtime) if outputs else None\n    latest_output = latest_output_path.name if latest_output_path else None\n    latest_output_age_seconds = int(max(0, (Path(latest_output_path).stat().st_mtime if latest_output_path else 0) and (os.path.getmtime(latest_output_path)))) if latest_output_path else None\n    lead_emails = sum(1 for item in lead_items if item.get(\"customer_email\"))\n    consented_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\"))\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"lead_email_count\": lead_emails,\n        \"marketing_consented_leads\": consented_leads,\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"latest_output_ready\": latest_output is not None,\n        \"latest_output_age_seconds\": latest_output_age_seconds,\n        \"monetization_ready\": lead_emails > 0 and latest_output is not None,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774826468.0112622
+  },
+  {
+    "id": "prop_1774826546",
+    "title": "Tighten self-improver step validation and proposal hygiene",
+    "reason": "The self-improver is the highest-risk mutation surface in Zerenthis. Strengthening validation reduces malformed edits, blocks dangerous file types and oversized payloads, and improves proposal quality before anything reaches approval or execution.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def _validate_steps(steps):\n    if not isinstance(steps, list) or not steps:\n        raise ValueError(\"steps must be a non-empty list\")\n    if len(steps) > 10:\n        raise ValueError(\"steps cannot exceed 10 actions\")\n\n    touched_paths = {}\n\n    for i, step in enumerate(steps):\n        if not isinstance(step, dict):\n            raise ValueError(f\"step {i} must be an object\")\n\n        action = step.get(\"action\")\n        path = step.get(\"path\")\n\n        if action not in ALLOWED_ACTIONS:\n            raise ValueError(f\"step {i} has invalid action\")\n        if not isinstance(path, str) or not path.strip():\n            raise ValueError(f\"step {i} path is required\")\n        if len(path.strip()) > 300:\n            raise ValueError(f\"step {i} path is too long\")\n        if any(x in path for x in PROTECTED) or path.startswith(\"/\") or path.startswith(\"\\\\\") or \"..\" in path:\n            raise ValueError(f\"step {i} path is blocked\")\n\n        normalized_path = path.strip()\n        previous_action = touched_paths.get(normalized_path)\n        if previous_action is not None:\n            raise ValueError(f\"step {i} reuses path already targeted earlier: {normalized_path}\")\n",
+        "replace": "def _validate_steps(steps):\n    if not isinstance(steps, list) or not steps:\n        raise ValueError(\"steps must be a non-empty list\")\n    if len(steps) > 10:\n        raise ValueError(\"steps cannot exceed 10 actions\")\n\n    touched_paths = {}\n\n    for i, step in enumerate(steps):\n        if not isinstance(step, dict):\n            raise ValueError(f\"step {i} must be an object\")\n\n        action = step.get(\"action\")\n        path = step.get(\"path\")\n\n        if action not in ALLOWED_ACTIONS:\n            raise ValueError(f\"step {i} has invalid action\")\n        if not isinstance(path, str) or not path.strip():\n            raise ValueError(f\"step {i} path is required\")\n        if len(path.strip()) > 300:\n            raise ValueError(f\"step {i} path is too long\")\n        if any(x in path for x in PROTECTED) or path.startswith(\"/\") or path.startswith(\"\\\\\") or \"..\" in path:\n            raise ValueError(f\"step {i} path is blocked\")\n\n        normalized_path = path.strip()\n        suffix = Path(normalized_path).suffix.lower()\n        if suffix and suffix not in TEXT_FILE_SUFFIXES:\n            raise ValueError(f\"step {i} path has unsupported file type: {suffix}\")\n\n        previous_action = touched_paths.get(normalized_path)\n        if previous_action is not None:\n            raise ValueError(f\"step {i} reuses path already targeted earlier: {normalized_path}\")\n\n        if action == \"create_file\":\n            content = step.get(\"content\")\n            if not isinstance(content, str) or not content.strip():\n                raise ValueError(f\"step {i} create_file requires non-empty content\")\n            if len(content) > MAX_TEXT_FIELD_LENGTH:\n                raise ValueError(f\"step {i} content is too long\")\n        elif action == \"edit_file\":\n            find = step.get(\"find\")\n            replace = step.get(\"replace\")\n            if not isinstance(find, str) or not find:\n                raise ValueError(f\"step {i} edit_file requires exact find text\")\n            if not isinstance(replace, str):\n                raise ValueError(f\"step {i} edit_file requires replace text\")\n            if len(find) > MAX_TEXT_FIELD_LENGTH or len(replace) > MAX_TEXT_FIELD_LENGTH:\n                raise ValueError(f\"step {i} edit payload is too long\")\n            if find == replace:\n                raise ValueError(f\"step {i} edit_file find and replace cannot be identical\")\n        elif action == \"delete_file\":\n            if suffix and suffix not in TEXT_FILE_SUFFIXES:\n                raise ValueError(f\"step {i} delete_file blocked for unsupported file type: {suffix}\")\n\n        touched_paths[normalized_path] = action\n"
+      }
+    ],
+    "status": "applied"
+  },
+  {
+    "id": "prop_1774826547",
+    "title": "Add API-level guardrails and proposal preview metadata",
+    "reason": "Returning richer validation feedback at intake time improves self-improver quality and human review speed. This lowers approval friction, makes risky proposals easier to spot, and supports a safer monetization-ready workflow around iterative product changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validation = validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    result = propose(data.title, data.reason, data.steps)\n    result[\"validation\"] = {\n        \"summary\": validation[\"summary\"],\n        \"risk\": validation[\"risk\"],\n        \"fingerprint\": validation[\"fingerprint\"],\n    }\n    return result\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774826547",
+    "title": "Expose product-ready generation options and lead capture UX on homepage",
+    "reason": "The current flow likely underuses the backend's monetization fields like promise, bonus, customer email, and consent. Surfacing these in the main page improves output quality, captures leads earlier, and creates a clearer path from generation to monetization without adding new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "\"use client\";\n",
+        "replace": "\"use client\";\n\nimport { useState } from \"react\";\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "export default function Home() {\n  return (\n    <main>\n",
+        "replace": "export default function Home() {\n  const [form, setForm] = useState({\n    topic: \"\",\n    niche: \"Make Money Online\",\n    tone: \"Premium\",\n    buyer: \"Beginners starting from zero\",\n    promise: \"\",\n    bonus: \"\",\n    customer_name: \"\",\n    customer_email: \"\",\n    marketing_consent: false,\n  });\n\n  return (\n    <main>\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/page.tsx",
+        "find": "    <main>\n",
+        "replace": "    <main>\n      <section style={{ maxWidth: 760, margin: \"0 auto\", padding: \"32px 20px\" }}>\n        <h1>Zerenthis</h1>\n        <p>Create higher-value product outputs and capture buyer-ready leads in one flow.</p>\n\n        <div style={{ display: \"grid\", gap: 12, marginTop: 24 }}>\n          <input placeholder=\"Topic\" value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })} />\n          <input placeholder=\"Niche\" value={form.niche} onChange={(e) => setForm({ ...form, niche: e.target.value })} />\n          <input placeholder=\"Target buyer\" value={form.buyer} onChange={(e) => setForm({ ...form, buyer: e.target.value })} />\n          <input placeholder=\"Core promise\" value={form.promise} onChange={(e) => setForm({ ...form, promise: e.target.value })} />\n          <input placeholder=\"Bonus offer\" value={form.bonus} onChange={(e) => setForm({ ...form, bonus: e.target.value })} />\n          <input placeholder=\"Your name (optional)\" value={form.customer_name} onChange={(e) => setForm({ ...form, customer_name: e.target.value })} />\n          <input placeholder=\"Your email (optional)\" value={form.customer_email} onChange={(e) => setForm({ ...form, customer_email: e.target.value })} />\n          <label style={{ display: \"flex\", gap: 8, alignItems: \"center\" }}>\n            <input type=\"checkbox\" checked={form.marketing_consent} onChange={(e) => setForm({ ...form, marketing_consent: e.target.checked })} />\n            <span>I want updates, templates, and launch ideas from Zerenthis.</span>\n          </label>\n        </div>\n      </section>\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774826547",
+    "title": "Add richer API health and monetization metrics endpoint [safe-prep]",
+    "reason": "Safe preparation extracted from: A stronger operations and monetization surface improves reliability, sales readiness, and user flow. Exposing output inventory, lead quality, and recent file types gives Zerenthis a clearer product dashboard foundation for frontend UX, admin monitoring, and future conversion analytics without requiring major architecture changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom urllib.parse import quote\nfrom pydantic import BaseModel, Field, EmailStr, field_validator\nimport json\n",
+        "replace": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom urllib.parse import quote\nfrom pydantic import BaseModel, Field, EmailStr, field_validator\nfrom collections import Counter\nimport json\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n\n\ndef load_leads() -> list[dict]:\n    if not LEADS_FILE.exists():\n        return []\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        return loaded if isinstance(loaded, list) else []\n    except Exception:\n        return []\n\n\ndef load_outputs() -> list[Path]:\n    return [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = load_leads()\n    outputs = load_outputs()\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = load_leads()\n    outputs = load_outputs()\n    extension_counts = Counter((p.suffix.lower() or \"no_extension\") for p in outputs)\n    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n    consented_leads = [item for item in leads if item.get(\"marketing_consent\")]\n    email_leads = [item for item in leads if item.get(\"customer_email\")]\n\n    return {\n        \"brand\": \"Zerenthis\",\n        \"service\": \"automation-core\",\n        \"totals\": {\n            \"outputs\": len(outputs),\n            \"leads\": len(leads),\n            \"consented_leads\": len(consented_leads),\n            \"email_leads\": len(email_leads),\n            \"lead_conversion_readiness\": round((len(consented_leads) / len(leads)) * 100, 2) if leads else 0,\n        },\n        \"outputs_by_type\": dict(extension_counts),\n        \"recent_outputs\": [\n            {\n                \"name\": p.name,\n                \"size_bytes\": p.stat().st_size,\n                \"modified_at\": int(p.stat().st_mtime),\n            }\n            for p in recent_outputs\n        ],\n        \"top_topics\": Counter(item.get(\"topic\", \"\") for item in leads if item.get(\"topic\")).most_common(5),\n        \"top_sources\": Counter(item.get(\"source\", \"\") for item in leads if item.get(\"source\")).most_common(5),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774826547",
+    "title": "Expose business-facing metrics in health route for better operations and user flow [safe-prep]",
+    "reason": "Safe preparation extracted from: A stronger health endpoint helps monitor reliability, output freshness, lead capture, and monetization readiness without adding new infrastructure. This improves operator confidence, supports dashboards, and gives the product a clearer business-ready backend surface.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "def health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output_path = max(outputs, key=lambda p: p.stat().st_mtime) if outputs else None\n    latest_output = latest_output_path.name if latest_output_path else None\n    latest_output_age_seconds = int(max(0, (Path(latest_output_path).stat().st_mtime if latest_output_path else 0) and (os.path.getmtime(latest_output_path)))) if latest_output_path else None\n    lead_emails = sum(1 for item in lead_items if item.get(\"customer_email\"))\n    consented_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\"))\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"lead_email_count\": lead_emails,\n        \"marketing_consented_leads\": consented_leads,\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"latest_output_ready\": latest_output is not None,\n        \"latest_output_age_seconds\": latest_output_age_seconds,\n        \"monetization_ready\": lead_emails > 0 and latest_output is not None,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n"
+      }
+    ],
+    "status": "pending"
   }
 ]

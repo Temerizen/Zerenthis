@@ -174,36 +174,9 @@ def _validate_steps(steps):
             raise ValueError(f"step {i} path is blocked")
 
         normalized_path = path.strip()
-        suffix = Path(normalized_path).suffix.lower()
-        if suffix and suffix not in TEXT_FILE_SUFFIXES:
-            raise ValueError(f"step {i} path has unsupported file type: {suffix}")
-
         previous_action = touched_paths.get(normalized_path)
         if previous_action is not None:
             raise ValueError(f"step {i} reuses path already targeted earlier: {normalized_path}")
-
-        if action == "create_file":
-            content = step.get("content")
-            if not isinstance(content, str) or not content.strip():
-                raise ValueError(f"step {i} create_file requires non-empty content")
-            if len(content) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} content is too long")
-        elif action == "edit_file":
-            find = step.get("find")
-            replace = step.get("replace")
-            if not isinstance(find, str) or not find:
-                raise ValueError(f"step {i} edit_file requires exact find text")
-            if not isinstance(replace, str):
-                raise ValueError(f"step {i} edit_file requires replace text")
-            if len(find) > MAX_TEXT_FIELD_LENGTH or len(replace) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} edit payload is too long")
-            if find == replace:
-                raise ValueError(f"step {i} edit_file find and replace cannot be identical")
-        elif action == "delete_file":
-            if suffix and suffix not in TEXT_FILE_SUFFIXES:
-                raise ValueError(f"step {i} delete_file blocked for unsupported file type: {suffix}")
-
-        touched_paths[normalized_path] = action
         touched_paths[normalized_path] = action
 
         suffix = Path(path).suffix.lower()

@@ -1164,5 +1164,29 @@
     "title": "Expose product and video quality scores in API catalog",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826416_22ac5e72",
+    "title": "Add richer API health and monetization metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826468_ea21e47e",
+    "title": "Expose business-facing metrics in health route for better operations and user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826546",
+    "title": "Tighten self-improver step validation and proposal hygiene",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826546"
+    }
   }
 ]
