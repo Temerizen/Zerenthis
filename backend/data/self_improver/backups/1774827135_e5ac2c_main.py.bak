@@ -200,23 +200,6 @@ def health():
         "product_readiness": product_readiness,
     }
 UBLIC_BASE_URL", "").strip()),
-        "ready_for_checkout_test": lead_metrics["with_email"] > 0 and (output_breakdown.get(".pdf", 0) > 0 or any(ext in output_breakdown for ext in [".mp4", ".mov"])),
-    }
-
-    return {
-        "status": "ok",
-        "service": "Zerenthis Automation Core",
-        "base_url": get_base_url(),
-        "outputs": {
-            "total": len(outputs),
-            "latest": latest_output,
-            "recent": recent_output_names,
-            "breakdown": output_breakdown,
-        },
-        "leads": lead_metrics,
-        "product_readiness": product_readiness,
-    }
-UBLIC_BASE_URL", "").strip()),
         "has_consented_leads": lead_metrics["marketing_consented"] > 0,
     }
 
