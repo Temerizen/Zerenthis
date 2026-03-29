@@ -10440,7 +10440,9 @@
         "replace": "    .footer-note {\n      text-align: center;\n      margin-top: 18px;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .proof-grid {\n      display: grid;\n      grid-template-columns: repeat(3, 1fr);\n      gap: 12px;\n      margin-top: 18px;\n    }\n\n    .proof-card {\n      border: 1px solid var(--line);\n      background: rgba(255,255,255,0.03);\n      border-radius: 16px;\n      padding: 16px;\n    }\n\n    .proof-card strong {\n      display: block;\n      margin-bottom: 8px;\n      font-size: 14px;\n      color: #ffffff;\n    }\n\n    .proof-card span {\n      color: var(--muted);\n      font-size: 13px;\n      line-height: 1.6;\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "applied",
+    "approved_at": 1774827137.3892064,
+    "applied_at": 1774827137.5430088
   },
   {
     "id": "prop_1774827077_f1489ceb",

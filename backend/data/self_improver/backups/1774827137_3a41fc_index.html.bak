@@ -312,33 +312,6 @@
       font-size: 13px;
     }
 
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .proof-card {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      border-radius: 16px;
-      padding: 16px;
-    }
-
-    .proof-card strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #ffffff;
-    }
-
-    .proof-card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
     @media (max-width: 980px) {
       .grid {
         grid-template-columns: 1fr;
@@ -354,15 +327,7 @@
   <div class="wrap">
     <section class="hero">
       <div class="eyebrow">Zerenthis Automation Core</div>
-      <h1>Generate premium products, shorts, and long-form YouTube packs from one input</h1>
-      <p>Zerenthis helps turn a topic into sellable digital assets with clearer offers, stronger CTA angles, better packaging, and faster output for creators, operators, and AI product sellers.</p>
-      <div class="file-links" style="justify-content:center; margin-top:18px;">
-        <a href="#">PDF product packs</a>
-        <a href="#">Short-form scripts and videos</a>
-        <a href="#">YouTube content packs</a>
-        <a href="#">Offer stack ideas</a>
-      </div>
-control panel.</h1>
+      <h1>Generate premium products, shorts, and long-form YouTube packs from one control panel.</h1>
       <p>
         This frontend talks to your Zerenthis backend. Use Product for premium PDFs, Shorts for fast caption-style vertical videos,
         and YouTube for long-form script + thumbnail + upload pack generation.
