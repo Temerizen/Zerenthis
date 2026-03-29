@@ -134,32 +134,6 @@ def _quality_score(topic, buyer, promise, bonus, notes):
     promise_text = _clean(promise)
     bonus_text = _clean(bonus)
     notes_text = _clean(notes)
-
-    checks = {
-        "has_specific_topic": len(topic_text) >= 6,
-        "has_defined_buyer": len(buyer_text) >= 8,
-        "has_clear_promise": len(promise_text) >= 8,
-        "has_bonus": len(bonus_text) >= 4,
-        "has_notes": len(notes_text) >= 10,
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-
-    recommendations = []
-    if not checks["has_clear_promise"]:
-        recommendations.append("Add a sharper end-result promise to increase conversion clarity.")
-    if not checks["has_bonus"]:
-        recommendations.append("Include a fast-action bonus to raise perceived value.")
-    if not checks["has_defined_buyer"]:
-        recommendations.append("Define the buyer more specifically so the offer feels tailored.")
-    if score >= 80:
-        recommendations.append("This pack is commercially strong enough to position as a premium starter offer.")
-
-    return {
-        "score": score,
-        "checks": checks,
-        "recommendations": recommendations,
-    }
-)
     checks = {
         "has_topic": bool(topic_text),
         "has_buyer": bool(buyer_text),

@@ -6799,9 +6799,11 @@
         "replace": "@app.post(\"/api/youtube-pack\")\ndef youtube_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"youtube\",\n        payload.model_dump(),\n        build_youtube_pack,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n    )\n    log_lead(\"youtube-pack\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/product-batch\")\ndef product_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"product_batch\",\n        payload.model_dump(),\n        build_product_batch,\n        topic=payload.topic,\n        niche=payload.niche,\n        tone=payload.tone,\n        buyer=payload.buyer,\n        promise=payload.promise,\n        bonus=payload.bonus,\n        notes=payload.notes,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"product-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.post(\"/api/shorts-batch\")\ndef shorts_batch(payload: BatchRequest):\n    job_id = create_job(\n        \"shorts_batch\",\n        payload.model_dump(),\n        build_shorts_batch,\n        topic=payload.topic,\n        tone=payload.tone,\n        promise=payload.promise,\n        duration_seconds=payload.duration_seconds,\n        count=payload.count,\n        base_url=get_base_url(),\n    )\n    log_lead(\"shorts-batch\", payload, job_id)\n    return {\n        \"job_id\": job_id,\n        \"status\": \"queued\",\n        \"job_url\": f\"{get_base_url()}/api/job/{job_id}\",\n        \"lead_captured\": bool(payload.customer_email or payload.customer_name),\n    }\n\n\n@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return job\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_file(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=quote(path.name))\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    files = []\n    for path in sorted(OUTPUT_DIR.glob(\"*\"), key=lambda p: p.stat().st_mtime, reverse=True):\n        if path.is_file():\n            files.append({\n                \"name\": path.name,\n                \"size\": path.stat().st_size,\n                \"download_url\": f\"{get_base_url()}/api/download/{quote(path.name)}\",\n            })\n    return {\"items\": files}\n\n\n@app.get(\"/api/leads\")\ndef list_leads():\n    if not LEADS_FILE.exists():\n        return {\"items\": [], \"count\": 0}\n    try:\n        items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(items, list):\n            items = []\n    except Exception:\n        items = []\n    return {\"items\": items, \"count\": len(items)}\n"
       }
     ],
-    "status": "applied",
-    "approved_at": 1774825350.569923,
-    "applied_at": 1774825350.6423972
+    "status": "failed",
+    "approved_at": 1774825352.3644013,
+    "applied_at": 1774825350.6423972,
+    "failed_at": 1774825352.448695,
+    "error": "find text not found in: backend/app/main.py"
   },
   {
     "id": "prop_1774825291",
@@ -6822,7 +6824,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825350.569923
+    "approved_at": 1774825352.3644013
   },
   {
     "id": "prop_1774825291",
@@ -6843,7 +6845,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825350.569923
+    "approved_at": 1774825352.3644013
   },
   {
     "id": "prop_1774825291",
@@ -6858,7 +6860,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825350.569923
+    "approved_at": 1774825352.3644013
   },
   {
     "id": "prop_1774825291",
@@ -6885,7 +6887,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825350.569923
+    "approved_at": 1774825352.3644013
   },
   {
     "id": "prop_1774825291",
@@ -6912,7 +6914,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825350.569923
+    "approved_at": 1774825352.3644013
   },
   {
     "id": "prop_1774825328_55bb4944",
@@ -6953,8 +6955,10 @@
         "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_specific_topic\": len(topic_text) >= 6,\n        \"has_defined_buyer\": len(buyer_text) >= 8,\n        \"has_clear_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 4,\n        \"has_notes\": len(notes_text) >= 10,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n\n    recommendations = []\n    if not checks[\"has_clear_promise\"]:\n        recommendations.append(\"Add a sharper end-result promise to increase conversion clarity.\")\n    if not checks[\"has_bonus\"]:\n        recommendations.append(\"Include a fast-action bonus to raise perceived value.\")\n    if not checks[\"has_defined_buyer\"]:\n        recommendations.append(\"Define the buyer more specifically so the offer feels tailored.\")\n    if score >= 80:\n        recommendations.append(\"This pack is commercially strong enough to position as a premium starter offer.\")\n\n    return {\n        \"score\": score,\n        \"checks\": checks,\n        \"recommendations\": recommendations,\n    }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825328.7183049
+    "status": "applied",
+    "created_at": 1774825328.7183049,
+    "approved_at": 1774825352.5205204,
+    "applied_at": 1774825352.5928023
   },
   {
     "id": "prop_1774825350_0d5f3a8e",
