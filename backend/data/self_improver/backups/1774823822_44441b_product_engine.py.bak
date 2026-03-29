@@ -75,18 +75,15 @@ def _offer_ideas(topic, buyer, promise):
 
 
 def _prompt_bank(topic, niche, buyer, promise):
-    buyer_text = (buyer or "beginners").lower()
     promise_text = promise or f"make progress with {topic}"
     return [
-        f'Create a premium digital product about {topic} for {buyer_text} in the {niche} niche.',
+        f'Create a premium digital product about {topic} for {buyer.lower()} in the {niche} niche.',
         f'Write 10 high-converting Gumroad product titles for {topic}.',
         f'Generate 25 practical prompts someone can use to {promise_text}.',
         f'Create a 7-day action plan for a beginner trying to succeed with {topic}.',
         f'Write a Gumroad description that makes {topic} feel actionable and worth paying for.',
         f'List 10 bundle ideas related to {topic} that can increase average order value.',
         f'Create 5 short-form content ideas that promote a {topic} digital product.',
-        f'Create 3 value-stack versions of a {topic} offer with pricing anchors and bonus ideas.',
-        f'Write a short checkout page section that explains why this {topic} pack saves time for {buyer_text}.',
     ]
 
 
@@ -148,7 +145,6 @@ def _cta_lines(topic):
         f"Get the {topic} pack now and start executing today.",
         "Use the templates, prompts, and checklist in one focused sitting.",
         "Launch the first version fast, then improve based on buyer response.",
-        "Start with the simple version, collect proof, and turn it into a repeatable offer.",
     ]
 
 

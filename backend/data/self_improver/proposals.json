@@ -1371,8 +1371,10 @@
         "replace": "def _cta_lines(topic):\n    return [\n        f\"Get the {topic} pack now and start executing today.\",\n        \"Use the templates, prompts, and checklist in one focused sitting.\",\n        \"Launch the first version fast, then improve based on buyer response.\",\n        \"Start with the simple version, collect proof, and turn it into a repeatable offer.\",\n    ]\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774823721.7404237
+    "status": "applied",
+    "created_at": 1774823721.7404237,
+    "approved_at": 1774823822.273493,
+    "applied_at": 1774823822.3214054
   },
   {
     "id": "prop_1774823787_bda4c0c0",

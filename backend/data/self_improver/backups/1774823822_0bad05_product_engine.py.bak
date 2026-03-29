@@ -38,55 +38,51 @@ def _premium_title(topic, promise):
 
 def _offer_ideas(topic, buyer, promise):
     topic_tc = _title_case(topic)
-    buyer_text = (buyer or "Beginners").strip()
     promise_text = promise or f"get better results with {topic}"
     return [
         {
             "name": f"{topic_tc} Starter Kit",
             "price": "$9–$19",
             "title": f"The {topic_tc} Starter Kit",
-            "description": f"A beginner-friendly pack for {buyer_text.lower()} who want to {promise_text}. Includes quick-start steps, templates, prompts, and a low-friction launch path."
+            "description": f"A beginner-friendly pack for {buyer.lower()} who want to {promise_text}. Includes steps, templates, prompts, and a simple launch path."
         },
         {
             "name": f"{topic_tc} Premium Blueprint",
             "price": "$19–$29",
             "title": f"{topic_tc} Premium Blueprint",
-            "description": f"A deeper system with examples, pricing ideas, execution checklists, and copy-paste assets for buyers who want faster and cleaner progress."
+            "description": f"A more detailed system with examples, pricing ideas, execution checklists, and copy-paste assets for someone who wants faster progress."
         },
         {
             "name": f"{topic_tc} Prompt Pack",
             "price": "$7–$17",
             "title": f"{topic_tc} Prompt Vault",
-            "description": f"A focused library of prompts, templates, and workflows designed to reduce thinking time and increase implementation speed."
+            "description": f"A focused collection of prompts, templates, and workflows to reduce thinking time and speed up execution."
         },
         {
             "name": f"{topic_tc} Fast-Start Pack",
             "price": "$9–$19",
             "title": f"{topic_tc} Fast-Start Pack",
-            "description": f"An action-first pack built for overwhelmed beginners who need clarity, momentum, and a simple path to their first result."
+            "description": f"A simplified action-oriented system designed to help overwhelmed beginners start quickly and avoid wasted time."
         },
         {
             "name": f"{topic_tc} Bundle",
             "price": "$29–$49",
             "title": f"The Complete {topic_tc} Bundle",
-            "description": f"A premium bundled offer combining guide, prompts, templates, and bonus assets into a stronger high-value package."
+            "description": f"A bundled premium offer that combines guide, prompts, templates, and bonus ideas into one higher-value product."
         },
     ]
 
 
 def _prompt_bank(topic, niche, buyer, promise):
-    buyer_text = (buyer or "beginners").lower()
     promise_text = promise or f"make progress with {topic}"
     return [
-        f'Create a premium digital product about {topic} for {buyer_text} in the {niche} niche.',
+        f'Create a premium digital product about {topic} for {buyer.lower()} in the {niche} niche.',
         f'Write 10 high-converting Gumroad product titles for {topic}.',
         f'Generate 25 practical prompts someone can use to {promise_text}.',
         f'Create a 7-day action plan for a beginner trying to succeed with {topic}.',
         f'Write a Gumroad description that makes {topic} feel actionable and worth paying for.',
         f'List 10 bundle ideas related to {topic} that can increase average order value.',
         f'Create 5 short-form content ideas that promote a {topic} digital product.',
-        f'Create 3 value-stack versions of a {topic} offer with pricing anchors and bonus ideas.',
-        f'Write a short checkout page section that explains why this {topic} pack saves time for {buyer_text}.',
     ]
 
 
@@ -148,7 +144,6 @@ def _cta_lines(topic):
         f"Get the {topic} pack now and start executing today.",
         "Use the templates, prompts, and checklist in one focused sitting.",
         "Launch the first version fast, then improve based on buyer response.",
-        "Start with the simple version, collect proof, and turn it into a repeatable offer.",
     ]
 
 

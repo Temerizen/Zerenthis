@@ -148,7 +148,6 @@ def _cta_lines(topic):
         f"Get the {topic} pack now and start executing today.",
         "Use the templates, prompts, and checklist in one focused sitting.",
         "Launch the first version fast, then improve based on buyer response.",
-        "Start with the simple version, collect proof, and turn it into a repeatable offer.",
     ]
 
 
