@@ -163,39 +163,6 @@ def health():
     }
 
 
-@app.get("/api/catalog")
-def catalog():
-    return {
-        "brand": "Zerenthis",
-        "products": [
-            {
-                "id": "product-pack",
-                "name": "Execution Pack PDF",
-                "category": "digital-product",
-                "starting_price": 19,
-                "deliverable": "pdf",
-                "best_for": "lead capture and low-ticket monetization"
-            },
-            {
-                "id": "shorts-pack",
-                "name": "Shorts Content Pack",
-                "category": "content",
-                "starting_price": 29,
-                "deliverable": "video-assets",
-                "best_for": "traffic generation and organic promotion"
-            },
-            {
-                "id": "youtube-pack",
-                "name": "YouTube Growth Pack",
-                "category": "content-strategy",
-                "starting_price": 49,
-                "deliverable": "script-pack",
-                "best_for": "authority building and upsells"
-            }
-        ]
-    }
-
-
 @app.get("/api/metrics")
 def metrics():
     leads = []

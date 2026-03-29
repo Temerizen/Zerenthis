@@ -972,5 +972,19 @@
       "ok": true,
       "id": "prop_1774825931"
     }
+  },
+  {
+    "time": 1774825935,
+    "id": "prop_1774825931",
+    "title": "Expose monetization and delivery metrics in the API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825935,
+    "id": "prop_1774825931",
+    "title": "Raise product output quality with built-in quality scoring and clearer package content",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

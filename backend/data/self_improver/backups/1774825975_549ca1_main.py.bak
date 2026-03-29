@@ -163,39 +163,6 @@ def health():
     }
 
 
-@app.get("/api/catalog")
-def catalog():
-    return {
-        "brand": "Zerenthis",
-        "products": [
-            {
-                "id": "product-pack",
-                "name": "Execution Pack PDF",
-                "category": "digital-product",
-                "starting_price": 19,
-                "deliverable": "pdf",
-                "best_for": "lead capture and low-ticket monetization"
-            },
-            {
-                "id": "shorts-pack",
-                "name": "Shorts Content Pack",
-                "category": "content",
-                "starting_price": 29,
-                "deliverable": "video-assets",
-                "best_for": "traffic generation and organic promotion"
-            },
-            {
-                "id": "youtube-pack",
-                "name": "YouTube Growth Pack",
-                "category": "content-strategy",
-                "starting_price": 49,
-                "deliverable": "script-pack",
-                "best_for": "authority building and upsells"
-            }
-        ]
-    }
-
-
 @app.get("/api/metrics")
 def metrics():
     leads = []
@@ -223,22 +190,6 @@ def metrics():
             named += 1
 
     conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0
-    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0
-    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0
-    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0
-    return {
-        "outputs": len(outputs),
-        "leads": len(leads),
-        "conversion_rate": conversion_rate,
-        "consent_rate": consent_rate,
-        "contact_rate": contact_rate,
-        "named_rate": named_rate,
-        "consented_leads": consented,
-        "contactable_leads": contactable,
-        "named_leads": named,
-        "by_source": by_source,
-        "latest_output": max((p.name for p in outputs), default=None),
-    }
     consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0
     contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0
 
