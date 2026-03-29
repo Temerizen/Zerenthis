@@ -57,19 +57,6 @@ def build_shorts_script(topic: str, tone: str, promise: str) -> List[str]:
     ]
 
 
-def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:
-    checks = {
-        "has_strong_title": len(title.strip()) >= 20,
-        "has_promise": bool((promise or "").strip()),
-        "has_bonus": bool((bonus or "").strip()),
-        "has_cta": "CTA IDEAS:" in script,
-        "has_structure": "STRUCTURE:" in script,
-        "has_thumbnail": "THUMBNAIL:" in script,
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-
-
 def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:
     title = f"{topic.title()} for {buyer} | {promise or 'A Better System'}"
     script = f"""
@@ -125,14 +112,11 @@ NOTES:
 {notes or 'Keep it premium and direct.'}
 """.strip()
 
-    quality = _score_youtube_pack(title, script, promise, bonus)
-
     return {
         "status": "done",
         "mode": "youtube",
         "title": title,
         "script": script,
-        "quality": quality,
     }
 
 
