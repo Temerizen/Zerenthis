@@ -1233,5 +1233,26 @@
     "title": "Improve generated offer quality with stronger CTA and conversion metadata",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826787_eac3b4f4",
+    "title": "Expose product and self-improver health metrics in the API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826857",
+    "title": "Complete health endpoint with monetization and job visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826857",
+    "title": "Add product output metadata for quality scoring and sales follow-up",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]
