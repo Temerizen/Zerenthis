@@ -781,5 +781,22 @@
       "ok": true,
       "id": "prop_1774825402_175532e4"
     }
+  },
+  {
+    "time": 1774825473,
+    "id": "prop_1774825463_cc716297",
+    "title": "Add user-facing intake and monetization summary to metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825473,
+    "id": "prop_1774825463_c2d4b311",
+    "title": "Improve frontend hero flow with lead capture intent and trust signals",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825463_c2d4b311"
+    }
   }
 ]
