@@ -132,19 +132,7 @@ def _monetization_summary(topic, buyer, promise):
     topic_text = _clean(topic, "digital product")
     buyer_text = _clean(buyer, "beginners")
     promise_text = _clean(promise, f"get results with {topic_text}")
- 
-
-def _score_product_pack(topic, buyer, promise, bonus, notes):
-    checks = {
-        "has_topic": bool(_clean(topic)),
-        "has_buyer": bool(_clean(buyer)),
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-   return {
+    return {
         "positioning": f"Sell this as a practical shortcut for {buyer_text} who want to {promise_text} without wasting time.",
         "price_strategy": "Lead with an entry offer, then upsell a premium bundle with templates and bonus assets.",
         "bundle_strategy": f"Bundle the core {topic_text} guide with prompts, checklists, and a fast-start bonus to raise perceived value.",

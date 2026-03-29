@@ -7501,7 +7501,9 @@
         "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n \n\ndef _score_product_pack(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_buyer\": bool(_clean(buyer)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825658.9758973
+    "status": "applied",
+    "created_at": 1774825658.9758973,
+    "approved_at": 1774825662.3009849,
+    "applied_at": 1774825662.3410625
   }
 ]
