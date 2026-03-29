@@ -500,5 +500,54 @@
     "title": "Upgrade product output with monetization-focused offer summary",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824631_6291274a",
+    "title": "Finish file-serving endpoint and add lead-capture checkout endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824709_2401d6f2",
+    "title": "Add product API UX, lead capture hooks, and complete file download responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824709_8d49e67e",
+    "title": "Strengthen API observability with request IDs and richer health status",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824729_a7223bc6",
+    "title": "Add a conversion-ready capabilities endpoint and clearer API health metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824729_ef8634cb",
+    "title": "Improve generated product quality with stronger commercial packaging",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824789",
+    "title": "Finish file serving and add download metadata for generated outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824789",
+    "title": "Add stronger commercial outputs to YouTube pack responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]
