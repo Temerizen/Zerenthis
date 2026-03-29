@@ -7076,7 +7076,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\"):\n            contactable += 1\n        if item.get(\"customer_name\"):\n            named += 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n        \"lead_to_output_rate_percent\": conversion_rate,\n        \"marketing_consent_rate_percent\": consent_rate,\n        \"contactable_lead_rate_percent\": contact_rate,\n        \"recent_leads\": leads[-5:],\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825471",
@@ -7090,7 +7090,7 @@
         "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": len(topic_text) >= 4,\n        \"has_specific_buyer\": len(buyer_text) >= 8,\n        \"has_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 3,\n        \"has_notes\": len(notes_text) >= 12,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _sales_angles(topic, buyer, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    return [\n        f\"Speed angle: help {buyer_text.lower()} {promise_text} without wasting time on random tactics.\",\n        f\"Clarity angle: turn {topic_tc} into a simpler step-by-step execution path.\",\n        f\"Confidence angle: reduce overwhelm with templates, prompts, and a first-win roadmap.\",\n    ]\n\n\ndef _cta_stack(topic):\n    topic_tc = _title_case(_clean(topic, \"this offer\"))\n    return [\n        f\"Get instant access to the {topic_tc} execution pack.\",\n        \"Use the templates today and ship faster this week.\",\n        \"Start with the core pack, then upsell the premium bundle.\",\n    ]"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825471",
@@ -7116,7 +7116,7 @@
         "replace": "@app.get(\"/api/jobs/{job_id}\")\ndef job_status(job_id: str):\n    job = get_job(job_id)\n    if not job:\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n\n    data = jsonable_encoder(job)\n    result = data.get(\"result\") if isinstance(data, dict) else None\n\n    if isinstance(result, dict):\n        filename = result.get(\"filename\") or result.get(\"file\") or result.get(\"output_file\")\n        if isinstance(filename, str) and filename.strip():\n            safe_name = Path(filename).name\n            result[\"download_url\"] = f\"{get_base_url()}/api/download/{quote(safe_name)}\"\n\n    return {\"ok\": True, \"job\": data}\n\n\n@app.get(\"/api/download/{filename}\")\ndef download_output(filename: str):\n    safe_name = Path(filename).name\n    path = OUTPUT_DIR / safe_name\n    if not path.exists() or not path.is_file():\n        raise HTTPException(status_code=404, detail=\"File not found\")\n    return FileResponse(path=str(path), filename=safe_name)\n\n\n@app.post(\"/api/product-pack\")\ndef product_pack(payload: GenerateRequest):\n    job_id = create_job(\n        \"product\",\n        payload.model_dump(),\n        build_product_pack,\n        topic=payload.topic,\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825471",
@@ -7130,7 +7130,7 @@
         "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    identified_leads = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\") or item.get(\"customer_name\"):\n            identified_leads += 1\n\n    total_outputs = len(outputs)\n    total_leads = len(leads)\n    lead_capture_rate = round((identified_leads / total_outputs) * 100, 2) if total_outputs else 0.0\n    consent_rate = round((consented / total_leads) * 100, 2) if total_leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": total_leads,\n        \"identified_leads\": identified_leads,\n        \"marketing_consented_leads\": consented,\n        \"consent_rate_percent\": consent_rate,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": total_outputs,\n        \"lead_capture_rate_percent\": lead_capture_rate,\n        \"outputs_per_lead\": round((total_outputs / total_leads), 2) if total_leads else None,\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825471",
@@ -7144,7 +7144,7 @@
         "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n\n\n@app.post(\"/api/offer-preview\")\ndef offer_preview(payload: GenerateRequest):\n    log_lead(\"offer_preview\", payload)\n\n    promise_text = payload.promise.strip() or f\"get faster results with {payload.topic}\"\n    bonus_text = payload.bonus.strip() or \"Prompt pack + launch checklist\"\n    topic = payload.topic.strip()\n    buyer = payload.buyer.strip() or \"Beginners starting from zero\"\n    niche = payload.niche.strip() or \"Make Money Online\"\n\n    headline = f\"{topic.title()} Execution Pack\"\n    subheadline = f\"Built for {buyer.lower()} who want to {promise_text}.\"\n\n    return {\n        \"ok\": True,\n        \"preview\": {\n            \"headline\": headline,\n            \"subheadline\": subheadline,\n            \"niche\": niche,\n            \"audience\": buyer,\n            \"core_promise\": promise_text,\n            \"bonus\": bonus_text,\n            \"recommended_price_range\": \"$19-$49\",\n            \"delivery\": [\"PDF execution pack\", \"Prompt bundle\", \"Launch ideas\"],\n            \"value_points\": [\n                f\"Clear positioning for {topic}\",\n                \"Faster time-to-launch with ready-to-use assets\",\n                \"Beginner-friendly structure with premium framing\"\n            ]\n        }\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "rejected"
   },
   {
     "id": "prop_1774825473",
@@ -7159,5 +7159,78 @@
       }
     ],
     "status": "pending"
+  },
+  {
+    "id": "prop_1774825475",
+    "title": "Add conversion-ready lead capture analytics and stronger API health visibility [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already collects leads, but monetization readiness is limited because there is no visibility into capture rate, consent quality, or recent lead sources. Expanding metrics and health data improves operations, monetization tracking, and user-flow optimization without adding risky infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\"):\n            contactable += 1\n        if item.get(\"customer_name\"):\n            named += 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n        \"lead_to_output_rate_percent\": conversion_rate,\n        \"marketing_consent_rate_percent\": consent_rate,\n        \"contactable_lead_rate_percent\": contact_rate,\n        \"recent_leads\": leads[-5:],\n    }\n"
+      }
+    ],
+    "status": "applied",
+    "approved_at": 1774825513.7430873,
+    "applied_at": 1774825513.7704208
+  },
+  {
+    "id": "prop_1774825475",
+    "title": "Raise product output quality with stronger scoring and monetization-focused content blocks [safe-prep]",
+    "reason": "Safe preparation extracted from: The product engine is a direct value generator. Improving its quality rubric and generated sales assets increases product usefulness, perceived polish, and monetization readiness. This creates better customer-facing output without needing new services or large refactors.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": len(topic_text) >= 4,\n        \"has_specific_buyer\": len(buyer_text) >= 8,\n        \"has_promise\": len(promise_text) >= 8,\n        \"has_bonus\": len(bonus_text) >= 3,\n        \"has_notes\": len(notes_text) >= 12,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _sales_angles(topic, buyer, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    return [\n        f\"Speed angle: help {buyer_text.lower()} {promise_text} without wasting time on random tactics.\",\n        f\"Clarity angle: turn {topic_tc} into a simpler step-by-step execution path.\",\n        f\"Confidence angle: reduce overwhelm with templates, prompts, and a first-win roadmap.\",\n    ]\n\n\ndef _cta_stack(topic):\n    topic_tc = _title_case(_clean(topic, \"this offer\"))\n    return [\n        f\"Get instant access to the {topic_tc} execution pack.\",\n        \"Use the templates today and ship faster this week.\",\n        \"Start with the core pack, then upsell the premium bundle.\",\n    ]"
+      }
+    ],
+    "status": "approved",
+    "approved_at": 1774825513.7430873
+  },
+  {
+    "id": "prop_1774825513_c5bf5610",
+    "title": "Add product quality and monetization metrics to API responses",
+    "reason": "Zerenthis already captures leads and outputs, but monetization readiness is limited without clear conversion-oriented quality signals in generated products. Returning quality scoring and commercial metadata from product generation improves product output quality, enables better UX in the frontend, and creates a measurable path for optimization.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_buyer\": bool(buyer_text),\n        \"has_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"topic_specificity\": len(topic_text) >= 8,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n",
+        "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return {\n        \"entry_offer\": f\"Low-ticket starter pack for {buyer_text.lower()}\",\n        \"core_offer\": f\"Execution blueprint helping customers {promise_text}\",\n        \"upsell\": f\"Bundle, prompt vault, or premium implementation pack around {topic_text}\",\n        \"lead_magnet\": f\"Free checklist or mini-guide about {topic_text}\",\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825513.6747136
+  },
+  {
+    "id": "prop_1774825513_b41b0e87",
+    "title": "Expose richer health and monetization dashboard metrics",
+    "reason": "A stronger user and operator flow needs better visibility into system status, lead capture quality, and monetization signals. Expanding health and metrics endpoints is realistic within the existing backend and supports reliability, sales readiness, and frontend dashboard improvements without adding risky infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n",
+        "replace": "def health():\n    lead_count = 0\n    consented_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n                consented_count = len([x for x in lead_items if isinstance(x, dict) and x.get(\"marketing_consent\")])\n        except Exception:\n            lead_count = 0\n            consented_count = 0\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": lead_count,\n        \"marketing_consented_leads\": consented_count,\n        \"capture_rate\": round((lead_count / max(len(outputs), 1)) * 100, 2),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "def metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    identified = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\") or item.get(\"customer_name\"):\n            identified += 1\n\n    total_leads = len(leads)\n    total_outputs = len(outputs)\n    return {\n        \"ok\": True,\n        \"total_leads\": total_leads,\n        \"marketing_consented_leads\": consented,\n        \"identified_leads\": identified,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": total_outputs,\n        \"lead_capture_rate\": round((total_leads / max(total_outputs, 1)) * 100, 2),\n        \"consent_rate\": round((consented / max(total_leads, 1)) * 100, 2),\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825513.6928287
   }
 ]

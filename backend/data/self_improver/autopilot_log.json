@@ -798,5 +798,19 @@
       "ok": true,
       "id": "prop_1774825463_c2d4b311"
     }
+  },
+  {
+    "time": 1774825475,
+    "id": "prop_1774825471",
+    "title": "Add conversion-ready lead capture analytics and stronger API health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825475,
+    "id": "prop_1774825471",
+    "title": "Raise product output quality with stronger scoring and monetization-focused content blocks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

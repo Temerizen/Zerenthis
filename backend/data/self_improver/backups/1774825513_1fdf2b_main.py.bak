@@ -142,24 +142,20 @@ def root():
 
 @app.get("/health")
 def health():
-    lead_items = []
+    lead_count = 0
     if LEADS_FILE.exists():
         try:
-            loaded = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
-            if isinstance(loaded, list):
-                lead_items = loaded
+            lead_items = json.loads(LEADS_FILE.read_text(encoding="utf-8"))
+            if isinstance(lead_items, list):
+                lead_count = len(lead_items)
         except Exception:
-            lead_items = []
-    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
+            lead_count = 0
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
         "output_dir": str(OUTPUT_DIR),
-        "output_count": len(outputs),
-        "lead_count": len(lead_items),
-        "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
-        "cors_origin_count": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,
-        "latest_output": max((p.name for p in outputs), default=None),
+        "output_count": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),
+        "lead_count": lead_count,
     }
 
 
@@ -177,34 +173,18 @@ def metrics():
     outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
     by_source = {}
     consented = 0
-    contactable = 0
-    named = 0
     for item in leads:
         source = item.get("source", "unknown")
         by_source[source] = by_source.get(source, 0) + 1
         if item.get("marketing_consent"):
             consented += 1
-        if item.get("customer_email"):
-            contactable += 1
-        if item.get("customer_name"):
-            named += 1
-
-    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0
-    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0
-    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0
 
     return {
         "ok": True,
         "total_leads": len(leads),
         "marketing_consented_leads": consented,
-        "contactable_leads": contactable,
-        "named_leads": named,
         "leads_by_source": by_source,
         "total_outputs": len(outputs),
-        "lead_to_output_rate_percent": conversion_rate,
-        "marketing_consent_rate_percent": consent_rate,
-        "contactable_lead_rate_percent": contact_rate,
-        "recent_leads": leads[-5:],
     }
 
 
