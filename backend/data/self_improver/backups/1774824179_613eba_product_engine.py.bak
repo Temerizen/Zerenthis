@@ -145,8 +145,6 @@ def _mistakes():
         "Padding pages instead of adding practical value",
         "Uploading once and never testing more offers",
         "Waiting for perfection before listing",
-        "Not adding an upsell, bundle, or order bump",
-        "Forgetting urgency, bonuses, or a clear call to action",
     ]
 
 

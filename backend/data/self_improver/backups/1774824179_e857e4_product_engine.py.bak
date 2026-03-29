@@ -112,8 +112,6 @@ def _distribution_ideas(topic):
         "X/Twitter threads that summarize one useful idea from the pack",
         "A free mini-post that leads into the paid version",
         "Bundle promotions and launch discounts",
-        "Email your audience with a 48-hour fast-action bonus",
-        "Use a simple lead magnet that upsells into the full pack",
     ]
 
 
@@ -145,8 +143,6 @@ def _mistakes():
         "Padding pages instead of adding practical value",
         "Uploading once and never testing more offers",
         "Waiting for perfection before listing",
-        "Not adding an upsell, bundle, or order bump",
-        "Forgetting urgency, bonuses, or a clear call to action",
     ]
 
 

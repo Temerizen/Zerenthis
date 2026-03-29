@@ -298,5 +298,54 @@
     "title": "Make YouTube pack output more sellable with embedded offer and CTA guidance",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774823999_3624afaa",
+    "title": "Add API metadata, base URL resolution, and gallery filtering for cleaner product delivery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824001_bac64690",
+    "title": "Add API metadata, input normalization, and monetization-friendly request context",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824001_3c3fb52b",
+    "title": "Expose structured gallery filters and monetization-oriented output metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824073_bc298315",
+    "title": "Add request validation, safer CORS, and startup diagnostics to API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824073_713c2e7d",
+    "title": "Upgrade product output with offer positioning and monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824136",
+    "title": "Add API-level request validation and monetization metadata to generation flows",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824136",
+    "title": "Lock down CORS and improve health visibility for deployment reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

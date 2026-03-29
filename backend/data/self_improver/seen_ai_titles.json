@@ -17,6 +17,8 @@
   "add production-safe api metadata and monetization-ready request tracing",
   "add production-safe api metadata, base url resolution, and monetization-ready gallery links",
   "add request validation, monetization metadata, and job ux fields to api responses",
+  "add request validation, safer cors, and gallery metadata for better ux and production readiness",
+  "add request validation, safer cors, and startup diagnostics to api",
   "add safe api schemas and proper self-improver route responses",
   "add safer api contracts and monetization-ready job metadata",
   "add typed self-improver api validation and proposal browsing",
@@ -47,5 +49,7 @@
   "strengthen product output with offer stack, pricing logic, and cta structure",
   "upgrade api output metadata for better frontend flow and monetization readiness",
   "upgrade gallery output with monetization-friendly previews and safer filtering",
+  "upgrade product output with offer positioning and monetization sections",
+  "upgrade product packs with monetization sections and stronger conversion assets",
   "upgrade product packs with monetization-focused sales assets"
 ]
