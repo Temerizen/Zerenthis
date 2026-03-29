@@ -137,8 +137,6 @@ def execute(pid):
 
     _validate_steps(p["steps"])
     backups = []
-    execution_log = _load_execution_log()
-    started_at = int(time.time())
 
     try:
         for s in p["steps"]:
@@ -169,35 +167,14 @@ def execute(pid):
                 path.unlink()
 
         p["status"] = "applied"
-        p["applied_at"] = int(time.time())
         save(d)
-        execution_log.append({
-            "id": pid,
-            "title": p.get("title"),
-            "status": "applied",
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "steps": p.get("steps", [])
-        })
-        _save_execution_log(execution_log)
         return {"ok": True, "id": pid}
 
     except Exception as e:
         for orig, b in backups:
             shutil.copy2(b, orig)
         p["status"] = "failed"
-        p["failed_at"] = int(time.time())
         save(d)
-        execution_log.append({
-            "id": pid,
-            "title": p.get("title"),
-            "status": "failed",
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "error": str(e),
-            "steps": p.get("steps", [])
-        })
-        _save_execution_log(execution_log)
         return {"ok": False, "id": pid, "error": str(e)}
 
 

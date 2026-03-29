@@ -549,5 +549,50 @@
     "title": "Add stronger commercial outputs to YouTube pack responses",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824972,
+    "id": "prop_1774824796_203383bd",
+    "title": "Finish file-serving and add product-ready download metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824972,
+    "id": "prop_1774824796_b1468c3e",
+    "title": "Add input normalization to generation models for more consistent output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824856_0ea64a77",
+    "title": "Complete file serving and add downloadable output catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824856_0952f470",
+    "title": "Add lead-capture and monetization metadata to generation responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824883_f4a99ca2",
+    "title": "Complete file delivery and add lead-capture checkout metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824934_269e5f3c",
+    "title": "Add proposal deduplication and execution audit trail",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824934_269e5f3c"
+    }
   }
 ]
