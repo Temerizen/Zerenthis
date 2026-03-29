@@ -1,13 +1,19 @@
-import shutil, os
+from self_improve.backups import backup_file
+from self_improve.logger import log
 
-BACKUP_DIR = "backend/self_improve/backups"
-os.makedirs(BACKUP_DIR, exist_ok=True)
-
-def backup_file(path):
-    if os.path.exists(path):
-        shutil.copy(path, f"{BACKUP_DIR}/{os.path.basename(path)}")
 
 def apply_patch(patch):
-    for file in patch["files"]:
-        backup_file(file)
-    return True
+    backups = []
+    for file_path in patch.get("files", []):
+        backed_up = backup_file(file_path)
+        if backed_up:
+            backups.append(backed_up)
+
+    # Starter mode:
+    # We are only backing up + logging.
+    # Real code mutation can be added later after approval/UI layer.
+    log(f"APPLY PLACEHOLDER: {patch.get('summary')} | files={patch.get('files')}")
+    return {
+        "applied": True,
+        "backups": backups
+    }
