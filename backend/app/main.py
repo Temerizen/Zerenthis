@@ -1,18 +1,23 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
+from __future__ import annotations
+
 from pathlib import Path
-import uuid, threading, textwrap
-from moviepy.editor import ColorClip, concatenate_videoclips, AudioClip
-import numpy as np
+from typing import Optional
 
-app = FastAPI(title="Zerenthis GOD CORE")
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+from pydantic import BaseModel, Field
 
-BASE = Path(__file__).resolve().parent
-OUT = BASE / "outputs"
-OUT.mkdir(exist_ok=True)
+from Engine.jobs import create_job, get_job
+from Engine.product_engine import build_product_pack
+from Engine.video_engine import build_shorts_video, build_youtube_pack
 
-JOBS = {}
+APP_DIR = Path(__file__).resolve().parent
+BACKEND_DIR = APP_DIR.parent
+OUTPUT_DIR = BACKEND_DIR / "data" / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+app = FastAPI(title="Zerenthis Automation Core")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,186 +27,102 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ---------------- CONTENT ENGINE ----------------
 
-def generate_script(topic):
-    return [
-        f"Stop scrolling. {topic} is changing everything.",
-        f"Most people are already behind.",
-        f"This is leverage.",
-        f"The gap is growing fast.",
-        f"Act now or miss it."
-    ]
+class GenerateRequest(BaseModel):
+    topic: str = Field(min_length=1, max_length=200)
+    niche: str = Field(default="Make Money Online")
+    tone: str = Field(default="Premium")
+    buyer: str = Field(default="Beginners starting from zero")
+    promise: str = Field(default="")
+    bonus: str = Field(default="")
+    notes: str = Field(default="")
+    duration_seconds: int = Field(default=35, ge=10, le=90)
 
-def generate_shorts(topic):
-    return [
-        f"{topic} is about to explode",
-        f"You are already behind in {topic}",
-        f"Nobody is ready for {topic}"
-    ]
 
-def generate_long(topic):
-    return f"{topic} is the next shift. Learn fast or fall behind."
+def get_base_url() -> str:
+    # Same origin works cleanly on deployed backend.
+    return ""
 
-def generate_ebook(topic):
-    return f"{topic}\n\nMini book about {topic}"
-
-def generate_pack(topic):
-    return {
-        "title": f"{topic} Explodes",
-        "script": generate_script(topic),
-        "shorts": generate_shorts(topic),
-        "ebook": generate_ebook(topic)
-    }
-
-# ---------------- INTELLIGENCE ----------------
-
-def ai_brain(topic):
-    return {
-        "analysis": f"{topic} creates leverage through speed.",
-        "insight": "Early movers dominate.",
-        "conclusion": "Act now."
-    }
-
-def research(topic):
-    return {
-        "trend": "growing",
-        "opportunity": "high",
-        "summary": f"{topic} is rising fast"
-    }
-
-def execution_plan(topic):
-    return [
-        f"Pick niche in {topic}",
-        "Create content daily",
-        "Track performance",
-        "Scale winners"
-    ]
-
-def monetization(topic):
-    return [
-        "affiliate links",
-        "digital products",
-        "ads",
-        "services"
-    ]
-
-# ---------------- VIDEO ENGINE ----------------
-
-def make_audio(duration):
-    def frame(t): return 0.2*np.sin(440*2*np.pi*t)
-    return AudioClip(frame, duration=duration, fps=44100)
-
-def render_video(lines):
-    uid = str(uuid.uuid4())
-    path = OUT / f"{uid}.mp4"
-
-    clips = []
-    for i in range(4):
-        clip = ColorClip((720,1280), color=(20+i*20,30,60+i*20)).set_duration(2)
-        clips.append(clip)
-
-    video = concatenate_videoclips(clips)
-    audio = make_audio(video.duration)
-    video = video.set_audio(audio)
-
-    video.write_videofile(
-        str(path),
-        fps=24,
-        codec="libx264",
-        audio_codec="aac",
-        preset="ultrafast",
-        verbose=False,
-        logger=None
-    )
-
-    return path.name
-
-def render_job(job_id, script):
-    try:
-        vid = render_video(script)
-        JOBS[job_id] = {"status":"done","video_url":f"/files/{vid}"}
-    except Exception as e:
-        JOBS[job_id] = {"status":"error","error":str(e)}
-
-# ---------------- BANANA MODE (FULL SYSTEM) ----------------
-
-def banana_system(topic):
-    batch = []
-
-    for i in range(5):
-        angle = f"{topic} angle {i}"
-
-        entry = {
-            "content": generate_pack(angle),
-            "brain": ai_brain(angle),
-            "research": research(angle),
-            "execution": execution_plan(angle),
-            "monetization": monetization(angle),
-            "score": len(angle) % 10 + 5
-        }
-
-        batch.append(entry)
-
-    best = max(batch, key=lambda x: x["score"])
-
-    return {
-        "batch": batch,
-        "best": best
-    }
-
-# ---------------- ROUTES ----------------
 
 @app.get("/")
 def root():
-    return {"status":"Zerenthis GOD CORE Live"}
+    return {"status": "Zerenthis Automation Core Live"}
 
-@app.post("/video")
-async def video(req: Request):
-    data = await req.json()
-    topic = data.get("topic","AI")
 
-    script = generate_script(topic)
+@app.get("/health")
+def health():
+    return {"ok": True}
 
-    job_id = str(uuid.uuid4())
-    JOBS[job_id] = {"status":"processing"}
 
-    threading.Thread(target=render_job,args=(job_id,script),daemon=True).start()
+@app.post("/api/product-pack")
+def product_pack(payload: GenerateRequest):
+    job_id = create_job(
+        "product",
+        payload.model_dump(),
+        build_product_pack,
+        topic=payload.topic,
+        niche=payload.niche,
+        tone=payload.tone,
+        buyer=payload.buyer,
+        promise=payload.promise,
+        bonus=payload.bonus,
+        notes=payload.notes,
+        base_url=get_base_url(),
+    )
+    return {"job_id": job_id, "status": "queued"}
 
-    return {"script":script,"job_id":job_id}
 
-@app.post("/shorts")
-async def shorts(req: Request):
-    data = await req.json()
-    return {"data":generate_shorts(data.get("topic","AI"))}
+@app.post("/api/shorts-pack")
+def shorts_pack(payload: GenerateRequest):
+    job_id = create_job(
+        "shorts",
+        payload.model_dump(),
+        build_shorts_video,
+        topic=payload.topic,
+        tone=payload.tone,
+        promise=payload.promise,
+        duration_seconds=payload.duration_seconds,
+        base_url=get_base_url(),
+    )
+    return {"job_id": job_id, "status": "queued"}
 
-@app.post("/long")
-async def long(req: Request):
-    data = await req.json()
-    return {"data":generate_long(data.get("topic","AI"))}
 
-@app.post("/ebook")
-async def ebook(req: Request):
-    data = await req.json()
-    return {"data":generate_ebook(data.get("topic","AI"))}
+@app.post("/api/youtube-pack")
+def youtube_pack(payload: GenerateRequest):
+    # This one is text-only and immediate because it produces a premium upload pack, not a rendered video.
+    result = build_youtube_pack(
+        topic=payload.topic,
+        niche=payload.niche,
+        tone=payload.tone,
+        buyer=payload.buyer,
+        promise=payload.promise,
+        bonus=payload.bonus,
+        notes=payload.notes,
+    )
+    return result
 
-@app.post("/pack")
-async def pack(req: Request):
-    data = await req.json()
-    return generate_pack(data.get("topic","AI"))
 
-@app.post("/banana")
-async def banana(req: Request):
-    data = await req.json()
-    return banana_system(data.get("topic","AI"))
+@app.get("/api/job/{job_id}")
+def job_status(job_id: str):
+    data = get_job(job_id)
+    if data.get("status") == "not_found":
+        raise HTTPException(status_code=404, detail="Job not found")
+    return data
 
-@app.get("/job/{id}")
-def job(id:str):
-    return JOBS.get(id,{"status":"not found"})
 
-@app.get("/files/{name}")
-def file(name:str):
-    path = OUT / name
+@app.get("/api/file/{name}")
+def serve_file(name: str):
+    if "/" in name or "\\" in name:
+        raise HTTPException(status_code=400, detail="Invalid file name")
+
+    path = OUTPUT_DIR / name
     if not path.exists():
-        return JSONResponse(status_code=404, content={"error":"missing"})
-    return FileResponse(path)
+        raise HTTPException(status_code=404, detail="File missing")
+
+    media_type = None
+    if path.suffix.lower() == ".pdf":
+        media_type = "application/pdf"
+    elif path.suffix.lower() == ".mp4":
+        media_type = "video/mp4"
+
+    return FileResponse(path, media_type=media_type, filename=path.name)
