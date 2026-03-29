@@ -7232,7 +7232,274 @@
         "replace": "def metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    identified = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\") or item.get(\"customer_name\"):\n            identified += 1\n\n    total_leads = len(leads)\n    total_outputs = len(outputs)\n    return {\n        \"ok\": True,\n        \"total_leads\": total_leads,\n        \"marketing_consented_leads\": consented,\n        \"identified_leads\": identified,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": total_outputs,\n        \"lead_capture_rate\": round((total_leads / max(total_outputs, 1)) * 100, 2),\n        \"consent_rate\": round((consented / max(total_leads, 1)) * 100, 2),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825513.6928287
+  },
+  {
+    "id": "prop_1774825525_ff7931cd",
+    "title": "Add generation quality scoring to product packs for better output and upsell readiness",
+    "reason": "Product outputs currently generate content but lack a built-in quality signal. Adding a structured quality score makes the product engine more self-evaluable, improves output consistency, and creates a monetization-ready foundation for gating premium/high-confidence deliverables or internal QA dashboards.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_buyer\": bool(buyer_text),\n        \"has_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"topic_length_ok\": len(topic_text) >= 4,\n        \"buyer_specificity_ok\": len(buyer_text) >= 8,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825525.992964
+  },
+  {
+    "id": "prop_1774825526_25e2e9be",
+    "title": "Expose conversion-ready intake metrics in health and metrics endpoints",
+    "reason": "Zerenthis already captures leads, but the API does not surface enough funnel intelligence for monetization and user-flow optimization. Adding consent rate and unique-email counts gives immediate operational insight for CRM readiness, list quality, and landing-page performance without introducing risky new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    consented = 0\n    unique_emails = set()\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n                for item in lead_items:\n                    if item.get(\"marketing_consent\"):\n                        consented += 1\n                    email = (item.get(\"customer_email\") or \"\").strip().lower()\n                    if email:\n                        unique_emails.add(email)\n        except Exception:\n            lead_count = 0\n            consented = 0\n            unique_emails = set()\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n        \"marketing_consented_leads\": consented,\n        \"unique_lead_emails\": len(unique_emails),\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    unique_emails = set()\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        email = (item.get(\"customer_email\") or \"\").strip().lower()\n        if email:\n            unique_emails.add(email)\n\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"consent_rate_percent\": consent_rate,\n        \"unique_lead_emails\": len(unique_emails),\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825526.018547
+  },
+  {
+    "id": "prop_1774825594_068be1a3",
+    "title": "Add monetization-ready metrics response with lead quality and output breakdown",
+    "reason": "The API already collects leads, but the metrics route is incomplete and underpowered. Completing it with lead quality, consent, source attribution, and output-type breakdown gives immediate monetization visibility, supports funnel optimization, and improves operator decision-making without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\"):\n            contactable += 1\n        if item.get(\"customer_name\"):\n            named += 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    by_extension = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    fully_qualified = 0\n\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        has_email = bool(item.get(\"customer_email\"))\n        has_name = bool(item.get(\"customer_name\"))\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if has_email:\n            contactable += 1\n        if has_name:\n            named += 1\n        if has_email and has_name:\n            fully_qualified += 1\n\n    for output in outputs:\n        ext = output.suffix.lower() or \"[no_extension]\"\n        by_extension[ext] = by_extension.get(ext, 0) + 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    qualification_rate = round((fully_qualified / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"total\": len(outputs),\n            \"by_extension\": by_extension,\n            \"latest\": max((p.name for p in outputs), default=None),\n        },\n        \"leads\": {\n            \"total\": len(leads),\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"fully_qualified\": fully_qualified,\n            \"by_source\": by_source,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate_percent\": conversion_rate,\n            \"consent_rate_percent\": consent_rate,\n            \"contact_rate_percent\": contact_rate,\n            \"qualification_rate_percent\": qualification_rate,\n        },\n        \"config\": {\n            \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n            \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        }\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825594.0955188
+  },
+  {
+    "id": "prop_1774825594_62309519",
+    "title": "Upgrade self-improver history and stats with failure visibility and execution outcomes",
+    "reason": "The self-improver already exposes proposals and execution logs, but operators cannot quickly assess proposal quality or failed execution patterns. Enriching these endpoints improves oversight, helps the system learn from failed changes, and creates a cleaner user/admin flow for approving safer, higher-impact proposals.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n",
+        "replace": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    execution_items = _load_execution_log()\n    latest_execution_by_id = {}\n    for row in execution_items:\n        pid = row.get(\"id\")\n        if not pid:\n            continue\n        current = latest_execution_by_id.get(pid)\n        if current is None or row.get(\"finished_at\", 0) >= current.get(\"finished_at\", 0):\n            latest_execution_by_id[pid] = row\n\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n\n        last_execution = latest_execution_by_id.get(item.get(\"id\"), {})\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n            \"last_execution_status\": last_execution.get(\"status\"),\n            \"last_execution_error\": last_execution.get(\"error\"),\n            \"last_execution_finished_at\": last_execution.get(\"finished_at\"),\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    executions = _load_execution_log()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n\n    execution_counts = {\n        \"applied\": 0,\n        \"failed\": 0,\n    }\n    for row in executions:\n        status = row.get(\"status\")\n        if status in execution_counts:\n            execution_counts[status] += 1\n\n    counts[\"total\"] = len(items)\n    counts[\"executions\"] = execution_counts\n    counts[\"approval_rate_percent\"] = round(((counts[\"approved\"] + counts[\"applied\"] + counts[\"failed\"]) / len(items)) * 100, 2) if items else 0.0\n    counts[\"execution_success_rate_percent\"] = round((execution_counts[\"applied\"] / (execution_counts[\"applied\"] + execution_counts[\"failed\"])) * 100, 2) if (execution_counts[\"applied\"] + execution_counts[\"failed\"]) else 0.0\n    return counts\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825594.1143079
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Add monetization-ready metrics and lead funnel summary response",
+    "reason": "The metrics endpoint is currently incomplete in the provided code and likely fails to return a usable business summary. Finishing it gives immediate value for monetization readiness, product decision-making, and user flow visibility by exposing conversion and lead quality data.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n\n    recent_leads = list(reversed(leads[-10:]))\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"count\": len(outputs),\n            \"latest\": max((p.name for p in outputs), default=None),\n        },\n        \"leads\": {\n            \"count\": len(leads),\n            \"by_source\": by_source,\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"recent\": recent_leads,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate_percent\": conversion_rate,\n            \"consent_rate_percent\": round((consented / len(leads)) * 100, 2) if leads else 0.0,\n            \"contactable_rate_percent\": round((contactable / len(leads)) * 100, 2) if leads else 0.0,\n        },\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n    }\n"
+      }
+    ],
+    "status": "failed"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Improve self-improver proposal quality with stricter validation heuristics",
+    "reason": "Right now the self-improver accepts structurally valid steps, but not necessarily high-signal or safe-to-apply proposals. Adding lightweight heuristics to reject vague titles/reasons and low-quality file edits will improve proposal quality, reduce junk changes, and make the system more reliable without needing new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def propose(title, reason, steps):\n    _validate_steps(steps)\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n",
+        "replace": "def propose(title, reason, steps):\n    _validate_steps(steps)\n\n    clean_title = (title or \"\").strip()\n    clean_reason = (reason or \"\").strip()\n    if len(clean_title) < 8:\n        raise ValueError(\"title must be more specific\")\n    if len(clean_reason) < 20:\n        raise ValueError(\"reason must clearly explain impact\")\n\n    weak_phrases = {\"fix stuff\", \"misc changes\", \"update code\", \"improve code\", \"small tweaks\", \"test\"}\n    if clean_title.lower() in weak_phrases or clean_reason.lower() in weak_phrases:\n        raise ValueError(\"proposal is too low-signal\")\n\n    touched_paths = set()\n    for i, step in enumerate(steps):\n        path = step.get(\"path\", \"\")\n        if path in touched_paths:\n            raise ValueError(f\"duplicate path edits are not allowed: {path}\")\n        touched_paths.add(path)\n\n        if step.get(\"action\") == \"edit_file\":\n            find_text = step.get(\"find\", \"\")\n            replace_text = step.get(\"replace\", \"\")\n            if len(find_text.strip()) < 10:\n                raise ValueError(f\"step {i} find text is too short to be reliable\")\n            if not replace_text.strip():\n                raise ValueError(f\"step {i} replace text cannot be blank\")\n\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Expose richer health and monetization dashboard metrics [safe-prep]",
+    "reason": "Safe preparation extracted from: A stronger user and operator flow needs better visibility into system status, lead capture quality, and monetization signals. Expanding health and metrics endpoints is realistic within the existing backend and supports reliability, sales readiness, and frontend dashboard improvements without adding risky infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n",
+        "replace": "def health():\n    lead_count = 0\n    consented_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n                consented_count = len([x for x in lead_items if isinstance(x, dict) and x.get(\"marketing_consent\")])\n        except Exception:\n            lead_count = 0\n            consented_count = 0\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": lead_count,\n        \"marketing_consented_leads\": consented_count,\n        \"capture_rate\": round((lead_count / max(len(outputs), 1)) * 100, 2),\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "def metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    identified = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\") or item.get(\"customer_name\"):\n            identified += 1\n\n    total_leads = len(leads)\n    total_outputs = len(outputs)\n    return {\n        \"ok\": True,\n        \"total_leads\": total_leads,\n        \"marketing_consented_leads\": consented,\n        \"identified_leads\": identified,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": total_outputs,\n        \"lead_capture_rate\": round((total_leads / max(total_outputs, 1)) * 100, 2),\n        \"consent_rate\": round((consented / max(total_leads, 1)) * 100, 2),\n    }\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Add generation quality scoring to product packs for better output and upsell readiness [safe-prep]",
+    "reason": "Safe preparation extracted from: Product outputs currently generate content but lack a built-in quality signal. Adding a structured quality score makes the product engine more self-evaluable, improves output consistency, and creates a monetization-ready foundation for gating premium/high-confidence deliverables or internal QA dashboards.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes",
+        "replace": "def _quality_score(topic, buyer, promise, bonus, notes):\n    topic_text = _clean(topic)\n    buyer_text = _clean(buyer)\n    promise_text = _clean(promise)\n    bonus_text = _clean(bonus)\n    notes_text = _clean(notes)\n\n    checks = {\n        \"has_topic\": bool(topic_text),\n        \"has_buyer\": bool(buyer_text),\n        \"has_promise\": bool(promise_text),\n        \"has_bonus\": bool(bonus_text),\n        \"has_notes\": bool(notes_text),\n        \"topic_length_ok\": len(topic_text) >= 4,\n        \"buyer_specificity_ok\": len(buyer_text) >= 8,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Expose conversion-ready intake metrics in health and metrics endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already captures leads, but the API does not surface enough funnel intelligence for monetization and user-flow optimization. Adding consent rate and unique-email counts gives immediate operational insight for CRM readiness, list quality, and landing-page performance without introducing risky new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    consented = 0\n    unique_emails = set()\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n                for item in lead_items:\n                    if item.get(\"marketing_consent\"):\n                        consented += 1\n                    email = (item.get(\"customer_email\") or \"\").strip().lower()\n                    if email:\n                        unique_emails.add(email)\n        except Exception:\n            lead_count = 0\n            consented = 0\n            unique_emails = set()\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n        \"marketing_consented_leads\": consented,\n        \"unique_lead_emails\": len(unique_emails),\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    unique_emails = set()\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        email = (item.get(\"customer_email\") or \"\").strip().lower()\n        if email:\n            unique_emails.add(email)\n\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"consent_rate_percent\": consent_rate,\n        \"unique_lead_emails\": len(unique_emails),\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Add monetization-ready metrics response with lead quality and output breakdown [safe-prep]",
+    "reason": "Safe preparation extracted from: The API already collects leads, but the metrics route is incomplete and underpowered. Completing it with lead quality, consent, source attribution, and output-type breakdown gives immediate monetization visibility, supports funnel optimization, and improves operator decision-making without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if item.get(\"customer_email\"):\n            contactable += 1\n        if item.get(\"customer_name\"):\n            named += 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    by_extension = {}\n    consented = 0\n    contactable = 0\n    named = 0\n    fully_qualified = 0\n\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        has_email = bool(item.get(\"customer_email\"))\n        has_name = bool(item.get(\"customer_name\"))\n        if item.get(\"marketing_consent\"):\n            consented += 1\n        if has_email:\n            contactable += 1\n        if has_name:\n            named += 1\n        if has_email and has_name:\n            fully_qualified += 1\n\n    for output in outputs:\n        ext = output.suffix.lower() or \"[no_extension]\"\n        by_extension[ext] = by_extension.get(ext, 0) + 1\n\n    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    qualification_rate = round((fully_qualified / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"total\": len(outputs),\n            \"by_extension\": by_extension,\n            \"latest\": max((p.name for p in outputs), default=None),\n        },\n        \"leads\": {\n            \"total\": len(leads),\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"fully_qualified\": fully_qualified,\n            \"by_source\": by_source,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate_percent\": conversion_rate,\n            \"consent_rate_percent\": consent_rate,\n            \"contact_rate_percent\": contact_rate,\n            \"qualification_rate_percent\": qualification_rate,\n        },\n        \"config\": {\n            \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n            \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        }\n    }\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825621",
+    "title": "Upgrade self-improver history and stats with failure visibility and execution outcomes [safe-prep]",
+    "reason": "Safe preparation extracted from: The self-improver already exposes proposals and execution logs, but operators cannot quickly assess proposal quality or failed execution patterns. Enriching these endpoints improves oversight, helps the system learn from failed changes, and creates a cleaner user/admin flow for approving safer, higher-impact proposals.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n",
+        "replace": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    execution_items = _load_execution_log()\n    latest_execution_by_id = {}\n    for row in execution_items:\n        pid = row.get(\"id\")\n        if not pid:\n            continue\n        current = latest_execution_by_id.get(pid)\n        if current is None or row.get(\"finished_at\", 0) >= current.get(\"finished_at\", 0):\n            latest_execution_by_id[pid] = row\n\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n\n        last_execution = latest_execution_by_id.get(item.get(\"id\"), {})\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n            \"last_execution_status\": last_execution.get(\"status\"),\n            \"last_execution_error\": last_execution.get(\"error\"),\n            \"last_execution_finished_at\": last_execution.get(\"finished_at\"),\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    executions = _load_execution_log()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n\n    execution_counts = {\n        \"applied\": 0,\n        \"failed\": 0,\n    }\n    for row in executions:\n        status = row.get(\"status\")\n        if status in execution_counts:\n            execution_counts[status] += 1\n\n    counts[\"total\"] = len(items)\n    counts[\"executions\"] = execution_counts\n    counts[\"approval_rate_percent\"] = round(((counts[\"approved\"] + counts[\"applied\"] + counts[\"failed\"]) / len(items)) * 100, 2) if items else 0.0\n    counts[\"execution_success_rate_percent\"] = round((execution_counts[\"applied\"] / (execution_counts[\"applied\"] + execution_counts[\"failed\"])) * 100, 2) if (execution_counts[\"applied\"] + execution_counts[\"failed\"]) else 0.0\n    return counts\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825622",
+    "title": "Add monetization-ready metrics and lead funnel summary response [safe-prep]",
+    "reason": "Safe preparation extracted from: The metrics endpoint is currently incomplete in the provided code and likely fails to return a usable business summary. Finishing it gives immediate value for monetization readiness, product decision-making, and user flow visibility by exposing conversion and lead quality data.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n\n    recent_leads = list(reversed(leads[-10:]))\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"count\": len(outputs),\n            \"latest\": max((p.name for p in outputs), default=None),\n        },\n        \"leads\": {\n            \"count\": len(leads),\n            \"by_source\": by_source,\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"recent\": recent_leads,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate_percent\": conversion_rate,\n            \"consent_rate_percent\": round((consented / len(leads)) * 100, 2) if leads else 0.0,\n            \"contactable_rate_percent\": round((contactable / len(leads)) * 100, 2) if leads else 0.0,\n        },\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825647_b8d4b0df",
+    "title": "Add complete metrics response for lead capture and monetization visibility",
+    "reason": "The metrics endpoint is currently incomplete, which blocks reliable reporting on conversions, lead quality, and monetization readiness. Finishing it gives immediate business visibility and improves decision-making around output quality and funnel performance.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"lead_sources\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825647.8083944
+  },
+  {
+    "id": "prop_1774825647_feb53f02",
+    "title": "Raise generated product quality with embedded quality scoring and stronger monetization sections",
+    "reason": "The product engine generates assets for sale, so it should self-score and include practical monetization guidance. Adding a lightweight quality rubric and richer commercialization content improves output quality, makes offers easier to sell, and creates better data for future self-improvement loops.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n ",
+        "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return {\n        \"positioning\": f\"Sell this as a practical shortcut for {buyer_text} who want to {promise_text} without wasting time.\",\n        \"price_strategy\": \"Lead with an entry offer, then upsell a premium bundle with templates and bonus assets.\",\n        \"bundle_strategy\": f\"Bundle the core {topic_text} guide with prompts, checklists, and a fast-start bonus to raise perceived value.\",\n        \"cta\": \"Use urgency, clarity, and a transformation-focused promise instead of generic feature lists.\",\n    }\n\n\ndef _score_product_pack(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": len(_clean(topic)) >= 4,\n        \"has_defined_buyer\": len(_clean(buyer)) >= 6,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "applied",
+    "created_at": 1774825647.8275123,
+    "approved_at": 1774825659.0260649,
+    "applied_at": 1774825659.0540953
+  },
+  {
+    "id": "prop_1774825658_f4171333",
+    "title": "Fix self-improver execution reliability and return structured results",
+    "reason": "The self-improver engine is currently broken at the end of execute(), which can cause proposal execution to fail silently or crash after applying changes. Hardening execution with consistent UTF-8 file handling, rollback on failure, and explicit success/failure logging will directly improve self-improver quality, reliability, and approval safety.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def execute(pid):\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p[\"steps\"])\n    backups = []\n    execution_log = _load_execution_log()\n    started_at = int(time.time())\n\n    try:\n        for s in p[\"steps\"]:\n            path = ROOT / s[\"path\"]\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                path.write_text(s.get(\"content\", \"\"))\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text()\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt)\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = int(time.time())\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"applied\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        re",
+        "replace": "def execute(pid):\n    d = load()\n    p = next((x for x in d if x[\"id\"] == pid), None)\n\n    if not p:\n        return {\"ok\": False, \"error\": \"proposal not found\"}\n    if p[\"status\"] != \"approved\":\n        return {\"ok\": False, \"error\": \"not approved\"}\n\n    _validate_steps(p[\"steps\"])\n    backups = []\n    created_files = []\n    execution_log = _load_execution_log()\n    started_at = int(time.time())\n\n    try:\n        for s in p[\"steps\"]:\n            path = ROOT / s[\"path\"]\n\n            if s[\"action\"] == \"create_file\":\n                path.parent.mkdir(parents=True, exist_ok=True)\n                if path.exists():\n                    raise Exception(f\"refusing to overwrite existing file: {s['path']}\")\n                path.write_text(s.get(\"content\", \"\"), encoding=\"utf-8\")\n                created_files.append(path)\n\n            elif s[\"action\"] == \"edit_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                txt = path.read_text(encoding=\"utf-8\")\n                if s[\"find\"] not in txt:\n                    raise Exception(f\"find text not found in {s['path']}\")\n                txt = txt.replace(s[\"find\"], s[\"replace\"], 1)\n                path.write_text(txt, encoding=\"utf-8\")\n\n            elif s[\"action\"] == \"delete_file\":\n                if not path.exists():\n                    raise Exception(f\"missing file: {s['path']}\")\n                b = backup(path)\n                if b:\n                    backups.append((path, b))\n                path.unlink()\n\n        p[\"status\"] = \"applied\"\n        p[\"applied_at\"] = int(time.time())\n        save(d)\n        result = {\n            \"ok\": True,\n            \"id\": pid,\n            \"status\": \"applied\",\n            \"applied_steps\": len(p.get(\"steps\", [])),\n            \"backups_created\": len(backups),\n        }\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"applied\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", []),\n            \"result\": result,\n        })\n        _save_execution_log(execution_log)\n        return result\n    except Exception as e:\n        for path, bak in reversed(backups):\n            shutil.copy2(bak, path)\n        for path in reversed(created_files):\n            if path.exists():\n                path.unlink()\n\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = int(time.time())\n        p[\"last_error\"] = str(e)\n        save(d)\n        result = {\"ok\": False, \"error\": str(e), \"id\": pid, \"status\": \"failed\"}\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"steps\": p.get(\"steps\", []),\n            \"error\": str(e),\n        })\n        _save_execution_log(execution_log)\n        return result"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825658.9184344
+  },
+  {
+    "id": "prop_1774825658_a7610782",
+    "title": "Complete metrics API for monetization and lead funnel visibility",
+    "reason": "The metrics route is currently incomplete, which blocks visibility into outputs, lead capture, consented contacts, and conversion signals. Finishing it gives Zerenthis a simple monetization dashboard foundation and improves operator decision-making without adding risky surface area.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    latest_outputs = sorted([p.name for p in outputs], reverse=True)[:10]\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"consent_rate\": consent_rate,\n        \"contactable_leads\": contactable,\n        \"contact_rate\": contact_rate,\n        \"named_leads\": named,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_outputs\": latest_outputs,\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825658.9489167
+  },
+  {
+    "id": "prop_1774825658_3704010e",
+    "title": "Add product quality scoring to generated YouTube and PDF offers",
+    "reason": "Zerenthis already scores YouTube packs, but the product engine appears to generate assets without a comparable quality gate. Adding lightweight, deterministic quality scoring to product outputs improves product output quality, gives the self-improver a measurable target, and creates better monetization readiness through more consistent offers.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n ",
+        "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n \n\ndef _score_product_pack(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_buyer\": bool(_clean(buyer)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825658.9758973
   }
 ]

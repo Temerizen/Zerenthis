@@ -812,5 +812,58 @@
     "title": "Raise product output quality with stronger scoring and monetization-focused content blocks",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825513_b41b0e87",
+    "title": "Expose richer health and monetization dashboard metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825525_ff7931cd",
+    "title": "Add generation quality scoring to product packs for better output and upsell readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825526_25e2e9be",
+    "title": "Expose conversion-ready intake metrics in health and metrics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825594_068be1a3",
+    "title": "Add monetization-ready metrics response with lead quality and output breakdown",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825594_62309519",
+    "title": "Upgrade self-improver history and stats with failure visibility and execution outcomes",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825621",
+    "title": "Add monetization-ready metrics and lead funnel summary response",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825621",
+    "title": "Improve self-improver proposal quality with stricter validation heuristics",
+    "risk": "low",
+    "result": {
+      "ok": false,
+      "id": "prop_1774825621",
+      "error": "'charmap' codec can't decode byte 0x90 in position 4401: character maps to <undefined>"
+    }
   }
 ]
