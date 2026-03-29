@@ -656,5 +656,43 @@
       "ok": true,
       "id": "prop_1774825070_33e3bf1c"
     }
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825070_5c5411ed",
+    "title": "Add product metadata endpoint for stronger user flow and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825070_7e484ff7",
+    "title": "Strengthen lead capture quality with timestamped deduplicated records",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825121_a511ad16",
+    "title": "Add atomic lead logging and monetization analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825124,
+    "id": "prop_1774825121_ff852943",
+    "title": "Expose quality metadata in health for better product feedback loops",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825124,
+    "id": "prop_1774825121",
+    "title": "Complete self-improver engine lifecycle and failure logging",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825121"
+    }
   }
 ]

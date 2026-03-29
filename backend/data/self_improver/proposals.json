@@ -6292,7 +6292,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    items = []\n    for p in sorted(OUTPUT_DIR.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):\n        if not p.is_file():\n            continue\n        items.append({\n            \"name\": p.name,\n            \"size_bytes\": p.stat().st_size,\n            \"updated_at\": datetime.fromtimestamp(p.stat().st_mtime).isoformat(),\n            \"download_url\": f\"{get_base_url()}/api/download/{quote(p.name)}\",\n        })\n    return {\"items\": items, \"count\": len(items)}\n\n\n# =========================\n# \ud83d\udcb0 PRODUCT GENERATION\n# =========================\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825070.379873
   },
   {
@@ -6307,7 +6307,7 @@
         "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    email = str(payload.customer_email).lower().strip() if payload.customer_email else \"\"\n    name = payload.customer_name.strip()\n    topic = payload.topic.strip()\n\n    duplicate = next(\n        (\n            item for item in items\n            if item.get(\"source\") == source\n            and item.get(\"customer_email\", \"\").lower().strip() == email\n            and item.get(\"topic\", \"\").strip() == topic\n        ),\n        None,\n    )\n\n    lead_record = {\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": topic,\n        \"niche\": payload.niche,\n        \"customer_name\": name,\n        \"customer_email\": email,\n        \"marketing_consent\": payload.marketing_consent,\n        \"created_at\": datetime.utcnow().isoformat() + \"Z\",\n    }\n\n    if duplicate:\n        duplicate.update(lead_record)\n    else:\n        items.append(lead_record)\n\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825070.403109
   },
   {
@@ -6334,7 +6334,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n\n\n@app.get(\"/api/leads/summary\")\ndef leads_summary():\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    source_counts = Counter(item.get(\"source\", \"unknown\") for item in items)\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n\n    return {\n        \"total_leads\": len(items),\n        \"email_leads\": with_email,\n        \"marketing_consented\": consented,\n        \"sources\": dict(source_counts),\n        \"conversion_ready\": with_email > 0,\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825121.3393278
   },
   {
@@ -6349,7 +6349,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    files = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    recent = sorted(files, key=lambda p: p.stat().st_mtime, reverse=True)[:5]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(files),\n        \"recent_outputs\": [p.name for p in recent],\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825121.3568559
   },
   {
@@ -6370,7 +6370,7 @@
         "replace": "    except Exception as e:\n        for orig, b in backups:\n            shutil.copy2(b, orig)\n        p[\"status\"] = \"failed\"\n        p[\"failed_at\"] = int(time.time())\n        p[\"error\"] = str(e)\n        save(d)\n        execution_log.append({\n            \"id\": pid,\n            \"title\": p.get(\"title\"),\n            \"status\": \"failed\",\n            \"started_at\": started_at,\n            \"finished_at\": int(time.time()),\n            \"error\": str(e),\n            \"steps\": p.get(\"steps\", [])\n        })\n        _save_execution_log(execution_log)\n        return {\"ok\": False, \"error\": str(e)}"
       }
     ],
-    "status": "pending"
+    "status": "applied"
   },
   {
     "id": "prop_1774825121",
@@ -6390,7 +6390,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_count = 0\n    if LEADS_FILE.exists():\n        try:\n            lead_items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(lead_items, list):\n                lead_count = len(lead_items)\n        except Exception:\n            lead_count = 0\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"lead_count\": lead_count,\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                leads = loaded\n        except Exception:\n            leads = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    by_source = {}\n    consented = 0\n    for item in leads:\n        source = item.get(\"source\", \"unknown\")\n        by_source[source] = by_source.get(source, 0) + 1\n        if item.get(\"marketing_consent\"):\n            consented += 1\n\n    return {\n        \"ok\": True,\n        \"total_leads\": len(leads),\n        \"marketing_consented_leads\": consented,\n        \"leads_by_source\": by_source,\n        \"total_outputs\": len(outputs),\n    }"
       }
     ],
-    "status": "pending"
+    "status": "approved"
   },
   {
     "id": "prop_1774825121",
@@ -6404,7 +6404,7 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _checkout_assets(topic, buyer, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Bonus prompt pack\")\n    return {\n        \"headline\": f\"A faster way for {buyer_text.lower()} to {promise_text}\",\n        \"subheadline\": f\"Use the {topic_tc} pack to skip blank-page syndrome and move with a clearer execution system.\",\n        \"bullets\": [\n            \"Clear offer idea and positioning\",\n            \"Templates and prompts to reduce thinking time\",\n            \"Launch steps that are realistic for a beginner\",\n            f\"Fast-action bonus: {bonus_text}\",\n        ],\n        \"objections\": [\n            \"I am starting from zero\",\n            \"I do not know what to sell first\",\n            \"I need something practical, not generic motivation\",\n        ],\n        \"upsell\": f\"Offer a premium {topic_tc} bundle with extra templates, examples, and a swipe file.\",\n    }\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):"
       }
     ],
-    "status": "pending"
+    "status": "approved"
   },
   {
     "id": "prop_1774825121",
@@ -6424,7 +6424,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n        \"cors_allow_origins\": ALLOWED_ORIGINS,\n        \"public_base_url\": get_base_url(),\n    }\n\n\n@app.post(\"/api/preview-request\")\ndef preview_request(payload: GenerateRequest):\n    return {\n        \"ok\": True,\n        \"summary\": summarize_request(payload),\n        \"recommended_endpoints\": {\n            \"product_pack\": f\"{get_base_url()}/api/product-pack\",\n            \"shorts_pack\": f\"{get_base_url()}/api/shorts-pack\",\n            \"youtube_pack\": f\"{get_base_url()}/api/youtube-pack\",\n        },\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "approved"
   },
   {
     "id": "prop_1774825121",
@@ -6454,6 +6454,80 @@
         "path": "backend/app/main.py",
         "find": "@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    data = get_job(job_id)\n    if data.get(\"status\") == \"not_found\":\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return data\n",
         "replace": "@app.get(\"/api/job/{job_id}\")\ndef job_status(job_id: str):\n    data = get_job(job_id)\n    if data.get(\"status\") == \"not_found\":\n        raise HTTPException(status_code=404, detail=\"Job not found\")\n    return _normalize_job_payload(data)\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774825123",
+    "title": "Add product metadata endpoint for stronger user flow and monetization readiness [safe-prep]",
+    "reason": "Safe preparation extracted from: Jobs already return a job URL, but there is no clear product catalog or output listing path for a frontend to show downloadable assets. Adding a lightweight outputs endpoint improves user flow, supports lead-to-delivery UX, and makes the system more sellable as a productized service.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi.responses import FileResponse\n",
+        "replace": "from fastapi.responses import FileResponse\nfrom datetime import datetime\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n\n\n# =========================\n# \ud83d\udcb0 PRODUCT GENERATION\n# =========================\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n\n\n@app.get(\"/api/outputs\")\ndef list_outputs():\n    items = []\n    for p in sorted(OUTPUT_DIR.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):\n        if not p.is_file():\n            continue\n        items.append({\n            \"name\": p.name,\n            \"size_bytes\": p.stat().st_size,\n            \"updated_at\": datetime.fromtimestamp(p.stat().st_mtime).isoformat(),\n            \"download_url\": f\"{get_base_url()}/api/download/{quote(p.name)}\",\n        })\n    return {\"items\": items, \"count\": len(items)}\n\n\n# =========================\n# \ud83d\udcb0 PRODUCT GENERATION\n# =========================\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825123",
+    "title": "Strengthen lead capture quality with timestamped deduplicated records [safe-prep]",
+    "reason": "Safe preparation extracted from: Leads are critical for monetization, but the current logger appends minimal data and can create noisy duplicates. Adding timestamps and simple deduplication makes the system more CRM-ready, improves analytics quality, and preserves cleaner customer intent data without changing the core flow.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    email = str(payload.customer_email).lower().strip() if payload.customer_email else \"\"\n    name = payload.customer_name.strip()\n    topic = payload.topic.strip()\n\n    duplicate = next(\n        (\n            item for item in items\n            if item.get(\"source\") == source\n            and item.get(\"customer_email\", \"\").lower().strip() == email\n            and item.get(\"topic\", \"\").strip() == topic\n        ),\n        None,\n    )\n\n    lead_record = {\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": topic,\n        \"niche\": payload.niche,\n        \"customer_name\": name,\n        \"customer_email\": email,\n        \"marketing_consent\": payload.marketing_consent,\n        \"created_at\": datetime.utcnow().isoformat() + \"Z\",\n    }\n\n    if duplicate:\n        duplicate.update(lead_record)\n    else:\n        items.append(lead_record)\n\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825123",
+    "title": "Add atomic lead logging and monetization analytics endpoints [safe-prep]",
+    "reason": "Safe preparation extracted from: Zerenthis already captures leads, but the current file-write flow is vulnerable to corruption under concurrent requests and provides no summary visibility for monetization. Making lead writes atomic and adding a lightweight analytics endpoint improves reliability, monetization readiness, and operator visibility without requiring new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom urllib.parse import quote\nfrom pydantic import BaseModel, Field, EmailStr, field_validator\nimport json\n",
+        "replace": "from fastapi import FastAPI, HTTPException\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import FileResponse\nfrom urllib.parse import quote\nfrom pydantic import BaseModel, Field, EmailStr, field_validator\nfrom collections import Counter\nimport json\nimport time\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    LEADS_FILE.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"created_at\": int(time.time()),\n    })\n    tmp_file = LEADS_FILE.with_suffix(\".tmp\")\n    tmp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    tmp_file.replace(LEADS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n\n\n@app.get(\"/api/leads/summary\")\ndef leads_summary():\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    source_counts = Counter(item.get(\"source\", \"unknown\") for item in items)\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n\n    return {\n        \"total_leads\": len(items),\n        \"email_leads\": with_email,\n        \"marketing_consented\": consented,\n        \"sources\": dict(source_counts),\n        \"conversion_ready\": with_email > 0,\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825124",
+    "title": "Expose quality metadata in health for better product feedback loops [safe-prep]",
+    "reason": "Safe preparation extracted from: Both product and video engines already compute quality signals, but the API health surface only reports file counts. Adding a lightweight quality snapshot endpoint improves user flow for operators and gives the self-improver a measurable target for product-output quality without changing the generation architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len([p for p in OUTPUT_DIR.iterdir() if p.is_file()]),\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    files = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    recent = sorted(files, key=lambda p: p.stat().st_mtime, reverse=True)[:5]\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(files),\n        \"recent_outputs\": [p.name for p in recent],\n    }\n"
       }
     ],
     "status": "pending"

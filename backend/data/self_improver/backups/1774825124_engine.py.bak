@@ -202,19 +202,8 @@ def execute(pid):
             shutil.copy2(b, orig)
         p["status"] = "failed"
         p["failed_at"] = int(time.time())
-        p["error"] = str(e)
         save(d)
         execution_log.append({
-            "id": pid,
-            "title": p.get("title"),
-            "status": "failed",
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "error": str(e),
-            "steps": p.get("steps", [])
-        })
-        _save_execution_log(execution_log)
-        return {"ok": False, "error": str(e)}n_log.append({
             "id": pid,
             "title": p.get("title"),
             "status": "failed",
