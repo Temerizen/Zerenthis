@@ -161,23 +161,17 @@ def pending():
 
 def approve(pid):
     d = load()
-    found = False
     for x in d:
         if x["id"] == pid:
             x["status"] = "approved"
-            found = True
     save(d)
-    return found
 
 def reject(pid):
     d = load()
-    found = False
     for x in d:
         if x["id"] == pid:
             x["status"] = "rejected"
-            found = True
     save(d)
-    return found
 
 def backup(path):
     if not path.exists():
@@ -190,16 +184,12 @@ def execute(pid):
     d = load()
     p = next((x for x in d if x["id"] == pid), None)
 
-    if not p:
-        return {"ok": False, "error": "proposal not found"}
-    if p["status"] != "approved":
-        return {"ok": False, "error": "not approved"}
+    if not p or p["status"] != "approved":
+        return {"error": "not approved"}
 
     backups = []
-    started_at = int(time.time())
 
     try:
-        _validate_steps(p.get("steps", []))
         for s in p["steps"]:
             path = ROOT / s["path"]
 
@@ -208,50 +198,31 @@ def execute(pid):
 
             if s["action"] == "create_file":
                 path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text(s.get("content", ""), encoding="utf-8")
+                path.write_text(s.get("content",""))
 
             elif s["action"] == "edit_file":
                 b = backup(path)
                 if b:
-                    backups.append((path, b))
-                txt = path.read_text(encoding="utf-8")
+                    backups.append((path,b))
+                txt = path.read_text()
                 if s["find"] not in txt:
                     raise Exception(f"find text not found in {s['path']}")
                 txt = txt.replace(s["find"], s["replace"], 1)
-                path.write_text(txt, encoding="utf-8")
+                path.write_text(txt)
 
             elif s["action"] == "delete_file":
                 b = backup(path)
                 if b:
-                    backups.append((path, b))
+                    backups.append((path,b))
                 path.unlink()
 
         p["status"] = "applied"
-        p["applied_at"] = int(time.time())
         save(d)
-        _append_execution_log({
-            "proposal_id": pid,
-            "title": p.get("title"),
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "status": "applied",
-            "step_count": len(p.get("steps", [])),
-        })
         return {"ok": True}
 
     except Exception as e:
-        for orig, b in backups:
-            shutil.copy2(b, orig)
+        for orig,b in backups:
+            shutil.copy2(b,orig)
         p["status"] = "failed"
-        p["failed_at"] = int(time.time())
         save(d)
-        _append_execution_log({
-            "proposal_id": pid,
-            "title": p.get("title"),
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "status": "failed",
-            "error": str(e),
-            "step_count": len(p.get("steps", [])),
-        })
-        return {"ok": False, "error": str(e)}
+        return {"error": str(e)}
