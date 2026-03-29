@@ -7437,7 +7437,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"lead_sources\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825647.8083944
   },
   {
@@ -7486,7 +7486,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    latest_outputs = sorted([p.name for p in outputs], reverse=True)[:10]\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"consent_rate\": consent_rate,\n        \"contactable_leads\": contactable,\n        \"contact_rate\": contact_rate,\n        \"named_leads\": named,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_outputs\": latest_outputs,\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825658.9489167
   },
   {
@@ -7505,5 +7505,160 @@
     "created_at": 1774825658.9758973,
     "approved_at": 1774825662.3009849,
     "applied_at": 1774825662.3410625
+  },
+  {
+    "id": "prop_1774825703_f841f2c9",
+    "title": "Finish and harden API metrics plus generation response metadata",
+    "reason": "The main API file appears truncated in the metrics route, which is a direct reliability risk. Completing metrics and returning richer generation metadata improves product quality visibility, supports monetization tracking, and gives the frontend a better user flow with download URLs and quality signals.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    latest_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n\n    return {\n        \"ok\": True,\n        \"lead_count\": len(leads),\n        \"output_count\": len(outputs),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"leads_by_source\": by_source,\n        \"latest_outputs\": [p.name for p in latest_outputs],\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"service\": \"Zerenthis Automation Core\",\n        \"docs\": \"/docs\",\n        \"health\": \"/health\",\n        \"metrics\": \"/api/metrics\",\n        \"self_improver\": \"/self/stats\",\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774825703.082457
+  },
+  {
+    "id": "prop_1774825703_d1db7ce9",
+    "title": "Add safer self-improver execution validation and duplicate-step protection",
+    "reason": "Self-improvement quality depends on proposal safety. The current engine validates syntax but not conflicting edits, duplicate path operations, or oversized proposal payloads. Strengthening validation reduces broken auto-edits, improves reliability, and makes autonomous improvement more approval-safe.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def _validate_steps(steps):\n    if not isinstance(steps, list) or not steps:\n        raise ValueError(\"steps must be a non-empty list\")\n\n    for i, step in enumerate(steps):\n        if not isinstance(step, dict):\n            raise ValueError(f\"step {i} must be an object\")\n\n        action = step.get(\"action\")\n        path = step.get(\"path\")\n\n        if action not in ALLOWED_ACTIONS:\n            raise ValueError(f\"step {i} has invalid action\")\n        if not isinstance(path, str) or not path.strip():\n            raise ValueError(f\"step {i} path is required\")\n        if any(x in path for x in PROTECTED) or path.startswith(\"/\") or path.startswith(\"\\\\\") or \"..\" in path:\n            raise ValueError(f\"step {i} path is blocked\")\n\n        suffix = Path(path).suffix.lower()\n        if suffix and suffix not in TEXT_FILE_SUFFIXES:\n            raise ValueError(f\"step {i} file type is not allowed\")\n\n        if action == \"create_file\":\n            if \"content\" not in step or not isinstance(step.get(\"content\"), str):\n                raise ValueError(f\"step {i} create_file requires string content\")\n\n        if action == \"edit_file\":\n            if not isinstance(step.get(\"find\"), str) or not step.get(\"find\"):\n                raise ValueError(f\"step {i} edit_file requires non-empty find text\")\n            if not isinstance(step.get(\"replace\"), str):\n                raise ValueError(f\"step {i} edit_file requires string replace text\")\n            if step.get(\"find\") == step.get(\"replace\"):\n                raise ValueError(f\"step {i} edit_file find and replace cannot be identical\")\n",
+        "replace": "def _validate_steps(steps):\n    if not isinstance(steps, list) or not steps:\n        raise ValueError(\"steps must be a non-empty list\")\n    if len(steps) > 10:\n        raise ValueError(\"steps cannot exceed 10 actions\")\n\n    touched_paths = {}\n\n    for i, step in enumerate(steps):\n        if not isinstance(step, dict):\n            raise ValueError(f\"step {i} must be an object\")\n\n        action = step.get(\"action\")\n        path = step.get(\"path\")\n\n        if action not in ALLOWED_ACTIONS:\n            raise ValueError(f\"step {i} has invalid action\")\n        if not isinstance(path, str) or not path.strip():\n            raise ValueError(f\"step {i} path is required\")\n        if any(x in path for x in PROTECTED) or path.startswith(\"/\") or path.startswith(\"\\\\\") or \"..\" in path:\n            raise ValueError(f\"step {i} path is blocked\")\n\n        normalized_path = path.strip()\n        previous_action = touched_paths.get(normalized_path)\n        if previous_action is not None:\n            raise ValueError(f\"step {i} reuses path already targeted earlier: {normalized_path}\")\n        touched_paths[normalized_path] = action\n\n        suffix = Path(path).suffix.lower()\n        if suffix and suffix not in TEXT_FILE_SUFFIXES:\n            raise ValueError(f\"step {i} file type is not allowed\")\n\n        if action == \"create_file\":\n            if \"content\" not in step or not isinstance(step.get(\"content\"), str):\n                raise ValueError(f\"step {i} create_file requires string content\")\n            if len(step.get(\"content\", \"\")) > 200000:\n                raise ValueError(f\"step {i} create_file content is too large\")\n\n        if action == \"edit_file\":\n            if not isinstance(step.get(\"find\"), str) or not step.get(\"find\"):\n                raise ValueError(f\"step {i} edit_file requires non-empty find text\")\n            if not isinstance(step.get(\"replace\"), str):\n                raise ValueError(f\"step {i} edit_file requires string replace text\")\n            if step.get(\"find\") == step.get(\"replace\"):\n                raise ValueError(f\"step {i} edit_file find and replace cannot be identical\")\n            if len(step.get(\"find\", \"\")) > 20000 or len(step.get(\"replace\", \"\")) > 200000:\n                raise ValueError(f\"step {i} edit_file payload is too large\")\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def approve(pid):\n    d = load()\n    found = False\n    for x in d:\n        if x[\"id\"] == pid:\n            x[\"status\"] = \"approved\"\n            found = True\n    save(d)\n    return found\n",
+        "replace": "def approve(pid):\n    d = load()\n    found = False\n    for x in d:\n        if x[\"id\"] == pid:\n            _validate_steps(x.get(\"steps\", []))\n            x[\"status\"] = \"approved\"\n            found = True\n    save(d)\n    return found\n"
+      }
+    ],
+    "status": "applied",
+    "created_at": 1774825703.1014946
+  },
+  {
+    "id": "prop_1774825703_23f3223e",
+    "title": "Upgrade product packs with built-in quality scoring and monetization sections",
+    "reason": "The product engine already generates assets, but adding explicit quality checks and sales-focused sections improves output consistency, perceived value, and monetization readiness. This makes generated products easier to sell and easier to evaluate programmatically.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n",
+        "replace": "def _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return [\n        f\"Primary buyer: {buyer_text}\",\n        f\"Core promise: {promise_text}\",\n        \"Entry offer: use a low-friction starter price to maximize first purchases.\",\n        \"Upsell path: offer a premium blueprint, bundle, or prompt vault immediately after checkout.\",\n        \"Retention angle: collect emails with a bonus and follow up with adjacent packs in the same niche.\",\n        f\"Fast positioning: sell this as a shortcut to help {buyer_text.lower()} get results faster with {topic_text}.\",\n    ]\n\n\ndef _quality_score(topic, buyer, promise, bonus, notes):\n    checks = {\n        \"has_topic\": bool(_clean(topic)),\n        \"has_specific_buyer\": len(_clean(buyer)) >= 10,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825703.1796985
+  },
+  {
+    "id": "prop_1774825759_0c411670",
+    "title": "Complete API responses with quality scoring and monetization metrics",
+    "reason": "The main API file appears truncated at the /api/metrics route, which risks runtime failure and weakens product readiness. Completing metrics and adding a lead-export endpoint improves reliability, gives immediate business visibility, and makes Zerenthis more monetization-ready without large structural changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    return {\n        \"ok\": True,\n        \"lead_count\": len(leads),\n        \"output_count\": len(outputs),\n        \"conversion_rate\": conversion_rate,\n        \"consent_rate\": consent_rate,\n        \"contact_rate\": contact_rate,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    if not LEADS_FILE.exists():\n        return {\"ok\": True, \"count\": 0, \"items\": []}\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(loaded, list):\n            loaded = []\n    except Exception:\n        loaded = []\n    return {\"ok\": True, \"count\": len(loaded), \"items\": loaded}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825759.411947
+  },
+  {
+    "id": "prop_1774825759_1592989f",
+    "title": "Add product quality metadata to generated YouTube packs",
+    "reason": "Zerenthis already computes quality checks for YouTube packs, but the output is basic. Exposing a clearer quality summary and monetization signals improves product output quality, helps future self-improver evaluation loops, and creates a cleaner user-facing artifact for premium offers.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n",
+        "replace": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    if score >= 85:\n        verdict = \"strong\"\n    elif score >= 60:\n        verdict = \"usable\"\n    else:\n        verdict = \"needs_improvement\"\n    return {\"score\": score, \"verdict\": verdict, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"offer_ready\": quality[\"score\"] >= 60,\n        \"monetization\": {\n            \"recommended_primary_offer\": \"execution pack\",\n            \"recommended_upsell\": bonus or \"prompt pack\",\n            \"cta_count\": script.count(\"- \"),\n        },\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825759.4322233
+  },
+  {
+    "id": "prop_1774825767",
+    "title": "Complete metrics and add monetization-ready lead analytics API",
+    "reason": "The main API file appears to have a truncated /api/metrics implementation, which risks runtime failure and blocks visibility into lead capture performance. Completing this route improves reliability, gives the product measurable conversion signals, and makes Zerenthis more monetization-ready by exposing consented/contactable lead stats and recent lead activity.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    recent_leads = list(reversed(leads[-10:]))\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"by_source\": by_source,\n        \"consented\": consented,\n        \"contactable\": contactable,\n        \"named\": named,\n        \"recent_leads\": recent_leads,\n    }\n\n\n@app.get(\"/api/leads\")\ndef leads():\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                items = loaded\n        except Exception:\n            items = []\n\n    total = len(items)\n    consented = sum(1 for item in items if item.get(\"marketing_consent\"))\n    with_email = sum(1 for item in items if item.get(\"customer_email\"))\n\n    return {\n        \"ok\": True,\n        \"total\": total,\n        \"consented\": consented,\n        \"with_email\": with_email,\n        \"items\": list(reversed(items[-50:])),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825768",
+    "title": "Add complete metrics response for lead capture and monetization visibility [safe-prep]",
+    "reason": "Safe preparation extracted from: The metrics endpoint is currently incomplete, which blocks reliable reporting on conversions, lead quality, and monetization readiness. Finishing it gives immediate business visibility and improves decision-making around output quality and funnel performance.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"lead_sources\": by_source,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825768",
+    "title": "Complete metrics API for monetization and lead funnel visibility [safe-prep]",
+    "reason": "Safe preparation extracted from: The metrics route is currently incomplete, which blocks visibility into outputs, lead capture, consented contacts, and conversion signals. Finishing it gives Zerenthis a simple monetization dashboard foundation and improves operator decision-making without adding risky surface area.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    latest_outputs = sorted([p.name for p in outputs], reverse=True)[:10]\n\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"consent_rate\": consent_rate,\n        \"contactable_leads\": contactable,\n        \"contact_rate\": contact_rate,\n        \"named_leads\": named,\n        \"named_rate\": named_rate,\n        \"leads_by_source\": by_source,\n        \"latest_outputs\": latest_outputs,\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774825768",
+    "title": "Finish and harden API metrics plus generation response metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: The main API file appears truncated in the metrics route, which is a direct reliability risk. Completing metrics and returning richer generation metadata improves product quality visibility, supports monetization tracking, and gives the frontend a better user flow with download URLs and quality signals.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    latest_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n\n    return {\n        \"ok\": True,\n        \"lead_count\": len(leads),\n        \"output_count\": len(outputs),\n        \"conversion_rate\": conversion_rate,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"leads_by_source\": by_source,\n        \"latest_outputs\": [p.name for p in latest_outputs],\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/\")\ndef root():\n    return {\"status\": \"Zerenthis Automation Core Live\"}\n",
+        "replace": "@app.get(\"/\")\ndef root():\n    return {\n        \"status\": \"Zerenthis Automation Core Live\",\n        \"service\": \"Zerenthis Automation Core\",\n        \"docs\": \"/docs\",\n        \"health\": \"/health\",\n        \"metrics\": \"/api/metrics\",\n        \"self_improver\": \"/self/stats\",\n    }\n"
+      }
+    ],
+    "status": "pending"
   }
 ]

@@ -865,5 +865,36 @@
       "id": "prop_1774825621",
       "error": "'charmap' codec can't decode byte 0x90 in position 4401: character maps to <undefined>"
     }
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825647_b8d4b0df",
+    "title": "Add complete metrics response for lead capture and monetization visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825658_a7610782",
+    "title": "Complete metrics API for monetization and lead funnel visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825703_f841f2c9",
+    "title": "Finish and harden API metrics plus generation response metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825703_d1db7ce9",
+    "title": "Add safer self-improver execution validation and duplicate-step protection",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825703_d1db7ce9"
+    }
   }
 ]

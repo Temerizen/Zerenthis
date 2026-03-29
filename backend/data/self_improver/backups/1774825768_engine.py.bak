@@ -126,7 +126,6 @@ def approve(pid):
     found = False
     for x in d:
         if x["id"] == pid:
-            _validate_steps(x.get("steps", []))
             x["status"] = "approved"
             found = True
     save(d)
