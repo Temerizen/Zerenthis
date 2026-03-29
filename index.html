@@ -1,188 +1,634 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Zerenthis — Content Engine</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zerenthis</title>
   <style>
+    :root {
+      --bg: #05070d;
+      --panel: #0d1220;
+      --panel-2: #11182b;
+      --text: #f5f7ff;
+      --muted: #a7b0c5;
+      --line: rgba(255,255,255,0.08);
+      --accent: #00e5ff;
+      --accent-2: #7c5cff;
+      --good: #79ffb5;
+      --danger: #ff7676;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #05070d;
-      color: white;
-      font-family: Arial;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(0,229,255,0.14), transparent 28%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 22px 0 26px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     h1 {
-      text-align: center;
-      color: #00e5ff;
+      margin: 18px 0 10px;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
     }
 
-    input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 15px;
-      background: #111;
-      color: white;
+    .hero p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
     }
 
-    button {
+    .grid {
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      gap: 20px;
+      margin-top: 26px;
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-inner {
+      padding: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dce3f2;
+    }
+
+    input, select, textarea {
       width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: none;
-      background: #00e5ff;
-      font-weight: bold;
-      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px;
+      font: inherit;
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(0,229,255,0.5);
+      box-shadow: 0 0 0 4px rgba(0,229,255,0.08);
     }
 
     textarea {
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--accent), #66f3ff);
+      color: #051018;
+      border-color: transparent;
+      box-shadow: 0 12px 24px rgba(0,229,255,0.16);
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      flex: 1;
+      min-width: 180px;
+      background: linear-gradient(135deg, var(--accent), #66f3ff);
+      color: #041018;
+      box-shadow: 0 12px 24px rgba(0,229,255,0.16);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .danger {
+      background: rgba(255,118,118,0.08);
+      color: #ffd3d3;
+      border: 1px solid rgba(255,118,118,0.2);
+    }
+
+    .output-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .output-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .pill {
+      border: 1px solid rgba(121,255,181,0.2);
+      background: rgba(121,255,181,0.08);
+      color: var(--good);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .output-box {
       width: 100%;
-      height: 400px;
-      margin-top: 20px;
-      background: #111;
-      color: white;
-      padding: 15px;
-      border-radius: 10px;
-      border: none;
+      min-height: 950px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 22px;
+      line-height: 1.65;
+      font-size: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.55;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+    }
+
+    .status.good {
+      color: var(--good);
+      border-color: rgba(121,255,181,0.18);
+      background: rgba(121,255,181,0.06);
+    }
+
+    .status.bad {
+      color: #ffd0d0;
+      border-color: rgba(255,118,118,0.18);
+      background: rgba(255,118,118,0.06);
+    }
+
+    .tips {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .tips h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .tips ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .file-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .file-links a {
+      display: inline-block;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .output-box {
+        min-height: 700px;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Zerenthis Automation Core</div>
+      <h1>Generate premium products, shorts, and long-form YouTube packs from one control panel.</h1>
+      <p>
+        This frontend talks to your Zerenthis backend. Use Product for premium PDFs, Shorts for fast caption-style vertical videos,
+        and YouTube for long-form script + thumbnail + upload pack generation.
+      </p>
+    </section>
 
-<h1>Zerenthis Content Engine</h1>
+    <section class="grid">
+      <div class="card">
+        <div class="card-inner">
+          <h2 class="section-title">Engine Controls</h2>
+          <div class="section-sub">
+            Point this page at your backend, choose a mode, then generate. Product mode returns a PDF. Shorts mode returns a vertical MP4.
+            YouTube mode returns a premium text pack you can use for long-form production.
+          </div>
 
-<input id="topic" placeholder="Enter product topic (ex: AI money system, fitness plan, dating guide)" />
+          <label for="apiBase">Backend URL</label>
+          <input id="apiBase" placeholder="https://your-backend-url.com" />
 
-<button onclick="generate()">Generate Premium Product</button>
+          <div class="tabs">
+            <button class="tab active" id="tab-product" onclick="setMode('product')">💰 Product</button>
+            <button class="tab" id="tab-shorts" onclick="setMode('shorts')">⚡ Shorts</button>
+            <button class="tab" id="tab-youtube" onclick="setMode('youtube')">🎬 YouTube</button>
+          </div>
 
-<textarea id="output"></textarea>
+          <label for="topic">Core Topic</label>
+          <input id="topic" placeholder="AI income system, faceless YouTube, resume domination, dating confidence" />
 
-<script>
-function generate() {
-  const topic = document.getElementById("topic").value;
+          <div class="row">
+            <div>
+              <label for="niche">Niche</label>
+              <select id="niche">
+                <option>Make Money Online</option>
+                <option>Content Creation</option>
+                <option>Career & Jobs</option>
+                <option>Fitness</option>
+                <option>Self Improvement</option>
+                <option>Dating</option>
+                <option>Productivity</option>
+                <option>Freelancing</option>
+              </select>
+            </div>
+            <div>
+              <label for="tone">Tone</label>
+              <select id="tone">
+                <option>Premium</option>
+                <option>Aggressive</option>
+                <option>Motivational</option>
+                <option>Minimal</option>
+                <option>Authority</option>
+              </select>
+            </div>
+          </div>
 
-  let content = `
-🔥 ${topic.toUpperCase()} — COMPLETE SYSTEM
+          <div class="row">
+            <div>
+              <label for="buyer">Target Buyer</label>
+              <select id="buyer">
+                <option>Beginners starting from zero</option>
+                <option>Creators who want faster growth</option>
+                <option>Freelancers who need clients</option>
+                <option>People stuck and overwhelmed</option>
+                <option>Busy people who want simple systems</option>
+              </select>
+            </div>
+            <div>
+              <label for="duration">Video Duration</label>
+              <select id="duration">
+                <option value="25">25 sec</option>
+                <option value="35">35 sec</option>
+                <option value="45">45 sec</option>
+                <option value="60">60 sec</option>
+              </select>
+            </div>
+          </div>
 
-============================
+          <label for="promise">Main Promise</label>
+          <input id="promise" placeholder="get their first $1K, first client, first 10k views, first interview" />
 
-INTRODUCTION
+          <label for="bonus">Bonus Theme</label>
+          <input id="bonus" placeholder="prompts, scripts, templates, checklists, outreach messages" />
 
-If you're struggling with ${topic}, this system gives you a clear, step-by-step method to start immediately.
+          <label for="notes">Extra Notes</label>
+          <textarea id="notes" rows="5" placeholder="Optional. Add a specific angle, style note, or subtopic."></textarea>
 
-This is not theory.
-This is execution.
+          <div class="btns">
+            <button class="primary" onclick="generate()">Generate</button>
+            <button class="secondary" onclick="copyOutput()">Copy Output</button>
+            <button class="secondary" onclick="saveApiBase()">Save Backend URL</button>
+            <button class="danger" onclick="clearAll()">Clear</button>
+          </div>
 
-============================
+          <div id="status" class="status">
+            Waiting for generation.
+          </div>
 
-CORE STRATEGY
+          <div id="fileLinks" class="file-links"></div>
 
-You are not consuming information.
-You are applying systems.
+          <div class="tips">
+            <h3>Best quick starts</h3>
+            <ul>
+              <li>Product: AI income system</li>
+              <li>Shorts: faceless YouTube</li>
+              <li>YouTube: make money with AI for beginners</li>
+              <li>Promise language beats vague topics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-The goal is simple:
-Turn ${topic} into results.
+      <div class="card">
+        <div class="output-head">
+          <h2>Generated Output</h2>
+          <div class="pill">Zerenthis live payload</div>
+        </div>
+        <textarea id="output" class="output-box" placeholder="Your script, product pack, or status data will appear here..."></textarea>
+      </div>
+    </section>
 
-============================
+    <div class="footer-note">
+      Product mode returns a PDF download. Shorts mode returns an MP4. YouTube mode returns a premium upload pack.
+    </div>
+  </div>
 
-SECTION 1 — FOUNDATIONS
+  <script>
+    let mode = "product";
+    let pollTimer = null;
 
-To succeed in ${topic}, you must understand:
+    function $(id) {
+      return document.getElementById(id);
+    }
 
-- Speed over perfection
-- Execution over planning
-- Output over learning
+    function getApiBase() {
+      return $("apiBase").value.trim().replace(/\/$/, "");
+    }
 
-============================
+    function setStatus(text, kind = "") {
+      const el = $("status");
+      el.className = "status" + (kind ? " " + kind : "");
+      el.textContent = text;
+    }
 
-SECTION 2 — STEP-BY-STEP SYSTEM
+    function setMode(nextMode) {
+      mode = nextMode;
 
-STEP 1:
-Define your goal clearly.
+      ["product", "shorts", "youtube"].forEach(m => {
+        const btn = $("tab-" + m);
+        btn.classList.toggle("active", m === nextMode);
+      });
 
-STEP 2:
-Use AI tools to generate ideas, scripts, or structure.
+      const durationDisabled = nextMode === "product" || nextMode === "youtube";
+      $("duration").disabled = durationDisabled;
+    }
 
-STEP 3:
-Organize into a usable format.
+    function saveApiBase() {
+      localStorage.setItem("zerenthis_api_base", $("apiBase").value.trim());
+      setStatus("Backend URL saved locally.", "good");
+    }
 
-STEP 4:
-Take action immediately.
+    function loadApiBase() {
+      const saved = localStorage.getItem("zerenthis_api_base");
+      if (saved) $("apiBase").value = saved;
+    }
 
-============================
+    function clearAll() {
+      $("topic").value = "";
+      $("promise").value = "";
+      $("bonus").value = "";
+      $("notes").value = "";
+      $("output").value = "";
+      $("fileLinks").innerHTML = "";
+      setStatus("Cleared.");
+    }
 
-SECTION 3 — TEMPLATES
+    function copyOutput() {
+      const output = $("output");
+      output.select();
+      output.setSelectionRange(0, 999999);
+      document.execCommand("copy");
+      setStatus("Output copied.", "good");
+    }
 
-TEMPLATE 1:
-“Give me a complete system for ${topic} with steps, tools, and examples”
+    function renderLinks(data) {
+      const box = $("fileLinks");
+      box.innerHTML = "";
 
-TEMPLATE 2:
-“Create 20 actionable ideas for ${topic}”
+      if (data.file_url) {
+        const a = document.createElement("a");
+        a.href = data.file_url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Open generated file";
+        box.appendChild(a);
+      }
 
-TEMPLATE 3:
-“Turn this into a monetizable system”
+      if (data.preview_url) {
+        const a = document.createElement("a");
+        a.href = data.preview_url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Preview";
+        box.appendChild(a);
+      }
+    }
 
-============================
+    async function generate() {
+      const apiBase = getApiBase();
+      if (!apiBase) {
+        setStatus("Enter your backend URL first.", "bad");
+        return;
+      }
 
-SECTION 4 — EXECUTION PLAN
+      const topic = $("topic").value.trim();
+      if (!topic) {
+        setStatus("Enter a topic.", "bad");
+        return;
+      }
 
-DAY 1:
-Create your system
+      const payload = {
+        topic,
+        niche: $("niche").value,
+        tone: $("tone").value,
+        buyer: $("buyer").value,
+        promise: $("promise").value.trim(),
+        bonus: $("bonus").value.trim(),
+        notes: $("notes").value.trim(),
+        duration_seconds: Number($("duration").value || 35)
+      };
 
-DAY 2:
-Package it
+      let endpoint = "/api/product-pack";
+      if (mode === "shorts") endpoint = "/api/shorts-pack";
+      if (mode === "youtube") endpoint = "/api/youtube-pack";
 
-DAY 3:
-Sell it
+      $("fileLinks").innerHTML = "";
+      $("output").value = "";
+      setStatus("Submitting job...", "");
 
-============================
+      try {
+        const res = await fetch(apiBase + endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
 
-SECTION 5 — ADVANCED STRATEGY
+        const data = await res.json();
 
-- Focus on results people want
-- Package solutions, not information
-- Keep things simple and actionable
+        if (!res.ok) {
+          throw new Error(data.detail || data.error || "Generation request failed.");
+        }
 
-============================
+        if (data.job_id) {
+          setStatus("Job accepted. Polling...", "");
+          pollJob(apiBase, data.job_id);
+          return;
+        }
 
-SECTION 6 — SCALING
+        $("output").value = JSON.stringify(data, null, 2);
+        renderLinks(data);
+        setStatus("Done.", "good");
+      } catch (err) {
+        setStatus(err.message || "Request failed.", "bad");
+      }
+    }
 
-Once this works:
-- Improve quality
-- Increase price
-- Create more products
+    async function pollJob(apiBase, jobId) {
+      if (pollTimer) clearInterval(pollTimer);
 
-============================
+      pollTimer = setInterval(async () => {
+        try {
+          const res = await fetch(apiBase + "/api/job/" + jobId);
+          const data = await res.json();
 
-FINAL NOTE
+          if (!res.ok) {
+            clearInterval(pollTimer);
+            throw new Error(data.detail || data.error || "Job polling failed.");
+          }
 
-Execution wins.
+          const pretty = JSON.stringify(data, null, 2);
+          $("output").value = pretty;
 
-If you apply this system, you can create results using ${topic} starting today.
+          if (data.status === "queued" || data.status === "running") {
+            setStatus("Job " + data.status + "...", "");
+            return;
+          }
 
-============================
-`;
+          clearInterval(pollTimer);
 
-  // ADD EXTRA LENGTH (IMPORTANT)
-  for (let i = 1; i <= 20; i++) {
-    content += `
-EXTRA INSIGHT ${i}
+          if (data.status === "done") {
+            setStatus("Generation complete.", "good");
+            renderLinks(data);
+          } else {
+            setStatus(data.error || "Job failed.", "bad");
+          }
+        } catch (err) {
+          clearInterval(pollTimer);
+          setStatus(err.message || "Polling failed.", "bad");
+        }
+      }, 2000);
+    }
 
-The key to ${topic} is consistency and action.
-The more you execute, the faster you improve.
-Avoid overthinking and focus on output.
-
-`;
-  }
-
-  document.getElementById("output").value = content;
-}
-</script>
-
+    loadApiBase();
+    setMode("product");
+  </script>
 </body>
 </html>
