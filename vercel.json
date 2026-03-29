@@ -1,0 +1,16 @@
+﻿{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/self/:path*",
+      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/self/:path*"
+    },
+    {
+      "source": "/health",
+      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/health"
+    }
+  ]
+}

@@ -1,23 +1,41 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
+import os
+
+# ✅ Fix import paths
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
+# ✅ Routers
+from backend.self_improver.routes import router as self_router
+
+# ✅ Engines
 from Engine.jobs import create_job, get_job
 from Engine.product_engine import build_product_batch, build_product_pack
 from Engine.video_engine import build_shorts_batch, build_shorts_video, build_youtube_pack
 
+# ✅ Paths
 APP_DIR = Path(__file__).resolve().parent
 BACKEND_DIR = APP_DIR.parent
 OUTPUT_DIR = BACKEND_DIR / "data" / "outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# ✅ Initialize app PROPERLY
 app = FastAPI(title="Zerenthis Automation Core")
 
+# ✅ Register self-improver routes
+app.include_router(self_router)
+
+# ✅ Middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,6 +44,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# =========================
+# 📦 MODELS
+# =========================
 
 class GenerateRequest(BaseModel):
     topic: str = Field(min_length=1, max_length=200)
@@ -42,9 +63,17 @@ class BatchRequest(GenerateRequest):
     count: int = Field(default=3, ge=1, le=10)
 
 
+# =========================
+# 🧠 HELPERS
+# =========================
+
 def get_base_url() -> str:
     return ""
 
+
+# =========================
+# 🌐 CORE ROUTES
+# =========================
 
 @app.get("/")
 def root():
@@ -55,6 +84,10 @@ def root():
 def health():
     return {"ok": True}
 
+
+# =========================
+# 💰 PRODUCT GENERATION
+# =========================
 
 @app.post("/api/product-pack")
 def product_pack(payload: GenerateRequest):
@@ -102,6 +135,10 @@ def youtube_pack(payload: GenerateRequest):
     )
 
 
+# =========================
+# 👑 FOUNDER ROUTES
+# =========================
+
 @app.post("/api/founder/product-batch")
 def founder_product_batch(payload: BatchRequest):
     job_id = create_job(
@@ -135,7 +172,11 @@ def founder_shorts_batch(payload: BatchRequest):
         count=payload.count,
     )
     return {"job_id": job_id, "status": "queued"}
-    
+
+
+# =========================
+# 📊 JOB SYSTEM
+# =========================
 
 @app.get("/api/job/{job_id}")
 def job_status(job_id: str):
@@ -144,6 +185,10 @@ def job_status(job_id: str):
         raise HTTPException(status_code=404, detail="Job not found")
     return data
 
+
+# =========================
+# 📁 FILE SERVING
+# =========================
 
 @app.get("/api/file/{name}")
 def serve_file(name: str):
@@ -171,6 +216,7 @@ def gallery():
     for path in sorted(OUTPUT_DIR.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):
         if not path.is_file():
             continue
+
         items.append(
             {
                 "name": path.name,
@@ -180,4 +226,5 @@ def gallery():
                 "extension": path.suffix.lower(),
             }
         )
+
     return {"items": items[:200]}

@@ -1,0 +1,15 @@
+[
+  "add api key gate and real base url generation for monetization-safe output links",
+  "add api key gating and proper base url generation",
+  "add api key gating and real base url generation",
+  "add api key protection and richer health status",
+  "add safe api schemas and proper self-improver route responses",
+  "fix self-improver execution reliability and add pending listing",
+  "fix self-improver execution reliability and add pending proposals support",
+  "fix self-improver execution rollback and pending listing",
+  "improve frontend user flow with a working generation console",
+  "improve gallery output for better user flow and selling presentation",
+  "make generated asset urls production-ready and improve api health metadata",
+  "protect self-improver routes with typed validation",
+  "repair and harden the self-improver execution engine"
+]
