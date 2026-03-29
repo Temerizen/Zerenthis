@@ -181,30 +181,6 @@ def _validate_steps(steps):
         if action == "delete_file" and suffix == ".json":
             raise ValueError(f"step {i} cannot delete json data files")
 
-        if action == "edit_file":
-            find_text = step.get("find")
-            replace_text = step.get("replace")
-            if not isinstance(find_text, str) or not find_text:
-                raise ValueError(f"step {i} edit_file requires non-empty find text")
-            if not isinstance(replace_text, str):
-                raise ValueError(f"step {i} edit_file requires replace text")
-            if len(find_text) > MAX_TEXT_FIELD_LENGTH or len(replace_text) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} edit_file payload is too large")
-            if find_text == replace_text:
-                raise ValueError(f"step {i} edit_file find and replace cannot be identical")
-
-        if action == "create_file":
-            content = step.get("content")
-            if not isinstance(content, str) or not content.strip():
-                raise ValueError(f"step {i} create_file requires non-empty content")
-            if len(content) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} create_file content is too large")
-
-        if action == "delete_file":
-            extra_keys = {"find", "replace", "content"}.intersection(step.keys())
-            if extra_keys:
-                raise ValueError(f"step {i} delete_file cannot include content fields")
-
         if action == "create_file":
             if "content" not in step or not isinstance(step.get("content"), str):
                 raise ValueError(f"step {i} create_file requires string content")

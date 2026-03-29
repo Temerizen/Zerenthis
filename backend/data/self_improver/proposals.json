@@ -9404,8 +9404,10 @@
         "replace": "        if action == \"delete_file\" and suffix == \".json\":\n            raise ValueError(f\"step {i} cannot delete json data files\")\n\n        if action == \"edit_file\":\n            find_text = step.get(\"find\")\n            replace_text = step.get(\"replace\")\n            if not isinstance(find_text, str) or not find_text:\n                raise ValueError(f\"step {i} edit_file requires non-empty find text\")\n            if not isinstance(replace_text, str):\n                raise ValueError(f\"step {i} edit_file requires replace text\")\n            if len(find_text) > MAX_TEXT_FIELD_LENGTH or len(replace_text) > MAX_TEXT_FIELD_LENGTH:\n                raise ValueError(f\"step {i} edit_file payload is too large\")\n            if find_text == replace_text:\n                raise ValueError(f\"step {i} edit_file find and replace cannot be identical\")\n\n        if action == \"create_file\":\n            content = step.get(\"content\")\n            if not isinstance(content, str) or not content.strip():\n                raise ValueError(f\"step {i} create_file requires non-empty content\")\n            if len(content) > MAX_TEXT_FIELD_LENGTH:\n                raise ValueError(f\"step {i} create_file content is too large\")\n\n        if action == \"delete_file\":\n            extra_keys = {\"find\", \"replace\", \"content\"}.intersection(step.keys())\n            if extra_keys:\n                raise ValueError(f\"step {i} delete_file cannot include content fields\")\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826416.6307786
+    "status": "applied",
+    "created_at": 1774826416.6307786,
+    "approved_at": 1774826470.0288785,
+    "applied_at": 1774826470.1400535
   },
   {
     "id": "prop_1774826416_22ac5e72",
