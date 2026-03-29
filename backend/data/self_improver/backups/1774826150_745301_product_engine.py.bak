@@ -119,40 +119,6 @@ def _launch_plan(topic):
     ]
 
 
-def _monetization_stack(topic, buyer, promise, bonus):
-    topic_tc = _title_case(_clean(topic, "Digital Product"))
-    buyer_text = _clean(buyer, "Beginners")
-    promise_text = _clean(promise, f"get better results with {topic_tc}")
-    bonus_text = _clean(bonus, "Prompt pack")
-    return {
-        "front_end": [
-            ["Core offer", f"{topic_tc} execution pack for {buyer_text.lower()} who want to {promise_text}."],
-            ["Price band", "$19–$29"],
-            ["Promise angle", f"Help buyers {promise_text} with less confusion and faster execution."],
-        ],
-        "order_bumps": [
-            ["Bump 1", f"{topic_tc} prompt vault for faster implementation."],
-            ["Bump 2", f"Checklist + template bundle tied to {topic_tc}."],
-            ["Bump 3", f"Fast-action bonus: {bonus_text}."],
-        ],
-        "upsells": [
-            ["Upsell 1", f"Premium bundle with prompts, templates, and examples for {topic_tc}."],
-            ["Upsell 2", "Creator license or commercial-use version."],
-            ["Upsell 3", "Content pack with promo captions, hooks, and CTA copy."],
-        ],
-    }
-
-
-def _fulfillment_checklist(topic):
-    return [
-        ["Delivery file", f"Export the final {topic} pack as a clean PDF."],
-        ["Product page", "Add promise-driven title, mockup, bullets, and FAQ."],
-        ["Checkout", "Add one order bump and one simple upsell."],
-        ["Email", "Send delivery link plus one quick-start instruction email."],
-        ["Support", "Include refund clarity, contact line, and expected outcome framing."],
-    ]
-
-
 def _score_product_pack(topic, promise, bonus, notes):
     checks = {
         "has_specific_topic": bool(_clean(topic)),

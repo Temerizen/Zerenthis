@@ -986,5 +986,61 @@
     "title": "Raise product output quality with built-in quality scoring and clearer package content",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774825952_1c05e95b",
+    "title": "Expose product and lead metrics through a reliable monetization API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774825975_7c8548a9",
+    "title": "Complete and harden API metrics plus lead capture insights",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_4f90cfed",
+    "title": "Add proposal risk scoring and safer self-improver stats",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_566eee8f",
+    "title": "Expose product quality and monetization signals in catalog and health APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_ef2caa28",
+    "title": "Strengthen YouTube pack conversion structure",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826083",
+    "title": "Add proposal quality scoring and safer self-improver diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826084,
+    "id": "prop_1774826083",
+    "title": "Add product quality metadata and monetization-ready output signals",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826084,
+    "id": "prop_1774826083",
+    "title": "Expose conversion-friendly metrics and catalog completeness in API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

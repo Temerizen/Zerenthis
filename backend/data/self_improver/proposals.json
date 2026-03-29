@@ -8079,7 +8079,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n\n    output_types = {\n        \"pdf\": 0,\n        \"mp4\": 0,\n        \"json\": 0,\n        \"other\": 0,\n    }\n    for output in outputs:\n        suffix = output.suffix.lower()\n        if suffix == \".pdf\":\n            output_types[\"pdf\"] += 1\n        elif suffix == \".mp4\":\n            output_types[\"mp4\"] += 1\n        elif suffix == \".json\":\n            output_types[\"json\"] += 1\n        else:\n            output_types[\"other\"] += 1\n\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"totals\": {\n            \"outputs\": len(outputs),\n            \"leads\": len(leads),\n            \"consented_leads\": consented,\n            \"contactable_leads\": contactable,\n            \"named_leads\": named,\n        },\n        \"conversion\": {\n            \"lead_per_output_rate\": conversion_rate,\n            \"consent_rate\": round((consented / len(leads)) * 100, 2) if leads else 0.0,\n            \"contact_rate\": round((contactable / len(leads)) * 100, 2) if leads else 0.0,\n        },\n        \"lead_sources\": by_source,\n        \"output_types\": output_types,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825952.6335793
   },
   {
@@ -8159,7 +8159,7 @@
         "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n    recent_leads = leads[-10:]\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"count\": len(outputs),\n            \"recent_files\": [p.name for p in recent_outputs],\n        },\n        \"leads\": {\n            \"count\": len(leads),\n            \"by_source\": by_source,\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"consent_rate\": consent_rate,\n            \"contact_rate\": contact_rate,\n            \"named_rate\": named_rate,\n            \"recent\": recent_leads,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate\": conversion_rate,\n        },\n        \"config\": {\n            \"public_base_url\": get_base_url(),\n            \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        }\n    }\n"
       }
     ],
-    "status": "pending",
+    "status": "rejected",
     "created_at": 1774825975.1896796
   },
   {
@@ -8184,5 +8184,461 @@
     "created_at": 1774825975.2773662,
     "approved_at": 1774825981.4454546,
     "applied_at": 1774825981.5547438
+  },
+  {
+    "id": "prop_1774826028_4f90cfed",
+    "title": "Add proposal risk scoring and safer self-improver stats",
+    "reason": "This directly improves self-improver quality and reliability by making risky proposals easier to detect before approval, while exposing more useful operational signals for monitoring and iteration.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def propose(title, reason, steps):\n    if not isinstance(title, str) or not title.strip():\n        raise ValueError(\"title is required\")\n    if not isinstance(reason, str) or len(reason.strip()) < 10:\n        raise ValueError(\"reason must be at least 10 characters\")\n    _validate_steps(steps)\n    title = title.strip()\n    reason = reason.strip()\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n\n    for existing in d:\n        if existing.get(\"fingerprint\") == fingerprint and existing.get(\"status\") in {\"pending\", \"approved\", \"applied\"}:\n            return existing\n\n    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time())\n    }\n    d.append(p)\n    save(d)\n    return p\n",
+        "replace": "def _assess_proposal_risk(title, reason, steps):\n    title_l = title.lower()\n    reason_l = reason.lower()\n    risks = []\n    score = 0\n\n    if len(steps) >= 5:\n        score += 10\n        risks.append(\"multi_step_change\")\n\n    touched_product = False\n    touched_runtime = False\n    touched_ui = False\n\n    for step in steps:\n        action = step.get(\"action\")\n        path = str(step.get(\"path\", \"\"))\n        path_l = path.lower()\n\n        if action == \"delete_file\":\n            score += 35\n            risks.append(f\"delete:{path}\")\n\n        if path_l.endswith(\"main.py\") or path_l.endswith(\"routes.py\"):\n            score += 15\n            touched_runtime = True\n\n        if \"/engine/\" in path_l or path_l.startswith(\"backend/engine/\"):\n            score += 10\n            touched_product = True\n\n        if path_l.endswith(\"page.tsx\") or path_l.endswith(\"layout.tsx\") or path_l.endswith(\"global.css\"):\n            score += 8\n            touched_ui = True\n\n        if action == \"create_file\" and len(step.get(\"content\", \"\")) > 50000:\n            score += 20\n            risks.append(f\"large_create:{path}\")\n\n        if action == \"edit_file\" and len(step.get(\"replace\", \"\")) > 30000:\n            score += 12\n            risks.append(f\"large_edit:{path}\")\n\n    if touched_product and touched_runtime:\n        score += 10\n        risks.append(\"cross_layer_product_runtime_change\")\n\n    if touched_runtime and touched_ui:\n        score += 8\n        risks.append(\"cross_layer_ui_runtime_change\")\n\n    if \"monetiz\" in reason_l or \"revenue\" in reason_l or \"pricing\" in reason_l:\n        score += 3\n\n    if score >= 60:\n        level = \"high\"\n    elif score >= 25:\n        level = \"medium\"\n    else:\n        level = \"low\"\n\n    return {\"score\": score, \"level\": level, \"flags\": risks}\n\n\ndef propose(title, reason, steps):\n    if not isinstance(title, str) or not title.strip():\n        raise ValueError(\"title is required\")\n    if not isinstance(reason, str) or len(reason.strip()) < 10:\n        raise ValueError(\"reason must be at least 10 characters\")\n    _validate_steps(steps)\n    title = title.strip()\n    reason = reason.strip()\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n\n    for existing in d:\n        if existing.get(\"fingerprint\") == fingerprint and existing.get(\"status\") in {\"pending\", \"approved\", \"applied\"}:\n            return existing\n\n    risk = _assess_proposal_risk(title, reason, steps)\n\n    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"risk\": risk,\n        \"created_at\": int(time.time())\n    }\n    d.append(p)\n    save(d)\n    return p\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    risk_counts = {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        risk_level = ((item.get(\"risk\") or {}).get(\"level\") or \"low\")\n        if risk_level in risk_counts:\n            risk_counts[risk_level] += 1\n    counts[\"total\"] = len(items)\n    counts[\"risk\"] = risk_counts\n    counts[\"approval_ready\"] = sum(1 for item in items if item.get(\"status\") == \"pending\" and ((item.get(\"risk\") or {}).get(\"level\") == \"low\"))\n    return counts\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774826028.415804
+  },
+  {
+    "id": "prop_1774826028_566eee8f",
+    "title": "Expose product quality and monetization signals in catalog and health APIs",
+    "reason": "This improves monetization readiness, product output quality visibility, and user flow by making the API more sales-ready and easier for a frontend or buyer-facing experience to consume.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    pdf_count = sum(1 for p in outputs if p.suffix.lower() == \".pdf\")\n    video_count = sum(1 for p in outputs if p.suffix.lower() in {\".mp4\", \".mov\", \".avi\"})\n    consented_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\") is True)\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"pdf_count\": pdf_count,\n        \"video_count\": video_count,\n        \"lead_count\": len(lead_items),\n        \"consented_lead_count\": consented_leads,\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n        \"catalog_url\": f\"{get_base_url()}/api/catalog\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\"\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_fo",
+        "replace": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\",\n                \"cta\": \"Generate a premium PDF execution pack\",\n                \"features\": [\"offer ideas\", \"prompt bank\", \"launch plan\", \"quality scoring\"]\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"organic reach and top-of-funnel content\",\n                \"cta\": \"Generate ready-to-post shorts assets\",\n                \"features\": [\"script generation\", \"voiceover\", \"vertical slides\", \"batch creation\"]\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Authority Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 39,\n                \"deliverable\": \"strategy-script-pack\",\n                \"best_for\": \"authority building and higher-value funnel entry\",\n                \"cta\": \"Generate long-form video positioning and script assets\",\n                \"features\": [\"thumbnail ideas\", \"structured script\", \"CTA ideas\", \"quality scoring\"]\n            }\n        ]\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774826028.437519
+  },
+  {
+    "id": "prop_1774826028_ef2caa28",
+    "title": "Strengthen YouTube pack conversion structure",
+    "reason": "This raises product output quality and monetization readiness by making generated long-form content more actionable, buyer-aware, and easier to turn into sellable offers and funnels.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n",
+        "replace": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n        \"has_offer_stack\": \"OFFER STACK:\" in script,\n        \"has_objections\": \"OBJECTION HANDLING:\" in script,\n        \"has_next_step\": \"NEXT BEST ACTION:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nCTA IDEAS:\n- Download the companion execution pack.\n- Grab the prompt bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    quality = _score_youtube_pack(title, script, promise, bonus)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nOFFER STACK:\n- Core asset: execution system for {buyer.lower()}\n- Fast-win outcome: {promise or f'a clearer path to results with {topic}'}\n- Bonus asset: {bonus or 'Prompt pack'}\n- Upsell path: bundle templates, prompts, and implementation checklist\n\nOBJECTION HANDLING:\n- Too busy: use the checklist to remove decision fatigue.\n- Too early: this is designed for beginners, not experts.\n- Too generic: tailor the framework to your niche and first offer.\n\nCTA IDEAS:\n- Download the companion execution pack.\n- Grab the prompt bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nNEXT BEST ACTION:\nChoose one framework from this video, apply it today, and use the companion product to shorten the path.\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    quality = _score_youtube_pack(title, script, promise, bonus)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n"
+      }
+    ],
+    "status": "rejected",
+    "created_at": 1774826028.4687526
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Add proposal quality scoring and safer self-improver diagnostics",
+    "reason": "This directly improves self-improver quality and reliability by ranking weak proposals before approval, exposing validation signals in the API, and making proposal review more data-driven without changing the approval-safe execution model.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\n",
+        "replace": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\n\n\ndef assess_proposal_quality(title, reason, steps):\n    checks = {\n        \"clear_title\": isinstance(title, str) and len(title.strip()) >= 8,\n        \"strong_reason\": isinstance(reason, str) and len(reason.strip()) >= 30,\n        \"step_count_ok\": isinstance(steps, list) and 1 <= len(steps) <= 6,\n        \"has_edit_or_create\": any(isinstance(step, dict) and step.get(\"action\") in {\"edit_file\", \"create_file\"} for step in (steps or [])),\n        \"all_paths_in_backend\": all(isinstance(step, dict) and str(step.get(\"path\", \"\")).startswith(\"backend/\") for step in (steps or [])),\n        \"no_delete_actions\": all(isinstance(step, dict) and step.get(\"action\") != \"delete_file\" for step in (steps or [])),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / max(len(checks), 1) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time())\n    }\n",
+        "replace": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"quality\": assess_proposal_quality(title, reason, steps),\n        \"created_at\": int(time.time())\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log, assess_proposal_quality\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        _validate_steps(data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        _validate_steps(data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    proposal = propose(data.title, data.reason, data.steps)\n    if \"quality\" not in proposal:\n        proposal[\"quality\"] = assess_proposal_quality(data.title, data.reason, data.steps)\n    return proposal\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    quality_scores = []\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        quality = item.get(\"quality\", {})\n        score = quality.get(\"score\")\n        if isinstance(score, int):\n            quality_scores.append(score)\n    counts[\"total\"] = len(items)\n    counts[\"avg_quality_score\"] = int(sum(quality_scores) / len(quality_scores)) if quality_scores else None\n    counts[\"high_quality_pending\"] = sum(1 for item in items if item.get(\"status\") == \"pending\" and int(item.get(\"quality\", {}).get(\"score\", 0)) >= 80)\n    return counts\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Add product quality metadata and monetization-ready output signals",
+    "reason": "This improves product output quality and monetization readiness by making generated assets easier to evaluate, sell, and iterate on through built-in quality scores, offer positioning, and upsell guidance.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks\n",
+        "replace": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _monetization_metadata(topic, buyer, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    return {\n        \"primary_offer\": f\"{topic_tc} Execution Pack\",\n        \"entry_price_range\": \"$9-$29\",\n        \"upsell_price_range\": \"$29-$79\",\n        \"ideal_buyer\": buyer_text,\n        \"core_promise\": promise_text,\n        \"sales_angles\": [\n            f\"Fast-track {promise_text}\",\n            \"Save time with templates and prompts\",\n            \"Turn confusion into a step-by-step action plan\"\n        ]\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    topic = (topic or \"Digital Product\").strip()\n    niche = (niche or \"Online Business\").strip()\n    tone = (tone or \"Premium\").strip()\n    buyer = (buyer or \"Beginners starting from zero\").strip()\n    promise = (promise or \"\").strip()\n    bonus = (bonus or \"\").strip()\n    notes = (notes or \"\").strip()\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"monetization\": {\n            \"recommended_cta\": \"Download the companion execution pack\",\n            \"entry_offer\": \"Execution Pack PDF\",\n            \"upsell\": bonus or \"Prompt Pack Bundle\",\n            \"audience\": buyer,\n        },\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Expose conversion-friendly metrics and catalog completeness in API",
+    "reason": "This improves user flow, monetization readiness, and reliability by making the backend present clearer product inventory and operational metrics that a frontend or checkout layer can use immediately.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_fo",
+        "replace": "            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"social growth and offer promotion\"\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Authority Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 49,\n                \"deliverable\": \"script-assets\",\n                \"best_for\": \"authority building and high-intent traffic\"\n            }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n        \"catalog_url\": f\"{get_base_url()}/api/catalog\",\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Expose product and lead metrics through a reliable monetization API [safe-prep]",
+    "reason": "Safe preparation extracted from: The metrics route is visibly incomplete in main.py. Completing it with source breakdowns, consent funnel stats, output type counts, and simple monetization indicators makes Zerenthis much more monetization-ready, easier to monitor, and more useful for product decisions without major repo changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n\n    output_types = {\n        \"pdf\": 0,\n        \"mp4\": 0,\n        \"json\": 0,\n        \"other\": 0,\n    }\n    for output in outputs:\n        suffix = output.suffix.lower()\n        if suffix == \".pdf\":\n            output_types[\"pdf\"] += 1\n        elif suffix == \".mp4\":\n            output_types[\"mp4\"] += 1\n        elif suffix == \".json\":\n            output_types[\"json\"] += 1\n        else:\n            output_types[\"other\"] += 1\n\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"totals\": {\n            \"outputs\": len(outputs),\n            \"leads\": len(leads),\n            \"consented_leads\": consented,\n            \"contactable_leads\": contactable,\n            \"named_leads\": named,\n        },\n        \"conversion\": {\n            \"lead_per_output_rate\": conversion_rate,\n            \"consent_rate\": round((consented / len(leads)) * 100, 2) if leads else 0.0,\n            \"contact_rate\": round((contactable / len(leads)) * 100, 2) if leads else 0.0,\n        },\n        \"lead_sources\": by_source,\n        \"output_types\": output_types,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Complete and harden API metrics plus lead capture insights [safe-prep]",
+    "reason": "Safe preparation extracted from: This improves monetization readiness, reliability, and operator visibility. The current main.py metrics route is incomplete in the snapshot, while leads are already being collected. Finishing the metrics endpoint and exposing actionable funnel stats gives immediate business value without adding new infrastructure.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0\n    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0\n    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0\n\n    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n    recent_leads = leads[-10:]\n\n    return {\n        \"ok\": True,\n        \"outputs\": {\n            \"count\": len(outputs),\n            \"recent_files\": [p.name for p in recent_outputs],\n        },\n        \"leads\": {\n            \"count\": len(leads),\n            \"by_source\": by_source,\n            \"consented\": consented,\n            \"contactable\": contactable,\n            \"named\": named,\n            \"consent_rate\": consent_rate,\n            \"contact_rate\": contact_rate,\n            \"named_rate\": named_rate,\n            \"recent\": recent_leads,\n        },\n        \"funnel\": {\n            \"lead_to_output_rate\": conversion_rate,\n        },\n        \"config\": {\n            \"public_base_url\": get_base_url(),\n            \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        }\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Add proposal risk scoring and safer self-improver stats [safe-prep]",
+    "reason": "Safe preparation extracted from: This directly improves self-improver quality and reliability by making risky proposals easier to detect before approval, while exposing more useful operational signals for monitoring and iteration.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "def propose(title, reason, steps):\n    if not isinstance(title, str) or not title.strip():\n        raise ValueError(\"title is required\")\n    if not isinstance(reason, str) or len(reason.strip()) < 10:\n        raise ValueError(\"reason must be at least 10 characters\")\n    _validate_steps(steps)\n    title = title.strip()\n    reason = reason.strip()\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n\n    for existing in d:\n        if existing.get(\"fingerprint\") == fingerprint and existing.get(\"status\") in {\"pending\", \"approved\", \"applied\"}:\n            return existing\n\n    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time())\n    }\n    d.append(p)\n    save(d)\n    return p\n",
+        "replace": "def _assess_proposal_risk(title, reason, steps):\n    title_l = title.lower()\n    reason_l = reason.lower()\n    risks = []\n    score = 0\n\n    if len(steps) >= 5:\n        score += 10\n        risks.append(\"multi_step_change\")\n\n    touched_product = False\n    touched_runtime = False\n    touched_ui = False\n\n    for step in steps:\n        action = step.get(\"action\")\n        path = str(step.get(\"path\", \"\"))\n        path_l = path.lower()\n\n        if action == \"delete_file\":\n            score += 35\n            risks.append(f\"delete:{path}\")\n\n        if path_l.endswith(\"main.py\") or path_l.endswith(\"routes.py\"):\n            score += 15\n            touched_runtime = True\n\n        if \"/engine/\" in path_l or path_l.startswith(\"backend/engine/\"):\n            score += 10\n            touched_product = True\n\n        if path_l.endswith(\"page.tsx\") or path_l.endswith(\"layout.tsx\") or path_l.endswith(\"global.css\"):\n            score += 8\n            touched_ui = True\n\n        if action == \"create_file\" and len(step.get(\"content\", \"\")) > 50000:\n            score += 20\n            risks.append(f\"large_create:{path}\")\n\n        if action == \"edit_file\" and len(step.get(\"replace\", \"\")) > 30000:\n            score += 12\n            risks.append(f\"large_edit:{path}\")\n\n    if touched_product and touched_runtime:\n        score += 10\n        risks.append(\"cross_layer_product_runtime_change\")\n\n    if touched_runtime and touched_ui:\n        score += 8\n        risks.append(\"cross_layer_ui_runtime_change\")\n\n    if \"monetiz\" in reason_l or \"revenue\" in reason_l or \"pricing\" in reason_l:\n        score += 3\n\n    if score >= 60:\n        level = \"high\"\n    elif score >= 25:\n        level = \"medium\"\n    else:\n        level = \"low\"\n\n    return {\"score\": score, \"level\": level, \"flags\": risks}\n\n\ndef propose(title, reason, steps):\n    if not isinstance(title, str) or not title.strip():\n        raise ValueError(\"title is required\")\n    if not isinstance(reason, str) or len(reason.strip()) < 10:\n        raise ValueError(\"reason must be at least 10 characters\")\n    _validate_steps(steps)\n    title = title.strip()\n    reason = reason.strip()\n    d = load()\n    fingerprint = _fingerprint(title, steps)\n\n    for existing in d:\n        if existing.get(\"fingerprint\") == fingerprint and existing.get(\"status\") in {\"pending\", \"approved\", \"applied\"}:\n            return existing\n\n    risk = _assess_proposal_risk(title, reason, steps)\n\n    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"risk\": risk,\n        \"created_at\": int(time.time())\n    }\n    d.append(p)\n    save(d)\n    return p\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    risk_counts = {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        risk_level = ((item.get(\"risk\") or {}).get(\"level\") or \"low\")\n        if risk_level in risk_counts:\n            risk_counts[risk_level] += 1\n    counts[\"total\"] = len(items)\n    counts[\"risk\"] = risk_counts\n    counts[\"approval_ready\"] = sum(1 for item in items if item.get(\"status\") == \"pending\" and ((item.get(\"risk\") or {}).get(\"level\") == \"low\"))\n    return counts\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Expose product quality and monetization signals in catalog and health APIs [safe-prep]",
+    "reason": "Safe preparation extracted from: This improves monetization readiness, product output quality visibility, and user flow by making the API more sales-ready and easier for a frontend or buyer-facing experience to consume.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    pdf_count = sum(1 for p in outputs if p.suffix.lower() == \".pdf\")\n    video_count = sum(1 for p in outputs if p.suffix.lower() in {\".mp4\", \".mov\", \".avi\"})\n    consented_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\") is True)\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"pdf_count\": pdf_count,\n        \"video_count\": video_count,\n        \"lead_count\": len(lead_items),\n        \"consented_lead_count\": consented_leads,\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n        \"catalog_url\": f\"{get_base_url()}/api/catalog\",\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\"\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_fo",
+        "replace": "@app.get(\"/api/catalog\")\ndef catalog():\n    return {\n        \"brand\": \"Zerenthis\",\n        \"currency\": \"USD\",\n        \"products\": [\n            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\",\n                \"cta\": \"Generate a premium PDF execution pack\",\n                \"features\": [\"offer ideas\", \"prompt bank\", \"launch plan\", \"quality scoring\"]\n            },\n            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"organic reach and top-of-funnel content\",\n                \"cta\": \"Generate ready-to-post shorts assets\",\n                \"features\": [\"script generation\", \"voiceover\", \"vertical slides\", \"batch creation\"]\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Authority Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 39,\n                \"deliverable\": \"strategy-script-pack\",\n                \"best_for\": \"authority building and higher-value funnel entry\",\n                \"cta\": \"Generate long-form video positioning and script assets\",\n                \"features\": [\"thumbnail ideas\", \"structured script\", \"CTA ideas\", \"quality scoring\"]\n            }\n        ]\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Strengthen YouTube pack conversion structure [safe-prep]",
+    "reason": "Safe preparation extracted from: This raises product output quality and monetization readiness by making generated long-form content more actionable, buyer-aware, and easier to turn into sellable offers and funnels.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n",
+        "replace": "def _score_youtube_pack(title: str, script: str, promise: str, bonus: str) -> Dict:\n    checks = {\n        \"has_strong_title\": len(title.strip()) >= 20,\n        \"has_promise\": bool((promise or \"\").strip()),\n        \"has_bonus\": bool((bonus or \"\").strip()),\n        \"has_cta\": \"CTA IDEAS:\" in script,\n        \"has_structure\": \"STRUCTURE:\" in script,\n        \"has_thumbnail\": \"THUMBNAIL:\" in script,\n        \"has_offer_stack\": \"OFFER STACK:\" in script,\n        \"has_objections\": \"OBJECTION HANDLING:\" in script,\n        \"has_next_step\": \"NEXT BEST ACTION:\" in script,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nCTA IDEAS:\n- Download the companion execution pack.\n- Grab the prompt bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    quality = _score_youtube_pack(title, script, promise, bonus)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n    script = f\"\"\"\nTITLE:\n{title}\n\nTHUMBNAIL:\nHeadline: STOP WASTING TIME ON {topic.upper()}\nSubline: {promise or 'A cleaner way to move faster'}\nColors: Black, cyan, white\n\nDESCRIPTION:\nA premium long-form YouTube pack for {buyer.lower()} in {niche.lower()}.\n\nPOSITIONING:\nPrimary audience: {buyer}\nCore promise: {promise or f'Get better results with {topic}'}\nTone: {tone}\nSuggested offer: low-ticket digital product + upsell bundle\n\nSTRUCTURE:\n1. Hook\n2. Why people stay stuck\n3. The core shift\n4. Framework\n5. Mistakes\n6. CTA\n\nHOOK OPTIONS:\n- Most people are making {topic} harder than it needs to be.\n- If you have been stuck trying to win with {topic}, this is the reset.\n- Here is the cleaner system for {buyer.lower()} who want real momentum.\n\nLONG-FORM SCRIPT:\nIf you're trying to improve at {topic} and it still feels messy, this video is built to simplify the path.\nMost people stay stuck because they collect ideas instead of using a system.\nThe better move is clarity, repetition, and cleaner execution.\nUse one framework, track what works, and turn small wins into a repeatable process.\nThat is how beginners stop consuming and start compounding results.\n\nOFFER STACK:\n- Core asset: execution system for {buyer.lower()}\n- Fast-win outcome: {promise or f'a clearer path to results with {topic}'}\n- Bonus asset: {bonus or 'Prompt pack'}\n- Upsell path: bundle templates, prompts, and implementation checklist\n\nOBJECTION HANDLING:\n- Too busy: use the checklist to remove decision fatigue.\n- Too early: this is designed for beginners, not experts.\n- Too generic: tailor the framework to your niche and first offer.\n\nCTA IDEAS:\n- Download the companion execution pack.\n- Grab the prompt bundle linked below.\n- Use the checklist and templates to implement this faster.\n\nNEXT BEST ACTION:\nChoose one framework from this video, apply it today, and use the companion product to shorten the path.\n\nBONUSES:\n- {bonus or 'Prompt pack'}\n- spin-off shorts\n- CTA ideas\n- thumbnail variants\n\nNOTES:\n{notes or 'Keep it premium and direct.'}\n\"\"\".strip()\n\n    quality = _score_youtube_pack(title, script, promise, bonus)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Add proposal quality scoring and safer self-improver diagnostics [safe-prep]",
+    "reason": "Safe preparation extracted from: This directly improves self-improver quality and reliability by ranking weak proposals before approval, exposing validation signals in the API, and making proposal review more data-driven without changing the approval-safe execution model.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\n",
+        "replace": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\n\n\ndef assess_proposal_quality(title, reason, steps):\n    checks = {\n        \"clear_title\": isinstance(title, str) and len(title.strip()) >= 8,\n        \"strong_reason\": isinstance(reason, str) and len(reason.strip()) >= 30,\n        \"step_count_ok\": isinstance(steps, list) and 1 <= len(steps) <= 6,\n        \"has_edit_or_create\": any(isinstance(step, dict) and step.get(\"action\") in {\"edit_file\", \"create_file\"} for step in (steps or [])),\n        \"all_paths_in_backend\": all(isinstance(step, dict) and str(step.get(\"path\", \"\")).startswith(\"backend/\") for step in (steps or [])),\n        \"no_delete_actions\": all(isinstance(step, dict) and step.get(\"action\") != \"delete_file\" for step in (steps or [])),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / max(len(checks), 1) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time())\n    }\n",
+        "replace": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"quality\": assess_proposal_quality(title, reason, steps),\n        \"created_at\": int(time.time())\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log, assess_proposal_quality\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        _validate_steps(data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        _validate_steps(data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    proposal = propose(data.title, data.reason, data.steps)\n    if \"quality\" not in proposal:\n        proposal[\"quality\"] = assess_proposal_quality(data.title, data.reason, data.steps)\n    return proposal\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    quality_scores = []\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        quality = item.get(\"quality\", {})\n        score = quality.get(\"score\")\n        if isinstance(score, int):\n            quality_scores.append(score)\n    counts[\"total\"] = len(items)\n    counts[\"avg_quality_score\"] = int(sum(quality_scores) / len(quality_scores)) if quality_scores else None\n    counts[\"high_quality_pending\"] = sum(1 for item in items if item.get(\"status\") == \"pending\" and int(item.get(\"quality\", {}).get(\"score\", 0)) >= 80)\n    return counts\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826083",
+    "title": "Add product quality metadata and monetization-ready output signals [safe-prep]",
+    "reason": "Safe preparation extracted from: This improves product output quality and monetization readiness by making generated assets easier to evaluate, sell, and iterate on through built-in quality scores, offer positioning, and upsell guidance.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks\n",
+        "replace": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _monetization_metadata(topic, buyer, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    return {\n        \"primary_offer\": f\"{topic_tc} Execution Pack\",\n        \"entry_price_range\": \"$9-$29\",\n        \"upsell_price_range\": \"$29-$79\",\n        \"ideal_buyer\": buyer_text,\n        \"core_promise\": promise_text,\n        \"sales_angles\": [\n            f\"Fast-track {promise_text}\",\n            \"Save time with templates and prompts\",\n            \"Turn confusion into a step-by-step action plan\"\n        ]\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n",
+        "replace": "def build_youtube_pack(topic: str, niche: str, tone: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:\n    topic = (topic or \"Digital Product\").strip()\n    niche = (niche or \"Online Business\").strip()\n    tone = (tone or \"Premium\").strip()\n    buyer = (buyer or \"Beginners starting from zero\").strip()\n    promise = (promise or \"\").strip()\n    bonus = (bonus or \"\").strip()\n    notes = (notes or \"\").strip()\n    title = f\"{topic.title()} for {buyer} | {promise or 'A Better System'}\"\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/video_engine.py",
+        "find": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n    }\n",
+        "replace": "    return {\n        \"status\": \"done\",\n        \"mode\": \"youtube\",\n        \"title\": title,\n        \"script\": script,\n        \"quality\": quality,\n        \"monetization\": {\n            \"recommended_cta\": \"Download the companion execution pack\",\n            \"entry_offer\": \"Execution Pack PDF\",\n            \"upsell\": bonus or \"Prompt Pack Bundle\",\n            \"audience\": buyer,\n        },\n    }\n"
+      }
+    ],
+    "status": "rejected"
+  },
+  {
+    "id": "prop_1774826084",
+    "title": "Expose conversion-friendly metrics and catalog completeness in API [safe-prep]",
+    "reason": "Safe preparation extracted from: This improves user flow, monetization readiness, and reliability by making the backend present clearer product inventory and operational metrics that a frontend or checkout layer can use immediately.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_fo",
+        "replace": "            {\n                \"id\": \"shorts-pack\",\n                \"name\": \"Shorts Content Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 29,\n                \"deliverable\": \"video-assets\",\n                \"best_for\": \"social growth and offer promotion\"\n            },\n            {\n                \"id\": \"youtube-pack\",\n                \"name\": \"YouTube Authority Pack\",\n                \"category\": \"content\",\n                \"starting_price\": 49,\n                \"deliverable\": \"script-assets\",\n                \"best_for\": \"authority building and high-intent traffic\"\n            }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n        \"catalog_url\": f\"{get_base_url()}/api/catalog\",\n    }\n"
+      }
+    ],
+    "status": "pending"
+  },
+  {
+    "id": "prop_1774826107_0676fbb3",
+    "title": "Add atomic lead logging and operational metrics endpoint",
+    "reason": "Lead capture is directly tied to monetization readiness, but the current lead logger can lose data under concurrent requests and there is no dedicated metrics API despite health referencing one. Adding a lock-safe write path and metrics endpoint improves reliability, monetization visibility, and operator confidence.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "from pathlib import Path\nimport os\n",
+        "replace": "from pathlib import Path\nimport os\nimport threading\nimport time\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n",
+        "replace": "LEADS_FILE = LEADS_DIR / \"intake_log.json\"\nLEAD_WRITE_LOCK = threading.Lock()\nSTART_TIME = time.time()\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\nLEADS_DIR.mkdir(parents=True, exist_ok=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    with LEAD_WRITE_LOCK:\n        items = []\n        if LEADS_FILE.exists():\n            try:\n                items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n                if not isinstance(items, list):\n                    items = []\n            except Exception:\n                items = []\n\n        items.append({\n            \"source\": source,\n            \"job_id\": job_id,\n            \"topic\": payload.topic,\n            \"niche\": payload.niche,\n            \"customer_name\": payload.customer_name,\n            \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n            \"marketing_consent\": payload.marketing_consent,\n            \"created_at\": int(time.time()),\n        })\n        temp_file = LEADS_FILE.with_suffix(\".tmp\")\n        temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n        temp_file.replace(LEADS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    output_suffix_counts = {}\n    for output in outputs:\n        suffix = output.suffix.lower() or \"[no_extension]\"\n        output_suffix_counts[suffix] = output_suffix_counts.get(suffix, 0) + 1\n\n    consenting_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\"))\n    identified_leads = sum(1 for item in lead_items if item.get(\"customer_email\") or item.get(\"customer_name\"))\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n\n    return {\n        \"brand\": \"Zerenthis\",\n        \"uptime_seconds\": int(time.time() - START_TIME),\n        \"lead_count\": len(lead_items),\n        \"identified_lead_count\": identified_leads,\n        \"marketing_consent_count\": consenting_leads,\n        \"output_count\": len(outputs),\n        \"latest_output\": latest_output,\n        \"output_suffix_counts\": output_suffix_counts,\n        \"conversion_snapshot\": {\n            \"lead_to_consent_rate\": round((consenting_leads / len(lead_items)) * 100, 2) if lead_items else 0.0,\n        },\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826107.0155263
+  },
+  {
+    "id": "prop_1774826107_f58e2075",
+    "title": "Upgrade product pack output with buyer-specific monetization and fulfillment sections",
+    "reason": "The product engine already generates assets, but stronger built-in monetization guidance increases end-user value immediately. Adding pricing logic, order bump ideas, upsell paths, and delivery checklists raises product output quality and makes Zerenthis more sellable as a business tool rather than just a content generator.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n",
+        "replace": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _monetization_stack(topic, buyer, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"Beginners\")\n    promise_text = _clean(promise, f\"get better results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Prompt pack\")\n    return {\n        \"front_end\": [\n            [\"Core offer\", f\"{topic_tc} execution pack for {buyer_text.lower()} who want to {promise_text}.\"],\n            [\"Price band\", \"$19\u2013$29\"],\n            [\"Promise angle\", f\"Help buyers {promise_text} with less confusion and faster execution.\"],\n        ],\n        \"order_bumps\": [\n            [\"Bump 1\", f\"{topic_tc} prompt vault for faster implementation.\"],\n            [\"Bump 2\", f\"Checklist + template bundle tied to {topic_tc}.\"],\n            [\"Bump 3\", f\"Fast-action bonus: {bonus_text}.\"],\n        ],\n        \"upsells\": [\n            [\"Upsell 1\", f\"Premium bundle with prompts, templates, and examples for {topic_tc}.\"],\n            [\"Upsell 2\", \"Creator license or commercial-use version.\"],\n            [\"Upsell 3\", \"Content pack with promo captions, hooks, and CTA copy.\"],\n        ],\n    }\n\n\ndef _fulfillment_checklist(topic):\n    return [\n        [\"Delivery file\", f\"Export the final {topic} pack as a clean PDF.\"],\n        [\"Product page\", \"Add promise-driven title, mockup, bullets, and FAQ.\"],\n        [\"Checkout\", \"Add one order bump and one simple upsell.\"],\n        [\"Email\", \"Send delivery link plus one quick-start instruction email.\"],\n        [\"Support\", \"Include refund clarity, contact line, and expected outcome framing.\"],\n    ]\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n"
+      }
+    ],
+    "status": "applied",
+    "created_at": 1774826107.0371573,
+    "approved_at": 1774826149.9616442,
+    "applied_at": 1774826150.0544527
+  },
+  {
+    "id": "prop_1774826149_dad779b6",
+    "title": "Add proposal safety scoring and richer self-improver stats",
+    "reason": "This directly improves self-improver quality and reliability by making proposals more explainable, easier to review, and safer to approve. It also helps operators quickly identify risky proposal patterns and gives Zerenthis clearer internal quality signals.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\n",
+        "replace": "PROTECTED = [\".env\", \".git\", \"node_modules\", \"venv\", \"backend/data\"]\nALLOWED_ACTIONS = {\"create_file\", \"edit_file\", \"delete_file\"}\nTEXT_FILE_SUFFIXES = {\".py\", \".tsx\", \".ts\", \".js\", \".jsx\", \".json\", \".css\", \".md\", \".toml\", \".yml\", \".yaml\", \".txt\"}\nHIGH_RISK_PATH_HINTS = [\"main.py\", \"routes.py\", \"engine.py\", \"requirements.txt\", \"Procfile\", \"nixpacks.toml\"]\n\n\ndef summarize_steps(steps):\n    action_counts = {}\n    touched_paths = []\n    for step in steps:\n        action = step.get(\"action\", \"unknown\")\n        action_counts[action] = action_counts.get(action, 0) + 1\n        path = step.get(\"path\")\n        if isinstance(path, str):\n            touched_paths.append(path)\n    return {\n        \"step_count\": len(steps),\n        \"action_counts\": action_counts,\n        \"touched_paths\": touched_paths,\n    }\n\n\ndef assess_proposal_risk(steps):\n    summary = summarize_steps(steps)\n    touched_paths = summary[\"touched_paths\"]\n    reasons = []\n    score = 0\n\n    if summary[\"action_counts\"].get(\"delete_file\", 0) > 0:\n        score += 35\n        reasons.append(\"contains delete_file action\")\n    if summary[\"action_counts\"].get(\"create_file\", 0) > 0:\n        score += 10\n        reasons.append(\"contains create_file action\")\n    if summary[\"step_count\"] >= 5:\n        score += 15\n        reasons.append(\"has 5 or more actions\")\n\n    high_risk_paths = [p for p in touched_paths if any(hint in p for hint in HIGH_RISK_PATH_HINTS)]\n    if high_risk_paths:\n        score += min(30, 10 * len(high_risk_paths))\n        reasons.append(\"touches core runtime files\")\n\n    if any(p.endswith(\".json\") for p in touched_paths):\n        score += 10\n        reasons.append(\"touches json files\")\n\n    score = min(score, 100)\n    if score >= 60:\n        level = \"high\"\n    elif score >= 25:\n        level = \"medium\"\n    else:\n        level = \"low\"\n\n    return {\n        \"score\": score,\n        \"level\": level,\n        \"reasons\": reasons,\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/engine.py",
+        "find": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time())\n    }\n",
+        "replace": "    p = {\n        \"id\": new_id(),\n        \"title\": title,\n        \"reason\": reason,\n        \"steps\": steps,\n        \"status\": \"pending\",\n        \"fingerprint\": fingerprint,\n        \"created_at\": int(time.time()),\n        \"summary\": summarize_steps(steps),\n        \"risk\": assess_proposal_risk(steps)\n    }\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log\n",
+        "replace": "from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log, summarize_steps, assess_proposal_risk\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n",
+        "replace": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        summary = item.get(\"summary\") or summarize_steps(steps)\n        risk = item.get(\"risk\") or assess_proposal_risk(steps)\n        enriched.append({\n            **item,\n            \"step_count\": summary[\"step_count\"],\n            \"action_counts\": summary[\"action_counts\"],\n            \"touched_paths\": summary[\"touched_paths\"],\n            \"risk\": risk,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n    counts[\"total\"] = len(items)\n    return counts\n",
+        "replace": "@router.get(\"/stats\")\ndef stats_route():\n    items = load()\n    counts = {\n        \"pending\": 0,\n        \"approved\": 0,\n        \"applied\": 0,\n        \"rejected\": 0,\n        \"failed\": 0,\n    }\n    risk_counts = {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 0,\n    }\n    total_steps = 0\n    for item in items:\n        status = item.get(\"status\")\n        if status in counts:\n            counts[status] += 1\n        steps = item.get(\"steps\", [])\n        summary = item.get(\"summary\") or summarize_steps(steps)\n        risk = item.get(\"risk\") or assess_proposal_risk(steps)\n        total_steps += summary[\"step_count\"]\n        if risk.get(\"level\") in risk_counts:\n            risk_counts[risk[\"level\"]] += 1\n    counts[\"total\"] = len(items)\n    counts[\"avg_steps\"] = round(total_steps / len(items), 2) if items else 0\n    counts[\"risk_counts\"] = risk_counts\n    return counts\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826149.7348845
+  },
+  {
+    "id": "prop_1774826149_fcab3fe2",
+    "title": "Add product deliverable quality metadata and monetization copy",
+    "reason": "This improves product output quality and monetization readiness by making generated packs more sellable, more measurable, and easier to present in a storefront or checkout flow. It also gives downstream UI and automation better structured data to work with.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n",
+        "replace": "def _launch_plan(topic):\n    return [\n        [\"Day 1\", f\"Generate 3 product variations around {topic}.\"],\n        [\"Day 2\", \"Pick the strongest one and upload it to Gumroad.\"],\n        [\"Day 3\", \"Create 3 short-form promo posts or scripts.\"],\n        [\"Day 4\", \"Improve the listing title, thumbnail, description, and first CTA.\"],\n        [\"Day 5\", \"Create a second product using the same niche.\"],\n        [\"Day 6\", \"Bundle two products together for a higher-priced offer.\"],\n        [\"Day 7\", \"Review clicks, saves, and buyer questions, then double down on the best-performing angle.\"],\n    ]\n\n\ndef _marketing_assets(topic, buyer, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get better results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Fast-action bonus included\")\n    return {\n        \"headline\": f\"{topic_tc} for {buyer_text}\",\n        \"subheadline\": f\"A premium execution pack designed to help you {promise_text}.\",\n        \"cta\": f\"Get the {topic_tc} pack now\",\n        \"bullets\": [\n            f\"Built for {buyer_text}\",\n            f\"Focused on helping buyers {promise_text}\",\n            \"Structured for fast implementation instead of theory overload\",\n            f\"Includes bonus value: {bonus_text}\",\n        ]\n    }\n\n\ndef _score_product_pack(topic, promise, bonus, notes):\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks\n",
+        "replace": "def _score_product_pack(topic, promise, bonus, notes):\n    checks = {\n        \"has_specific_topic\": bool(_clean(topic)),\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\"\n            },\n",
+        "replace": "            {\n                \"id\": \"product-pack\",\n                \"name\": \"Execution Pack PDF\",\n                \"category\": \"digital-product\",\n                \"starting_price\": 19,\n                \"deliverable\": \"pdf\",\n                \"best_for\": \"lead capture and low-ticket monetization\",\n                \"features\": [\"offer ideas\", \"prompt bank\", \"launch plan\", \"premium positioning\"],\n                \"checkout_cta\": \"Generate and sell a premium-ready PDF pack\"\n            },\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826149.7567096
+  },
+  {
+    "id": "prop_1774826149_9d06be11",
+    "title": "Strengthen API health and lead logging for better user flow",
+    "reason": "This improves reliability and user flow by exposing clearer operational diagnostics and making lead capture data more useful for follow-up and monetization. It also reduces ambiguity for frontend integrations and future analytics.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n",
+        "replace": "def log_lead(source: str, payload: GenerateRequest, job_id: str | None = None) -> None:\n    if not payload.customer_email and not payload.customer_name:\n        return\n\n    items = []\n    if LEADS_FILE.exists():\n        try:\n            items = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if not isinstance(items, list):\n                items = []\n        except Exception:\n            items = []\n\n    items.append({\n        \"source\": source,\n        \"job_id\": job_id,\n        \"topic\": payload.topic,\n        \"niche\": payload.niche,\n        \"tone\": payload.tone,\n        \"buyer\": payload.buyer,\n        \"promise\": payload.promise,\n        \"customer_name\": payload.customer_name,\n        \"customer_email\": str(payload.customer_email) if payload.customer_email else \"\",\n        \"marketing_consent\": payload.marketing_consent,\n        \"created_at\": int(__import__(\"time\").time()),\n    })\n    temp_file = LEADS_FILE.with_suffix(\".tmp\")\n    temp_file.write_text(json.dumps(items, indent=2), encoding=\"utf-8\")\n    temp_file.replace(LEADS_FILE)\n"
+      },
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
+        "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    latest_lead = max(lead_items, key=lambda x: x.get(\"created_at\", 0)) if lead_items else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"latest_lead_topic\": latest_lead.get(\"topic\") if latest_lead else None,\n        \"latest_lead_email\": latest_lead.get(\"customer_email\") if latest_lead else None,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n        \"catalog_url\": f\"{get_base_url()}/api/catalog\",\n    }\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774826149.8454537
   }
 ]
