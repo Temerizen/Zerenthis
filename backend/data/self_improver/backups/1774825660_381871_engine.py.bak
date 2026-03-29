@@ -152,7 +152,6 @@ def execute(pid):
 
     _validate_steps(p["steps"])
     backups = []
-    created_files = []
     execution_log = _load_execution_log()
     started_at = int(time.time())
 
@@ -162,10 +161,7 @@ def execute(pid):
 
             if s["action"] == "create_file":
                 path.parent.mkdir(parents=True, exist_ok=True)
-                if path.exists():
-                    raise Exception(f"refusing to overwrite existing file: {s['path']}")
-                path.write_text(s.get("content", ""), encoding="utf-8")
-                created_files.append(path)
+                path.write_text(s.get("content", ""))
 
             elif s["action"] == "edit_file":
                 if not path.exists():
@@ -173,11 +169,11 @@ def execute(pid):
                 b = backup(path)
                 if b:
                     backups.append((path, b))
-                txt = path.read_text(encoding="utf-8")
+                txt = path.read_text()
                 if s["find"] not in txt:
                     raise Exception(f"find text not found in {s['path']}")
                 txt = txt.replace(s["find"], s["replace"], 1)
-                path.write_text(txt, encoding="utf-8")
+                path.write_text(txt)
 
             elif s["action"] == "delete_file":
                 if not path.exists():
@@ -190,47 +186,16 @@ def execute(pid):
         p["status"] = "applied"
         p["applied_at"] = int(time.time())
         save(d)
-        result = {
-            "ok": True,
-            "id": pid,
-            "status": "applied",
-            "applied_steps": len(p.get("steps", [])),
-            "backups_created": len(backups),
-        }
         execution_log.append({
             "id": pid,
             "title": p.get("title"),
             "status": "applied",
             "started_at": started_at,
             "finished_at": int(time.time()),
-            "steps": p.get("steps", []),
-            "result": result,
+            "steps": p.get("steps", [])
         })
         _save_execution_log(execution_log)
-        return result
-    except Exception as e:
-        for path, bak in reversed(backups):
-            shutil.copy2(bak, path)
-        for path in reversed(created_files):
-            if path.exists():
-                path.unlink()
-
-        p["status"] = "failed"
-        p["failed_at"] = int(time.time())
-        p["last_error"] = str(e)
-        save(d)
-        result = {"ok": False, "error": str(e), "id": pid, "status": "failed"}
-        execution_log.append({
-            "id": pid,
-            "title": p.get("title"),
-            "status": "failed",
-            "started_at": started_at,
-            "finished_at": int(time.time()),
-            "steps": p.get("steps", []),
-            "error": str(e),
-        })
-        _save_execution_log(execution_log)
-        return resultturn {"ok": True, "id": pid}
+        return {"ok": True, "id": pid}
 
     except Exception as e:
         for orig, b in backups:
