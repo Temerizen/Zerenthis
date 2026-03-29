@@ -594,5 +594,29 @@
       "ok": true,
       "id": "prop_1774824934_269e5f3c"
     }
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824934_591d8a2d",
+    "title": "Add API metadata and monetization-ready intake fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824934_97fe6562",
+    "title": "Upgrade YouTube pack output with stronger conversion assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824972",
+    "title": "Make self-improver execution safer, more auditable, and encoding-stable",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824972"
+    }
   }
 ]
