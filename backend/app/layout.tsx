@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./global.css";
 
 export const metadata: Metadata = {
-  title: "Zerenthis",
+  title: "Zerenthis Admin",
   description:
-    "Zerenthis is an intelligent creation engine for premium documents, short-form content, YouTube scripts, and guided AI production workflows.",
+    "Zerenthis admin shell for premium product, shorts, and YouTube pack generation.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>{children}</body>
