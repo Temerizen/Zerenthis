@@ -6978,8 +6978,10 @@
         "replace": "@router.get(\"/history\")\ndef history_route():\n    items = load()\n    enriched = []\n    for item in items:\n        steps = item.get(\"steps\", [])\n        action_counts = {}\n        touched_paths = []\n        for step in steps:\n            action = step.get(\"action\", \"unknown\")\n            action_counts[action] = action_counts.get(action, 0) + 1\n            path = step.get(\"path\")\n            if isinstance(path, str):\n                touched_paths.append(path)\n        enriched.append({\n            **item,\n            \"step_count\": len(steps),\n            \"action_counts\": action_counts,\n            \"touched_paths\": touched_paths,\n        })\n    return sorted(enriched, key=lambda x: x.get(\"created_at\", 0), reverse=True)\n\n\n@router.get(\"/execution-log\")\ndef execution_log_route():\n    items = _load_execution_log()\n    return sorted(items, key=lambda x: x.get(\"started_at\", 0), reverse=True)\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825350.4029267
+    "status": "applied",
+    "created_at": 1774825350.4029267,
+    "approved_at": 1774825354.2571232,
+    "applied_at": 1774825354.343448
   },
   {
     "id": "prop_1774825350_39526613",

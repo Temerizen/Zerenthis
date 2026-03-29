@@ -31,30 +31,7 @@ def pending_route():
 @router.get("/history")
 def history_route():
     items = load()
-    enriched = []
-    for item in items:
-        steps = item.get("steps", [])
-        action_counts = {}
-        touched_paths = []
-        for step in steps:
-            action = step.get("action", "unknown")
-            action_counts[action] = action_counts.get(action, 0) + 1
-            path = step.get("path")
-            if isinstance(path, str):
-                touched_paths.append(path)
-        enriched.append({
-            **item,
-            "step_count": len(steps),
-            "action_counts": action_counts,
-            "touched_paths": touched_paths,
-        })
-    return sorted(enriched, key=lambda x: x.get("created_at", 0), reverse=True)
-
-
-@router.get("/execution-log")
-def execution_log_route():
-    items = _load_execution_log()
-    return sorted(items, key=lambda x: x.get("started_at", 0), reverse=True)
+    return sorted(items, key=lambda x: x.get("created_at", 0), reverse=True)
 
 
 @router.get("/stats")
