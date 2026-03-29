@@ -7674,8 +7674,8 @@
       }
     ],
     "status": "applied",
-    "approved_at": 1774825809.323089,
-    "applied_at": 1774825809.3517134
+    "approved_at": 1774825811.5096495,
+    "applied_at": 1774825811.5470686
   },
   {
     "id": "prop_1774825770",
@@ -7690,7 +7690,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825809.323089
+    "approved_at": 1774825811.5096495
   },
   {
     "id": "prop_1774825770",
@@ -7711,7 +7711,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825809.323089
+    "approved_at": 1774825811.5096495
   },
   {
     "id": "prop_1774825770",
@@ -7726,7 +7726,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774825809.323089
+    "approved_at": 1774825811.5096495
   },
   {
     "id": "prop_1774825809_f038c80c",
@@ -7763,5 +7763,20 @@
     ],
     "status": "pending",
     "created_at": 1774825809.2688985
+  },
+  {
+    "id": "prop_1774825811_b7de6853",
+    "title": "Finish metrics and add monetization-ready lead analytics endpoints",
+    "reason": "Zerenthis already collects leads, but the API lacks a complete metrics response and a clean lead export surface. Adding this improves monetization readiness, helps track product-to-lead conversion, and supports better operator decisions without changing core architecture.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/app/main.py",
+        "find": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n",
+        "replace": "    conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0\n    latest_lead = leads[-1] if leads else None\n    return {\n        \"ok\": True,\n        \"outputs\": len(outputs),\n        \"leads\": len(leads),\n        \"conversion_rate\": conversion_rate,\n        \"lead_sources\": by_source,\n        \"consented_leads\": consented,\n        \"contactable_leads\": contactable,\n        \"named_leads\": named,\n        \"latest_output\": max((p.name for p in outputs), default=None),\n        \"latest_lead\": latest_lead,\n    }\n\n\n@app.get(\"/api/leads\")\ndef get_leads():\n    if not LEADS_FILE.exists():\n        return {\"ok\": True, \"count\": 0, \"items\": []}\n    try:\n        loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n        if not isinstance(loaded, list):\n            loaded = []\n    except Exception:\n        loaded = []\n    return {\"ok\": True, \"count\": len(loaded), \"items\": loaded}\n"
+      }
+    ],
+    "status": "pending",
+    "created_at": 1774825811.2338889
   }
 ]
