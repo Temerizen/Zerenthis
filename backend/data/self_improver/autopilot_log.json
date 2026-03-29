@@ -1188,5 +1188,22 @@
       "ok": true,
       "id": "prop_1774826546"
     }
+  },
+  {
+    "time": 1774826549,
+    "id": "prop_1774826547",
+    "title": "Add API-level guardrails and proposal preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826550,
+    "id": "prop_1774826547",
+    "title": "Expose product-ready generation options and lead capture UX on homepage",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826547"
+    }
   }
 ]

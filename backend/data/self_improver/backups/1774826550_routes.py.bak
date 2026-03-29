@@ -17,16 +17,10 @@ class ProposalRequest(BaseModel):
 @router.post("/propose")
 def propose_route(data: ProposalRequest):
     try:
-        validation = validate_proposal_payload(data.title, data.reason, data.steps)
+        validate_proposal_payload(data.title, data.reason, data.steps)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    result = propose(data.title, data.reason, data.steps)
-    result["validation"] = {
-        "summary": validation["summary"],
-        "risk": validation["risk"],
-        "fingerprint": validation["fingerprint"],
-    }
-    return result
+    return propose(data.title, data.reason, data.steps)
 
 
 @router.get("/pending")

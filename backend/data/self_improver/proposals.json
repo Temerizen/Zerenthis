@@ -9535,7 +9535,7 @@
         "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validation = validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    result = propose(data.title, data.reason, data.steps)\n    result[\"validation\"] = {\n        \"summary\": validation[\"summary\"],\n        \"risk\": validation[\"risk\"],\n        \"fingerprint\": validation[\"fingerprint\"],\n    }\n    return result\n"
       }
     ],
-    "status": "pending"
+    "status": "applied"
   },
   {
     "id": "prop_1774826547",
@@ -9561,7 +9561,7 @@
         "replace": "    <main>\n      <section style={{ maxWidth: 760, margin: \"0 auto\", padding: \"32px 20px\" }}>\n        <h1>Zerenthis</h1>\n        <p>Create higher-value product outputs and capture buyer-ready leads in one flow.</p>\n\n        <div style={{ display: \"grid\", gap: 12, marginTop: 24 }}>\n          <input placeholder=\"Topic\" value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })} />\n          <input placeholder=\"Niche\" value={form.niche} onChange={(e) => setForm({ ...form, niche: e.target.value })} />\n          <input placeholder=\"Target buyer\" value={form.buyer} onChange={(e) => setForm({ ...form, buyer: e.target.value })} />\n          <input placeholder=\"Core promise\" value={form.promise} onChange={(e) => setForm({ ...form, promise: e.target.value })} />\n          <input placeholder=\"Bonus offer\" value={form.bonus} onChange={(e) => setForm({ ...form, bonus: e.target.value })} />\n          <input placeholder=\"Your name (optional)\" value={form.customer_name} onChange={(e) => setForm({ ...form, customer_name: e.target.value })} />\n          <input placeholder=\"Your email (optional)\" value={form.customer_email} onChange={(e) => setForm({ ...form, customer_email: e.target.value })} />\n          <label style={{ display: \"flex\", gap: 8, alignItems: \"center\" }}>\n            <input type=\"checkbox\" checked={form.marketing_consent} onChange={(e) => setForm({ ...form, marketing_consent: e.target.checked })} />\n            <span>I want updates, templates, and launch ideas from Zerenthis.</span>\n          </label>\n        </div>\n      </section>\n"
       }
     ],
-    "status": "pending"
+    "status": "approved"
   },
   {
     "id": "prop_1774826547",
@@ -9587,7 +9587,7 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = load_leads()\n    outputs = load_outputs()\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n\n\n@app.get(\"/api/metrics\")\ndef metrics():\n    leads = load_leads()\n    outputs = load_outputs()\n    extension_counts = Counter((p.suffix.lower() or \"no_extension\") for p in outputs)\n    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]\n    consented_leads = [item for item in leads if item.get(\"marketing_consent\")]\n    email_leads = [item for item in leads if item.get(\"customer_email\")]\n\n    return {\n        \"brand\": \"Zerenthis\",\n        \"service\": \"automation-core\",\n        \"totals\": {\n            \"outputs\": len(outputs),\n            \"leads\": len(leads),\n            \"consented_leads\": len(consented_leads),\n            \"email_leads\": len(email_leads),\n            \"lead_conversion_readiness\": round((len(consented_leads) / len(leads)) * 100, 2) if leads else 0,\n        },\n        \"outputs_by_type\": dict(extension_counts),\n        \"recent_outputs\": [\n            {\n                \"name\": p.name,\n                \"size_bytes\": p.stat().st_size,\n                \"modified_at\": int(p.stat().st_mtime),\n            }\n            for p in recent_outputs\n        ],\n        \"top_topics\": Counter(item.get(\"topic\", \"\") for item in leads if item.get(\"topic\")).most_common(5),\n        \"top_sources\": Counter(item.get(\"source\", \"\") for item in leads if item.get(\"source\")).most_common(5),\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "approved"
   },
   {
     "id": "prop_1774826547",
@@ -9599,6 +9599,20 @@
         "path": "backend/app/main.py",
         "find": "def health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n",
         "replace": "def health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output_path = max(outputs, key=lambda p: p.stat().st_mtime) if outputs else None\n    latest_output = latest_output_path.name if latest_output_path else None\n    latest_output_age_seconds = int(max(0, (Path(latest_output_path).stat().st_mtime if latest_output_path else 0) and (os.path.getmtime(latest_output_path)))) if latest_output_path else None\n    lead_emails = sum(1 for item in lead_items if item.get(\"customer_email\"))\n    consented_leads = sum(1 for item in lead_items if item.get(\"marketing_consent\"))\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"lead_email_count\": lead_emails,\n        \"marketing_consented_leads\": consented_leads,\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"latest_output_ready\": latest_output is not None,\n        \"latest_output_age_seconds\": latest_output_age_seconds,\n        \"monetization_ready\": lead_emails > 0 and latest_output is not None,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n"
+      }
+    ],
+    "status": "approved"
+  },
+  {
+    "id": "prop_1774826549",
+    "title": "Add API-level guardrails and proposal preview metadata [safe-prep]",
+    "reason": "Safe preparation extracted from: Returning richer validation feedback at intake time improves self-improver quality and human review speed. This lowers approval friction, makes risky proposals easier to spot, and supports a safer monetization-ready workflow around iterative product changes.",
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/self_improver/routes.py",
+        "find": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    return propose(data.title, data.reason, data.steps)\n",
+        "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validation = validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    result = propose(data.title, data.reason, data.steps)\n    result[\"validation\"] = {\n        \"summary\": validation[\"summary\"],\n        \"risk\": validation[\"risk\"],\n        \"fingerprint\": validation[\"fingerprint\"],\n    }\n    return result\n"
       }
     ],
     "status": "pending"
