@@ -6147,8 +6147,11 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _product_quality(topic, buyer, promise, bonus, notes, ideas):\n    checks = {\n        \"has_specific_topic\": len(_clean(topic)) >= 4,\n        \"has_defined_buyer\": len(_clean(buyer)) >= 6,\n        \"has_promise\": bool(_clean(promise)),\n        \"has_bonus\": bool(_clean(bonus)),\n        \"has_notes\": bool(_clean(notes)),\n        \"has_offer_depth\": len(ideas) >= 3,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)\n    return {\"score\": score, \"checks\": checks}\n\n\ndef _monetization_snapshot(topic, ideas):\n    prices = [idea.get(\"price\", \"\") for idea in ideas[:3]]\n    return {\n        \"primary_channel\": \"Gumroad\",\n        \"entry_offer_range\": prices[0] if len(prices) > 0 else \"$9\u2013$19\",\n        \"core_offer_range\": prices[1] if len(prices) > 1 else \"$19\u2013$29\",\n        \"upsell_range\": prices[2] if len(prices) > 2 else \"$7\u2013$17\",\n        \"recommended_funnel\": [\n            f\"Lead magnet about {topic}\",\n            \"Low-ticket starter offer\",\n            \"Premium bundle upsell\",\n        ],\n    }\n\n\ndef _value_stack(topic, bonus):\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825020.846138
+    "status": "failed",
+    "created_at": 1774825020.846138,
+    "approved_at": 1774825040.4316,
+    "failed_at": 1774825040.4694285,
+    "error": "edit produced no change for: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774825020_5c138b9e",
@@ -6195,8 +6198,10 @@
         "replace": "def pending():\n    return [x for x in load() if x.get(\"status\") == \"pending\"]\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825038.4405813
+    "status": "applied",
+    "created_at": 1774825038.4405813,
+    "approved_at": 1774825040.4951978,
+    "applied_at": 1774825040.5408027
   },
   {
     "id": "prop_1774825038_0c07aae9",

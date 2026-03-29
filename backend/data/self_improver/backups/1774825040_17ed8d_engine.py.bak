@@ -13,7 +13,6 @@ BACKUPS.mkdir(parents=True, exist_ok=True)
 
 PROTECTED = [".env", ".git", "node_modules", "venv", "backend/data"]
 ALLOWED_ACTIONS = {"create_file", "edit_file", "delete_file"}
-TEXT_FILE_SUFFIXES = {".py", ".tsx", ".ts", ".js", ".jsx", ".json", ".css", ".md", ".toml", ".yml", ".yaml", ".txt"}
 
 
 def load():
@@ -63,10 +62,6 @@ def _validate_steps(steps):
         if any(x in path for x in PROTECTED) or path.startswith("/") or path.startswith("\\") or ".." in path:
             raise ValueError(f"step {i} path is blocked")
 
-        suffix = Path(path).suffix.lower()
-        if suffix and suffix not in TEXT_FILE_SUFFIXES:
-            raise ValueError(f"step {i} file type is not allowed")
-
         if action == "create_file":
             if "content" not in step or not isinstance(step.get("content"), str):
                 raise ValueError(f"step {i} create_file requires string content")
@@ -76,8 +71,6 @@ def _validate_steps(steps):
                 raise ValueError(f"step {i} edit_file requires non-empty find text")
             if not isinstance(step.get("replace"), str):
                 raise ValueError(f"step {i} edit_file requires string replace text")
-            if step.get("find") == step.get("replace"):
-                raise ValueError(f"step {i} edit_file find and replace cannot be identical")
 
 
 def propose(title, reason, steps):
@@ -209,8 +202,7 @@ def execute(pid):
 
 
 def pending():
-    return [x for x in load() if x.get("status") == "pending"]
-= "pending"]
+    return [x for x in load() if x["status"] == "pending"]
 
 
 def verify():

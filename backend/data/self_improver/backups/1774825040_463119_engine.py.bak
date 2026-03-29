@@ -209,8 +209,7 @@ def execute(pid):
 
 
 def pending():
-    return [x for x in load() if x.get("status") == "pending"]
-= "pending"]
+    return [x for x in load() if x["status"] == "pending"]
 
 
 def verify():
