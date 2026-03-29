@@ -110,39 +110,6 @@ def _save_execution_log(items):
     temp.replace(EXECUTION_LOG)
 
 
-def validate_proposal_payload(title, reason, steps):
-    if not isinstance(title, str) or len(title.strip()) < 5:
-        raise ValueError("title must be at least 5 characters")
-    if not isinstance(reason, str) or len(reason.strip()) < 20:
-        raise ValueError("reason must be at least 20 characters")
-    lowered_title = title.strip().lower()
-    blocked_title_phrases = ["test", "misc", "random", "quick fix", "stuff"]
-    if any(phrase == lowered_title for phrase in blocked_title_phrases):
-        raise ValueError("title is too low-signal")
-
-    _validate_steps(steps)
-
-    summary = summarize_steps(steps)
-    touched = summary["touched_paths"]
-    if len(touched) != len(set(touched)):
-        raise ValueError("proposal contains duplicate target paths")
-
-    title_fp = _fingerprint(title, steps)
-    for item in load():
-        if _fingerprint(item.get("title", ""), item.get("steps", [])) == title_fp:
-            raise ValueError("duplicate proposal already exists")
-
-    risk = assess_proposal_risk(steps)
-    if risk["level"] == "high":
-        raise ValueError("proposal risk is too high for automatic intake")
-
-    return {
-        "summary": summary,
-        "risk": risk,
-        "fingerprint": title_fp,
-    }
-
-
 def _validate_steps(steps):
     if not isinstance(steps, list) or not steps:
         raise ValueError("steps must be a non-empty list")

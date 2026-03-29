@@ -8930,9 +8930,11 @@
         "replace": "def _score_product_pack(topic, promise, bonus, notes):\n    clean_topic = _clean(topic)\n    clean_promise = _clean(promise)\n    clean_bonus = _clean(bonus)\n    clean_notes = _clean(notes)\n    checks = {\n        \"has_specific_topic\": bool(clean_topic) and len(clean_topic) >= 6,\n        \"has_promise\": bool(clean_promise) and len(clean_promise) >= 8,\n        \"has_bonus\": bool(clean_bonus),\n        \"has_notes\": bool(clean_notes),\n        \"title_is_specific\": len(_premium_title(clean_topic or \"Digital Product\", clean_promise or \"\").strip()) >= 20,\n        \"commercial_inputs_present\": sum(1 for v in [clean_promise, clean_bonus, clean_notes] if v) >= 2,\n    }\n    score = int(sum(1 for passed in checks.values() if passed) / len(checks)"
       }
     ],
-    "status": "applied",
-    "approved_at": 1774826302.0047958,
-    "applied_at": 1774826302.1007712
+    "status": "failed",
+    "approved_at": 1774826304.2916644,
+    "applied_at": 1774826302.1007712,
+    "failed_at": 1774826304.3883054,
+    "error": "find text not found in: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774826238",
@@ -8965,7 +8967,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774826302.0047958
+    "approved_at": 1774826304.2916644
   },
   {
     "id": "prop_1774826238",
@@ -8986,7 +8988,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774826302.0047958
+    "approved_at": 1774826304.2916644
   },
   {
     "id": "prop_1774826238",
@@ -9007,7 +9009,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774826302.0047958
+    "approved_at": 1774826304.2916644
   },
   {
     "id": "prop_1774826238",
@@ -9022,7 +9024,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774826302.0047958
+    "approved_at": 1774826304.2916644
   },
   {
     "id": "prop_1774826238",
@@ -9049,7 +9051,7 @@
       }
     ],
     "status": "approved",
-    "approved_at": 1774826302.0047958
+    "approved_at": 1774826304.2916644
   },
   {
     "id": "prop_1774826282_e4594031",
@@ -9075,8 +9077,11 @@
         "replace": "    quality = _score_product_pack(topic, buyer, promise, bonus, notes)\n\n    return {\n        \"status\": \"done\",\n        \"mode\": \"product-pack\",\n        \"title\": title,\n        \"file\": str(output_path),\n        \"filename\": output_path.name,\n        \"quality\": quality,\n    }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826282.968366
+    "status": "failed",
+    "created_at": 1774826282.968366,
+    "approved_at": 1774826304.4813335,
+    "failed_at": 1774826304.6078987,
+    "error": "edit produced no change for: backend/Engine/product_engine.py"
   },
   {
     "id": "prop_1774826282_051c193f",
@@ -9129,8 +9134,10 @@
         "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        validate_proposal_payload(data.title, data.reason, data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    return propose(data.title, data.reason, data.steps)\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774826301.677439
+    "status": "applied",
+    "created_at": 1774826301.677439,
+    "approved_at": 1774826304.7038977,
+    "applied_at": 1774826304.8184931
   },
   {
     "id": "prop_1774826301_369a3ab3",

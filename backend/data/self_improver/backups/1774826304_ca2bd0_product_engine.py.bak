@@ -119,18 +119,6 @@ def _launch_plan(topic):
     ]
 
 
-def _score_product_pack(topic: str, buyer: str, promise: str, bonus: str, notes: str) -> Dict:
-    checks = {
-        "has_specific_topic": len(_clean(topic)) >= 4,
-        "has_buyer": bool(_clean(buyer)),
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-
-
 def _monetization_stack(topic, buyer, promise, bonus):
     topic_tc = _title_case(_clean(topic, "Digital Product"))
     buyer_text = _clean(buyer, "Beginners")
