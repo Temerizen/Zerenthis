@@ -128,18 +128,6 @@ def _distribution_ideas(topic):
     ]
 
 
-def _monetization_summary(topic, buyer, promise):
-    topic_text = _clean(topic, "digital product")
-    buyer_text = _clean(buyer, "beginners")
-    promise_text = _clean(promise, f"get results with {topic_text}")
-    return {
-        "entry_offer": f"Low-ticket starter pack for {buyer_text.lower()}",
-        "core_offer": f"Execution blueprint helping customers {promise_text}",
-        "upsell": f"Bundle, prompt vault, or premium implementation pack around {topic_text}",
-        "lead_magnet": f"Free checklist or mini-guide about {topic_text}",
-    }
-
-
 def _quality_score(topic, buyer, promise, bonus, notes):
     topic_text = _clean(topic)
     buyer_text = _clean(buyer)

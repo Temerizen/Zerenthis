@@ -128,36 +128,12 @@ def _distribution_ideas(topic):
     ]
 
 
-def _monetization_summary(topic, buyer, promise):
-    topic_text = _clean(topic, "digital product")
-    buyer_text = _clean(buyer, "beginners")
-    promise_text = _clean(promise, f"get results with {topic_text}")
-    return {
-        "entry_offer": f"Low-ticket starter pack for {buyer_text.lower()}",
-        "core_offer": f"Execution blueprint helping customers {promise_text}",
-        "upsell": f"Bundle, prompt vault, or premium implementation pack around {topic_text}",
-        "lead_magnet": f"Free checklist or mini-guide about {topic_text}",
-    }
-
-
 def _quality_score(topic, buyer, promise, bonus, notes):
     topic_text = _clean(topic)
     buyer_text = _clean(buyer)
     promise_text = _clean(promise)
     bonus_text = _clean(bonus)
     notes_text = _clean(notes)
-
-    checks = {
-        "has_topic": bool(topic_text),
-        "has_buyer": bool(buyer_text),
-        "has_promise": bool(promise_text),
-        "has_bonus": bool(bonus_text),
-        "has_notes": bool(notes_text),
-        "topic_specificity": len(topic_text) >= 8,
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-)
 
     checks = {
         "has_specific_topic": len(topic_text) >= 6,

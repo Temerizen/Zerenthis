@@ -7209,8 +7209,10 @@
         "replace": "def _distribution_ideas(topic):\n    return [\n        f\"Short-form videos about {topic} with a CTA to your product\",\n        f\"Reddit discussion posts around pain points in {topic}\",\n        \"X/Twitter threads that summarize one useful idea from the pack\",\n        \"A free mini-post that leads into the paid version\",\n        \"Bundle promotions and launch discounts\",\n        \"Email your audience with a 48-hour fast-action bonus\",\n        \"Use a simple lead magnet that upsells into the full pack\",\n    ]\n\n\ndef _monetization_summary(topic, buyer, promise):\n    topic_text = _clean(topic, \"digital product\")\n    buyer_text = _clean(buyer, \"beginners\")\n    promise_text = _clean(promise, f\"get results with {topic_text}\")\n    return {\n        \"entry_offer\": f\"Low-ticket starter pack for {buyer_text.lower()}\",\n        \"core_offer\": f\"Execution blueprint helping customers {promise_text}\",\n        \"upsell\": f\"Bundle, prompt vault, or premium implementation pack around {topic_text}\",\n        \"lead_magnet\": f\"Free checklist or mini-guide about {topic_text}\",\n    }\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825513.6747136
+    "status": "applied",
+    "created_at": 1774825513.6747136,
+    "approved_at": 1774825515.5080056,
+    "applied_at": 1774825515.5466835
   },
   {
     "id": "prop_1774825513_b41b0e87",
