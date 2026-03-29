@@ -1,139 +1,124 @@
 from reportlab.platypus import *
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
-import os, uuid
+from pathlib import Path
+import uuid
 
-OUT_DIR = "backend/data/outputs"
-os.makedirs(OUT_DIR, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parents[1]
+OUT_DIR = BASE_DIR / "data" / "outputs"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def build_product_pack(**kwargs):
     topic = kwargs.get("topic", "AI System")
     promise = kwargs.get("promise", "get results fast")
     buyer = kwargs.get("buyer", "beginners")
 
-    filename = f"{topic.replace(' ','_')}_{uuid.uuid4().hex[:6]}.pdf"
-    path = os.path.join(OUT_DIR, filename)
+    safe_topic = topic.replace(" ", "_").replace("/", "_")
+    filename = f"{safe_topic}_{uuid.uuid4().hex[:6]}.pdf"
+    path = OUT_DIR / filename
 
     styles = getSampleStyleSheet()
-    doc = SimpleDocTemplate(path)
+    doc = SimpleDocTemplate(str(path), pagesize=letter)
 
     content = []
 
     def section(title, text):
         content.append(Paragraph(f"<b>{title}</b>", styles["Heading2"]))
-        content.append(Spacer(1,10))
+        content.append(Spacer(1, 10))
         content.append(Paragraph(text, styles["BodyText"]))
-        content.append(Spacer(1,20))
+        content.append(Spacer(1, 20))
 
-    # COVER
     content.append(Paragraph(f"<b>{topic.upper()} SYSTEM</b>", styles["Title"]))
-    content.append(Spacer(1,20))
+    content.append(Spacer(1, 20))
     content.append(Paragraph(f"A complete system to help {buyer} {promise}", styles["BodyText"]))
     content.append(PageBreak())
 
-    # CORE IDEA
-    section("The Core Idea",
-    f"""
-This system focuses on using AI to generate high-value assets quickly and monetize them.
-Instead of building slowly, you create and sell immediately.
-    """)
+    section(
+        "The Core Idea",
+        "This system focuses on using AI to generate high-value assets quickly and monetize them. "
+        "Instead of building slowly, you create and sell immediately."
+    )
 
-    # MODEL 1
-    section("Model 1: Digital Product Engine",
-    f"""
-Create and sell PDFs using AI.
+    section(
+        "Model 1: Digital Product Engine",
+        f"Create and sell PDFs using AI.\n\n"
+        f"Steps:\n"
+        f"1. Choose a problem in {topic}\n"
+        f"2. Generate a premium guide\n"
+        f"3. Upload to Gumroad\n"
+        f"4. Price between $9–$29\n"
+        f"5. Repeat daily\n\n"
+        f"Goal: First sale within days"
+    )
 
-Steps:
-1. Choose a problem in {topic}
-2. Generate a premium guide
-3. Upload to Gumroad
-4. Price between $9–$29
-5. Repeat daily
+    section(
+        "Model 2: Faceless Content System",
+        "Use AI to create viral short videos.\n\n"
+        "Steps:\n"
+        "1. Generate scripts\n"
+        "2. Add AI voice\n"
+        "3. Add captions\n"
+        "4. Post daily\n\n"
+        "Monetization:\n"
+        "- Affiliate links\n"
+        "- Product funnels\n"
+        "- Traffic conversion"
+    )
 
-Goal: First sale within days
-    """)
+    section(
+        "Model 3: AI Service System",
+        "Sell services using AI.\n\n"
+        "Examples:\n"
+        "- Resume writing\n"
+        "- Content creation\n"
+        "- Social posts\n\n"
+        "Steps:\n"
+        "1. Find client\n"
+        "2. Generate work using AI\n"
+        "3. Deliver fast\n"
+        "4. Scale"
+    )
 
-    # MODEL 2
-    section("Model 2: Faceless Content System",
-    """
-Use AI to create viral short videos.
+    section(
+        "7-Day Execution Plan",
+        "Day 1: Generate 3 products\n"
+        "Day 2: Upload listings\n"
+        "Day 3: Create videos\n"
+        "Day 4: Post content\n"
+        "Day 5: Improve\n"
+        "Day 6: Expand\n"
+        "Day 7: Scale"
+    )
 
-Steps:
-1. Generate scripts
-2. Add AI voice
-3. Add captions
-4. Post daily
+    section(
+        "Copy-Paste Prompts",
+        f"\"Create a premium guide about {topic}\"\n\n"
+        "\"Generate viral content ideas\"\n\n"
+        "\"Write a product description that converts\""
+    )
 
-Monetization:
-- Affiliate links
-- Product funnels
-- Traffic conversion
-    """)
+    section(
+        "Pricing Strategy",
+        "Start: $7–$19\n"
+        "Scale: $29–$49\n"
+        "Bundles: $79+"
+    )
 
-    # MODEL 3
-    section("Model 3: AI Service System",
-    """
-Sell services using AI.
+    section(
+        "Mistakes to Avoid",
+        "- Overthinking\n"
+        "- Waiting too long\n"
+        "- Not posting\n"
+        "- Making things too complex"
+    )
 
-Examples:
-- Resume writing
-- Content creation
-- Social posts
-
-Steps:
-1. Find client
-2. Generate work using AI
-3. Deliver fast
-4. Scale
-    """)
-
-    # EXECUTION PLAN
-    section("7-Day Execution Plan",
-    """
-Day 1: Generate 3 products  
-Day 2: Upload listings  
-Day 3: Create videos  
-Day 4: Post content  
-Day 5: Improve  
-Day 6: Expand  
-Day 7: Scale  
-    """)
-
-    # PROMPTS
-    section("Copy-Paste Prompts",
-    f"""
-"Create a premium guide about {topic}"
-
-"Generate viral content ideas"
-
-"Write a product description that converts"
-    """)
-
-    # PRICING
-    section("Pricing Strategy",
-    """
-Start: $7–$19  
-Scale: $29–$49  
-Bundles: $79+  
-    """)
-
-    # MISTAKES
-    section("Mistakes to Avoid",
-    """
-- Overthinking
-- Waiting too long
-- Not posting
-- Making things too complex
-    """)
-
-    # BONUS
-    section("Bonus Ideas",
-    """
-- Bundle products
-- Sell templates
-- Sell prompts
-- Create mini courses
-    """)
+    section(
+        "Bonus Ideas",
+        "- Bundle products\n"
+        "- Sell templates\n"
+        "- Sell prompts\n"
+        "- Create mini courses"
+    )
 
     doc.build(content)
 
@@ -150,11 +135,14 @@ Bundles: $79+
 def build_product_batch(**kwargs):
     topic = kwargs.get("topic", "AI System")
     count = int(kwargs.get("count", 3))
-
     items = []
 
-    for i in range(count):
-        result = build_product_pack(topic=f"{topic} {i+1}")
+    for i in range(max(1, min(count, 10))):
+        result = build_product_pack(
+            topic=f"{topic} {i+1}",
+            promise=kwargs.get("promise", "get results fast"),
+            buyer=kwargs.get("buyer", "beginners"),
+        )
         items.append(result)
 
     return {
