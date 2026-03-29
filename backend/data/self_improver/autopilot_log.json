@@ -1205,5 +1205,33 @@
       "ok": true,
       "id": "prop_1774826547"
     }
+  },
+  {
+    "time": 1774826710,
+    "id": "prop_1774826627_71f5c8fa",
+    "title": "Improve API health and lead capture trust signals for user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Add proposal deduplication, stronger step validation, and execution metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Expose generation quality and monetization signals in health output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Improve generated offer quality with stronger CTA and conversion metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

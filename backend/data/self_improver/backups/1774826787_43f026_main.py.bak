@@ -169,23 +169,11 @@ def root():
 def health():
     lead_metrics = get_lead_metrics()
     outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
-    latest_output_path = max(outputs, key=lambda p: p.stat().st_mtime) if outputs else None
-    latest_output = latest_output_path.name if latest_output_path else None
+    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None
     output_breakdown = {}
     for output in outputs:
         ext = output.suffix.lower() or "[no_ext]"
         output_breakdown[ext] = output_breakdown.get(ext, 0) + 1
-
-    recent_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:5]
-    recent_output_names = [p.name for p in recent_outputs]
-    product_readiness = {
-        "has_pdf_outputs": output_breakdown.get(".pdf", 0) > 0,
-        "has_video_outputs": any(ext in output_breakdown for ext in [".mp4", ".mov"]),
-        "lead_capture_active": LEADS_FILE.exists(),
-        "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
-        "has_consented_leads": lead_metrics["marketing_consented"] > 0,
-    }
-
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
@@ -197,9 +185,6 @@ def health():
         "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
         "cors_origin_count": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,
         "latest_output": latest_output,
-        "latest_output_size_bytes": latest_output_path.stat().st_size if latest_output_path else 0,
-        "recent_outputs": recent_output_names,
-        "product_readiness": product_readiness,
         "metrics_url": f"{get_base_url()}/api/metrics",
         "self_improver_url": f"{get_base_url()}/self/stats",
     }

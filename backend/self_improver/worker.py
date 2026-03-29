@@ -18,8 +18,18 @@ SEEN_FILE = DATA_DIR / "seen_ai_titles.json"
 BLOCK_TERMS = {
     "harden self-improver",
     "validation-friendly",
-    "safer public health info",
     "safe rollback",
+    "safer ids",
+    "request tracing",
+    "richer health",
+    "production-safe api metadata",
+}
+
+CORE_BLOCK_PATHS = {
+    "backend/self_improver/engine.py",
+    "backend/self_improver/worker.py",
+    "backend/self_improver/autopilot.py",
+    "backend/app/main.py",
 }
 
 def _load_seen() -> set[str]:
@@ -47,19 +57,6 @@ def _existing_titles() -> set[str]:
         print("LOAD ERROR:", e)
     return titles
 
-def _valid_step(step: dict) -> bool:
-    action = step.get("action")
-    path = step.get("path")
-    if action not in {"create_file", "edit_file", "delete_file"}:
-        return False
-    if not isinstance(path, str) or not path.strip():
-        return False
-    if action == "edit_file":
-        return isinstance(step.get("find"), str) and isinstance(step.get("replace"), str) and bool(step.get("find"))
-    if action == "create_file":
-        return isinstance(step.get("content", ""), str)
-    return True
-
 def _is_similar(a: str, b: str) -> bool:
     a = a.lower().strip()
     b = b.lower().strip()
@@ -69,8 +66,27 @@ def _blocked_title(title: str) -> bool:
     t = title.lower()
     return any(term in t for term in BLOCK_TERMS)
 
+def _valid_step(step: dict) -> bool:
+    action = step.get("action")
+    path = str(step.get("path", "")).replace("\\", "/").strip()
+
+    if action not in {"create_file", "edit_file", "delete_file"}:
+        return False
+    if not path:
+        return False
+    if path in CORE_BLOCK_PATHS:
+        return False
+    if any(token in path.lower() for token in [".env", ".git", "venv", "node_modules", "auth", "billing", "deploy", "railway", "vercel", "secret"]):
+        return False
+
+    if action == "edit_file":
+        return isinstance(step.get("find"), str) and isinstance(step.get("replace"), str) and bool(step.get("find"))
+    if action == "create_file":
+        return isinstance(step.get("content", ""), str)
+    return True
+
 def run_ai_cycle() -> None:
-    print("Starting AI analysis...")
+    print("Starting smarter AI analysis...")
     seen = _load_seen()
     existing = _existing_titles()
 
@@ -93,7 +109,7 @@ def run_ai_cycle() -> None:
             continue
 
         if _blocked_title(title):
-            print("Skipping low-value repeat:", title)
+            print("Skipping repetitive low-value idea:", title)
             continue
 
         if any(_is_similar(title, t) for t in existing) or any(_is_similar(title, s) for s in seen):
@@ -102,7 +118,7 @@ def run_ai_cycle() -> None:
 
         filtered_steps = [s for s in steps if isinstance(s, dict) and _valid_step(s)]
         if not filtered_steps:
-            print("Skipping invalid proposal:", title)
+            print("Skipping risky/invalid proposal:", title)
             continue
 
         try:
@@ -114,13 +130,14 @@ def run_ai_cycle() -> None:
             print("PROPOSAL ERROR:", title, "-", e)
 
     _save_seen(seen)
-    print("AI cycle complete. New proposals:", created)
+    print("Smarter AI cycle complete. New proposals:", created)
 
 def run() -> None:
     print("Self-improver worker started.")
     while True:
         run_ai_cycle()
-        time.sleep(30)
+        print("Cycle finished. Sleeping 120s...")
+        time.sleep(120)
 
 if __name__ == "__main__":
     run()
