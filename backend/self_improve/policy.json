@@ -1,0 +1,17 @@
+{
+  "auto_apply_paths": [
+    "backend/Engine/product_engine.py",
+    "backend/Engine/video_engine.py"
+  ],
+  "approval_required_paths": [
+    "backend/app/main.py",
+    "index.html"
+  ],
+  "forbidden_paths": [
+    ".env",
+    "secrets",
+    "auth",
+    "billing"
+  ],
+  "max_patch_lines": 200
+}
