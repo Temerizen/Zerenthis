@@ -178,31 +178,6 @@ def _validate_steps(steps):
         if suffix and suffix not in TEXT_FILE_SUFFIXES:
             raise ValueError(f"step {i} path has unsupported file type: {suffix}")
 
-        if normalized_path in touched_paths:
-            raise ValueError(f"step {i} targets the same path as another step")
-        touched_paths[normalized_path] = True
-
-        if action == "edit_file":
-            find = step.get("find")
-            replace = step.get("replace")
-            if not isinstance(find, str) or not find:
-                raise ValueError(f"step {i} edit_file requires a non-empty find string")
-            if not isinstance(replace, str):
-                raise ValueError(f"step {i} edit_file requires a replace string")
-            if len(find) > MAX_TEXT_FIELD_LENGTH or len(replace) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} edit payload is too large")
-
-        elif action == "create_file":
-            content = step.get("content")
-            if not isinstance(content, str) or not content:
-                raise ValueError(f"step {i} create_file requires non-empty content")
-            if len(content) > MAX_TEXT_FIELD_LENGTH:
-                raise ValueError(f"step {i} create content is too large")
-
-        elif action == "delete_file":
-            if any(hint in normalized_path for hint in HIGH_RISK_PATH_HINTS):
-                raise ValueError(f"step {i} delete_file targets a protected core runtime file")
-
         previous_action = touched_paths.get(normalized_path)
         if previous_action is not None:
             raise ValueError(f"step {i} reuses path already targeted earlier: {normalized_path}")
