@@ -924,5 +924,29 @@
     "title": "Complete metrics and add monetization-ready lead analytics API",
     "risk": "medium",
     "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825809_f038c80c",
+    "title": "Complete metrics and add monetization-ready intake analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825811_b7de6853",
+    "title": "Finish metrics and add monetization-ready lead analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825879_a3745a89",
+    "title": "Add execution telemetry and safer self-improver edit validation",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825879_a3745a89"
+    }
   }
 ]
