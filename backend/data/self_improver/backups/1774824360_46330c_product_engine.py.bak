@@ -40,48 +40,37 @@ def _offer_ideas(topic, buyer, promise):
     topic = _clean(topic, "digital product")
     topic_tc = _title_case(topic)
     buyer_text = _clean(buyer, "Beginners")
-    buyer_lower = buyer_text.lower()
     promise_text = _clean(promise, f"get better results with {topic}")
     return [
         {
             "name": f"{topic_tc} Starter Kit",
             "price": "$9–$19",
             "title": f"The {topic_tc} Starter Kit",
-            "description": f"A beginner-friendly pack for {buyer_lower} who want to {promise_text}. Includes quick-start steps, templates, prompts, and a low-friction launch path.",
-            "best_for": "First-time buyers who want speed and clarity",
-            "cta": "Start with the entry offer and add a fast-action bonus"
+            "description": f"A beginner-friendly pack for {buyer_text.lower()} who want to {promise_text}. Includes quick-start steps, templates, prompts, and a low-friction launch path."
         },
         {
             "name": f"{topic_tc} Premium Blueprint",
             "price": "$19–$29",
             "title": f"{topic_tc} Premium Blueprint",
-            "description": f"A deeper system with examples, pricing ideas, execution checklists, and copy-paste assets for buyers who want faster and cleaner progress.",
-            "best_for": "Buyers who want a fuller implementation system",
-            "cta": "Position as the most complete done-with-you roadmap"
+            "description": f"A deeper system with examples, pricing ideas, execution checklists, and copy-paste assets for buyers who want faster and cleaner progress."
         },
         {
             "name": f"{topic_tc} Prompt Pack",
             "price": "$7–$17",
             "title": f"{topic_tc} Prompt Vault",
-            "description": f"A focused library of prompts, templates, and workflows designed to reduce thinking time and increase implementation speed.",
-            "best_for": "Action-takers who value templates over theory",
-            "cta": "Use as an impulse buy, bump, or bundle enhancer"
+            "description": f"A focused library of prompts, templates, and workflows designed to reduce thinking time and increase implementation speed."
         },
         {
             "name": f"{topic_tc} Fast-Start Pack",
             "price": "$9–$19",
             "title": f"{topic_tc} Fast-Start Pack",
-            "description": f"An action-first pack built for overwhelmed beginners who need clarity, momentum, and a simple path to their first result.",
-            "best_for": "New buyers who need immediate momentum",
-            "cta": "Sell the transformation of fast clarity, not just pages"
+            "description": f"An action-first pack built for overwhelmed beginners who need clarity, momentum, and a simple path to their first result."
         },
         {
             "name": f"{topic_tc} Bundle",
             "price": "$29–$49",
             "title": f"The Complete {topic_tc} Bundle",
-            "description": f"A premium bundled offer combining guide, prompts, templates, and bonus assets into a stronger high-value package.",
-            "best_for": "Customers already convinced and ready to spend more",
-            "cta": "Anchor against buying each asset separately"
+            "description": f"A premium bundled offer combining guide, prompts, templates, and bonus assets into a stronger high-value package."
         },
     ]
 
@@ -146,8 +135,6 @@ def _pricing_recommendation():
         ["Bundle / order bump", "$29-$49"],
         ["Fast-action launch price", "$7-$14 for first 48 hours"],
         ["Upsell / implementation add-on", "$27-$49"],
-        ["Founding customer pre-sale", "$5-$9 before the full version ships"],
-        ["Done-with-you audit add-on", "$49-$99"],
     ]
 
 
@@ -158,10 +145,7 @@ def _mistakes():
         "Padding pages instead of adding practical value",
         "Uploading once and never testing more offers",
         "Waiting for perfection before listing",
-        "Not adding an upsell, bundle, or email capture",
-        "Selling features instead of the buyer's next concrete outcome",
-        "Ignoring fast feedback from early buyers",
-r order bump",
+        "Not adding an upsell, bundle, or order bump",
         "Forgetting urgency, bonuses, or a clear call to action",
     ]
 

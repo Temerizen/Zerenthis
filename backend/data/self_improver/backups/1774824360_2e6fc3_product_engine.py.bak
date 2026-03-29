@@ -146,8 +146,6 @@ def _pricing_recommendation():
         ["Bundle / order bump", "$29-$49"],
         ["Fast-action launch price", "$7-$14 for first 48 hours"],
         ["Upsell / implementation add-on", "$27-$49"],
-        ["Founding customer pre-sale", "$5-$9 before the full version ships"],
-        ["Done-with-you audit add-on", "$49-$99"],
     ]
 
 
@@ -158,10 +156,7 @@ def _mistakes():
         "Padding pages instead of adding practical value",
         "Uploading once and never testing more offers",
         "Waiting for perfection before listing",
-        "Not adding an upsell, bundle, or email capture",
-        "Selling features instead of the buyer's next concrete outcome",
-        "Ignoring fast feedback from early buyers",
-r order bump",
+        "Not adding an upsell, bundle, or order bump",
         "Forgetting urgency, bonuses, or a clear call to action",
     ]
 

@@ -4276,7 +4276,9 @@
         "replace": "def _mistakes():\n    return [\n        \"Making the product too broad\",\n        \"Using weak, vague titles\",\n        \"Padding pages instead of adding practical value\",\n        \"Uploading once and never testing more offers\",\n        \"Waiting for perfection before listing\",\n        \"Not adding an upsell, bundle, or email capture\",\n        \"Selling features instead of the buyer's next concrete outcome\",\n        \"Ignoring fast feedback from early buyers\",\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774824358.2655053
+    "status": "applied",
+    "created_at": 1774824358.2655053,
+    "approved_at": 1774824360.063781,
+    "applied_at": 1774824360.1027465
   }
 ]
