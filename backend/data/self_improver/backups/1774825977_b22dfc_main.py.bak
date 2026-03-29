@@ -151,7 +151,6 @@ def health():
         except Exception:
             lead_items = []
     outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
-    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
@@ -160,9 +159,7 @@ def health():
         "lead_count": len(lead_items),
         "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
         "cors_origin_count": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,
-        "latest_output": latest_output,
-        "metrics_url": f"{get_base_url()}/api/metrics",
-        "self_improver_url": f"{get_base_url()}/self/stats",
+        "latest_output": max((p.name for p in outputs), default=None),
     }
 
 
@@ -215,10 +212,6 @@ def metrics():
     consented = 0
     contactable = 0
     named = 0
-    file_types = {}
-    for output in outputs:
-        suffix = output.suffix.lower() or "no_extension"
-        file_types[suffix] = file_types.get(suffix, 0) + 1
     for item in leads:
         source = item.get("source", "unknown")
         by_source[source] = by_source.get(source, 0) + 1
@@ -230,28 +223,6 @@ def metrics():
             named += 1
 
     conversion_rate = round((len(leads) / len(outputs)) * 100, 2) if outputs else 0.0
-    consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0
-    contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0
-    named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0
-
-    latest_outputs = sorted(outputs, key=lambda p: p.stat().st_mtime, reverse=True)[:10]
-    return {
-        "ok": True,
-        "service": "Zerenthis Automation Core",
-        "lead_count": len(leads),
-        "output_count": len(outputs),
-        "conversion_rate": conversion_rate,
-        "consented_lead_count": consented,
-        "contactable_lead_count": contactable,
-        "named_lead_count": named,
-        "consent_rate": consent_rate,
-        "contact_rate": contact_rate,
-        "named_rate": named_rate,
-        "leads_by_source": by_source,
-        "outputs_by_type": file_types,
-        "latest_outputs": [p.name for p in latest_outputs],
-        "public_base_url": get_base_url(),
-    }
     consent_rate = round((consented / len(leads)) * 100, 2) if leads else 0.0
     contact_rate = round((contactable / len(leads)) * 100, 2) if leads else 0.0
     named_rate = round((named / len(leads)) * 100, 2) if leads else 0.0

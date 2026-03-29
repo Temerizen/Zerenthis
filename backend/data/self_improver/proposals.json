@@ -8000,7 +8000,9 @@
         "replace": "@app.get(\"/health\")\ndef health():\n    lead_items = []\n    if LEADS_FILE.exists():\n        try:\n            loaded = json.loads(LEADS_FILE.read_text(encoding=\"utf-8\"))\n            if isinstance(loaded, list):\n                lead_items = loaded\n        except Exception:\n            lead_items = []\n    outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]\n    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None\n    return {\n        \"ok\": True,\n        \"service\": \"Zerenthis Automation Core\",\n        \"output_dir\": str(OUTPUT_DIR),\n        \"output_count\": len(outputs),\n        \"lead_count\": len(lead_items),\n        \"has_public_base_url\": bool(os.getenv(\"PUBLIC_BASE_URL\", \"\").strip()),\n        \"cors_origin_count\": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,\n        \"latest_output\": latest_output,\n        \"metrics_url\": f\"{get_base_url()}/api/metrics\",\n        \"self_improver_url\": f\"{get_base_url()}/self/stats\",\n    }\n"
       }
     ],
-    "status": "pending"
+    "status": "applied",
+    "approved_at": 1774825977.287597,
+    "applied_at": 1774825977.3959918
   },
   {
     "id": "prop_1774825935",
@@ -8020,7 +8022,8 @@
         "replace": "def _premium_title(topic, promise):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    promise = _clean(promise)\n    if promise:\n        return f\"{topic_tc} Execution Pack for {promise}\"\n    return f\"{topic_tc} Execution Pack\"\n\n\ndef _value_stack(topic, promise, bonus):\n    topic_tc = _title_case(_clean(topic, \"Digital Product\"))\n    promise_text = _clean(promise, f\"get results with {topic_tc}\")\n    bonus_text = _clean(bonus, \"Bonus prompt pack\")\n    return [\n        f\"Core guide: a practical system to help buyers {promise_text}\",\n        f\"Prompt assets: reusable prompts and templates for {topic_tc}\",\n        \"Launch checklist: a step-by-step path from idea to listing\",\n        f\"Bonus asset: {bonus_text}\",\n    ]\n"
       }
     ],
-    "status": "pending"
+    "status": "approved",
+    "approved_at": 1774825977.287597
   },
   {
     "id": "prop_1774825952_623c8482",

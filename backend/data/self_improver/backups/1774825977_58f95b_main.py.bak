@@ -151,7 +151,6 @@ def health():
         except Exception:
             lead_items = []
     outputs = [p for p in OUTPUT_DIR.iterdir() if p.is_file()]
-    latest_output = max(outputs, key=lambda p: p.stat().st_mtime).name if outputs else None
     return {
         "ok": True,
         "service": "Zerenthis Automation Core",
@@ -160,9 +159,7 @@ def health():
         "lead_count": len(lead_items),
         "has_public_base_url": bool(os.getenv("PUBLIC_BASE_URL", "").strip()),
         "cors_origin_count": len(ALLOWED_ORIGINS) if ALLOWED_ORIGINS else 1,
-        "latest_output": latest_output,
-        "metrics_url": f"{get_base_url()}/api/metrics",
-        "self_improver_url": f"{get_base_url()}/self/stats",
+        "latest_output": max((p.name for p in outputs), default=None),
     }
 
 
