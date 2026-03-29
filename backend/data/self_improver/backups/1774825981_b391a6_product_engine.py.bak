@@ -1,7 +1,7 @@
 from pathlib import Path
 import uuid
 import re
-from typing import Dict, List
+from typing import Dict
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -147,24 +147,6 @@ def _monetization_summary(topic, buyer, promise):
     buyer_text = _clean(buyer, "beginners")
     promise_text = _clean(promise, f"get results with {topic_text}")
     return [
-        f"Primary transformation: help {buyer_text.lower()} {promise_text}.",
-        "Entry offer: launch a low-friction product priced for impulse purchase.",
-        "Order bump: add prompts, templates, or swipe files that speed up implementation.",
-        "Upsell: offer a premium bundle with deeper guidance and bonus assets.",
-        f"Retention play: turn {topic_text} into a repeatable series of niche packs.",
-    ]
-
-
-def _quality_score_product_pack(topic, promise, bonus, notes):
-    checks = {
-        "has_specific_topic": len(_clean(topic)) >= 5,
-        "has_promise": bool(_clean(promise)),
-        "has_bonus": bool(_clean(bonus)),
-        "has_notes": bool(_clean(notes)),
-    }
-    score = int(sum(1 for passed in checks.values() if passed) / len(checks) * 100)
-    return {"score": score, "checks": checks}
-   return [
         f"Primary buyer: {buyer_text}",
         f"Core promise: {promise_text}",
         "Entry offer: use a low-friction starter price to maximize first purchases.",

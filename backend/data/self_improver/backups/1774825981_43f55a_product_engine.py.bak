@@ -1,7 +1,7 @@
 from pathlib import Path
 import uuid
 import re
-from typing import Dict, List
+from typing import Dict
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle

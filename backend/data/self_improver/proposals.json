@@ -8141,8 +8141,11 @@
         "replace": "@router.post(\"/propose\")\ndef propose_route(data: ProposalRequest):\n    try:\n        _validate_steps(data.steps)\n        assessment = assess_steps(data.steps)\n    except ValueError as e:\n        raise HTTPException(status_code=400, detail=str(e))\n    if assessment.get(\"risk_level\") == \"high\":\n        raise HTTPException(status_code=400, detail={\"message\": \"Proposal blocked as high risk\", \"safety\": assessment})\n    return propose(data.title, data.reason, data.steps)\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825975.1611404
+    "status": "failed",
+    "created_at": 1774825975.1611404,
+    "approved_at": 1774825981.2345247,
+    "failed_at": 1774825981.3565905,
+    "error": "find text not found in: backend/self_improver/engine.py"
   },
   {
     "id": "prop_1774825975_7c8548a9",
@@ -8177,7 +8180,9 @@
         "replace": "from typing import Dict, List\n"
       }
     ],
-    "status": "pending",
-    "created_at": 1774825975.2773662
+    "status": "applied",
+    "created_at": 1774825975.2773662,
+    "approved_at": 1774825981.4454546,
+    "applied_at": 1774825981.5547438
   }
 ]
