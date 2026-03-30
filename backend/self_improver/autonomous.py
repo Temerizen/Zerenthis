@@ -1,6 +1,7 @@
 ﻿import time
 import sys
 import os
+import json
 from pathlib import Path
 import random
 
@@ -10,9 +11,16 @@ sys.path.append(str(ROOT))
 from self_improver.worker import run_ai_cycle
 from self_improver.engine import pending, approve, execute, create_proposal
 
+MEMORY_FILE = ROOT / "self_improver_memory.json"
 OUTPUT_DIR = ROOT / "data" / "outputs"
 
-print("🧠 Zerenthis Autonomous Evolution ONLINE")
+def load_memory():
+    if not MEMORY_FILE.exists():
+        return {"ideas": [], "files": []}
+    return json.loads(MEMORY_FILE.read_text())
+
+def save_memory(mem):
+    MEMORY_FILE.write_text(json.dumps(mem, indent=2))
 
 IDEAS = [
     "Improve conversion of product packs",
@@ -28,33 +36,47 @@ SAFE = [
     "output","scoring","conversion","cta","offer","title"
 ]
 
-def generate_ideas():
+def generate_ideas(mem):
     for idea in IDEAS:
-        if random.random() < 0.6:
+        if idea in mem["ideas"]:
+            continue
+        if random.random() < 0.5:
             create_proposal({"title": idea, "description": idea, "tier": "low"})
-            print("🧠 Idea injected:", idea)
+            mem["ideas"].append(idea)
+            print("🧠 New idea:", idea)
 
-def detect_weak_outputs():
+def detect_weak_outputs(mem):
     if not OUTPUT_DIR.exists():
         return
     for f in OUTPUT_DIR.glob("*"):
+        fname = f.name
+        if fname in mem["files"]:
+            continue
         try:
             if os.path.getsize(f) < 3000:
                 create_proposal({
-                    "title": f"Improve weak output: {f.name}",
+                    "title": f"Improve weak output: {fname}",
                     "description": "Low quality output detected",
                     "tier": "low"
                 })
-                print("🩺 Weak output:", f.name)
+                mem["files"].append(fname)
+                print("🩺 Weak output (new):", fname)
         except:
             pass
 
 def loop():
+    print("🧠 Stable Evolution Engine ONLINE")
+
     while True:
         try:
-            print("\n⚙️ Evolution cycle...")
-            generate_ideas()
-            detect_weak_outputs()
+            mem = load_memory()
+
+            print("\n⚙️ Smart cycle...")
+            generate_ideas(mem)
+            detect_weak_outputs(mem)
+
+            save_memory(mem)
+
             run_ai_cycle()
 
             props = pending()
@@ -74,7 +96,7 @@ def loop():
         except Exception as e:
             print("❌ ERROR:", e)
 
-        time.sleep(60)
+        time.sleep(120)
 
 if __name__ == "__main__":
     loop()
