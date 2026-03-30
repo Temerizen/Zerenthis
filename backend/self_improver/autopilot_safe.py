@@ -1,6 +1,6 @@
 ﻿import time
-from backend.self_improver.worker import run_ai_cycle
-from backend.self_improver.engine import pending, approve, execute
+from self_improver.worker import run_ai_cycle
+from self_improver.engine import pending, approve, execute
 
 print("🧠 Zerenthis Autopilot ONLINE")
 
@@ -40,3 +40,4 @@ def auto_loop():
 
 if __name__ == "__main__":
     auto_loop()
+
