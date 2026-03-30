@@ -5,7 +5,7 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from self_improver.engine import pending, applied, failed, approve, reject, execute, verify, load
+
 
 router = APIRouter(prefix="/api/self-improver", tags=["self-improver"])
 
@@ -77,4 +77,5 @@ def execute_proposal(proposal_id: str):
     if not result.get("ok"):
         raise HTTPException(status_code=400, detail=result.get("error", "Execution failed"))
     return result
+
 
