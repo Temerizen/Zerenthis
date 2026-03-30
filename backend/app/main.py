@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import os
 import sys
@@ -20,7 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
-from backend.self_improver.routes import router as self_router
+from self_improver.routes import router as self_router
 from backend.empire.routes import router as empire_router
 from Engine.jobs import create_job, get_job
 from Engine.product_engine import build_product_batch, build_product_pack
