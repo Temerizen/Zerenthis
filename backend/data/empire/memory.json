@@ -3,9 +3,11 @@
   "failed_patterns": [],
   "high_leverage_moves": [
     "Creator Execution Bundle",
+    "Creator Execution Bundle",
     "Creator Execution Bundle"
   ],
   "bottlenecks": [
+    "low_output_count",
     "low_output_count",
     "low_output_count"
   ]
