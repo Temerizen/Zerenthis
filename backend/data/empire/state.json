@@ -1,6 +1,6 @@
 {
   "mode": "empire",
-  "cycles": 3,
+  "cycles": 4,
   "focus": [
     "increase perceived value",
     "increase leverage per output",
@@ -21,5 +21,5 @@
     "exploit_trend:AI side-income starter kits",
     "prioritize_niche:make money online"
   ],
-  "compound_score": 42
+  "compound_score": 56
 }
