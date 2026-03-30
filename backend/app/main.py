@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 import sys
@@ -21,7 +21,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from self_improver.routes import router as self_router
-from backend.empire.routes import router as empire_router
+from empire.routes import router as empire_router
 from Engine.jobs import create_job, get_job
 from Engine.product_engine import build_product_batch, build_product_pack
 from Engine.video_engine import build_shorts_batch, build_shorts_video, build_youtube_pack
@@ -292,3 +292,4 @@ def gallery():
             }
         )
     return {"items": items[:200]}
+
