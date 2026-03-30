@@ -18,6 +18,17 @@ function Ensure-Command($name, $installHint) {
     }
 }
 
+function Refresh-NpmPath {
+    try {
+        $npmPrefix = npm config get prefix
+        $npmBin = Join-Path $npmPrefix "node_modules\.bin"
+        $userNpm = Join-Path $env:APPDATA "npm"
+        $env:Path = "$env:Path;$npmPrefix;$npmBin;$userNpm;C:\Program Files\nodejs"
+    } catch {
+        $env:Path = "$env:Path;$env:APPDATA\npm;C:\Program Files\nodejs"
+    }
+}
+
 Step "Move to repo root"
 Set-Location "C:\Zerenthis"
 
@@ -54,12 +65,19 @@ Ensure-Command "npm" "Install Node.js first."
 Step "Install or verify Vercel CLI"
 if (-not (Get-Command "vercel" -ErrorAction SilentlyContinue)) {
     npm install -g vercel
+    Refresh-NpmPath
 }
 
 Step "Install or verify Railway CLI"
 if (-not (Get-Command "railway" -ErrorAction SilentlyContinue)) {
     npm install -g @railway/cli
+    Refresh-NpmPath
 }
+
+Step "Verify CLIs"
+Refresh-NpmPath
+Ensure-Command "vercel" "Global npm bin is not on PATH yet."
+Ensure-Command "railway" "Global npm bin is not on PATH yet."
 
 Step "Deploy frontend to Vercel"
 Set-Location (Resolve-Path $FrontendDir)
