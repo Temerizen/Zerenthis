@@ -1,16 +1,10 @@
 ﻿{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/api/:path*"
-    },
-    {
-      "source": "/self/:path*",
-      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/self/:path*"
-    },
-    {
-      "source": "/health",
-      "destination": "https://semantiqai-backend-production-bcab.up.railway.app/health"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
