@@ -1,116 +1,79 @@
-from typing import Any
+﻿from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field
+from collections import Counter
+import json
+from pathlib import Path
 
-from backend.self_improver.engine import approve, execute, pending, propose, reject, _validate_steps, load, _load_execution_log, summarize_steps, assess_proposal_risk, validate_proposal_payload
+from backend.self_improver.engine import pending, applied, failed, approve, reject, execute, verify, load
 
-router = APIRouter(prefix="/self", tags=["Self Improver"])
+router = APIRouter(prefix="/api/self-improver", tags=["self-improver"])
 
+ROOT = Path(__file__).resolve().parents[2]
+EXECUTION_LOG = ROOT / "backend" / "data" / "self_improver" / "execution_log.json"
 
-class ProposalRequest(BaseModel):
-    title: str = Field(min_length=3, max_length=200)
-    reason: str = Field(min_length=10, max_length=2000)
-    steps: list[dict[str, Any]]
-
-
-@router.post("/propose")
-def propose_route(data: ProposalRequest):
+def _load_execution_log():
+    if not EXECUTION_LOG.exists():
+        return []
     try:
-        validation = validate_proposal_payload(data.title, data.reason, data.steps)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    result = propose(data.title, data.reason, data.steps)
-    result["validation"] = {
-        "summary": validation["summary"],
-        "risk": validation["risk"],
-        "fingerprint": validation["fingerprint"],
-    }
-    return result
+        data = json.loads(EXECUTION_LOG.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
 
+@router.get("/health")
+def self_improver_health():
+    return {"ok": True, "verified": verify()}
 
-@router.get("/pending")
-def pending_route():
-    return pending()
+@router.get("/proposals")
+def list_pending_proposals():
+    return {"items": pending()}
 
+@router.get("/applied")
+def list_applied_proposals():
+    return {"items": applied()}
+
+@router.get("/failed")
+def list_failed_proposals():
+    return {"items": failed()}
 
 @router.get("/history")
-def history_route():
+def history():
     items = load()
-    enriched = []
-    for item in items:
-        steps = item.get("steps", [])
-        summary = item.get("summary") or summarize_steps(steps)
-        risk = item.get("risk") or assess_proposal_risk(steps)
-        enriched.append({
-            **item,
-            "step_count": summary["step_count"],
-            "action_counts": summary["action_counts"],
-            "touched_paths": summary["touched_paths"],
-            "risk": risk,
-        })
-    return sorted(enriched, key=lambda x: x.get("created_at", 0), reverse=True)
-
-
-@router.get("/execution-log")
-def execution_log_route():
-    items = _load_execution_log()
-    return sorted(items, key=lambda x: x.get("started_at", 0), reverse=True)
-
+    return {"items": sorted(items, key=lambda x: x.get("created_ts", 0), reverse=True)}
 
 @router.get("/stats")
-def stats_route():
+def stats():
     items = load()
-    counts = {
-        "pending": 0,
-        "approved": 0,
-        "applied": 0,
-        "rejected": 0,
-        "failed": 0,
+    executions = _load_execution_log()
+    status_counts = Counter(item.get("status", "unknown") for item in items)
+    execution_counts = Counter(item.get("status", "unknown") for item in executions)
+    return {
+        "total": len(items),
+        "proposal_statuses": dict(status_counts),
+        "execution_statuses": dict(execution_counts),
+        "approval_rate_percent": round(((status_counts.get("approved", 0) + status_counts.get("applied", 0) + status_counts.get("failed", 0)) / len(items)) * 100, 2) if items else 0.0,
     }
-    risk_counts = {
-        "low": 0,
-        "medium": 0,
-        "high": 0,
-    }
-    total_steps = 0
-    for item in items:
-        status = item.get("status")
-        if status in counts:
-            counts[status] += 1
-        steps = item.get("steps", [])
-        summary = item.get("summary") or summarize_steps(steps)
-        risk = item.get("risk") or assess_proposal_risk(steps)
-        total_steps += summary["step_count"]
-        if risk.get("level") in risk_counts:
-            risk_counts[risk["level"]] += 1
-    counts["total"] = len(items)
-    counts["avg_steps"] = round(total_steps / len(items), 2) if items else 0
-    counts["risk_counts"] = risk_counts
-    return counts
 
-
-@router.post("/approve/{pid}")
-def approve_route(pid: str):
-    ok = approve(pid)
+@router.post("/approve/{proposal_id}")
+def approve_proposal(proposal_id: str):
+    ok = approve(proposal_id)
     if not ok:
         raise HTTPException(status_code=404, detail="Proposal not found")
-    return {"ok": True, "id": pid, "status": "approved"}
+    return {"ok": True, "id": proposal_id, "status": "approved"}
 
-
-@router.post("/reject/{pid}")
-def reject_route(pid: str):
-    ok = reject(pid)
+@router.post("/reject/{proposal_id}")
+def reject_proposal(proposal_id: str):
+    ok = reject(proposal_id)
     if not ok:
         raise HTTPException(status_code=404, detail="Proposal not found")
-    return {"ok": True, "id": pid, "status": "rejected"}
+    return {"ok": True, "id": proposal_id, "status": "rejected"}
 
-
-@router.post("/execute/{pid}")
-def execute_route(pid: str):
-    result = execute(pid)
-    if not result.get("ok") and result.get("error") == "proposal not found":
-        raise HTTPException(status_code=404, detail="Proposal not found")
-    if not result.get("ok") and result.get("error") == "not approved":
+@router.post("/execute/{proposal_id}")
+def execute_proposal(proposal_id: str):
+    result = execute(proposal_id)
+    if result.get("error") == "not approved":
         raise HTTPException(status_code=400, detail="Proposal is not approved")
+    if not result.get("ok"):
+        raise HTTPException(status_code=400, detail=result.get("error", "Execution failed"))
     return result

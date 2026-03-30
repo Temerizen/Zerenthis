@@ -1351,5 +1351,215 @@
       "ok": true,
       "id": "prop_1774827156_742ba61c"
     }
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827156_d47e9fcd",
+    "title": "Finish and harden API health reporting for better product readiness and reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827156_a3e56916",
+    "title": "Improve generated product packs with stronger quality checks and monetization content",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827197",
+    "title": "Complete health endpoint and add generation readiness metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827197",
+    "title": "Finish product engine prompt bank for stronger output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827380,
+    "id": "prop_1774827201_8abf07",
+    "title": "Complete and upgrade product engine prompt bank with monetization-ready sales assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827380,
+    "id": "prop_1774827248_b238d45d",
+    "title": "Expose operational health and product-readiness safely",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827314_d22090c0",
+    "title": "Improve API health visibility for outputs and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827338_f1c700b4",
+    "title": "Complete health endpoint with monetization and output observability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827338_e8cef34d",
+    "title": "Upgrade product packs with sales-page copy and stronger conversion assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827340_ccc145",
+    "title": "Complete and upgrade product engine prompt bank with monetization-focused assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827380",
+    "title": "Finish and stabilize health endpoint for operational reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827382,
+    "id": "prop_1774827380",
+    "title": "Increase product-pack quality with stronger monetization copy blocks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827423_2ad50a",
+    "title": "Fix truncated product offer generator and add conversion-ready fallback ideas",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827550_ce4253",
+    "title": "Finish and strengthen product offer generation with monetization-ready variants",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827677_ddabe2",
+    "title": "Complete and monetize product offer generation with conversion-focused ideas",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827860_97f748",
+    "title": "Repair truncated product engine and add offer-angle batch generation for stronger product-market outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827996_12c0f5",
+    "title": "Add monetization-focused product pack content with built-in offer stack and buyer CTA",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774828134_8d7c8c",
+    "title": "Upgrade product packs with monetization-ready sales sections and branded file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774828231_66e971",
+    "title": "Add monetization-ready product pack metadata and unique batch variation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828330,
+    "id": "prop_1774828231_1b5943",
+    "title": "Add monetization-ready product pack metadata and unique batch titles",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828330,
+    "id": "prop_1774828330_1a33ea",
+    "title": "Upgrade product packs into monetization-ready offer briefs with branded links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828331_b78b26",
+    "title": "Upgrade product packs with monetization-ready offer assets and valid public file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828395_c7aaa8",
+    "title": "Add monetization metadata and commercial copy to product packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828395_270a4f",
+    "title": "Upgrade product pack output into a monetization-ready PDF with offer stack and customization",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828533,
+    "id": "prop_1774828532_472049",
+    "title": "Upgrade product packs with monetization-ready sales metadata and personalized execution plan",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828533,
+    "id": "prop_1774828533_9913c4",
+    "title": "Add monetization-focused product pack metadata and cleaner filenames",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828670,
+    "id": "prop_1774828666_e93204",
+    "title": "Add monetization-ready product pack metadata and conversion copy",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828670,
+    "id": "prop_1774828670_6823c9",
+    "title": "Upgrade product packs with monetization-focused sections and a usable base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828787,
+    "id": "prop_1774828785_163687",
+    "title": "Upgrade product packs with monetization sections and branded URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828787,
+    "id": "prop_1774828787_d1f0d1",
+    "title": "Add monetization-ready product metadata and deterministic batch naming",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
   }
 ]

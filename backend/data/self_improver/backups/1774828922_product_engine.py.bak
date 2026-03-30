@@ -1,0 +1,81 @@
+﻿from __future__ import annotations
+
+import uuid
+from pathlib import Path
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
+OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data" / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def _make_pdf(title: str, content: str, filename: str) -> str:
+    path = OUTPUT_DIR / filename
+    c = canvas.Canvas(str(path), pagesize=letter)
+
+    y = 750
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(50, y, title)
+
+    y -= 40
+    c.setFont("Helvetica", 11)
+
+    for line in content.split("\n"):
+        if y < 50:
+            c.showPage()
+            c.setFont("Helvetica", 11)
+            y = 750
+        c.drawString(50, y, line[:100])
+        y -= 15
+
+    c.save()
+    return filename
+
+def build_product_pack(
+    topic: str,
+    niche: str,
+    tone: str,
+    buyer: str,
+    promise: str = "",
+    bonus: str = "",
+    notes: str = "",
+    base_url: str = "",
+):
+    title = f"{topic.title()} Execution Pack"
+    content = f"""
+Topic: {topic}
+Niche: {niche}
+Tone: {tone}
+Target Buyer: {buyer}
+
+Promise:
+{promise}
+
+Bonus:
+{bonus}
+
+Notes:
+{notes}
+
+Steps to Execute:
+1. Identify your audience
+2. Create high-value content
+3. Package into a sellable product
+4. Distribute on platforms
+5. Optimize and scale
+"""
+
+    filename = f"{topic.replace(' ', '_')}_{uuid.uuid4().hex[:6]}.pdf"
+    _make_pdf(title, content, filename)
+
+    return {
+        "title": title,
+        "file_name": filename,
+        "file_url": f"/api/file/{filename}",
+    }
+
+def build_product_batch(**kwargs):
+    count = kwargs.get("count", 3)
+    results = []
+    for i in range(count):
+        results.append(build_product_pack(**kwargs))
+    return results

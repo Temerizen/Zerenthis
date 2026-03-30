@@ -1,0 +1,48 @@
+[
+  {
+    "id": "prop_1774830877_591984",
+    "title": "Add product quality score to batch summary",
+    "status": "failed",
+    "started_at": 1774831958,
+    "finished_at": 1774831958,
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "backend/Engine/product_engine.py",
+        "find": "\"summary\": {\n            \"buyer\": buyer_text,\n            \"promise\": promise_text,\n            \"cta\": \"Start with the front-end offer, add the bonus, and upgrade to the bundle.\",\n            \"quality_score\": quality[\"score\"],\n        },",
+        "replace": "\"summary\": {\n            \"buyer\": buyer_text,\n            \"promise\": promise_text,\n            \"cta\": \"Start with the front-end offer, add the bonus, and upgrade to the bundle.\",\n            \"quality_score\": quality[\"score\"],\n            \"quality_checks\": quality[\"checks\"],\n        },"
+      }
+    ],
+    "error": "find text not found in backend/Engine/product_engine.py"
+  },
+  {
+    "id": "prop_1774830994_0ac0ce",
+    "title": "Add founder dashboard guidance line",
+    "status": "applied",
+    "started_at": 1774831958,
+    "finished_at": 1774831958,
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "index.html",
+        "find": "<div class=\"sub\">Generate assets, review proposals, and monitor applied or failed changes.</div>",
+        "replace": "<div class=\"sub\">Generate assets, review proposals, and monitor applied or failed changes.</div><div class=\"sub\">Approval rate, quality signals, and recent outputs now guide your founder decisions.</div>"
+      }
+    ]
+  },
+  {
+    "id": "prop_1774831337_18eb88",
+    "title": "Add guided founder copy",
+    "status": "applied",
+    "started_at": 1774831958,
+    "finished_at": 1774831958,
+    "steps": [
+      {
+        "action": "edit_file",
+        "path": "index.html",
+        "find": "<div class=\"sub\">Generate assets, review proposals, and monitor applied or failed changes.</div>",
+        "replace": "<div class=\"sub\">Generate assets, review proposals, and monitor applied or failed changes.</div><div class=\"sub\">Magic mode is active: low-risk improvements can self-heal, while bigger changes wait for your judgment.</div>"
+      }
+    ]
+  }
+]

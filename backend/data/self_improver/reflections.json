@@ -1,0 +1,602 @@
+[
+  {
+    "id": "fe0e0b60-a0cf-41aa-93c6-8e8877ea0d12",
+    "cycle": 1145,
+    "timestamp": 1774831920.5993593,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "d3d5b163-81ef-477b-97d4-449cd8133689",
+    "cycle": 1146,
+    "timestamp": 1774831920.615107,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "0e59b30d-ce29-4159-a9ed-f4d90621a82a",
+    "cycle": 1147,
+    "timestamp": 1774831920.6315114,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "d3b4ffa1-3137-4196-80b1-213b06b4275d",
+    "cycle": 1148,
+    "timestamp": 1774831920.6488824,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "ffdc3d69-641b-4d89-9719-4655fbdf1e2b",
+    "cycle": 1149,
+    "timestamp": 1774831920.6649942,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "a77b7bbc-cdb7-4190-8be7-cd7fc010a2f1",
+    "cycle": 1150,
+    "timestamp": 1774831920.6814444,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "1094e744-7fee-4cfd-8de7-d8c6d7eefad6",
+    "cycle": 1151,
+    "timestamp": 1774831920.698661,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "bc1c6694-2293-4b18-b63c-1d60dc6b19b7",
+    "cycle": 1152,
+    "timestamp": 1774831920.7157917,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "89d1950a-ffac-4453-ac4c-a5edeb05dcd2",
+    "cycle": 1153,
+    "timestamp": 1774831920.7345471,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "3c0c5d1c-dbc6-40eb-9122-7f56fba1eca8",
+    "cycle": 1154,
+    "timestamp": 1774831920.7513373,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "724726a1-739a-4fb3-a075-cdafdf19e173",
+    "cycle": 1155,
+    "timestamp": 1774831920.7678282,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "fa2d888f-0765-48e1-97e2-8381b5edd293",
+    "cycle": 1156,
+    "timestamp": 1774831920.784775,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "46cb0407-5afc-42b5-9104-e6cac4aec1e1",
+    "cycle": 1157,
+    "timestamp": 1774831920.8007476,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "90811fb1-6a41-4081-83b4-ecb5786d1f05",
+    "cycle": 1158,
+    "timestamp": 1774831920.816777,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "eddc8ee8-2b9f-4061-9743-7dd44e3133ff",
+    "cycle": 1159,
+    "timestamp": 1774831920.8321288,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "e9970ac4-6b1f-4686-878f-5d6ac099cf84",
+    "cycle": 1160,
+    "timestamp": 1774831920.8486674,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "fe3f6f72-8496-4685-9742-07f7b4827b07",
+    "cycle": 1161,
+    "timestamp": 1774831920.864863,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "e4b8268c-0935-4215-a8f7-5a5c1357ca13",
+    "cycle": 1162,
+    "timestamp": 1774831920.8814108,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "0e0e731a-8e96-4957-852f-91a253dabd4d",
+    "cycle": 1163,
+    "timestamp": 1774831920.8978806,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "e5664d25-e432-4462-9927-9a0a0daea1a9",
+    "cycle": 1164,
+    "timestamp": 1774831920.9134698,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "c7e90c86-ea0d-4874-82bb-a54cba091f1f",
+    "cycle": 1165,
+    "timestamp": 1774831920.9289443,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "7570e9c0-8fd8-4f14-a60e-9dd415f43261",
+    "cycle": 1166,
+    "timestamp": 1774831920.9458716,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "afeaa3d5-3447-4c5b-af96-f92415db5d84",
+    "cycle": 1167,
+    "timestamp": 1774831920.9629674,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "68cbfff1-88a6-476a-a8d5-f80026239ed1",
+    "cycle": 1168,
+    "timestamp": 1774831920.9795732,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "7039bfd2-6725-44fb-8275-ca398b85b68f",
+    "cycle": 1169,
+    "timestamp": 1774831920.9966233,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "7da03f34-5643-44ce-a92c-c8615451336f",
+    "cycle": 1170,
+    "timestamp": 1774831921.0125616,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "f5bb4152-190c-4bf3-9e7f-dc3f1c60fe1a",
+    "cycle": 1171,
+    "timestamp": 1774831921.0286472,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "4860c523-1558-4532-9add-4f321da25b9d",
+    "cycle": 1172,
+    "timestamp": 1774831921.0446749,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "c385d907-df98-4d2d-bb40-759efd2775d7",
+    "cycle": 1173,
+    "timestamp": 1774831921.0607603,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "d38b5dcb-d0d6-4fb3-967a-10484de2c43b",
+    "cycle": 1174,
+    "timestamp": 1774831921.0764794,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "2db97beb-84fb-4cf2-b826-2ee1a7761c6f",
+    "cycle": 1175,
+    "timestamp": 1774831921.0924547,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "a67f08b7-7cdb-462c-8ef5-9b53496e0380",
+    "cycle": 1176,
+    "timestamp": 1774831921.109626,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "80ca5fdd-d3b8-4dad-b45a-6fd11bd74740",
+    "cycle": 1177,
+    "timestamp": 1774831921.125225,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "c5635c62-14a9-4600-850b-7abe8535171b",
+    "cycle": 1178,
+    "timestamp": 1774831921.1417675,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "b4f520c7-9d96-437f-a25d-1a005ce15ee2",
+    "cycle": 1179,
+    "timestamp": 1774831921.1589236,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "a268251e-9097-4d3f-a7c3-ecf771341394",
+    "cycle": 1180,
+    "timestamp": 1774831921.1755748,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "594d09b6-bd53-4379-ba8d-6b38b0c76c95",
+    "cycle": 1181,
+    "timestamp": 1774831921.1925416,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "540a11c3-2f27-414c-bd12-679131f11098",
+    "cycle": 1182,
+    "timestamp": 1774831921.2084742,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "82c2e567-4930-45a6-8b2e-745a9d0efec1",
+    "cycle": 1183,
+    "timestamp": 1774831921.224592,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "e509cc63-6695-4fdd-9155-2fa52df4a588",
+    "cycle": 1184,
+    "timestamp": 1774831921.2402399,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "6ffb3ce4-2152-441d-939d-a8ef15917a24",
+    "cycle": 1185,
+    "timestamp": 1774831921.2564876,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "407ab177-b35f-48a4-97e4-02c76577dd99",
+    "cycle": 1186,
+    "timestamp": 1774831921.27264,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "8a45b3cf-53e2-4de5-9bdf-631b971b9a95",
+    "cycle": 1187,
+    "timestamp": 1774831921.2881167,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "77efa1f3-95aa-4ddc-9043-46834870f3f2",
+    "cycle": 1188,
+    "timestamp": 1774831921.303612,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "2035398e-2bd7-44d8-8d5f-06dc4638c79d",
+    "cycle": 1189,
+    "timestamp": 1774831921.3186638,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "16d3a706-37fb-45c1-9e0c-aed93523549e",
+    "cycle": 1190,
+    "timestamp": 1774831921.3359437,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "a9cd835b-3e59-4324-ad79-1fd26346b195",
+    "cycle": 1191,
+    "timestamp": 1774831921.3537428,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "3bcf1f29-a0c4-4f14-824b-afff5aa3234b",
+    "cycle": 1192,
+    "timestamp": 1774831921.3688161,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "e5bd87eb-4575-45ff-bfc9-c1c107a82731",
+    "cycle": 1193,
+    "timestamp": 1774831921.3859236,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  },
+  {
+    "id": "2be52df7-e2b8-42ff-93ff-27b7e727b16e",
+    "cycle": 1194,
+    "timestamp": 1774831921.4043543,
+    "analysis": [
+      "Total outputs: 2",
+      "Total proposals: 238",
+      "Low output production detected ? prioritize generation",
+      "Too many proposals ? risk of clutter",
+      "Failures detected ? tighten validation"
+    ]
+  }
+]

@@ -1,38 +1,28 @@
 ﻿from __future__ import annotations
 
 import json
-import sys
 import time
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[2]))
-
 from backend.self_improver.brain.ai_brain import analyze_system
-from backend.self_improver.engine import load, propose
+from backend.self_improver.engine import load, propose, approve
+from backend.self_improver.policy import classify_proposal
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "backend" / "data" / "self_improver"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 SEEN_FILE = DATA_DIR / "seen_ai_titles.json"
 
-BLOCK_TERMS = {
-    "harden self-improver",
-    "validation-friendly",
-    "safe rollback",
-    "safer ids",
-    "request tracing",
-    "richer health",
-    "production-safe api metadata",
-}
-
 CORE_BLOCK_PATHS = {
     "backend/self_improver/engine.py",
     "backend/self_improver/worker.py",
     "backend/self_improver/autopilot.py",
+    "backend/self_improver/policy.py",
+    "backend/self_improver/brain/ai_brain.py",
     "backend/app/main.py",
 }
 
-def _load_seen() -> set[str]:
+def _load_seen():
     if not SEEN_FILE.exists():
         return set()
     try:
@@ -43,75 +33,61 @@ def _load_seen() -> set[str]:
         pass
     return set()
 
-def _save_seen(seen: set[str]) -> None:
+def _save_seen(seen):
     SEEN_FILE.write_text(json.dumps(sorted(seen), indent=2), encoding="utf-8")
 
-def _existing_titles() -> set[str]:
+def _existing_titles():
     titles = set()
     try:
         for item in load():
             title = str(item.get("title", "")).strip().lower()
             if title:
                 titles.add(title)
-    except Exception as e:
-        print("LOAD ERROR:", e)
+    except Exception:
+        pass
     return titles
 
-def _is_similar(a: str, b: str) -> bool:
+def _is_similar(a, b):
     a = a.lower().strip()
     b = b.lower().strip()
     return a == b or a in b or b in a
 
-def _blocked_title(title: str) -> bool:
-    t = title.lower()
-    return any(term in t for term in BLOCK_TERMS)
-
-def _valid_step(step: dict) -> bool:
+def _valid_step(step):
     action = step.get("action")
     path = str(step.get("path", "")).replace("\\", "/").strip()
-
     if action not in {"create_file", "edit_file", "delete_file"}:
         return False
-    if not path:
-        return False
-    if path in CORE_BLOCK_PATHS:
+    if not path or path in CORE_BLOCK_PATHS:
         return False
     if any(token in path.lower() for token in [".env", ".git", "venv", "node_modules", "auth", "billing", "deploy", "railway", "vercel", "secret"]):
         return False
-
     if action == "edit_file":
         return isinstance(step.get("find"), str) and isinstance(step.get("replace"), str) and bool(step.get("find"))
     if action == "create_file":
         return isinstance(step.get("content", ""), str)
     return True
 
-def run_ai_cycle() -> None:
-    print("Starting smarter AI analysis...")
+def run_ai_cycle():
+    print("Self-improver: scanning for elegant wins...")
     seen = _load_seen()
     existing = _existing_titles()
 
     try:
         ideas = analyze_system()
-        print(f"AI returned {len(ideas)} proposal(s)")
+        print(f"Magic brain returned {len(ideas)} proposal(s)")
     except Exception as e:
         print("AI ERROR:", e)
         return
 
     created = 0
+    auto_approved = 0
 
     for idea in ideas:
         title = str(idea.get("title", "")).strip()
         reason = str(idea.get("reason", "")).strip()
         steps = idea.get("steps", [])
-
         if not title or not reason or not isinstance(steps, list) or not steps:
-            print("Skipping malformed idea")
             continue
-
-        if _blocked_title(title):
-            print("Skipping repetitive low-value idea:", title)
-            continue
-
         if any(_is_similar(title, t) for t in existing) or any(_is_similar(title, s) for s in seen):
             print("Skipping duplicate/similar:", title)
             continue
@@ -121,22 +97,33 @@ def run_ai_cycle() -> None:
             print("Skipping risky/invalid proposal:", title)
             continue
 
+        policy = classify_proposal({"title": title, "reason": reason, "steps": filtered_steps})
+        if policy["tier"] == "blocked":
+            print("Blocked proposal:", title, "-", "; ".join(policy["reasons"]))
+            continue
+
         try:
-            result = propose(title, reason, filtered_steps)
+            result = propose(title, reason, filtered_steps, meta={"policy": policy})
             seen.add(title.lower())
             created += 1
-            print("Created proposal:", result.get("id"), "-", title)
+            print("Created proposal:", result.get("id"), "-", title, "| tier:", policy["tier"])
+
+            if policy.get("auto_approve"):
+                approve(result["id"])
+                auto_approved += 1
+                print("Auto-approved low-risk proposal:", result["id"])
+
         except Exception as e:
             print("PROPOSAL ERROR:", title, "-", e)
 
     _save_seen(seen)
-    print("Smarter AI cycle complete. New proposals:", created)
+    print("Cycle complete. New proposals:", created, "| auto-approved:", auto_approved)
 
-def run() -> None:
+def run():
     print("Self-improver worker started.")
     while True:
         run_ai_cycle()
-        print("Cycle finished. Sleeping 120s...")
+        print("Sleeping 120s...")
         time.sleep(120)
 
 if __name__ == "__main__":

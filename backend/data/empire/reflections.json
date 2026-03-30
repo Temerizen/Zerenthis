@@ -1,0 +1,36 @@
+[
+  {
+    "id": "818eb986-f8e8-4bcd-bbac-be43f4a7ce0a",
+    "created_at": 1774831928,
+    "cycle": 1,
+    "outputs_seen": 2,
+    "top_offer": "Creator Execution Bundle",
+    "top_trend": "AI side-income starter kits",
+    "best_niche": "make money online",
+    "actions": [
+      "increase_output_pressure",
+      "double_down_offer:Creator Execution Bundle",
+      "exploit_trend:AI side-income starter kits",
+      "prioritize_niche:make money online"
+    ],
+    "compound_score": 14,
+    "operator_judgment": "Push highest leverage offer, reinforce winning niche, and keep asset production compounding."
+  },
+  {
+    "id": "d83ba84f-78e5-43d6-86f5-d6c8acb42b87",
+    "created_at": 1774832048,
+    "cycle": 2,
+    "outputs_seen": 2,
+    "top_offer": "Creator Execution Bundle",
+    "top_trend": "AI side-income starter kits",
+    "best_niche": "make money online",
+    "actions": [
+      "increase_output_pressure",
+      "double_down_offer:Creator Execution Bundle",
+      "exploit_trend:AI side-income starter kits",
+      "prioritize_niche:make money online"
+    ],
+    "compound_score": 28,
+    "operator_judgment": "Push highest leverage offer, reinforce winning niche, and keep asset production compounding."
+  }
+]
