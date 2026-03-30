@@ -214,5 +214,41 @@
     "approved": true,
     "executed": true,
     "created_at": 1774838777.877993
+  },
+  {
+    "id": "prop_1774839052740",
+    "title": "Improve conversion of product packs",
+    "description": "Improve conversion of product packs",
+    "tier": "low",
+    "approved": false,
+    "executed": false,
+    "created_at": 1774839052.7400954
+  },
+  {
+    "id": "prop_1774839052747",
+    "title": "Add monetization sections",
+    "description": "Add monetization sections",
+    "tier": "low",
+    "approved": false,
+    "executed": false,
+    "created_at": 1774839052.7476354
+  },
+  {
+    "id": "prop_1774839052756",
+    "title": "Improve CTA and sales copy",
+    "description": "Improve CTA and sales copy",
+    "tier": "low",
+    "approved": false,
+    "executed": false,
+    "created_at": 1774839052.756656
+  },
+  {
+    "id": "prop_1774839052764",
+    "title": "Make outputs more viral",
+    "description": "Make outputs more viral",
+    "tier": "low",
+    "approved": false,
+    "executed": false,
+    "created_at": 1774839052.7642643
   }
 ]
