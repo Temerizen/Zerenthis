@@ -1,4 +1,4 @@
-from backend.self_improver.conscious_loop import reflect
+﻿from self_improver.conscious_loop import reflect
 
 def run():
     print("?? Conscious loop active...")
@@ -7,3 +7,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

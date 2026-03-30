@@ -20,3 +20,4 @@ def build_mitigation_notes(proposal: dict[str, Any]) -> dict[str, Any]:
     return {
         "mitigation_notes": notes
     }
+

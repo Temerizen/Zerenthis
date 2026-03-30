@@ -37,3 +37,4 @@ def decompose_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
             "steps": risky_steps,
         } if risky_steps else None,
     }
+

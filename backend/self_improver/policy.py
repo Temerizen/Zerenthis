@@ -150,3 +150,4 @@ def classify_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
         "title": title,
         "paths": sorted(unique_paths),
     }
+

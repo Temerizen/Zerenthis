@@ -1,4 +1,4 @@
-import json, time, uuid
+﻿import json, time, uuid
 from pathlib import Path
 
 ROOT = Path(r"C:\Zerenthis")
@@ -76,3 +76,4 @@ if __name__ == "__main__":
     while True:
         reflect()
         time.sleep(90)
+

@@ -2,7 +2,7 @@
 
 import time
 
-from backend.self_improver.engine import approved, execute
+from self_improver.engine import approved, execute
 
 def run():
     print("Autopilot started. Watching for approved proposals...")
@@ -40,3 +40,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

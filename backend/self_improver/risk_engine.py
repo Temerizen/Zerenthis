@@ -60,3 +60,4 @@ def score_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
         "risk": risk,
         "reasons": reasons,
     }
+

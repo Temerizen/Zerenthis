@@ -4,9 +4,9 @@ import json
 import time
 from pathlib import Path
 
-from backend.self_improver.brain.ai_brain import analyze_system
-from backend.self_improver.engine import load, propose, approve
-from backend.self_improver.policy import classify_proposal
+from self_improver.brain.ai_brain import analyze_system
+from self_improver.engine import load, propose, approve
+from self_improver.policy import classify_proposal
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "backend" / "data" / "self_improver"
@@ -128,3 +128,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

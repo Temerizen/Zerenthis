@@ -1,7 +1,7 @@
 ﻿from __future__ import annotations
 
 import time
-from backend.empire.engine import bootstrap, run_cycle
+from empire.engine import bootstrap, run_cycle
 
 def run():
     bootstrap()
@@ -13,3 +13,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

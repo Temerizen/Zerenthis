@@ -14,3 +14,4 @@ def append_if_missing(code, marker, content):
     if marker in code:
         return code
     return code + "\n\n" + content
+

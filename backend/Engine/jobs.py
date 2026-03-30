@@ -69,3 +69,4 @@ def create_job(kind: str, payload: dict[str, Any], fn: Callable[..., Any], **kwa
 
     threading.Thread(target=_runner, daemon=True).start()
     return job_id
+

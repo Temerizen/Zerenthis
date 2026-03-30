@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+﻿from fastapi import APIRouter
 import json
 from pathlib import Path
 
@@ -26,3 +26,4 @@ def reflections():
         return json.loads((ROOT / "backend/data/self_improver/reflections.json").read_text())
     except:
         return {"status": "no reflections"}
+

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from fastapi import APIRouter
 
-from backend.empire.engine import run_cycle, bootstrap
+from empire.engine import run_cycle, bootstrap
 
 router = APIRouter(prefix="/api/empire", tags=["empire"])
 
@@ -59,3 +59,4 @@ def empire_reflections():
 def empire_cycle():
     bootstrap()
     return run_cycle()
+

@@ -267,3 +267,4 @@ def build_product_batch(**kwargs):
         results.append(build_product_pack(**batch_kwargs))
 
     return results
+
