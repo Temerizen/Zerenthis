@@ -67,8 +67,8 @@
     "title": "Improve conversion of product packs",
     "description": "Improve conversion of product packs",
     "tier": "low",
-    "approved": false,
-    "executed": false,
+    "approved": true,
+    "executed": true,
     "created_at": 1774839052.7400954
   },
   {
@@ -76,8 +76,8 @@
     "title": "Add monetization sections",
     "description": "Add monetization sections",
     "tier": "low",
-    "approved": false,
-    "executed": false,
+    "approved": true,
+    "executed": true,
     "created_at": 1774839052.7476354
   },
   {
@@ -85,8 +85,8 @@
     "title": "Improve CTA and sales copy",
     "description": "Improve CTA and sales copy",
     "tier": "low",
-    "approved": false,
-    "executed": false,
+    "approved": true,
+    "executed": true,
     "created_at": 1774839052.756656
   },
   {
@@ -94,8 +94,8 @@
     "title": "Make outputs more viral",
     "description": "Make outputs more viral",
     "tier": "low",
-    "approved": false,
-    "executed": false,
+    "approved": true,
+    "executed": true,
     "created_at": 1774839052.7642643
   }
 ]

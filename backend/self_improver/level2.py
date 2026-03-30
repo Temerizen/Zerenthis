@@ -49,7 +49,7 @@ SAFE = [
     "output","scoring","conversion","cta","offer","title","viral"
 ]
 
-COOLDOWN_SECONDS = 3600
+COOLDOWN_SECONDS = 300
 
 def can_create(title, cooldowns):
     title_n = normalize(title)
@@ -149,3 +149,4 @@ def loop():
 
 if __name__ == "__main__":
     loop()
+
