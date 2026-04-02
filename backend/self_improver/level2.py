@@ -82,13 +82,16 @@ def score_output(file_path):
 
 def update_scores():
     scores = load_json(SCORES_FILE, {})
+    if not isinstance(scores, dict):
+        scores = {}
 
     for f in OUTPUT_DIR.glob("*"):
         if not f.is_file():
             continue
 
         current = score_output(f)
-        previous = scores.get(f.name, {}).get("current_score", 0)
+        previous_raw = scores.get(f.name, {})
+        previous = previous_raw.get("current_score", 0) if isinstance(previous_raw, dict) else 0
 
         scores[f.name] = {
             "current_score": current,
@@ -101,15 +104,20 @@ def update_scores():
     return scores
 
 def performance_based_proposals(scores, cooldowns, memory):
-    if not scores:
+    if not scores or not isinstance(scores, dict):
         return
 
     ranked = sorted(
         scores.items(),
-        key=lambda kv: (kv[1].get("current_score", 0), kv[1].get("delta", 0))
+        key=lambda kv: (
+            kv[1].get("current_score", 0) if isinstance(kv[1], dict) else 0,
+            kv[1].get("delta", 0) if isinstance(kv[1], dict) else 0
+        )
     )
 
     for name, info in ranked[:3]:
+        if not isinstance(info, dict):
+            continue
         current = info.get("current_score", 0)
         delta = info.get("delta", 0)
 
@@ -209,3 +217,4 @@ def loop():
 
 if __name__ == "__main__":
     loop()
+
