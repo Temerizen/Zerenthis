@@ -15,6 +15,14 @@ def save_data(data):
     with open(DATA_PATH, "w") as f:
         json.dump(data, f, indent=2)
 
+def log_result(entry):
+    data = load_data()
+    entry["timestamp"] = str(datetime.utcnow())
+    data.append(entry)
+    save_data(data)
+    print("Logged result:", entry)
+    return {"ok": True}
+
 def evaluate_and_improve():
     data = load_data()
 
@@ -23,7 +31,6 @@ def evaluate_and_improve():
         return {"ok": False}
 
     latest = data[-1]
-
     score = latest.get("score", 0)
 
     print(f"Evaluating score: {score}")
@@ -36,7 +43,6 @@ def evaluate_and_improve():
         action = "Scale this content"
 
     result = {
-        "timestamp": str(datetime.utcnow()),
         "score": score,
         "action": action
     }
