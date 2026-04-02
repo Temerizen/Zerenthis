@@ -23,33 +23,30 @@ def log_result(entry):
     print("Logged result:", entry)
     return {"ok": True}
 
-def evaluate_and_improve():
+def suggest_next_move():
     data = load_data()
 
     if not data:
-        print("No performance data yet.")
-        return {"ok": False}
+        return {"suggestion": "No data yet. Generate content first."}
 
     latest = data[-1]
     score = latest.get("score", 0)
 
-    print(f"Evaluating score: {score}")
-
     if score < 5:
-        action = "Improve hook and title"
+        suggestion = "Improve hook and title"
     elif score < 8:
-        action = "Improve content depth"
+        suggestion = "Improve content depth and clarity"
     else:
-        action = "Scale this content"
+        suggestion = "Scale this content and create variations"
 
     result = {
         "score": score,
-        "action": action
+        "suggestion": suggestion
     }
 
-    print("Decision:", result)
+    print("Next move:", result)
+    return result
 
-    data.append(result)
-    save_data(data)
-
-    return {"ok": True, "effect": action}
+def evaluate_and_improve():
+    decision = suggest_next_move()
+    return {"ok": True, "effect": decision["suggestion"]}
