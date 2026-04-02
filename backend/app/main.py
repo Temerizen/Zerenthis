@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -25,4 +25,5 @@ from self_improver.outcome_engine import log_result, suggest_next_move
 @app.get("/health")
 def health():
     return {"ok": True}
+
 
