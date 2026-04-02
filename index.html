@@ -1,188 +1,866 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zerenthis Founder Empire Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background:#05070d; color:white; font-family:Arial,sans-serif; padding:20px; }
-    h1 { color:#00e5ff; text-align:center; margin-bottom:8px; }
-    .sub { text-align:center; opacity:0.75; margin-bottom:10px; }
-    .section { margin-bottom:24px; padding:16px; background:#0c1018; border-radius:14px; }
-    input, select { width:100%; padding:12px; margin-bottom:10px; border-radius:10px; border:none; background:#111827; color:white; }
-    button { padding:10px 14px; margin:4px; border-radius:10px; border:none; font-weight:bold; cursor:pointer; }
-    .primary { background:#00e5ff; color:black; }
-    .approve { background:#00ff88; color:black; }
-    .reject { background:#ff4d4d; color:white; }
-    .execute { background:#facc15; color:black; }
-    .card { background:#111827; padding:14px; margin-bottom:12px; border-radius:12px; }
-    pre { background:#000; padding:10px; border-radius:8px; overflow-x:auto; white-space:pre-wrap; }
-    a { color:#8be9fd; }
+    :root {
+      --bg: #05070d;
+      --bg-2: #0b1020;
+      --panel: #0d1322;
+      --panel-2: #111827;
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f7fb;
+      --muted: rgba(245,247,251,0.68);
+      --cyan: #00e5ff;
+      --green: #00ff88;
+      --yellow: #facc15;
+      --red: #ff4d4d;
+      --purple: #8b5cf6;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(0,229,255,0.08), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(139,92,246,0.12), transparent 20%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      min-height: 100%;
+    }
+
+    body {
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card,
+    .panel,
+    .status-chip,
+    .result-card,
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(13,19,34,0.84);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), #4cc9f0);
+      color: #031018;
+      font-weight: 900;
+      font-size: 22px;
+      box-shadow: 0 0 24px rgba(0,229,255,0.24);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .status-chip {
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metric-box {
+      border-radius: 24px;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(17,24,39,0.96), rgba(9,13,23,0.95));
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric-value {
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .left-col, .right-col {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .panel {
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .panel-head .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0a1120;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 96px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(0,229,255,0.45);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--cyan), #80f2ff);
+      color: #031018;
+      box-shadow: 0 8px 24px rgba(0,229,255,0.18);
+    }
+
+    .secondary {
+      background: #192132;
+      color: var(--text);
+    }
+
+    .approve { background: var(--green); color: #02130b; }
+    .reject { background: var(--red); color: #fff; }
+    .execute { background: var(--yellow); color: #171104; }
+
+    .result-card {
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(10,17,32,1), rgba(13,19,34,0.92));
+    }
+
+    .result-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(0,229,255,0.8);
+    }
+
+    pre {
+      margin: 0;
+      padding: 14px;
+      border-radius: 14px;
+      background: #060b15;
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #d7e2ff;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      border-radius: 14px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(17,24,39,0.92), rgba(10,15,26,0.95));
+    }
+
+    .card-title {
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    a {
+      color: #8be9fd;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    .json-block {
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>🧠 Zerenthis Founder Empire Panel</h1>
-  <div class="sub">Generate assets, review proposals, and monitor applied or failed changes.</div><div class="sub">Magic mode is active: low-risk improvements can self-heal, while bigger changes wait for your judgment.</div><div class="sub">Approval rate, quality signals, and recent outputs now guide your founder decisions.</div>
-  <div class="sub">Empire mode is active: leverage compounds through offers, niches, trend pressure, and operator reflection.</div>
-
-  <div class="section">
-    <h2>Generate</h2>
-    <input id="topic" placeholder="Topic" value="How to make money with AI in 2026">
-    <select id="mode">
-      <option value="product">Product Pack</option>
-      <option value="shorts">Shorts Pack</option>
-      <option value="youtube">YouTube Pack</option>
-    </select>
-    <button class="primary" onclick="generate()">Generate</button>
-    <pre id="latestResult"></pre>
-  </div>
-
-  <div class="section">
-    <h2>Founder Magic</h2>
-    <pre id="magic"></pre>
-  </div>
-
-  <div class="section">
-    <h2>Empire State</h2>
-    <pre id="empire"></pre>
-  </div>
-
-  <div class="section">
-    <h2>Pending Proposals</h2>
-    <div id="proposals"></div>
-  </div>
-
-  <div class="section">
-    <h2>Applied</h2>
-    <div id="applied"></div>
-  </div>
-
-  <div class="section">
-    <h2>Failed</h2>
-    <div id="failed"></div>
-  </div>
-
-  <div class="section">
-    <h2>Gallery</h2>
-    <div id="gallery"></div>
-  </div>
-
-<script>
-const API = "http://127.0.0.1:8000";
-
-async function fetchJson(url, options = {}) {
-  const res = await fetch(url, options);
-  return await res.json();
-}
-
-function proposalCard(p) {
-  const policy = (p.meta && p.meta.policy) ? p.meta.policy : {};
-  return `
-    <div class="card">
-      <div><strong>${p.title}</strong></div>
-      <div style="opacity:.8;margin:8px 0;">${p.reason}</div>
-      <div style="opacity:.7;margin-bottom:8px;">Tier: ${policy.tier || "unknown"} | Risk: ${policy.risk_score ?? "?"}</div>
-      <pre>${JSON.stringify(p.steps, null, 2)}</pre>
-      <button class="approve" onclick="approveProposal('${p.id}')">Approve</button>
-      <button class="reject" onclick="rejectProposal('${p.id}')">Reject</button>
-      <button class="execute" onclick="executeProposal('${p.id}')">Execute</button>
-    </div>
-  `;
-}
-
-function simpleCard(p) {
-  return `
-    <div class="card">
-      <div><strong>${p.title || p.id || "Item"}</strong></div>
-      <div style="opacity:.8;margin:8px 0;">${p.reason || p.error || ""}</div>
-      <div style="opacity:.7;">Status: ${p.status || "unknown"}</div>
-    </div>
-  `;
-}
-
-async function loadAll() {
-  const pending = await fetchJson(`${API}/api/self-improver/proposals`);
-  const applied = await fetchJson(`${API}/api/self-improver/applied`);
-  const failed = await fetchJson(`${API}/api/self-improver/failed`);
-  const gallery = await fetchJson(`${API}/api/gallery`);
-  const magic = await fetchJson(`${API}/api/founder/magic`);
-  const empire = await fetchJson(`${API}/api/empire/state`);
-
-  document.getElementById("magic").textContent = JSON.stringify(magic, null, 2);
-  document.getElementById("empire").textContent = JSON.stringify(empire, null, 2);
-
-  document.getElementById("proposals").innerHTML = (pending.items || []).length
-    ? pending.items.map(proposalCard).join("")
-    : "<div class='card'>No pending proposals.</div>";
-
-  document.getElementById("applied").innerHTML = (applied.items || []).length
-    ? applied.items.slice(-10).reverse().map(simpleCard).join("")
-    : "<div class='card'>No applied proposals yet.</div>";
-
-  document.getElementById("failed").innerHTML = (failed.items || []).length
-    ? failed.items.slice(-10).reverse().map(simpleCard).join("")
-    : "<div class='card'>No failed proposals.</div>";
-
-  document.getElementById("gallery").innerHTML = (gallery.items || []).length
-    ? gallery.items.map(item => `
-        <div class="card">
-          <a href="${API}${item.url}" target="_blank">${item.name}</a>
-          <div style="opacity:.7;">${item.extension} • ${Math.round(item.size_bytes / 1024)} KB</div>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="brand">
+          <div class="brand-mark">Z</div>
+          <div>
+            <h1>Zerenthis Founder Empire Panel</h1>
+            <div class="sub">
+              Generate premium assets, monitor the self-improver, inspect empire state,
+              and watch the system evolve without poking it with a stick every 12 seconds.
+            </div>
+          </div>
         </div>
-      `).join("")
-    : "<div class='card'>No files yet.</div>";
-}
 
-async function approveProposal(id) {
-  await fetchJson(`${API}/api/self-improver/approve/${id}`, { method: "POST" });
-  loadAll();
-}
+        <div class="hero-tags">
+          <div class="status-chip">API: <span id="apiHealthText">Checking...</span></div>
+          <div class="status-chip">Autopilot: <span id="autopilotHealthText">Watching...</span></div>
+          <div class="status-chip">Backend: <span id="backendHostText"></span></div>
+        </div>
+      </div>
 
-async function rejectProposal(id) {
-  await fetchJson(`${API}/api/self-improver/reject/${id}`, { method: "POST" });
-  loadAll();
-}
+      <div class="hero-side">
+        <div class="metric-box panel">
+          <div class="metric-label">Live API Host</div>
+          <div class="metric-value" style="font-size:22px;" id="apiHostLabel">api.zerenthis.com</div>
+          <div class="sub">Your frontend now points at the real deployed backend, not localhost.</div>
+        </div>
 
-async function executeProposal(id) {
-  await fetchJson(`${API}/api/self-improver/execute/${id}`, { method: "POST" });
-  loadAll();
-}
+        <div class="metric-box panel">
+          <div class="metric-label">Last Action</div>
+          <div class="metric-value" style="font-size:18px;" id="lastActionText">Waiting for input...</div>
+          <div class="sub">Generate something and the panel will track the flow here.</div>
+        </div>
+      </div>
+    </section>
 
-async function generate() {
-  const topic = document.getElementById("topic").value.trim();
-  const mode = document.getElementById("mode").value;
-  let endpoint = "/api/product-pack";
-  if (mode === "shorts") endpoint = "/api/shorts-pack";
-  if (mode === "youtube") endpoint = "/api/youtube-pack";
+    <section class="grid">
+      <div class="left-col">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Generate</h2>
+              <div class="muted">This time the button actually does something.</div>
+            </div>
+          </div>
 
-  const payload = {
-    topic,
-    niche: "Make Money Online",
-    tone: "Premium",
-    buyer: "Beginners starting from zero",
-    promise: "get results faster",
-    bonus: "templates and prompts",
-    notes: "Keep it practical and premium",
-    duration_seconds: 35
-  };
+          <div class="form-grid">
+            <div class="full">
+              <label for="topic">Topic</label>
+              <input id="topic" placeholder="Topic" value="How to make money with AI in 2026" />
+            </div>
 
-  const data = await fetchJson(`${API}${endpoint}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
+            <div>
+              <label for="mode">Mode</label>
+              <select id="mode">
+                <option value="product">Product Pack</option>
+                <option value="shorts">Shorts Pack</option>
+                <option value="youtube">YouTube Pack</option>
+              </select>
+            </div>
 
-  document.getElementById("latestResult").textContent = JSON.stringify(data, null, 2);
+            <div>
+              <label for="niche">Niche</label>
+              <input id="niche" value="Make Money Online" />
+            </div>
 
-  if (data.job_id) {
-    setTimeout(loadAll, 2500);
-    setTimeout(loadAll, 5000);
-  } else {
+            <div>
+              <label for="tone">Tone</label>
+              <input id="tone" value="Premium" />
+            </div>
+
+            <div>
+              <label for="buyer">Buyer</label>
+              <input id="buyer" value="Beginners starting from zero" />
+            </div>
+
+            <div>
+              <label for="duration">Duration Seconds</label>
+              <input id="duration" type="number" min="10" max="90" value="35" />
+            </div>
+
+            <div class="full">
+              <label for="promise">Promise</label>
+              <input id="promise" value="get results faster" />
+            </div>
+
+            <div class="full">
+              <label for="bonus">Bonus</label>
+              <input id="bonus" value="templates and prompts" />
+            </div>
+
+            <div class="full">
+              <label for="notes">Notes</label>
+              <textarea id="notes">Keep it practical and premium</textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="generateBtn" onclick="generate()">Generate</button>
+            <button class="secondary" onclick="loadAll(true)">Refresh Panel</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Latest Result</h2>
+              <div class="muted">Job queue, polling, completed file links, and status live here.</div>
+            </div>
+            <div class="badge"><span class="dot"></span><span id="resultStatus">Idle</span></div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <div class="card-title" id="resultTitle">No generation yet</div>
+              <div class="tiny" id="jobIdText"></div>
+            </div>
+            <pre id="latestResult" class="json-block">Waiting...</pre>
+            <div id="resultLinks" class="actions" style="margin-top:12px;"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Gallery</h2>
+              <div class="muted">Recent generated outputs from the backend.</div>
+            </div>
+          </div>
+          <div id="gallery" class="gallery-grid"></div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Founder Magic</h2>
+              <div class="muted">System state, counts, and recent engine signals.</div>
+            </div>
+          </div>
+          <pre id="magic" class="json-block">Loading...</pre>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Empire State</h2>
+              <div class="muted">Compound score, cycles, focus, reflections.</div>
+            </div>
+          </div>
+          <pre id="empire" class="json-block">Loading...</pre>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Pending Proposals</h2>
+              <div class="muted">Approve, reject, or execute directly.</div>
+            </div>
+          </div>
+          <div id="proposals" class="stack"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Applied</h2>
+            </div>
+          </div>
+          <div id="applied" class="stack"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Failed</h2>
+            </div>
+          </div>
+          <div id="failed" class="stack"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const API = "https://api.zerenthis.com";
+    const POLL_INTERVAL_MS = 2500;
+    let activePoll = null;
+
+    document.getElementById("backendHostText").textContent = API;
+    document.getElementById("apiHostLabel").textContent = API.replace(/^https?:\/\//, "");
+
+    async function fetchJson(url, options = {}) {
+      const res = await fetch(url, options);
+      const text = await res.text();
+
+      let data;
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (err) {
+        throw new Error(`Non-JSON response from ${url}: ${text.slice(0, 300)}`);
+      }
+
+      if (!res.ok) {
+        throw new Error(data.detail || data.error || `Request failed: ${res.status}`);
+      }
+
+      return data;
+    }
+
+    function setLastAction(text) {
+      document.getElementById("lastActionText").textContent = text;
+    }
+
+    function setResultStatus(text) {
+      document.getElementById("resultStatus").textContent = text;
+    }
+
+    function proposalCard(p) {
+      const policy = (p.meta && p.meta.policy) ? p.meta.policy : {};
+      return `
+        <div class="card">
+          <div class="card-title">${escapeHtml(p.title || "Untitled Proposal")}</div>
+          <div class="meta">${escapeHtml(p.reason || "")}</div>
+          <div class="meta" style="margin-top:8px;">Tier: ${escapeHtml(policy.tier || "unknown")} | Risk: ${policy.risk_score ?? "?"}</div>
+          <pre>${escapeHtml(JSON.stringify(p.steps || [], null, 2))}</pre>
+          <div class="actions">
+            <button class="approve" onclick="approveProposal('${p.id}')">Approve</button>
+            <button class="reject" onclick="rejectProposal('${p.id}')">Reject</button>
+            <button class="execute" onclick="executeProposal('${p.id}')">Execute</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function simpleCard(p) {
+      return `
+        <div class="card">
+          <div class="card-title">${escapeHtml(p.title || p.id || "Item")}</div>
+          <div class="meta">${escapeHtml(p.reason || p.error || "")}</div>
+          <div class="meta" style="margin-top:8px;">Status: ${escapeHtml(p.status || "unknown")}</div>
+        </div>
+      `;
+    }
+
+    function galleryCard(item) {
+      const sizeKb = Math.max(1, Math.round((item.size_bytes || 0) / 1024));
+      return `
+        <div class="card">
+          <div class="card-title">
+            <a href="${API}${item.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.name)}</a>
+          </div>
+          <div class="meta">${escapeHtml(item.extension || "")} • ${sizeKb} KB</div>
+        </div>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    async function loadHealth() {
+      try {
+        const health = await fetchJson(`${API}/health`);
+        document.getElementById("apiHealthText").textContent = health.ok ? "Online" : "Degraded";
+      } catch (err) {
+        document.getElementById("apiHealthText").textContent = "Offline";
+      }
+
+      try {
+        const magic = await fetchJson(`${API}/api/founder/magic`);
+        document.getElementById("autopilotHealthText").textContent = magic.ok ? "Active" : "Unknown";
+      } catch (err) {
+        document.getElementById("autopilotHealthText").textContent = "Unknown";
+      }
+    }
+
+    async function loadAll(manual = false) {
+      if (manual) setLastAction("Refreshing panel...");
+
+      await loadHealth();
+
+      try {
+        const [pending, applied, failed, gallery, magic, empire] = await Promise.all([
+          fetchJson(`${API}/api/self-improver/proposals`),
+          fetchJson(`${API}/api/self-improver/applied`),
+          fetchJson(`${API}/api/self-improver/failed`),
+          fetchJson(`${API}/api/gallery`),
+          fetchJson(`${API}/api/founder/magic`),
+          fetchJson(`${API}/api/empire/state`)
+        ]);
+
+        document.getElementById("magic").textContent = JSON.stringify(magic, null, 2);
+        document.getElementById("empire").textContent = JSON.stringify(empire, null, 2);
+
+        document.getElementById("proposals").innerHTML = (pending.items || []).length
+          ? pending.items.map(proposalCard).join("")
+          : `<div class="empty">No pending proposals.</div>`;
+
+        document.getElementById("applied").innerHTML = (applied.items || []).length
+          ? applied.items.slice(-10).reverse().map(simpleCard).join("")
+          : `<div class="empty">No applied proposals yet.</div>`;
+
+        document.getElementById("failed").innerHTML = (failed.items || []).length
+          ? failed.items.slice(-10).reverse().map(simpleCard).join("")
+          : `<div class="empty">No failed proposals.</div>`;
+
+        document.getElementById("gallery").innerHTML = (gallery.items || []).length
+          ? gallery.items.slice(0, 24).map(galleryCard).join("")
+          : `<div class="empty">No files yet.</div>`;
+
+        if (manual) setLastAction("Panel refreshed.");
+      } catch (err) {
+        if (manual) setLastAction(`Refresh failed: ${err.message}`);
+      }
+    }
+
+    async function approveProposal(id) {
+      try {
+        setLastAction(`Approving proposal ${id}...`);
+        await fetchJson(`${API}/api/self-improver/approve/${id}`, { method: "POST" });
+        await loadAll();
+        setLastAction(`Approved proposal ${id}.`);
+      } catch (err) {
+        setLastAction(`Approve failed: ${err.message}`);
+      }
+    }
+
+    async function rejectProposal(id) {
+      try {
+        setLastAction(`Rejecting proposal ${id}...`);
+        await fetchJson(`${API}/api/self-improver/reject/${id}`, { method: "POST" });
+        await loadAll();
+        setLastAction(`Rejected proposal ${id}.`);
+      } catch (err) {
+        setLastAction(`Reject failed: ${err.message}`);
+      }
+    }
+
+    async function executeProposal(id) {
+      try {
+        setLastAction(`Executing proposal ${id}...`);
+        await fetchJson(`${API}/api/self-improver/execute/${id}`, { method: "POST" });
+        await loadAll();
+        setLastAction(`Executed proposal ${id}.`);
+      } catch (err) {
+        setLastAction(`Execute failed: ${err.message}`);
+      }
+    }
+
+    function renderResultLinks(jobData) {
+      const wrap = document.getElementById("resultLinks");
+      const links = [];
+
+      if (jobData.file_url) {
+        links.push(`<a class="secondary" href="${API}${jobData.file_url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 16px;border-radius:12px;">Open File</a>`);
+      }
+
+      if (jobData.url) {
+        links.push(`<a class="secondary" href="${jobData.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 16px;border-radius:12px;">Open Result</a>`);
+      }
+
+      wrap.innerHTML = links.join("");
+    }
+
+    async function pollJob(jobId) {
+      if (activePoll) {
+        clearInterval(activePoll);
+      }
+
+      document.getElementById("jobIdText").textContent = `Job ID: ${jobId}`;
+      setResultStatus("Polling");
+      setLastAction(`Polling job ${jobId}...`);
+
+      const check = async () => {
+        try {
+          const data = await fetchJson(`${API}/api/job/${jobId}`);
+          document.getElementById("latestResult").textContent = JSON.stringify(data, null, 2);
+
+          if (data.status === "done" || data.status === "completed") {
+            clearInterval(activePoll);
+            activePoll = null;
+            setResultStatus("Complete");
+            document.getElementById("resultTitle").textContent = data.title || "Generation Complete";
+            renderResultLinks(data);
+            setLastAction(`Job ${jobId} completed.`);
+            await loadAll();
+            return;
+          }
+
+          if (data.status === "failed" || data.status === "error") {
+            clearInterval(activePoll);
+            activePoll = null;
+            setResultStatus("Failed");
+            document.getElementById("resultTitle").textContent = "Generation Failed";
+            setLastAction(`Job ${jobId} failed.`);
+            return;
+          }
+
+          document.getElementById("resultTitle").textContent = data.title || "Generation In Progress";
+          setResultStatus(String(data.status || "Queued"));
+        } catch (err) {
+          clearInterval(activePoll);
+          activePoll = null;
+          setResultStatus("Error");
+          setLastAction(`Polling failed: ${err.message}`);
+        }
+      };
+
+      await check();
+      activePoll = setInterval(check, POLL_INTERVAL_MS);
+    }
+
+    async function generate() {
+      const btn = document.getElementById("generateBtn");
+      btn.disabled = true;
+
+      try {
+        const topic = document.getElementById("topic").value.trim();
+        const mode = document.getElementById("mode").value;
+        let endpoint = "/api/product-pack";
+        if (mode === "shorts") endpoint = "/api/shorts-pack";
+        if (mode === "youtube") endpoint = "/api/youtube-pack";
+
+        const payload = {
+          topic,
+          niche: document.getElementById("niche").value.trim(),
+          tone: document.getElementById("tone").value.trim(),
+          buyer: document.getElementById("buyer").value.trim(),
+          promise: document.getElementById("promise").value.trim(),
+          bonus: document.getElementById("bonus").value.trim(),
+          notes: document.getElementById("notes").value.trim(),
+          duration_seconds: Number(document.getElementById("duration").value || 35)
+        };
+
+        setResultStatus("Submitting");
+        document.getElementById("resultTitle").textContent = "Submitting Generation Request";
+        document.getElementById("latestResult").textContent = "Sending request...";
+        document.getElementById("resultLinks").innerHTML = "";
+        document.getElementById("jobIdText").textContent = "";
+        setLastAction(`Generating ${mode}...`);
+
+        const data = await fetchJson(`${API}${endpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById("latestResult").textContent = JSON.stringify(data, null, 2);
+
+        if (data.job_id) {
+          await pollJob(data.job_id);
+        } else {
+          setResultStatus("Complete");
+          document.getElementById("resultTitle").textContent = "Generation Returned Immediately";
+          renderResultLinks(data);
+          setLastAction(`${mode} generation completed immediately.`);
+          await loadAll();
+        }
+      } catch (err) {
+        setResultStatus("Error");
+        document.getElementById("resultTitle").textContent = "Generation Error";
+        document.getElementById("latestResult").textContent = err.message;
+        setLastAction(`Generate failed: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
     loadAll();
-  }
-}
-
-loadAll();
-setInterval(loadAll, 7000);
-</script>
+    setInterval(() => loadAll(false), 10000);
+  </script>
 </body>
 </html>
