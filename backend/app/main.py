@@ -5,8 +5,8 @@ import sys
 import json
 from pathlib import Path
 from collections import Counter
-from self_improver.outcome_engine import log_result, suggest_next_move`nfrom self_improver.generation_logger import log_generation_event
-from self_improver.autopilot import run_once
+from self_improver.outcome_engine import log_result, suggest_next_move
+from self_improver.generation_logger import log_generation_event
 
 ROOT = Path(__file__).resolve().parents[2]
 BACKEND_DIR = ROOT / "backend"
@@ -55,6 +55,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class GenerateRequest(BaseModel):
     topic: str = Field(min_length=1, max_length=200)
     niche: str = Field(default="Make Money Online")
@@ -65,8 +66,10 @@ class GenerateRequest(BaseModel):
     notes: str = Field(default="")
     duration_seconds: int = Field(default=35, ge=10, le=90)
 
+
 class BatchRequest(GenerateRequest):
     count: int = Field(default=3, ge=1, le=10)
+
 
 def get_base_url(request: Request | None = None) -> str:
     env_url = (os.getenv("PUBLIC_BASE_URL") or os.getenv("BASE_URL") or "").strip().rstrip("/")
@@ -76,6 +79,7 @@ def get_base_url(request: Request | None = None) -> str:
         return str(request.base_url).rstrip("/")
     return ""
 
+
 def _load_json_list(path: Path):
     if not path.exists():
         return []
@@ -84,6 +88,7 @@ def _load_json_list(path: Path):
         return data if isinstance(data, list) else []
     except Exception:
         return []
+
 
 @app.get("/")
 def root():
@@ -97,6 +102,7 @@ def root():
         "empire": "/api/empire/state",
         "founder_metrics": "/api/founder/magic",
     }
+
 
 @app.get("/health")
 def health():
@@ -122,6 +128,7 @@ def health():
         "empire_mode": True,
         "compound_score": empire_state.get("compound_score", 0),
     }
+
 
 @app.get("/api/founder/magic")
 def founder_magic():
@@ -176,6 +183,7 @@ def founder_magic():
         },
     }
 
+
 @app.post("/api/product-pack")
 def product_pack(payload: GenerateRequest, request: Request):
     job_id = create_job(
@@ -191,7 +199,14 @@ def product_pack(payload: GenerateRequest, request: Request):
         notes=payload.notes,
         base_url=get_base_url(request),
     )
+    log_generation_event(
+        "product_pack",
+        payload.model_dump(),
+        status="queued",
+        extra={"job_id": job_id},
+    )
     return {"job_id": job_id, "status": "queued"}
+
 
 @app.post("/api/shorts-pack")
 def shorts_pack(payload: GenerateRequest, request: Request):
@@ -205,11 +220,18 @@ def shorts_pack(payload: GenerateRequest, request: Request):
         duration_seconds=payload.duration_seconds,
         base_url=get_base_url(request),
     )
+    log_generation_event(
+        "shorts_pack",
+        payload.model_dump(),
+        status="queued",
+        extra={"job_id": job_id},
+    )
     return {"job_id": job_id, "status": "queued"}
+
 
 @app.post("/api/youtube-pack")
 def youtube_pack(payload: GenerateRequest):
-    return build_youtube_pack(
+    result = build_youtube_pack(
         topic=payload.topic,
         niche=payload.niche,
         tone=payload.tone,
@@ -218,6 +240,13 @@ def youtube_pack(payload: GenerateRequest):
         bonus=payload.bonus,
         notes=payload.notes,
     )
+    log_generation_event(
+        "youtube_pack",
+        payload.model_dump(),
+        status="generated",
+    )
+    return result
+
 
 @app.post("/api/founder/product-batch")
 def founder_product_batch(payload: BatchRequest, request: Request):
@@ -235,7 +264,14 @@ def founder_product_batch(payload: BatchRequest, request: Request):
         base_url=get_base_url(request),
         count=payload.count,
     )
+    log_generation_event(
+        "founder_product_batch",
+        payload.model_dump(),
+        status="queued",
+        extra={"job_id": job_id},
+    )
     return {"job_id": job_id, "status": "queued"}
+
 
 @app.post("/api/founder/shorts-batch")
 def founder_shorts_batch(payload: BatchRequest, request: Request):
@@ -250,7 +286,14 @@ def founder_shorts_batch(payload: BatchRequest, request: Request):
         base_url=get_base_url(request),
         count=payload.count,
     )
+    log_generation_event(
+        "founder_shorts_batch",
+        payload.model_dump(),
+        status="queued",
+        extra={"job_id": job_id},
+    )
     return {"job_id": job_id, "status": "queued"}
+
 
 @app.get("/api/job/{job_id}")
 def job_status(job_id: str):
@@ -258,6 +301,7 @@ def job_status(job_id: str):
     if data.get("status") == "not_found":
         raise HTTPException(status_code=404, detail="Job not found")
     return data
+
 
 @app.get("/api/file/{name}")
 def serve_file(name: str):
@@ -278,6 +322,7 @@ def serve_file(name: str):
 
     return FileResponse(path, media_type=media_type, filename=path.name)
 
+
 @app.get("/api/gallery")
 def gallery():
     items = []
@@ -294,17 +339,14 @@ def gallery():
             }
         )
     return {"items": items[:200]}
+
+
 @app.post("/api/self/log")
 def log_performance(data: dict):
     log_result(data)
     return {"status": "logged"}
 
+
 @app.get("/api/self/suggest")
 def suggest():
     return suggest_next_move()
-
-
-@app.post("/api/self/autopilot/run")
-def run_autopilot_cycle():
-    return run_once()
-
