@@ -8,8 +8,8 @@ def load_data():
     if not DATA_PATH.exists():
         return []
     try:
-        data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
-        return data if isinstance(data, list) else []
+        raw = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+        return [x for x in raw if isinstance(x, dict)]
     except Exception:
         return []
 
@@ -19,6 +19,7 @@ def save_data(data):
 
 def log_result(entry):
     if not isinstance(entry, dict):
+        print("?? Skipping invalid log entry:", entry)
         return
     data = load_data()
     entry["timestamp"] = datetime.utcnow().isoformat()
@@ -28,20 +29,17 @@ def log_result(entry):
 def score_entry(entry):
     if not isinstance(entry, dict):
         return 0
-    score = 0
-    score += entry.get("views", 0) * 0.1
-    score += entry.get("clicks", 0) * 0.5
-    score += entry.get("sales", 0) * 5
-    return score
+    return (
+        entry.get("views", 0) * 0.1 +
+        entry.get("clicks", 0) * 0.5 +
+        entry.get("sales", 0) * 5
+    )
 
 def get_top_performers():
     data = load_data()
-    cleaned = []
     for d in data:
-        if isinstance(d, dict):
-            d["score"] = score_entry(d)
-            cleaned.append(d)
-    return sorted(cleaned, key=lambda x: x["score"], reverse=True)[:5]
+        d["score"] = score_entry(d)
+    return sorted(data, key=lambda x: x["score"], reverse=True)[:5]
 
 def suggest_next_move():
     top = get_top_performers()
