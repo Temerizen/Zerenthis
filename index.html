@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -570,7 +570,7 @@
   </div>
 
   <script>
-    const API = "https://api.zerenthis.com";
+    const API = "https://semantiqai-backend-production-bcab.up.railway.app";
     const POLL_INTERVAL_MS = 2500;
     let activePoll = null;
 
@@ -637,7 +637,7 @@
           <div class="card-title">
             <a href="${API}${item.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.name)}</a>
           </div>
-          <div class="meta">${escapeHtml(item.extension || "")} • ${sizeKb} KB</div>
+          <div class="meta">${escapeHtml(item.extension || "")} � ${sizeKb} KB</div>
         </div>
       `;
     }
