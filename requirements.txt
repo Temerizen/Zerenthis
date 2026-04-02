@@ -1,2 +1,13 @@
 ﻿fastapi
 uvicorn
+python-dotenv
+openai
+pydantic
+requests
+numpy
+Pillow
+imageio
+imageio-ffmpeg
+moviepy
+reportlab
+python-multipart
