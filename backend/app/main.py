@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from collections import Counter
 from self_improver.outcome_engine import log_result, suggest_next_move
+from self_improver.autopilot import run_once
 
 ROOT = Path(__file__).resolve().parents[2]
 BACKEND_DIR = ROOT / "backend"
@@ -302,3 +303,7 @@ def log_performance(data: dict):
 def suggest():
     return suggest_next_move()
 
+
+@app.post("/api/self/autopilot/run")
+def run_autopilot_cycle():
+    return run_once()

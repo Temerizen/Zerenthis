@@ -1,43 +1,41 @@
-﻿from __future__ import annotations
+﻿import time
+from pathlib import Path
 
-import time
+from self_improver.level2 import run_performance_cycle
 
-from self_improver.engine import approved, execute
+LOG_FILE = Path("backend/data/self_improver/autopilot_log.txt")
+LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-def run():
-    print("Autopilot started. Watching for approved proposals...")
-    seen = set()
+SLEEP_SECONDS = 300  # 5 minutes
 
+
+def write_log(message: str):
+    line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {message}"
+    print(line, flush=True)
+    try:
+        with LOG_FILE.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except Exception:
+        pass
+
+
+def run_once():
+    write_log("AUTOPILOT cycle starting")
+    try:
+        result = run_performance_cycle()
+        write_log(f"AUTOPILOT result: {result}")
+        return {"ok": True, "result": result}
+    except Exception as e:
+        write_log(f"AUTOPILOT error: {e}")
+        return {"ok": False, "error": str(e)}
+
+
+def main():
+    write_log("AUTOPILOT ONLINE")
     while True:
-        try:
-            for proposal in approved():
-                pid = proposal.get("id")
-                if not pid or pid in seen:
-                    continue
+        run_once()
+        time.sleep(SLEEP_SECONDS)
 
-                meta = proposal.get("meta", {}) or {}
-                policy = meta.get("policy", {}) or {}
-
-                print(
-                    "Executing:",
-                    pid,
-                    "-",
-                    proposal.get("title"),
-                    "| tier:",
-                    policy.get("tier", "unknown"),
-                    "| risk:",
-                    policy.get("risk_score", "?"),
-                )
-
-                result = execute(pid)
-                print("Result:", result)
-                seen.add(pid)
-
-        except Exception as e:
-            print("AUTOPILOT ERROR:", e)
-
-        time.sleep(15)
 
 if __name__ == "__main__":
-    run()
-
+    main()
