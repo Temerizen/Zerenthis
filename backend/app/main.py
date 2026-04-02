@@ -5,6 +5,7 @@ import sys
 import json
 from pathlib import Path
 from collections import Counter
+from self_improver.outcome_engine import log_result, suggest_next_move
 
 ROOT = Path(__file__).resolve().parents[2]
 BACKEND_DIR = ROOT / "backend"
@@ -292,5 +293,12 @@ def gallery():
             }
         )
     return {"items": items[:200]}
+@app.post("/api/self/log")
+def log_performance(data: dict):
+    log_result(data)
+    return {"status": "logged"}
 
+@app.get("/api/self/suggest")
+def suggest():
+    return suggest_next_move()
 
