@@ -1,10 +1,11 @@
-﻿from fastapi import FastAPI, HTTPException, BackgroundTasks
+﻿from fastapi import FastAPI, HTTPException, BackgroundTasks, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from uuid import uuid4
+from datetime import datetime, timezone
 import json, re, threading
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -15,7 +16,7 @@ JOB_FILE = DATA_DIR / "jobs.json"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 GEN_DIR.mkdir(parents=True, exist_ok=True)
 
-app = FastAPI(title="Zerenthis Quality Engine", version="3.0")
+app = FastAPI(title="Zerenthis Empirical Engine", version="4.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,25 +26,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-jobs = {}
 lock = threading.Lock()
+jobs: Dict[str, Dict[str, Any]] = {}
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+def slug(x):
+    return re.sub(r"[^a-z0-9]+","_", (x or "product").lower())[:60]
 
 def load():
     global jobs
     if JOB_FILE.exists():
         try: jobs = json.loads(JOB_FILE.read_text())
         except: jobs = {}
+    else:
+        jobs = {}
 
 def save():
-    JOB_FILE.write_text(json.dumps(jobs, indent=2))
+    tmp = JOB_FILE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(jobs, indent=2))
+    tmp.replace(JOB_FILE)
 
-def setj(j, d):
+def setj(jid, data):
     with lock:
-        jobs[j] = {**jobs.get(j, {}), **d}
+        jobs[jid] = {**jobs.get(jid, {}), **data}
         save()
-
-def slug(x):
-    return re.sub(r"[^a-z0-9]+","_",x.lower())[:60]
+        return jobs[jid]
 
 class Req(BaseModel):
     topic:str=""
@@ -54,8 +63,7 @@ class Req(BaseModel):
     bonus:str=""
     notes:str=""
 
-def build(p):
-
+def build(p: Req):
     return f"""
 🔥 {p.topic.upper()} — AI CASH STARTER KIT
 
@@ -64,134 +72,127 @@ Make your first $100 using AI by creating and selling a simple digital product.
 
 --------------------------------------
 
-⚡ EXACT METHOD (FASTEST PATH)
+⚡ EXACT METHOD
 
-STEP 1 — Pick a micro-result
-Example: "AI resume builder prompts"
-
-STEP 2 — Generate product using AI
-Use prompts to create:
-- guide
-- templates
-- examples
-
-STEP 3 — Package it
-Turn it into a clean PDF or text pack
-
-STEP 4 — Sell it
-Upload to Gumroad ($9–$19)
-
-STEP 5 — Promote
-Post 3–5 short content pieces
+1. Pick a micro-result
+2. Generate product with AI
+3. Package it
+4. Sell it ($9–$19)
+5. Promote with short content
 
 --------------------------------------
 
-💡 REAL PRODUCT IDEAS
-
-1. "AI Resume Toolkit"
-2. "ChatGPT Side Hustle Prompts"
-3. "Faceless TikTok AI Guide"
-4. "AI Business Name Generator Kit"
+💡 PRODUCT IDEAS
+- AI resume toolkit
+- ChatGPT prompt packs
+- faceless TikTok guides
 
 --------------------------------------
 
-📦 YOUR FIRST PRODUCT (EXAMPLE)
-
-Title:
-"{p.topic} Starter Kit"
-
-Price:
-$9
-
-Inside:
-- guide
-- prompts
-- templates
+🧩 PROMPTS
+- Create product about {p.topic}
+- Write sales page for {p.niche}
+- Generate TikTok hooks
 
 --------------------------------------
 
-🧩 HIGH VALUE PROMPTS
-
-1. "Create a beginner-friendly product about {p.topic}"
-2. "Write a sales page for a {p.niche} product"
-3. "Generate 10 TikTok hooks about {p.topic}"
-4. "Create a step-by-step guide for {p.buyer}"
-5. "Write a simple Gumroad description"
-6. "Generate 5 product ideas in {p.niche}"
+🚀 FIRST SALE PLAN
+- Generate in 15 min
+- Upload to Gumroad
+- Post 3 pieces of content
 
 --------------------------------------
 
-🚀 HOW TO GET YOUR FIRST SALE
-
-1. Generate product (10–15 min)
-2. Upload to Gumroad
-3. Post:
-   - 3 TikToks OR
-   - 1 Twitter thread
-4. Use hook:
-   "I made this with AI in 20 minutes"
-
---------------------------------------
-
-🎯 HOOKS THAT SELL
-
-- "This AI trick made me my first sale"
-- "I used ChatGPT to create income"
-- "You’re one prompt away from your first product"
-
---------------------------------------
-
-⚠️ FINAL TRUTH
-
-This works because:
-- low cost
-- fast creation
-- high demand
-
-The only rule:
 EXECUTE FAST.
-
 """
 
-def process(j,p):
+def process(jid, p):
     try:
-        setj(j,{"status":"running"})
-        name = slug(p.topic)+"_"+j[:6]+".txt"
+        setj(jid, {
+            "status":"running",
+            "started_at": now()
+        })
+
+        name = slug(p.topic) + "_" + jid[:6] + ".txt"
         path = GEN_DIR / name
 
-        path.write_text(build(p))
+        content = build(p)
+        path.write_text(content)
 
         url = f"/api/file/{name}"
 
-        setj(j,{
+        setj(jid, {
             "status":"completed",
-            "file_url":url,
-            "result":{"file_url":url}
+            "finished_at": now(),
+            "file_url": url,
+            "file_name": name,
+            "payload": p.dict(),
+            "score": None,
+            "notes": None,
+            "result": {"file_url": url}
         })
 
     except Exception as e:
-        setj(j,{"status":"failed","error":str(e)})
+        setj(jid, {
+            "status":"failed",
+            "error": str(e),
+            "finished_at": now()
+        })
 
 @app.on_event("startup")
-def s(): load()
+def startup():
+    load()
 
 @app.get("/health")
-def h(): return {"ok":True}
+def health():
+    return {"ok": True, "jobs": len(jobs)}
 
 @app.post("/api/product-pack")
-def create(p:Req, bg:BackgroundTasks):
+def create(p: Req, bg: BackgroundTasks):
     jid = uuid4().hex
-    setj(jid,{"status":"queued"})
-    bg.add_task(process,jid,p)
-    return {"job_id":jid}
+    setj(jid, {
+        "job_id": jid,
+        "status":"queued",
+        "created_at": now(),
+        "payload": p.dict()
+    })
+    bg.add_task(process, jid, p)
+    return {"job_id": jid}
 
 @app.get("/api/job/{jid}")
-def get(jid:str):
-    if jid not in jobs: raise HTTPException(404)
-    return jobs[jid]
+def get(jid: str):
+    j = jobs.get(jid)
+    if not j:
+        raise HTTPException(404)
+    return j
+
+@app.get("/api/jobs")
+def list_jobs():
+    return list(jobs.values())
+
+@app.post("/api/job/{jid}/rate")
+def rate_job(jid: str, score: int = Body(...), notes: Optional[str] = Body(None)):
+    if jid not in jobs:
+        raise HTTPException(404)
+    if score < 1 or score > 10:
+        raise HTTPException(400, "Score must be 1-10")
+
+    setj(jid, {
+        "score": score,
+        "notes": notes
+    })
+
+    return {"ok": True}
+
+@app.get("/api/top")
+def top_jobs(limit: int = 5):
+    scored = [j for j in jobs.values() if j.get("score") is not None]
+    scored.sort(key=lambda x: x.get("score", 0), reverse=True)
+    return scored[:limit]
 
 @app.get("/api/file/{name}")
-def f(name:str):
+def file(name: str):
     p = GEN_DIR / name
-    if not p.exists(): raise HTTPException(404)
+    if not p.exists():
+        raise HTTPException(404)
     return FileResponse(p)
