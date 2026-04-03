@@ -1,35 +1,35 @@
 {
-  "updated_at": "2026-04-03T21:50:00.606465+00:00",
-  "cycles": 161,
+  "updated_at": "2026-04-03T21:51:30.625122+00:00",
+  "cycles": 163,
   "status": "running",
   "weights": {
     "styles": {
-      "fruit": 2.5,
+      "fruit": 2.53,
       "animals": 1.36,
       "robots": 1.36,
       "fast food": 3.4,
-      "objects": 3.64
+      "objects": 3.67
     },
     "formats": {
       "viral short": 2.41,
       "youtube episode": 2.32,
-      "animated skit": 3.91,
+      "animated skit": 3.94,
       "podcast bit": 1.42,
       "comic arc": 1.36,
-      "game loop": 1.84
+      "game loop": 1.87
     },
     "hooks": {
-      "Nobody expected this to happen": 3.46,
+      "Nobody expected this to happen": 3.49,
       "This got out of control instantly": 2.53,
       "This is the funniest thing online right now": 2.77,
-      "This might be the messiest episode yet": 1.36,
+      "This might be the messiest episode yet": 1.39,
       "You will not believe what happens next": 2.14
     },
     "twists": {
       "betrayal": 3.13,
-      "shock reveal": 4.54,
+      "shock reveal": 4.57,
       "public embarrassment": 1.09,
-      "secret alliance": 1.12,
+      "secret alliance": 1.15,
       "elimination": 2.38
     }
   },
@@ -196,22 +196,6 @@
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T21:03:30.031195+00:00",
-      "style": "robots",
-      "format": "game loop",
-      "hook": "This might be the messiest episode yet",
-      "twist": "shock reveal",
-      "quality": 6.73
-    },
-    {
-      "time": "2026-04-03T21:04:15.041564+00:00",
-      "style": "fast food",
-      "format": "game loop",
-      "hook": "Nobody expected this to happen",
-      "twist": "shock reveal",
-      "quality": 7.14
-    },
     {
       "time": "2026-04-03T21:05:00.049626+00:00",
       "style": "fast food",
@@ -675,6 +659,22 @@
       "hook": "This might be the messiest episode yet",
       "twist": "betrayal",
       "quality": 7.53
+    },
+    {
+      "time": "2026-04-03T21:50:45.615694+00:00",
+      "style": "objects",
+      "format": "animated skit",
+      "hook": "Nobody expected this to happen",
+      "twist": "secret alliance",
+      "quality": 7.14
+    },
+    {
+      "time": "2026-04-03T21:51:30.625122+00:00",
+      "style": "fruit",
+      "format": "game loop",
+      "hook": "This might be the messiest episode yet",
+      "twist": "shock reveal",
+      "quality": 7.11
     }
   ]
 }
