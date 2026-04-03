@@ -431,124 +431,119 @@
   </main>
 
   <script>
-    const API_BASE = window.location.origin.includes("127.0.0.1") || window.location.origin.includes("localhost")
-      ? "http://127.0.0.1:8000"
-      : "";
+    const API_BASE = "https://semantiqai-backend-production-bcab.up.railway.app";
 
-    const promptEl = document.getElementById("prompt");
-    const runBtn = document.getElementById("runBtn");
-    const resultEl = document.getElementById("result");
-    const loadingEl = document.getElementById("loading");
-    const errorEl = document.getElementById("error");
+const promptEl = document.getElementById("prompt");
+const runBtn = document.getElementById("runBtn");
+const resultEl = document.getElementById("result");
+const loadingEl = document.getElementById("loading");
+const errorEl = document.getElementById("error");
 
-    function setLoading(isLoading) {
-      runBtn.disabled = isLoading;
-      runBtn.textContent = isLoading ? "Generating..." : "Generate Outcome";
-      loadingEl.classList.toggle("show", isLoading);
-      errorEl.classList.remove("show");
-      errorEl.textContent = "";
+function setLoading(isLoading) {
+  runBtn.disabled = isLoading;
+  runBtn.textContent = isLoading ? "Generating..." : "Generate Outcome";
+  loadingEl.classList.toggle("show", isLoading);
+  errorEl.classList.remove("show");
+  errorEl.textContent = "";
+}
+
+function showError(message) {
+  errorEl.textContent = message;
+  errorEl.classList.add("show");
+}
+
+function renderAssets(assets) {
+  const assetsList = document.getElementById("assetsList");
+  assetsList.innerHTML = "";
+  if (!assets || !assets.length) {
+    assetsList.innerHTML = '<li class="trace-item">No artifacts returned yet.</li>';
+    return;
+  }
+  for (const asset of assets) {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.className = "asset-link";
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    const url = asset.url || "";
+    a.href = url.startsWith("http") ? url : `${API_BASE}${url}`;
+    a.innerHTML = `<span>${asset.label || asset.type || "Artifact"}</span><span class="mono">${url}</span>`;
+    li.appendChild(a);
+    assetsList.appendChild(li);
+  }
+}
+
+function renderTrace(trace) {
+  const traceList = document.getElementById("traceList");
+  traceList.innerHTML = "";
+  if (!trace || !trace.length) {
+    traceList.innerHTML = '<li class="trace-item">No trace available.</li>';
+    return;
+  }
+  for (const item of trace) {
+    const li = document.createElement("li");
+    li.className = "trace-item";
+    li.textContent = item;
+    traceList.appendChild(li);
+  }
+}
+
+function renderInputMeta(input) {
+  const inputMeta = document.getElementById("inputMeta");
+  const rows = [
+    ["Prompt", input?.prompt || ""],
+    ["Buyer", input?.buyer || ""],
+    ["Niche", input?.niche || ""],
+    ["Promise", input?.promise || ""]
+  ];
+  inputMeta.innerHTML = rows.map(([k, v]) => `<div><strong>${k}:</strong> ${v || "-"}</div>`).join("");
+}
+
+async function runCommand() {
+  const prompt = promptEl.value.trim();
+  if (!prompt) {
+    showError("Write a command first.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const response = await fetch(`${API_BASE}/api/command/run`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt,
+        buyer: "New creators",
+        niche: "Content Monetization",
+        promise: "start posting fast and monetize sooner"
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || data.status === "error") {
+      throw new Error(data.error || data.detail || "Command failed.");
     }
 
-    function showError(message) {
-      errorEl.textContent = message;
-      errorEl.classList.add("show");
-    }
+    document.getElementById("resultTitle").textContent = data.result?.title || "Command Result";
+    document.getElementById("resultSummary").textContent = data.result?.summary || "";
+    document.getElementById("statusBadge").textContent = (data.status || "ok").toUpperCase();
+    document.getElementById("nextAction").innerHTML = `<div>${data.result?.next_action || "No next action returned."}</div>`;
 
-    function renderAssets(assets) {
-      const assetsList = document.getElementById("assetsList");
-      assetsList.innerHTML = "";
+    renderAssets(data.result?.assets || []);
+    renderTrace(data.trace || []);
+    renderInputMeta(data.input || {});
+    resultEl.classList.add("show");
+    resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (err) {
+    showError(err.message || "Something went sideways.");
+  } finally {
+    setLoading(false);
+  }
+}
 
-      if (!assets || !assets.length) {
-        assetsList.innerHTML = '<li class="trace-item">No artifacts returned yet.</li>';
-        return;
-      }
-
-      for (const asset of assets) {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.className = "asset-link";
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.href = `${API_BASE}${asset.url || ""}`;
-        a.innerHTML = `<span>${asset.label || asset.type || "Artifact"}</span><span class="mono">${asset.url || ""}</span>`;
-        li.appendChild(a);
-        assetsList.appendChild(li);
-      }
-    }
-
-    function renderTrace(trace) {
-      const traceList = document.getElementById("traceList");
-      traceList.innerHTML = "";
-
-      if (!trace || !trace.length) {
-        traceList.innerHTML = '<li class="trace-item">No trace available.</li>';
-        return;
-      }
-
-      for (const item of trace) {
-        const li = document.createElement("li");
-        li.className = "trace-item";
-        li.textContent = item;
-        traceList.appendChild(li);
-      }
-    }
-
-    function renderInputMeta(input) {
-      const inputMeta = document.getElementById("inputMeta");
-      const rows = [
-        ["Prompt", input?.prompt || ""],
-        ["Buyer", input?.buyer || ""],
-        ["Niche", input?.niche || ""],
-        ["Promise", input?.promise || ""]
-      ];
-      inputMeta.innerHTML = rows.map(([k, v]) => `<div><strong>${k}:</strong> ${v || "-"}</div>`).join("");
-    }
-
-    async function runCommand() {
-      const prompt = promptEl.value.trim();
-      if (!prompt) {
-        showError("Write a command first.");
-        return;
-      }
-
-      setLoading(true);
-
-      try {
-        const response = await fetch(`${API_BASE}/api/command/api/command/api/command/run`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            prompt,
-            buyer: "New creators",
-            niche: "Content Monetization",
-            promise: "start posting fast and monetize sooner"
-          })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || data.status === "error") {
-          throw new Error(data.error || data.detail || "Command failed.");
-        }
-
-        document.getElementById("resultTitle").textContent = data.result?.title || "Command Result";
-        document.getElementById("resultSummary").textContent = data.result?.summary || "";
-        document.getElementById("statusBadge").textContent = (data.status || "ok").toUpperCase();
-        document.getElementById("nextAction").innerHTML = `<div>${data.result?.next_action || "No next action returned."}</div>`;
-
-        renderAssets(data.result?.assets || []);
-        renderTrace(data.trace || []);
-        renderInputMeta(data.input || {});
-        resultEl.classList.add("show");
-        resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
-      } catch (err) {
-        showError(err.message || "Something went sideways.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    runBtn.addEventListener("click", runCommand);
+runBtn.addEventListener("click", runCommand);
     promptEl.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
         runCommand();
@@ -557,6 +552,7 @@
   </script>
 </body>
 </html>
+
 
 
 
