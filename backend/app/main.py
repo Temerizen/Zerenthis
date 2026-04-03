@@ -1,4 +1,5 @@
-﻿from backend.app.money_sweep import router as money_sweep_router
+﻿from backend.app.control_tower import router as control_tower_router
+from backend.app.money_sweep import router as money_sweep_router
 from backend.app.output_routes import router as output_router
 from backend.app.expansion_routes import router as expansion_router
 from backend.app.orchestrator_routes import router as orchestrator_router
@@ -872,4 +873,7 @@ async def start_god_mode():
 
 
 app.include_router(money_sweep_router)
+
+
+app.include_router(control_tower_router)
 
