@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pathlib import Path
@@ -29,7 +29,7 @@ app.add_middleware(
 
 ROUTER_MODULES: List[str] = [
     "backend.app.adaptive_brain",
-    "backend.app.command_center",
+    "backend.app.command_center",    "backend.app.workflow_builder",
 ]
 
 _loaded_routes: List[Dict[str, Any]] = []

@@ -1,47 +1,39 @@
 {
-  "updated_at": "2026-04-03T22:05:00.798484+00:00",
-  "cycles": 181,
+  "updated_at": "2026-04-03T22:08:45.843699+00:00",
+  "cycles": 186,
   "status": "running",
   "weights": {
     "styles": {
-      "fruit": 2.68,
-      "animals": 1.42,
+      "fruit": 2.8,
+      "animals": 1.57,
       "robots": 1.42,
-      "fast food": 4.09,
-      "objects": 3.88
+      "fast food": 4.21,
+      "objects": 3.91
     },
     "formats": {
       "viral short": 2.83,
       "youtube episode": 2.44,
-      "animated skit": 4.33,
-      "podcast bit": 1.36,
+      "animated skit": 4.69,
+      "podcast bit": 1.39,
       "comic arc": 1.42,
-      "game loop": 2.11
+      "game loop": 2.14
     },
     "hooks": {
       "Nobody expected this to happen": 3.79,
-      "This got out of control instantly": 2.89,
-      "This is the funniest thing online right now": 2.95,
-      "This might be the messiest episode yet": 1.51,
+      "This got out of control instantly": 3.04,
+      "This is the funniest thing online right now": 3.19,
+      "This might be the messiest episode yet": 1.54,
       "You will not believe what happens next": 2.35
     },
     "twists": {
-      "betrayal": 3.46,
-      "shock reveal": 4.87,
+      "betrayal": 3.49,
+      "shock reveal": 5.0,
       "public embarrassment": 1.15,
       "secret alliance": 1.18,
-      "elimination": 2.83
+      "elimination": 3.07
     }
   },
   "top_patterns": [
-    {
-      "time": "2026-04-03T21:23:00.270558+00:00",
-      "style": "objects",
-      "format": "viral short",
-      "hook": "This got out of control instantly",
-      "twist": "shock reveal",
-      "quality": 8.63
-    },
     {
       "time": "2026-04-03T21:31:15.369824+00:00",
       "style": "fast food",
@@ -57,6 +49,22 @@
       "hook": "This got out of control instantly",
       "twist": "elimination",
       "quality": 8.43
+    },
+    {
+      "time": "2026-04-03T22:05:45.807883+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "This got out of control instantly",
+      "twist": "elimination",
+      "quality": 8.38
+    },
+    {
+      "time": "2026-04-03T22:06:30.816570+00:00",
+      "style": "fruit",
+      "format": "animated skit",
+      "hook": "This is the funniest thing online right now",
+      "twist": "shock reveal",
+      "quality": 8.37
     },
     {
       "time": "2026-04-03T22:04:15.790376+00:00",
@@ -185,57 +193,9 @@
       "hook": "Nobody expected this to happen",
       "twist": "shock reveal",
       "quality": 7.92
-    },
-    {
-      "time": "2026-04-03T21:53:45.656456+00:00",
-      "style": "fast food",
-      "format": "animated skit",
-      "hook": "You will not believe what happens next",
-      "twist": "elimination",
-      "quality": 7.81
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T21:20:45.243831+00:00",
-      "style": "fast food",
-      "format": "animated skit",
-      "hook": "You will not believe what happens next",
-      "twist": "public embarrassment",
-      "quality": 6.99
-    },
-    {
-      "time": "2026-04-03T21:21:30.252656+00:00",
-      "style": "fast food",
-      "format": "viral short",
-      "hook": "Nobody expected this to happen",
-      "twist": "betrayal",
-      "quality": 7.72
-    },
-    {
-      "time": "2026-04-03T21:22:15.260839+00:00",
-      "style": "fruit",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "betrayal",
-      "quality": 7.67
-    },
-    {
-      "time": "2026-04-03T21:23:00.270558+00:00",
-      "style": "objects",
-      "format": "viral short",
-      "hook": "This got out of control instantly",
-      "twist": "shock reveal",
-      "quality": 8.63
-    },
-    {
-      "time": "2026-04-03T21:23:45.278491+00:00",
-      "style": "fast food",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "elimination",
-      "quality": 7.48
-    },
     {
       "time": "2026-04-03T21:24:30.286347+00:00",
       "style": "robots",
@@ -675,6 +635,46 @@
       "hook": "You will not believe what happens next",
       "twist": "shock reveal",
       "quality": 8.02
+    },
+    {
+      "time": "2026-04-03T22:05:45.807883+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "This got out of control instantly",
+      "twist": "elimination",
+      "quality": 8.38
+    },
+    {
+      "time": "2026-04-03T22:06:30.816570+00:00",
+      "style": "fruit",
+      "format": "animated skit",
+      "hook": "This is the funniest thing online right now",
+      "twist": "shock reveal",
+      "quality": 8.37
+    },
+    {
+      "time": "2026-04-03T22:07:15.826322+00:00",
+      "style": "animals",
+      "format": "podcast bit",
+      "hook": "This got out of control instantly",
+      "twist": "betrayal",
+      "quality": 7.71
+    },
+    {
+      "time": "2026-04-03T22:08:00.834683+00:00",
+      "style": "objects",
+      "format": "game loop",
+      "hook": "This might be the messiest episode yet",
+      "twist": "shock reveal",
+      "quality": 7.66
+    },
+    {
+      "time": "2026-04-03T22:08:45.843699+00:00",
+      "style": "animals",
+      "format": "animated skit",
+      "hook": "This is the funniest thing online right now",
+      "twist": "elimination",
+      "quality": 7.86
     }
   ]
 }
