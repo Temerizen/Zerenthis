@@ -3,37 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis Studio</title>
+  <title>Zerenthis Studio | Sweep 8</title>
   <style>
     :root{
       --bg:#05070d;
       --panel:#0d1322;
-      --panel-2:#0a1120;
-      --soft:#9db0d1;
-      --text:#f5f7fb;
+      --panel2:#0a1120;
       --line:rgba(255,255,255,.08);
+      --text:#f5f7fb;
+      --muted:#9db0d1;
       --cyan:#00e5ff;
-      --cyan-dark:#031018;
+      --cyanDark:#04131b;
       --green:#17d18f;
       --amber:#ffcc66;
       --red:#ff6b6b;
+      --purple:#a78bfa;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:radial-gradient(circle at top, #0a1225 0%, var(--bg) 45%);
+      font-family:Arial,Helvetica,sans-serif;
       color:var(--text);
-      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0,229,255,.08), transparent 28%),
+        radial-gradient(circle at right, rgba(167,139,250,.08), transparent 22%),
+        var(--bg);
       padding:24px;
     }
-    .wrap{max-width:1180px;margin:0 auto}
+    .wrap{max-width:1400px;margin:0 auto}
     .hero{
       display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
       margin-bottom:18px;flex-wrap:wrap;
     }
-    .title{font-size:34px;font-weight:800;margin:0 0 8px;letter-spacing:.2px}
-    .sub{color:var(--soft);max-width:780px;line-height:1.5}
-    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .title{font-size:34px;font-weight:800;margin:0 0 8px}
+    .sub{color:var(--muted);max-width:820px;line-height:1.55}
+    .status-pill{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;
+      border-radius:999px;background:#121a2a;border:1px solid var(--line);font-weight:700
+    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--amber)}
+    .dot.done{background:var(--green)}
+    .dot.fail{background:var(--red)}
+    .dot.live{background:var(--cyan)}
+    .grid{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;
+    }
     .panel{
       background:rgba(13,19,34,.94);
       border:1px solid var(--line);
@@ -42,65 +56,65 @@
       box-shadow:0 12px 36px rgba(0,0,0,.22);
     }
     .panel h2{margin:0 0 14px;font-size:20px}
-    .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+    .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
     .stat{
-      background:var(--panel-2);
+      background:var(--panel2);
       border:1px solid var(--line);
       border-radius:16px;
       padding:14px;
     }
     .stat-label{
-      font-size:12px;color:var(--soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px
+      font-size:12px;color:var(--muted);margin-bottom:6px;
+      text-transform:uppercase;letter-spacing:.7px
     }
-    .stat-value{font-size:18px;font-weight:700}
+    .stat-value{font-size:17px;font-weight:700;word-break:break-word}
     label{display:block;margin-bottom:12px}
-    .label-text{display:block;margin-bottom:7px;font-size:13px;color:var(--soft)}
-    input,textarea,select{
+    .label-text{display:block;margin-bottom:7px;font-size:13px;color:var(--muted)}
+    input, textarea{
       width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
-      background:var(--panel-2);color:var(--text);outline:none;font-size:14px;
+      background:var(--panel2);color:var(--text);outline:none;font-size:14px;
     }
-    textarea{min-height:120px;resize:vertical}
+    textarea{min-height:110px;resize:vertical}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
-    button,.link-btn{
+    button, .link-btn{
       border:none;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer;
       text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
       transition:transform .08s ease, opacity .2s ease;
     }
     button:hover,.link-btn:hover{transform:translateY(-1px)}
     button:disabled{opacity:.65;cursor:not-allowed;transform:none}
-    .primary{background:var(--cyan);color:var(--cyan-dark);min-width:190px}
+    .primary{background:var(--cyan);color:var(--cyanDark);min-width:175px}
     .secondary{background:#172136;color:var(--text);border:1px solid var(--line)}
+    .success{background:var(--green);color:#06140f}
+    .purple{background:var(--purple);color:#160f29}
     .download{background:var(--green);color:#06140f}
-    .status-pill{
-      display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;
-      background:#121a2a;border:1px solid var(--line);font-size:13px;font-weight:700;
-    }
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--amber)}
-    .dot.done{background:var(--green)}
-    .dot.fail{background:var(--red)}
     .console{
       background:#08101a;border:1px solid var(--line);border-radius:16px;padding:14px;
-      min-height:240px;white-space:pre-wrap;line-height:1.45;font-size:13px;color:#dbe7ff;
-      overflow:auto;
+      min-height:250px;white-space:pre-wrap;line-height:1.45;font-size:13px;color:#dbe7ff;overflow:auto;
     }
-    .muted{color:var(--soft)}
-    .result-card{
-      margin-top:14px;padding:14px;background:#0b1526;border:1px solid var(--line);border-radius:16px;
-    }
-    .result-title{font-weight:800;margin-bottom:8px}
-    .link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .small{font-size:12px}
     .right-stack{display:flex;flex-direction:column;gap:18px}
     .list{display:flex;flex-direction:column;gap:10px}
-    .list-item{
-      padding:12px 14px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line)
+    .item{
+      padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)
     }
-    .list-item strong{display:block;margin-bottom:4px}
-    .success{color:#89f0c5}
-    .warn{color:#ffd98d}
-    .error{color:#ff9d9d}
-    @media (max-width: 980px){
+    .item strong{display:block;margin-bottom:4px}
+    .item .muted{color:var(--muted);font-size:13px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;
+      font-size:12px;font-weight:700;border:1px solid var(--line);background:#131c2d
+    }
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .section-space{margin-top:14px}
+    .small{font-size:12px;color:var(--muted)}
+    .divider{height:1px;background:var(--line);margin:14px 0}
+    .clicky{
+      width:100%;text-align:left;background:var(--panel2);color:var(--text);border:1px solid var(--line);
+      padding:12px 14px;border-radius:14px;font-weight:700
+    }
+    .clicky:hover{filter:brightness(1.06)}
+    .empty{color:var(--muted);font-size:13px;padding:6px 0}
+    @media (max-width: 1050px){
       .grid{grid-template-columns:1fr}
       .mini-grid,.form-grid{grid-template-columns:1fr}
     }
@@ -112,8 +126,8 @@
       <div>
         <h1 class="title">Zerenthis Studio</h1>
         <div class="sub">
-          Founder-grade product pack generation connected to your live Railway backend.
-          Generate, track the job, and download the finished asset from one page.
+          Sweep 8 activates the cash loop. Evolution finds angles, automation runs the engine,
+          generation creates assets, winners surface the best bets, and the page keeps the thread stitched together.
         </div>
       </div>
       <div class="status-pill">
@@ -124,7 +138,7 @@
 
     <div class="grid">
       <div class="panel">
-        <h2>Generate Product Pack</h2>
+        <h2>Founder Generation Console</h2>
 
         <div class="mini-grid">
           <div class="stat">
@@ -138,6 +152,10 @@
           <div class="stat">
             <div class="stat-label">Download</div>
             <div class="stat-value" id="downloadLabel">Waiting</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Automation</div>
+            <div class="stat-value" id="automationLabel">Checking...</div>
           </div>
         </div>
 
@@ -176,11 +194,29 @@
         <div class="actions">
           <button id="generateBtn" class="primary">Generate Pack</button>
           <button id="refreshBtn" class="secondary">Refresh Current Job</button>
+          <button id="evoPreviewBtn" class="purple">Run Evolution Preview</button>
+          <button id="applyEvoBtn" class="secondary">Apply Evolved Idea</button>
+          <button id="automationRunBtn" class="success">Automation Run Once</button>
+          <button id="automationToggleBtn" class="secondary">Toggle Automation</button>
           <a id="downloadBtn" class="link-btn download" href="#" target="_blank" style="display:none">Download File</a>
         </div>
 
-        <div class="result-card">
-          <div class="result-title">Console</div>
+        <div class="section-space">
+          <div class="row">
+            <span class="chip" id="lastSeedChip">Seed: waiting</span>
+            <span class="chip" id="evoStateChip">Evolution: ready</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="item">
+          <strong>Evolution Preview</strong>
+          <div id="evoPreviewBox" class="muted">No evolved idea loaded yet.</div>
+        </div>
+
+        <div class="section-space item">
+          <strong>Console</strong>
           <div id="console" class="console">Ready.</div>
         </div>
       </div>
@@ -189,24 +225,32 @@
         <div class="panel">
           <h2>Current Result</h2>
           <div class="list">
-            <div class="list-item"><strong>Job ID</strong><span id="resultJob">-</span></div>
-            <div class="list-item"><strong>Status</strong><span id="resultStatus">-</span></div>
-            <div class="list-item"><strong>Score</strong><span id="resultScore">-</span></div>
-            <div class="list-item"><strong>File Name</strong><span id="resultFile">-</span></div>
-            <div class="list-item"><strong>File URL</strong><span id="resultUrl">-</span></div>
+            <div class="item"><strong>Job ID</strong><span id="resultJob">-</span></div>
+            <div class="item"><strong>Status</strong><span id="resultStatus">-</span></div>
+            <div class="item"><strong>Score</strong><span id="resultScore">-</span></div>
+            <div class="item"><strong>File Name</strong><span id="resultFile">-</span></div>
+            <div class="item"><strong>File URL</strong><span id="resultUrl">-</span></div>
           </div>
         </div>
 
         <div class="panel">
-          <h2>Flow</h2>
+          <h2>Automation Status</h2>
           <div class="list">
-            <div class="list-item"><strong>1. Submit</strong><span class="muted">POST /api/product-pack</span></div>
-            <div class="list-item"><strong>2. Poll</strong><span class="muted">GET /api/job/{job_id}</span></div>
-            <div class="list-item"><strong>3. Download</strong><span class="muted">Open returned /api/file URL</span></div>
+            <div class="item"><strong>Enabled</strong><span id="autoEnabled">-</span></div>
+            <div class="item"><strong>Last Run</strong><span id="autoLastRun">-</span></div>
+            <div class="item"><strong>Runs Today</strong><span id="autoRunsToday">-</span></div>
+            <div class="item"><strong>Last Job</strong><span id="autoLastJob">-</span></div>
           </div>
-          <div class="small muted" style="margin-top:12px">
-            This page stores the latest job id in localStorage so refreshes do not lose the trail.
-          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Top Winners</h2>
+          <div id="topJobsList" class="list"><div class="empty">Loading winners...</div></div>
+        </div>
+
+        <div class="panel">
+          <h2>Recent Jobs</h2>
+          <div id="recentJobsList" class="list"><div class="empty">Loading jobs...</div></div>
         </div>
       </div>
     </div>
@@ -216,10 +260,16 @@
     const API_BASE = "https://semantiqai-backend-production-bcab.up.railway.app";
     const POLL_MS = 2500;
     let pollHandle = null;
+    let latestEvolution = null;
+    let currentAutomationEnabled = false;
 
     const els = {
       generateBtn: document.getElementById("generateBtn"),
       refreshBtn: document.getElementById("refreshBtn"),
+      evoPreviewBtn: document.getElementById("evoPreviewBtn"),
+      applyEvoBtn: document.getElementById("applyEvoBtn"),
+      automationRunBtn: document.getElementById("automationRunBtn"),
+      automationToggleBtn: document.getElementById("automationToggleBtn"),
       downloadBtn: document.getElementById("downloadBtn"),
       console: document.getElementById("console"),
       statusText: document.getElementById("statusText"),
@@ -227,11 +277,21 @@
       apiBaseLabel: document.getElementById("apiBaseLabel"),
       jobLabel: document.getElementById("jobLabel"),
       downloadLabel: document.getElementById("downloadLabel"),
+      automationLabel: document.getElementById("automationLabel"),
       resultJob: document.getElementById("resultJob"),
       resultStatus: document.getElementById("resultStatus"),
       resultScore: document.getElementById("resultScore"),
       resultFile: document.getElementById("resultFile"),
       resultUrl: document.getElementById("resultUrl"),
+      autoEnabled: document.getElementById("autoEnabled"),
+      autoLastRun: document.getElementById("autoLastRun"),
+      autoRunsToday: document.getElementById("autoRunsToday"),
+      autoLastJob: document.getElementById("autoLastJob"),
+      topJobsList: document.getElementById("topJobsList"),
+      recentJobsList: document.getElementById("recentJobsList"),
+      lastSeedChip: document.getElementById("lastSeedChip"),
+      evoStateChip: document.getElementById("evoStateChip"),
+      evoPreviewBox: document.getElementById("evoPreviewBox"),
       topic: document.getElementById("topic"),
       niche: document.getElementById("niche"),
       tone: document.getElementById("tone"),
@@ -241,7 +301,7 @@
       notes: document.getElementById("notes"),
     };
 
-    function log(msg, cls) {
+    function log(msg) {
       const line = "[" + new Date().toLocaleTimeString() + "] " + msg;
       els.console.textContent = els.console.textContent === "Ready." ? line : els.console.textContent + "\n" + line;
       els.console.scrollTop = els.console.scrollHeight;
@@ -252,11 +312,28 @@
       els.statusDot.className = "dot";
       if (mode === "done") els.statusDot.classList.add("done");
       if (mode === "fail") els.statusDot.classList.add("fail");
+      if (mode === "live") els.statusDot.classList.add("live");
     }
 
     function setBusy(busy) {
-      els.generateBtn.disabled = busy;
-      els.refreshBtn.disabled = busy;
+      [
+        els.generateBtn, els.refreshBtn, els.evoPreviewBtn,
+        els.applyEvoBtn, els.automationRunBtn, els.automationToggleBtn
+      ].forEach(btn => btn.disabled = busy);
+    }
+
+    function storeJobId(jobId) {
+      localStorage.setItem("zerenthis_last_job_id", jobId || "");
+    }
+
+    function getStoredJobId() {
+      return localStorage.getItem("zerenthis_last_job_id") || "";
+    }
+
+    function prettyTime(value) {
+      if (!value) return "-";
+      try { return new Date(value).toLocaleString(); }
+      catch { return value; }
     }
 
     function setDownload(fileUrl, fileName) {
@@ -272,14 +349,6 @@
         els.downloadLabel.textContent = "Waiting";
         els.resultUrl.textContent = "-";
       }
-    }
-
-    function storeJobId(jobId) {
-      localStorage.setItem("zerenthis_last_job_id", jobId || "");
-    }
-
-    function getStoredJobId() {
-      return localStorage.getItem("zerenthis_last_job_id") || "";
     }
 
     function renderJob(job) {
@@ -299,21 +368,26 @@
         setStatus("Failed", "fail");
         log("Job failed: " + (job.error || "Unknown error"));
       } else {
-        setStatus("Running", "");
+        setStatus("Running", "live");
         log("Job status: " + job.status);
       }
     }
 
-    async function fetchJob(jobId, silent=false) {
+    async function api(path, options = {}) {
+      const res = await fetch(API_BASE + path, options);
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(path + " -> " + text);
+      }
+      return res.json();
+    }
+
+    async function fetchJob(jobId, silent = false) {
       if (!jobId) {
         if (!silent) log("No saved job id found.");
         return;
       }
-      const res = await fetch(API_BASE + "/api/job/" + encodeURIComponent(jobId));
-      if (!res.ok) {
-        throw new Error("Job lookup failed with status " + res.status);
-      }
-      const job = await res.json();
+      const job = await api("/api/job/" + encodeURIComponent(jobId));
       renderJob(job);
       storeJobId(job.job_id || "");
       if (job.status === "completed" || job.status === "failed") {
@@ -328,6 +402,8 @@
       pollHandle = setInterval(async () => {
         try {
           await fetchJob(jobId, true);
+          await loadJobs();
+          await loadTopJobs();
         } catch (err) {
           log("Polling error: " + err.message);
         }
@@ -341,50 +417,57 @@
       }
     }
 
+    function formPayload() {
+      return {
+        topic: els.topic.value.trim(),
+        niche: els.niche.value.trim(),
+        tone: els.tone.value.trim(),
+        buyer: els.buyer.value.trim(),
+        promise: els.promise.value.trim(),
+        bonus: els.bonus.value.trim(),
+        notes: els.notes.value.trim()
+      };
+    }
+
+    function applyPayload(data) {
+      if (!data) return;
+      if (data.topic) els.topic.value = data.topic;
+      if (data.niche) els.niche.value = data.niche;
+      if (data.tone) els.tone.value = data.tone;
+      if (data.buyer) els.buyer.value = data.buyer;
+      if (data.promise) els.promise.value = data.promise;
+      if (data.bonus) els.bonus.value = data.bonus;
+      if (data.notes) els.notes.value = data.notes;
+    }
+
     async function generate() {
       try {
         setBusy(true);
-        setStatus("Submitting", "");
+        setStatus("Submitting", "live");
         setDownload("", "");
         log("Submitting product-pack request...");
-
-        const body = {
-          topic: els.topic.value.trim(),
-          niche: els.niche.value.trim(),
-          tone: els.tone.value.trim(),
-          buyer: els.buyer.value.trim(),
-          promise: els.promise.value.trim(),
-          bonus: els.bonus.value.trim(),
-          notes: els.notes.value.trim()
-        };
-
-        const res = await fetch(API_BASE + "/api/product-pack", {
+        const data = await api("/api/product-pack", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
+          body: JSON.stringify(formPayload())
         });
-
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error("Generate failed: " + text);
-        }
-
-        const data = await res.json();
         const jobId = data.job_id;
         if (!jobId) throw new Error("No job_id returned from backend.");
-
         storeJobId(jobId);
         els.jobLabel.textContent = jobId;
         els.resultJob.textContent = jobId;
         els.resultStatus.textContent = data.status || "queued";
         log("Job created: " + jobId);
-        setStatus("Queued", "");
+        setStatus("Queued", "live");
         startPolling(jobId);
         await fetchJob(jobId, true);
+        await loadJobs();
+        await loadTopJobs();
+        await loadAutomationStatus();
       } catch (err) {
         setBusy(false);
         setStatus("Failed", "fail");
-        log(err.message);
+        log("Generate error: " + err.message);
       }
     }
 
@@ -401,18 +484,193 @@
         if (job && job.status !== "completed" && job.status !== "failed") {
           startPolling(jobId);
         }
+        await loadJobs();
+        await loadTopJobs();
+        await loadAutomationStatus();
       } catch (err) {
         setStatus("Failed", "fail");
-        log(err.message);
+        log("Refresh error: " + err.message);
         setBusy(false);
       }
     }
 
-    els.apiBaseLabel.textContent = new URL(API_BASE).hostname;
-    els.generateBtn.addEventListener("click", generate);
-    els.refreshBtn.addEventListener("click", refreshCurrentJob);
+    async function runEvolutionPreview() {
+      try {
+        setBusy(true);
+        setStatus("Evolving", "live");
+        log("Requesting evolution preview...");
+        const data = await api("/api/evolution/preview", { method: "POST" });
+        latestEvolution = data.evolved || null;
+        const seedTopic = data.seed && data.seed.topic ? data.seed.topic : "unknown";
+        els.lastSeedChip.textContent = "Seed: " + seedTopic;
+        els.evoStateChip.textContent = "Evolution: preview ready";
+        els.evoPreviewBox.textContent = JSON.stringify(data.evolved || {}, null, 2);
+        log("Evolution preview ready.");
+        setStatus("Evolution Ready", "done");
+      } catch (err) {
+        setStatus("Evolution Failed", "fail");
+        log("Evolution preview error: " + err.message);
+      } finally {
+        setBusy(false);
+      }
+    }
 
-    (async function init(){
+    function applyEvolution() {
+      if (!latestEvolution) {
+        log("No evolved idea is loaded yet.");
+        return;
+      }
+      applyPayload(latestEvolution);
+      els.evoStateChip.textContent = "Evolution: applied to form";
+      log("Applied evolved idea to the form.");
+    }
+
+    async function runAutomationOnce() {
+      try {
+        setBusy(true);
+        setStatus("Automation Run", "live");
+        log("Triggering automation run once...");
+        const data = await api("/api/automation/run-once", { method: "POST" });
+        const jobId = data.job_id;
+        if (data.payload) {
+          applyPayload(data.payload);
+          log("Applied automation payload to form.");
+        }
+        if (jobId) {
+          storeJobId(jobId);
+          els.jobLabel.textContent = jobId;
+          els.resultJob.textContent = jobId;
+          log("Automation created job: " + jobId);
+          startPolling(jobId);
+          await fetchJob(jobId, true);
+        }
+        await loadAutomationStatus();
+        await loadJobs();
+        await loadTopJobs();
+      } catch (err) {
+        setStatus("Automation Failed", "fail");
+        log("Automation run error: " + err.message);
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    async function toggleAutomation() {
+      try {
+        setBusy(true);
+        const path = currentAutomationEnabled ? "/api/automation/stop" : "/api/automation/start";
+        log((currentAutomationEnabled ? "Stopping" : "Starting") + " automation...");
+        await api(path, { method: "POST" });
+        await loadAutomationStatus();
+      } catch (err) {
+        setStatus("Automation Toggle Failed", "fail");
+        log("Automation toggle error: " + err.message);
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    async function loadAutomationStatus() {
+      try {
+        const data = await api("/api/automation/status");
+        currentAutomationEnabled = !!data.enabled;
+        els.automationLabel.textContent = data.enabled ? "Enabled" : "Disabled";
+        els.autoEnabled.textContent = data.enabled ? "Yes" : "No";
+        els.autoLastRun.textContent = prettyTime(data.last_run_at);
+        els.autoRunsToday.textContent = String(data.runs_today ?? 0) + " / " + String(data.max_daily_runs ?? "-");
+        els.autoLastJob.textContent = data.last_job_id || "-";
+        els.automationToggleBtn.textContent = data.enabled ? "Stop Automation" : "Start Automation";
+      } catch (err) {
+        els.automationLabel.textContent = "Error";
+        log("Automation status error: " + err.message);
+      }
+    }
+
+    function winnerButton(job) {
+      const btn = document.createElement("button");
+      btn.className = "clicky";
+      const score = job.score ?? "-";
+      const fileName = job.file_name || "No file";
+      const title = (job.payload && job.payload.topic) || job.topic || job.title || "Untitled";
+      btn.innerHTML =
+        "<div><strong>" + title + "</strong></div>" +
+        "<div class='muted'>Score: " + score + " | Status: " + (job.status || "-") + "</div>" +
+        "<div class='muted'>" + fileName + "</div>";
+      btn.addEventListener("click", () => {
+        if (job.payload) {
+          applyPayload(job.payload);
+          log("Loaded winner payload into form: " + title);
+        } else {
+          els.topic.value = title;
+          log("Loaded winner topic into form: " + title);
+        }
+      });
+      return btn;
+    }
+
+    async function loadTopJobs() {
+      try {
+        const jobs = await api("/api/top?limit=5");
+        els.topJobsList.innerHTML = "";
+        if (!jobs.length) {
+          els.topJobsList.innerHTML = "<div class='empty'>No scored winners yet.</div>";
+          return;
+        }
+        jobs.forEach(job => els.topJobsList.appendChild(winnerButton(job)));
+      } catch (err) {
+        els.topJobsList.innerHTML = "<div class='empty'>Could not load winners.</div>";
+        log("Top jobs error: " + err.message);
+      }
+    }
+
+    function recentButton(job) {
+      const btn = document.createElement("button");
+      btn.className = "clicky";
+      const title = (job.payload && job.payload.topic) || "Untitled";
+      const fileUrl = job.file_url || (job.result && job.result.file_url) || "";
+      btn.innerHTML =
+        "<div><strong>" + title + "</strong></div>" +
+        "<div class='muted'>Status: " + (job.status || "-") + " | Score: " + (job.score ?? "-") + "</div>" +
+        "<div class='muted'>" + (fileUrl || "No file URL yet") + "</div>";
+      btn.addEventListener("click", async () => {
+        storeJobId(job.job_id || "");
+        log("Selected recent job: " + (job.job_id || "-"));
+        renderJob(job);
+        if (job.job_id && job.status !== "completed" && job.status !== "failed") {
+          startPolling(job.job_id);
+        }
+      });
+      return btn;
+    }
+
+    async function loadJobs() {
+      try {
+        const jobs = await api("/api/jobs");
+        els.recentJobsList.innerHTML = "";
+        if (!jobs.length) {
+          els.recentJobsList.innerHTML = "<div class='empty'>No jobs found yet.</div>";
+          return;
+        }
+        jobs.slice(0, 8).forEach(job => els.recentJobsList.appendChild(recentButton(job)));
+      } catch (err) {
+        els.recentJobsList.innerHTML = "<div class='empty'>Could not load recent jobs.</div>";
+        log("Jobs list error: " + err.message);
+      }
+    }
+
+    async function init() {
+      els.apiBaseLabel.textContent = new URL(API_BASE).hostname;
+      els.generateBtn.addEventListener("click", generate);
+      els.refreshBtn.addEventListener("click", refreshCurrentJob);
+      els.evoPreviewBtn.addEventListener("click", runEvolutionPreview);
+      els.applyEvoBtn.addEventListener("click", applyEvolution);
+      els.automationRunBtn.addEventListener("click", runAutomationOnce);
+      els.automationToggleBtn.addEventListener("click", toggleAutomation);
+
+      await loadAutomationStatus();
+      await loadJobs();
+      await loadTopJobs();
+
       const saved = getStoredJobId();
       if (saved) {
         log("Recovered saved job id: " + saved);
@@ -430,7 +688,11 @@
       } else {
         setBusy(false);
       }
-    })();
+
+      setStatus("Ready", "done");
+    }
+
+    init();
   </script>
 </body>
 </html>
