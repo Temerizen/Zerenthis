@@ -1,16 +1,9 @@
-﻿import asyncio, requests, os, json, random
+﻿import asyncio, os, json, random
 from datetime import datetime
 
-def normalize_base(url: str, fallback: str) -> str:
-    u = (url or "").strip().rstrip("/")
-    if not u:
-        return fallback
-    if not u.startswith("http://") and not u.startswith("https://"):
-        u = "https://" + u
-    return u
+from backend.app.body_engine import recent_runs
+from backend.app.distribution_engine import build_distribution_package, enqueue
 
-PUBLIC_BASE = normalize_base(os.getenv("PUBLIC_BASE_URL"), "https://semantiqai-backend-production-bcab.up.railway.app")
-LOCAL_BASE = "http://127.0.0.1:8080"
 MEMORY_PATH = "backend/data/god_mode_memory.json"
 
 def _now():
@@ -39,49 +32,92 @@ def protocol(weakness):
         return ["step by step", "simple breakdown", "clear system"]
     return ["optimized"]
 
-def get_json(path, prefer_local=True):
-    bases = [LOCAL_BASE, PUBLIC_BASE] if prefer_local else [PUBLIC_BASE, LOCAL_BASE]
-    last_error = None
-    for base in bases:
-        try:
-            return requests.get(f"{base}{path}", timeout=20).json()
-        except Exception as e:
-            last_error = e
-    raise last_error
+def run_body_loop_direct(data: dict):
+    from backend.app.video_factory_engine import build_video_factory_package
+    from backend.app.body_engine import build_variants, score_package, persist_run, make_manifest
 
-def post_json(path, payload, prefer_local=True):
-    bases = [LOCAL_BASE, PUBLIC_BASE] if prefer_local else [PUBLIC_BASE, LOCAL_BASE]
-    last_error = None
-    for base in bases:
-        try:
-            return requests.post(f"{base}{path}", json=payload, timeout=60).json()
-        except Exception as e:
-            last_error = e
-    raise last_error
+    package = build_video_factory_package(data)
+    script = package.get("script", "")
+
+    topic = data.get("topic", "Generated Content")
+    buyer = data.get("buyer", "Creators")
+    promise = data.get("promise", "grow faster")
+    niche = data.get("niche", "Content")
+    tone = data.get("tone", "Premium")
+    bonus = data.get("bonus", "hook templates")
+    notes = data.get("notes", "fast execution")
+
+    meta = {
+        "tiktok": {
+            "hooks": [
+                f"How {buyer} can use {topic} to {promise}",
+                f"Nobody is talking about this {topic} angle yet",
+                f"Use this {topic} method before everyone copies it"
+            ],
+            "caption": f"{topic} for {buyer}. Goal: {promise}. Bonus: {bonus}.",
+            "short_script": script[:220] + ("..." if len(script) > 220 else "")
+        },
+        "youtube": {
+            "title": f"{topic} | Full Breakdown",
+            "description": f"{topic}\n\nFor: {buyer}\nPromise: {promise}\nNiche: {niche}\nTone: {tone}\nBonus: {bonus}\nNotes: {notes}",
+            "tags": [topic, niche, buyer, "Zerenthis", "AI content", "automation"]
+        },
+        "monetization": {
+            "offer_name": topic,
+            "cta": f"Download the {topic} package and start to {promise}.",
+            "product_angle": f"A {tone.lower()} offer for {buyer} in {niche}.",
+            "bonus": bonus
+        },
+        "evolution": {
+            "score_seed": 7,
+            "winner_hint": f"If this performs well, create 3 more variations around {topic}.",
+            "next_variants": [
+                f"{topic} for beginners",
+                f"{topic} advanced version",
+                f"{topic} mistakes to avoid"
+            ]
+        }
+    }
+
+    variants = build_variants(topic, buyer, promise, niche)
+    scores = score_package(
+        topic,
+        buyer,
+        promise,
+        niche,
+        tone,
+        script,
+        [v["title"] for v in variants]
+    )
+
+    manifest = make_manifest(data, package, meta, variants, scores)
+
+    record = {
+        "created_at": manifest["created_at"],
+        "topic": manifest["input"]["topic"],
+        "buyer": manifest["input"]["buyer"],
+        "promise": manifest["input"]["promise"],
+        "niche": manifest["input"]["niche"],
+        "tone": manifest["input"]["tone"],
+        "scores": scores,
+        "assets": manifest["assets"],
+        "distribution": manifest["distribution"],
+        "youtube": manifest["youtube"],
+        "monetization": manifest["monetization"],
+        "variants": manifest["variants"]
+    }
+    persist_run(record)
+    return manifest
 
 async def run_cycle():
     print("=== GOD MODE SURGEON ===")
-    print("PUBLIC_BASE:", PUBLIC_BASE)
 
     memory = load_memory()
-
-    try:
-        history_res = get_json("/api/body-loop/history?limit=10")
-        history = history_res.get("items", [])
-    except Exception as e:
-        print("Failed to fetch history:", e)
-        return
+    history = recent_runs(10)
 
     if not history:
         print("No history yet")
         return
-
-    try:
-        fb = get_json("/api/reality/feedback")
-        if fb:
-            print("Reality signal:", fb[0] if isinstance(fb, list) else fb)
-    except:
-        pass
 
     target = sorted(history, key=lambda x: x.get("scores", {}).get("overall", 5))[0]
     topic = target.get("topic", "")
@@ -121,8 +157,7 @@ async def run_cycle():
 
     for v in variants:
         try:
-            res = post_json("/api/body-loop/run", v)
-            manifest = res.get("manifest", {})
+            manifest = run_body_loop_direct(v)
             score = manifest.get("scores", {}).get("overall", 0)
             print("Variant score:", score)
             if score > best_score:
@@ -135,25 +170,23 @@ async def run_cycle():
 
     if best_score > old_score and best_manifest:
         print("Improvement:", old_score, "->", best_score)
-        script = best_manifest.get("content", {}).get("script", "")
-        variants_out = best_manifest.get("variants", [])
-        try:
-            dist = post_json("/api/distribution/build", {
-                "topic": best_manifest["input"]["topic"],
-                "buyer": best_manifest["input"]["buyer"],
-                "promise": best_manifest["input"]["promise"],
-                "niche": best_manifest["input"]["niche"],
-                "script": script,
-                "variants": variants_out
+
+        dist = build_distribution_package(
+            best_manifest["input"]["topic"],
+            best_manifest["input"]["buyer"],
+            best_manifest["input"]["promise"],
+            best_manifest["input"]["niche"],
+            best_manifest["content"]["script"],
+            best_manifest["variants"]
+        )
+
+        if dist.get("tiktok"):
+            enqueue({
+                "platform": "tiktok",
+                "content": dist["tiktok"][0],
+                "topic": best_manifest["input"]["topic"]
             })
-            if dist.get("tiktok"):
-                post_json("/api/distribution/queue", {
-                    "platform": "tiktok",
-                    "content": dist["tiktok"][0],
-                    "topic": best_manifest["input"]["topic"]
-                })
-        except Exception as e:
-            print("Distribution failed:", e)
+
         result = "success"
     else:
         print("No improvement")
