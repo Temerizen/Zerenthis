@@ -1,4 +1,5 @@
-﻿from fastapi import FastAPI, BackgroundTasks, HTTPException, Body
+﻿from backend.app.limit_lock import router as limit_router, LimitLockMiddleware
+from fastapi import FastAPI, BackgroundTasks, HTTPException, Body
 from backend.app.evo_routes import router as evo_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -744,5 +745,6 @@ app.include_router(winner_router)
 
 from backend.app.limit_lock import router as limit_router
 app.include_router(limit_router)
+
 
 
