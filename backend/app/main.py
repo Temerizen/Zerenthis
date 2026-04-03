@@ -1,4 +1,32 @@
-﻿from backend.app.decision_routes import router as decision_router
+﻿
+DATA_DIR = "backend/data"
+PACKS_FILE = os.path.join(DATA_DIR, "packs.json")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+def _load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+def _save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def _save_pack_record(topic, buyer, promise, file_name="", content=""):
+    packs = _load_json(PACKS_FILE, [])
+    packs.append({
+        "topic": topic,
+        "buyer": buyer,
+        "promise": promise,
+        "file_name": file_name,
+        "content": content
+    })
+    _save_json(PACKS_FILE, packs)
+from backend.app.decision_routes import router as decision_router
 
 from backend.app.expansion_routes import router as expansion_router
 from backend.app.money_routes import router as money_router
@@ -773,4 +801,5 @@ def proof():
 
 
 app.include_router(decision_router)
+
 
