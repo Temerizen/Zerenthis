@@ -1,33 +1,33 @@
 {
-  "updated_at": "2026-04-03T21:08:45.100092+00:00",
-  "cycles": 109,
+  "updated_at": "2026-04-03T21:10:15.118242+00:00",
+  "cycles": 111,
   "status": "running",
   "weights": {
     "styles": {
       "fruit": 2.26,
       "animals": 1.33,
       "robots": 1.24,
-      "fast food": 2.08,
-      "objects": 2.89
+      "fast food": 2.2,
+      "objects": 2.92
     },
     "formats": {
       "viral short": 1.9,
       "youtube episode": 1.72,
-      "animated skit": 3.01,
+      "animated skit": 3.16,
       "podcast bit": 1.33,
       "comic arc": 1.18,
       "game loop": 1.66
     },
     "hooks": {
-      "Nobody expected this to happen": 2.53,
+      "Nobody expected this to happen": 2.65,
       "This got out of control instantly": 1.99,
       "This is the funniest thing online right now": 2.08,
       "This might be the messiest episode yet": 1.36,
-      "You will not believe what happens next": 1.84
+      "You will not believe what happens next": 1.87
     },
     "twists": {
-      "betrayal": 2.38,
-      "shock reveal": 3.43,
+      "betrayal": 2.5,
+      "shock reveal": 3.46,
       "public embarrassment": 1.03,
       "secret alliance": 1.03,
       "elimination": 1.93
@@ -49,6 +49,14 @@
       "hook": "This is the funniest thing online right now",
       "twist": "betrayal",
       "quality": 8.7
+    },
+    {
+      "time": "2026-04-03T21:09:30.110079+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "Nobody expected this to happen",
+      "twist": "betrayal",
+      "quality": 8.33
     },
     {
       "time": "2026-04-03T20:27:29.604526+00:00",
@@ -131,14 +139,6 @@
       "quality": 8.11
     },
     {
-      "time": "2026-04-03T20:23:44.560384+00:00",
-      "style": "fast food",
-      "format": "youtube episode",
-      "hook": "Nobody expected this to happen",
-      "twist": "shock reveal",
-      "quality": 8.07
-    },
-    {
       "time": "2026-04-03T20:59:44.982046+00:00",
       "style": "objects",
       "format": "youtube episode",
@@ -196,22 +196,6 @@
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T20:24:29.569606+00:00",
-      "style": "objects",
-      "format": "comic arc",
-      "hook": "This is the funniest thing online right now",
-      "twist": "shock reveal",
-      "quality": 7.73
-    },
-    {
-      "time": "2026-04-03T20:25:14.578550+00:00",
-      "style": "animals",
-      "format": "animated skit",
-      "hook": "You will not believe what happens next",
-      "twist": "public embarrassment",
-      "quality": 7.13
-    },
     {
       "time": "2026-04-03T20:25:59.588230+00:00",
       "style": "fast food",
@@ -675,6 +659,22 @@
       "hook": "This got out of control instantly",
       "twist": "elimination",
       "quality": 8.02
+    },
+    {
+      "time": "2026-04-03T21:09:30.110079+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "Nobody expected this to happen",
+      "twist": "betrayal",
+      "quality": 8.33
+    },
+    {
+      "time": "2026-04-03T21:10:15.118242+00:00",
+      "style": "objects",
+      "format": "animated skit",
+      "hook": "You will not believe what happens next",
+      "twist": "shock reveal",
+      "quality": 7.5
     }
   ]
 }
