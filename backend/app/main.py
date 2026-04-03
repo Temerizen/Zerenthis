@@ -1,4 +1,5 @@
-﻿from backend.app.command_center import router as command_center_router
+﻿from backend.app.failsafe import router as failsafe_router
+from backend.app.command_center import router as command_center_router
 from backend.app.knowledge import router as knowledge_router
 from backend.app.workflow_builder import router as workflow_builder_router
 from backend.app.browser_operator import router as browser_operator_router
@@ -928,4 +929,7 @@ app.include_router(knowledge_router)
 
 
 app.include_router(command_center_router)
+
+
+app.include_router(failsafe_router)
 
