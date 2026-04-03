@@ -12,3 +12,4 @@ JOB_FILE = DATA_DIR / "jobs.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 GEN_DIR.mkdir(parents=True, exist_ok=True)
+

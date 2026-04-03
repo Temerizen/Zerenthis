@@ -1,5 +1,5 @@
 ﻿from fastapi import APIRouter
-from app.self_surgeon import run_surgeon, create_proposals
+from backend.app.self_surgeon import run_surgeon, create_proposals
 
 router = APIRouter(prefix="/api/surgeon", tags=["surgeon"])
 
@@ -10,3 +10,4 @@ def run():
 @router.get("/proposals")
 def proposals():
     return create_proposals()
+

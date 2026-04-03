@@ -1,5 +1,5 @@
 ﻿from fastapi import FastAPI, BackgroundTasks, HTTPException, Body
-from app.evo_routes import router as evo_router
+from backend.app.evo_routes import router as evo_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -706,24 +706,25 @@ def evolution_preview():
     return {"ok": True, "seed": seed, "evolved": evolved}
 
 app.include_router(evo_router)
-from app.video_routes import router as video_router
+from backend.app.video_routes import router as video_router
 app.include_router(video_router)
 
-from app.surgeon_routes import router as surgeon_router
+from backend.app.surgeon_routes import router as surgeon_router
 app.include_router(surgeon_router)
-from app.video_routes import router as video_router
+from backend.app.video_routes import router as video_router
 app.include_router(video_router)
 
 
-from app.feedback_routes import router as feedback_router
+from backend.app.feedback_routes import router as feedback_router
 app.include_router(feedback_router)
-from app.video_routes import router as video_router
+from backend.app.video_routes import router as video_router
 app.include_router(video_router)
 
-from app.surgeon_routes import router as surgeon_router
+from backend.app.surgeon_routes import router as surgeon_router
 app.include_router(surgeon_router)
-from app.video_routes import router as video_router
+from backend.app.video_routes import router as video_router
 app.include_router(video_router)
+
 
 
 

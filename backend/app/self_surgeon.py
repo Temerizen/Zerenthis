@@ -130,7 +130,7 @@ def apply_fix(proposal):
 def validate():
     try:
         import importlib
-        import app.evo_engine
+        import backend.app.evo_engine
         importlib.reload(app.evo_engine)
         return True
     except:
@@ -177,3 +177,4 @@ def run_surgeon():
         "processed": len(results),
         "details": results
     }
+

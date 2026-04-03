@@ -1,5 +1,5 @@
 ﻿from fastapi import APIRouter
-from app.evo_engine import run_engine
+from backend.app.evo_engine import run_engine
 
 router = APIRouter()
 
@@ -7,3 +7,4 @@ router = APIRouter()
 def run():
     result = run_engine()
     return {"ok": True, "result": result}
+

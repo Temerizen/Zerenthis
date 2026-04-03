@@ -19,3 +19,4 @@ def create_video_package(idea):
         "audio": audio_path,
         "status": "phase6_safe_mode"
     }
+

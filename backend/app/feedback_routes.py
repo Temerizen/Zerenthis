@@ -1,5 +1,5 @@
 ﻿from fastapi import APIRouter, Body
-from app.feedback_engine import track_view, track_click, track_sale
+from backend.app.feedback_engine import track_view, track_click, track_sale
 
 router = APIRouter(prefix="/api/feedback", tags=["feedback"])
 
@@ -14,3 +14,4 @@ def click(data: dict = Body(...)):
 @router.post("/sale")
 def sale(data: dict = Body(...)):
     return track_sale(data)
+
