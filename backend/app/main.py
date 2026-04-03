@@ -1,4 +1,5 @@
-﻿from backend.app.monetization import router as monetization_router
+﻿from backend.app.vision import router as vision_router
+from backend.app.monetization import router as monetization_router
 from backend.app.intelligence import router as intelligence_router
 from backend.app.system_hardening import router as system_hardening_router
 from backend.app.winner_cycle import router as winner_cycle_router
@@ -892,4 +893,7 @@ app.include_router(intelligence_router)
 
 
 app.include_router(monetization_router)
+
+
+app.include_router(vision_router)
 
