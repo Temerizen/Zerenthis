@@ -29,7 +29,7 @@ GEN_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------
 # App
 # -----------------------------
-app = FastAPI(title="Zerenthis Automation Engine", version="7.0")
+app = FastAPI(title="Zerenthis Automation Engine", version="8.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,6 +53,7 @@ automation_state: Dict[str, Any] = {
     "last_reset_date": None,
     "last_job_id": None,
     "last_error": None,
+    "auto_rate_enabled": True,
     "topic_pool": [
         {
             "topic": "Make your first $100 selling AI resume kits for job seekers",
@@ -217,6 +218,86 @@ Requirements:
     content = (response.choices[0].message.content or "").strip()
     return content or build_fallback_pack(p)
 
+def heuristic_score(content: str, payload: Dict[str, str]) -> Dict[str, Any]:
+    text = (content or "").lower()
+    score = 4
+    reasons = []
+
+    if len(content) > 1800:
+        score += 1
+        reasons.append("good depth")
+    if "buyer outcome" in text or "goal" in text:
+        score += 1
+        reasons.append("clear outcome")
+    if "step-by-step" in text or "first-win" in text or "first win" in text:
+        score += 1
+        reasons.append("execution plan")
+    if "prompt" in text:
+        score += 1
+        reasons.append("includes prompts")
+    if "product ideas" in text or "ideas" in text:
+        score += 1
+        reasons.append("includes ideas")
+    if "selling strategy" in text or "cta" in text or "call to action" in text:
+        score += 1
+        reasons.append("includes selling layer")
+
+    topic = (payload.get("topic","") or "").lower()
+    if any(word in topic for word in ["first $100", "resume", "gumroad", "tiktok", "job seekers", "24 hours"]):
+        score += 1
+        reasons.append("specific topic angle")
+
+    score = max(1, min(10, score))
+    notes = "auto-rated by fallback heuristic: " + ", ".join(reasons) if reasons else "auto-rated by fallback heuristic"
+    return {"score": score, "notes": notes}
+
+def auto_rate_content(content: str, payload: Dict[str, str]) -> Dict[str, Any]:
+    if not client:
+        return heuristic_score(content, payload)
+
+    topic = payload.get("topic", "")
+    buyer = payload.get("buyer", "")
+    prompt = f"""
+You are evaluating a digital product pack for sellability and usefulness.
+
+TOPIC: {topic}
+BUYER: {buyer}
+
+Return ONLY valid JSON with this exact schema:
+{{
+  "score": <integer 1-10>,
+  "notes": "<one concise sentence explaining the rating>"
+}}
+
+Scoring guidance:
+- 9-10 = highly specific, strong buyer outcome, very sellable
+- 7-8 = strong and useful, but still has some breadth or fluff
+- 5-6 = decent but generic
+- 1-4 = weak, repetitive, not compelling
+
+CONTENT TO EVALUATE:
+\"\"\"
+{content[:12000]}
+\"\"\"
+"""
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a strict product evaluator. Return only JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.2,
+        )
+        raw = (response.choices[0].message.content or "").strip()
+        data = json.loads(raw)
+        score = int(data.get("score", 5))
+        notes = str(data.get("notes", "auto-rated by AI"))
+        score = max(1, min(10, score))
+        return {"score": score, "notes": f"auto-rated: {notes}"}
+    except Exception:
+        return heuristic_score(content, payload)
+
 def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
     scored = [j for j in jobs.values() if isinstance(j.get("score"), int) and j.get("payload")]
     scored.sort(key=lambda x: (x.get("score", 0), x.get("created_at", "")), reverse=True)
@@ -261,6 +342,7 @@ def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
         "error": None,
         "result": None,
         "automated": automated,
+        "auto_rated": False,
     })
     try:
         content = generate_with_ai(payload)
@@ -270,13 +352,22 @@ def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
         temp_path.write_text(content, encoding="utf-8")
         temp_path.replace(final_path)
         file_url = f"/api/file/{filename}"
-        set_job(job_id, {
+
+        patch = {
             "status": "completed",
             "finished_at": now_iso(),
             "file_name": filename,
             "file_url": file_url,
             "result": {"file_url": file_url}
-        })
+        }
+
+        if automated and automation_state.get("auto_rate_enabled", True):
+            rated = auto_rate_content(content, payload)
+            patch["score"] = rated.get("score")
+            patch["notes"] = rated.get("notes")
+            patch["auto_rated"] = True
+
+        set_job(job_id, patch)
         return job_id
     except Exception as e:
         set_job(job_id, {
@@ -337,6 +428,7 @@ class AutomationConfigRequest(BaseModel):
     enabled: Optional[bool] = None
     interval_minutes: Optional[int] = None
     max_daily_runs: Optional[int] = None
+    auto_rate_enabled: Optional[bool] = None
 
 # -----------------------------
 # Startup
@@ -363,7 +455,7 @@ def root():
     return {
         "ok": True,
         "name": "Zerenthis Automation Engine",
-        "version": "7.0"
+        "version": "8.0"
     }
 
 @app.get("/health")
@@ -372,7 +464,8 @@ def health():
         "ok": True,
         "openai_configured": bool(OPENAI_API_KEY),
         "jobs_loaded": len(jobs),
-        "automation_enabled": bool(automation_state.get("enabled"))
+        "automation_enabled": bool(automation_state.get("enabled")),
+        "auto_rate_enabled": bool(automation_state.get("auto_rate_enabled", True))
     }
 
 @app.post("/api/product-pack")
@@ -388,6 +481,7 @@ def create_product_pack(payload: ProductPackRequest, background_tasks: Backgroun
         "error": None,
         "result": None,
         "automated": False,
+        "auto_rated": False,
     })
 
     def worker():
@@ -441,7 +535,7 @@ def rate_job(
         raise HTTPException(status_code=404, detail="Job not found")
     if score < 1 or score > 10:
         raise HTTPException(status_code=400, detail="Score must be 1-10")
-    updated = set_job(job_id, {"score": score, "notes": notes})
+    updated = set_job(job_id, {"score": score, "notes": notes, "auto_rated": False})
     return {"ok": True, "job_id": job_id, "score": updated.get("score"), "notes": updated.get("notes")}
 
 @app.get("/api/top")
@@ -486,6 +580,8 @@ def automation_config(config: AutomationConfigRequest):
         patch["interval_minutes"] = max(5, int(config.interval_minutes))
     if config.max_daily_runs is not None:
         patch["max_daily_runs"] = max(1, int(config.max_daily_runs))
+    if config.auto_rate_enabled is not None:
+        patch["auto_rate_enabled"] = bool(config.auto_rate_enabled)
     updated = set_automation(patch)
     return {"ok": True, "automation": updated}
 
