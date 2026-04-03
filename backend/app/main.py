@@ -846,3 +846,7 @@ app.include_router(full_loop_router)
 from backend.app.body_routes import router as body_router
 app.include_router(body_router)
 
+
+from backend.app.distribution_routes import router as distribution_router
+app.include_router(distribution_router)
+
