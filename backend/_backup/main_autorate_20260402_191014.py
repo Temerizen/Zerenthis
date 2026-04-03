@@ -1,5 +1,4 @@
-from fastapi import FastAPI
-from app.evo_routes import router as evo_router, HTTPException, BackgroundTasks, Body
+﻿from fastapi import FastAPI, HTTPException, BackgroundTasks, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -30,7 +29,7 @@ GEN_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------
 # App
 # -----------------------------
-app = FastAPI(title="Zerenthis Evolution Engine", version="9.0")
+app = FastAPI(title="Zerenthis Automation Engine", version="7.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -54,9 +53,6 @@ automation_state: Dict[str, Any] = {
     "last_reset_date": None,
     "last_job_id": None,
     "last_error": None,
-    "auto_rate_enabled": True,
-    "evolution_enabled": True,
-    "last_seed_source": "topic_pool",
     "topic_pool": [
         {
             "topic": "Make your first $100 selling AI resume kits for job seekers",
@@ -221,95 +217,12 @@ Requirements:
     content = (response.choices[0].message.content or "").strip()
     return content or build_fallback_pack(p)
 
-def heuristic_score(content: str, payload: Dict[str, str]) -> Dict[str, Any]:
-    text = (content or "").lower()
-    score = 4
-    reasons = []
-
-    if len(content) > 1800:
-        score += 1
-        reasons.append("good depth")
-    if "buyer outcome" in text or "goal" in text:
-        score += 1
-        reasons.append("clear outcome")
-    if "step-by-step" in text or "first-win" in text or "first win" in text:
-        score += 1
-        reasons.append("execution plan")
-    if "prompt" in text:
-        score += 1
-        reasons.append("includes prompts")
-    if "product ideas" in text or "ideas" in text:
-        score += 1
-        reasons.append("includes ideas")
-    if "selling strategy" in text or "cta" in text or "call to action" in text:
-        score += 1
-        reasons.append("includes selling layer")
-
-    topic = (payload.get("topic","") or "").lower()
-    if any(word in topic for word in ["first $100", "resume", "gumroad", "tiktok", "job seekers", "24 hours"]):
-        score += 1
-        reasons.append("specific topic angle")
-
-    score = max(1, min(10, score))
-    notes = "auto-rated by fallback heuristic: " + ", ".join(reasons) if reasons else "auto-rated by fallback heuristic"
-    return {"score": score, "notes": notes}
-
-def auto_rate_content(content: str, payload: Dict[str, str]) -> Dict[str, Any]:
-    if not client:
-        return heuristic_score(content, payload)
-
-    topic = payload.get("topic", "")
-    buyer = payload.get("buyer", "")
-    prompt = f"""
-You are evaluating a digital product pack for sellability and usefulness.
-
-TOPIC: {topic}
-BUYER: {buyer}
-
-Return ONLY valid JSON with this exact schema:
-{{
-  "score": <integer 1-10>,
-  "notes": "<one concise sentence explaining the rating>"
-}}
-
-Scoring guidance:
-- 9-10 = highly specific, strong buyer outcome, very sellable
-- 7-8 = strong and useful, but still has some breadth or fluff
-- 5-6 = decent but generic
-- 1-4 = weak, repetitive, not compelling
-
-CONTENT TO EVALUATE:
-\"\"\"
-{content[:12000]}
-\"\"\"
-"""
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a strict product evaluator. Return only JSON."},
-                {"role": "user", "content": prompt},
-            ],
-            temperature=0.2,
-        )
-        raw = (response.choices[0].message.content or "").strip()
-        data = json.loads(raw)
-        score = int(data.get("score", 5))
-        notes = str(data.get("notes", "auto-rated by AI"))
-        score = max(1, min(10, score))
-        return {"score": score, "notes": f"auto-rated: {notes}"}
-    except Exception:
-        return heuristic_score(content, payload)
-
-def get_best_jobs(limit: int = 5) -> List[Dict[str, Any]]:
+def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
     scored = [j for j in jobs.values() if isinstance(j.get("score"), int) and j.get("payload")]
     scored.sort(key=lambda x: (x.get("score", 0), x.get("created_at", "")), reverse=True)
-    return scored[:limit]
-
-def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
     winners = []
     seen_topics = set()
-    for j in get_best_jobs(limit=10):
+    for j in scored:
         payload = j.get("payload", {})
         topic = payload.get("topic", "").strip()
         if topic and topic not in seen_topics:
@@ -319,99 +232,21 @@ def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
             break
     return winners
 
-def evolve_topic_from_winner(seed_payload: Dict[str, str]) -> Dict[str, str]:
-    if not client:
-        seed_topic = seed_payload.get("topic", "AI starter kit")
-        return {
-            "topic": f"{seed_topic} with a sharper beginner-first angle",
-            "niche": seed_payload.get("niche", "Make Money Online"),
-            "tone": "Premium",
-            "buyer": seed_payload.get("buyer", "Beginners"),
-            "promise": seed_payload.get("promise", "get results faster"),
-            "bonus": seed_payload.get("bonus", "templates and prompts"),
-            "notes": "Evolved from a winning topic. Make it tighter, more specific, and more sellable."
-        }
-
-    prompt = f"""
-You are evolving a winning digital product topic into a stronger variant.
-
-Seed payload:
-{json.dumps(seed_payload, ensure_ascii=False)}
-
-Return ONLY valid JSON with this exact schema:
-{{
-  "topic": "...",
-  "niche": "...",
-  "tone": "Premium",
-  "buyer": "...",
-  "promise": "...",
-  "bonus": "...",
-  "notes": "..."
-}}
-
-Rules:
-- Make it more specific and more sellable than the seed
-- Keep it in a niche that can monetize
-- Aim for beginner-friendly clarity
-- Prefer sharp first-win angles
-- Avoid broad generic wording
-- Do not mention being an evolved variant
-"""
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You create improved topic variants for digital products. Return only JSON."},
-                {"role": "user", "content": prompt},
-            ],
-            temperature=0.8,
-        )
-        raw = (response.choices[0].message.content or "").strip()
-        data = json.loads(raw)
-        required = ["topic", "niche", "tone", "buyer", "promise", "bonus", "notes"]
-        for key in required:
-            if key not in data or not str(data[key]).strip():
-                raise ValueError(f"Missing evolved field: {key}")
-        data["tone"] = "Premium"
-        return data
-    except Exception:
-        seed_topic = seed_payload.get("topic", "AI starter kit")
-        return {
-            "topic": f"{seed_topic} for a specific beginner niche",
-            "niche": seed_payload.get("niche", "Make Money Online"),
-            "tone": "Premium",
-            "buyer": seed_payload.get("buyer", "Beginners"),
-            "promise": seed_payload.get("promise", "get a first quick win"),
-            "bonus": seed_payload.get("bonus", "templates and prompts"),
-            "notes": "Refine the seed topic into a tighter, more actionable offer."
-        }
-
 def choose_topic_for_run() -> Dict[str, str]:
-    if automation_state.get("evolution_enabled", True):
-        winners = get_best_topics(limit=3)
-        if winners:
-            index = int(time.time()) % len(winners)
-            seed = winners[index]
-            evolved = evolve_topic_from_winner(seed)
-            set_automation({"last_seed_source": "winner_evolution"})
-            return evolved
-
-    pool = automation_state.get("topic_pool", [])
-    if pool:
-        index = int(time.time()) % len(pool)
-        set_automation({"last_seed_source": "topic_pool"})
-        return pool[index]
-
-    set_automation({"last_seed_source": "fallback"})
-    return {
-        "topic": "Make your first $100 selling AI starter kits online",
-        "niche": "Make Money Online",
-        "tone": "Premium",
-        "buyer": "Beginners",
-        "promise": "get a first quick win",
-        "bonus": "templates and prompts",
-        "notes": "Keep it practical and specific"
-    }
+    winners = get_best_topics(limit=3)
+    pool = winners if winners else automation_state.get("topic_pool", [])
+    if not pool:
+        return {
+            "topic": "Make your first $100 selling AI starter kits online",
+            "niche": "Make Money Online",
+            "tone": "Premium",
+            "buyer": "Beginners",
+            "promise": "get a first quick win",
+            "bonus": "templates and prompts",
+            "notes": "Keep it practical and specific"
+        }
+    index = int(time.time()) % len(pool)
+    return pool[index]
 
 def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
     job_id = uuid4().hex
@@ -426,7 +261,6 @@ def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
         "error": None,
         "result": None,
         "automated": automated,
-        "auto_rated": False,
     })
     try:
         content = generate_with_ai(payload)
@@ -436,22 +270,13 @@ def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
         temp_path.write_text(content, encoding="utf-8")
         temp_path.replace(final_path)
         file_url = f"/api/file/{filename}"
-
-        patch = {
+        set_job(job_id, {
             "status": "completed",
             "finished_at": now_iso(),
             "file_name": filename,
             "file_url": file_url,
             "result": {"file_url": file_url}
-        }
-
-        if automated and automation_state.get("auto_rate_enabled", True):
-            rated = auto_rate_content(content, payload)
-            patch["score"] = rated.get("score")
-            patch["notes"] = rated.get("notes")
-            patch["auto_rated"] = True
-
-        set_job(job_id, patch)
+        })
         return job_id
     except Exception as e:
         set_job(job_id, {
@@ -512,8 +337,6 @@ class AutomationConfigRequest(BaseModel):
     enabled: Optional[bool] = None
     interval_minutes: Optional[int] = None
     max_daily_runs: Optional[int] = None
-    auto_rate_enabled: Optional[bool] = None
-    evolution_enabled: Optional[bool] = None
 
 # -----------------------------
 # Startup
@@ -539,8 +362,8 @@ def shutdown_event() -> None:
 def root():
     return {
         "ok": True,
-        "name": "Zerenthis Evolution Engine",
-        "version": "9.0"
+        "name": "Zerenthis Automation Engine",
+        "version": "7.0"
     }
 
 @app.get("/health")
@@ -549,9 +372,7 @@ def health():
         "ok": True,
         "openai_configured": bool(OPENAI_API_KEY),
         "jobs_loaded": len(jobs),
-        "automation_enabled": bool(automation_state.get("enabled")),
-        "auto_rate_enabled": bool(automation_state.get("auto_rate_enabled", True)),
-        "evolution_enabled": bool(automation_state.get("evolution_enabled", True))
+        "automation_enabled": bool(automation_state.get("enabled"))
     }
 
 @app.post("/api/product-pack")
@@ -567,7 +388,6 @@ def create_product_pack(payload: ProductPackRequest, background_tasks: Backgroun
         "error": None,
         "result": None,
         "automated": False,
-        "auto_rated": False,
     })
 
     def worker():
@@ -621,7 +441,7 @@ def rate_job(
         raise HTTPException(status_code=404, detail="Job not found")
     if score < 1 or score > 10:
         raise HTTPException(status_code=400, detail="Score must be 1-10")
-    updated = set_job(job_id, {"score": score, "notes": notes, "auto_rated": False})
+    updated = set_job(job_id, {"score": score, "notes": notes})
     return {"ok": True, "job_id": job_id, "score": updated.get("score"), "notes": updated.get("notes")}
 
 @app.get("/api/top")
@@ -666,10 +486,6 @@ def automation_config(config: AutomationConfigRequest):
         patch["interval_minutes"] = max(5, int(config.interval_minutes))
     if config.max_daily_runs is not None:
         patch["max_daily_runs"] = max(1, int(config.max_daily_runs))
-    if config.auto_rate_enabled is not None:
-        patch["auto_rate_enabled"] = bool(config.auto_rate_enabled)
-    if config.evolution_enabled is not None:
-        patch["evolution_enabled"] = bool(config.evolution_enabled)
     updated = set_automation(patch)
     return {"ok": True, "automation": updated}
 
@@ -686,23 +502,3 @@ def automation_run_once():
         "last_error": None
     })
     return {"ok": True, "job_id": job_id, "automation": updated, "payload": payload}
-
-@app.get("/api/evolution/seeds")
-def evolution_seeds():
-    return {
-        "last_seed_source": automation_state.get("last_seed_source", "unknown"),
-        "top_jobs": get_best_jobs(limit=5),
-        "top_topics": get_best_topics(limit=5)
-    }
-
-@app.post("/api/evolution/preview")
-def evolution_preview():
-    winners = get_best_topics(limit=3)
-    if not winners:
-        raise HTTPException(status_code=400, detail="No scored winners available yet")
-    index = int(time.time()) % len(winners)
-    seed = winners[index]
-    evolved = evolve_topic_from_winner(seed)
-    return {"ok": True, "seed": seed, "evolved": evolved}
-
-app.include_router(evo_router)
