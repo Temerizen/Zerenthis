@@ -856,8 +856,16 @@ app.include_router(self_router)
 
 
 from backend.app.god_mode import autopilot_loop
-import asyncio\n@app.on_event("startup")\nasync def start_god_mode():\n    asyncio.create_task(autopilot_loop())\n
+
 
 from backend.app.reality_routes import router as reality_router
 app.include_router(reality_router)
+
+
+import asyncio
+from backend.app.god_mode import autopilot_loop
+
+@app.on_event("startup")
+async def start_god_mode():
+    asyncio.create_task(autopilot_loop())
 
