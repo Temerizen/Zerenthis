@@ -347,3 +347,43 @@
   </script>
 </body>
 </html>
+<script>
+async function generate() {
+  const btn = document.getElementById("generateBtn");
+  btn.disabled = true;
+
+  try {
+    const payload = {
+      topic: document.getElementById("topic").value.trim(),
+      niche: document.getElementById("niche").value.trim(),
+      tone: document.getElementById("tone").value.trim(),
+      buyer: document.getElementById("buyer").value.trim(),
+      promise: document.getElementById("promise").value.trim(),
+      bonus: document.getElementById("bonus").value.trim(),
+      notes: document.getElementById("notes").value.trim(),
+      duration_seconds: Number(document.getElementById("duration").value || 35)
+    };
+
+    const res = await fetch(`${API}/api/product-pack`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    document.getElementById("resultStatus").textContent = "Queued";
+    document.getElementById("jobIdText").textContent = data.job_id;
+
+    pollJob(data.job_id);
+
+  } catch (err) {
+    document.getElementById("resultStatus").textContent = "Error";
+    document.getElementById("latestResult").textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+</script>
