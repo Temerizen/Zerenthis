@@ -2,6 +2,7 @@
 import json
 from datetime import datetime
 from .packs_store import get_packs
+from .learning_engine import get_learning_bonus
 
 DATA_DIR = "backend/data"
 DECISIONS_FILE = os.path.join(DATA_DIR, "decisions.json")
@@ -36,6 +37,8 @@ def score_pack(pack):
         score += 2
     if "beginner" in buyer or "new creator" in buyer or "new creators" in buyer:
         score += 1
+
+    score += get_learning_bonus(pack)
     return score
 
 def build_queue():
@@ -43,6 +46,7 @@ def build_queue():
     queue = []
     for p in packs:
         item = dict(p)
+        item["learning_bonus"] = get_learning_bonus(item)
         item["score"] = score_pack(item)
         item["status"] = item.get("status", "pending")
         queue.append(item)

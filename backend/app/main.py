@@ -1,4 +1,7 @@
-﻿from backend.app.decision_routes import router as decision_router
+﻿from backend.app.learning_routes import router as learning_router
+import json
+import os
+from backend.app.decision_routes import router as decision_router
 from backend.app.autopilot_routes import router as autopilot_router
 import json
 import os
@@ -811,4 +814,7 @@ def proof():
 
 app.include_router(decision_router)
 app.include_router(autopilot_router)
+
+
+app.include_router(learning_router)
 
