@@ -1,9 +1,10 @@
-﻿from backend.app.decision_routes import router as decision_router
+﻿
 from backend.app.expansion_routes import router as expansion_router
 from backend.app.money_routes import router as money_router
 from backend.app.founder import router as founder_router
 from backend.app.limit_lock import router as limit_router
-from fastapi import FastAPI, BackgroundTasks, HTTPException, Body
+from fastapi import FastAPI
+from app.decision_routes import router as decision_router, BackgroundTasks, HTTPException, Body
 from backend.app.evo_routes import router as evo_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -761,5 +762,6 @@ app.include_router(limit_router)
 @app.get("/proof")
 def proof():
     return {"status": "NEW BACKEND ACTIVE"}
+
 
 

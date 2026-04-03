@@ -70,3 +70,4 @@ def mark_posted(title):
 
     save_json(DECISIONS_FILE, queue)
     return {"status": "updated"}
+

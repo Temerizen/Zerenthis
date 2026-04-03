@@ -1,5 +1,5 @@
 ﻿from fastapi import APIRouter
-from backend.app.decision_engine import build_queue, get_ranked, get_next, mark_posted
+from app.decision_engine import build_queue, get_ranked, get_next, mark_posted
 
 router = APIRouter()
 
@@ -18,3 +18,4 @@ def next_item():
 @router.post("/api/decision/mark-posted")
 def post(title: str):
     return mark_posted(title)
+
