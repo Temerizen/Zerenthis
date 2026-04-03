@@ -19,6 +19,10 @@ def save_memory(mem):
 def now_iso():
     return datetime.utcnow().isoformat()
 
+# =========================
+# CORE DATA
+# =========================
+
 BUYERS = [
     {"buyer": "beginners with no audience", "pain": "they do not know what to post or how to get a first sale"},
     {"buyer": "creators stuck under 1k views", "pain": "their content is not hooking attention or converting"},
@@ -64,12 +68,14 @@ HOOK_TEMPLATES = [
     "The easiest entry point for {buyer} is smaller than you think.",
 ]
 
+# =========================
+# IDEA BUILDERS
+# =========================
+
 def pick_base():
     b = random.choice(BUYERS)
     n = random.choice(NICHES)
     p = random.choice(PRODUCT_TYPES)
-    promise = random.choice(PROMISES)
-    price = random.choice(PRICES)
     return {
         "buyer": b["buyer"],
         "pain": b["pain"],
@@ -77,189 +83,177 @@ def pick_base():
         "channel": n["channel"],
         "product_type": p["product_type"],
         "delivery": p["delivery"],
-        "promise": promise,
-        "price": price,
+        "promise": random.choice(PROMISES),
+        "price": random.choice(PRICES),
     }
 
-def build_title(idea):
-    niche = idea["niche"]
-    product_type = idea["product_type"]
-    buyer = idea["buyer"]
-    if "beginners" in buyer:
-        audience = "Beginners"
-    elif "side hustlers" in buyer:
-        audience = "Side Hustlers"
-    elif "creators" in buyer:
-        audience = "Creators"
-    else:
-        audience = "New Sellers"
-    return f"{niche} {product_type} for {audience}"
+def build_title(i):
+    return f"{i['niche']} {i['product_type']} for {i['buyer'].split()[0].capitalize()}"
 
-def build_offer(idea):
-    return f"{idea['product_type']} that helps {idea['buyer']} solve this problem: {idea['pain']}."
+def build_offer(i):
+    return f"{i['product_type']} to help {i['buyer']} solve: {i['pain']}"
 
-def build_monetization_path(idea):
-    return f"Create content for {idea['channel']} → send traffic to a low-ticket {idea['product_type']} → test clicks and sales."
+def build_path(i):
+    return f"{i['channel']} content → link → {i['product_type']} → sales"
 
-def build_hooks(idea):
-    hooks = []
-    for template in random.sample(HOOK_TEMPLATES, k=min(7, len(HOOK_TEMPLATES))):
-        hooks.append(template.format(
-            buyer=idea["buyer"],
-            niche=idea["niche"],
-            pain=idea["pain"],
-            product_type=idea["product_type"]
-        ))
-    return hooks
+def build_hooks(i):
+    return [
+        t.format(
+            buyer=i["buyer"],
+            niche=i["niche"],
+            pain=i["pain"],
+            product_type=i["product_type"]
+        )
+        for t in random.sample(HOOK_TEMPLATES, 7)
+    ]
 
 def generate_idea():
-    idea = pick_base()
-    idea["title"] = build_title(idea)
-    idea["offer"] = build_offer(idea)
-    idea["monetization_path"] = build_monetization_path(idea)
-    idea["hooks"] = build_hooks(idea)
-    return idea
+    i = pick_base()
+    i["title"] = build_title(i)
+    i["offer"] = build_offer(i)
+    i["monetization_path"] = build_path(i)
+    i["hooks"] = build_hooks(i)
+    return i
 
-def mutate_from_top(mem):
-    if not mem.get("top"):
-        return generate_idea()
+# =========================
+# SIMILARITY (ANTI-CLONE)
+# =========================
 
-    base = random.choice(mem["top"]).copy()
-    mutated = dict(base)
-
-    if random.random() < 0.6:
-        b = random.choice(BUYERS)
-        mutated["buyer"] = b["buyer"]
-        mutated["pain"] = b["pain"]
-
-    if random.random() < 0.5:
-        n = random.choice(NICHES)
-        mutated["niche"] = n["niche"]
-        mutated["channel"] = n["channel"]
-
-    if random.random() < 0.5:
-        p = random.choice(PRODUCT_TYPES)
-        mutated["product_type"] = p["product_type"]
-        mutated["delivery"] = p["delivery"]
-
-    if random.random() < 0.5:
-        mutated["promise"] = random.choice(PROMISES)
-
-    if random.random() < 0.5:
-        mutated["price"] = random.choice(PRICES)
-
-    mutated["title"] = build_title(mutated)
-    mutated["offer"] = build_offer(mutated)
-    mutated["monetization_path"] = build_monetization_path(mutated)
-    mutated["hooks"] = build_hooks(mutated)
-    return mutated
-
-def score_idea(idea):
+def similarity(a, b):
     score = 0
-    title = idea.get("title", "").lower()
-    buyer = idea.get("buyer", "").lower()
-    pain = idea.get("pain", "").lower()
-    offer = idea.get("offer", "").lower()
-    niche = idea.get("niche", "").lower()
-    hooks = idea.get("hooks", [])
+    if a.get("niche") == b.get("niche"):
+        score += 1
+    if a.get("buyer") == b.get("buyer"):
+        score += 1
+    if a.get("product_type") == b.get("product_type"):
+        score += 1
+    return score  # 0–3
 
-    if len(title) >= 12:
-        score += 1
-    if any(x in buyer for x in ["beginners", "creators", "side hustlers", "starting from zero"]):
+def diversity_penalty(idea, top):
+    if not top:
+        return 0
+    penalties = []
+    for t in top:
+        penalties.append(similarity(idea, t))
+    return max(penalties) if penalties else 0
+
+# =========================
+# SCORING
+# =========================
+
+def score_idea(i, mem):
+    score = 0
+
+    if len(i["pain"]) > 25:
         score += 2
-    if len(pain) >= 20:
+    if "beginner" in i["buyer"] or "side hustlers" in i["buyer"]:
         score += 2
-    if any(x in niche for x in ["youtube shorts", "faceless tiktok", "digital products", "ai content", "affiliate"]):
+    if i["price"] <= 39:
+        score += 1
+    if len(i["hooks"]) >= 5:
+        score += 1
+    if any(x in i["niche"].lower() for x in ["tiktok","youtube","ai","digital"]):
         score += 2
-    if any(x in offer for x in ["helps", "solve", "problem"]):
-        score += 1
-    if 9 <= int(idea.get("price", 0)) <= 39:
-        score += 1
-    if len(hooks) >= 5 and all(len(h.strip()) > 20 for h in hooks[:5]):
-        score += 1
+
+    # diversity penalty
+    penalty = diversity_penalty(i, mem.get("top", []))
+    if penalty >= 2:
+        score -= 3
+    elif penalty == 1:
+        score -= 1
 
     return max(1, min(10, score))
 
-def build_product(idea, score):
-    hooks_text = "\n".join([f"- {h}" for h in idea["hooks"]])
-    return f"""# {idea['title']}
+# =========================
+# MUTATION
+# =========================
 
-## WHO THIS IS FOR
-{idea['buyer']}
+def mutate(mem):
+    if not mem.get("top"):
+        return generate_idea()
 
-## CORE PAIN
-{idea['pain']}
+    base = random.choice(mem["top"])
+    i = dict(base)
 
-## PROMISE
-{idea['promise']}
+    if random.random() < 0.6:
+        i.update(pick_base())
 
-## PRODUCT TO SELL
-{idea['offer']}
+    i["title"] = build_title(i)
+    i["offer"] = build_offer(i)
+    i["monetization_path"] = build_path(i)
+    i["hooks"] = build_hooks(i)
+    return i
+
+# =========================
+# PRODUCT
+# =========================
+
+def build_product(i, score):
+    hooks = "\n".join([f"- {h}" for h in i["hooks"]])
+    return f"""# {i['title']}
+
+## WHO
+{i['buyer']}
+
+## PAIN
+{i['pain']}
+
+## OFFER
+{i['offer']}
 
 ## PRICE
-${idea['price']}
+${i['price']}
 
-## DELIVERY
-{idea['delivery']}
+## PATH
+{i['monetization_path']}
 
-## CHANNEL
-{idea['channel']}
-
-## MONETIZATION PATH
-{idea['monetization_path']}
-
-## 7 HOOKS
-{hooks_text}
+## HOOKS
+{hooks}
 
 ## SCORE
 {score}/10
-
-## CTA
-Launch a smaller, clearer offer and test it fast.
 """
+
+# =========================
+# ENGINE
+# =========================
 
 def run_engine():
     mem = load_memory()
 
-    best_result = None
-    attempts = []
+    best = None
 
-    for _ in range(3):
-        if mem.get("top") and random.random() < 0.7:
-            idea = mutate_from_top(mem)
-        else:
-            idea = generate_idea()
-
-        score = score_idea(idea)
-        product = build_product(idea, score)
+    for _ in range(4):
+        idea = mutate(mem) if random.random() < 0.7 else generate_idea()
+        score = score_idea(idea, mem)
 
         result = {
             "idea": idea,
             "score": score,
-            "product": product,
             "time": now_iso()
         }
-        attempts.append(result)
 
-        if best_result is None or score > best_result["score"]:
-            best_result = result
+        if best is None or score > best["score"]:
+            best = result
 
-        if score >= 6:
+        if score >= 7:
             break
 
-    mem["history"].append(best_result)
-    mem["history"] = mem["history"][-150:]
+    mem["history"].append(best)
+    mem["history"] = mem["history"][-200:]
 
-    strong = [x for x in mem["history"] if int(x.get("score", 0)) >= 6]
-    strong.sort(key=lambda x: (x.get("score", 0), x.get("time", "")), reverse=True)
-    mem["top"] = [x["idea"] for x in strong[:20]]
+    strong = [x for x in mem["history"] if x["score"] >= 7]
+    strong.sort(key=lambda x: x["score"], reverse=True)
+
+    mem["top"] = [x["idea"] for x in strong[:25]]
 
     save_memory(mem)
 
+    product = build_product(best["idea"], best["score"])
+
     return {
-        "idea": best_result["idea"],
-        "score": best_result["score"],
-        "product": best_result["product"],
-        "attempts_considered": len(attempts),
-        "top_memory_count": len(mem["top"])
+        "idea": best["idea"],
+        "score": best["score"],
+        "product": product,
+        "top_size": len(mem["top"])
     }
