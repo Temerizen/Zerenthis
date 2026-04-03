@@ -757,3 +757,8 @@ app.include_router(limit_router)
 
 
 
+
+@app.get("/proof")
+def proof():
+    return {"status": "NEW BACKEND ACTIVE"}
+
