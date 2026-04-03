@@ -30,7 +30,7 @@ def protocol(weakness):
         return ["step by step","simple breakdown","clear system"]
     return ["optimized"]
 
-async def run_cycle():\n    # REALITY FEEDBACK INTEGRATION\n    try:\n        import requests\n        fb = requests.get(BASE + "/api/reality/feedback").json()\n        if fb:\n            top = fb[0]\n            print("Reality signal:", top)\n    except:\n        pass\n
+async def run_cycle():
     print("=== GOD MODE SURGEON ===")
 
     memory = load_memory()
@@ -44,6 +44,14 @@ async def run_cycle():\n    # REALITY FEEDBACK INTEGRATION\n    try:\n        im
     if not history:
         print("No history yet")
         return
+
+    # OPTIONAL REALITY SIGNAL
+    try:
+        fb = requests.get(f"{BASE}/api/reality/feedback").json()
+        if fb:
+            print("Reality signal:", fb[0])
+    except:
+        pass
 
     target = sorted(history, key=lambda x: x.get("scores",{}).get("overall",5))[0]
 
@@ -122,7 +130,6 @@ async def run_cycle():\n    # REALITY FEEDBACK INTEGRATION\n    try:\n        im
                     "content": dist["tiktok"][0],
                     "topic": best_manifest["input"]["topic"]
                 })
-
         except:
             pass
 
@@ -150,5 +157,4 @@ async def autopilot_loop():
         except Exception as e:
             print("Autopilot error:", e)
 
-        await asyncio.sleep(600)  # 10 min cooldown
-
+        await asyncio.sleep(600)
