@@ -1,117 +1,56 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis Founder Empire Panel</title>
+  <title>Zerenthis Generator</title>
   <style>
     body { margin:0; padding:24px; background:#05070d; color:#f5f7fb; font-family:Arial,sans-serif; }
-    .wrap { max-width:1200px; margin:0 auto; }
+    .wrap { max-width:900px; margin:0 auto; }
     .panel { background:#0d1322; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; margin-bottom:18px; }
     h1,h2 { margin-top:0; }
-    .sub { color:rgba(245,247,251,.7); margin-bottom:14px; }
-    .grid { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
-    .stack { display:grid; gap:12px; }
-    input, select, textarea { width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#0a1120; color:#fff; margin-bottom:10px; }
-    textarea { min-height:90px; resize:vertical; }
-    button { padding:12px 16px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; }
-    .primary { background:#00e5ff; color:#031018; }
-    .secondary { background:#192132; color:#fff; }
-    .approve { background:#00ff88; color:#02130b; }
-    .reject { background:#ff4d4d; color:#fff; }
-    .execute { background:#facc15; color:#171104; }
-    .actions { display:flex; flex-wrap:wrap; gap:10px; }
-    .card { background:#111827; border-radius:14px; padding:14px; }
-    .meta { color:rgba(245,247,251,.7); font-size:13px; }
+    .sub,.meta { color:rgba(245,247,251,.7); }
+    input, textarea { width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#0a1120; color:#fff; margin-bottom:10px; }
+    textarea { min-height:100px; resize:vertical; }
+    button { padding:12px 16px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; background:#00e5ff; color:#031018; }
     pre { background:#060b15; border:1px solid rgba(255,255,255,.06); padding:14px; border-radius:14px; overflow:auto; white-space:pre-wrap; word-break:break-word; }
-    a { color:#8be9fd; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
-    .badge { display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.06); color:rgba(245,247,251,.75); font-size:12px; }
-    @media (max-width: 900px) { .grid { grid-template-columns:1fr; } }
+    a { color:#8be9fd; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="panel">
-      <h1>Zerenthis Founder Empire Panel</h1>
-      <div class="sub">Live frontend connected to the working Railway backend.</div>
-      <div class="actions">
-        <div class="badge">API: <span id="apiHealthText">Checking...</span></div>
-        <div class="badge">Autopilot: <span id="autopilotHealthText">Watching...</span></div>
-        <div class="badge">Backend: <span id="backendHostText"></span></div>
-      </div>
+      <h1>Zerenthis Generator</h1>
+      <div class="sub">Minimal working frontend wired only to the live product generator.</div>
+      <div class="meta">Backend: <span id="backendText"></span></div>
+      <div class="meta">Health: <span id="healthText">Checking...</span></div>
     </div>
 
-    <div class="grid">
-      <div class="stack">
-        <div class="panel">
-          <h2>Generate</h2>
-          <div class="sub">This button should now actually work.</div>
-          <input id="topic" value="How to make money with AI in 2026" placeholder="Topic" />
-          <select id="mode">
-            <option value="product">Product Pack</option>
-            <option value="shorts">Shorts Pack</option>
-            <option value="youtube">YouTube Pack</option>
-          </select>
-          <input id="niche" value="Make Money Online" placeholder="Niche" />
-          <input id="tone" value="Premium" placeholder="Tone" />
-          <input id="buyer" value="Beginners starting from zero" placeholder="Buyer" />
-          <input id="duration" type="number" min="10" max="90" value="35" placeholder="Duration" />
-          <input id="promise" value="get results faster" placeholder="Promise" />
-          <input id="bonus" value="templates and prompts" placeholder="Bonus" />
-          <textarea id="notes">Keep it practical and premium</textarea>
-          <div class="actions">
-            <button class="primary" id="generateBtn" onclick="generate()">Generate</button>
-            <button class="secondary" onclick="loadAll(true)">Refresh Panel</button>
-          </div>
-        </div>
+    <div class="panel">
+      <h2>Generate Product Pack</h2>
+      <input id="topic" value="How to make money with AI in 2026" placeholder="Topic" />
+      <input id="niche" value="Make Money Online" placeholder="Niche" />
+      <input id="tone" value="Premium" placeholder="Tone" />
+      <input id="buyer" value="Beginners starting from zero" placeholder="Buyer" />
+      <input id="promise" value="get results faster" placeholder="Promise" />
+      <input id="bonus" value="templates and prompts" placeholder="Bonus" />
+      <textarea id="notes">Keep it practical and premium</textarea>
+      <button id="generateBtn" onclick="generate()">Generate</button>
+    </div>
 
-        <div class="panel">
-          <h2 id="resultTitle">No generation yet</h2>
-          <div class="meta" id="jobIdText"></div>
-          <div class="sub">Status: <span id="resultStatus">Idle</span></div>
-          <pre id="latestResult">Waiting...</pre>
-          <div id="resultLinks" class="actions" style="margin-top:12px;"></div>
-        </div>
-
-        <div class="panel">
-          <h2>Gallery</h2>
-          <div id="gallery" class="gallery-grid"></div>
-        </div>
-      </div>
-
-      <div class="stack">
-        <div class="panel">
-          <h2>Founder Magic</h2>
-          <pre id="magic">Loading...</pre>
-        </div>
-        <div class="panel">
-          <h2>Empire State</h2>
-          <pre id="empire">Loading...</pre>
-        </div>
-        <div class="panel">
-          <h2>Pending Proposals</h2>
-          <div id="proposals" class="stack"></div>
-        </div>
-        <div class="panel">
-          <h2>Applied</h2>
-          <div id="applied" class="stack"></div>
-        </div>
-        <div class="panel">
-          <h2>Failed</h2>
-          <div id="failed" class="stack"></div>
-        </div>
-      </div>
+    <div class="panel">
+      <h2 id="resultTitle">Latest Result</h2>
+      <div class="meta">Job ID: <span id="jobIdText">None</span></div>
+      <div class="meta">Status: <span id="statusText">Idle</span></div>
+      <pre id="resultBox">Waiting...</pre>
+      <div id="fileLink" style="margin-top:12px;"></div>
     </div>
   </div>
 
   <script>
     const API = "https://semantiqai-backend-production-bcab.up.railway.app";
-    const POLL_INTERVAL_MS = 2500;
     let activePoll = null;
-
-    document.getElementById("backendHostText").textContent = API;
+    document.getElementById("backendText").textContent = API;
 
     async function fetchJson(url, options = {}) {
       const res = await fetch(url, options);
@@ -122,171 +61,64 @@
       return data;
     }
 
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function setResultStatus(text) {
-      document.getElementById("resultStatus").textContent = text;
-    }
-
-    function proposalCard(p) {
-      const policy = (p.meta && p.meta.policy) ? p.meta.policy : {};
-      return `
-        <div class="card">
-          <div><strong>${escapeHtml(p.title || "Untitled Proposal")}</strong></div>
-          <div class="meta" style="margin:8px 0;">${escapeHtml(p.reason || "")}</div>
-          <div class="meta">Tier: ${escapeHtml(policy.tier || "unknown")} | Risk: ${policy.risk_score ?? "?"}</div>
-          <pre>${escapeHtml(JSON.stringify(p.steps || [], null, 2))}</pre>
-          <div class="actions">
-            <button class="approve" onclick="approveProposal('${p.id}')">Approve</button>
-            <button class="reject" onclick="rejectProposal('${p.id}')">Reject</button>
-            <button class="execute" onclick="executeProposal('${p.id}')">Execute</button>
-          </div>
-        </div>`;
-    }
-
-    function simpleCard(p) {
-      return `
-        <div class="card">
-          <div><strong>${escapeHtml(p.title || p.id || "Item")}</strong></div>
-          <div class="meta" style="margin:8px 0;">${escapeHtml(p.reason || p.error || "")}</div>
-          <div class="meta">Status: ${escapeHtml(p.status || "unknown")}</div>
-        </div>`;
-    }
-
-    function galleryCard(item) {
-      const sizeKb = Math.max(1, Math.round((item.size_bytes || 0) / 1024));
-      return `
-        <div class="card">
-          <a href="${API}${item.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.name)}</a>
-          <div class="meta">${escapeHtml(item.extension || "")} • ${sizeKb} KB</div>
-        </div>`;
-    }
-
     async function loadHealth() {
       try {
-        const health = await fetchJson(`${API}/health`);
-        document.getElementById("apiHealthText").textContent = health.ok ? "Online" : "Degraded";
-      } catch {
-        document.getElementById("apiHealthText").textContent = "Offline";
-      }
-
-      try {
-        const magic = await fetchJson(`${API}/api/founder/magic`);
-        document.getElementById("autopilotHealthText").textContent = magic.ok ? "Active" : "Unknown";
-      } catch {
-        document.getElementById("autopilotHealthText").textContent = "Unknown";
-      }
-    }
-
-    async function loadAll() {
-      await loadHealth();
-      try {
-        const [pending, applied, failed, gallery, magic, empire] = await Promise.all([
-          fetchJson(`${API}/api/self-improver/proposals`),
-          fetchJson(`${API}/api/self-improver/applied`),
-          fetchJson(`${API}/api/self-improver/failed`),
-          fetchJson(`${API}/api/gallery`),
-          fetchJson(`${API}/api/founder/magic`),
-          fetchJson(`${API}/api/empire/state`)
-        ]);
-
-        document.getElementById("magic").textContent = JSON.stringify(magic, null, 2);
-        document.getElementById("empire").textContent = JSON.stringify(empire, null, 2);
-        document.getElementById("proposals").innerHTML = (pending.items || []).length ? pending.items.map(proposalCard).join("") : "<div class='card'>No pending proposals.</div>";
-        document.getElementById("applied").innerHTML = (applied.items || []).length ? applied.items.slice(-10).reverse().map(simpleCard).join("") : "<div class='card'>No applied proposals yet.</div>";
-        document.getElementById("failed").innerHTML = (failed.items || []).length ? failed.items.slice(-10).reverse().map(simpleCard).join("") : "<div class='card'>No failed proposals.</div>";
-        document.getElementById("gallery").innerHTML = (gallery.items || []).length ? gallery.items.slice(0,24).map(galleryCard).join("") : "<div class='card'>No files yet.</div>";
+        const data = await fetchJson(`${API}/health`);
+        document.getElementById("healthText").textContent = data.ok ? "Online" : "Degraded";
       } catch (err) {
-        document.getElementById("latestResult").textContent = err.message;
+        document.getElementById("healthText").textContent = "Offline";
       }
     }
 
-    async function approveProposal(id) {
-      await fetchJson(`${API}/api/self-improver/approve/${id}`, { method: "POST" });
-      await loadAll();
-    }
-
-    async function rejectProposal(id) {
-      await fetchJson(`${API}/api/self-improver/reject/${id}`, { method: "POST" });
-      await loadAll();
-    }
-
-    async function executeProposal(id) {
-      await fetchJson(`${API}/api/self-improver/execute/${id}`, { method: "POST" });
-      await loadAll();
-    }
-
-    function renderResultLinks(jobData) {
-      const wrap = document.getElementById("resultLinks");
-      const links = [];
-      const directFileUrl = jobData.file_url || (jobData.result && jobData.result.file_url) || null;
-
-      let publicFileUrl = null;
-      if (directFileUrl) {
-        if (directFileUrl.startsWith("http")) {
-          publicFileUrl = directFileUrl.replace("semantiqai-backend.railway.internal", API);
-        } else {
-          publicFileUrl = `${API}${directFileUrl.startsWith("/") ? "" : "/"}${directFileUrl}`;
-        }
+    function renderFileLink(data) {
+      const wrap = document.getElementById("fileLink");
+      const fileUrl = data.file_url || (data.result && data.result.file_url);
+      if (!fileUrl) {
+        wrap.innerHTML = "";
+        return;
       }
-
-      if (publicFileUrl) {
-        links.push(`<a class="secondary" href="${publicFileUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 16px;border-radius:12px;">Open File</a>`);
-      }
-
-      wrap.innerHTML = links.join("");
+      const href = fileUrl.startsWith("http") ? fileUrl : `${API}${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
+      wrap.innerHTML = `<a href="${href}" target="_blank" rel="noopener noreferrer">Open generated file</a>`;
     }
 
     async function pollJob(jobId) {
       if (activePoll) clearInterval(activePoll);
-      document.getElementById("jobIdText").textContent = `Job ID: ${jobId}`;
-      setResultStatus("Polling");
+      document.getElementById("jobIdText").textContent = jobId;
+      document.getElementById("statusText").textContent = "Polling";
 
       const check = async () => {
         try {
           const data = await fetchJson(`${API}/api/job/${jobId}`);
-          document.getElementById("latestResult").textContent = JSON.stringify(data, null, 2);
+          document.getElementById("resultBox").textContent = JSON.stringify(data, null, 2);
 
-          const resultTitle = data.title || (data.result && data.result.title) || "Generation Complete";
-
-          if (data.status === "done" || data.status === "completed") {
+          if (data.status === "completed" || data.status === "done") {
             clearInterval(activePoll);
             activePoll = null;
-            setResultStatus("Complete");
-            document.getElementById("resultTitle").textContent = resultTitle;
-            renderResultLinks(data);
-            await loadAll();
+            document.getElementById("statusText").textContent = "Complete";
+            document.getElementById("resultTitle").textContent = (data.result && data.result.title) || "Generation Complete";
+            renderFileLink(data);
             return;
           }
 
-          if (data.status === "failed" || data.status === "error" || data.status === "not_found") {
+          if (data.status === "failed" || data.error) {
             clearInterval(activePoll);
             activePoll = null;
-            setResultStatus("Failed");
+            document.getElementById("statusText").textContent = "Failed";
             document.getElementById("resultTitle").textContent = "Generation Failed";
             return;
           }
 
-          document.getElementById("resultTitle").textContent = resultTitle;
-          setResultStatus(String(data.status || "Queued"));
+          document.getElementById("statusText").textContent = data.status || "Queued";
         } catch (err) {
           clearInterval(activePoll);
           activePoll = null;
-          setResultStatus("Error");
-          document.getElementById("resultTitle").textContent = "Generation Error";
-          document.getElementById("latestResult").textContent = err.message;
+          document.getElementById("statusText").textContent = "Error";
+          document.getElementById("resultBox").textContent = err.message;
         }
       };
 
       await check();
-      activePoll = setInterval(check, POLL_INTERVAL_MS);
+      activePoll = setInterval(check, 2500);
     }
 
     async function generate() {
@@ -294,97 +126,47 @@
       btn.disabled = true;
 
       try {
-        const topic = document.getElementById("topic").value.trim();
-        const mode = document.getElementById("mode").value;
-        let endpoint = "/api/product-pack";
-        if (mode === "shorts") endpoint = "/api/shorts-pack";
-        if (mode === "youtube") endpoint = "/api/youtube-pack";
-
         const payload = {
-          topic,
+          topic: document.getElementById("topic").value.trim(),
           niche: document.getElementById("niche").value.trim(),
           tone: document.getElementById("tone").value.trim(),
           buyer: document.getElementById("buyer").value.trim(),
           promise: document.getElementById("promise").value.trim(),
           bonus: document.getElementById("bonus").value.trim(),
           notes: document.getElementById("notes").value.trim(),
-          duration_seconds: Number(document.getElementById("duration").value || 35)
+          duration_seconds: 35
         };
 
-        setResultStatus("Submitting");
         document.getElementById("resultTitle").textContent = "Submitting Generation Request";
-        document.getElementById("latestResult").textContent = "Sending request...";
-        document.getElementById("resultLinks").innerHTML = "";
-        document.getElementById("jobIdText").textContent = "";
+        document.getElementById("resultBox").textContent = "Sending request...";
+        document.getElementById("fileLink").innerHTML = "";
+        document.getElementById("statusText").textContent = "Submitting";
 
-        const data = await fetchJson(`${API}${endpoint}`, {
+        const data = await fetchJson(`${API}/api/product-pack`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
 
-        document.getElementById("latestResult").textContent = JSON.stringify(data, null, 2);
+        document.getElementById("resultBox").textContent = JSON.stringify(data, null, 2);
 
         if (data.job_id) {
           await pollJob(data.job_id);
         } else {
-          setResultStatus("Complete");
-          document.getElementById("resultTitle").textContent = "Generation Returned Immediately";
-          renderResultLinks(data);
-          await loadAll();
+          document.getElementById("statusText").textContent = "Complete";
+          document.getElementById("resultTitle").textContent = data.title || "Generation Complete";
+          renderFileLink(data);
         }
       } catch (err) {
-        setResultStatus("Error");
+        document.getElementById("statusText").textContent = "Error";
         document.getElementById("resultTitle").textContent = "Generation Error";
-        document.getElementById("latestResult").textContent = err.message;
+        document.getElementById("resultBox").textContent = err.message;
       } finally {
         btn.disabled = false;
       }
     }
 
-    loadAll();
-    setInterval(loadAll, 10000);
+    loadHealth();
   </script>
 </body>
 </html>
-<script>
-async function generate() {
-  const btn = document.getElementById("generateBtn");
-  btn.disabled = true;
-
-  try {
-    const payload = {
-      topic: document.getElementById("topic").value.trim(),
-      niche: document.getElementById("niche").value.trim(),
-      tone: document.getElementById("tone").value.trim(),
-      buyer: document.getElementById("buyer").value.trim(),
-      promise: document.getElementById("promise").value.trim(),
-      bonus: document.getElementById("bonus").value.trim(),
-      notes: document.getElementById("notes").value.trim(),
-      duration_seconds: Number(document.getElementById("duration").value || 35)
-    };
-
-    const res = await fetch(`${API}/api/product-pack`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-
-    document.getElementById("resultStatus").textContent = "Queued";
-    document.getElementById("jobIdText").textContent = data.job_id;
-
-    pollJob(data.job_id);
-
-  } catch (err) {
-    document.getElementById("resultStatus").textContent = "Error";
-    document.getElementById("latestResult").textContent = err.message;
-  } finally {
-    btn.disabled = false;
-  }
-}
-</script>
-
