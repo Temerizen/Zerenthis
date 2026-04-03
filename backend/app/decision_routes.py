@@ -18,5 +18,3 @@ def next_item():
 @router.post("/api/decision/mark-posted")
 def post(title: str):
     return mark_posted(title)
-
-
