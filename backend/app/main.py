@@ -1,4 +1,5 @@
-﻿from backend.app.expansion_routes import router as expansion_router
+﻿from backend.app.output_routes import router as output_router
+from backend.app.expansion_routes import router as expansion_router
 from backend.app.orchestrator_routes import router as orchestrator_router
 import json
 import os
@@ -823,4 +824,7 @@ app.include_router(learning_router)
 
 app.include_router(expansion_router)
 app.include_router(orchestrator_router)
+
+
+app.include_router(output_router)
 
