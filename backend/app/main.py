@@ -8,7 +8,7 @@ from typing import List, Dict, Any
 import os
 
 APP_TITLE = "Zerenthis Stabilized Core"
-APP_VERSION = "10.0"
+APP_VERSION = "11.0"
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -29,34 +29,7 @@ app.add_middleware(
 
 ROUTER_MODULES: List[str] = [
     "backend.app.adaptive_brain",
- "backend.app.auto_engine",
-    "backend.app.autonomy",
-    "backend.app.failsafe",
     "backend.app.command_center",
-    "backend.app.knowledge",
-    "backend.app.workflow_builder",
-    "backend.app.browser_operator",
-    "backend.app.inbox",
-    "backend.app.live_mode",
-    "backend.app.evals",
-    "backend.app.vision_hardening",
-    "backend.app.vision",
-    "backend.app.monetization",
-    "backend.app.intelligence",
-    "backend.app.system_hardening",
-    "backend.app.winner_cycle",
-    "backend.app.control_tower",
-    "backend.app.money_sweep",
-    "backend.app.output_routes",
-    "backend.app.expansion_routes",
-    "backend.app.orchestrator_routes",
-    "backend.app.learning_routes",
-    "backend.app.decision_routes",
-    "backend.app.autopilot_routes",
-    "backend.app.money_routes",
-    "backend.app.founder",
-    "backend.app.limit_lock",
-    "backend.app.evo_routes",
 ]
 
 _loaded_routes: List[Dict[str, Any]] = []
@@ -71,21 +44,12 @@ def _safe_include(module_name: str) -> None:
         module = import_module(module_name)
         router = getattr(module, "router", None)
         if router is None:
-            _startup_errors.append({
-                "module": module_name,
-                "error": "router attribute not found"
-            })
+            _startup_errors.append({"module": module_name, "error": "router attribute not found"})
             return
         app.include_router(router)
-        _loaded_routes.append({
-            "module": module_name,
-            "status": "loaded"
-        })
+        _loaded_routes.append({"module": module_name, "status": "loaded"})
     except Exception as e:
-        _startup_errors.append({
-            "module": module_name,
-            "error": str(e)
-        })
+        _startup_errors.append({"module": module_name, "error": str(e)})
 
 for _module_name in ROUTER_MODULES:
     _safe_include(_module_name)
@@ -140,6 +104,3 @@ def system_info():
         "loaded_routes_count": len(_loaded_routes),
         "startup_errors_count": len(_startup_errors)
     }
-
-
-

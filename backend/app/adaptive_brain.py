@@ -8,14 +8,13 @@ router = APIRouter(prefix="/api/brain", tags=["brain"])
 BASE = Path(__file__).resolve().parents[2]
 DATA = BASE / "backend" / "data"
 DATA.mkdir(parents=True, exist_ok=True)
-
 STATE_FILE = DATA / "brain_state.json"
 
 RUNNING = False
 THREAD = None
 
-STYLES = ["fruit", "animals", "robots", "fast food", "objects"]
-FORMATS = ["viral short", "youtube episode", "animated skit", "podcast bit", "comic arc", "game loop"]
+STYLES = ["fruit","animals","robots","fast food","objects"]
+FORMATS = ["viral short","youtube episode","animated skit","podcast bit","comic arc","game loop"]
 HOOKS = [
     "Nobody expected this to happen",
     "This got out of control instantly",
@@ -23,7 +22,7 @@ HOOKS = [
     "This might be the messiest episode yet",
     "You will not believe what happens next"
 ]
-TWISTS = ["betrayal", "shock reveal", "public embarrassment", "secret alliance", "elimination"]
+TWISTS = ["betrayal","shock reveal","public embarrassment","secret alliance","elimination"]
 
 def now():
     return datetime.now(timezone.utc).isoformat()
@@ -84,7 +83,6 @@ def adapt_once():
     twist = weighted_choice(TWISTS, w["twists"])
 
     quality = simulate_quality(style, fmt, hook, twist)
-
     bump = 0.12 if quality >= 7.8 else (-0.06 if quality < 7.0 else 0.03)
 
     w["styles"][style] = round(max(0.2, min(5.0, w["styles"].get(style, 1.0) + bump)), 3)
@@ -104,10 +102,8 @@ def adapt_once():
         "quality": quality
     }
     state.setdefault("history", []).append(pattern)
-
     ranked = sorted(state["history"], key=lambda x: x.get("quality", 0), reverse=True)
     state["top_patterns"] = ranked[:20]
-
     save_state(state)
 
 def loop(interval_sec):
