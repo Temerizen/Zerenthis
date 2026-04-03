@@ -736,8 +736,8 @@ app.include_router(video_router)
 
 
 
-from app.file_routes import router as file_router
+from backend.app.file_routes import router as file_router
 app.include_router(file_router)
 
-from app.winner_routes import router as winner_router
+from backend.app.winner_routes import router as winner_router
 app.include_router(winner_router)
