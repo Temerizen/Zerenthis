@@ -1,5 +1,6 @@
 ﻿from fastapi import FastAPI
-from app.evo_routes import router as evo_router`r`nfrom fastapi.middleware.cors import CORSMiddleware
+from app.evo_routes import router as evo_router
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from pathlib import Path
@@ -705,5 +706,6 @@ def evolution_preview():
     return {"ok": True, "seed": seed, "evolved": evolved}
 
 app.include_router(evo_router)
+
 
 
