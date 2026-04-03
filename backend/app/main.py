@@ -29,7 +29,7 @@ GEN_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------
 # App
 # -----------------------------
-app = FastAPI(title="Zerenthis Automation Engine", version="8.0")
+app = FastAPI(title="Zerenthis Evolution Engine", version="9.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -54,6 +54,8 @@ automation_state: Dict[str, Any] = {
     "last_job_id": None,
     "last_error": None,
     "auto_rate_enabled": True,
+    "evolution_enabled": True,
+    "last_seed_source": "topic_pool",
     "topic_pool": [
         {
             "topic": "Make your first $100 selling AI resume kits for job seekers",
@@ -298,12 +300,15 @@ CONTENT TO EVALUATE:
     except Exception:
         return heuristic_score(content, payload)
 
-def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
+def get_best_jobs(limit: int = 5) -> List[Dict[str, Any]]:
     scored = [j for j in jobs.values() if isinstance(j.get("score"), int) and j.get("payload")]
     scored.sort(key=lambda x: (x.get("score", 0), x.get("created_at", "")), reverse=True)
+    return scored[:limit]
+
+def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
     winners = []
     seen_topics = set()
-    for j in scored:
+    for j in get_best_jobs(limit=10):
         payload = j.get("payload", {})
         topic = payload.get("topic", "").strip()
         if topic and topic not in seen_topics:
@@ -313,21 +318,99 @@ def get_best_topics(limit: int = 3) -> List[Dict[str, str]]:
             break
     return winners
 
-def choose_topic_for_run() -> Dict[str, str]:
-    winners = get_best_topics(limit=3)
-    pool = winners if winners else automation_state.get("topic_pool", [])
-    if not pool:
+def evolve_topic_from_winner(seed_payload: Dict[str, str]) -> Dict[str, str]:
+    if not client:
+        seed_topic = seed_payload.get("topic", "AI starter kit")
         return {
-            "topic": "Make your first $100 selling AI starter kits online",
-            "niche": "Make Money Online",
+            "topic": f"{seed_topic} with a sharper beginner-first angle",
+            "niche": seed_payload.get("niche", "Make Money Online"),
             "tone": "Premium",
-            "buyer": "Beginners",
-            "promise": "get a first quick win",
-            "bonus": "templates and prompts",
-            "notes": "Keep it practical and specific"
+            "buyer": seed_payload.get("buyer", "Beginners"),
+            "promise": seed_payload.get("promise", "get results faster"),
+            "bonus": seed_payload.get("bonus", "templates and prompts"),
+            "notes": "Evolved from a winning topic. Make it tighter, more specific, and more sellable."
         }
-    index = int(time.time()) % len(pool)
-    return pool[index]
+
+    prompt = f"""
+You are evolving a winning digital product topic into a stronger variant.
+
+Seed payload:
+{json.dumps(seed_payload, ensure_ascii=False)}
+
+Return ONLY valid JSON with this exact schema:
+{{
+  "topic": "...",
+  "niche": "...",
+  "tone": "Premium",
+  "buyer": "...",
+  "promise": "...",
+  "bonus": "...",
+  "notes": "..."
+}}
+
+Rules:
+- Make it more specific and more sellable than the seed
+- Keep it in a niche that can monetize
+- Aim for beginner-friendly clarity
+- Prefer sharp first-win angles
+- Avoid broad generic wording
+- Do not mention being an evolved variant
+"""
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You create improved topic variants for digital products. Return only JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.8,
+        )
+        raw = (response.choices[0].message.content or "").strip()
+        data = json.loads(raw)
+        required = ["topic", "niche", "tone", "buyer", "promise", "bonus", "notes"]
+        for key in required:
+            if key not in data or not str(data[key]).strip():
+                raise ValueError(f"Missing evolved field: {key}")
+        data["tone"] = "Premium"
+        return data
+    except Exception:
+        seed_topic = seed_payload.get("topic", "AI starter kit")
+        return {
+            "topic": f"{seed_topic} for a specific beginner niche",
+            "niche": seed_payload.get("niche", "Make Money Online"),
+            "tone": "Premium",
+            "buyer": seed_payload.get("buyer", "Beginners"),
+            "promise": seed_payload.get("promise", "get a first quick win"),
+            "bonus": seed_payload.get("bonus", "templates and prompts"),
+            "notes": "Refine the seed topic into a tighter, more actionable offer."
+        }
+
+def choose_topic_for_run() -> Dict[str, str]:
+    if automation_state.get("evolution_enabled", True):
+        winners = get_best_topics(limit=3)
+        if winners:
+            index = int(time.time()) % len(winners)
+            seed = winners[index]
+            evolved = evolve_topic_from_winner(seed)
+            set_automation({"last_seed_source": "winner_evolution"})
+            return evolved
+
+    pool = automation_state.get("topic_pool", [])
+    if pool:
+        index = int(time.time()) % len(pool)
+        set_automation({"last_seed_source": "topic_pool"})
+        return pool[index]
+
+    set_automation({"last_seed_source": "fallback"})
+    return {
+        "topic": "Make your first $100 selling AI starter kits online",
+        "niche": "Make Money Online",
+        "tone": "Premium",
+        "buyer": "Beginners",
+        "promise": "get a first quick win",
+        "bonus": "templates and prompts",
+        "notes": "Keep it practical and specific"
+    }
 
 def run_generation(payload: Dict[str, str], automated: bool = False) -> str:
     job_id = uuid4().hex
@@ -429,6 +512,7 @@ class AutomationConfigRequest(BaseModel):
     interval_minutes: Optional[int] = None
     max_daily_runs: Optional[int] = None
     auto_rate_enabled: Optional[bool] = None
+    evolution_enabled: Optional[bool] = None
 
 # -----------------------------
 # Startup
@@ -454,8 +538,8 @@ def shutdown_event() -> None:
 def root():
     return {
         "ok": True,
-        "name": "Zerenthis Automation Engine",
-        "version": "8.0"
+        "name": "Zerenthis Evolution Engine",
+        "version": "9.0"
     }
 
 @app.get("/health")
@@ -465,7 +549,8 @@ def health():
         "openai_configured": bool(OPENAI_API_KEY),
         "jobs_loaded": len(jobs),
         "automation_enabled": bool(automation_state.get("enabled")),
-        "auto_rate_enabled": bool(automation_state.get("auto_rate_enabled", True))
+        "auto_rate_enabled": bool(automation_state.get("auto_rate_enabled", True)),
+        "evolution_enabled": bool(automation_state.get("evolution_enabled", True))
     }
 
 @app.post("/api/product-pack")
@@ -582,6 +667,8 @@ def automation_config(config: AutomationConfigRequest):
         patch["max_daily_runs"] = max(1, int(config.max_daily_runs))
     if config.auto_rate_enabled is not None:
         patch["auto_rate_enabled"] = bool(config.auto_rate_enabled)
+    if config.evolution_enabled is not None:
+        patch["evolution_enabled"] = bool(config.evolution_enabled)
     updated = set_automation(patch)
     return {"ok": True, "automation": updated}
 
@@ -598,3 +685,21 @@ def automation_run_once():
         "last_error": None
     })
     return {"ok": True, "job_id": job_id, "automation": updated, "payload": payload}
+
+@app.get("/api/evolution/seeds")
+def evolution_seeds():
+    return {
+        "last_seed_source": automation_state.get("last_seed_source", "unknown"),
+        "top_jobs": get_best_jobs(limit=5),
+        "top_topics": get_best_topics(limit=5)
+    }
+
+@app.post("/api/evolution/preview")
+def evolution_preview():
+    winners = get_best_topics(limit=3)
+    if not winners:
+        raise HTTPException(status_code=400, detail="No scored winners available yet")
+    index = int(time.time()) % len(winners)
+    seed = winners[index]
+    evolved = evolve_topic_from_winner(seed)
+    return {"ok": True, "seed": seed, "evolved": evolved}
