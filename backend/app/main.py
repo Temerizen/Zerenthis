@@ -850,3 +850,7 @@ app.include_router(body_router)
 from backend.app.distribution_routes import router as distribution_router
 app.include_router(distribution_router)
 
+
+from backend.app.self_improver_routes import router as self_router
+app.include_router(self_router)
+
