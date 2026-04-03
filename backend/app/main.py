@@ -854,3 +854,6 @@ app.include_router(distribution_router)
 from backend.app.self_improver_routes import router as self_router
 app.include_router(self_router)
 
+
+from backend.app.god_mode import autopilot_loop
+import asyncio\n@app.on_event("startup")\nasync def start_god_mode():\n    asyncio.create_task(autopilot_loop())\n
