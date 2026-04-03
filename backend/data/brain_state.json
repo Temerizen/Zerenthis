@@ -1,35 +1,35 @@
 {
-  "updated_at": "2026-04-03T21:41:00.488331+00:00",
-  "cycles": 149,
+  "updated_at": "2026-04-03T21:44:00.528916+00:00",
+  "cycles": 153,
   "status": "running",
   "weights": {
     "styles": {
       "fruit": 2.47,
-      "animals": 1.42,
+      "animals": 1.36,
       "robots": 1.33,
-      "fast food": 3.25,
-      "objects": 3.25
+      "fast food": 3.37,
+      "objects": 3.31
     },
     "formats": {
       "viral short": 2.38,
-      "youtube episode": 2.11,
+      "youtube episode": 2.17,
       "animated skit": 3.76,
       "podcast bit": 1.39,
-      "comic arc": 1.3,
+      "comic arc": 1.36,
       "game loop": 1.78
     },
     "hooks": {
-      "Nobody expected this to happen": 3.25,
+      "Nobody expected this to happen": 3.28,
       "This got out of control instantly": 2.5,
-      "This is the funniest thing online right now": 2.53,
-      "This might be the messiest episode yet": 1.27,
-      "You will not believe what happens next": 2.17
+      "This is the funniest thing online right now": 2.65,
+      "This might be the messiest episode yet": 1.3,
+      "You will not believe what happens next": 2.11
     },
     "twists": {
-      "betrayal": 2.95,
-      "shock reveal": 4.24,
+      "betrayal": 3.1,
+      "shock reveal": 4.27,
       "public embarrassment": 1.06,
-      "secret alliance": 1.18,
+      "secret alliance": 1.12,
       "elimination": 2.29
     }
   },
@@ -83,14 +83,6 @@
       "quality": 8.27
     },
     {
-      "time": "2026-04-03T20:55:59.938595+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "This might be the messiest episode yet",
-      "twist": "betrayal",
-      "quality": 8.19
-    },
-    {
       "time": "2026-04-03T21:34:15.409237+00:00",
       "style": "fast food",
       "format": "animated skit",
@@ -123,14 +115,6 @@
       "quality": 8.12
     },
     {
-      "time": "2026-04-03T20:55:14.930810+00:00",
-      "style": "robots",
-      "format": "youtube episode",
-      "hook": "This is the funniest thing online right now",
-      "twist": "elimination",
-      "quality": 8.11
-    },
-    {
       "time": "2026-04-03T21:18:30.217008+00:00",
       "style": "objects",
       "format": "animated skit",
@@ -153,6 +137,14 @@
       "hook": "This is the funniest thing online right now",
       "twist": "elimination",
       "quality": 8.1
+    },
+    {
+      "time": "2026-04-03T21:41:45.497094+00:00",
+      "style": "fast food",
+      "format": "youtube episode",
+      "hook": "This is the funniest thing online right now",
+      "twist": "betrayal",
+      "quality": 8.08
     },
     {
       "time": "2026-04-03T20:59:44.982046+00:00",
@@ -187,47 +179,23 @@
       "quality": 7.99
     },
     {
-      "time": "2026-04-03T20:54:29.921476+00:00",
-      "style": "robots",
+      "time": "2026-04-03T21:17:45.207601+00:00",
+      "style": "fast food",
+      "format": "podcast bit",
+      "hook": "You will not believe what happens next",
+      "twist": "shock reveal",
+      "quality": 7.77
+    },
+    {
+      "time": "2026-04-03T21:32:00.378999+00:00",
+      "style": "fast food",
       "format": "animated skit",
       "hook": "Nobody expected this to happen",
       "twist": "betrayal",
-      "quality": 7.81
+      "quality": 7.75
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T20:54:29.921476+00:00",
-      "style": "robots",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "betrayal",
-      "quality": 7.81
-    },
-    {
-      "time": "2026-04-03T20:55:14.930810+00:00",
-      "style": "robots",
-      "format": "youtube episode",
-      "hook": "This is the funniest thing online right now",
-      "twist": "elimination",
-      "quality": 8.11
-    },
-    {
-      "time": "2026-04-03T20:55:59.938595+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "This might be the messiest episode yet",
-      "twist": "betrayal",
-      "quality": 8.19
-    },
-    {
-      "time": "2026-04-03T20:56:44.948462+00:00",
-      "style": "robots",
-      "format": "comic arc",
-      "hook": "You will not believe what happens next",
-      "twist": "shock reveal",
-      "quality": 7.17
-    },
     {
       "time": "2026-04-03T20:57:29.956948+00:00",
       "style": "fruit",
@@ -675,6 +643,38 @@
       "hook": "Nobody expected this to happen",
       "twist": "shock reveal",
       "quality": 7.37
+    },
+    {
+      "time": "2026-04-03T21:41:45.497094+00:00",
+      "style": "fast food",
+      "format": "youtube episode",
+      "hook": "This is the funniest thing online right now",
+      "twist": "betrayal",
+      "quality": 8.08
+    },
+    {
+      "time": "2026-04-03T21:42:30.511111+00:00",
+      "style": "objects",
+      "format": "comic arc",
+      "hook": "Nobody expected this to happen",
+      "twist": "shock reveal",
+      "quality": 7.5
+    },
+    {
+      "time": "2026-04-03T21:43:15.520261+00:00",
+      "style": "animals",
+      "format": "youtube episode",
+      "hook": "You will not believe what happens next",
+      "twist": "secret alliance",
+      "quality": 6.51
+    },
+    {
+      "time": "2026-04-03T21:44:00.528916+00:00",
+      "style": "objects",
+      "format": "comic arc",
+      "hook": "This might be the messiest episode yet",
+      "twist": "betrayal",
+      "quality": 7.45
     }
   ]
 }
