@@ -295,4 +295,3 @@ def get_file(filename: str):
     if not path.exists() or not path.is_file():
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(path, filename=safe_name, media_type="text/plain")
-
