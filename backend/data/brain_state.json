@@ -1,35 +1,35 @@
 {
-  "updated_at": "2026-04-03T21:35:00.418472+00:00",
-  "cycles": 141,
+  "updated_at": "2026-04-03T21:38:00.454319+00:00",
+  "cycles": 145,
   "status": "running",
   "weights": {
     "styles": {
-      "fruit": 2.44,
-      "animals": 1.33,
+      "fruit": 2.47,
+      "animals": 1.36,
       "robots": 1.33,
-      "fast food": 3.04,
+      "fast food": 3.19,
       "objects": 3.25
     },
     "formats": {
-      "viral short": 2.26,
-      "youtube episode": 2.02,
-      "animated skit": 3.73,
+      "viral short": 2.38,
+      "youtube episode": 2.08,
+      "animated skit": 3.76,
       "podcast bit": 1.33,
       "comic arc": 1.27,
       "game loop": 1.78
     },
     "hooks": {
-      "Nobody expected this to happen": 3.13,
-      "This got out of control instantly": 2.47,
+      "Nobody expected this to happen": 3.19,
+      "This got out of control instantly": 2.5,
       "This is the funniest thing online right now": 2.47,
       "This might be the messiest episode yet": 1.27,
-      "You will not believe what happens next": 2.05
+      "You will not believe what happens next": 2.17
     },
     "twists": {
       "betrayal": 2.92,
-      "shock reveal": 4.03,
+      "shock reveal": 4.18,
       "public embarrassment": 1.06,
-      "secret alliance": 1.09,
+      "secret alliance": 1.15,
       "elimination": 2.29
     }
   },
@@ -41,14 +41,6 @@
       "hook": "This got out of control instantly",
       "twist": "shock reveal",
       "quality": 8.77
-    },
-    {
-      "time": "2026-04-03T20:49:59.867543+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "This is the funniest thing online right now",
-      "twist": "betrayal",
-      "quality": 8.7
     },
     {
       "time": "2026-04-03T21:23:00.270558+00:00",
@@ -193,41 +185,17 @@
       "hook": "This got out of control instantly",
       "twist": "elimination",
       "quality": 8.01
+    },
+    {
+      "time": "2026-04-03T21:35:45.428201+00:00",
+      "style": "fast food",
+      "format": "viral short",
+      "hook": "You will not believe what happens next",
+      "twist": "shock reveal",
+      "quality": 7.99
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T20:48:29.850653+00:00",
-      "style": "robots",
-      "format": "game loop",
-      "hook": "This is the funniest thing online right now",
-      "twist": "secret alliance",
-      "quality": 6.98
-    },
-    {
-      "time": "2026-04-03T20:49:14.858600+00:00",
-      "style": "animals",
-      "format": "viral short",
-      "hook": "Nobody expected this to happen",
-      "twist": "shock reveal",
-      "quality": 7.08
-    },
-    {
-      "time": "2026-04-03T20:49:59.867543+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "This is the funniest thing online right now",
-      "twist": "betrayal",
-      "quality": 8.7
-    },
-    {
-      "time": "2026-04-03T20:50:44.875484+00:00",
-      "style": "objects",
-      "format": "game loop",
-      "hook": "You will not believe what happens next",
-      "twist": "betrayal",
-      "quality": 7.92
-    },
     {
       "time": "2026-04-03T20:51:29.884703+00:00",
       "style": "fruit",
@@ -675,6 +643,38 @@
       "hook": "Nobody expected this to happen",
       "twist": "shock reveal",
       "quality": 8.11
+    },
+    {
+      "time": "2026-04-03T21:35:45.428201+00:00",
+      "style": "fast food",
+      "format": "viral short",
+      "hook": "You will not believe what happens next",
+      "twist": "shock reveal",
+      "quality": 7.99
+    },
+    {
+      "time": "2026-04-03T21:36:30.437706+00:00",
+      "style": "fast food",
+      "format": "youtube episode",
+      "hook": "This got out of control instantly",
+      "twist": "secret alliance",
+      "quality": 7.56
+    },
+    {
+      "time": "2026-04-03T21:37:15.445959+00:00",
+      "style": "fruit",
+      "format": "animated skit",
+      "hook": "Nobody expected this to happen",
+      "twist": "secret alliance",
+      "quality": 7.54
+    },
+    {
+      "time": "2026-04-03T21:38:00.454319+00:00",
+      "style": "animals",
+      "format": "youtube episode",
+      "hook": "Nobody expected this to happen",
+      "twist": "shock reveal",
+      "quality": 7.08
     }
   ]
 }
