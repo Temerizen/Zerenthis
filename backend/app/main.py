@@ -1,4 +1,5 @@
-﻿from backend.app.output_routes import router as output_router
+﻿from backend.app.money_sweep import router as money_sweep_router
+from backend.app.output_routes import router as output_router
 from backend.app.expansion_routes import router as expansion_router
 from backend.app.orchestrator_routes import router as orchestrator_router
 import json
@@ -868,4 +869,7 @@ from backend.app.god_mode import autopilot_loop
 @app.on_event("startup")
 async def start_god_mode():
     asyncio.create_task(autopilot_loop())
+
+
+app.include_router(money_sweep_router)
 
