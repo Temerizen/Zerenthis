@@ -6,145 +6,108 @@ import uuid, random, json
 router = APIRouter(prefix="/api/command", tags=["command"])
 
 BASE = Path(__file__).resolve().parents[2]
-DATA = BASE / "backend/data"
 OUT = BASE / "backend/outputs"
-
-DATA.mkdir(parents=True, exist_ok=True)
 OUT.mkdir(parents=True, exist_ok=True)
-
-APPROVAL_FILE = DATA / "approvals.json"
 
 def now():
     return datetime.now(timezone.utc).isoformat()
 
-def load(path, default):
-    return json.loads(path.read_text()) if path.exists() else default
-
-def save(path, data):
-    path.write_text(json.dumps(data, indent=2))
-
-# --- TREND DNA ---
-HOOKS = [
-    "This went from normal to chaos instantly",
-    "Nobody was ready for this",
-    "This is the most chaotic episode yet",
-    "You won't believe what happens next",
-    "This might be the funniest idea ever"
-]
-
-STYLES = ["fruit","animals","robots","fast food","objects"]
-FORMATS = ["dating show","elimination show","chaos reality show","sitcom","competition"]
-TWISTS = ["betrayal","shock elimination","secret alliance","public humiliation"]
-
-def generate_candidate(prompt):
-    style = random.choice(STYLES)
-    fmt = random.choice(FORMATS)
-
-    title = f"{style.capitalize()} {fmt}"
-    hook = random.choice(HOOKS)
-    twist = random.choice(TWISTS)
-
-    dialogue = [
-        "I didn't come here to play safe.",
-        "You're not ready for this.",
-        "This is getting ridiculous.",
-    ]
-
-    score = score_candidate(hook, twist, style)
-
+# ---------------- DIRECTOR ----------------
+def director(prompt):
+    formats = ["viral short","youtube episode","animated skit"]
+    tones = ["chaotic","funny","dramatic","absurd"]
     return {
-        "id": uuid.uuid4().hex[:8],
-        "title": title,
-        "hook": hook,
-        "twist": twist,
-        "style": style,
-        "format": fmt,
-        "dialogue": dialogue,
-        "score": score
+        "format": random.choice(formats),
+        "tone": random.choice(tones)
     }
 
-def score_candidate(hook, twist, style):
-    base = random.uniform(6,9)
+# ---------------- RESEARCHER ----------------
+def researcher():
+    hooks = [
+        "Nobody expected this to happen",
+        "This got out of control instantly",
+        "This is the funniest thing online right now"
+    ]
+    twists = ["betrayal","shock reveal","public embarrassment"]
+    return random.choice(hooks), random.choice(twists)
 
-    if "chaos" in hook.lower(): base += 0.5
-    if twist in ["betrayal","shock elimination"]: base += 0.5
-    if style in ["fruit","fast food","objects"]: base += 0.5
+# ---------------- WRITER ----------------
+def writer(prompt, hook, twist):
+    characters = ["Alpha","Nova","Blitz","Zara"]
+    script = [
+        f"HOOK: {hook}",
+        f"{characters[0]} enters confidently.",
+        f"{characters[1]} challenges them immediately.",
+        f"Twist happens: {twist}.",
+        "Everything explodes into chaos.",
+        "Cliffhanger ending."
+    ]
+    return script, characters
 
-    return round(min(base,10),2)
+# ---------------- CRITIC ----------------
+def critic(script):
+    score = random.uniform(6,10)
+    return score >= 8.2, round(score,2)
 
-def taste_gate(candidates):
-    return [c for c in candidates if c["score"] >= 7.5]
+# ---------------- REFINER LOOP ----------------
+def refine(prompt):
+    best = None
+    for _ in range(8):
+        hook, twist = researcher()
+        script, chars = writer(prompt, hook, twist)
+        ok, score = critic(script)
 
-def evolve(prompt):
-    pool = [generate_candidate(prompt) for _ in range(10)]
-    pool = taste_gate(pool)
+        if ok:
+            best = (script, chars, hook, twist, score)
+            break
 
-    if not pool:
-        pool = [generate_candidate(prompt) for _ in range(5)]
+    return best
 
-    pool = sorted(pool, key=lambda x: x["score"], reverse=True)
-    return pool[0], pool[1:3]
+# ---------------- PRODUCER ----------------
+def produce(script, chars, hook):
+    shots = [f"Scene: {line}" for line in script]
+    captions = [hook, "Follow for next episode"]
+    return shots, captions
 
-# --- MULTI MEDIA EXPANSION ---
-def expand_media(winner):
-
+# ---------------- EXPANSION ----------------
+def expand(title, twist):
     return {
-        "tiktok": {
-            "episode": winner["title"],
-            "hook": winner["hook"]
-        },
-        "youtube": {
-            "long_form": f"{winner['title']} full episode concept"
-        },
-        "podcast": {
-            "topic": f"Discussion inside {winner['title']}"
-        },
-        "comic": {
-            "plot": f"Story arc based on {winner['twist']}"
-        },
-        "game": {
-            "concept": f"Interactive {winner['format']} game with eliminations"
-        },
-        "series_arc": [
-            "Episode 1: intro chaos",
-            "Episode 2: alliances",
-            "Episode 3: betrayal",
-            "Episode 4: elimination",
-            "Episode 5: twist escalation"
-        ]
+        "youtube": f"{title} full episode based on {twist}",
+        "podcast": f"Discussion inside {title}",
+        "comic": f"Story arc about {twist}",
+        "game": f"Interactive chaos game with elimination mechanics"
     }
 
 @router.post("/run")
 def run(payload: dict = Body(...)):
     prompt = payload.get("prompt","")
 
-    winner, alts = evolve(prompt)
-    media = expand_media(winner)
+    decision = director(prompt)
+    result = refine(prompt)
 
-    approvals = load(APPROVAL_FILE, [])
-    winner["approval_bias"] = len(approvals)
+    if not result:
+        return {"status":"failed","reason":"no strong output generated"}
+
+    script, chars, hook, twist, score = result
+
+    shots, captions = produce(script, chars, hook)
+    expansion = expand(prompt, twist)
 
     file = f"{uuid.uuid4().hex[:6]}.json"
     (OUT / file).write_text(json.dumps({
-        "winner": winner,
-        "media": media
+        "script": script,
+        "shots": shots,
+        "captions": captions,
+        "expansion": expansion
     }, indent=2))
 
     return {
         "status":"ok",
-        "phase":"mega sweep A",
+        "phase":"hidden team generator",
         "result":{
-            "title": winner["title"],
-            "summary": "Top-tier filtered and expanded content",
-            "file": f"/api/file/{file}"
-        },
-        "winner": winner,
-        "media": media
+            "title": prompt,
+            "quality_score": score,
+            "file": f"/api/file/{file}",
+            "summary": "Fully refined output generated by internal system"
+        }
     }
-
-@router.post("/approve")
-def approve(payload: dict = Body(...)):
-    approvals = load(APPROVAL_FILE, [])
-    approvals.append(payload)
-    save(APPROVAL_FILE, approvals)
-    return {"status":"saved"}
