@@ -1,7 +1,15 @@
 ﻿import asyncio, requests, os, json, random
 from datetime import datetime
 
-PUBLIC_BASE = (os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app").rstrip("/")
+def normalize_base(url: str, fallback: str) -> str:
+    u = (url or "").strip().rstrip("/")
+    if not u:
+        return fallback
+    if not u.startswith("http://") and not u.startswith("https://"):
+        u = "https://" + u
+    return u
+
+PUBLIC_BASE = normalize_base(os.getenv("PUBLIC_BASE_URL"), "https://semantiqai-backend-production-bcab.up.railway.app")
 LOCAL_BASE = "http://127.0.0.1:8080"
 MEMORY_PATH = "backend/data/god_mode_memory.json"
 
@@ -12,12 +20,12 @@ def load_memory():
     if not os.path.exists(MEMORY_PATH):
         return []
     try:
-        return json.load(open(MEMORY_PATH, "r"))
+        return json.load(open(MEMORY_PATH, "r", encoding="utf-8"))
     except:
         return []
 
 def save_memory(data):
-    json.dump(data, open(MEMORY_PATH, "w"), indent=2)
+    json.dump(data, open(MEMORY_PATH, "w", encoding="utf-8"), indent=2)
 
 def weakest(scores):
     return min(["monetization", "virality", "clarity"], key=lambda k: scores.get(k, 5))
@@ -53,6 +61,7 @@ def post_json(path, payload, prefer_local=True):
 
 async def run_cycle():
     print("=== GOD MODE SURGEON ===")
+    print("PUBLIC_BASE:", PUBLIC_BASE)
 
     memory = load_memory()
 
