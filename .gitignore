@@ -29,3 +29,14 @@ backend/_backup/
 Thumbs.db
 .vscode/
 .idea/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+ENV/
+dist/
+build/
+*.log

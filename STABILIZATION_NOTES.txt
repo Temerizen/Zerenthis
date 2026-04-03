@@ -1,0 +1,13 @@
+﻿Zerenthis Stabilization Sweep Applied
+
+What changed:
+- Replaced backend/app/main.py with a clean shell app
+- Moved router loading to safe dynamic imports
+- Added health, system info, route diagnostics, and file serving
+- Backed up previous entrypoint to backend/app/main.pre_stabilization_backup.py
+
+Next checks:
+1. Start backend
+2. Open /health
+3. Open /api/system/routes
+4. Fix any startup_errors module-by-module instead of crashing the whole app
