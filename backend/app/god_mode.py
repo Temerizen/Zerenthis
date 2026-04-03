@@ -30,7 +30,7 @@ def protocol(weakness):
         return ["step by step","simple breakdown","clear system"]
     return ["optimized"]
 
-async def run_cycle():
+async def run_cycle():\n    # REALITY FEEDBACK INTEGRATION\n    try:\n        import requests\n        fb = requests.get(BASE + "/api/reality/feedback").json()\n        if fb:\n            top = fb[0]\n            print("Reality signal:", top)\n    except:\n        pass\n
     print("=== GOD MODE SURGEON ===")
 
     memory = load_memory()
@@ -151,3 +151,4 @@ async def autopilot_loop():
             print("Autopilot error:", e)
 
         await asyncio.sleep(600)  # 10 min cooldown
+
