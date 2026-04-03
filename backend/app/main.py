@@ -706,6 +706,10 @@ def evolution_preview():
     return {"ok": True, "seed": seed, "evolved": evolved}
 
 app.include_router(evo_router)
+from app.feedback_routes import router as feedback_router
+app.include_router(feedback_router)
+
+
 
 
 
