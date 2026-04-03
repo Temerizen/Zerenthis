@@ -1,17 +1,32 @@
-﻿from fastapi import APIRouter
-from backend.app.expansion import run_expansion
-from backend.app.self_improver import propose_change, approve_proposal
+﻿from fastapi import APIRouter, Body
+from .decision_engine import get_next
+from .expansion_engine import build_expansion_pack, save_expansion_pack, get_expansion_history
 
 router = APIRouter()
 
-@router.post("/api/system/expand")
-def expand():
-    return run_expansion()
+@router.post("/api/expansion/run")
+def expansion_run(
+    topic: str = Body("", embed=True)
+):
+    item = get_next()
 
-@router.post("/api/system/propose")
-def propose():
-    return propose_change()
+    if topic and isinstance(item, dict) and item.get("message") == "No content available":
+        item = {
+            "topic": topic,
+            "buyer": "",
+            "promise": "",
+            "content": "",
+            "niche": "",
+            "tone": ""
+        }
 
-@router.post("/api/system/approve/{pid}")
-def approve(pid: int):
-    return approve_proposal(pid)
+    if not item or item.get("message") == "No content available":
+        return {"message": "No content available for expansion"}
+
+    pack = build_expansion_pack(item)
+    save_expansion_pack(pack)
+    return pack
+
+@router.get("/api/expansion/history")
+def expansion_history():
+    return get_expansion_history()
