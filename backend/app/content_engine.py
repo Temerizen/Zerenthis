@@ -6,7 +6,7 @@
     script = f"""
 Today we are breaking down {topic}.
 
-If you are {buyer}, this will help you {promise}.
+If you are {buyer}, this can help you {promise}.
 
 Step 1: Understand the opportunity.
 Step 2: Apply a simple execution strategy.

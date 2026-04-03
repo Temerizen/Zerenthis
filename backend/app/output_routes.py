@@ -14,7 +14,6 @@ def output_run():
         return {"error": "No content available"}
 
     script = build_script(item)
-
     video = create_video(item["topic"], script)
     pdf = create_pdf(item["topic"], script)
 
