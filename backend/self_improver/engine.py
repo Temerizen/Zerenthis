@@ -1,78 +1,33 @@
-﻿import json
-import time
-from pathlib import Path
+﻿import time
 
-DATA_FILE = Path(__file__).parent / "proposals.json"
-OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data" / "outputs"
+MAX_ATTEMPTS = 5
 
-def load():
-    if not DATA_FILE.exists():
-        return []
-    return json.loads(DATA_FILE.read_text())
+def safe_surgeon_loop(run_step):
+    attempts = 0
 
-def save(data):
-    DATA_FILE.write_text(json.dumps(data, indent=2))
+    while attempts < MAX_ATTEMPTS:
+        try:
+            result = run_step()
 
-def create_proposal(data):
-    items = load()
+            if result == "success":
+                print("SUCCESS: Surgery complete")
+                return
 
-    pid = f"prop_{int(time.time()*1000)}"
+            print("Skipping failed pattern")
 
-    proposal = {
-        "id": pid,
-        "title": data.get("title",""),
-        "description": data.get("description",""),
-        "tier": data.get("tier","low"),
-        "approved": False,
-        "executed": False,
-        "created_at": time.time()
-    }
+        except Exception as e:
+            print("ERROR:", e)
 
-    items.append(proposal)
-    save(items)
-    return proposal
+        attempts += 1
 
-def propose(data):
-    return create_proposal(data)
+    print("FAILED: No valid pattern found. Exiting loop.")
 
-def pending():
-    return [p for p in load() if not p.get("executed")]
+# === ORIGINAL ENTRY POINT WRAP ===
 
-def approve(pid):
-    items = load()
-    for p in items:
-        if p["id"] == pid:
-            p["approved"] = True
-    save(items)
+if __name__ == "__main__":
+    def dummy_step():
+        print("=== GOD MODE SURGEON ===")
+        print("Target: Empire engine seed | Weakness: clarity")
+        return "fail"
 
-def execute(pid):
-    items = load()
-
-    for p in items:
-        if p["id"] == pid and p.get("approved"):
-
-            title = p.get("title","").lower()
-
-            # 🔥 REAL EFFECTS
-            if "weak output" in title:
-                for f in OUTPUT_DIR.glob("*.pdf"):
-                    with open(f, "a", encoding="utf-8") as file:
-                        file.write("\n\n--- IMPROVED VERSION ---\n")
-                        file.write("This product has been upgraded with stronger monetization, clearer structure, and better engagement.\n")
-
-            if "conversion" in title or "cta" in title:
-                for f in OUTPUT_DIR.glob("*.pdf"):
-                    with open(f, "a", encoding="utf-8") as file:
-                        file.write("\n\n--- CALL TO ACTION ---\nBuy now. Limited offer. Take action immediately.\n")
-
-            if "monetization" in title:
-                for f in OUTPUT_DIR.glob("*.pdf"):
-                    with open(f, "a", encoding="utf-8") as file:
-                        file.write("\n\n--- MONETIZATION SECTION ---\nPremium tier: $49\nBundle offer available.\n")
-
-            p["executed"] = True
-            save(items)
-
-            return {"ok": True, "effect": "applied"}
-
-    return {"error": "not approved"}
+    safe_surgeon_loop(dummy_step)
