@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from pathlib import Path
 from typing import Optional, Dict, Any
 from uuid import uuid4
-from datetime import datetime, timezone
 import json, re, threading
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -16,7 +15,7 @@ JOB_FILE = DATA_DIR / "jobs.json"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 GEN_DIR.mkdir(parents=True, exist_ok=True)
 
-app = FastAPI(title="Zerenthis Money Engine", version="2.0")
+app = FastAPI(title="Zerenthis Quality Engine", version="3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,33 +25,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-job_lock = threading.Lock()
-jobs: Dict[str, Dict[str, Any]] = {}
+jobs = {}
+lock = threading.Lock()
 
-def now_iso():
-    return datetime.now(timezone.utc).isoformat()
-
-def safe_slug(v):
-    v = (v or "product").lower()
-    v = re.sub(r"[^a-z0-9]+","_",v)
-    return v[:60]
-
-def load_jobs():
+def load():
     global jobs
     if JOB_FILE.exists():
         try: jobs = json.loads(JOB_FILE.read_text())
         except: jobs = {}
-    else: jobs = {}
 
-def save_jobs():
+def save():
     JOB_FILE.write_text(json.dumps(jobs, indent=2))
 
-def set_job(jid, data):
-    with job_lock:
-        jobs[jid] = {**jobs.get(jid, {}), **data}
-        save_jobs()
+def setj(j, d):
+    with lock:
+        jobs[j] = {**jobs.get(j, {}), **d}
+        save()
 
-class ProductPackRequest(BaseModel):
+def slug(x):
+    return re.sub(r"[^a-z0-9]+","_",x.lower())[:60]
+
+class Req(BaseModel):
     topic:str=""
     niche:str=""
     tone:str=""
@@ -61,142 +54,141 @@ class ProductPackRequest(BaseModel):
     bonus:str=""
     notes:str=""
 
-def build_money_pack(p):
+def build(p):
 
     return f"""
-🔥 {p.topic.upper()} — PREMIUM AI PRODUCT PACK
+🔥 {p.topic.upper()} — AI CASH STARTER KIT
 
-WHO THIS IS FOR:
-{p.buyer}
-
-CORE RESULT:
-This product helps the user {p.promise} using AI with a clear step-by-step system.
+🎯 GOAL:
+Make your first $100 using AI by creating and selling a simple digital product.
 
 --------------------------------------
 
-💰 SECTION 1: THE OPPORTUNITY
+⚡ EXACT METHOD (FASTEST PATH)
 
-Right now, people are making money using AI by:
-- creating digital products
-- selling simple guides
-- building niche content systems
+STEP 1 — Pick a micro-result
+Example: "AI resume builder prompts"
 
-The advantage? Speed and leverage.
+STEP 2 — Generate product using AI
+Use prompts to create:
+- guide
+- templates
+- examples
 
---------------------------------------
+STEP 3 — Package it
+Turn it into a clean PDF or text pack
 
-⚡ SECTION 2: THE SIMPLE MONEY SYSTEM
+STEP 4 — Sell it
+Upload to Gumroad ($9–$19)
 
-STEP 1 — Pick a specific outcome
-STEP 2 — Generate a product around it
-STEP 3 — Package it cleanly
-STEP 4 — Sell it on Gumroad or similar
-STEP 5 — Improve what works
-
---------------------------------------
-
-🧠 SECTION 3: PRODUCT IDEAS
-
-- AI beginner income kit
-- niche-specific AI workflows
-- shortcut guides
-- automation packs
+STEP 5 — Promote
+Post 3–5 short content pieces
 
 --------------------------------------
 
-📦 SECTION 4: YOUR SELLABLE PRODUCT
+💡 REAL PRODUCT IDEAS
 
-Title Idea:
-"{p.topic} — Starter Kit"
+1. "AI Resume Toolkit"
+2. "ChatGPT Side Hustle Prompts"
+3. "Faceless TikTok AI Guide"
+4. "AI Business Name Generator Kit"
+
+--------------------------------------
+
+📦 YOUR FIRST PRODUCT (EXAMPLE)
+
+Title:
+"{p.topic} Starter Kit"
 
 Price:
-$9–$19
+$9
 
-What to include:
-- Guide (this document)
-- Templates
-- Prompts
-
---------------------------------------
-
-🧩 SECTION 5: TEMPLATES (HIGH VALUE)
-
-PROMPT TEMPLATE:
-"Generate a {p.niche} product that helps {p.buyer} achieve {p.promise}"
-
-OFFER TEMPLATE:
-"This guide helps you {p.promise} using AI without wasting time."
+Inside:
+- guide
+- prompts
+- templates
 
 --------------------------------------
 
-🚀 SECTION 6: HOW TO SELL IT
+🧩 HIGH VALUE PROMPTS
 
-1. Upload to Gumroad
-2. Add simple title + description
-3. Post content on TikTok / Twitter
-4. Drive traffic to product
-
---------------------------------------
-
-🎯 SECTION 7: HOOKS
-
-- "AI is replacing beginners — unless you do this"
-- "Turn AI into income in 24 hours"
-- "Start making money with AI even if you're starting from zero"
+1. "Create a beginner-friendly product about {p.topic}"
+2. "Write a sales page for a {p.niche} product"
+3. "Generate 10 TikTok hooks about {p.topic}"
+4. "Create a step-by-step guide for {p.buyer}"
+5. "Write a simple Gumroad description"
+6. "Generate 5 product ideas in {p.niche}"
 
 --------------------------------------
 
-⚠️ FINAL NOTE
+🚀 HOW TO GET YOUR FIRST SALE
 
-This is not theory.
+1. Generate product (10–15 min)
+2. Upload to Gumroad
+3. Post:
+   - 3 TikToks OR
+   - 1 Twitter thread
+4. Use hook:
+   "I made this with AI in 20 minutes"
 
-This is a simple system:
-Create → Package → Sell → Improve
+--------------------------------------
 
-Speed wins.
+🎯 HOOKS THAT SELL
+
+- "This AI trick made me my first sale"
+- "I used ChatGPT to create income"
+- "You’re one prompt away from your first product"
+
+--------------------------------------
+
+⚠️ FINAL TRUTH
+
+This works because:
+- low cost
+- fast creation
+- high demand
+
+The only rule:
+EXECUTE FAST.
 
 """
 
-def process(jid,p):
+def process(j,p):
     try:
-        set_job(jid, {"status":"running"})
-        slug = safe_slug(p.topic)
-        name = f"{slug}_{jid[:6]}.txt"
+        setj(j,{"status":"running"})
+        name = slug(p.topic)+"_"+j[:6]+".txt"
         path = GEN_DIR / name
 
-        content = build_money_pack(p)
-        path.write_text(content)
+        path.write_text(build(p))
 
         url = f"/api/file/{name}"
 
-        set_job(jid,{
+        setj(j,{
             "status":"completed",
             "file_url":url,
-            "file_name":name,
             "result":{"file_url":url}
         })
 
     except Exception as e:
-        set_job(jid,{"status":"failed","error":str(e)})
+        setj(j,{"status":"failed","error":str(e)})
 
 @app.on_event("startup")
-def s(): load_jobs()
+def s(): load()
 
 @app.get("/health")
 def h(): return {"ok":True}
 
 @app.post("/api/product-pack")
-def create(p:ProductPackRequest, bg:BackgroundTasks):
+def create(p:Req, bg:BackgroundTasks):
     jid = uuid4().hex
-    set_job(jid,{"status":"queued"})
+    setj(jid,{"status":"queued"})
     bg.add_task(process,jid,p)
     return {"job_id":jid}
 
 @app.get("/api/job/{jid}")
 def get(jid:str):
-    j = jobs.get(jid)
-    if not j: raise HTTPException(404,"Not found")
-    return j
+    if jid not in jobs: raise HTTPException(404)
+    return jobs[jid]
 
 @app.get("/api/file/{name}")
 def f(name:str):
