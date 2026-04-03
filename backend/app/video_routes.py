@@ -6,4 +6,3 @@ router = APIRouter(prefix="/api/video", tags=["video"])
 @router.post("/generate")
 def generate(data: dict = Body(...)):
     return create_video_package(data)
-
