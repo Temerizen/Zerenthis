@@ -842,3 +842,7 @@ app.include_router(video_factory_router)
 from backend.app.full_loop_routes import router as full_loop_router
 app.include_router(full_loop_router)
 
+
+from backend.app.body_routes import router as body_router
+app.include_router(body_router)
+
