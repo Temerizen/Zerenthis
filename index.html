@@ -3,170 +3,434 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis Generator</title>
+  <title>Zerenthis Studio</title>
   <style>
-    body { margin:0; padding:24px; background:#05070d; color:#f5f7fb; font-family:Arial,sans-serif; }
-    .wrap { max-width:900px; margin:0 auto; }
-    .panel { background:#0d1322; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; margin-bottom:18px; }
-    h1,h2 { margin-top:0; }
-    .sub,.meta { color:rgba(245,247,251,.7); }
-    input, textarea { width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#0a1120; color:#fff; margin-bottom:10px; }
-    textarea { min-height:100px; resize:vertical; }
-    button { padding:12px 16px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; background:#00e5ff; color:#031018; }
-    pre { background:#060b15; border:1px solid rgba(255,255,255,.06); padding:14px; border-radius:14px; overflow:auto; white-space:pre-wrap; word-break:break-word; }
-    a { color:#8be9fd; }
+    :root{
+      --bg:#05070d;
+      --panel:#0d1322;
+      --panel-2:#0a1120;
+      --soft:#9db0d1;
+      --text:#f5f7fb;
+      --line:rgba(255,255,255,.08);
+      --cyan:#00e5ff;
+      --cyan-dark:#031018;
+      --green:#17d18f;
+      --amber:#ffcc66;
+      --red:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:radial-gradient(circle at top, #0a1225 0%, var(--bg) 45%);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+      padding:24px;
+    }
+    .wrap{max-width:1180px;margin:0 auto}
+    .hero{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+      margin-bottom:18px;flex-wrap:wrap;
+    }
+    .title{font-size:34px;font-weight:800;margin:0 0 8px;letter-spacing:.2px}
+    .sub{color:var(--soft);max-width:780px;line-height:1.5}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .panel{
+      background:rgba(13,19,34,.94);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:0 12px 36px rgba(0,0,0,.22);
+    }
+    .panel h2{margin:0 0 14px;font-size:20px}
+    .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+    .stat{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+    .stat-label{
+      font-size:12px;color:var(--soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px
+    }
+    .stat-value{font-size:18px;font-weight:700}
+    label{display:block;margin-bottom:12px}
+    .label-text{display:block;margin-bottom:7px;font-size:13px;color:var(--soft)}
+    input,textarea,select{
+      width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
+      background:var(--panel-2);color:var(--text);outline:none;font-size:14px;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+    button,.link-btn{
+      border:none;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer;
+      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+      transition:transform .08s ease, opacity .2s ease;
+    }
+    button:hover,.link-btn:hover{transform:translateY(-1px)}
+    button:disabled{opacity:.65;cursor:not-allowed;transform:none}
+    .primary{background:var(--cyan);color:var(--cyan-dark);min-width:190px}
+    .secondary{background:#172136;color:var(--text);border:1px solid var(--line)}
+    .download{background:var(--green);color:#06140f}
+    .status-pill{
+      display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;
+      background:#121a2a;border:1px solid var(--line);font-size:13px;font-weight:700;
+    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--amber)}
+    .dot.done{background:var(--green)}
+    .dot.fail{background:var(--red)}
+    .console{
+      background:#08101a;border:1px solid var(--line);border-radius:16px;padding:14px;
+      min-height:240px;white-space:pre-wrap;line-height:1.45;font-size:13px;color:#dbe7ff;
+      overflow:auto;
+    }
+    .muted{color:var(--soft)}
+    .result-card{
+      margin-top:14px;padding:14px;background:#0b1526;border:1px solid var(--line);border-radius:16px;
+    }
+    .result-title{font-weight:800;margin-bottom:8px}
+    .link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .small{font-size:12px}
+    .right-stack{display:flex;flex-direction:column;gap:18px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .list-item{
+      padding:12px 14px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line)
+    }
+    .list-item strong{display:block;margin-bottom:4px}
+    .success{color:#89f0c5}
+    .warn{color:#ffd98d}
+    .error{color:#ff9d9d}
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .mini-grid,.form-grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="panel">
-      <h1>Zerenthis Generator</h1>
-      <div class="sub">Minimal working frontend wired only to the live product generator.</div>
-      <div class="meta">Backend: <span id="backendText"></span></div>
-      <div class="meta">Health: <span id="healthText">Checking...</span></div>
+    <div class="hero">
+      <div>
+        <h1 class="title">Zerenthis Studio</h1>
+        <div class="sub">
+          Founder-grade product pack generation connected to your live Railway backend.
+          Generate, track the job, and download the finished asset from one page.
+        </div>
+      </div>
+      <div class="status-pill">
+        <span id="statusDot" class="dot"></span>
+        <span id="statusText">Idle</span>
+      </div>
     </div>
 
-    <div class="panel">
-      <h2>Generate Product Pack</h2>
-      <input id="topic" value="How to make money with AI in 2026" placeholder="Topic" />
-      <input id="niche" value="Make Money Online" placeholder="Niche" />
-      <input id="tone" value="Premium" placeholder="Tone" />
-      <input id="buyer" value="Beginners starting from zero" placeholder="Buyer" />
-      <input id="promise" value="get results faster" placeholder="Promise" />
-      <input id="bonus" value="templates and prompts" placeholder="Bonus" />
-      <textarea id="notes">Keep it practical and premium</textarea>
-      <button id="generateBtn" onclick="generate()">Generate</button>
-    </div>
+    <div class="grid">
+      <div class="panel">
+        <h2>Generate Product Pack</h2>
 
-    <div class="panel">
-      <h2 id="resultTitle">Latest Result</h2>
-      <div class="meta">Job ID: <span id="jobIdText">None</span></div>
-      <div class="meta">Status: <span id="statusText">Idle</span></div>
-      <pre id="resultBox">Waiting...</pre>
-      <div id="fileLink" style="margin-top:12px;"></div>
+        <div class="mini-grid">
+          <div class="stat">
+            <div class="stat-label">API Base</div>
+            <div class="stat-value" id="apiBaseLabel">Loading...</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Current Job</div>
+            <div class="stat-value" id="jobLabel">None</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Download</div>
+            <div class="stat-value" id="downloadLabel">Waiting</div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span class="label-text">Topic</span>
+            <input id="topic" value="Faceless TikTok AI starter pack for beginners" />
+          </label>
+          <label>
+            <span class="label-text">Niche</span>
+            <input id="niche" value="Content Monetization" />
+          </label>
+          <label>
+            <span class="label-text">Tone</span>
+            <input id="tone" value="Premium" />
+          </label>
+          <label>
+            <span class="label-text">Buyer</span>
+            <input id="buyer" value="New creators" />
+          </label>
+          <label>
+            <span class="label-text">Promise</span>
+            <input id="promise" value="start posting quickly" />
+          </label>
+          <label>
+            <span class="label-text">Bonus</span>
+            <input id="bonus" value="hook templates" />
+          </label>
+        </div>
+
+        <label>
+          <span class="label-text">Notes</span>
+          <textarea id="notes">Emphasize fast setup and monetizable content angles</textarea>
+        </label>
+
+        <div class="actions">
+          <button id="generateBtn" class="primary">Generate Pack</button>
+          <button id="refreshBtn" class="secondary">Refresh Current Job</button>
+          <a id="downloadBtn" class="link-btn download" href="#" target="_blank" style="display:none">Download File</a>
+        </div>
+
+        <div class="result-card">
+          <div class="result-title">Console</div>
+          <div id="console" class="console">Ready.</div>
+        </div>
+      </div>
+
+      <div class="right-stack">
+        <div class="panel">
+          <h2>Current Result</h2>
+          <div class="list">
+            <div class="list-item"><strong>Job ID</strong><span id="resultJob">-</span></div>
+            <div class="list-item"><strong>Status</strong><span id="resultStatus">-</span></div>
+            <div class="list-item"><strong>Score</strong><span id="resultScore">-</span></div>
+            <div class="list-item"><strong>File Name</strong><span id="resultFile">-</span></div>
+            <div class="list-item"><strong>File URL</strong><span id="resultUrl">-</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Flow</h2>
+          <div class="list">
+            <div class="list-item"><strong>1. Submit</strong><span class="muted">POST /api/product-pack</span></div>
+            <div class="list-item"><strong>2. Poll</strong><span class="muted">GET /api/job/{job_id}</span></div>
+            <div class="list-item"><strong>3. Download</strong><span class="muted">Open returned /api/file URL</span></div>
+          </div>
+          <div class="small muted" style="margin-top:12px">
+            This page stores the latest job id in localStorage so refreshes do not lose the trail.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    const API = "https://semantiqai-backend-production-bcab.up.railway.app";
-    let activePoll = null;
-    document.getElementById("backendText").textContent = API;
+    const API_BASE = "https://semantiqai-backend-production-bcab.up.railway.app";
+    const POLL_MS = 2500;
+    let pollHandle = null;
 
-    async function fetchJson(url, options = {}) {
-      const res = await fetch(url, options);
-      const text = await res.text();
-      let data = {};
-      try { data = text ? JSON.parse(text) : {}; } catch (e) { throw new Error(text || "Invalid response"); }
-      if (!res.ok) throw new Error(data.detail || data.error || `Request failed: ${res.status}`);
-      return data;
+    const els = {
+      generateBtn: document.getElementById("generateBtn"),
+      refreshBtn: document.getElementById("refreshBtn"),
+      downloadBtn: document.getElementById("downloadBtn"),
+      console: document.getElementById("console"),
+      statusText: document.getElementById("statusText"),
+      statusDot: document.getElementById("statusDot"),
+      apiBaseLabel: document.getElementById("apiBaseLabel"),
+      jobLabel: document.getElementById("jobLabel"),
+      downloadLabel: document.getElementById("downloadLabel"),
+      resultJob: document.getElementById("resultJob"),
+      resultStatus: document.getElementById("resultStatus"),
+      resultScore: document.getElementById("resultScore"),
+      resultFile: document.getElementById("resultFile"),
+      resultUrl: document.getElementById("resultUrl"),
+      topic: document.getElementById("topic"),
+      niche: document.getElementById("niche"),
+      tone: document.getElementById("tone"),
+      buyer: document.getElementById("buyer"),
+      promise: document.getElementById("promise"),
+      bonus: document.getElementById("bonus"),
+      notes: document.getElementById("notes"),
+    };
+
+    function log(msg, cls) {
+      const line = "[" + new Date().toLocaleTimeString() + "] " + msg;
+      els.console.textContent = els.console.textContent === "Ready." ? line : els.console.textContent + "\n" + line;
+      els.console.scrollTop = els.console.scrollHeight;
     }
 
-    async function loadHealth() {
-      try {
-        const data = await fetchJson(`${API}/health`);
-        document.getElementById("healthText").textContent = data.ok ? "Online" : "Degraded";
-      } catch (err) {
-        document.getElementById("healthText").textContent = "Offline";
+    function setStatus(text, mode) {
+      els.statusText.textContent = text;
+      els.statusDot.className = "dot";
+      if (mode === "done") els.statusDot.classList.add("done");
+      if (mode === "fail") els.statusDot.classList.add("fail");
+    }
+
+    function setBusy(busy) {
+      els.generateBtn.disabled = busy;
+      els.refreshBtn.disabled = busy;
+    }
+
+    function setDownload(fileUrl, fileName) {
+      if (fileUrl) {
+        els.downloadBtn.style.display = "inline-flex";
+        els.downloadBtn.href = API_BASE + fileUrl;
+        els.downloadBtn.download = fileName || "";
+        els.downloadLabel.textContent = "Ready";
+        els.resultUrl.textContent = fileUrl;
+      } else {
+        els.downloadBtn.style.display = "none";
+        els.downloadBtn.href = "#";
+        els.downloadLabel.textContent = "Waiting";
+        els.resultUrl.textContent = "-";
       }
     }
 
-    function renderFileLink(data) {
-      const wrap = document.getElementById("fileLink");
-      const fileUrl = data.file_url || (data.result && data.result.file_url);
-      if (!fileUrl) {
-        wrap.innerHTML = "";
+    function storeJobId(jobId) {
+      localStorage.setItem("zerenthis_last_job_id", jobId || "");
+    }
+
+    function getStoredJobId() {
+      return localStorage.getItem("zerenthis_last_job_id") || "";
+    }
+
+    function renderJob(job) {
+      const fileUrl = job.file_url || (job.result && job.result.file_url) || "";
+      const fileName = job.file_name || "-";
+      els.jobLabel.textContent = job.job_id || "None";
+      els.resultJob.textContent = job.job_id || "-";
+      els.resultStatus.textContent = job.status || "-";
+      els.resultScore.textContent = (job.score ?? "-");
+      els.resultFile.textContent = fileName;
+      setDownload(fileUrl, fileName);
+
+      if (job.status === "completed") {
+        setStatus("Completed", "done");
+        log("Job completed successfully.");
+      } else if (job.status === "failed") {
+        setStatus("Failed", "fail");
+        log("Job failed: " + (job.error || "Unknown error"));
+      } else {
+        setStatus("Running", "");
+        log("Job status: " + job.status);
+      }
+    }
+
+    async function fetchJob(jobId, silent=false) {
+      if (!jobId) {
+        if (!silent) log("No saved job id found.");
         return;
       }
-      const href = fileUrl.startsWith("http") ? fileUrl : `${API}${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
-      wrap.innerHTML = `<a href="${href}" target="_blank" rel="noopener noreferrer">Open generated file</a>`;
+      const res = await fetch(API_BASE + "/api/job/" + encodeURIComponent(jobId));
+      if (!res.ok) {
+        throw new Error("Job lookup failed with status " + res.status);
+      }
+      const job = await res.json();
+      renderJob(job);
+      storeJobId(job.job_id || "");
+      if (job.status === "completed" || job.status === "failed") {
+        stopPolling();
+        setBusy(false);
+      }
+      return job;
     }
 
-    async function pollJob(jobId) {
-      if (activePoll) clearInterval(activePoll);
-      document.getElementById("jobIdText").textContent = jobId;
-      document.getElementById("statusText").textContent = "Polling";
-
-      const check = async () => {
+    function startPolling(jobId) {
+      stopPolling();
+      pollHandle = setInterval(async () => {
         try {
-          const data = await fetchJson(`${API}/api/job/${jobId}`);
-          document.getElementById("resultBox").textContent = JSON.stringify(data, null, 2);
-
-          if (data.status === "completed" || data.status === "done") {
-            clearInterval(activePoll);
-            activePoll = null;
-            document.getElementById("statusText").textContent = "Complete";
-            document.getElementById("resultTitle").textContent = (data.result && data.result.title) || "Generation Complete";
-            renderFileLink(data);
-            return;
-          }
-
-          if (data.status === "failed" || data.error) {
-            clearInterval(activePoll);
-            activePoll = null;
-            document.getElementById("statusText").textContent = "Failed";
-            document.getElementById("resultTitle").textContent = "Generation Failed";
-            return;
-          }
-
-          document.getElementById("statusText").textContent = data.status || "Queued";
+          await fetchJob(jobId, true);
         } catch (err) {
-          clearInterval(activePoll);
-          activePoll = null;
-          document.getElementById("statusText").textContent = "Error";
-          document.getElementById("resultBox").textContent = err.message;
+          log("Polling error: " + err.message);
         }
-      };
+      }, POLL_MS);
+    }
 
-      await check();
-      activePoll = setInterval(check, 2500);
+    function stopPolling() {
+      if (pollHandle) {
+        clearInterval(pollHandle);
+        pollHandle = null;
+      }
     }
 
     async function generate() {
-      const btn = document.getElementById("generateBtn");
-      btn.disabled = true;
-
       try {
-        const payload = {
-          topic: document.getElementById("topic").value.trim(),
-          niche: document.getElementById("niche").value.trim(),
-          tone: document.getElementById("tone").value.trim(),
-          buyer: document.getElementById("buyer").value.trim(),
-          promise: document.getElementById("promise").value.trim(),
-          bonus: document.getElementById("bonus").value.trim(),
-          notes: document.getElementById("notes").value.trim(),
-          duration_seconds: 35
+        setBusy(true);
+        setStatus("Submitting", "");
+        setDownload("", "");
+        log("Submitting product-pack request...");
+
+        const body = {
+          topic: els.topic.value.trim(),
+          niche: els.niche.value.trim(),
+          tone: els.tone.value.trim(),
+          buyer: els.buyer.value.trim(),
+          promise: els.promise.value.trim(),
+          bonus: els.bonus.value.trim(),
+          notes: els.notes.value.trim()
         };
 
-        document.getElementById("resultTitle").textContent = "Submitting Generation Request";
-        document.getElementById("resultBox").textContent = "Sending request...";
-        document.getElementById("fileLink").innerHTML = "";
-        document.getElementById("statusText").textContent = "Submitting";
-
-        const data = await fetchJson(`${API}/api/product-pack`, {
+        const res = await fetch(API_BASE + "/api/product-pack", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(body)
         });
 
-        document.getElementById("resultBox").textContent = JSON.stringify(data, null, 2);
-
-        if (data.job_id) {
-          await pollJob(data.job_id);
-        } else {
-          document.getElementById("statusText").textContent = "Complete";
-          document.getElementById("resultTitle").textContent = data.title || "Generation Complete";
-          renderFileLink(data);
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error("Generate failed: " + text);
         }
+
+        const data = await res.json();
+        const jobId = data.job_id;
+        if (!jobId) throw new Error("No job_id returned from backend.");
+
+        storeJobId(jobId);
+        els.jobLabel.textContent = jobId;
+        els.resultJob.textContent = jobId;
+        els.resultStatus.textContent = data.status || "queued";
+        log("Job created: " + jobId);
+        setStatus("Queued", "");
+        startPolling(jobId);
+        await fetchJob(jobId, true);
       } catch (err) {
-        document.getElementById("statusText").textContent = "Error";
-        document.getElementById("resultTitle").textContent = "Generation Error";
-        document.getElementById("resultBox").textContent = err.message;
-      } finally {
-        btn.disabled = false;
+        setBusy(false);
+        setStatus("Failed", "fail");
+        log(err.message);
       }
     }
 
-    loadHealth();
+    async function refreshCurrentJob() {
+      const jobId = getStoredJobId();
+      if (!jobId) {
+        log("No stored job id yet. Generate a pack first.");
+        return;
+      }
+      try {
+        setBusy(true);
+        log("Refreshing current job: " + jobId);
+        const job = await fetchJob(jobId);
+        if (job && job.status !== "completed" && job.status !== "failed") {
+          startPolling(jobId);
+        }
+      } catch (err) {
+        setStatus("Failed", "fail");
+        log(err.message);
+        setBusy(false);
+      }
+    }
+
+    els.apiBaseLabel.textContent = new URL(API_BASE).hostname;
+    els.generateBtn.addEventListener("click", generate);
+    els.refreshBtn.addEventListener("click", refreshCurrentJob);
+
+    (async function init(){
+      const saved = getStoredJobId();
+      if (saved) {
+        log("Recovered saved job id: " + saved);
+        try {
+          const job = await fetchJob(saved, true);
+          if (job && job.status !== "completed" && job.status !== "failed") {
+            startPolling(saved);
+          } else {
+            setBusy(false);
+          }
+        } catch (err) {
+          log("Saved job refresh failed: " + err.message);
+          setBusy(false);
+        }
+      } else {
+        setBusy(false);
+      }
+    })();
   </script>
 </body>
 </html>

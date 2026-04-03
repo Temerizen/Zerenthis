@@ -1,3 +1,31 @@
+﻿# env
 .env
-.vercel
-.env*.local
+.env.local
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# virtual envs
+venv/
+.venv/
+
+# logs / temp
+*.log
+download_test.txt
+
+# generated/runtime data
+backend/data/outputs/
+backend/data/generated/
+backend/data/self_improver/backups/
+backend/data/self_improver/autopilot_log.json
+backend/_backup/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
