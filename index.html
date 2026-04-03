@@ -514,7 +514,7 @@
       setLoading(true);
 
       try {
-        const response = await fetch(`${API_BASE}/api/command/api/command/run`, {
+        const response = await fetch(`${API_BASE}/api/command/api/command/api/command/run`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -557,5 +557,6 @@
   </script>
 </body>
 </html>
+
 
 
