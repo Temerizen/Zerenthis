@@ -1,4 +1,5 @@
-﻿from backend.app.workflow_builder import router as workflow_builder_router
+﻿from backend.app.knowledge import router as knowledge_router
+from backend.app.workflow_builder import router as workflow_builder_router
 from backend.app.browser_operator import router as browser_operator_router
 from backend.app.inbox import router as inbox_router
 from backend.app.live_mode import router as live_mode_router
@@ -920,4 +921,7 @@ app.include_router(browser_operator_router)
 
 
 app.include_router(workflow_builder_router)
+
+
+app.include_router(knowledge_router)
 
