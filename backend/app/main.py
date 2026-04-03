@@ -1,11 +1,12 @@
-﻿from fastapi import FastAPI, BackgroundTasks
+﻿from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
-import uuid, time, os, json
+from pathlib import Path
+import uuid, time
 
 app = FastAPI()
 
-# Allow frontend (Vercel) to talk to backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,8 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATA_DIR = "data"
-os.makedirs(DATA_DIR, exist_ok=True)
+ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = ROOT / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 jobs = {}
 
@@ -33,25 +35,26 @@ class ProductRequest(BaseModel):
 def health():
     return {"ok": True}
 
-def generate_product(job_id, payload):
+def generate_product(job_id: str, payload: ProductRequest):
     time.sleep(2)
 
-    file_name = payload.topic.replace(" ", "_") + "_" + str(uuid.uuid4())[:6] + ".txt"
-    file_path = os.path.join(DATA_DIR, file_name)
+    safe_name = payload.topic.replace(" ", "_").replace("/", "_").replace("\\", "_")
+    file_name = f"{safe_name}_{str(uuid.uuid4())[:6]}.txt"
+    file_path = DATA_DIR / file_name
 
-    content = f"""
-TITLE: {payload.topic}
+    content = f"""TITLE: {payload.topic}
 
 NICHE: {payload.niche}
+TONE: {payload.tone}
 BUYER: {payload.buyer}
 PROMISE: {payload.promise}
+BONUS: {payload.bonus}
 
 NOTES:
 {payload.notes}
 """
 
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(content)
+    file_path.write_text(content, encoding="utf-8")
 
     jobs[job_id]["status"] = "completed"
     jobs[job_id]["result"] = {
@@ -66,12 +69,11 @@ def create_product(payload: ProductRequest, background_tasks: BackgroundTasks):
 
     jobs[job_id] = {
         "status": "queued",
-        "payload": payload.dict(),
+        "payload": payload.model_dump(),
         "created_at": time.time()
     }
 
     background_tasks.add_task(generate_product, job_id, payload)
-
     return {"job_id": job_id, "status": "queued"}
 
 @app.get("/api/job/{job_id}")
@@ -82,8 +84,11 @@ def get_job(job_id: str):
 
 @app.get("/api/file/{name}")
 def get_file(name: str):
-    path = os.path.join(DATA_DIR, name)
-    if not os.path.exists(path):
-        return {"error": "file not found"}
-    with open(path, "r", encoding="utf-8") as f:
-        return {"content": f.read()}
+    if "/" in name or "\\" in name:
+        raise HTTPException(status_code=400, detail="invalid file name")
+
+    path = DATA_DIR / name
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="file not found")
+
+    return FileResponse(path, media_type="text/plain", filename=path.name)
