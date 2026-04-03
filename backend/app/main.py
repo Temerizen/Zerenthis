@@ -28,6 +28,7 @@ app.add_middleware(
 )
 
 ROUTER_MODULES: List[str] = [
+    "backend.app.autonomy",
     "backend.app.failsafe",
     "backend.app.command_center",
     "backend.app.knowledge",
@@ -137,3 +138,4 @@ def system_info():
         "loaded_routes_count": len(_loaded_routes),
         "startup_errors_count": len(_startup_errors)
     }
+
