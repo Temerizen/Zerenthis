@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-﻿from fastapi import FastAPI
+﻿<<<<<<< HEAD
+ï»¿from fastapi import FastAPI
 from datetime import datetime
 from threading import Thread
 import asyncio, json, os

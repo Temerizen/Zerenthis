@@ -1,36 +1,36 @@
 {
-  "updated_at": "2026-04-03T21:10:15.118242+00:00",
-  "cycles": 111,
+  "updated_at": "2026-04-03T21:17:00.198643+00:00",
+  "cycles": 117,
   "status": "running",
   "weights": {
     "styles": {
       "fruit": 2.26,
-      "animals": 1.33,
-      "robots": 1.24,
-      "fast food": 2.2,
-      "objects": 2.92
+      "animals": 1.27,
+      "robots": 1.18,
+      "fast food": 2.35,
+      "objects": 2.98
     },
     "formats": {
-      "viral short": 1.9,
+      "viral short": 1.84,
       "youtube episode": 1.72,
-      "animated skit": 3.16,
-      "podcast bit": 1.33,
-      "comic arc": 1.18,
-      "game loop": 1.66
+      "animated skit": 3.28,
+      "podcast bit": 1.27,
+      "comic arc": 1.21,
+      "game loop": 1.72
     },
     "hooks": {
       "Nobody expected this to happen": 2.65,
       "This got out of control instantly": 1.99,
       "This is the funniest thing online right now": 2.08,
-      "This might be the messiest episode yet": 1.36,
-      "You will not believe what happens next": 1.87
+      "This might be the messiest episode yet": 1.33,
+      "You will not believe what happens next": 1.99
     },
     "twists": {
-      "betrayal": 2.5,
-      "shock reveal": 3.46,
-      "public embarrassment": 1.03,
+      "betrayal": 2.56,
+      "shock reveal": 3.49,
+      "public embarrassment": 0.97,
       "secret alliance": 1.03,
-      "elimination": 1.93
+      "elimination": 1.99
     }
   },
   "top_patterns": [
@@ -59,14 +59,6 @@
       "quality": 8.33
     },
     {
-      "time": "2026-04-03T20:27:29.604526+00:00",
-      "style": "fruit",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "elimination",
-      "quality": 8.3
-    },
-    {
       "time": "2026-04-03T20:34:14.686418+00:00",
       "style": "fast food",
       "format": "animated skit",
@@ -80,6 +72,14 @@
       "format": "viral short",
       "hook": "This got out of control instantly",
       "twist": "shock reveal",
+      "quality": 8.27
+    },
+    {
+      "time": "2026-04-03T21:13:15.155863+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "You will not believe what happens next",
+      "twist": "betrayal",
       "quality": 8.27
     },
     {
@@ -113,14 +113,6 @@
       "hook": "This might be the messiest episode yet",
       "twist": "betrayal",
       "quality": 8.19
-    },
-    {
-      "time": "2026-04-03T20:28:14.618772+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "betrayal",
-      "quality": 8.14
     },
     {
       "time": "2026-04-03T21:05:45.062967+00:00",
@@ -193,57 +185,17 @@
       "hook": "You will not believe what happens next",
       "twist": "betrayal",
       "quality": 7.92
+    },
+    {
+      "time": "2026-04-03T20:31:14.651403+00:00",
+      "style": "objects",
+      "format": "animated skit",
+      "hook": "This might be the messiest episode yet",
+      "twist": "shock reveal",
+      "quality": 7.91
     }
   ],
   "history": [
-    {
-      "time": "2026-04-03T20:25:59.588230+00:00",
-      "style": "fast food",
-      "format": "podcast bit",
-      "hook": "This might be the messiest episode yet",
-      "twist": "secret alliance",
-      "quality": 7.21
-    },
-    {
-      "time": "2026-04-03T20:26:44.596269+00:00",
-      "style": "fruit",
-      "format": "comic arc",
-      "hook": "You will not believe what happens next",
-      "twist": "public embarrassment",
-      "quality": 6.76
-    },
-    {
-      "time": "2026-04-03T20:27:29.604526+00:00",
-      "style": "fruit",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "elimination",
-      "quality": 8.3
-    },
-    {
-      "time": "2026-04-03T20:28:14.618772+00:00",
-      "style": "objects",
-      "format": "animated skit",
-      "hook": "Nobody expected this to happen",
-      "twist": "betrayal",
-      "quality": 8.14
-    },
-    {
-      "time": "2026-04-03T20:28:59.628637+00:00",
-      "style": "animals",
-      "format": "podcast bit",
-      "hook": "This might be the messiest episode yet",
-      "twist": "public embarrassment",
-      "quality": 6.81
-    },
-    {
-      "time": "2026-04-03T20:29:44.636090+00:00",
-      "style": "fast food",
-      "format": "animated skit",
-      "hook": "This might be the messiest episode yet",
-      "twist": "public embarrassment",
-      "quality": 7.77
-    },
     {
       "time": "2026-04-03T20:30:29.644266+00:00",
       "style": "animals",
@@ -675,6 +627,54 @@
       "hook": "You will not believe what happens next",
       "twist": "shock reveal",
       "quality": 7.5
+    },
+    {
+      "time": "2026-04-03T21:13:15.155863+00:00",
+      "style": "fast food",
+      "format": "animated skit",
+      "hook": "You will not believe what happens next",
+      "twist": "betrayal",
+      "quality": 8.27
+    },
+    {
+      "time": "2026-04-03T21:14:00.165493+00:00",
+      "style": "objects",
+      "format": "game loop",
+      "hook": "This might be the messiest episode yet",
+      "twist": "shock reveal",
+      "quality": 7.59
+    },
+    {
+      "time": "2026-04-03T21:14:45.173247+00:00",
+      "style": "fast food",
+      "format": "game loop",
+      "hook": "Nobody expected this to happen",
+      "twist": "elimination",
+      "quality": 7.42
+    },
+    {
+      "time": "2026-04-03T21:15:30.182450+00:00",
+      "style": "robots",
+      "format": "viral short",
+      "hook": "Nobody expected this to happen",
+      "twist": "public embarrassment",
+      "quality": 6.66
+    },
+    {
+      "time": "2026-04-03T21:16:15.190354+00:00",
+      "style": "objects",
+      "format": "comic arc",
+      "hook": "Nobody expected this to happen",
+      "twist": "elimination",
+      "quality": 7.29
+    },
+    {
+      "time": "2026-04-03T21:17:00.198643+00:00",
+      "style": "animals",
+      "format": "podcast bit",
+      "hook": "This might be the messiest episode yet",
+      "twist": "betrayal",
+      "quality": 6.87
     }
   ]
 }
