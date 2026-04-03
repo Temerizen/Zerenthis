@@ -838,3 +838,7 @@ from fastapi import APIRouter
 from backend.app.video_factory_routes import router as video_factory_router
 app.include_router(video_factory_router)
 
+
+from backend.app.full_loop_routes import router as full_loop_router
+app.include_router(full_loop_router)
+
