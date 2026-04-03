@@ -1,4 +1,5 @@
-﻿from backend.app.vision_hardening import router as vision_hardening_router
+﻿from backend.app.evals import router as evals_router
+from backend.app.vision_hardening import router as vision_hardening_router
 from backend.app.vision import router as vision_router
 from backend.app.monetization import router as monetization_router
 from backend.app.intelligence import router as intelligence_router
@@ -900,4 +901,7 @@ app.include_router(vision_router)
 
 
 app.include_router(vision_hardening_router)
+
+
+app.include_router(evals_router)
 
