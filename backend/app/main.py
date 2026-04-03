@@ -1,4 +1,5 @@
-﻿from backend.app.money_routes import router as money_router
+﻿from backend.app.expansion_routes import router as expansion_router
+from backend.app.money_routes import router as money_router
 from backend.app.founder import router as founder_router
 from backend.app.limit_lock import router as limit_router
 from fastapi import FastAPI, BackgroundTasks, HTTPException, Body
@@ -747,6 +748,7 @@ app.include_router(winner_router)
 
 from backend.app.limit_lock import router as limit_router
 app.include_router(limit_router)
+
 
 
 
