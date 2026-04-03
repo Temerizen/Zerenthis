@@ -8,57 +8,71 @@ router = APIRouter(prefix="/api/command", tags=["command"])
 def _now():
     return datetime.now(timezone.utc).isoformat()
 
-VIRAL_HOOKS = [
-    "This is why nobody talks about this...",
-    "You’re doing this wrong and it’s costing you views",
-    "I tested this so you don’t have to",
-    "Nobody tells beginners this...",
-    "This will either blow up or flop. Watch.",
-    "If this doesn’t work, nothing will"
+CHARACTER_ARCHETYPES = [
+    ("Leader", "confident but secretly insecure"),
+    ("Clown", "funny but underestimated"),
+    ("Villain", "manipulative and strategic"),
+    ("Lover", "emotional and impulsive"),
+    ("Wildcard", "unpredictable chaos"),
 ]
 
-EMOTIONAL_TRIGGERS = [
-    "curiosity gap",
-    "status improvement",
-    "fear of missing out",
-    "identity shift",
-    "social proof tension",
-    "instant reward"
+FORMATS = [
+    "dating show",
+    "survival island",
+    "high school drama",
+    "reality competition",
+    "mafia betrayal",
 ]
 
-CTA_STYLES = [
-    "follow for part 2",
-    "comment 'guide' and I’ll send it",
-    "save this before it disappears",
-    "try this tonight",
-    "watch this twice"
+OBJECT_STYLES = [
+    "fruit",
+    "animals",
+    "robots",
+    "food",
+    "household objects"
 ]
 
-def generate_viral_script(topic):
-    hook = random.choice(VIRAL_HOOKS)
-    trigger = random.choice(EMOTIONAL_TRIGGERS)
-    cta = random.choice(CTA_STYLES)
+def generate_characters(style):
+    names = ["Alpha", "Nova", "Zara", "Blitz", "Milo"]
+    chars = []
+    for i in range(3):
+        role, trait = random.choice(CHARACTER_ARCHETYPES)
+        chars.append({
+            "name": f"{style.capitalize()} {names[i]}",
+            "role": role,
+            "personality": trait
+        })
+    return chars
+
+def generate_episode(prompt):
+    style = random.choice(OBJECT_STYLES)
+    format_type = random.choice(FORMATS)
+    characters = generate_characters(style)
+
+    hook = f"{style.capitalize()} {format_type} is already getting messy..."
+    
+    scenes = [
+        f"{characters[0]['name']} enters and immediately causes tension.",
+        f"{characters[1]['name']} flirts but gets rejected.",
+        f"{characters[2]['name']} reveals a secret alliance.",
+        "Everything escalates into drama.",
+        "Cliffhanger ending."
+    ]
+
+    dialogue = [
+        f"{characters[0]['name']}: 'You think you can trust them?'",
+        f"{characters[1]['name']}: 'I came here to win, not play safe.'",
+        f"{characters[2]['name']}: 'You have no idea what’s coming.'"
+    ]
 
     return {
-        "hook": f"{hook} ({trigger})",
-        "script": [
-            hook,
-            f"Here’s the truth about {topic}.",
-            "Most people overcomplicate this.",
-            "Step 1: Do the simplest version first.",
-            "Step 2: Focus on speed, not perfection.",
-            "Step 3: Repeat what actually works.",
-            f"This is how people are growing fast right now with {topic}.",
-            cta
-        ],
-        "caption": f"{topic} but simplified for real results. {cta}",
-        "hashtags": [
-            "#fyp",
-            "#viral",
-            "#contentcreator",
-            "#tiktokgrowth",
-            "#facelesstiktok"
-        ]
+        "format": format_type,
+        "style": style,
+        "characters": characters,
+        "hook": hook,
+        "scenes": scenes,
+        "dialogue": dialogue,
+        "next_episode_hook": "Someone gets eliminated next episode."
     }
 
 @router.post("/run")
@@ -68,24 +82,17 @@ def run_command(payload: dict = Body(...)):
     if not prompt:
         return {"status": "error", "error": "prompt is required"}
 
-    scripts = [generate_viral_script(prompt) for _ in range(3)]
+    episodes = [generate_episode(prompt) for _ in range(2)]
 
     return {
         "status": "ok",
-        "phase": "viral engine active",
+        "phase": "viral story engine",
         "job_id": f"cmd_{uuid.uuid4().hex[:10]}",
         "created_at": _now(),
         "result": {
-            "title": f"Viral Content Pack: {prompt}",
-            "summary": "High-retention TikTok scripts engineered for attention and growth.",
-            "assets": [
-                {
-                    "type": "viral_scripts",
-                    "label": "TikTok Scripts",
-                    "url": "/api/file/viral_scripts.json"
-                }
-            ],
-            "content": scripts,
-            "next_action": "Pick one script, record immediately, post within 10 minutes."
+            "title": f"Viral Story Series: {prompt}",
+            "summary": "Character-driven viral episode concepts designed for short-form domination.",
+            "content": episodes,
+            "next_action": "Pick one episode, generate visuals + voice, and post immediately."
         }
     }
