@@ -834,12 +834,7 @@ app.include_router(output_router)
 
 
 from fastapi import APIRouter
-from video_factory.engine import run_video_factory
 
-video_router = APIRouter()
+from backend.app.video_factory_routes import router as video_factory_router
+app.include_router(video_factory_router)
 
-@video_router.post("/api/video-factory")
-def create_video(payload: dict):
-    return run_video_factory(payload["topic"])
-
-app.include_router(video_router)
