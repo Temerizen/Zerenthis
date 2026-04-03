@@ -3,696 +3,557 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis Studio | Sweep 8</title>
+  <title>Zerenthis</title>
   <style>
-    :root{
-      --bg:#05070d;
-      --panel:#0d1322;
-      --panel2:#0a1120;
-      --line:rgba(255,255,255,.08);
-      --text:#f5f7fb;
-      --muted:#9db0d1;
-      --cyan:#00e5ff;
-      --cyanDark:#04131b;
-      --green:#17d18f;
-      --amber:#ffcc66;
-      --red:#ff6b6b;
-      --purple:#a78bfa;
+    :root {
+      --bg: #06080f;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #9ea7b8;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --success: #86efac;
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 24px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      color:var(--text);
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
       background:
-        radial-gradient(circle at top, rgba(0,229,255,.08), transparent 28%),
-        radial-gradient(circle at right, rgba(167,139,250,.08), transparent 22%),
-        var(--bg);
-      padding:24px;
+        radial-gradient(circle at top, rgba(125,211,252,0.14), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(167,139,250,0.14), transparent 22%),
+        linear-gradient(180deg, #04060b 0%, #0a1020 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .wrap{max-width:1400px;margin:0 auto}
-    .hero{
-      display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
-      margin-bottom:18px;flex-wrap:wrap;
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
     }
-    .title{font-size:34px;font-weight:800;margin:0 0 8px}
-    .sub{color:var(--muted);max-width:820px;line-height:1.55}
-    .status-pill{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;
-      border-radius:999px;background:#121a2a;border:1px solid var(--line);font-weight:700
+
+    .app {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
     }
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--amber)}
-    .dot.done{background:var(--green)}
-    .dot.fail{background:var(--red)}
-    .dot.live{background:var(--cyan)}
-    .grid{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
-    .panel{
-      background:rgba(13,19,34,.94);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 12px 36px rgba(0,0,0,.22);
+
+    .hero {
+      padding: 32px;
     }
-    .panel h2{margin:0 0 14px;font-size:20px}
-    .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-    .stat{
-      background:var(--panel2);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.2px;
     }
-    .stat-label{
-      font-size:12px;color:var(--muted);margin-bottom:6px;
-      text-transform:uppercase;letter-spacing:.7px
+
+    .orb {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 22px rgba(125,211,252,0.8);
     }
-    .stat-value{font-size:17px;font-weight:700;word-break:break-word}
-    label{display:block;margin-bottom:12px}
-    .label-text{display:block;margin-bottom:7px;font-size:13px;color:var(--muted)}
-    input, textarea{
-      width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
-      background:var(--panel2);color:var(--text);outline:none;font-size:14px;
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(40px, 6vw, 66px);
+      line-height: 0.96;
+      letter-spacing: -2px;
     }
-    textarea{min-height:110px;resize:vertical}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
-    button, .link-btn{
-      border:none;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer;
-      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
-      transition:transform .08s ease, opacity .2s ease;
+
+    .sub {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 680px;
     }
-    button:hover,.link-btn:hover{transform:translateY(-1px)}
-    button:disabled{opacity:.65;cursor:not-allowed;transform:none}
-    .primary{background:var(--cyan);color:var(--cyanDark);min-width:175px}
-    .secondary{background:#172136;color:var(--text);border:1px solid var(--line)}
-    .success{background:var(--green);color:#06140f}
-    .purple{background:var(--purple);color:#160f29}
-    .download{background:var(--green);color:#06140f}
-    .console{
-      background:#08101a;border:1px solid var(--line);border-radius:16px;padding:14px;
-      min-height:250px;white-space:pre-wrap;line-height:1.45;font-size:13px;color:#dbe7ff;overflow:auto;
+
+    .command-box {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
     }
-    .right-stack{display:flex;flex-direction:column;gap:18px}
-    .list{display:flex;flex-direction:column;gap:10px}
-    .item{
-      padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)
+
+    .prompt {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.55;
+      font-family: inherit;
     }
-    .item strong{display:block;margin-bottom:4px}
-    .item .muted{color:var(--muted);font-size:13px}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;
-      font-size:12px;font-weight:700;border:1px solid var(--line);background:#131c2d
+
+    .prompt::placeholder {
+      color: #7e8798;
     }
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .section-space{margin-top:14px}
-    .small{font-size:12px;color:var(--muted)}
-    .divider{height:1px;background:var(--line);margin:14px 0}
-    .clicky{
-      width:100%;text-align:left;background:var(--panel2);color:var(--text);border:1px solid var(--line);
-      padding:12px 14px;border-radius:14px;font-weight:700
+
+    .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      align-items: center;
     }
-    .clicky:hover{filter:brightness(1.06)}
-    .empty{color:var(--muted);font-size:13px;padding:6px 0}
-    @media (max-width: 1050px){
-      .grid{grid-template-columns:1fr}
-      .mini-grid,.form-grid{grid-template-columns:1fr}
+
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.16s ease, opacity 0.16s ease, background 0.16s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07111f;
+      margin-left: auto;
+      min-width: 170px;
+    }
+
+    .side {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .side-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 8px;
+    }
+
+    .big {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .small {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .result {
+      grid-column: 1 / -1;
+      padding: 26px;
+      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result-top {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .result-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.7px;
+      margin: 0 0 8px;
+    }
+
+    .result-summary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .status {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(134,239,172,0.10);
+      border: 1px solid rgba(134,239,172,0.22);
+      color: var(--success);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      min-height: 100%;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .asset-list, .trace-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .asset-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .asset-link:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .trace-item {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .loading {
+      display: none;
+      color: var(--accent);
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .error {
+      display: none;
+      margin-top: 14px;
+      color: #fca5a5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .btn-primary {
+        margin-left: 0;
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <h1 class="title">Zerenthis Studio</h1>
-        <div class="sub">
-          Sweep 8 activates the cash loop. Evolution finds angles, automation runs the engine,
-          generation creates assets, winners surface the best bets, and the page keeps the thread stitched together.
-        </div>
-      </div>
-      <div class="status-pill">
-        <span id="statusDot" class="dot"></span>
-        <span id="statusText">Idle</span>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="panel">
-        <h2>Founder Generation Console</h2>
-
-        <div class="mini-grid">
-          <div class="stat">
-            <div class="stat-label">API Base</div>
-            <div class="stat-value" id="apiBaseLabel">Loading...</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Current Job</div>
-            <div class="stat-value" id="jobLabel">None</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Download</div>
-            <div class="stat-value" id="downloadLabel">Waiting</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Automation</div>
-            <div class="stat-value" id="automationLabel">Checking...</div>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <label>
-            <span class="label-text">Topic</span>
-            <input id="topic" value="Faceless TikTok AI starter pack for beginners" />
-          </label>
-          <label>
-            <span class="label-text">Niche</span>
-            <input id="niche" value="Content Monetization" />
-          </label>
-          <label>
-            <span class="label-text">Tone</span>
-            <input id="tone" value="Premium" />
-          </label>
-          <label>
-            <span class="label-text">Buyer</span>
-            <input id="buyer" value="New creators" />
-          </label>
-          <label>
-            <span class="label-text">Promise</span>
-            <input id="promise" value="start posting quickly" />
-          </label>
-          <label>
-            <span class="label-text">Bonus</span>
-            <input id="bonus" value="hook templates" />
-          </label>
-        </div>
-
-        <label>
-          <span class="label-text">Notes</span>
-          <textarea id="notes">Emphasize fast setup and monetizable content angles</textarea>
-        </label>
-
-        <div class="actions">
-          <button id="generateBtn" class="primary">Generate Pack</button>
-          <button id="refreshBtn" class="secondary">Refresh Current Job</button>
-          <button id="evoPreviewBtn" class="purple">Run Evolution Preview</button>
-          <button id="applyEvoBtn" class="secondary">Apply Evolved Idea</button>
-          <button id="automationRunBtn" class="success">Automation Run Once</button>
-          <button id="automationToggleBtn" class="secondary">Toggle Automation</button>
-          <a id="downloadBtn" class="link-btn download" href="#" target="_blank" style="display:none">Download File</a>
-        </div>
-
-        <div class="section-space">
-          <div class="row">
-            <span class="chip" id="lastSeedChip">Seed: waiting</span>
-            <span class="chip" id="evoStateChip">Evolution: ready</span>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="item">
-          <strong>Evolution Preview</strong>
-          <div id="evoPreviewBox" class="muted">No evolved idea loaded yet.</div>
-        </div>
-
-        <div class="section-space item">
-          <strong>Console</strong>
-          <div id="console" class="console">Ready.</div>
-        </div>
+  <main class="app">
+    <section class="panel hero">
+      <div class="brand">
+        <span class="orb"></span>
+        <span>Zerenthis Command Center</span>
       </div>
 
-      <div class="right-stack">
-        <div class="panel">
-          <h2>Current Result</h2>
-          <div class="list">
-            <div class="item"><strong>Job ID</strong><span id="resultJob">-</span></div>
-            <div class="item"><strong>Status</strong><span id="resultStatus">-</span></div>
-            <div class="item"><strong>Score</strong><span id="resultScore">-</span></div>
-            <div class="item"><strong>File Name</strong><span id="resultFile">-</span></div>
-            <div class="item"><strong>File URL</strong><span id="resultUrl">-</span></div>
-          </div>
+      <h1>One command.<br>Full outcome.</h1>
+      <p class="sub">
+        Describe what you want built, packaged, or monetized. Zerenthis runs the engine room behind the glass and returns the clean result.
+      </p>
+
+      <div class="command-box">
+        <textarea id="prompt" class="prompt" placeholder="Example: Build me a faceless TikTok money strategy with a sellable offer, promo assets, and a posting plan.">Faceless TikTok money strategy</textarea>
+
+        <div class="row">
+          <span class="pill">Apple Flow</span>
+          <span class="pill">Hidden orchestration</span>
+          <span class="pill">Monetizable output</span>
+          <button id="runBtn" class="btn btn-primary">Generate Outcome</button>
         </div>
 
-        <div class="panel">
-          <h2>Automation Status</h2>
-          <div class="list">
-            <div class="item"><strong>Enabled</strong><span id="autoEnabled">-</span></div>
-            <div class="item"><strong>Last Run</strong><span id="autoLastRun">-</span></div>
-            <div class="item"><strong>Runs Today</strong><span id="autoRunsToday">-</span></div>
-            <div class="item"><strong>Last Job</strong><span id="autoLastJob">-</span></div>
-          </div>
+        <div id="loading" class="loading">Generating through command center…</div>
+        <div id="error" class="error"></div>
+      </div>
+    </section>
+
+    <aside class="panel side">
+      <div class="side-card">
+        <div class="kicker">Mode</div>
+        <div class="big">Founder-first flow</div>
+        <div class="small">One input enters. Knowledge, workflow, monetization, and evaluation run behind the curtain.</div>
+      </div>
+
+      <div class="side-card">
+        <div class="kicker">Output</div>
+        <div class="big">Assets, not ideas</div>
+        <div class="small">The panel is designed to surface concrete artifacts and next actions, not a pile of loose suggestions.</div>
+      </div>
+
+      <div class="side-card">
+        <div class="kicker">Design language</div>
+        <div class="big">Quiet power</div>
+        <div class="small">Dark glass, low clutter, clear hierarchy. The point is inevitability, not dashboard confetti.</div>
+      </div>
+    </aside>
+
+    <section id="result" class="panel result">
+      <div class="result-top">
+        <div>
+          <h2 id="resultTitle" class="result-title">Result title</h2>
+          <p id="resultSummary" class="result-summary">Result summary</p>
+        </div>
+        <div id="statusBadge" class="status">Completed</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Assets</h3>
+          <ul id="assetsList" class="asset-list"></ul>
+          <div class="footer-note">Artifacts open directly from the backend file route.</div>
         </div>
 
-        <div class="panel">
-          <h2>Top Winners</h2>
-          <div id="topJobsList" class="list"><div class="empty">Loading winners...</div></div>
+        <div class="card">
+          <h3>Execution Trace</h3>
+          <ul id="traceList" class="trace-list"></ul>
         </div>
 
-        <div class="panel">
-          <h2>Recent Jobs</h2>
-          <div id="recentJobsList" class="list"><div class="empty">Loading jobs...</div></div>
+        <div class="card">
+          <h3>Command Input</h3>
+          <div id="inputMeta" class="meta"></div>
+        </div>
+
+        <div class="card">
+          <h3>Next Action</h3>
+          <div id="nextAction" class="meta"></div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
-    const API_BASE = "https://semantiqai-backend-production-bcab.up.railway.app";
-    const POLL_MS = 2500;
-    let pollHandle = null;
-    let latestEvolution = null;
-    let currentAutomationEnabled = false;
+    const API_BASE = window.location.origin.includes("127.0.0.1") || window.location.origin.includes("localhost")
+      ? "http://127.0.0.1:8000"
+      : "";
 
-    const els = {
-      generateBtn: document.getElementById("generateBtn"),
-      refreshBtn: document.getElementById("refreshBtn"),
-      evoPreviewBtn: document.getElementById("evoPreviewBtn"),
-      applyEvoBtn: document.getElementById("applyEvoBtn"),
-      automationRunBtn: document.getElementById("automationRunBtn"),
-      automationToggleBtn: document.getElementById("automationToggleBtn"),
-      downloadBtn: document.getElementById("downloadBtn"),
-      console: document.getElementById("console"),
-      statusText: document.getElementById("statusText"),
-      statusDot: document.getElementById("statusDot"),
-      apiBaseLabel: document.getElementById("apiBaseLabel"),
-      jobLabel: document.getElementById("jobLabel"),
-      downloadLabel: document.getElementById("downloadLabel"),
-      automationLabel: document.getElementById("automationLabel"),
-      resultJob: document.getElementById("resultJob"),
-      resultStatus: document.getElementById("resultStatus"),
-      resultScore: document.getElementById("resultScore"),
-      resultFile: document.getElementById("resultFile"),
-      resultUrl: document.getElementById("resultUrl"),
-      autoEnabled: document.getElementById("autoEnabled"),
-      autoLastRun: document.getElementById("autoLastRun"),
-      autoRunsToday: document.getElementById("autoRunsToday"),
-      autoLastJob: document.getElementById("autoLastJob"),
-      topJobsList: document.getElementById("topJobsList"),
-      recentJobsList: document.getElementById("recentJobsList"),
-      lastSeedChip: document.getElementById("lastSeedChip"),
-      evoStateChip: document.getElementById("evoStateChip"),
-      evoPreviewBox: document.getElementById("evoPreviewBox"),
-      topic: document.getElementById("topic"),
-      niche: document.getElementById("niche"),
-      tone: document.getElementById("tone"),
-      buyer: document.getElementById("buyer"),
-      promise: document.getElementById("promise"),
-      bonus: document.getElementById("bonus"),
-      notes: document.getElementById("notes"),
-    };
+    const promptEl = document.getElementById("prompt");
+    const runBtn = document.getElementById("runBtn");
+    const resultEl = document.getElementById("result");
+    const loadingEl = document.getElementById("loading");
+    const errorEl = document.getElementById("error");
 
-    function log(msg) {
-      const line = "[" + new Date().toLocaleTimeString() + "] " + msg;
-      els.console.textContent = els.console.textContent === "Ready." ? line : els.console.textContent + "\n" + line;
-      els.console.scrollTop = els.console.scrollHeight;
+    function setLoading(isLoading) {
+      runBtn.disabled = isLoading;
+      runBtn.textContent = isLoading ? "Generating..." : "Generate Outcome";
+      loadingEl.classList.toggle("show", isLoading);
+      errorEl.classList.remove("show");
+      errorEl.textContent = "";
     }
 
-    function setStatus(text, mode) {
-      els.statusText.textContent = text;
-      els.statusDot.className = "dot";
-      if (mode === "done") els.statusDot.classList.add("done");
-      if (mode === "fail") els.statusDot.classList.add("fail");
-      if (mode === "live") els.statusDot.classList.add("live");
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.classList.add("show");
     }
 
-    function setBusy(busy) {
-      [
-        els.generateBtn, els.refreshBtn, els.evoPreviewBtn,
-        els.applyEvoBtn, els.automationRunBtn, els.automationToggleBtn
-      ].forEach(btn => btn.disabled = busy);
-    }
+    function renderAssets(assets) {
+      const assetsList = document.getElementById("assetsList");
+      assetsList.innerHTML = "";
 
-    function storeJobId(jobId) {
-      localStorage.setItem("zerenthis_last_job_id", jobId || "");
-    }
-
-    function getStoredJobId() {
-      return localStorage.getItem("zerenthis_last_job_id") || "";
-    }
-
-    function prettyTime(value) {
-      if (!value) return "-";
-      try { return new Date(value).toLocaleString(); }
-      catch { return value; }
-    }
-
-    function setDownload(fileUrl, fileName) {
-      if (fileUrl) {
-        els.downloadBtn.style.display = "inline-flex";
-        els.downloadBtn.href = API_BASE + fileUrl;
-        els.downloadBtn.download = fileName || "";
-        els.downloadLabel.textContent = "Ready";
-        els.resultUrl.textContent = fileUrl;
-      } else {
-        els.downloadBtn.style.display = "none";
-        els.downloadBtn.href = "#";
-        els.downloadLabel.textContent = "Waiting";
-        els.resultUrl.textContent = "-";
-      }
-    }
-
-    function renderJob(job) {
-      const fileUrl = job.file_url || (job.result && job.result.file_url) || "";
-      const fileName = job.file_name || "-";
-      els.jobLabel.textContent = job.job_id || "None";
-      els.resultJob.textContent = job.job_id || "-";
-      els.resultStatus.textContent = job.status || "-";
-      els.resultScore.textContent = (job.score ?? "-");
-      els.resultFile.textContent = fileName;
-      setDownload(fileUrl, fileName);
-
-      if (job.status === "completed") {
-        setStatus("Completed", "done");
-        log("Job completed successfully.");
-      } else if (job.status === "failed") {
-        setStatus("Failed", "fail");
-        log("Job failed: " + (job.error || "Unknown error"));
-      } else {
-        setStatus("Running", "live");
-        log("Job status: " + job.status);
-      }
-    }
-
-    async function api(path, options = {}) {
-      const res = await fetch(API_BASE + path, options);
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(path + " -> " + text);
-      }
-      return res.json();
-    }
-
-    async function fetchJob(jobId, silent = false) {
-      if (!jobId) {
-        if (!silent) log("No saved job id found.");
+      if (!assets || !assets.length) {
+        assetsList.innerHTML = '<li class="trace-item">No artifacts returned yet.</li>';
         return;
       }
-      const job = await api("/api/job/" + encodeURIComponent(jobId));
-      renderJob(job);
-      storeJobId(job.job_id || "");
-      if (job.status === "completed" || job.status === "failed") {
-        stopPolling();
-        setBusy(false);
-      }
-      return job;
-    }
 
-    function startPolling(jobId) {
-      stopPolling();
-      pollHandle = setInterval(async () => {
-        try {
-          await fetchJob(jobId, true);
-          await loadJobs();
-          await loadTopJobs();
-        } catch (err) {
-          log("Polling error: " + err.message);
-        }
-      }, POLL_MS);
-    }
-
-    function stopPolling() {
-      if (pollHandle) {
-        clearInterval(pollHandle);
-        pollHandle = null;
+      for (const asset of assets) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.className = "asset-link";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.href = `${API_BASE}${asset.url || ""}`;
+        a.innerHTML = `<span>${asset.label || asset.type || "Artifact"}</span><span class="mono">${asset.url || ""}</span>`;
+        li.appendChild(a);
+        assetsList.appendChild(li);
       }
     }
 
-    function formPayload() {
-      return {
-        topic: els.topic.value.trim(),
-        niche: els.niche.value.trim(),
-        tone: els.tone.value.trim(),
-        buyer: els.buyer.value.trim(),
-        promise: els.promise.value.trim(),
-        bonus: els.bonus.value.trim(),
-        notes: els.notes.value.trim()
-      };
+    function renderTrace(trace) {
+      const traceList = document.getElementById("traceList");
+      traceList.innerHTML = "";
+
+      if (!trace || !trace.length) {
+        traceList.innerHTML = '<li class="trace-item">No trace available.</li>';
+        return;
+      }
+
+      for (const item of trace) {
+        const li = document.createElement("li");
+        li.className = "trace-item";
+        li.textContent = item;
+        traceList.appendChild(li);
+      }
     }
 
-    function applyPayload(data) {
-      if (!data) return;
-      if (data.topic) els.topic.value = data.topic;
-      if (data.niche) els.niche.value = data.niche;
-      if (data.tone) els.tone.value = data.tone;
-      if (data.buyer) els.buyer.value = data.buyer;
-      if (data.promise) els.promise.value = data.promise;
-      if (data.bonus) els.bonus.value = data.bonus;
-      if (data.notes) els.notes.value = data.notes;
+    function renderInputMeta(input) {
+      const inputMeta = document.getElementById("inputMeta");
+      const rows = [
+        ["Prompt", input?.prompt || ""],
+        ["Buyer", input?.buyer || ""],
+        ["Niche", input?.niche || ""],
+        ["Promise", input?.promise || ""]
+      ];
+      inputMeta.innerHTML = rows.map(([k, v]) => `<div><strong>${k}:</strong> ${v || "-"}</div>`).join("");
     }
 
-    async function generate() {
+    async function runCommand() {
+      const prompt = promptEl.value.trim();
+      if (!prompt) {
+        showError("Write a command first.");
+        return;
+      }
+
+      setLoading(true);
+
       try {
-        setBusy(true);
-        setStatus("Submitting", "live");
-        setDownload("", "");
-        log("Submitting product-pack request...");
-        const data = await api("/api/product-pack", {
+        const response = await fetch(`${API_BASE}/api/command/run`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formPayload())
+          body: JSON.stringify({
+            prompt,
+            buyer: "New creators",
+            niche: "Content Monetization",
+            promise: "start posting fast and monetize sooner"
+          })
         });
-        const jobId = data.job_id;
-        if (!jobId) throw new Error("No job_id returned from backend.");
-        storeJobId(jobId);
-        els.jobLabel.textContent = jobId;
-        els.resultJob.textContent = jobId;
-        els.resultStatus.textContent = data.status || "queued";
-        log("Job created: " + jobId);
-        setStatus("Queued", "live");
-        startPolling(jobId);
-        await fetchJob(jobId, true);
-        await loadJobs();
-        await loadTopJobs();
-        await loadAutomationStatus();
-      } catch (err) {
-        setBusy(false);
-        setStatus("Failed", "fail");
-        log("Generate error: " + err.message);
-      }
-    }
 
-    async function refreshCurrentJob() {
-      const jobId = getStoredJobId();
-      if (!jobId) {
-        log("No stored job id yet. Generate a pack first.");
-        return;
-      }
-      try {
-        setBusy(true);
-        log("Refreshing current job: " + jobId);
-        const job = await fetchJob(jobId);
-        if (job && job.status !== "completed" && job.status !== "failed") {
-          startPolling(jobId);
+        const data = await response.json();
+
+        if (!response.ok || data.status === "error") {
+          throw new Error(data.error || data.detail || "Command failed.");
         }
-        await loadJobs();
-        await loadTopJobs();
-        await loadAutomationStatus();
-      } catch (err) {
-        setStatus("Failed", "fail");
-        log("Refresh error: " + err.message);
-        setBusy(false);
-      }
-    }
 
-    async function runEvolutionPreview() {
-      try {
-        setBusy(true);
-        setStatus("Evolving", "live");
-        log("Requesting evolution preview...");
-        const data = await api("/api/evolution/preview", { method: "POST" });
-        latestEvolution = data.evolved || null;
-        const seedTopic = data.seed && data.seed.topic ? data.seed.topic : "unknown";
-        els.lastSeedChip.textContent = "Seed: " + seedTopic;
-        els.evoStateChip.textContent = "Evolution: preview ready";
-        els.evoPreviewBox.textContent = JSON.stringify(data.evolved || {}, null, 2);
-        log("Evolution preview ready.");
-        setStatus("Evolution Ready", "done");
+        document.getElementById("resultTitle").textContent = data.result?.title || "Command Result";
+        document.getElementById("resultSummary").textContent = data.result?.summary || "";
+        document.getElementById("statusBadge").textContent = (data.status || "ok").toUpperCase();
+        document.getElementById("nextAction").innerHTML = `<div>${data.result?.next_action || "No next action returned."}</div>`;
+
+        renderAssets(data.result?.assets || []);
+        renderTrace(data.trace || []);
+        renderInputMeta(data.input || {});
+        resultEl.classList.add("show");
+        resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
       } catch (err) {
-        setStatus("Evolution Failed", "fail");
-        log("Evolution preview error: " + err.message);
+        showError(err.message || "Something went sideways.");
       } finally {
-        setBusy(false);
+        setLoading(false);
       }
     }
 
-    function applyEvolution() {
-      if (!latestEvolution) {
-        log("No evolved idea is loaded yet.");
-        return;
+    runBtn.addEventListener("click", runCommand);
+    promptEl.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        runCommand();
       }
-      applyPayload(latestEvolution);
-      els.evoStateChip.textContent = "Evolution: applied to form";
-      log("Applied evolved idea to the form.");
-    }
-
-    async function runAutomationOnce() {
-      try {
-        setBusy(true);
-        setStatus("Automation Run", "live");
-        log("Triggering automation run once...");
-        const data = await api("/api/automation/run-once", { method: "POST" });
-        const jobId = data.job_id;
-        if (data.payload) {
-          applyPayload(data.payload);
-          log("Applied automation payload to form.");
-        }
-        if (jobId) {
-          storeJobId(jobId);
-          els.jobLabel.textContent = jobId;
-          els.resultJob.textContent = jobId;
-          log("Automation created job: " + jobId);
-          startPolling(jobId);
-          await fetchJob(jobId, true);
-        }
-        await loadAutomationStatus();
-        await loadJobs();
-        await loadTopJobs();
-      } catch (err) {
-        setStatus("Automation Failed", "fail");
-        log("Automation run error: " + err.message);
-      } finally {
-        setBusy(false);
-      }
-    }
-
-    async function toggleAutomation() {
-      try {
-        setBusy(true);
-        const path = currentAutomationEnabled ? "/api/automation/stop" : "/api/automation/start";
-        log((currentAutomationEnabled ? "Stopping" : "Starting") + " automation...");
-        await api(path, { method: "POST" });
-        await loadAutomationStatus();
-      } catch (err) {
-        setStatus("Automation Toggle Failed", "fail");
-        log("Automation toggle error: " + err.message);
-      } finally {
-        setBusy(false);
-      }
-    }
-
-    async function loadAutomationStatus() {
-      try {
-        const data = await api("/api/automation/status");
-        currentAutomationEnabled = !!data.enabled;
-        els.automationLabel.textContent = data.enabled ? "Enabled" : "Disabled";
-        els.autoEnabled.textContent = data.enabled ? "Yes" : "No";
-        els.autoLastRun.textContent = prettyTime(data.last_run_at);
-        els.autoRunsToday.textContent = String(data.runs_today ?? 0) + " / " + String(data.max_daily_runs ?? "-");
-        els.autoLastJob.textContent = data.last_job_id || "-";
-        els.automationToggleBtn.textContent = data.enabled ? "Stop Automation" : "Start Automation";
-      } catch (err) {
-        els.automationLabel.textContent = "Error";
-        log("Automation status error: " + err.message);
-      }
-    }
-
-    function winnerButton(job) {
-      const btn = document.createElement("button");
-      btn.className = "clicky";
-      const score = job.score ?? "-";
-      const fileName = job.file_name || "No file";
-      const title = (job.payload && job.payload.topic) || job.topic || job.title || "Untitled";
-      btn.innerHTML =
-        "<div><strong>" + title + "</strong></div>" +
-        "<div class='muted'>Score: " + score + " | Status: " + (job.status || "-") + "</div>" +
-        "<div class='muted'>" + fileName + "</div>";
-      btn.addEventListener("click", () => {
-        if (job.payload) {
-          applyPayload(job.payload);
-          log("Loaded winner payload into form: " + title);
-        } else {
-          els.topic.value = title;
-          log("Loaded winner topic into form: " + title);
-        }
-      });
-      return btn;
-    }
-
-    async function loadTopJobs() {
-      try {
-        const jobs = await api("/api/top?limit=5");
-        els.topJobsList.innerHTML = "";
-        if (!jobs.length) {
-          els.topJobsList.innerHTML = "<div class='empty'>No scored winners yet.</div>";
-          return;
-        }
-        jobs.forEach(job => els.topJobsList.appendChild(winnerButton(job)));
-      } catch (err) {
-        els.topJobsList.innerHTML = "<div class='empty'>Could not load winners.</div>";
-        log("Top jobs error: " + err.message);
-      }
-    }
-
-    function recentButton(job) {
-      const btn = document.createElement("button");
-      btn.className = "clicky";
-      const title = (job.payload && job.payload.topic) || "Untitled";
-      const fileUrl = job.file_url || (job.result && job.result.file_url) || "";
-      btn.innerHTML =
-        "<div><strong>" + title + "</strong></div>" +
-        "<div class='muted'>Status: " + (job.status || "-") + " | Score: " + (job.score ?? "-") + "</div>" +
-        "<div class='muted'>" + (fileUrl || "No file URL yet") + "</div>";
-      btn.addEventListener("click", async () => {
-        storeJobId(job.job_id || "");
-        log("Selected recent job: " + (job.job_id || "-"));
-        renderJob(job);
-        if (job.job_id && job.status !== "completed" && job.status !== "failed") {
-          startPolling(job.job_id);
-        }
-      });
-      return btn;
-    }
-
-    async function loadJobs() {
-      try {
-        const jobs = await api("/api/jobs");
-        els.recentJobsList.innerHTML = "";
-        if (!jobs.length) {
-          els.recentJobsList.innerHTML = "<div class='empty'>No jobs found yet.</div>";
-          return;
-        }
-        jobs.slice(0, 8).forEach(job => els.recentJobsList.appendChild(recentButton(job)));
-      } catch (err) {
-        els.recentJobsList.innerHTML = "<div class='empty'>Could not load recent jobs.</div>";
-        log("Jobs list error: " + err.message);
-      }
-    }
-
-    async function init() {
-      els.apiBaseLabel.textContent = new URL(API_BASE).hostname;
-      els.generateBtn.addEventListener("click", generate);
-      els.refreshBtn.addEventListener("click", refreshCurrentJob);
-      els.evoPreviewBtn.addEventListener("click", runEvolutionPreview);
-      els.applyEvoBtn.addEventListener("click", applyEvolution);
-      els.automationRunBtn.addEventListener("click", runAutomationOnce);
-      els.automationToggleBtn.addEventListener("click", toggleAutomation);
-
-      await loadAutomationStatus();
-      await loadJobs();
-      await loadTopJobs();
-
-      const saved = getStoredJobId();
-      if (saved) {
-        log("Recovered saved job id: " + saved);
-        try {
-          const job = await fetchJob(saved, true);
-          if (job && job.status !== "completed" && job.status !== "failed") {
-            startPolling(saved);
-          } else {
-            setBusy(false);
-          }
-        } catch (err) {
-          log("Saved job refresh failed: " + err.message);
-          setBusy(false);
-        }
-      } else {
-        setBusy(false);
-      }
-
-      setStatus("Ready", "done");
-    }
-
-    init();
+    });
   </script>
 </body>
 </html>
