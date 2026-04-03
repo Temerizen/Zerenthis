@@ -13,10 +13,8 @@ def _safe_name(path: str) -> str:
     return os.path.basename(path or "").strip()
 
 def _asset_url(request: Request, filename: str) -> str:
-    public_base = (os.getenv("PUBLIC_BASE_URL") or "").rstrip("/")
-    if public_base:
-        return f"{public_base}/api/assets/{quote(filename)}"
-    return str(request.base_url).rstrip("/") + f"/api/assets/{quote(filename)}"
+    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app").rstrip("/")
+    return f"{public_base}/api/assets/{quote(filename)}"
 
 def _build_meta(data: dict, script: str) -> dict:
     topic = data.get("topic", "Generated Content")
