@@ -7,7 +7,7 @@ from threading import Thread
 app = FastAPI()
 
 # ========================
-# GLOBAL STATE (SAFE)
+# GLOBAL STATE
 # ========================
 
 SYSTEM_STATE = {
@@ -21,14 +21,16 @@ SYSTEM_STATE = {
     "stats": {
         "commands_run": 0,
         "tasks_completed": 0,
-        "proposals_created": 0
+        "proposals_created": 0,
+        "proposals_executed": 0,
     }
 }
 
 AUTO_MODE = True
 
+
 # ========================
-# UTILITIES
+# HELPERS
 # ========================
 
 def now():
@@ -36,6 +38,7 @@ def now():
 
 def log(msg: str):
     SYSTEM_STATE["logs"].append(f"[{now()}] {msg}")
+    SYSTEM_STATE["logs"] = SYSTEM_STATE["logs"][-200:]
 
 def add_task(cmd: str, source: str = "manual"):
     task = {
@@ -43,7 +46,7 @@ def add_task(cmd: str, source: str = "manual"):
         "command": cmd,
         "status": "queued",
         "created_at": now(),
-        "source": source
+        "source": source,
     }
     SYSTEM_STATE["tasks"].append(task)
     return task
@@ -53,29 +56,38 @@ def add_proposal(title: str, action: str, risk: str = "low"):
         "id": len(SYSTEM_STATE["proposals"]) + 1,
         "title": title,
         "action": action,
-        "risk": risk,  # low | medium | high
+        "risk": risk,   # low | medium | high
         "status": "pending",
-        "created_at": now()
+        "created_at": now(),
+        "result": None,
     }
     SYSTEM_STATE["proposals"].append(proposal)
     SYSTEM_STATE["stats"]["proposals_created"] += 1
     log(f"[PROPOSAL] {title} (risk={risk})")
     return proposal
 
+def find_proposal(proposal_id: int):
+    for proposal in SYSTEM_STATE["proposals"]:
+        if proposal["id"] == proposal_id:
+            return proposal
+    return None
+
+
 # ========================
-# BASIC
+# BASIC ROUTES
 # ========================
 
 @app.get("/")
 def root():
     return {
         "status": "Zerenthis Phone Control Online",
-        "mode": SYSTEM_STATE["mode"]
+        "mode": SYSTEM_STATE["mode"],
     }
 
 @app.get("/health")
 def health():
     return {"ok": True}
+
 
 # ========================
 # COMMANDER
@@ -84,7 +96,7 @@ def health():
 commander = APIRouter()
 
 @commander.get("/status")
-def status():
+def commander_status():
     return {"state": SYSTEM_STATE}
 
 @commander.get("/command")
@@ -99,23 +111,50 @@ def run_command(cmd: str):
 
     return {"queued": task}
 
+
 # ========================
-# TASK ENGINE (SAFE)
+# TASK ENGINE
 # ========================
 
 tasks = APIRouter()
 
 def execute_logic(command: str):
-    cmd = command.lower()
+    cmd = command.lower().strip()
+
+    # Special case so /memory/set?... passed in as a command can still work
+    if cmd.startswith("/memory/set?"):
+        try:
+            query = cmd.split("?", 1)[1]
+            params = {}
+            for piece in query.split("&"):
+                if "=" in piece:
+                    k, v = piece.split("=", 1)
+                    params[k] = v.replace("+", " ")
+            key = params.get("key")
+            value = params.get("value")
+            if key is not None and value is not None:
+                SYSTEM_STATE["memory"][key] = value
+                log(f"[MEM] set {key}")
+                return f"Memory stored: {key}"
+        except Exception as e:
+            return f"Memory parse failed: {e}"
 
     if "scan" in cmd:
         return "Scan complete (placeholder)"
+
+    if "plan-monetization" in cmd:
+        add_proposal(
+            "Create monetization workflow",
+            "Build monetization routes and founder cash engine planning",
+            risk="medium",
+        )
+        return "Monetization plan created"
 
     if "build-product-idea" in cmd:
         add_proposal(
             "Create product generator skeleton",
             "Add /api/product-pack endpoint and basic job flow",
-            risk="medium"
+            risk="medium",
         )
         return "Product idea planned"
 
@@ -123,23 +162,15 @@ def execute_logic(command: str):
         add_proposal(
             "Create content strategy module",
             "Generate short-form and long-form content planning routes",
-            risk="low"
+            risk="low",
         )
         return "Content strategy planned"
-
-    if "plan-monetization" in cmd:
-        add_proposal(
-            "Create monetization workflow",
-            "Build monetization routes and founder cash engine planning",
-            risk="medium"
-        )
-        return "Monetization plan created"
 
     if "focus-tiktok-engine" in cmd:
         add_proposal(
             "Focus on TikTok engine",
             "Prioritize faceless TikTok scripts and content flow",
-            risk="low"
+            risk="low",
         )
         return "TikTok engine focus planned"
 
@@ -147,15 +178,31 @@ def execute_logic(command: str):
         add_proposal(
             "Build digital product system",
             "Create product templates, packs, and export planning",
-            risk="medium"
+            risk="medium",
         )
         return "Digital product system planned"
+
+    if "expand-intelligence-system" in cmd:
+        add_proposal(
+            "Expand intelligence system",
+            "Plan research, learning, and reasoning modules",
+            risk="medium",
+        )
+        return "Intelligence expansion planned"
+
+    if "prioritize-monetization" in cmd:
+        add_proposal(
+            "Prioritize monetization",
+            "Shift roadmap toward fast-income features first",
+            risk="low",
+        )
+        return "Monetization priority planned"
 
     if "build" in cmd:
         add_proposal(
             "Create build proposal",
             f"Prepare safe build plan for command: {command}",
-            risk="medium"
+            risk="medium",
         )
         return "Build planned (proposal created)"
 
@@ -163,7 +210,7 @@ def execute_logic(command: str):
         add_proposal(
             "Create planning proposal",
             f"Plan next steps for: {command}",
-            risk="low"
+            risk="low",
         )
         return "Plan created"
 
@@ -202,8 +249,9 @@ def run_next():
 def list_tasks():
     return {"tasks": SYSTEM_STATE["tasks"]}
 
+
 # ========================
-# MEMORY / GOALS
+# MEMORY
 # ========================
 
 memory = APIRouter()
@@ -218,18 +266,21 @@ def set_memory(key: str, value: str):
 def get_memory(key: str):
     return {"value": SYSTEM_STATE["memory"].get(key)}
 
+
 # ========================
 # LOGS
 # ========================
 
 logs = APIRouter()
 
+@logs.get("")
 @logs.get("/")
 def get_logs():
-    return {"logs": SYSTEM_STATE["logs"][-100:]}
+    return {"logs": SYSTEM_STATE["logs"]}
+
 
 # ========================
-# PROPOSALS (RISK GATE)
+# PROPOSALS
 # ========================
 
 proposals = APIRouter()
@@ -238,25 +289,60 @@ proposals = APIRouter()
 def list_props():
     return {"proposals": SYSTEM_STATE["proposals"]}
 
-@proposals.get("/approve")
-def approve(id: int):
-    for proposal in SYSTEM_STATE["proposals"]:
-        if proposal["id"] == id:
-            if proposal["risk"] == "high":
-                return {"error": "High risk requires PC approval"}
-            proposal["status"] = "approved"
-            log(f"[APPROVED] {proposal['title']}")
-            return {"approved": proposal}
-    return {"error": "not found"}
+@proposals.get("/approve/{proposal_id}")
+def approve_path(proposal_id: int):
+    proposal = find_proposal(proposal_id)
+    if not proposal:
+        return {"error": "not found"}
 
-@proposals.get("/reject")
-def reject(id: int):
-    for proposal in SYSTEM_STATE["proposals"]:
-        if proposal["id"] == id:
-            proposal["status"] = "rejected"
-            log(f"[REJECTED] {proposal['title']}")
-            return {"rejected": proposal}
-    return {"error": "not found"}
+    if proposal["risk"] == "high":
+        return {"error": "High risk requires PC approval"}
+
+    proposal["status"] = "approved"
+    log(f"[APPROVED] {proposal['title']}")
+    return {"status": "approved", "proposal": proposal}
+
+@proposals.get("/reject/{proposal_id}")
+def reject_path(proposal_id: int):
+    proposal = find_proposal(proposal_id)
+    if not proposal:
+        return {"error": "not found"}
+
+    proposal["status"] = "rejected"
+    log(f"[REJECTED] {proposal['title']}")
+    return {"status": "rejected", "proposal": proposal}
+
+@proposals.get("/execute/{proposal_id}")
+def execute_proposal(proposal_id: int):
+    proposal = find_proposal(proposal_id)
+    if not proposal:
+        return {"error": "not found"}
+
+    if proposal["status"] != "approved":
+        return {"error": "proposal must be approved first"}
+
+    action = proposal["action"].lower()
+
+    # SAFE execution only. No file editing yet.
+    if "product" in action:
+        result = "Prepared product engine execution plan"
+    elif "content" in action:
+        result = "Prepared content strategy execution plan"
+    elif "monetization" in action:
+        result = "Prepared monetization execution plan"
+    elif "research" in action or "learning" in action or "reasoning" in action:
+        result = "Prepared intelligence system execution plan"
+    else:
+        result = f"Executed safe placeholder for: {proposal['title']}"
+
+    proposal["status"] = "executed"
+    proposal["result"] = result
+    SYSTEM_STATE["stats"]["proposals_executed"] += 1
+    log(f"[EXECUTED] {proposal['title']}")
+    log(f"[RESULT] {result}")
+
+    return {"status": "executed", "proposal": proposal, "result": result}
+
 
 # ========================
 # CONTROL
@@ -271,8 +357,9 @@ def set_auto(on: bool = True):
     log(f"[CONTROL] AUTO_MODE={AUTO_MODE}")
     return {"AUTO_MODE": AUTO_MODE}
 
+
 # ========================
-# AUTO LOOP (GOAL-DRIVEN, SAFE)
+# AUTO LOOP
 # ========================
 
 def auto_tick():
@@ -282,22 +369,20 @@ def auto_tick():
     goal = SYSTEM_STATE["memory"].get("main_goal")
 
     if not goal:
-        log("[AUTO] No goal set")
         return
 
     if not SYSTEM_STATE["tasks"]:
         goal_lower = goal.lower()
 
-        if "money" in goal_lower or "monet" in goal_lower:
+        if "money" in goal_lower or "income" in goal_lower or "monet" in goal_lower:
             add_task("plan-monetization", "auto")
             add_task("build-product-idea", "auto")
             add_task("generate-content-strategy", "auto")
         elif "tiktok" in goal_lower:
             add_task("focus-tiktok-engine", "auto")
             add_task("generate-content-strategy", "auto")
-        elif "product" in goal_lower:
-            add_task("build-digital-products", "auto")
-            add_task("plan-monetization", "auto")
+        elif "research" in goal_lower or "learning" in goal_lower or "intelligence" in goal_lower:
+            add_task("expand-intelligence-system", "auto")
         else:
             add_task("scan-system", "auto")
 
@@ -319,8 +404,9 @@ def start_loop():
 
 Thread(target=start_loop, daemon=True).start()
 
+
 # ========================
-# PHONE UI
+# PANEL
 # ========================
 
 @app.get("/panel", response_class=HTMLResponse)
@@ -344,14 +430,14 @@ def panel():
 
       <div class="card">
         <h3>Set Main Goal</h3>
-        <input id="goal" placeholder="e.g. make money fast with AI content and products" />
+        <input id="goal" placeholder="e.g. build income, content, intelligence" />
         <button onclick="setGoal()">Set Goal</button>
       </div>
 
       <div class="card">
-        <h3>Send Command</h3>
+        <h3>Command</h3>
         <input id="cmd" placeholder="e.g. build-digital-products" />
-        <button onclick="send()">Send Command</button>
+        <button onclick="sendCmd()">Send Command</button>
       </div>
 
       <div class="card">
@@ -370,21 +456,22 @@ def panel():
       </div>
 
       <script>
-        function send(){
+        function sendCmd() {
           const c = document.getElementById('cmd').value;
           window.location = '/commander/command?cmd=' + encodeURIComponent(c);
         }
-        function setGoal(){
+        function setGoal() {
           const g = document.getElementById('goal').value;
           window.location = '/memory/set?key=main_goal&value=' + encodeURIComponent(g);
         }
-        function go(u){
-          window.location = u;
+        function go(url) {
+          window.location = url;
         }
       </script>
     </body>
     </html>
     """
+
 
 # ========================
 # INFO
@@ -401,14 +488,15 @@ def system_info():
             "logs",
             "proposals",
             "control",
-            "panel"
+            "panel",
         ],
         "stats": SYSTEM_STATE["stats"],
-        "auto_mode": AUTO_MODE
+        "auto_mode": AUTO_MODE,
     }
 
+
 # ========================
-# ROUTERS
+# REGISTER ROUTERS
 # ========================
 
 app.include_router(commander, prefix="/commander")
