@@ -1,105 +1,91 @@
 ﻿from fastapi import APIRouter, Body
 from datetime import datetime, timezone
 import uuid
+import random
 
 router = APIRouter(prefix="/api/command", tags=["command"])
 
 def _now():
     return datetime.now(timezone.utc).isoformat()
 
-def _safe_dict(x):
-    return x if isinstance(x, dict) else {"value": x}
+VIRAL_HOOKS = [
+    "This is why nobody talks about this...",
+    "You’re doing this wrong and it’s costing you views",
+    "I tested this so you don’t have to",
+    "Nobody tells beginners this...",
+    "This will either blow up or flop. Watch.",
+    "If this doesn’t work, nothing will"
+]
+
+EMOTIONAL_TRIGGERS = [
+    "curiosity gap",
+    "status improvement",
+    "fear of missing out",
+    "identity shift",
+    "social proof tension",
+    "instant reward"
+]
+
+CTA_STYLES = [
+    "follow for part 2",
+    "comment 'guide' and I’ll send it",
+    "save this before it disappears",
+    "try this tonight",
+    "watch this twice"
+]
+
+def generate_viral_script(topic):
+    hook = random.choice(VIRAL_HOOKS)
+    trigger = random.choice(EMOTIONAL_TRIGGERS)
+    cta = random.choice(CTA_STYLES)
+
+    return {
+        "hook": f"{hook} ({trigger})",
+        "script": [
+            hook,
+            f"Here’s the truth about {topic}.",
+            "Most people overcomplicate this.",
+            "Step 1: Do the simplest version first.",
+            "Step 2: Focus on speed, not perfection.",
+            "Step 3: Repeat what actually works.",
+            f"This is how people are growing fast right now with {topic}.",
+            cta
+        ],
+        "caption": f"{topic} but simplified for real results. {cta}",
+        "hashtags": [
+            "#fyp",
+            "#viral",
+            "#contentcreator",
+            "#tiktokgrowth",
+            "#facelesstiktok"
+        ]
+    }
 
 @router.post("/run")
 def run_command(payload: dict = Body(...)):
     prompt = (payload.get("prompt") or "").strip()
+
     if not prompt:
         return {"status": "error", "error": "prompt is required"}
 
-    trace = []
-    knowledge = {}
-    workflow = {}
-    summary_bits = []
-    assets = []
-
-    try:
-        from backend.app.knowledge import knowledge_apply
-        knowledge = _safe_dict(knowledge_apply({
-            "query": prompt,
-            "topic": prompt,
-            "buyer": payload.get("buyer", "Creators"),
-            "niche": payload.get("niche", "Content Monetization"),
-            "promise": payload.get("promise", "move faster")
-        }))
-        trace.append("knowledge_apply:ok")
-
-        guidance = _safe_dict(knowledge.get("guidance", {}))
-        if guidance.get("guided_topic"):
-            summary_bits.append(f"Guided topic: {guidance['guided_topic']}")
-        if knowledge.get("artifact_url"):
-            assets.append({
-                "type": "knowledge_artifact",
-                "label": "Knowledge Artifact",
-                "url": knowledge.get("artifact_url")
-            })
-    except Exception as e:
-        knowledge = {"status": "error", "error": str(e)}
-        trace.append(f"knowledge_apply:error:{e}")
-
-    try:
-        from backend.app.workflow_builder import workflow_quick_build_and_run
-        workflow = _safe_dict(workflow_quick_build_and_run({
-            "prompt": prompt,
-            "title": f"Apple Flow: {prompt[:60]}",
-            "payload": {
-                "topic": prompt,
-                "text": prompt,
-                "buyer": payload.get("buyer", "Creators"),
-                "niche": payload.get("niche", "Content Monetization"),
-                "promise": payload.get("promise", "move faster"),
-                "bonus": payload.get("bonus", "apple command bonus"),
-                "notes": payload.get("notes", "apple command center execution"),
-                "url": payload.get("url", "")
-            }
-        }))
-        trace.append("workflow_quick_build_and_run:ok")
-
-        run = _safe_dict(workflow.get("run", {}))
-        if run.get("status"):
-            summary_bits.append(f"Workflow status: {run['status']}")
-        if workflow.get("artifact_url"):
-            assets.append({
-                "type": "workflow_artifact",
-                "label": "Workflow Artifact",
-                "url": workflow.get("artifact_url")
-            })
-    except Exception as e:
-        workflow = {"status": "error", "error": str(e)}
-        trace.append(f"workflow_quick_build_and_run:error:{e}")
-
-    title = f"Zerenthis Command Result: {prompt}"
-    summary = " | ".join(summary_bits) if summary_bits else "Command executed through Apple command center."
+    scripts = [generate_viral_script(prompt) for _ in range(3)]
 
     return {
         "status": "ok",
-        "phase": "apple command center",
+        "phase": "viral engine active",
         "job_id": f"cmd_{uuid.uuid4().hex[:10]}",
         "created_at": _now(),
-        "input": {
-            "prompt": prompt,
-            "buyer": payload.get("buyer", "Creators"),
-            "niche": payload.get("niche", "Content Monetization"),
-            "promise": payload.get("promise", "move faster")
-        },
         "result": {
-            "title": title,
-            "summary": summary,
-            "assets": assets,
-            "next_action": "Connect this route to the frontend single-input Apple panel."
-        },
-        "modules": {
-            "knowledge": knowledge,
-            "workflow": workflow
-        },
-        "trace": trace
+            "title": f"Viral Content Pack: {prompt}",
+            "summary": "High-retention TikTok scripts engineered for attention and growth.",
+            "assets": [
+                {
+                    "type": "viral_scripts",
+                    "label": "TikTok Scripts",
+                    "url": "/api/file/viral_scripts.json"
+                }
+            ],
+            "content": scripts,
+            "next_action": "Pick one script, record immediately, post within 10 minutes."
+        }
     }
