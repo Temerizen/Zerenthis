@@ -1,4 +1,5 @@
-﻿from backend.app.system_hardening import router as system_hardening_router
+﻿from backend.app.intelligence import router as intelligence_router
+from backend.app.system_hardening import router as system_hardening_router
 from backend.app.winner_cycle import router as winner_cycle_router
 from backend.app.control_tower import router as control_tower_router
 from backend.app.money_sweep import router as money_sweep_router
@@ -884,4 +885,7 @@ app.include_router(winner_cycle_router)
 
 
 app.include_router(system_hardening_router)
+
+
+app.include_router(intelligence_router)
 
