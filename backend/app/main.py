@@ -6,15 +6,18 @@ from pydantic import BaseModel
 from uuid import uuid4
 import json
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.0")
+app = FastAPI(title="Zerenthis Core Engine", version="2.1")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
+AUTO_DIR = DATA_DIR / "autopilot"
 JOB_FILE = DATA_DIR / "jobs.json"
+WINNERS_FILE = AUTO_DIR / "winners.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+AUTO_DIR.mkdir(parents=True, exist_ok=True)
 
 jobs = {}
 
@@ -41,6 +44,16 @@ def now():
 def save_jobs():
     JOB_FILE.write_text(json.dumps(jobs, indent=2, ensure_ascii=False), encoding="utf-8")
 
+def read_winners():
+    if WINNERS_FILE.exists():
+        try:
+            data = json.loads(WINNERS_FILE.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                return data
+        except Exception:
+            pass
+    return []
+
 @app.get("/")
 def root():
     return {"ok": True, "message": "Zerenthis core alive"}
@@ -49,29 +62,39 @@ def root():
 def health():
     return {"ok": True, "jobs": len(jobs)}
 
+@app.get("/api/jobs")
+def list_jobs():
+    return list(jobs.values())
+
+@app.get("/api/job/{job_id}")
+def get_job(job_id: str):
+    job = jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return job
+
+@app.get("/api/winners")
+def get_winners():
+    return read_winners()
+
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
     job_id = uuid4().hex
 
     try:
-        # 🔥 REAL ENGINE CONNECTION
         from backend.Engine.product_engine import build_product_pack
-
         result = build_product_pack(**payload.model_dump())
 
         file_name = Path(result.get("file_name", f"{job_id}.txt")).name
         file_path = OUTPUT_DIR / file_name
 
-        # fallback if engine didn’t physically write file
         if not file_path.exists():
             content = json.dumps(result, indent=2, ensure_ascii=False)
             file_path.write_text(content, encoding="utf-8")
 
     except Exception as e:
-        # fallback safety (never crash system again)
         file_name = f"{job_id}.txt"
         file_path = OUTPUT_DIR / file_name
-
         content = f"""FALLBACK MODE
 
 ERROR: {str(e)}
@@ -85,7 +108,6 @@ BONUS: {payload.bonus}
 NOTES: {payload.notes}
 """
         file_path.write_text(content, encoding="utf-8")
-
         result = {"error": str(e), "fallback": True}
 
     jobs[job_id] = {
@@ -106,17 +128,6 @@ NOTES: {payload.notes}
         "status": "completed",
         "file_url": f"/api/file/{file_name}"
     }
-
-@app.get("/api/job/{job_id}")
-def get_job(job_id: str):
-    job = jobs.get(job_id)
-    if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
-    return job
-
-@app.get("/api/jobs")
-def list_jobs():
-    return list(jobs.values())
 
 @app.get("/api/file/{name:path}")
 def get_file(name: str):
