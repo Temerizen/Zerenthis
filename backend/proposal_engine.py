@@ -27,20 +27,53 @@ def write_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+def get_completed_names():
+    data = read_json(ROADMAP, {"modules": []})
+    completed = set()
+    for m in data.get("modules", []):
+        if str(m.get("status", "")).lower() == "complete":
+            completed.add(str(m.get("name", "")).strip())
+    return completed
+
 def choose_next_module():
     data = read_json(ROADMAP, {"modules": []})
-    for m in data.get("modules", []):
-        if m.get("status") in ("pending", "planned", "proposed"):
+    modules = data.get("modules", [])
+    completed_names = get_completed_names()
+
+    seen = set()
+    for m in modules:
+        name = str(m.get("name", "")).strip()
+        status = str(m.get("status", "")).strip().lower()
+
+        if not name or name in seen:
+            continue
+        seen.add(name)
+
+        if name in completed_names:
+            continue
+
+        if status in ("pending", "planned", "proposed", "blocked", "building"):
             return m
+
     return None
 
 def set_module_status(name, status, extra=None):
     data = read_json(ROADMAP, {"modules": []})
+    changed = False
     for m in data.get("modules", []):
-        if m.get("name") == name:
+        if str(m.get("name", "")).strip() == str(name).strip():
             m["status"] = status
             if extra:
                 m.update(extra)
+            changed = True
+
+    if not changed:
+        data.setdefault("modules", []).append({
+            "name": name,
+            "status": status,
+            **(extra or {})
+        })
+
     write_json(ROADMAP, data)
 
 def build_proposal():
@@ -48,7 +81,7 @@ def build_proposal():
     if not module:
         return {"status": "complete", "message": "all modules processed"}
 
-    name = module["name"]
+    name = str(module["name"]).strip()
     risk = module.get("risk", "medium")
 
     proposal = {
