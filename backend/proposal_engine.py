@@ -18,7 +18,7 @@ def read_json(path, default):
         if path.exists():
             with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
-    except:
+    except Exception:
         pass
     return default
 
@@ -28,7 +28,7 @@ def write_json(path, data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 def choose_next_module():
-    data = read_json(ROADMAP, {"modules":[]})
+    data = read_json(ROADMAP, {"modules": []})
     for m in data.get("modules", []):
         if m.get("status") in ("pending", "planned"):
             return m
@@ -37,13 +37,13 @@ def choose_next_module():
 def build_proposal():
     module = choose_next_module()
     if not module:
-        return {"status":"complete","message":"all modules processed"}
+        return {"status": "complete", "message": "all modules processed"}
 
     name = module["name"]
-    risk = module.get("risk","medium")
+    risk = module.get("risk", "medium")
 
     proposal = {
-        "id": f"proposal_{name.lower().replace(' ','_')}",
+        "id": f"proposal_{name.lower().replace(' ', '_')}",
         "time": now(),
         "module": name,
         "risk": risk,
@@ -52,7 +52,7 @@ def build_proposal():
         "changes": [
             {
                 "type": "route_or_module",
-                "target": f"{name.lower().replace(' ','_')}",
+                "target": f"{name.lower().replace(' ', '_')}",
                 "reason": f"Advance roadmap for {name}"
             }
         ],
@@ -70,7 +70,7 @@ def build_proposal():
     proposals.append(proposal)
     write_json(PROPOSALS, proposals[-200:])
 
-    data = read_json(ROADMAP, {"modules":[]})
+    data = read_json(ROADMAP, {"modules": []})
     for m in data.get("modules", []):
         if m.get("name") == name:
             m["status"] = "planned"
