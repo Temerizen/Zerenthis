@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI, HTTPException
 from backend.app.routes.chat_routes import router as chat_router
-from backend.app.routes_founder import router as founder_router, HTTPException
+from backend.app.routes_founder import router as founder_router
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.routes.system_routes import router as system_router
 from fastapi.responses import FileResponse
@@ -428,6 +428,7 @@ def get_file(name: str):
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="file not found")
     return FileResponse(str(target), filename=safe_name)
+
 
 
 
