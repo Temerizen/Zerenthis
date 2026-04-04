@@ -56,3 +56,5 @@ backend/outputs/
 *.webm
 *.wav
 *.TEMP_MPY*
+_recovered/
+*.tmp
