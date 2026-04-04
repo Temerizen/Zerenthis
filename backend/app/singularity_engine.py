@@ -13,6 +13,8 @@ import struct
 
 from gtts import gTTS
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
 from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, CompositeAudioClip
 
 router = APIRouter()
@@ -617,3 +619,4 @@ def get_package_file(name: str):
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="package file not found")
     return FileResponse(str(target), filename=safe_name)
+
