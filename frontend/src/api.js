@@ -5,7 +5,7 @@ const isLocalhost =
 export const API_BASE =
   window.__ZERENTHIS_API_BASE__ ||
   (isLocalhost
-    ? "http://127.0.0.1:8000"
+    ? "https://semantiqai-backend-production-bcab.up.railway.app"
     : "https://semantiqai-backend-production-bcab.up.railway.app");
 
 export async function postSystemRun(engine, payload = {}) {

@@ -8,7 +8,7 @@ async function boot() {
       <h1 style="margin-top:0;">Zerenthis Founder</h1>
       <p>API Base: <code>${API_BASE}</code></p>
       <button id="runBtn" style="padding:12px 18px;border:none;border-radius:10px;background:#00e5ff;color:black;font-weight:bold;cursor:pointer;">
-        Run Core Test
+        Run Founder Engine
       </button>
       <pre id="out" style="margin-top:20px;padding:16px;background:#111;border-radius:12px;white-space:pre-wrap;"></pre>
     </div>
@@ -18,7 +18,7 @@ async function boot() {
     const out = document.getElementById("out");
     out.textContent = "Running...";
     try {
-      const data = await postSystemRun("core_test", { hello: "world" });
+      const data = await postSystemRun("founder_engine", {});
       out.textContent = JSON.stringify(data, null, 2);
     } catch (e) {
       out.textContent = String(e);
