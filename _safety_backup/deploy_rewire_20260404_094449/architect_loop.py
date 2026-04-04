@@ -1,5 +1,4 @@
-﻿import os
-import json
+﻿import json
 import time
 import traceback
 import subprocess
@@ -14,7 +13,7 @@ DATA_DIR = Path("/data") if Path("/data").exists() else BASE / "backend" / "data
 AUTO = DATA_DIR / "autopilot"
 RUNS = AUTO / "architect_runs.json"
 
-BASE_URL = os.getenv("BASE_URL") or os.getenv("PUBLIC_BASE_URL") or "http://semantiqai-backend.railway.internal:8080"
+BASE_URL = "https://semantiqai-backend-production-bcab.up.railway.app"
 TIMEOUT = 180
 
 MODULE_MAP = {
@@ -218,6 +217,3 @@ def loop():
 
 if __name__ == "__main__":
     loop()
-
-
-

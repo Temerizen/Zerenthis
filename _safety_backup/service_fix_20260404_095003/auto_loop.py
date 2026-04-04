@@ -1,10 +1,9 @@
-﻿import os
-import threading
+﻿import threading
 import time
 import requests
 import random
 
-BASE_URL = os.getenv("BASE_URL") or os.getenv("PUBLIC_BASE_URL") or "http://semantiqai-backend.railway.internal:8080"
+BASE_URL = "https://api.zerenthis.com"
 
 TOPICS = [
     "Faceless TikTok automation system",
@@ -64,6 +63,4 @@ def run_loop():
             time.sleep(10)
 
 threading.Thread(target=run_loop, daemon=True).start()
-
-
 

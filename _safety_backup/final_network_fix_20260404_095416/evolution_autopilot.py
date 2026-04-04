@@ -2,7 +2,7 @@
 import time, requests, os, json
 from datetime import datetime
 
-BASE = os.getenv("PUBLIC_BASE_URL") or "http://semantiqai-backend.railway.internal:8080"
+BASE = os.getenv("PUBLIC_BASE_URL") or "http://zerenthis-main.railway.internal:8080"
 MEMORY_PATH = "backend/data/self_improver_memory.json"
 
 def _now():
@@ -122,6 +122,5 @@ if __name__ == "__main__":
         except Exception as e:
             print("Error:", e)
         time.sleep(600)
-
 
 
