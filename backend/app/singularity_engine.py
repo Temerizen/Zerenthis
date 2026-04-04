@@ -7,10 +7,13 @@ import json
 import textwrap
 import re
 import uuid
+import math
+import wave
+import struct
 
 from gtts import gTTS
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
+from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, CompositeAudioClip
 
 router = APIRouter()
 
@@ -18,13 +21,14 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
 DNA_DIR = DATA_DIR / "story_dna"
+MUSIC_DIR = DATA_DIR / "music_beds"
 PODCAST_DIR = DATA_DIR / "podcasts"
 COMIC_DIR = DATA_DIR / "comics"
 NOVEL_DIR = DATA_DIR / "novels"
 GAME_DIR = DATA_DIR / "games"
 PACKAGE_DIR = DATA_DIR / "packages"
 
-for p in [OUTPUT_DIR, DNA_DIR, PODCAST_DIR, COMIC_DIR, NOVEL_DIR, GAME_DIR, PACKAGE_DIR]:
+for p in [OUTPUT_DIR, DNA_DIR, MUSIC_DIR, PODCAST_DIR, COMIC_DIR, NOVEL_DIR, GAME_DIR, PACKAGE_DIR]:
     p.mkdir(parents=True, exist_ok=True)
 
 class SingularityRequest(BaseModel):
@@ -52,7 +56,7 @@ def build_story_dna(req: SingularityRequest) -> dict:
     if req.girlfriend_mode:
         theme = "love, appreciation, tenderness, and emotional safety"
         setting = "a dreamy emotional universe made of memory, warmth, soft light, and little forever moments"
-        audio_identity = "soft intimate narration with gentle emotional cadence"
+        audio_identity = "soft intimate narration with gentle emotional cadence and emotional underscore"
         protagonist_role = "someone quietly and deeply in love"
         second_role = "the emotional center of the universe"
         hook = "I wanted to make something beautiful just for you."
@@ -61,7 +65,7 @@ def build_story_dna(req: SingularityRequest) -> dict:
     else:
         theme = "transformation, imagination, momentum, and wonder"
         setting = "a cinematic entertainment universe built from imagination and possibility"
-        audio_identity = "clean cinematic narration"
+        audio_identity = "clean cinematic narration with emotional underscore"
         protagonist_role = "an imaginative creator"
         second_role = "the witness to transformation"
         hook = "One idea can become a whole universe."
@@ -104,6 +108,19 @@ def build_story_dna(req: SingularityRequest) -> dict:
     }
 
 def build_video_script(dna: dict, req: SingularityRequest) -> str:
+    if req.girlfriend_mode and req.mode.lower() == "trailer":
+        lines = [
+            "I did not just want to say something to you.",
+            "I wanted to create something you could feel.",
+            "So I built a little world, just for you.",
+            "A place where everything feels soft, warm, and real.",
+            "Where every moment quietly says you matter.",
+            "Because you are the reason it all feels alive.",
+            "This is not just a video.",
+            "It is something I made for you. Always."
+        ]
+        return " ".join(lines)
+
     if req.girlfriend_mode:
         script = """
         I wanted to make something beautiful just for you.
@@ -192,7 +209,7 @@ def build_comic_outline(dna: dict, req: SingularityRequest) -> dict:
     title = dna["title"]
     if req.girlfriend_mode:
         panels = [
-            {"panel": 1, "scene": "Soft title splash with dreamy light and gentle colors", "dialogue": "I wanted to make something beautiful just for you.", "visual_prompt": "romantic dreamy scene, soft glowing light, cinematic, tender atmosphere"},
+            {"panel": 1, "scene": "Soft title splash with dreamy light and gentle colors", "dialogue": "I wanted to make something beautiful just for you.", "visual_prompt": "romantic cinematic scene, soft glowing light, cinematic, tender atmosphere"},
             {"panel": 2, "scene": "A small universe forming from warm light", "dialogue": "It started as a small thought.", "visual_prompt": "warm emotional cosmic spark becoming a little universe, delicate and beautiful"},
             {"panel": 3, "scene": "The world grows softer and fuller", "dialogue": "Then it became a quiet little world.", "visual_prompt": "gentle fantasy world, warm colors, intimate emotional tone"},
             {"panel": 4, "scene": "Close emotional focus on the beloved as the center", "dialogue": "You are the reason it feels alive.", "visual_prompt": "romantic emotional focal point, cinematic framing, soft expression"},
@@ -350,12 +367,9 @@ def make_frame(text: str, title: str, out_path: Path, idx: int, total: int, widt
     bottom_box = (120, 1560, width - 120, 1760)
 
     draw.rounded_rectangle(main_box, radius=46, fill=(12, 12, 18), outline=(210, 190, 255), width=3)
-
     draw_centered_text(draw, top_box, title, title_font, (255, 245, 250))
     draw_centered_text(draw, main_box, text, body_font, (232, 236, 245), spacing=16)
-
-    footer = f"{idx + 1}/{total}"
-    draw_centered_text(draw, bottom_box, footer, small_font, (210, 210, 225))
+    draw_centered_text(draw, bottom_box, f"{idx + 1}/{total}", small_font, (210, 210, 225))
 
     img.save(out_path)
 
@@ -363,7 +377,6 @@ def make_title_card(title: str, out_path: Path, width: int = 1080, height: int =
     img = Image.new("RGB", (width, height), color=(10, 10, 18))
     draw = ImageDraw.Draw(img)
     title_font, body_font, _ = get_fonts()
-
     draw_centered_text(draw, (80, 350, width - 80, 850), title, title_font, (255, 240, 248))
     draw_centered_text(draw, (100, 980, width - 100, 1250), "A small moving memory" if "always" in title.lower() else "A world becoming real", body_font, (220, 225, 238))
     img.save(out_path)
@@ -372,58 +385,108 @@ def make_ending_card(out_path: Path, width: int = 1080, height: int = 1920, girl
     img = Image.new("RGB", (width, height), color=(14, 12, 20))
     draw = ImageDraw.Draw(img)
     title_font, body_font, _ = get_fonts()
-
     line1 = "For you, always." if girlfriend_mode else "The universe continues."
     line2 = "Made with love" if girlfriend_mode else "Created by Zerenthis"
-
     draw_centered_text(draw, (80, 420, width - 80, 780), line1, title_font, (255, 242, 246))
     draw_centered_text(draw, (100, 950, width - 100, 1220), line2, body_font, (220, 228, 238))
     img.save(out_path)
+
+def smooth_zoom(clip, duration):
+    def scale(t):
+        return 1.0 + 0.06 * (t / max(duration, 0.001))
+    return clip.resize(scale)
+
+def write_music_bed(out_path: Path, duration_seconds: float, girlfriend_mode: bool):
+    sample_rate = 44100
+    total_frames = int(sample_rate * duration_seconds)
+    volume = 0.14 if girlfriend_mode else 0.12
+
+    if girlfriend_mode:
+        freqs = [220.0, 329.63, 440.0]
+    else:
+        freqs = [196.0, 293.66, 392.0]
+
+    with wave.open(str(out_path), "w") as wav_file:
+        wav_file.setnchannels(1)
+        wav_file.setsampwidth(2)
+        wav_file.setframerate(sample_rate)
+
+        for i in range(total_frames):
+            t = i / sample_rate
+            envelope = min(1.0, t / 2.0) * min(1.0, (duration_seconds - t) / 2.0)
+            pulse = 0.5 + 0.5 * math.sin(2 * math.pi * 0.2 * t)
+            sample = 0.0
+            for j, freq in enumerate(freqs):
+                sample += math.sin(2 * math.pi * freq * t + j * 0.8)
+            sample /= len(freqs)
+            sample *= volume * envelope * (0.75 + 0.25 * pulse)
+            packed = struct.pack("<h", int(max(-1.0, min(1.0, sample)) * 32767))
+            wav_file.writeframesraw(packed)
 
 def render_audio(text: str, slug: str, folder: Path) -> str:
     audio_path = folder / f"{slug}.mp3"
     gTTS(text=text, lang="en").save(str(audio_path))
     return audio_path.name
 
-def render_video(title: str, script: str, video_slug: str, girlfriend_mode: bool = False) -> tuple[str, str]:
-    audio_path = OUTPUT_DIR / f"{video_slug}.mp3"
-    gTTS(text=script, lang="en").save(str(audio_path))
+def get_scene_durations(scene_count: int, total_duration: float, mode: str):
+    if scene_count <= 0:
+        return []
+
+    if mode.lower() == "trailer" and scene_count >= 4:
+        title_d = 1.8
+        ending_d = 1.6
+        body = max(total_duration - title_d - ending_d, scene_count * 1.4)
+        weights = [0.75, 0.85] + [1.0] * max(scene_count - 4, 0) + [1.2, 1.35]
+        weights = weights[:scene_count]
+        total_w = sum(weights)
+        mids = [body * (w / total_w) for w in weights]
+        return title_d, mids, ending_d
+
+    title_d = 2.4
+    ending_d = 2.0
+    body = max(total_duration - title_d - ending_d, 4)
+    mids = [body / scene_count] * scene_count
+    return title_d, mids, ending_d
+
+def render_video(title: str, script: str, video_slug: str, girlfriend_mode: bool = False, mode: str = "cinematic") -> tuple[str, str, str]:
+    narration_path = OUTPUT_DIR / f"{video_slug}.mp3"
+    gTTS(text=script, lang="en").save(str(narration_path))
 
     scenes = split_script_into_scenes(script)
-    total_scene_count = len(scenes) + 2
-
-    image_paths = []
 
     title_card = OUTPUT_DIR / f"{video_slug}_title.png"
     make_title_card(title, title_card)
-    image_paths.append(title_card)
 
+    scene_images = []
     for idx, scene in enumerate(scenes, start=1):
         img_path = OUTPUT_DIR / f"{video_slug}_scene_{idx}.png"
-        make_frame(scene, title, img_path, idx, total_scene_count)
-        image_paths.append(img_path)
+        make_frame(scene, title, img_path, idx, len(scenes) + 2)
+        scene_images.append(img_path)
 
     ending_card = OUTPUT_DIR / f"{video_slug}_ending.png"
     make_ending_card(ending_card, girlfriend_mode=girlfriend_mode)
-    image_paths.append(ending_card)
 
-    audio_clip = AudioFileClip(str(audio_path))
-    total_duration = max(audio_clip.duration, 8)
+    narration = AudioFileClip(str(narration_path))
+    total_duration = max(narration.duration, 10)
 
-    title_duration = 2.4
-    ending_duration = 2.0
-    middle_duration = max(total_duration - title_duration - ending_duration, 4)
-    per_middle = middle_duration / max(len(scenes), 1)
+    music_path = OUTPUT_DIR / f"{video_slug}_music.wav"
+    write_music_bed(music_path, total_duration + 0.5, girlfriend_mode)
+    music = AudioFileClip(str(music_path)).volumex(0.18 if girlfriend_mode else 0.15)
+
+    title_d, mids, ending_d = get_scene_durations(len(scene_images), total_duration, mode)
 
     clips = []
-    clips.append(ImageClip(str(title_card)).set_duration(title_duration))
+    clips.append(ImageClip(str(title_card)).set_duration(title_d).fadein(0.4).fadeout(0.4))
 
-    for img_path in image_paths[1:-1]:
-        clips.append(ImageClip(str(img_path)).set_duration(per_middle))
+    for img_path, dur in zip(scene_images, mids):
+        clip = ImageClip(str(img_path)).set_duration(dur)
+        clip = smooth_zoom(clip, dur).fadein(0.35).fadeout(0.35)
+        clips.append(clip)
 
-    clips.append(ImageClip(str(ending_card)).set_duration(ending_duration))
+    clips.append(ImageClip(str(ending_card)).set_duration(ending_d).fadein(0.4).fadeout(0.5))
 
-    video = concatenate_videoclips(clips, method="compose").set_audio(audio_clip)
+    video = concatenate_videoclips(clips, method="compose")
+    video = video.set_audio(CompositeAudioClip([music, narration]))
 
     mp4_path = OUTPUT_DIR / f"{video_slug}.mp4"
     video.write_videofile(
@@ -435,12 +498,13 @@ def render_video(title: str, script: str, video_slug: str, girlfriend_mode: bool
         logger=None
     )
 
-    audio_clip.close()
+    narration.close()
+    music.close()
     video.close()
     for clip in clips:
         clip.close()
 
-    return mp4_path.name, audio_path.name
+    return mp4_path.name, narration_path.name, music_path.name
 
 @router.post("/api/singularity/create")
 def create_singularity(req: SingularityRequest):
@@ -458,7 +522,14 @@ def create_singularity(req: SingularityRequest):
         title = dna["title"]
         video_slug = f"{slugify(title)}_{uuid.uuid4().hex[:6]}"
 
-        video_file, audio_file = render_video(title, video_script, video_slug, girlfriend_mode=req.girlfriend_mode)
+        video_file, audio_file, music_file = render_video(
+            title,
+            video_script,
+            video_slug,
+            girlfriend_mode=req.girlfriend_mode,
+            mode=req.mode
+        )
+
         podcast_audio = render_audio(podcast_script, f"{video_slug}_podcast", PODCAST_DIR)
 
         comic_file = save_json(COMIC_DIR, title, comic_outline)
@@ -470,12 +541,14 @@ def create_singularity(req: SingularityRequest):
         return {
             "ok": True,
             "mode": "multi_format_singularity",
+            "quality": "emotional_music_and_beat_sync",
             "title": title,
             "story_dna_file": f"/api/singularity/file/{dna_file}",
             "video": {
                 "script": video_script,
                 "video_file": f"/api/file/{video_file}",
-                "audio_file": f"/api/file/{audio_file}"
+                "audio_file": f"/api/file/{audio_file}",
+                "music_file": f"/api/file/{music_file}"
             },
             "podcast": {
                 "script_file": f"/api/podcast/file/{podcast_script_file}",
@@ -508,10 +581,9 @@ def get_singularity_file(name: str):
 @router.get("/api/podcast/file/{name:path}")
 def get_podcast_file(name: str):
     safe_name = Path(name).name
-    candidates = [PODCAST_DIR / safe_name]
-    for target in candidates:
-        if target.exists() and target.is_file():
-            return FileResponse(str(target), filename=safe_name)
+    target = PODCAST_DIR / safe_name
+    if target.exists() and target.is_file():
+        return FileResponse(str(target), filename=safe_name)
     raise HTTPException(status_code=404, detail="podcast file not found")
 
 @router.get("/api/comic/file/{name:path}")
