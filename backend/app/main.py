@@ -6,13 +6,18 @@ from pydantic import BaseModel
 from uuid import uuid4
 import json
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.1")
+app = FastAPI(title="Zerenthis Core Engine", version="2.2")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
 AUTO_DIR = DATA_DIR / "autopilot"
 JOB_FILE = DATA_DIR / "jobs.json"
+
+ALT_DATA_DIR = BASE_DIR / "backend" / "data"
+ALT_AUTO_DIR = ALT_DATA_DIR / "autopilot"
+ALT_WINNERS_FILE = ALT_AUTO_DIR / "winners.json"
+
 WINNERS_FILE = AUTO_DIR / "winners.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -44,15 +49,40 @@ def now():
 def save_jobs():
     JOB_FILE.write_text(json.dumps(jobs, indent=2, ensure_ascii=False), encoding="utf-8")
 
+def read_json_file(path, default):
+    try:
+        if path.exists():
+            data = json.loads(path.read_text(encoding="utf-8"))
+            return data
+    except Exception:
+        pass
+    return default
+
 def read_winners():
-    if WINNERS_FILE.exists():
-        try:
-            data = json.loads(WINNERS_FILE.read_text(encoding="utf-8"))
-            if isinstance(data, list):
-                return data
-        except Exception:
-            pass
-    return []
+    combined = []
+
+    primary = read_json_file(WINNERS_FILE, [])
+    if isinstance(primary, list):
+        combined.extend(primary)
+
+    alternate = read_json_file(ALT_WINNERS_FILE, [])
+    if isinstance(alternate, list):
+        combined.extend(alternate)
+
+    deduped = []
+    seen = set()
+    for item in combined:
+        key = (
+            str(item.get("job_id", "")),
+            str(item.get("file_name", "")),
+            str(item.get("module", ""))
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+
+    return deduped
 
 @app.get("/")
 def root():
@@ -75,7 +105,13 @@ def get_job(job_id: str):
 
 @app.get("/api/winners")
 def get_winners():
-    return read_winners()
+    winners = read_winners()
+    return {
+        "count": len(winners),
+        "items": winners,
+        "primary_path": str(WINNERS_FILE),
+        "alternate_path": str(ALT_WINNERS_FILE)
+    }
 
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
