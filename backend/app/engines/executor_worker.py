@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 def run(payload):
     ROOT = Path(__file__).resolve().parents[3]
@@ -14,7 +14,17 @@ def system_status():
 
     path.write_text(code, encoding="utf-8")
 
-    return {
+    
+    # === REAL BUILD TASKS ===
+    if task.get("kind") == "create_file":
+        return auto_file_write(task)
+
+    if task.get("kind") == "append_file":
+        return auto_append(task)
+
+    if task.get("kind") == "ui":
+        return auto_file_write(task)
+ return {
         "status": "built",
         "file": str(path)
     }
