@@ -3,48 +3,35 @@ from pathlib import Path
 from datetime import datetime
 
 ROOT = Path(__file__).resolve().parents[3]
-DATA = ROOT / "backend" / "data"
-PROPOSALS = DATA / "builder" / "proposals.json"
-QUEUE = DATA / "execution" / "queue.json"
-
-def load(p):
-    try: return json.loads(p.read_text())
-    except: return []
-
-def save(p,d):
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(d,indent=2))
+GEN_PATH = ROOT / "backend/app/generated"
 
 def run(payload):
-    proposals = load(PROPOSALS)
-    queue = load(QUEUE)
+    GEN_PATH.mkdir(parents=True, exist_ok=True)
 
     created = []
 
-    for i in range(3):
+    for i in range(2):
         pid = uuid.uuid4().hex
 
-        file_path = f"backend/app/generated/module_{pid}.py"
+        file_path = GEN_PATH / f"system_{pid}.py"
 
-        content = f"""# Auto Module
-def run():
-    return "Module {pid} alive"
+        content = f"""
+# Zerenthis Generated System
+
+def run(input_data=None):
+    return {{
+        "id": "{pid}",
+        "status": "active",
+        "type": "auto_generated_tool"
+    }}
 """
 
-        task = {
-            "id": pid,
-            "kind": "create_file",
-            "file_path": file_path,
-            "content": content,
-            "status": "queued",
-            "created_at": datetime.utcnow().isoformat()
-        }
+        file_path.write_text(content, encoding="utf-8")
 
-        proposals.append(task)
-        queue.append(task)
-        created.append(task)
+        created.append(str(file_path))
 
-    save(PROPOSALS, proposals)
-    save(QUEUE, queue)
-
-    return {"status":"built","created":len(created)}
+    return {{
+        "status": "systems_created",
+        "count": len(created),
+        "files": created
+    }}
