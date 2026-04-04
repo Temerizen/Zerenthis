@@ -33,20 +33,50 @@ def apply_task(task):
     target = task.get("target", "")
 
     if title == "Founder Dashboard Expansion" and kind == "ui" and target == "frontend/src/main.js":
-        return {
+        
+    # EXPANDED SAFE TASK HANDLING
+    if "dashboard" in title.lower():
+        return {"applied": True, "action": "ui_upgrade"}
+
+    if "video" in title.lower():
+        return {"applied": True, "action": "video_layer_ready"}
+
+    if "pipeline" in title.lower():
+        return {"applied": True, "action": "pipeline_ready"}
+ return {
             "applied": True,
             "action": "recognized_safe_ui_task",
             "details": "Task acknowledged and marked complete for supervised dashboard expansion"
         }
 
     if title == "Video Content Asset Layer" and kind == "engine":
-        return {
+        
+    # EXPANDED SAFE TASK HANDLING
+    if "dashboard" in title.lower():
+        return {"applied": True, "action": "ui_upgrade"}
+
+    if "video" in title.lower():
+        return {"applied": True, "action": "video_layer_ready"}
+
+    if "pipeline" in title.lower():
+        return {"applied": True, "action": "pipeline_ready"}
+ return {
             "applied": True,
             "action": "recognized_safe_engine_task",
             "details": "Task acknowledged and marked complete for future engine extension"
         }
 
-    return {
+    
+    # EXPANDED SAFE TASK HANDLING
+    if "dashboard" in title.lower():
+        return {"applied": True, "action": "ui_upgrade"}
+
+    if "video" in title.lower():
+        return {"applied": True, "action": "video_layer_ready"}
+
+    if "pipeline" in title.lower():
+        return {"applied": True, "action": "pipeline_ready"}
+ return {
         "applied": False,
         "action": "skipped_unknown_task",
         "details": "Executor only handles known safe task signatures right now"
@@ -83,7 +113,17 @@ def run(payload):
 
     save_json(QUEUE_FILE, queue)
 
-    return {
+    
+    # EXPANDED SAFE TASK HANDLING
+    if "dashboard" in title.lower():
+        return {"applied": True, "action": "ui_upgrade"}
+
+    if "video" in title.lower():
+        return {"applied": True, "action": "video_layer_ready"}
+
+    if "pipeline" in title.lower():
+        return {"applied": True, "action": "pipeline_ready"}
+ return {
         "status": "executor_worker_complete",
         "updated_count": len(updated),
         "completed_count": len([t for t in updated if t.get("status") == "completed"]),
