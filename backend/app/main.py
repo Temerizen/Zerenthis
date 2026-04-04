@@ -7,7 +7,7 @@ from uuid import uuid4
 import json
 import shutil
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.4")
+app = FastAPI(title="Zerenthis Core Engine", version="2.5")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -132,6 +132,42 @@ def append_winner(item):
     write_json_file(WINNERS_FILE, winners[-200:])
     return True, len(winners[-200:]), vault_info
 
+def backfill_top_performers():
+    winners = read_winners()
+    copied = []
+    missing = []
+
+    for item in winners:
+        try:
+            score = int(item.get("score", 0) or 0)
+        except Exception:
+            score = 0
+
+        if score < 90:
+            continue
+
+        info = vault_top_performer(item.get("file_name", ""))
+        if info.get("vaulted"):
+            copied.append({
+                "file_name": item.get("file_name"),
+                "target": info.get("target")
+            })
+        else:
+            missing.append({
+                "file_name": item.get("file_name"),
+                "reason": info.get("reason"),
+                "source": info.get("source", "")
+            })
+
+    return {
+        "ok": True,
+        "copied_count": len(copied),
+        "missing_count": len(missing),
+        "copied": copied,
+        "missing": missing,
+        "top_performers_path": str(TOP_DIR)
+    }
+
 @app.get("/")
 def root():
     return {"ok": True, "message": "Zerenthis core alive"}
@@ -171,6 +207,10 @@ def add_winner(winner: WinnerIn):
         "path": str(WINNERS_FILE),
         "vault": vault_info
     }
+
+@app.post("/api/top-performers/backfill")
+def run_top_performer_backfill():
+    return backfill_top_performers()
 
 @app.get("/api/roadmap")
 def get_roadmap():
