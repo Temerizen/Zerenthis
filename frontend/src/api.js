@@ -1,12 +1,11 @@
-const isLocalhost =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1";
-
 export const API_BASE =
   window.__ZERENTHIS_API_BASE__ ||
-  (isLocalhost
-    ? "https://semantiqai-backend-production-bcab.up.railway.app"
-    : "https://semantiqai-backend-production-bcab.up.railway.app");
+  "https://semantiqai-backend-production-bcab.up.railway.app";
+
+async function parseResponse(res) {
+  const text = await res.text();
+  try { return JSON.parse(text); } catch { return text; }
+}
 
 export async function postSystemRun(engine, payload = {}) {
   const res = await fetch(`${API_BASE}/api/system/run`, {
@@ -18,5 +17,17 @@ export async function postSystemRun(engine, payload = {}) {
     const text = await res.text();
     throw new Error(`System run failed: ${res.status} ${text}`);
   }
-  return res.json();
+  return parseResponse(res);
+}
+
+export async function getHealth() {
+  const res = await fetch(`${API_BASE}/health`);
+  if (!res.ok) throw new Error(`Health failed: ${res.status}`);
+  return parseResponse(res);
+}
+
+export async function getWinners() {
+  const res = await fetch(`${API_BASE}/api/winners`, { method: "POST" });
+  if (!res.ok) throw new Error(`Winners failed: ${res.status}`);
+  return parseResponse(res);
 }

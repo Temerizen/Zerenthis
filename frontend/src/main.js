@@ -1,43 +1,66 @@
-import { postSystemRun, API_BASE } from "./api.js";
+import { API_BASE, postSystemRun, getHealth, getWinners } from "./api.js";
 
 const root = document.getElementById("app");
 
-async function boot() {
+function btn(label, id, bg = "#00e5ff", fg = "black") {
+  return `<button id="${id}" style="padding:12px 18px;border:none;border-radius:12px;background:${bg};color:${fg};font-weight:700;cursor:pointer;">${label}</button>`;
+}
+
+function render() {
   root.innerHTML = `
-    <div style="background:#05070d;color:white;min-height:100vh;font-family:Arial,sans-serif;padding:32px;">
-      <h1 style="margin-top:0;">Zerenthis Founder</h1>
-      <p>API Base: <code>${API_BASE}</code></p>
-      <button id="runBtn" style="padding:12px 18px;border:none;border-radius:10px;background:#00e5ff;color:black;font-weight:bold;cursor:pointer;">
-        Run Founder Engine
-      </button>
-      <pre id="out" style="margin-top:20px;padding:16px;background:#111;border-radius:12px;white-space:pre-wrap;"></pre>
+    <div style="background:#05070d;color:white;min-height:100vh;font-family:Arial,sans-serif;padding:28px;box-sizing:border-box;">
+      <h1 style="margin:0 0 12px 0;font-size:52px;">Zerenthis Founder</h1>
+      <div style="opacity:.9;margin-bottom:18px;">API Base: <code>${API_BASE}</code></div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:980px;margin-bottom:22px;">
+        ${btn("Run Founder Engine", "founderBtn")}
+        ${btn("Run Money Engine", "moneyBtn", "#22c55e", "black")}
+        ${btn("Run Product Engine", "productBtn", "#f59e0b", "black")}
+        ${btn("System Health", "healthBtn", "#8b5cf6", "white")}
+        ${btn("View Winners", "winnersBtn", "#334155", "white")}
+      </div>
+
+      <div style="padding:18px;background:#0d1117;border-radius:16px;border:1px solid #1f2937;max-width:1320px;">
+        <div style="font-size:14px;opacity:.8;margin-bottom:10px;">Output</div>
+        <pre id="out" style="margin:0;white-space:pre-wrap;word-break:break-word;font-size:14px;min-height:240px;"></pre>
+      </div>
     </div>
   `;
 
-  document.getElementById("runBtn").onclick = async () => {
-    const out = document.getElementById("out");
-    out.textContent = "Running...";
+  const out = document.getElementById("out");
+  const show = (value) => {
+    out.textContent = typeof value === "string" ? value : JSON.stringify(value, null, 2);
+  };
+
+  document.getElementById("founderBtn").onclick = async () => {
+    show("Running founder engine...");
+    try { show(await postSystemRun("founder_engine", {})); } catch (e) { show(String(e)); }
+  };
+
+  document.getElementById("moneyBtn").onclick = async () => {
+    show("Running money engine...");
+    try { show(await postSystemRun("money_engine", {})); } catch (e) { show(String(e)); }
+  };
+
+  document.getElementById("productBtn").onclick = async () => {
+    show("Running product engine...");
     try {
-      const data = await postSystemRun("founder_engine", {});
-      out.textContent = JSON.stringify(data, null, 2);
-    } catch (e) {
-      out.textContent = String(e);
-    }
+      show(await postSystemRun("product_engine", {
+        topic: "AI Starter Product Pack",
+        niche: "Content Monetization"
+      }));
+    } catch (e) { show(String(e)); }
+  };
+
+  document.getElementById("healthBtn").onclick = async () => {
+    show("Checking system health...");
+    try { show(await getHealth()); } catch (e) { show(String(e)); }
+  };
+
+  document.getElementById("winnersBtn").onclick = async () => {
+    show("Loading winners...");
+    try { show(await getWinners()); } catch (e) { show(String(e)); }
   };
 }
 
-boot();
-document.body.insertAdjacentHTML('beforeend', 
-'<button onclick="runMoney()" style="position:fixed;bottom:20px;right:20px;padding:14px;background:#22c55e;border:none;border-radius:10px;font-weight:bold;">💸 Money</button>'
-);
-
-async function runMoney() {
-  const out = document.getElementById("out");
-  out.textContent = "Running money engine...";
-  try {
-    const res = await postSystemRun("money_engine", {});
-    out.textContent = JSON.stringify(res, null, 2);
-  } catch (e) {
-    out.textContent = String(e);
-  }
-}
+render();

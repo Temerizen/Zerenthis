@@ -4,7 +4,7 @@ from typing import Dict, Any
 ENGINE_REGISTRY = {}
 
 SAFE_ENGINES = [
-    "core_test","founder_engine","money_engine"
+    "core_test","founder_engine","product_engine","money_engine","product_engine"
 ]
 
 def load_engines():
