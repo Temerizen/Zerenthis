@@ -5,7 +5,7 @@ ENGINE_REGISTRY = {}
 
 SAFE_ENGINES = [
     "core_test","founder_engine","builder_engine","watcher_engine","product_engine","money_engine","product_engine"
-,"builder_engine","executor_worker","autopilot_loop"]
+,"builder_engine","executor_worker","local_test","autopilot_loop"]
 
 def load_engines():
     for name in SAFE_ENGINES:
@@ -13,18 +13,19 @@ def load_engines():
         try:
             mod = importlib.import_module(module_name)
             if hasattr(mod, "run"):
-                ENGINE_REGISTRY[name,"builder_engine","executor_worker","autopilot_loop"] = mod.run
+                ENGINE_REGISTRY[name,"builder_engine","executor_worker","local_test","autopilot_loop"] = mod.run
             else:
-                print(f"[ENGINE SKIP,"builder_engine","executor_worker","autopilot_loop"] {module_name}: no run()")
+                print(f"[ENGINE SKIP,"builder_engine","executor_worker","local_test","autopilot_loop"] {module_name}: no run()")
         except Exception as e:
-            print(f"[ENGINE LOAD ERROR,"builder_engine","executor_worker","autopilot_loop"] {module_name}: {e}")
+            print(f"[ENGINE LOAD ERROR,"builder_engine","executor_worker","local_test","autopilot_loop"] {module_name}: {e}")
 
-def run_engine(name: str, payload: Dict[str, Any,"builder_engine","executor_worker","autopilot_loop"]):
+def run_engine(name: str, payload: Dict[str, Any,"builder_engine","executor_worker","local_test","autopilot_loop"]):
     if name not in ENGINE_REGISTRY:
         return {"error": f"Engine '{name}' not available"}
     try:
-        return ENGINE_REGISTRY[name,"builder_engine","executor_worker","autopilot_loop"](payload)
+        return ENGINE_REGISTRY[name,"builder_engine","executor_worker","local_test","autopilot_loop"](payload)
     except Exception as e:
         return {"error": str(e)}
 
 load_engines()
+
