@@ -1,4 +1,4 @@
-import json
+﻿import json
 from pathlib import Path
 from datetime import datetime
 
@@ -24,15 +24,24 @@ def read_json(path, default):
 
 def write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8-sig") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 def choose_next_module():
     data = read_json(ROADMAP, {"modules": []})
     for m in data.get("modules", []):
-        if m.get("status") in ("pending", "planned"):
+        if m.get("status") in ("pending", "planned", "proposed"):
             return m
     return None
+
+def set_module_status(name, status, extra=None):
+    data = read_json(ROADMAP, {"modules": []})
+    for m in data.get("modules", []):
+        if m.get("name") == name:
+            m["status"] = status
+            if extra:
+                m.update(extra)
+    write_json(ROADMAP, data)
 
 def build_proposal():
     module = choose_next_module()
@@ -58,7 +67,6 @@ def build_proposal():
         ],
         "verification": [
             "health endpoint passes",
-            "new route/module imports cleanly",
             "response shape is valid",
             "no startup errors"
         ]
@@ -70,14 +78,19 @@ def build_proposal():
     proposals.append(proposal)
     write_json(PROPOSALS, proposals[-200:])
 
-    data = read_json(ROADMAP, {"modules": []})
-    for m in data.get("modules", []):
-        if m.get("name") == name:
-            m["status"] = "planned"
-    write_json(ROADMAP, data)
-
+    set_module_status(name, "proposed", {"last_proposal_id": proposal["id"]})
     return proposal
+
+def mark_proposal_status(proposal_id, status, extra=None):
+    proposals = read_json(PROPOSALS, [])
+    if not isinstance(proposals, list):
+        proposals = []
+    for p in proposals:
+        if p.get("id") == proposal_id:
+            p["status"] = status
+            if extra:
+                p.update(extra)
+    write_json(PROPOSALS, proposals[-200:])
 
 if __name__ == "__main__":
     print(json.dumps(build_proposal(), indent=2))
-
