@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from uuid import uuid4
 import json
 
-app = FastAPI(title="Zerenthis Recovery Core", version="1.0")
+app = FastAPI(title="Zerenthis Core Engine", version="2.0")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -43,19 +43,40 @@ def save_jobs():
 
 @app.get("/")
 def root():
-    return {"ok": True, "message": "recovery core alive"}
+    return {"ok": True, "message": "Zerenthis core alive"}
 
 @app.get("/health")
 def health():
-    return {"ok": True, "message": "health alive", "jobs": len(jobs)}
+    return {"ok": True, "jobs": len(jobs)}
 
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
     job_id = uuid4().hex
-    file_name = f"{job_id}.txt"
-    file_path = OUTPUT_DIR / file_name
 
-    content = f"""TOPIC: {payload.topic}
+    try:
+        # 🔥 REAL ENGINE CONNECTION
+        from backend.Engine.product_engine import build_product_pack
+
+        result = build_product_pack(**payload.model_dump())
+
+        file_name = Path(result.get("file_name", f"{job_id}.txt")).name
+        file_path = OUTPUT_DIR / file_name
+
+        # fallback if engine didn’t physically write file
+        if not file_path.exists():
+            content = json.dumps(result, indent=2, ensure_ascii=False)
+            file_path.write_text(content, encoding="utf-8")
+
+    except Exception as e:
+        # fallback safety (never crash system again)
+        file_name = f"{job_id}.txt"
+        file_path = OUTPUT_DIR / file_name
+
+        content = f"""FALLBACK MODE
+
+ERROR: {str(e)}
+
+TOPIC: {payload.topic}
 NICHE: {payload.niche}
 TONE: {payload.tone}
 BUYER: {payload.buyer}
@@ -63,17 +84,20 @@ PROMISE: {payload.promise}
 BONUS: {payload.bonus}
 NOTES: {payload.notes}
 """
+        file_path.write_text(content, encoding="utf-8")
 
-    file_path.write_text(content, encoding="utf-8")
+        result = {"error": str(e), "fallback": True}
 
     jobs[job_id] = {
         "job_id": job_id,
         "status": "completed",
         "created_at": now(),
         "payload": payload.model_dump(),
+        "result": result,
         "file_name": file_name,
         "file_url": f"/api/file/{file_name}"
     }
+
     save_jobs()
 
     return {
