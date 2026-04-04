@@ -7,7 +7,7 @@ router = APIRouter()
 
 class RunRequest(BaseModel):
     engine: str
-    payload: Dict[str, Any]
+    payload: Dict[str, Any] = {}
 
 @router.get("/health")
 def health():
@@ -16,4 +16,8 @@ def health():
 @router.post("/run")
 def run(req: RunRequest):
     result = run_engine(req.engine, req.payload)
-    return {"result": result}
+    return {
+        "engine": req.engine,
+        "input": req.payload,
+        "result": result
+    }

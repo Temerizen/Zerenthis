@@ -1,4 +1,4 @@
-﻿const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow } = require("electron");
 
 const FRONTEND_URL = process.env.ZERENTHIS_FRONTEND_URL || "http://localhost:5173";
 const APP_TITLE = "Zerenthis Founder";
@@ -21,7 +21,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
-
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
