@@ -1,8 +1,14 @@
-﻿from fastapi import FastAPI
+﻿from backend.app.execution.routes import router as execution_router
+from backend.app.hybrid.routes import router as hybrid_router
+from fastapi import FastAPI
 from pydantic import BaseModel
 import importlib
 
 app = FastAPI()
+app.include_router(execution_router)
+app.include_router(hybrid_router)
+from backend.app.routes.live_feed import router as live_router
+app.include_router(live_router)
 
 class SystemRequest(BaseModel):
     engine: str
@@ -29,3 +35,8 @@ def run_system(req: SystemRequest):
 
     except Exception as e:
         return {"error": str(e)}
+
+
+
+
+
