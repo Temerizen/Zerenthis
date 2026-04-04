@@ -1,4 +1,5 @@
-﻿from fastapi import FastAPI, HTTPException
+﻿from fastapi import FastAPIHTTPException
+from backend.app.routes.system_routes import router as system_router
 from fastapi.responses import FileResponse
 from pathlib import Path
 from datetime import datetime, timezone
@@ -351,7 +352,7 @@ def get_top_performer_file(name: str):
     safe_name = Path(name).name
     target = TOP_DIR / safe_name
     if not target.exists() or not target.is_file():
-        raise HTTPException(status_code=404, detail="top performer file not found")
+        raise (status_code=404, detail="top performer file not found")
     return FileResponse(str(target), filename=safe_name)
 
 @app.get("/api/founder/overview")
@@ -420,6 +421,9 @@ def get_file(name: str):
     safe_name = Path(name).name
     target = OUTPUT_DIR / safe_name
     if not target.exists() or not target.is_file():
-        raise HTTPException(status_code=404, detail="file not found")
+        raise (status_code=404, detail="file not found")
     return FileResponse(str(target), filename=safe_name)
+
+
+
 

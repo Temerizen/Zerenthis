@@ -1,82 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Zerenthis</title>
-<style>
-body {
-    background: #05070d;
-    color: white;
-    font-family: -apple-system;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.container {
-    width: 600px;
-    text-align: center;
-}
-input {
-    width: 100%;
-    padding: 20px;
-    border-radius: 20px;
-    border: none;
-    background: #111;
-    color: white;
-    font-size: 18px;
-}
-button {
-    margin-top: 20px;
-    padding: 15px;
-    width: 100%;
-    border-radius: 20px;
-    background: #00e5ff;
-    border: none;
-    font-weight: bold;
-}
-.result {
-    margin-top: 20px;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zerenthis</title>
 </head>
-<body>
-
-<div class="container">
-<h1>Zerenthis</h1>
-
-<input id="prompt" placeholder="What do you want to create or achieve?" />
-<button onclick="run()">Generate</button>
-
-<div class="result" id="result"></div>
-</div>
-
-<script>
-async function run() {
-    const prompt = document.getElementById("prompt").value;
-
-    const res = await fetch("http://localhost:8000/api/generate", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({prompt})
-    });
-
-    const data = await res.json();
-    const jobId = data.job_id;
-
-    document.getElementById("result").innerText = "Generating...";
-
-    const interval = setInterval(async () => {
-        const r = await fetch("http://localhost:8000/api/job/" + jobId);
-        const j = await r.json();
-
-        if (j.status === "done") {
-            clearInterval(interval);
-            document.getElementById("result").innerText =
-                JSON.stringify(j.result, null, 2);
-        }
-    }, 1000);
-}
-</script>
-
+<body style="background:#05070d;color:white;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
+  <div style="text-align:center;">
+    <h1>Zerenthis is Alive 🧠</h1>
+    <p>Founder hybrid shell online.</p>
+  </div>
 </body>
 </html>
