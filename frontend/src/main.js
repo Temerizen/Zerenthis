@@ -27,3 +27,17 @@ async function boot() {
 }
 
 boot();
+document.body.insertAdjacentHTML('beforeend', 
+'<button onclick="runMoney()" style="position:fixed;bottom:20px;right:20px;padding:14px;background:#22c55e;border:none;border-radius:10px;font-weight:bold;">💸 Money</button>'
+);
+
+async function runMoney() {
+  const out = document.getElementById("out");
+  out.textContent = "Running money engine...";
+  try {
+    const res = await postSystemRun("money_engine", {});
+    out.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    out.textContent = String(e);
+  }
+}
