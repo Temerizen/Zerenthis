@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pathlib import Path
 from datetime import datetime, timezone
@@ -8,7 +8,9 @@ from collections import Counter
 import json
 import shutil
 
-app = FastAPI(title="Zerenthis Core Engine", version="3.1")
+
+from backend.app.evolution_engine import router as evolution_router
+app.include_router(evolution_router)
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -504,3 +506,4 @@ def get_file(name: str):
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="file not found")
     return FileResponse(str(target), filename=safe_name)
+
