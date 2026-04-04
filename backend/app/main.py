@@ -5,19 +5,27 @@ from datetime import datetime, timezone
 from pydantic import BaseModel
 from uuid import uuid4
 import json
+import shutil
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.3")
+app = FastAPI(title="Zerenthis Core Engine", version="2.4")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
 AUTO_DIR = DATA_DIR / "autopilot"
+TOP_DIR = DATA_DIR / "top_performers"
+CORE_DIR = DATA_DIR / "core"
+
 JOB_FILE = DATA_DIR / "jobs.json"
 WINNERS_FILE = AUTO_DIR / "winners.json"
+RUNS_FILE = AUTO_DIR / "architect_runs.json"
+ROADMAP_FILE = CORE_DIR / "roadmap.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 AUTO_DIR.mkdir(parents=True, exist_ok=True)
+TOP_DIR.mkdir(parents=True, exist_ok=True)
+CORE_DIR.mkdir(parents=True, exist_ok=True)
 
 jobs = {}
 
@@ -71,6 +79,26 @@ def read_winners():
     data = read_json_file(WINNERS_FILE, [])
     return data if isinstance(data, list) else []
 
+def vault_top_performer(file_name: str):
+    if not file_name:
+        return {"vaulted": False, "reason": "missing file_name"}
+
+    safe_name = Path(file_name).name
+    source = OUTPUT_DIR / safe_name
+    target = TOP_DIR / safe_name
+
+    if not source.exists() or not source.is_file():
+        return {"vaulted": False, "reason": "source file missing", "source": str(source)}
+
+    if not target.exists():
+        shutil.copy2(source, target)
+
+    return {
+        "vaulted": True,
+        "source": str(source),
+        "target": str(target)
+    }
+
 def append_winner(item):
     winners = read_winners()
     key = (
@@ -78,6 +106,7 @@ def append_winner(item):
         str(item.get("file_name", "")),
         str(item.get("module", ""))
     )
+
     for existing in winners:
         existing_key = (
             str(existing.get("job_id", "")),
@@ -85,10 +114,23 @@ def append_winner(item):
             str(existing.get("module", ""))
         )
         if existing_key == key:
-            return False, len(winners)
-    winners.append(item)
+            return False, len(winners), {"vaulted": False, "reason": "duplicate"}
+
+    vault_info = {"vaulted": False, "reason": "score below threshold"}
+    try:
+        score = int(item.get("score", 0) or 0)
+    except Exception:
+        score = 0
+
+    if score >= 90:
+        vault_info = vault_top_performer(item.get("file_name", ""))
+
+    stored = dict(item)
+    stored["vault"] = vault_info
+
+    winners.append(stored)
     write_json_file(WINNERS_FILE, winners[-200:])
-    return True, len(winners[-200:])
+    return True, len(winners[-200:]), vault_info
 
 @app.get("/")
 def root():
@@ -115,13 +157,67 @@ def get_winners():
     return {
         "count": len(winners),
         "items": winners,
-        "path": str(WINNERS_FILE)
+        "path": str(WINNERS_FILE),
+        "top_performers_path": str(TOP_DIR)
     }
 
 @app.post("/api/winners")
 def add_winner(winner: WinnerIn):
-    added, count = append_winner(winner.model_dump())
-    return {"ok": True, "added": added, "count": count, "path": str(WINNERS_FILE)}
+    added, count, vault_info = append_winner(winner.model_dump())
+    return {
+        "ok": True,
+        "added": added,
+        "count": count,
+        "path": str(WINNERS_FILE),
+        "vault": vault_info
+    }
+
+@app.get("/api/roadmap")
+def get_roadmap():
+    roadmap = read_json_file(ROADMAP_FILE, {"modules": []})
+    if not isinstance(roadmap, dict):
+        roadmap = {"modules": []}
+    return {
+        "ok": True,
+        "path": str(ROADMAP_FILE),
+        "roadmap": roadmap
+    }
+
+@app.get("/api/autopilot/runs")
+def get_autopilot_runs():
+    runs = read_json_file(RUNS_FILE, [])
+    if not isinstance(runs, list):
+        runs = []
+    return {
+        "ok": True,
+        "count": len(runs),
+        "path": str(RUNS_FILE),
+        "items": runs[-50:]
+    }
+
+@app.get("/api/top-performers")
+def list_top_performers():
+    items = []
+    for p in sorted(TOP_DIR.glob("*")):
+        if p.is_file():
+            items.append({
+                "file_name": p.name,
+                "file_url": f"/api/top-performers/file/{p.name}"
+            })
+    return {
+        "ok": True,
+        "count": len(items),
+        "path": str(TOP_DIR),
+        "items": items
+    }
+
+@app.get("/api/top-performers/file/{name:path}")
+def get_top_performer_file(name: str):
+    safe_name = Path(name).name
+    target = TOP_DIR / safe_name
+    if not target.exists() or not target.is_file():
+        raise HTTPException(status_code=404, detail="top performer file not found")
+    return FileResponse(str(target), filename=safe_name)
 
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
