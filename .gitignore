@@ -45,3 +45,14 @@ _safety_backup/
 
 _repo_reports/
 node_modules/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+backend/outputs/
+*.mp4
+*.mov
+*.avi
+*.webm
+*.wav
+*.TEMP_MPY*
