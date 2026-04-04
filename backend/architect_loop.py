@@ -11,7 +11,6 @@ BASE = Path(__file__).resolve().parents[1]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE / "backend" / "data"
 AUTO = DATA_DIR / "autopilot"
 RUNS = AUTO / "architect_runs.json"
-WINNERS = AUTO / "winners.json"
 
 BASE_URL = "https://semantiqai-backend-production-bcab.up.railway.app"
 TIMEOUT = 180
@@ -79,25 +78,17 @@ def append_run(entry):
     data.append(entry)
     write_json(RUNS, data[-300:])
 
-def append_winner(entry):
-    data = read_json(WINNERS, [])
-    if not isinstance(data, list):
-        data = []
-    data.append(entry)
-    write_json(WINNERS, data[-200:])
-    print("=== WINNER WRITTEN ===")
-    print(json.dumps({
-        "winners_path": str(WINNERS),
-        "count": len(data[-200:]),
-        "last_file_name": entry.get("file_name"),
-        "last_job_id": entry.get("job_id")
-    }, indent=2, ensure_ascii=False))
-
 def verify_health():
     r = requests.get(f"{BASE_URL}/health", timeout=60)
     r.raise_for_status()
     data = r.json()
     return data.get("ok") is True
+
+def push_winner(entry):
+    r = requests.post(f"{BASE_URL}/api/winners", json=entry, timeout=60)
+    r.raise_for_status()
+    print("=== WINNER PUSHED TO MAIN ===")
+    print(json.dumps(r.json(), indent=2, ensure_ascii=False))
 
 def execute_proposal(proposal):
     module = proposal["module"]
@@ -147,15 +138,15 @@ def execute_proposal(proposal):
         summary = (job.get("result") or {}).get("summary") or {}
         score = summary.get("quality_score", 0)
 
-        append_winner({
+        push_winner({
             "time": now(),
             "module": module,
             "job_id": job_id,
             "score": score,
             "file_url": job.get("file_url"),
             "file_name": job.get("file_name"),
-            "payload": job.get("payload"),
-            "result": job.get("result")
+            "payload": job.get("payload") or {},
+            "result": job.get("result") or {}
         })
 
         return {
@@ -170,13 +161,6 @@ def execute_proposal(proposal):
     return {"status": "blocked", "reason": "verification failed", "result": result, "job": job}
 
 def loop():
-    print("=== BUILDER PATHS ===")
-    print(json.dumps({
-        "data_dir": str(DATA_DIR),
-        "runs_path": str(RUNS),
-        "winners_path": str(WINNERS)
-    }, indent=2, ensure_ascii=False))
-
     while True:
         try:
             proposal = build_proposal()

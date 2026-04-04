@@ -6,18 +6,13 @@ from pydantic import BaseModel
 from uuid import uuid4
 import json
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.2")
+app = FastAPI(title="Zerenthis Core Engine", version="2.3")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
 AUTO_DIR = DATA_DIR / "autopilot"
 JOB_FILE = DATA_DIR / "jobs.json"
-
-ALT_DATA_DIR = BASE_DIR / "backend" / "data"
-ALT_AUTO_DIR = ALT_DATA_DIR / "autopilot"
-ALT_WINNERS_FILE = ALT_AUTO_DIR / "winners.json"
-
 WINNERS_FILE = AUTO_DIR / "winners.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -43,6 +38,16 @@ class ProductPackRequest(BaseModel):
     bonus: str = ""
     notes: str = ""
 
+class WinnerIn(BaseModel):
+    time: str = ""
+    module: str = ""
+    job_id: str = ""
+    score: int = 0
+    file_url: str = ""
+    file_name: str = ""
+    payload: dict = {}
+    result: dict = {}
+
 def now():
     return datetime.now(timezone.utc).isoformat()
 
@@ -58,31 +63,32 @@ def read_json_file(path, default):
         pass
     return default
 
+def write_json_file(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
 def read_winners():
-    combined = []
+    data = read_json_file(WINNERS_FILE, [])
+    return data if isinstance(data, list) else []
 
-    primary = read_json_file(WINNERS_FILE, [])
-    if isinstance(primary, list):
-        combined.extend(primary)
-
-    alternate = read_json_file(ALT_WINNERS_FILE, [])
-    if isinstance(alternate, list):
-        combined.extend(alternate)
-
-    deduped = []
-    seen = set()
-    for item in combined:
-        key = (
-            str(item.get("job_id", "")),
-            str(item.get("file_name", "")),
-            str(item.get("module", ""))
+def append_winner(item):
+    winners = read_winners()
+    key = (
+        str(item.get("job_id", "")),
+        str(item.get("file_name", "")),
+        str(item.get("module", ""))
+    )
+    for existing in winners:
+        existing_key = (
+            str(existing.get("job_id", "")),
+            str(existing.get("file_name", "")),
+            str(existing.get("module", ""))
         )
-        if key in seen:
-            continue
-        seen.add(key)
-        deduped.append(item)
-
-    return deduped
+        if existing_key == key:
+            return False, len(winners)
+    winners.append(item)
+    write_json_file(WINNERS_FILE, winners[-200:])
+    return True, len(winners[-200:])
 
 @app.get("/")
 def root():
@@ -109,9 +115,13 @@ def get_winners():
     return {
         "count": len(winners),
         "items": winners,
-        "primary_path": str(WINNERS_FILE),
-        "alternate_path": str(ALT_WINNERS_FILE)
+        "path": str(WINNERS_FILE)
     }
+
+@app.post("/api/winners")
+def add_winner(winner: WinnerIn):
+    added, count = append_winner(winner.model_dump())
+    return {"ok": True, "added": added, "count": count, "path": str(WINNERS_FILE)}
 
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
