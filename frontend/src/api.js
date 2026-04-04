@@ -27,7 +27,7 @@ export async function getHealth() {
 }
 
 export async function getWinners() {
-  const res = await fetch(`${API_BASE}/api/winners`, { method: "POST" });
+  const res = await fetch(`${API_BASE}/api/winners`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
   if (!res.ok) throw new Error(`Winners failed: ${res.status}`);
   return parseResponse(res);
 }
