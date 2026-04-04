@@ -14,6 +14,7 @@ import shutil
 app = FastAPI(title="Zerenthis Core Engine", version="3.2")
 app.include_router(evolution_router)
 app.include_router(singularity_router)
+app.include_router(system_router, prefix="/api/system")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
