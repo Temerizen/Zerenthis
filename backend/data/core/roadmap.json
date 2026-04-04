@@ -1,0 +1,12 @@
+﻿{
+  "modules": [
+    {"name": "Money Engine", "status": "pending"},
+    {"name": "AI School", "status": "pending"},
+    {"name": "Research Engine", "status": "pending"},
+    {"name": "Cognitive Lab", "status": "pending"},
+    {"name": "Content Factory", "status": "pending"},
+    {"name": "Video Engine", "status": "pending"},
+    {"name": "Self Improver", "status": "pending"},
+    {"name": "Founder Console", "status": "pending"}
+  ]
+}
