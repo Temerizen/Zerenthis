@@ -1,6 +1,7 @@
 ﻿import json
 import time
 import traceback
+import subprocess
 from pathlib import Path
 from datetime import datetime
 import requests
@@ -90,6 +91,22 @@ def push_winner(entry):
     print("=== WINNER PUSHED TO MAIN ===")
     print(json.dumps(r.json(), indent=2, ensure_ascii=False))
 
+def run_ascension():
+    try:
+        result = subprocess.run(
+            ["python", "-m", "backend.ascension_engine"],
+            capture_output=True,
+            text=True,
+            timeout=120
+        )
+        print("=== ASCENSION ENGINE ===")
+        print(result.stdout)
+        if result.stderr:
+            print(result.stderr)
+    except Exception as e:
+        print("=== ASCENSION ENGINE ERROR ===")
+        print(str(e))
+
 def execute_proposal(proposal):
     module = proposal["module"]
     risk = proposal.get("risk", "medium")
@@ -149,6 +166,8 @@ def execute_proposal(proposal):
             "result": job.get("result") or {}
         })
 
+        run_ascension()
+
         return {
             "status": "complete",
             "result": result,
@@ -169,6 +188,7 @@ def loop():
 
             if proposal.get("status") == "complete":
                 append_run({"time": now(), "status": "complete", "proposal": proposal})
+                run_ascension()
                 time.sleep(300)
                 continue
 

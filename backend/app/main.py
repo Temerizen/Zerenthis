@@ -7,7 +7,7 @@ from uuid import uuid4
 import json
 import shutil
 
-app = FastAPI(title="Zerenthis Core Engine", version="2.5")
+app = FastAPI(title="Zerenthis Core Engine", version="3.0")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -15,17 +15,21 @@ OUTPUT_DIR = DATA_DIR / "outputs"
 AUTO_DIR = DATA_DIR / "autopilot"
 TOP_DIR = DATA_DIR / "top_performers"
 CORE_DIR = DATA_DIR / "core"
+MARKET_DIR = DATA_DIR / "marketplace"
 
 JOB_FILE = DATA_DIR / "jobs.json"
 WINNERS_FILE = AUTO_DIR / "winners.json"
 RUNS_FILE = AUTO_DIR / "architect_runs.json"
 ROADMAP_FILE = CORE_DIR / "roadmap.json"
+INSIGHTS_FILE = CORE_DIR / "insights.json"
+LISTINGS_FILE = MARKET_DIR / "listings.json"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 AUTO_DIR.mkdir(parents=True, exist_ok=True)
 TOP_DIR.mkdir(parents=True, exist_ok=True)
 CORE_DIR.mkdir(parents=True, exist_ok=True)
+MARKET_DIR.mkdir(parents=True, exist_ok=True)
 
 jobs = {}
 
@@ -174,7 +178,7 @@ def root():
 
 @app.get("/health")
 def health():
-    return {"ok": True, "jobs": len(jobs)}
+    return {"ok": True, "jobs": len(jobs), "winners": len(read_winners())}
 
 @app.get("/api/jobs")
 def list_jobs():
@@ -223,6 +227,17 @@ def get_roadmap():
         "roadmap": roadmap
     }
 
+@app.get("/api/insights")
+def get_insights():
+    insights = read_json_file(INSIGHTS_FILE, {})
+    if not isinstance(insights, dict):
+        insights = {}
+    return {
+        "ok": True,
+        "path": str(INSIGHTS_FILE),
+        "insights": insights
+    }
+
 @app.get("/api/autopilot/runs")
 def get_autopilot_runs():
     runs = read_json_file(RUNS_FILE, [])
@@ -233,6 +248,18 @@ def get_autopilot_runs():
         "count": len(runs),
         "path": str(RUNS_FILE),
         "items": runs[-50:]
+    }
+
+@app.get("/api/listings")
+def get_listings():
+    listings = read_json_file(LISTINGS_FILE, [])
+    if not isinstance(listings, list):
+        listings = []
+    return {
+        "ok": True,
+        "count": len(listings),
+        "path": str(LISTINGS_FILE),
+        "items": listings
     }
 
 @app.get("/api/top-performers")
@@ -258,6 +285,27 @@ def get_top_performer_file(name: str):
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="top performer file not found")
     return FileResponse(str(target), filename=safe_name)
+
+@app.get("/api/founder/overview")
+def founder_overview():
+    insights = read_json_file(INSIGHTS_FILE, {})
+    winners = read_winners()
+    roadmap = read_json_file(ROADMAP_FILE, {"modules": []})
+    listings = read_json_file(LISTINGS_FILE, [])
+
+    return {
+        "ok": True,
+        "system": {
+            "total_jobs": len(jobs),
+            "total_winners": len(winners),
+            "vault_size": len(list(TOP_DIR.glob("*"))),
+            "listing_count": len(listings) if isinstance(listings, list) else 0
+        },
+        "top_modules": insights.get("top_modules", []),
+        "top_niches": insights.get("top_niches", []),
+        "top_buyers": insights.get("top_buyers", []),
+        "roadmap": roadmap
+    }
 
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):

@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 
 BASE = Path(__file__).resolve().parents[1]
-DATA = BASE / "backend" / "data"
+DATA = Path("/data") if Path("/data").exists() else BASE / "backend" / "data"
 CORE = DATA / "core"
 AUTO = DATA / "autopilot"
 
