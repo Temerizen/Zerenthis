@@ -40,3 +40,8 @@ ENV/
 dist/
 build/
 *.log
+
+_safety_backup/
+
+_repo_reports/
+node_modules/
