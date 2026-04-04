@@ -1,4 +1,4 @@
-﻿{
+{
   "modules": [
     {"name":"Money Engine","status":"pending","risk":"low"},
     {"name":"AI School","status":"pending","risk":"medium"},

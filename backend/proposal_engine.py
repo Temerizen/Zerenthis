@@ -1,4 +1,4 @@
-﻿import json
+import json
 from pathlib import Path
 from datetime import datetime
 
@@ -16,7 +16,7 @@ def now():
 def read_json(path, default):
     try:
         if path.exists():
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8-sig") as f:
                 return json.load(f)
     except Exception:
         pass
@@ -24,7 +24,7 @@ def read_json(path, default):
 
 def write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8-sig") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 def choose_next_module():
@@ -80,3 +80,4 @@ def build_proposal():
 
 if __name__ == "__main__":
     print(json.dumps(build_proposal(), indent=2))
+
