@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException
 from backend.app.routes.chat_routes import router as chat_router
 from backend.app.routes_founder import router as founder_router
 from fastapi.middleware.cors import CORSMiddleware
