@@ -3,8 +3,8 @@ from pathlib import Path
 from uuid import uuid4
 from datetime import datetime, timezone
 
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / "backend" / "data"
+ROOT_DIR = Path(__file__).resolve().parents[3]
+DATA_DIR = ROOT_DIR / "backend" / "data"
 PRODUCT_DIR = DATA_DIR / "products"
 PRODUCTS_FILE = PRODUCT_DIR / "products.json"
 
