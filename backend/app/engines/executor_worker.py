@@ -17,30 +17,40 @@ def save(data):
     QUEUE.write_text(json.dumps(data, indent=2))
 
 def write_file(task):
-    path = ROOT / task.get("file_path")
+    file_path = task.get("file_path")
+    content = task.get("content", "")
+
+    if not file_path:
+        return {"applied": False, "reason": "no file_path"}
+
+    path = ROOT / file_path
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(task.get("content",""), encoding="utf-8")
+    path.write_text(content, encoding="utf-8")
+
     return {"applied": True, "file": str(path)}
 
 def run(payload):
     queue = load()
-    updated = []
+    processed = []
 
-    for t in queue:
-        if t.get("status") != "queued":
+    for task in queue:
+        if task.get("status") != "queued":
             continue
 
         try:
-            res = write_file(t)
-            t["status"] = "completed"
-            t["result"] = res
-            t["time"] = datetime.utcnow().isoformat()
+            result = write_file(task)
+            task["status"] = "completed"
+            task["result"] = result
+            task["time"] = datetime.utcnow().isoformat()
         except Exception as e:
-            t["status"] = "failed"
-            t["error"] = str(e)
+            task["status"] = "failed"
+            task["error"] = str(e)
 
-        updated.append(t)
+        processed.append(task)
 
     save(queue)
 
-    return {"status":"executed","count":len(updated)}
+    return {
+        "status": "executor_ran",
+        "processed": len(processed)
+    }
