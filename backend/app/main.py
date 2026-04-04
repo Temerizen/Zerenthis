@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from backend.app.routes.system_routes import router as system_router
 from fastapi.responses import FileResponse
 from pathlib import Path
@@ -12,6 +13,7 @@ import json
 import shutil
 
 app = FastAPI(title="Zerenthis Core Engine", version="3.2")
+app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_credentials=True, allow_methods=['*'], allow_headers=['*'])
 app.include_router(evolution_router)
 app.include_router(singularity_router)
 app.include_router(system_router, prefix="/api/system")
