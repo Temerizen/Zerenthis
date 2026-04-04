@@ -11,7 +11,7 @@ BASE = Path(__file__).resolve().parents[1]
 AUTO = BASE / "backend" / "data" / "autopilot"
 RUNS = AUTO / "architect_runs.json"
 
-BASE_URL = "https://zerenthis-production.up.railway.app"
+BASE_URL = "https://semantiqai-backend-production-bcab.up.railway.app"
 TIMEOUT = 180
 
 MODULE_MAP = {
@@ -182,3 +182,4 @@ def loop():
 
 if __name__ == "__main__":
     loop()
+
