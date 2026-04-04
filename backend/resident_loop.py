@@ -6,7 +6,7 @@ from backend.critic import evaluate
 
 PLAN_PATH = Path("backend/data/autopilot/director_plan.json")
 
-API_URL = "http://127.0.0.1:8000/api/product-pack"
+API_URL = "https://zerenthis-production.up.railway.app/api/workflow/build"
 
 def loop():
     while True:
@@ -43,3 +43,4 @@ def loop():
 
 if __name__ == "__main__":
     loop()
+
