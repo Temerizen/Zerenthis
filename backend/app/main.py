@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPIHTTPExceptionHTTPException
+from fastapi import FastAPI, HTTPException
 from backend.app.routes.system_routes import router as system_router
 from fastapi.responses import FileResponse
 from pathlib import Path
