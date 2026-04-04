@@ -19,6 +19,7 @@ function render() {
         ${btn("Run Builder", "builderBtn", "#06b6d4", "black")}
         ${btn("Run Watcher", "watcherBtn", "#ef4444", "white")}
         ${btn("Run Execution Layer", "execBtn", "#14b8a6", "black")}
+        ${btn("Run Executor Worker", "workerBtn", "#f97316", "black")}
         ${btn("System Health", "healthBtn", "#8b5cf6", "white")}
         ${btn("View Winners", "winnersBtn", "#334155", "white")}
       </div>
@@ -68,6 +69,11 @@ function render() {
   document.getElementById("execBtn").onclick = async () => {
     show("Running execution layer...");
     try { show(await postSystemRun("execution_engine", {})); } catch (e) { show(String(e)); }
+  };
+
+  document.getElementById("workerBtn").onclick = async () => {
+    show("Running executor worker...");
+    try { show(await postSystemRun("executor_worker", {})); } catch (e) { show(String(e)); }
   };
 
   document.getElementById("healthBtn").onclick = async () => {
