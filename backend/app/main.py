@@ -5,11 +5,11 @@ from datetime import datetime, timezone
 from pydantic import BaseModel
 from uuid import uuid4
 from collections import Counter
+from backend.app.evolution_engine import router as evolution_router
 import json
 import shutil
 
-
-from backend.app.evolution_engine import router as evolution_router
+app = FastAPI(title="Zerenthis Core Engine", version="3.2")
 app.include_router(evolution_router)
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -35,7 +35,6 @@ CORE_DIR.mkdir(parents=True, exist_ok=True)
 MARKET_DIR.mkdir(parents=True, exist_ok=True)
 
 jobs = {}
-
 if JOB_FILE.exists():
     try:
         jobs = json.loads(JOB_FILE.read_text(encoding="utf-8"))
@@ -104,26 +103,14 @@ def vault_top_performer(file_name: str):
     if not target.exists():
         shutil.copy2(source, target)
 
-    return {
-        "vaulted": True,
-        "source": str(source),
-        "target": str(target)
-    }
+    return {"vaulted": True, "source": str(source), "target": str(target)}
 
 def append_winner(item):
     winners = read_winners()
-    key = (
-        str(item.get("job_id", "")),
-        str(item.get("file_name", "")),
-        str(item.get("module", ""))
-    )
+    key = (str(item.get("job_id", "")), str(item.get("file_name", "")), str(item.get("module", "")))
 
     for existing in winners:
-        existing_key = (
-            str(existing.get("job_id", "")),
-            str(existing.get("file_name", "")),
-            str(existing.get("module", ""))
-        )
+        existing_key = (str(existing.get("job_id", "")), str(existing.get("file_name", "")), str(existing.get("module", "")))
         if existing_key == key:
             return False, len(winners), {"vaulted": False, "reason": "duplicate"}
 
@@ -159,16 +146,9 @@ def backfill_top_performers():
 
         info = vault_top_performer(item.get("file_name", ""))
         if info.get("vaulted"):
-            copied.append({
-                "file_name": item.get("file_name"),
-                "target": info.get("target")
-            })
+            copied.append({"file_name": item.get("file_name"), "target": info.get("target")})
         else:
-            missing.append({
-                "file_name": item.get("file_name"),
-                "reason": info.get("reason"),
-                "source": info.get("source", "")
-            })
+            missing.append({"file_name": item.get("file_name"), "reason": info.get("reason"), "source": info.get("source", "")})
 
     return {
         "ok": True,
@@ -181,7 +161,6 @@ def backfill_top_performers():
 
 def build_insights():
     winners = read_winners()
-
     modules = Counter()
     niches = Counter()
     buyers = Counter()
@@ -198,15 +177,11 @@ def build_insights():
         "top_buyers": buyers.most_common(),
         "total_winners": len(winners)
     }
-
     write_json_file(INSIGHTS_FILE, insights)
     return insights
 
 def build_roadmap(insights):
-    preferred = []
-    for name, _score in insights.get("top_modules", []):
-        preferred.append({"name": name, "risk": "low", "status": "pending"})
-
+    preferred = [{"name": name, "risk": "low", "status": "pending"} for name, _ in insights.get("top_modules", [])]
     defaults = [
         {"name": "Money Engine", "risk": "low", "status": "pending"},
         {"name": "Content Factory", "risk": "low", "status": "pending"},
@@ -214,7 +189,7 @@ def build_roadmap(insights):
         {"name": "Founder Console", "risk": "low", "status": "pending"},
         {"name": "AI School", "risk": "medium", "status": "pending"},
         {"name": "Research Engine", "risk": "medium", "status": "pending"},
-        {"name": "Cognitive Lab", "risk": "medium", "status": "pending"}
+        {"name": "Cognitive Lab", "risk": "medium", "status": "pending"},
     ]
 
     seen = set()
@@ -226,11 +201,7 @@ def build_roadmap(insights):
         seen.add(name)
         merged.append(item)
 
-    roadmap = {
-        "modules": merged,
-        "last_updated": now()
-    }
-
+    roadmap = {"modules": merged, "last_updated": now()}
     write_json_file(ROADMAP_FILE, roadmap)
     return roadmap
 
@@ -276,16 +247,8 @@ def backfill_runs_from_winners():
     for w in winners:
         synthesized.append({
             "time": w.get("time", now()),
-            "proposal": {
-                "module": w.get("module", "unknown"),
-                "status": "complete"
-            },
-            "outcome": {
-                "status": "complete",
-                "job_id": w.get("job_id"),
-                "file_name": w.get("file_name"),
-                "score": w.get("score", 0)
-            }
+            "proposal": {"module": w.get("module", "unknown"), "status": "complete"},
+            "outcome": {"status": "complete", "job_id": w.get("job_id"), "file_name": w.get("file_name"), "score": w.get("score", 0)}
         })
 
     write_json_file(RUNS_FILE, synthesized[-300:])
@@ -330,23 +293,12 @@ def get_job(job_id: str):
 @app.get("/api/winners")
 def get_winners():
     winners = read_winners()
-    return {
-        "count": len(winners),
-        "items": winners,
-        "path": str(WINNERS_FILE),
-        "top_performers_path": str(TOP_DIR)
-    }
+    return {"count": len(winners), "items": winners, "path": str(WINNERS_FILE), "top_performers_path": str(TOP_DIR)}
 
 @app.post("/api/winners")
 def add_winner(winner: WinnerIn):
     added, count, vault_info = append_winner(winner.model_dump())
-    return {
-        "ok": True,
-        "added": added,
-        "count": count,
-        "path": str(WINNERS_FILE),
-        "vault": vault_info
-    }
+    return {"ok": True, "added": added, "count": count, "path": str(WINNERS_FILE), "vault": vault_info}
 
 @app.post("/api/top-performers/backfill")
 def run_top_performer_backfill():
@@ -361,62 +313,36 @@ def get_roadmap():
     roadmap = read_json_file(ROADMAP_FILE, {"modules": []})
     if not isinstance(roadmap, dict):
         roadmap = {"modules": []}
-    return {
-        "ok": True,
-        "path": str(ROADMAP_FILE),
-        "roadmap": roadmap
-    }
+    return {"ok": True, "path": str(ROADMAP_FILE), "roadmap": roadmap}
 
 @app.get("/api/insights")
 def get_insights():
     insights = read_json_file(INSIGHTS_FILE, {})
     if not isinstance(insights, dict):
         insights = {}
-    return {
-        "ok": True,
-        "path": str(INSIGHTS_FILE),
-        "insights": insights
-    }
+    return {"ok": True, "path": str(INSIGHTS_FILE), "insights": insights}
 
 @app.get("/api/autopilot/runs")
 def get_autopilot_runs():
     runs = read_json_file(RUNS_FILE, [])
     if not isinstance(runs, list):
         runs = []
-    return {
-        "ok": True,
-        "count": len(runs),
-        "path": str(RUNS_FILE),
-        "items": runs[-50:]
-    }
+    return {"ok": True, "count": len(runs), "path": str(RUNS_FILE), "items": runs[-50:]}
 
 @app.get("/api/listings")
 def get_listings():
     listings = read_json_file(LISTINGS_FILE, [])
     if not isinstance(listings, list):
         listings = []
-    return {
-        "ok": True,
-        "count": len(listings),
-        "path": str(LISTINGS_FILE),
-        "items": listings
-    }
+    return {"ok": True, "count": len(listings), "path": str(LISTINGS_FILE), "items": listings}
 
 @app.get("/api/top-performers")
 def list_top_performers():
     items = []
     for p in sorted(TOP_DIR.glob("*")):
         if p.is_file():
-            items.append({
-                "file_name": p.name,
-                "file_url": f"/api/top-performers/file/{p.name}"
-            })
-    return {
-        "ok": True,
-        "count": len(items),
-        "path": str(TOP_DIR),
-        "items": items
-    }
+            items.append({"file_name": p.name, "file_url": f"/api/top-performers/file/{p.name}"})
+    return {"ok": True, "count": len(items), "path": str(TOP_DIR), "items": items}
 
 @app.get("/api/top-performers/file/{name:path}")
 def get_top_performer_file(name: str):
@@ -450,18 +376,13 @@ def founder_overview():
 @app.post("/api/product-pack")
 def create_product_pack(payload: ProductPackRequest):
     job_id = uuid4().hex
-
     try:
         from backend.Engine.product_engine import build_product_pack
         result = build_product_pack(**payload.model_dump())
-
         file_name = Path(result.get("file_name", f"{job_id}.txt")).name
         file_path = OUTPUT_DIR / file_name
-
         if not file_path.exists():
-            content = json.dumps(result, indent=2, ensure_ascii=False)
-            file_path.write_text(content, encoding="utf-8")
-
+            file_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     except Exception as e:
         file_name = f"{job_id}.txt"
         file_path = OUTPUT_DIR / file_name
@@ -489,15 +410,8 @@ NOTES: {payload.notes}
         "file_name": file_name,
         "file_url": f"/api/file/{file_name}"
     }
-
     save_jobs()
-
-    return {
-        "ok": True,
-        "job_id": job_id,
-        "status": "completed",
-        "file_url": f"/api/file/{file_name}"
-    }
+    return {"ok": True, "job_id": job_id, "status": "completed", "file_url": f"/api/file/{file_name}"}
 
 @app.get("/api/file/{name:path}")
 def get_file(name: str):
@@ -506,6 +420,3 @@ def get_file(name: str):
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="file not found")
     return FileResponse(str(target), filename=safe_name)
-
-
-
