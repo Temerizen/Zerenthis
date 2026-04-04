@@ -1,6 +1,6 @@
 ﻿from fastapi import FastAPI
 
-app = FastAPI(title="Zerenthis Autopilot", version="1.1")
+app = FastAPI(title="Zerenthis Autopilot", version="1.2")
 
 @app.get("/")
 def root():
