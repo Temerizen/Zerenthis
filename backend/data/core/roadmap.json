@@ -1,12 +1,12 @@
 ﻿{
   "modules": [
-    {"name": "Money Engine", "status": "pending"},
-    {"name": "AI School", "status": "pending"},
-    {"name": "Research Engine", "status": "pending"},
-    {"name": "Cognitive Lab", "status": "pending"},
-    {"name": "Content Factory", "status": "pending"},
-    {"name": "Video Engine", "status": "pending"},
-    {"name": "Self Improver", "status": "pending"},
-    {"name": "Founder Console", "status": "pending"}
+    {"name":"Money Engine","status":"pending","risk":"low"},
+    {"name":"AI School","status":"pending","risk":"medium"},
+    {"name":"Research Engine","status":"pending","risk":"medium"},
+    {"name":"Cognitive Lab","status":"pending","risk":"medium"},
+    {"name":"Content Factory","status":"pending","risk":"low"},
+    {"name":"Video Engine","status":"pending","risk":"low"},
+    {"name":"Self Improver","status":"pending","risk":"high"},
+    {"name":"Founder Console","status":"pending","risk":"low"}
   ]
 }
