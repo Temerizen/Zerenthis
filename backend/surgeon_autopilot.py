@@ -1,6 +1,6 @@
 ﻿import time, requests, os
 
-BASE = os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app"
+BASE = os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com"
 
 def analyze(history):
     if not history:
@@ -87,3 +87,4 @@ if __name__ == "__main__":
         except Exception as e:
             print("Error:", e)
         time.sleep(600)  # every 10 minutes
+

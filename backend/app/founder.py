@@ -21,7 +21,7 @@ def is_founder(request: Request):
     return bool(key) and request.headers.get("x-founder-key") == key
 
 def _asset_url(filename: str) -> str:
-    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app").rstrip("/")
+    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com").rstrip("/")
     safe = quote(os.path.basename(filename or ""))
     return f"{public_base}/api/assets/{safe}" if safe else ""
 
@@ -183,3 +183,4 @@ def founder_cash_machine(request: Request, data: dict = Body(...)):
         "evolution": evolution,
         "queue": queued
     }
+

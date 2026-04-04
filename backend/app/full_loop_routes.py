@@ -13,7 +13,7 @@ def _safe_name(path: str) -> str:
     return os.path.basename(path or "").strip()
 
 def _asset_url(request: Request, filename: str) -> str:
-    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app").rstrip("/")
+    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com").rstrip("/")
     return f"{public_base}/api/assets/{quote(filename)}"
 
 def _build_meta(data: dict, script: str) -> dict:
@@ -115,3 +115,4 @@ def run_full_loop(request: Request, data: dict = Body(...)):
         "monetization": meta["monetization"],
         "evolution": meta["evolution"]
     }
+

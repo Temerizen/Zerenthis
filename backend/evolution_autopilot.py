@@ -1,7 +1,7 @@
 ﻿import time, requests, os, json
 from datetime import datetime
 
-BASE = os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app"
+BASE = os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com"
 MEMORY_PATH = "backend/data/self_improver_memory.json"
 
 def _now():
@@ -121,3 +121,4 @@ if __name__ == "__main__":
         except Exception as e:
             print("Error:", e)
         time.sleep(600)
+

@@ -13,7 +13,7 @@ DATA_DIR = Path("/data") if Path("/data").exists() else BASE / "backend" / "data
 AUTO = DATA_DIR / "autopilot"
 RUNS = AUTO / "architect_runs.json"
 
-BASE_URL = "https://semantiqai-backend-production-bcab.up.railway.app"
+BASE_URL = "https://api.zerenthis.com"
 TIMEOUT = 180
 
 MODULE_MAP = {
@@ -217,3 +217,4 @@ def loop():
 
 if __name__ == "__main__":
     loop()
+

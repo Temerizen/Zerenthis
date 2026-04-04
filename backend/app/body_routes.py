@@ -14,7 +14,7 @@ def _safe_name(path: str) -> str:
     return os.path.basename(path or "").strip()
 
 def _asset_url(filename: str) -> str:
-    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://semantiqai-backend-production-bcab.up.railway.app").rstrip("/")
+    public_base = (os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com").rstrip("/")
     return f"{public_base}/api/assets/{quote(filename)}"
 
 def _build_meta(data: dict, script: str) -> dict:
@@ -140,3 +140,4 @@ def get_body_loop_history(limit: int = 10):
         "phase": "history",
         "items": recent_runs(limit)
     }
+

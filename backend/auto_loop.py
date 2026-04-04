@@ -3,7 +3,7 @@ import time
 import requests
 import random
 
-BASE_URL = "https://semantiqai-backend-production-bcab.up.railway.app"
+BASE_URL = "https://api.zerenthis.com"
 
 TOPICS = [
     "Faceless TikTok automation system",
@@ -63,3 +63,4 @@ def run_loop():
             time.sleep(10)
 
 threading.Thread(target=run_loop, daemon=True).start()
+
