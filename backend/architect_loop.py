@@ -8,7 +8,8 @@ import requests
 from backend.proposal_engine import build_proposal, set_module_status, mark_proposal_status
 
 BASE = Path(__file__).resolve().parents[1]
-AUTO = BASE / "backend" / "data" / "autopilot"
+DATA_DIR = Path("/data") if Path("/data").exists() else BASE / "backend" / "data"
+AUTO = DATA_DIR / "autopilot"
 RUNS = AUTO / "architect_runs.json"
 WINNERS = AUTO / "winners.json"
 
