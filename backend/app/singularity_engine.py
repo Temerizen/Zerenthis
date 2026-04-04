@@ -18,9 +18,14 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
 OUTPUT_DIR = DATA_DIR / "outputs"
 DNA_DIR = DATA_DIR / "story_dna"
+PODCAST_DIR = DATA_DIR / "podcasts"
+COMIC_DIR = DATA_DIR / "comics"
+NOVEL_DIR = DATA_DIR / "novels"
+GAME_DIR = DATA_DIR / "games"
+PACKAGE_DIR = DATA_DIR / "packages"
 
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-DNA_DIR.mkdir(parents=True, exist_ok=True)
+for p in [OUTPUT_DIR, DNA_DIR, PODCAST_DIR, COMIC_DIR, NOVEL_DIR, GAME_DIR, PACKAGE_DIR]:
+    p.mkdir(parents=True, exist_ok=True)
 
 class SingularityRequest(BaseModel):
     idea: str
@@ -44,7 +49,26 @@ def slugify(value: str) -> str:
 def build_story_dna(req: SingularityRequest) -> dict:
     title = req.title_hint.strip() if req.title_hint.strip() else req.idea.strip()
 
-    dna = {
+    if req.girlfriend_mode:
+        theme = "love, appreciation, tenderness, and emotional safety"
+        setting = "a dreamy emotional universe made of memory, warmth, soft light, and little forever moments"
+        audio_identity = "soft intimate narration with gentle emotional cadence"
+        protagonist_role = "someone quietly and deeply in love"
+        second_role = "the emotional center of the universe"
+        hook = "I wanted to make something beautiful just for you."
+        middle = "The feeling grows into images, into light, into memories, into a tiny world made to hold affection."
+        ending = "So if this feels warm, that is because it was made from real feeling."
+    else:
+        theme = "transformation, imagination, momentum, and wonder"
+        setting = "a cinematic entertainment universe built from imagination and possibility"
+        audio_identity = "clean cinematic narration"
+        protagonist_role = "an imaginative creator"
+        second_role = "the witness to transformation"
+        hook = "One idea can become a whole universe."
+        middle = "The idea sharpens into stories, scenes, worlds, systems, and emotion."
+        ending = "That is how imagination becomes entertainment."
+
+    return {
         "created_at": now(),
         "idea": req.idea,
         "title": title,
@@ -54,31 +78,30 @@ def build_story_dna(req: SingularityRequest) -> dict:
         "visual_style": req.visual_style,
         "girlfriend_mode": req.girlfriend_mode,
         "world": {
-            "setting": "a dreamy emotional universe made of memory, warmth, and gentle light" if req.girlfriend_mode else "a cinematic digital universe of momentum and imagination",
-            "theme": "love, appreciation, tenderness, and emotional safety" if req.girlfriend_mode else "transformation and possibility",
+            "setting": setting,
+            "theme": theme,
             "visual_identity": req.visual_style,
-            "audio_identity": "soft intimate narration with gentle emotional cadence" if req.girlfriend_mode else "clean cinematic narration"
+            "audio_identity": audio_identity
         },
         "characters": [
             {
                 "name": "Narrator",
-                "role": "someone quietly in love" if req.girlfriend_mode else "an imaginative guide",
+                "role": protagonist_role,
                 "voice_style": "soft, affectionate, sincere" if req.girlfriend_mode else "clear, warm, cinematic"
             },
             {
                 "name": "Beloved" if req.girlfriend_mode else "Audience",
-                "role": "the emotional center of the story" if req.girlfriend_mode else "the witness to the transformation",
+                "role": second_role,
                 "voice_style": "silent emotional focal point"
             }
         ],
         "story_arc": {
-            "hook": "I wanted to make something beautiful just for you." if req.girlfriend_mode else "One idea can become a whole universe.",
-            "middle": "The feeling grows into images, into light, into little moments that feel like they were always waiting to exist." if req.girlfriend_mode else "The idea sharpens into something people can see, hear, and remember.",
-            "ending": "So if this feels warm, that is because it was made from real feeling." if req.girlfriend_mode else "That is how imagination becomes entertainment."
+            "hook": hook,
+            "middle": middle,
+            "ending": ending
         },
-        "format_targets": ["video", "podcast", "comic", "novel", "game_concept"]
+        "format_targets": ["video", "podcast", "comic", "novel", "game_concept", "social_package"]
     }
-    return dna
 
 def build_video_script(dna: dict, req: SingularityRequest) -> str:
     if req.girlfriend_mode:
@@ -99,19 +122,177 @@ def build_video_script(dna: dict, req: SingularityRequest) -> str:
         First there is a feeling.
         Then a shape.
         Then a story.
-        Then something people can actually see and remember.
+        Then something people can actually see, hear, and remember.
         This is how imagination stops waiting and starts becoming real.
         """
     return " ".join(line.strip() for line in script.splitlines() if line.strip())
+
+def build_podcast_script(dna: dict, req: SingularityRequest) -> str:
+    title = dna["title"]
+    if req.girlfriend_mode:
+        text = f"""
+        Welcome to {title}.
+        This is a little audio letter from one heart to another.
+        Sometimes love is not a huge speech. Sometimes it is attention, softness, and choosing someone again and again.
+        If I could build a tiny universe for you, it would be full of warmth, safe silence, soft colors, and little details that say you matter.
+        It would hold the feeling of being understood without needing to explain everything.
+        It would remind you that you are loved in a way that is calm, deep, and real.
+        And maybe that is what this is trying to be.
+        Not something loud. Just something true.
+        A small world, made for you, with tenderness in every corner.
+        """
+    else:
+        text = f"""
+        Welcome to {title}.
+        This is an idea becoming a world in real time.
+        Entertainment begins with a spark, but it grows through structure, feeling, and identity.
+        A strong universe creates characters, tone, conflict, memory, and style.
+        Once those pieces lock together, one idea can become a video, a podcast, a comic, a novel, or even a game concept.
+        That is the power of story DNA.
+        """
+    return " ".join(line.strip() for line in text.splitlines() if line.strip())
+
+def build_novel_chapter(dna: dict, req: SingularityRequest) -> str:
+    title = dna["title"]
+    if req.girlfriend_mode:
+        chapter = f"""
+        Chapter One: {title}
+
+        The first thing he noticed was the light.
+
+        It rested on everything gently, as though the room had decided that harshness was no longer welcome there. It touched the edges of the walls, the quiet corners, the soft places where memory liked to stay. In another life, it might have been an ordinary evening. In this one, it felt like the beginning of a promise.
+
+        He had wanted to make something beautiful for her, though he was not entirely sure when wanting had turned into building. Perhaps it happened the moment he realized that some feelings were too full to remain trapped inside thought. They needed shape. They needed motion. They needed a world.
+
+        So he began there.
+
+        A world with warm colors and patient air. A world where tenderness was not an interruption to reality but the center of it. A world where affection could sit quietly without having to prove itself to anyone.
+
+        And at the center of that world was her.
+
+        Not as a symbol. Not as an idea. But as herself. The reason the small universe had a heartbeat.
+        """
+    else:
+        chapter = f"""
+        Chapter One: {title}
+
+        Every universe begins with an unnoticed spark.
+
+        Not a grand explosion. Not a chorus. Just a tiny pressure against the dark, asking to become something more.
+
+        Most ideas die there, suspended between possibility and effort. But some survive. Some gather shape, tone, and conflict. Some begin to attract characters as if personalities were iron filings and the spark was suddenly magnetic.
+
+        That was how this one started.
+
+        It did not know yet whether it wanted to become a film, a comic, a game, or a myth whispered between strangers. It only knew that it wanted to exist.
+        """
+    return textwrap.dedent(chapter).strip()
+
+def build_comic_outline(dna: dict, req: SingularityRequest) -> dict:
+    title = dna["title"]
+    if req.girlfriend_mode:
+        panels = [
+            {"panel": 1, "scene": "Soft title splash with dreamy light and gentle colors", "dialogue": "I wanted to make something beautiful just for you.", "visual_prompt": "romantic dreamy scene, soft glowing light, cinematic, tender atmosphere"},
+            {"panel": 2, "scene": "A small universe forming from warm light", "dialogue": "It started as a small thought.", "visual_prompt": "warm emotional cosmic spark becoming a little universe, delicate and beautiful"},
+            {"panel": 3, "scene": "The world grows softer and fuller", "dialogue": "Then it became a quiet little world.", "visual_prompt": "gentle fantasy world, warm colors, intimate emotional tone"},
+            {"panel": 4, "scene": "Close emotional focus on the beloved as the center", "dialogue": "You are the reason it feels alive.", "visual_prompt": "romantic emotional focal point, cinematic framing, soft expression"},
+            {"panel": 5, "scene": "Ending panel with comforting warmth", "dialogue": "A small moving memory, made just to wrap around your heart.", "visual_prompt": "heartwarming final frame, dreamy cinematic romance, gentle glow"}
+        ]
+    else:
+        panels = [
+            {"panel": 1, "scene": "A spark in darkness", "dialogue": "One idea can become a whole universe.", "visual_prompt": "cinematic spark in darkness, imagination awakening"},
+            {"panel": 2, "scene": "Concept becomes structure", "dialogue": "First there is a feeling. Then a shape.", "visual_prompt": "abstract story world forming, cinematic concept art"},
+            {"panel": 3, "scene": "Characters and worlds emerge", "dialogue": "Stories turn into scenes.", "visual_prompt": "stylized entertainment universe, characters, worlds, energy"},
+            {"panel": 4, "scene": "The system builds media", "dialogue": "Imagination starts becoming real.", "visual_prompt": "creative studio machine generating media formats"}
+        ]
+    return {"title": title, "format": "comic_manga_outline", "panels": panels}
+
+def build_game_concept(dna: dict, req: SingularityRequest) -> dict:
+    title = dna["title"]
+    if req.girlfriend_mode:
+        return {
+            "title": title,
+            "genre": "narrative exploration romance",
+            "core_loop": "explore intimate memory spaces, unlock heartfelt scenes, deepen emotional connection",
+            "player_goal": "reconstruct a universe made from affection and shared meaning",
+            "world_hook": "a dreamlike world where each zone represents a feeling inside a relationship",
+            "quests": [
+                "Recover scattered memory fragments",
+                "Unlock the Warm Light Garden",
+                "Restore the Heartbeat Observatory"
+            ],
+            "systems": [
+                "dialogue choices",
+                "memory collecting",
+                "emotional world restoration"
+            ]
+        }
+    return {
+        "title": title,
+        "genre": "cinematic narrative adventure",
+        "core_loop": "discover lore, unlock scenes, shape the entertainment universe",
+        "player_goal": "turn imagination into a living world",
+        "world_hook": "a reality where unfinished ideas become places, people, and missions",
+        "quests": [
+            "Awaken the first world shard",
+            "Recruit the story architect",
+            "Stabilize the imagination engine"
+        ],
+        "systems": [
+            "dialogue choices",
+            "world expansion",
+            "story branch unlocking"
+        ]
+    }
+
+def build_social_package(dna: dict, req: SingularityRequest) -> dict:
+    title = dna["title"]
+    if req.girlfriend_mode:
+        hooks = [
+            "I made this little AI love film for my girlfriend.",
+            "This started as a thought and turned into a tiny universe.",
+            "A soft romantic video made from pure affection."
+        ]
+        captions = [
+            "A small moving memory, made with love.",
+            "Sometimes the sweetest things are the quietest.",
+            "Made this just to make her smile."
+        ]
+    else:
+        hooks = [
+            "One idea turned into a whole entertainment universe.",
+            "This is what happens when imagination stops waiting.",
+            "AI entertainment studio mode activated."
+        ]
+        captions = [
+            "From spark to story to media.",
+            "Building universes from ideas.",
+            "Entertainment singularity in motion."
+        ]
+
+    return {
+        "title": title,
+        "hooks": hooks,
+        "captions": captions,
+        "hashtags": ["#AIStudio", "#StoryWorld", "#Cinematic", "#Shorts", "#CreativeAI"],
+        "thumbnail_text": title,
+        "cta": "Watch the full piece and follow the universe as it expands."
+    }
 
 def split_script_into_scenes(script: str):
     parts = [s.strip() for s in re.split(r'(?<=[.!?])\s+', script) if s.strip()]
     return parts[:8] if parts else [script]
 
-def save_story_dna(dna: dict) -> str:
-    dna_id = f"{slugify(dna['title'])}_{uuid.uuid4().hex[:6]}"
-    path = DNA_DIR / f"{dna_id}.json"
-    path.write_text(json.dumps(dna, indent=2, ensure_ascii=False), encoding="utf-8")
+def save_json(folder: Path, title: str, data: dict) -> str:
+    file_id = f"{slugify(title)}_{uuid.uuid4().hex[:6]}.json"
+    path = folder / file_id
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path.name
+
+def save_text(folder: Path, title: str, suffix: str, content: str) -> str:
+    file_id = f"{slugify(title)}_{suffix}_{uuid.uuid4().hex[:6]}.txt"
+    path = folder / file_id
+    path.write_text(content, encoding="utf-8")
     return path.name
 
 def get_fonts():
@@ -184,22 +365,29 @@ def make_title_card(title: str, out_path: Path, width: int = 1080, height: int =
     title_font, body_font, _ = get_fonts()
 
     draw_centered_text(draw, (80, 350, width - 80, 850), title, title_font, (255, 240, 248))
-    draw_centered_text(draw, (100, 980, width - 100, 1250), "A small moving memory", body_font, (220, 225, 238))
+    draw_centered_text(draw, (100, 980, width - 100, 1250), "A small moving memory" if "always" in title.lower() else "A world becoming real", body_font, (220, 225, 238))
     img.save(out_path)
 
-def make_ending_card(out_path: Path, width: int = 1080, height: int = 1920):
+def make_ending_card(out_path: Path, width: int = 1080, height: int = 1920, girlfriend_mode: bool = False):
     img = Image.new("RGB", (width, height), color=(14, 12, 20))
     draw = ImageDraw.Draw(img)
     title_font, body_font, _ = get_fonts()
 
-    draw_centered_text(draw, (80, 420, width - 80, 780), "For you, always.", title_font, (255, 242, 246))
-    draw_centered_text(draw, (100, 950, width - 100, 1220), "Made with love", body_font, (220, 228, 238))
+    line1 = "For you, always." if girlfriend_mode else "The universe continues."
+    line2 = "Made with love" if girlfriend_mode else "Created by Zerenthis"
+
+    draw_centered_text(draw, (80, 420, width - 80, 780), line1, title_font, (255, 242, 246))
+    draw_centered_text(draw, (100, 950, width - 100, 1220), line2, body_font, (220, 228, 238))
     img.save(out_path)
 
-def render_video(title: str, script: str, video_slug: str) -> tuple[str, str]:
+def render_audio(text: str, slug: str, folder: Path) -> str:
+    audio_path = folder / f"{slug}.mp3"
+    gTTS(text=text, lang="en").save(str(audio_path))
+    return audio_path.name
+
+def render_video(title: str, script: str, video_slug: str, girlfriend_mode: bool = False) -> tuple[str, str]:
     audio_path = OUTPUT_DIR / f"{video_slug}.mp3"
-    tts = gTTS(text=script, lang="en")
-    tts.save(str(audio_path))
+    gTTS(text=script, lang="en").save(str(audio_path))
 
     scenes = split_script_into_scenes(script)
     total_scene_count = len(scenes) + 2
@@ -216,7 +404,7 @@ def render_video(title: str, script: str, video_slug: str) -> tuple[str, str]:
         image_paths.append(img_path)
 
     ending_card = OUTPUT_DIR / f"{video_slug}_ending.png"
-    make_ending_card(ending_card)
+    make_ending_card(ending_card, girlfriend_mode=girlfriend_mode)
     image_paths.append(ending_card)
 
     audio_clip = AudioFileClip(str(audio_path))
@@ -230,7 +418,7 @@ def render_video(title: str, script: str, video_slug: str) -> tuple[str, str]:
     clips = []
     clips.append(ImageClip(str(title_card)).set_duration(title_duration))
 
-    for idx, img_path in enumerate(image_paths[1:-1], start=1):
+    for img_path in image_paths[1:-1]:
         clips.append(ImageClip(str(img_path)).set_duration(per_middle))
 
     clips.append(ImageClip(str(ending_card)).set_duration(ending_duration))
@@ -258,23 +446,53 @@ def render_video(title: str, script: str, video_slug: str) -> tuple[str, str]:
 def create_singularity(req: SingularityRequest):
     try:
         dna = build_story_dna(req)
-        dna_file = save_story_dna(dna)
+        dna_file = save_json(DNA_DIR, dna["title"], dna)
 
-        script = build_video_script(dna, req)
+        video_script = build_video_script(dna, req)
+        podcast_script = build_podcast_script(dna, req)
+        novel_text = build_novel_chapter(dna, req)
+        comic_outline = build_comic_outline(dna, req)
+        game_concept = build_game_concept(dna, req)
+        social_package = build_social_package(dna, req)
+
         title = dna["title"]
         video_slug = f"{slugify(title)}_{uuid.uuid4().hex[:6]}"
-        video_file, audio_file = render_video(title, script, video_slug)
+
+        video_file, audio_file = render_video(title, video_script, video_slug, girlfriend_mode=req.girlfriend_mode)
+        podcast_audio = render_audio(podcast_script, f"{video_slug}_podcast", PODCAST_DIR)
+
+        comic_file = save_json(COMIC_DIR, title, comic_outline)
+        game_file = save_json(GAME_DIR, title, game_concept)
+        social_file = save_json(PACKAGE_DIR, title, social_package)
+        novel_file = save_text(NOVEL_DIR, title, "chapter_one", novel_text)
+        podcast_script_file = save_text(PODCAST_DIR, title, "script", podcast_script)
 
         return {
             "ok": True,
-            "mode": "core_singularity",
-            "quality": "upgraded_romantic_video",
+            "mode": "multi_format_singularity",
             "title": title,
             "story_dna_file": f"/api/singularity/file/{dna_file}",
-            "script": script,
-            "video_file": f"/api/file/{video_file}",
-            "audio_file": f"/api/file/{audio_file}",
-            "next_expansions": ["podcast", "comic", "novel", "game_concept"]
+            "video": {
+                "script": video_script,
+                "video_file": f"/api/file/{video_file}",
+                "audio_file": f"/api/file/{audio_file}"
+            },
+            "podcast": {
+                "script_file": f"/api/podcast/file/{podcast_script_file}",
+                "audio_file": f"/api/podcast/file/{podcast_audio}"
+            },
+            "comic": {
+                "outline_file": f"/api/comic/file/{comic_file}"
+            },
+            "novel": {
+                "chapter_file": f"/api/novel/file/{novel_file}"
+            },
+            "game_concept": {
+                "concept_file": f"/api/game/file/{game_file}"
+            },
+            "social_package": {
+                "package_file": f"/api/package/file/{social_file}"
+            }
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"singularity_error: {str(e)}")
@@ -285,4 +503,45 @@ def get_singularity_file(name: str):
     target = DNA_DIR / safe_name
     if not target.exists() or not target.is_file():
         raise HTTPException(status_code=404, detail="story dna file not found")
+    return FileResponse(str(target), filename=safe_name)
+
+@router.get("/api/podcast/file/{name:path}")
+def get_podcast_file(name: str):
+    safe_name = Path(name).name
+    candidates = [PODCAST_DIR / safe_name]
+    for target in candidates:
+        if target.exists() and target.is_file():
+            return FileResponse(str(target), filename=safe_name)
+    raise HTTPException(status_code=404, detail="podcast file not found")
+
+@router.get("/api/comic/file/{name:path}")
+def get_comic_file(name: str):
+    safe_name = Path(name).name
+    target = COMIC_DIR / safe_name
+    if not target.exists() or not target.is_file():
+        raise HTTPException(status_code=404, detail="comic file not found")
+    return FileResponse(str(target), filename=safe_name)
+
+@router.get("/api/novel/file/{name:path}")
+def get_novel_file(name: str):
+    safe_name = Path(name).name
+    target = NOVEL_DIR / safe_name
+    if not target.exists() or not target.is_file():
+        raise HTTPException(status_code=404, detail="novel file not found")
+    return FileResponse(str(target), filename=safe_name)
+
+@router.get("/api/game/file/{name:path}")
+def get_game_file(name: str):
+    safe_name = Path(name).name
+    target = GAME_DIR / safe_name
+    if not target.exists() or not target.is_file():
+        raise HTTPException(status_code=404, detail="game concept file not found")
+    return FileResponse(str(target), filename=safe_name)
+
+@router.get("/api/package/file/{name:path}")
+def get_package_file(name: str):
+    safe_name = Path(name).name
+    target = PACKAGE_DIR / safe_name
+    if not target.exists() or not target.is_file():
+        raise HTTPException(status_code=404, detail="package file not found")
     return FileResponse(str(target), filename=safe_name)
