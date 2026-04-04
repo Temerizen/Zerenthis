@@ -4,10 +4,11 @@ from pathlib import Path
 from datetime import datetime, timezone
 from pydantic import BaseModel
 from uuid import uuid4
+from collections import Counter
 import json
 import shutil
 
-app = FastAPI(title="Zerenthis Core Engine", version="3.0")
+app = FastAPI(title="Zerenthis Core Engine", version="3.1")
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = Path("/data") if Path("/data").exists() else BASE_DIR / "backend" / "data"
@@ -81,6 +82,10 @@ def write_json_file(path, data):
 
 def read_winners():
     data = read_json_file(WINNERS_FILE, [])
+    return data if isinstance(data, list) else []
+
+def read_runs():
+    data = read_json_file(RUNS_FILE, [])
     return data if isinstance(data, list) else []
 
 def vault_top_performer(file_name: str):
@@ -172,6 +177,135 @@ def backfill_top_performers():
         "top_performers_path": str(TOP_DIR)
     }
 
+def build_insights():
+    winners = read_winners()
+
+    modules = Counter()
+    niches = Counter()
+    buyers = Counter()
+
+    for w in winners:
+        modules[w.get("module", "unknown")] += 1
+        payload = w.get("payload", {}) or {}
+        niches[payload.get("niche", "unknown")] += 1
+        buyers[payload.get("buyer", "unknown")] += 1
+
+    insights = {
+        "top_modules": modules.most_common(),
+        "top_niches": niches.most_common(),
+        "top_buyers": buyers.most_common(),
+        "total_winners": len(winners)
+    }
+
+    write_json_file(INSIGHTS_FILE, insights)
+    return insights
+
+def build_roadmap(insights):
+    preferred = []
+    for name, _score in insights.get("top_modules", []):
+        preferred.append({"name": name, "risk": "low", "status": "pending"})
+
+    defaults = [
+        {"name": "Money Engine", "risk": "low", "status": "pending"},
+        {"name": "Content Factory", "risk": "low", "status": "pending"},
+        {"name": "Video Engine", "risk": "low", "status": "pending"},
+        {"name": "Founder Console", "risk": "low", "status": "pending"},
+        {"name": "AI School", "risk": "medium", "status": "pending"},
+        {"name": "Research Engine", "risk": "medium", "status": "pending"},
+        {"name": "Cognitive Lab", "risk": "medium", "status": "pending"}
+    ]
+
+    seen = set()
+    merged = []
+    for item in preferred + defaults:
+        name = str(item.get("name", "")).strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        merged.append(item)
+
+    roadmap = {
+        "modules": merged,
+        "last_updated": now()
+    }
+
+    write_json_file(ROADMAP_FILE, roadmap)
+    return roadmap
+
+def build_listings():
+    winners = read_winners()
+    listings = []
+
+    for w in winners:
+        result = w.get("result", {}) or {}
+        offer = result.get("offer", {}) or {}
+        summary = result.get("summary", {}) or {}
+        title = result.get("title") or w.get("file_name") or "Untitled Product"
+
+        listings.append({
+            "module": w.get("module"),
+            "job_id": w.get("job_id"),
+            "title": title,
+            "file_name": w.get("file_name"),
+            "file_url": w.get("file_url"),
+            "score": w.get("score", 0),
+            "front_end_name": (offer.get("front_end") or {}).get("name", title),
+            "front_end_price": (offer.get("front_end") or {}).get("price", 29),
+            "order_bump_name": (offer.get("order_bump") or {}).get("name", ""),
+            "order_bump_price": (offer.get("order_bump") or {}).get("price", 12),
+            "upsell_name": (offer.get("upsell") or {}).get("name", ""),
+            "upsell_price": (offer.get("upsell") or {}).get("price", 59),
+            "buyer": summary.get("buyer", ""),
+            "promise": summary.get("promise", ""),
+            "cta": summary.get("cta", ""),
+            "market_status": "ready_to_list"
+        })
+
+    write_json_file(LISTINGS_FILE, listings)
+    return listings
+
+def backfill_runs_from_winners():
+    runs = read_runs()
+    if runs:
+        return {"ok": True, "count": len(runs), "source": "existing"}
+
+    winners = read_winners()
+    synthesized = []
+    for w in winners:
+        synthesized.append({
+            "time": w.get("time", now()),
+            "proposal": {
+                "module": w.get("module", "unknown"),
+                "status": "complete"
+            },
+            "outcome": {
+                "status": "complete",
+                "job_id": w.get("job_id"),
+                "file_name": w.get("file_name"),
+                "score": w.get("score", 0)
+            }
+        })
+
+    write_json_file(RUNS_FILE, synthesized[-300:])
+    return {"ok": True, "count": len(synthesized[-300:]), "source": "synthesized_from_winners"}
+
+def run_ascension_backfill():
+    vault = backfill_top_performers()
+    insights = build_insights()
+    roadmap = build_roadmap(insights)
+    listings = build_listings()
+    runs = backfill_runs_from_winners()
+
+    return {
+        "ok": True,
+        "vault": vault,
+        "insights_total_winners": insights.get("total_winners", 0),
+        "roadmap_modules": len(roadmap.get("modules", [])),
+        "listing_count": len(listings),
+        "runs_count": runs.get("count", 0),
+        "runs_source": runs.get("source", "")
+    }
+
 @app.get("/")
 def root():
     return {"ok": True, "message": "Zerenthis core alive"}
@@ -215,6 +349,10 @@ def add_winner(winner: WinnerIn):
 @app.post("/api/top-performers/backfill")
 def run_top_performer_backfill():
     return backfill_top_performers()
+
+@app.post("/api/ascension/backfill")
+def ascension_backfill():
+    return run_ascension_backfill()
 
 @app.get("/api/roadmap")
 def get_roadmap():
