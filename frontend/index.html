@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zerenthis Founder</title>
+<title>Zerenthis Studio</title>
+<style>
+body{background:#05070d;color:white;font-family:sans-serif;padding:20px}
+button{padding:12px;border-radius:10px;border:none;background:#00e5ff;color:black;cursor:pointer}
+pre{background:#111;padding:10px;border-radius:10px}
+</style>
 </head>
-<body style="margin:0;">
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
+<body>
+<h1>Zerenthis Control</h1>
+<button onclick="run()">Run Generated Systems</button>
+<pre id="out"></pre>
+
+<script>
+async function run(){
+  const res = await fetch("/run-generated",{method:"POST"})
+  const data = await res.json()
+  document.getElementById("out").textContent = JSON.stringify(data,null,2)
+}
+</script>
 </body>
 </html>

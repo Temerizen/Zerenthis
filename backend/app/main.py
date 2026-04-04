@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Dict, Any
 import importlib, os, json, time
 
-app = FastAPI(title="Zerenthis Core", version="1.0")
+app = FastAPI(title="Zerenthis Core", version="normalized")
 
 BASE_DIR = os.path.dirname(__file__)
 GEN_DIR = os.path.join(BASE_DIR, "generated")
@@ -13,14 +13,10 @@ LOG_PATH = os.path.join(DATA_DIR, "execution_log.json")
 os.makedirs(GEN_DIR, exist_ok=True)
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# -------- EXECUTION --------
 def load_log():
-    if not os.path.exists(LOG_PATH):
-        return []
-    try:
-        return json.load(open(LOG_PATH))
-    except:
-        return []
+    if not os.path.exists(LOG_PATH): return []
+    try: return json.load(open(LOG_PATH))
+    except: return []
 
 def save_log(data):
     json.dump(data[:1000], open(LOG_PATH,"w"), indent=2)
@@ -50,22 +46,19 @@ def run_generated(limit=10):
     save_log(log)
     return out
 
-# -------- ROUTES --------
 class Req(BaseModel):
     engine:str
     input:Dict[str,Any]={}
 
 @app.get("/")
-def root():
-    return {"ok":True,"system":"zerenthis"}
+def root(): return {"ok":True,"system":"zerenthis"}
 
 @app.get("/health")
-def health():
-    return {"ok":True}
+def health(): return {"ok":True}
 
 @app.get("/status")
 def status():
-    return {"generated_count":len(os.listdir(GEN_DIR))}
+    return {"generated":len(os.listdir(GEN_DIR))}
 
 @app.post("/run-generated")
 def run_all():

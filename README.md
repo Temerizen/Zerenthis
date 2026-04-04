@@ -1,12 +1,13 @@
-﻿# Zerenthis Core Stable
+﻿# Zerenthis Normalized
 
-MAIN:
+Backend:
 backend.app.main:app
 
-AUTOPILOT:
-app.main:app
+Frontend:
+frontend/index.html
 
 Endpoints:
 - /health
+- /status
 - /run-generated
 - /system/run
