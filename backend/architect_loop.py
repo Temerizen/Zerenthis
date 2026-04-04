@@ -85,6 +85,13 @@ def append_winner(entry):
         data = []
     data.append(entry)
     write_json(WINNERS, data[-200:])
+    print("=== WINNER WRITTEN ===")
+    print(json.dumps({
+        "winners_path": str(WINNERS),
+        "count": len(data[-200:]),
+        "last_file_name": entry.get("file_name"),
+        "last_job_id": entry.get("job_id")
+    }, indent=2, ensure_ascii=False))
 
 def verify_health():
     r = requests.get(f"{BASE_URL}/health", timeout=60)
@@ -140,17 +147,16 @@ def execute_proposal(proposal):
         summary = (job.get("result") or {}).get("summary") or {}
         score = summary.get("quality_score", 0)
 
-        if score >= 90:
-            append_winner({
-                "time": now(),
-                "module": module,
-                "job_id": job_id,
-                "score": score,
-                "file_url": job.get("file_url"),
-                "file_name": job.get("file_name"),
-                "payload": job.get("payload"),
-                "result": job.get("result")
-            })
+        append_winner({
+            "time": now(),
+            "module": module,
+            "job_id": job_id,
+            "score": score,
+            "file_url": job.get("file_url"),
+            "file_name": job.get("file_name"),
+            "payload": job.get("payload"),
+            "result": job.get("result")
+        })
 
         return {
             "status": "complete",
@@ -164,6 +170,13 @@ def execute_proposal(proposal):
     return {"status": "blocked", "reason": "verification failed", "result": result, "job": job}
 
 def loop():
+    print("=== BUILDER PATHS ===")
+    print(json.dumps({
+        "data_dir": str(DATA_DIR),
+        "runs_path": str(RUNS),
+        "winners_path": str(WINNERS)
+    }, indent=2, ensure_ascii=False))
+
     while True:
         try:
             proposal = build_proposal()
