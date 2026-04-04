@@ -1,6 +1,7 @@
-﻿import time, requests, os
+﻿import os
+import time, requests, os
 
-BASE = os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com"
+BASE = os.getenv("PUBLIC_BASE_URL") or "http://zerenthis-main.railway.internal:8080"
 
 def run_cycle():
     print("=== AUTOPILOT CYCLE START ===")
@@ -73,4 +74,5 @@ if __name__ == "__main__":
         except Exception as e:
             print("Error:", e)
         time.sleep(300)  # runs every 5 minutes
+
 

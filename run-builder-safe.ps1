@@ -1,4 +1,4 @@
 ﻿Set-Location C:\Zerenthis
 $ErrorActionPreference = "Stop"
-$env:PUBLIC_BASE_URL = "https://api.zerenthis.com"
-python -m backend.architect_loop
+$env:BASE_URL = "http://127.0.0.1:8000"
+python .\backend\architect_loop.py

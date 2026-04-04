@@ -1,7 +1,8 @@
-﻿import time, requests, os, json, random
+﻿import os
+import time, requests, os, json, random
 from datetime import datetime
 
-BASE = os.getenv("PUBLIC_BASE_URL") or "https://api.zerenthis.com"
+BASE = os.getenv("PUBLIC_BASE_URL") or "http://zerenthis-main.railway.internal:8080"
 MEMORY_PATH = "backend/data/surgeon_memory.json"
 
 def _now():
@@ -159,4 +160,5 @@ if __name__ == "__main__":
         except Exception as e:
             print("Error:", e)
         time.sleep(600)
+
 
