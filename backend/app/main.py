@@ -31,11 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ROUTER_MODULES: List[str] = [
-    "backend.app.adaptive_brain",
-    "backend.app.command_center",
-    "backend.app.workflow_builder",
-]
+ROUTER_MODULES: List[str] = []
 
 _loaded_routes: List[Dict[str, Any]] = []
 _startup_errors: List[Dict[str, str]] = []
@@ -208,3 +204,4 @@ def get_file(name: str):
         if target.exists() and target.is_file():
             return FileResponse(str(target), filename=safe_name)
     raise HTTPException(status_code=404, detail="file not found")
+
