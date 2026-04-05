@@ -1,5 +1,6 @@
 ﻿from backend.app.core.output_engine import format_output
 from backend.app.engines.pdf_engine import create_pdf
+from backend.app.engines.sell_engine import generate_offer
 
 def run_money(cycle_id):
     product = format_output(
@@ -11,15 +12,17 @@ def run_money(cycle_id):
             "Post 3-5 short videos daily",
             "Redirect traffic to digital product"
         ],
-        monetization="Sell this as a $19-$49 product via Gumroad or Stripe"
+        monetization="Sell as a $19-$49 digital product via Gumroad or Stripe"
     )
 
     pdf = create_pdf(product)
+    offer = generate_offer(product)
 
-    print(f"[MONEY][{cycle_id}] product created → {pdf}", flush=True)
+    print(f"[MONEY][{cycle_id}] SELLABLE PRODUCT → {pdf}", flush=True)
 
     return {
         "status": "success",
         "file": pdf,
-        "product": product
+        "product": product,
+        "offer": offer
     }
