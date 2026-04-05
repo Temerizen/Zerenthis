@@ -535,8 +535,11 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=False)
 
-from app.core.core_loop import run_core_loop
-import threading
 
-threading.Thread(target=run_core_loop, daemon=True).start()
+try:
+    from backend.app.core.core_loop import run_core_loop
+    import threading
+    threading.Thread(target=run_core_loop, daemon=True).start()
+except Exception as e:
+    print("Core loop failed:", e)
 
