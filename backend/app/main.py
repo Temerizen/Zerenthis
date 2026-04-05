@@ -1,5 +1,5 @@
 ﻿from fastapi import FastAPI, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from pydantic import BaseModel
 from typing import Dict, Any
 import os, json, time, importlib, importlib.util, traceback, shutil, random
@@ -545,7 +545,7 @@ except Exception as e:
 
 
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from datetime import datetime
 import os, uuid
 
@@ -693,4 +693,87 @@ def get_winners():
         "count": len(winners),
         "winners": winners
     }
+
+
+# SWEEP3_CONTENT_ENGINE_BLOCK
+from typing import Optional, List
+import os
+from pydantic import BaseModel
+
+class Sweep3ContentPackRequest(BaseModel):
+    topic: str = "Untitled"
+    niche: str = "General"
+    tone: str = "Premium"
+    buyer: str = "General audience"
+    promise: str = "Useful result"
+    bonus: str = ""
+    notes: str = ""
+    channel: str = "multi-platform"
+
+class Sweep3OfferRequest(BaseModel):
+    title: str = "Starter Offer"
+    niche: str = "General"
+    buyer: str = "General audience"
+    promise: str = "Useful result"
+    price: str = ""
+    notes: str = ""
+
+@app.post("/api/content-pack")
+def create_content_pack(payload: Sweep3ContentPackRequest):
+    from backend.app.engines.content_engine import build_content_pack
+    result = build_content_pack(payload.model_dump())
+    return result
+
+@app.post("/api/social-pack")
+def create_social_pack(payload: Sweep3ContentPackRequest):
+    from backend.app.engines.content_engine import build_content_pack
+    data = payload.model_dump()
+    data["channel"] = "social"
+    result = build_content_pack(data)
+    return result
+
+@app.post("/api/offer/create")
+def create_offer(payload: Sweep3OfferRequest):
+    output_dir = os.path.join("backend", "outputs")
+    os.makedirs(output_dir, exist_ok=True)
+
+    safe_title = "".join(ch.lower() if ch.isalnum() else "_" for ch in payload.title).strip("_")
+    if not safe_title:
+        safe_title = "starter_offer"
+
+    filename = f"{safe_title}_offer.txt"
+    filepath = os.path.join(output_dir, filename)
+
+    lines = [
+        "Zerenthis Offer",
+        "",
+        f"Title: {payload.title}",
+        f"Niche: {payload.niche}",
+        f"Buyer: {payload.buyer}",
+        f"Promise: {payload.promise}",
+        f"Price: {payload.price}",
+        f"Notes: {payload.notes}",
+        "",
+        "Pitch:",
+        f"This offer helps {payload.buyer} in {payload.niche} achieve: {payload.promise}.",
+        "",
+        "CTA:",
+        "Start with the offer, publish the content, refine from response."
+    ]
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+    return {
+        "status": "completed",
+        "file_name": filename,
+        "file_url": f"/api/file/{filename}"
+    }
+
+@app.get("/api/file/{filepath:path}")
+def get_generated_file(filepath: str):
+    full_path = os.path.join("backend", "outputs", filepath)
+    if not os.path.isfile(full_path):
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(full_path)
 

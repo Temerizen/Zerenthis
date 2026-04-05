@@ -1,37 +1,30 @@
-﻿import json, uuid
-from pathlib import Path
+﻿import os
+import json
 from datetime import datetime
 
-ROOT = Path(__file__).resolve().parents[3]
-GEN_PATH = ROOT / "backend/app/generated"
+DATA_DIR = os.path.join("backend", "data")
+LATEST_IDEA_PATH = os.path.join(DATA_DIR, "latest_builder_idea.json")
 
-def run(payload):
-    GEN_PATH.mkdir(parents=True, exist_ok=True)
+def run_builder():
+    os.makedirs(DATA_DIR, exist_ok=True)
 
-    created = []
+    idea = {
+        "created_at": datetime.utcnow().isoformat() + "Z",
+        "title": "Faceless Content Cashflow Starter Pack",
+        "niche": "Content Monetization",
+        "buyer": "Beginners who want fast content and simple offers",
+        "promise": "Launch useful content and a starter offer quickly",
+        "offer": "$19 starter content bundle",
+        "angles": [
+            "speed",
+            "simplicity",
+            "beginner-friendly monetization",
+            "repurposing one idea into many assets"
+        ]
+    }
 
-    for i in range(2):
-        pid = uuid.uuid4().hex
+    with open(LATEST_IDEA_PATH, "w", encoding="utf-8") as f:
+        json.dump(idea, f, indent=2)
 
-        file_path = GEN_PATH / f"system_{pid}.py"
-
-        content = f"""
-# Zerenthis Generated System
-
-def run(input_data=None):
-    return {{
-        "id": "{pid}",
-        "status": "active",
-        "type": "auto_generated_tool"
-    }}
-"""
-
-        file_path.write_text(content, encoding="utf-8")
-
-        created.append(str(file_path))
-
-    return {{
-        "status": "systems_created",
-        "count": len(created),
-        "files": created
-    }}
+    print("Builder generated idea:", idea["title"])
+    return idea
