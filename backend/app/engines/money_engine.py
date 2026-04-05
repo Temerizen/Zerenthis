@@ -2,18 +2,18 @@
 import os, time
 
 def run_money(cycle_id):
-    title = "Instant Cashflow Offer"
+    title = "AI Cashflow Micro-Product"
 
     output = format_output(
         title=title,
-        summary="A fast-launch digital offer designed to generate immediate revenue using AI content systems.",
+        summary="A ready-to-sell digital product generated automatically using AI systems.",
         steps=[
-            "Create simple digital product",
-            "Use TikTok or Shorts for traffic",
-            "Offer limited-time deal",
-            "Drive to Gumroad or Stripe"
+            "Pick a trending niche (AI, money, relationships)",
+            "Generate a simple but valuable PDF guide",
+            "Create viral short-form content for traffic",
+            "Sell via Gumroad or Stripe instantly"
         ],
-        monetization="Direct digital product sales and affiliate stacking"
+        monetization="Sell as $9-$29 digital product with upsells"
     )
 
     os.makedirs("backend/outputs", exist_ok=True)
@@ -23,3 +23,9 @@ def run_money(cycle_id):
         f.write(str(output))
 
     print(f"[MONEY][{cycle_id}] generated {filename}", flush=True)
+
+    return {
+        "status": "success",
+        "file": filename,
+        "data": output
+    }
