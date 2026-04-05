@@ -1,73 +1,542 @@
 ﻿from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from typing import Dict, Any
-import importlib, os, json, time
+import os, json, time, importlib, importlib.util, traceback, shutil, random
 
-app = FastAPI(title="Zerenthis Core", version="normalized")
+app = FastAPI(title="Zerenthis Money Mode", version="3.0")
 
 BASE_DIR = os.path.dirname(__file__)
 GEN_DIR = os.path.join(BASE_DIR, "generated")
+APPROVED_DIR = os.path.join(BASE_DIR, "approved")
+QUAR_DIR = os.path.join(BASE_DIR, "quarantine")
 DATA_DIR = os.path.join(os.path.dirname(BASE_DIR), "data")
 LOG_PATH = os.path.join(DATA_DIR, "execution_log.json")
+STATE_PATH = os.path.join(DATA_DIR, "evolution_state.json")
+MONEY_PATH = os.path.join(DATA_DIR, "money_mode.json")
 
-os.makedirs(GEN_DIR, exist_ok=True)
-os.makedirs(DATA_DIR, exist_ok=True)
+for d in [GEN_DIR, APPROVED_DIR, QUAR_DIR, DATA_DIR]:
+    os.makedirs(d, exist_ok=True)
+
+class EngineRequest(BaseModel):
+    engine: str
+    input: Dict[str, Any] = {}
+
+def load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 def load_log():
-    if not os.path.exists(LOG_PATH): return []
-    try: return json.load(open(LOG_PATH))
-    except: return []
+    return load_json(LOG_PATH, [])
 
 def save_log(data):
-    json.dump(data[:1000], open(LOG_PATH,"w"), indent=2)
+    save_json(LOG_PATH, data[:2000])
 
-def score(x):
-    if isinstance(x, dict): return min(len(x)*2, 20)
-    if isinstance(x, str): return min(len(x)//50, 20)
-    return 1
+def load_state():
+    return load_json(STATE_PATH, {
+        "runs": 0,
+        "promoted": [],
+        "quarantined": [],
+        "top_scores": [],
+        "last_evolution_time": None
+    })
+
+def save_state(data):
+    save_json(STATE_PATH, data)
+
+def load_money():
+    return load_json(MONEY_PATH, {
+        "money_runs": 0,
+        "winners": [],
+        "last_bundle": None
+    })
+
+def save_money(data):
+    save_json(MONEY_PATH, data)
+
+def list_py_files(path):
+    return sorted([f for f in os.listdir(path) if f.endswith(".py")], reverse=True)
+
+def money_keywords_score(text):
+    low = text.lower()
+    score = 0
+    reasons = []
+    reward_terms = {
+        "offer": 3, "buyer": 3, "problem": 2, "promise": 2, "product": 3,
+        "price": 4, "cta": 3, "summary": 2, "title": 2, "bundle": 3,
+        "email": 2, "hooks": 2, "landing": 3, "gumroad": 4, "script": 2,
+        "launch": 2, "content": 2, "market": 2, "sales": 3, "objection": 2
+    }
+    for k, v in reward_terms.items():
+        if k in low:
+            score += v
+            reasons.append(f"contains {k}")
+
+    if len(text.strip()) > 80:
+        score += 3
+        reasons.append("substantial output")
+    if len(text.strip()) > 220:
+        score += 4
+        reasons.append("rich output")
+
+    if "alive" in low and len(text.strip()) < 60:
+        score -= 5
+        reasons.append("placeholder output")
+    if any(w in low for w in ["error", "traceback", "exception", "failed"]):
+        score -= 6
+        reasons.append("error-like output")
+
+    return max(score, 0), reasons
+
+def run_file(path):
+    fname = os.path.basename(path)
+    try:
+        spec = importlib.util.spec_from_file_location(fname.replace(".py",""), path)
+        if spec is None or spec.loader is None:
+            raise Exception("Could not load module spec")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        if not hasattr(module, "run"):
+            return {
+                "file": fname, "ok": False, "score": 0,
+                "result": "missing run()", "reasons": ["missing run()"], "time": time.time()
+            }
+        result = module.run()
+        text = json.dumps(result, ensure_ascii=False) if isinstance(result, (dict, list)) else str(result)
+        score, reasons = money_keywords_score(text)
+        return {
+            "file": fname, "ok": True, "score": score,
+            "result": result, "reasons": reasons, "time": time.time()
+        }
+    except Exception as e:
+        return {
+            "file": fname, "ok": False, "score": 0,
+            "error": str(e), "trace": traceback.format_exc(),
+            "reasons": ["execution exception"], "time": time.time()
+        }
+
+def maybe_promote(entry):
+    fname = entry["file"]
+    src = os.path.join(GEN_DIR, fname)
+    dst = os.path.join(APPROVED_DIR, fname)
+    if os.path.exists(src) and entry.get("score", 0) >= 7:
+        shutil.copy2(src, dst)
+        return True
+    return False
+
+def maybe_quarantine(entry):
+    fname = entry["file"]
+    src = os.path.join(GEN_DIR, fname)
+    dst = os.path.join(QUAR_DIR, fname)
+    if not os.path.exists(src):
+        return False
+    txt = str(entry.get("result","")).lower()
+    if entry.get("score", 0) <= 1 or entry.get("ok") is False or "missing run()" in txt:
+        shutil.move(src, dst)
+        return True
+    return False
+
+def mutate_seed(entry):
+    src = os.path.join(GEN_DIR, entry["file"])
+    if not os.path.exists(src):
+        src = os.path.join(APPROVED_DIR, entry["file"])
+    if not os.path.exists(src):
+        return None
+
+    code = open(src, "r", encoding="utf-8").read()
+    swaps = [
+        ("solo founder", "freelancer"),
+        ("freelancer", "creator"),
+        ("creator", "coach"),
+        ("starter", "premium"),
+        ("simple", "high-converting"),
+        ("launch", "scale"),
+        ("product", "digital asset"),
+        ("offer", "micro-offer")
+    ]
+    new_code = code
+    for a, b in swaps:
+        if a in new_code:
+            new_code = new_code.replace(a, b, 1)
+            break
+    else:
+        new_code += "\n# mutation: money-mode variant\n"
+
+    new_name = f"money_{int(time.time()*1000)}_{random.randint(1000,9999)}.py"
+    with open(os.path.join(GEN_DIR, new_name), "w", encoding="utf-8") as f:
+        f.write(new_code)
+    return new_name
+
+def make_bundle_from_winners():
+    approved = list_py_files(APPROVED_DIR)[:10]
+    bundle = {
+        "title": "Zerenthis Money Bundle",
+        "summary": "Top monetizable outputs detected by Money Mode.",
+        "approved_files": approved,
+        "bundle_components": [],
+        "cta": "Package the best outputs into a sellable starter kit."
+    }
+    for f in approved[:5]:
+        bundle["bundle_components"].append({
+            "file": f,
+            "use": "candidate for PDF, hooks pack, scripts pack, or landing copy asset"
+        })
+    return bundle
+
+def seed_money_universe():
+    seeds = {
+        "money_offer_machine.py": '''
+def run():
+    return {
+        "ok": True,
+        "title": "Instant Offer Machine",
+        "summary": "Creates a quick digital offer aimed at immediate cash flow.",
+        "buyer": "solo founder",
+        "problem": "too many ideas and no clear product",
+        "promise": "launch a paid starter asset in 24 hours",
+        "product": "Offer Blueprint + CTA Pack",
+        "price": 29,
+        "cta": "Sell this as a same-day launch kit"
+    }
+''',
+        "gumroad_cash_pack.py": '''
+def run():
+    return {
+        "ok": True,
+        "title": "Gumroad Cash Pack",
+        "summary": "A marketplace-ready digital bundle.",
+        "product": "PDF guide + 50 hooks + 10 emails + launch checklist",
+        "buyer": "beginner creator",
+        "price": 19,
+        "gumroad": True,
+        "cta": "List as a beginner monetization starter pack"
+    }
+''',
+        "sales_email_money_pack.py": '''
+def run():
+    return {
+        "ok": True,
+        "title": "Sales Email Pack",
+        "summary": "Three email sequence to convert interest into a first purchase.",
+        "emails": [
+            {"subject": "Your first simple offer", "goal": "belief shift"},
+            {"subject": "Why simple sells first", "goal": "objection handling"},
+            {"subject": "Your starter asset is ready", "goal": "conversion"}
+        ],
+        "sales": True,
+        "cta": "Use this to sell a starter digital product"
+    }
+''',
+        "landing_page_cash_copy.py": '''
+def run():
+    return {
+        "ok": True,
+        "title": "Landing Page Cash Copy",
+        "summary": "Drafts clear landing page copy for a paid digital asset.",
+        "headline": "Turn one idea into a sellable digital asset this week",
+        "subheadline": "Get focused offer generation, launch copy, and starter pack structure without drowning in complexity.",
+        "bullets": [
+            "Generate a small offer fast",
+            "Get launch-ready messaging",
+            "Package outputs into a real product"
+        ],
+        "cta": "Generate My Cash Starter Pack"
+    }
+''',
+        "content_to_cash_engine.py": '''
+def run():
+    return {
+        "ok": True,
+        "title": "Content to Cash Engine",
+        "summary": "Maps content outputs to direct monetization paths.",
+        "content": ["video hooks", "carousel ideas", "email prompts"],
+        "product": "starter content monetization bundle",
+        "price": 27,
+        "buyer": "new creator",
+        "cta": "Turn these assets into a low-ticket pack"
+    }
+'''
+    }
+    created = []
+    for name, code in seeds.items():
+        path = os.path.join(GEN_DIR, name)
+        if not os.path.exists(path):
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(code.strip() + "\n")
+            created.append(name)
+    return created
 
 def run_generated(limit=10):
-    files = sorted([f for f in os.listdir(GEN_DIR) if f.endswith(".py")], reverse=True)
+    files = list_py_files(GEN_DIR)[:limit]
     log = load_log()
-    out = []
-    for f in files[:limit]:
-        try:
-            path = os.path.join(GEN_DIR,f)
-            spec = importlib.util.spec_from_file_location(f,path)
-            m = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(m)
-            r = m.run() if hasattr(m,"run") else "no run()"
-            s = score(r)
-            entry = {"file":f,"result":str(r),"score":s,"time":time.time()}
-        except Exception as e:
-            entry = {"file":f,"error":str(e),"score":0}
-        log.insert(0,entry)
-        out.append(entry)
+    results = []
+    for f in files:
+        entry = run_file(os.path.join(GEN_DIR, f))
+        log.insert(0, entry)
+        results.append(entry)
     save_log(log)
-    return out
+    return results
 
-class Req(BaseModel):
-    engine:str
-    input:Dict[str,Any]={}
+def evolve_money(limit=15):
+    log = load_log()
+    state = load_state()
+    money = load_money()
+    files = list_py_files(GEN_DIR)[:limit]
+    results = []
+    promoted = []
+    quarantined = []
+    mutants = []
 
-@app.get("/")
-def root(): return {"ok":True,"system":"zerenthis"}
+    for f in files:
+        entry = run_file(os.path.join(GEN_DIR, f))
+        results.append(entry)
+        log.insert(0, entry)
+
+    ranked = sorted(results, key=lambda x: x.get("score", 0), reverse=True)
+    top = ranked[:5]
+    mid = ranked[5:10]
+    low = ranked[10:]
+
+    for r in top:
+        if maybe_promote(r):
+            promoted.append(r["file"])
+
+    for r in low:
+        if maybe_quarantine(r):
+            quarantined.append(r["file"])
+
+    for r in top + mid:
+        m = mutate_seed(r)
+        if m:
+            mutants.append(m)
+
+    state["runs"] = int(state.get("runs", 0)) + 1
+    state["promoted"] = (promoted + state.get("promoted", []))[:200]
+    state["quarantined"] = (quarantined + state.get("quarantined", []))[:200]
+    state["top_scores"] = [{"file": r["file"], "score": r["score"], "reasons": r.get("reasons", [])} for r in top]
+    state["last_evolution_time"] = time.time()
+    save_state(state)
+
+    bundle = make_bundle_from_winners()
+    money["money_runs"] = int(money.get("money_runs", 0)) + 1
+    money["winners"] = ([{"file": r["file"], "score": r["score"]} for r in top] + money.get("winners", []))[:100]
+    money["last_bundle"] = bundle
+    save_money(money)
+
+    save_log(log)
+
+    return {
+        "ok": True,
+        "processed": len(results),
+        "promoted": promoted,
+        "quarantined": quarantined,
+        "mutated": mutants,
+        "top_scores": state["top_scores"],
+        "bundle": bundle
+    }
 
 @app.get("/health")
-def health(): return {"ok":True}
+def health():
+    return {
+        "ok": True,
+        "service": "zerenthis-money-mode",
+        "generated_count": len(list_py_files(GEN_DIR)),
+        "approved_count": len(list_py_files(APPROVED_DIR)),
+        "quarantine_count": len(list_py_files(QUAR_DIR))
+    }
 
 @app.get("/status")
 def status():
-    return {"generated":len(os.listdir(GEN_DIR))}
+    logs = load_log()
+    state = load_state()
+    money = load_money()
+    return {
+        "ok": True,
+        "service": "zerenthis-money-mode",
+        "generated_count": len(list_py_files(GEN_DIR)),
+        "approved_count": len(list_py_files(APPROVED_DIR)),
+        "quarantine_count": len(list_py_files(QUAR_DIR)),
+        "recent_runs": len(logs[:10]),
+        "latest": logs[0] if logs else None,
+        "evolution_runs": state.get("runs", 0),
+        "money_runs": money.get("money_runs", 0),
+        "top_scores": state.get("top_scores", []),
+        "bundle": money.get("last_bundle")
+    }
+
+@app.get("/logs")
+def logs():
+    return {"ok": True, "logs": load_log()[:50]}
+
+@app.get("/generated")
+def generated():
+    return {"ok": True, "files": list_py_files(GEN_DIR)[:200]}
+
+@app.get("/approved")
+def approved():
+    return {"ok": True, "files": list_py_files(APPROVED_DIR)[:200]}
+
+@app.get("/quarantine")
+def quarantine():
+    return {"ok": True, "files": list_py_files(QUAR_DIR)[:200]}
+
+@app.get("/money")
+def money():
+    return {"ok": True, "money": load_money()}
 
 @app.post("/run-generated")
 def run_all():
-    return {"ok":True,"results":run_generated()}
+    return {"ok": True, "results": run_generated(10)}
+
+@app.post("/evolve")
+def evolve_now():
+    return evolve_money(15)
+
+@app.post("/seed-money")
+def seed_money():
+    created = seed_money_universe()
+    return {"ok": True, "created": created}
 
 @app.post("/system/run")
-def run_engine(req:Req):
+def system_run(req: EngineRequest):
     try:
-        m = importlib.import_module(f"backend.app.engines.{req.engine}")
-        return {"ok":True,"result":m.run(req.input)}
+        module = importlib.import_module(f"backend.app.engines.{req.engine}")
+        if not hasattr(module, "run"):
+            raise Exception("Engine missing run(input)")
+        return {"ok": True, "engine": req.engine, "result": module.run(req.input)}
+    except ModuleNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Engine not found: {req.engine}")
     except Exception as e:
-        raise HTTPException(500,str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/", response_class=HTMLResponse)
+def dashboard():
+    return """
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Zerenthis Money Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; background:#05070d; color:#f5f7fb; }
+    .wrap { max-width:1450px; margin:0 auto; padding:24px; }
+    h1 { margin:0 0 8px; color:#00e5ff; }
+    .sub { color:#9fb0c3; margin-bottom:24px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+    .card { background:#0e1420; border:1px solid #1c2638; border-radius:18px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.25); min-height:220px; }
+    .card h3 { margin-top:0; color:#ffffff; }
+    .metric { font-size:28px; font-weight:700; margin:8px 0; color:#00e5ff; }
+    button { background:#00e5ff; color:#031018; border:none; padding:12px 16px; border-radius:12px; cursor:pointer; font-weight:700; }
+    button:hover { filter:brightness(1.05); }
+    pre { background:#08101a; color:#d8e7ff; border:1px solid #1b2940; border-radius:14px; padding:14px; overflow:auto; white-space:pre-wrap; word-break:break-word; min-height:120px; max-height:480px; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 22px; }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#122033; color:#b9d7ff; border:1px solid #233757; font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Zerenthis Money Mode</h1>
+    <div class="sub">Bias the machine toward offers, product packs, copy, and monetizable outputs.</div>
+
+    <div class="row">
+      <button onclick="refreshAll()">Refresh Dashboard</button>
+      <button onclick="seedMoney()">Seed Money Universe</button>
+      <button onclick="runGenerated()">Run Generated</button>
+      <button onclick="evolveNow()">Activate Money Mode</button>
+      <span class="pill" id="serverState">Checking server...</span>
+    </div>
+
+    <div class="grid">
+      <div class="card"><h3>Health</h3><div class="metric" id="healthMetric">...</div><pre id="healthOut">Loading...</pre></div>
+      <div class="card"><h3>Status</h3><div class="metric" id="statusMetric">...</div><pre id="statusOut">Loading...</pre></div>
+      <div class="card"><h3>Generated</h3><div class="metric" id="generatedMetric">...</div><pre id="generatedOut">Loading...</pre></div>
+      <div class="card"><h3>Approved</h3><div class="metric" id="approvedMetric">...</div><pre id="approvedOut">Loading...</pre></div>
+      <div class="card"><h3>Quarantine</h3><div class="metric" id="quarantineMetric">...</div><pre id="quarantineOut">Loading...</pre></div>
+      <div class="card"><h3>Execution Logs</h3><div class="metric" id="logsMetric">...</div><pre id="logsOut">Loading...</pre></div>
+      <div class="card"><h3>Money State</h3><div class="metric" id="moneyMetric">...</div><pre id="moneyOut">Loading...</pre></div>
+      <div class="card"><h3>Bundle Output</h3><div class="metric" id="bundleMetric">...</div><pre id="bundleOut">Loading...</pre></div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchJson(url, options) {
+      const r = await fetch(url, options || {});
+      if (!r.ok) throw new Error(url + " -> " + r.status);
+      return await r.json();
+    }
+    function show(id, data) {
+      document.getElementById(id).textContent = JSON.stringify(data, null, 2);
+    }
+    async function refreshAll() {
+      try {
+        document.getElementById("serverState").textContent = "Server online";
+        const health = await fetchJson('/health');
+        const status = await fetchJson('/status');
+        const generated = await fetchJson('/generated');
+        const approved = await fetchJson('/approved');
+        const quarantine = await fetchJson('/quarantine');
+        const logs = await fetchJson('/logs');
+        const money = await fetchJson('/money');
+
+        document.getElementById("healthMetric").textContent = health.ok ? "OK" : "DOWN";
+        document.getElementById("statusMetric").textContent = status.money_runs ?? 0;
+        document.getElementById("generatedMetric").textContent = (generated.files || []).length;
+        document.getElementById("approvedMetric").textContent = (approved.files || []).length;
+        document.getElementById("quarantineMetric").textContent = (quarantine.files || []).length;
+        document.getElementById("logsMetric").textContent = (logs.logs || []).length;
+        document.getElementById("moneyMetric").textContent = (money.money?.money_runs ?? 0);
+        document.getElementById("bundleMetric").textContent = status.bundle ? (status.bundle.approved_files || []).length : 0;
+
+        show('healthOut', health);
+        show('statusOut', status);
+        show('generatedOut', generated.files || []);
+        show('approvedOut', approved.files || []);
+        show('quarantineOut', quarantine.files || []);
+        show('logsOut', logs.logs || []);
+        show('moneyOut', money.money || {});
+        show('bundleOut', status.bundle || {});
+      } catch (e) {
+        document.getElementById("serverState").textContent = "Server error";
+        document.getElementById("healthOut").textContent = String(e);
+      }
+    }
+    async function runGenerated() {
+      const result = await fetchJson('/run-generated', { method:'POST' });
+      show('logsOut', result);
+      await refreshAll();
+    }
+    async function evolveNow() {
+      const result = await fetchJson('/evolve', { method:'POST' });
+      show('moneyOut', result);
+      await refreshAll();
+    }
+    async function seedMoney() {
+      const result = await fetchJson('/seed-money', { method:'POST' });
+      show('generatedOut', result);
+      await refreshAll();
+    }
+    refreshAll();
+  </script>
+</body>
+</html>
+"""
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=False)
+
+from app.core.core_loop import run_core_loop
+import threading
+
+threading.Thread(target=run_core_loop, daemon=True).start()
+
