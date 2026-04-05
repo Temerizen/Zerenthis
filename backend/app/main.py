@@ -906,3 +906,51 @@ async def zerenthis_start_core_loop_once():
     start_core_loop_once()
 # END_CORE_LOOP_STARTUP_BLOCK
 
+
+# FINAL_GAP_SWEEP_BLOCK
+
+@app.get("/api/founder/summary")
+def founder_summary_route():
+    from backend.app.engines.founder_engine import founder_summary
+    return founder_summary()
+
+@app.get("/api/founder/recent-outputs")
+def founder_recent_outputs_route(limit: int = 25):
+    from backend.app.engines.founder_engine import founder_recent_outputs
+    return founder_recent_outputs(limit=limit)
+
+@app.get("/api/founder/module-status")
+def founder_module_status_route():
+    from backend.app.engines.founder_engine import founder_module_status
+    return founder_module_status()
+
+@app.get("/api/content/status")
+def content_status_route():
+    from backend.app.engines.content_status_engine import get_content_status
+    return get_content_status()
+
+@app.get("/api/money/status")
+def money_status_route():
+    from backend.app.engines.money_status_engine import get_money_status
+    return get_money_status()
+
+@app.get("/api/school/status")
+def school_status_route():
+    from backend.app.engines.school_status_engine import get_school_status
+    return get_school_status()
+
+@app.get("/api/research/status")
+def research_status_route():
+    from backend.app.engines.research_status_engine import get_research_status
+    return get_research_status()
+
+@app.get("/api/cognitive/status")
+def cognitive_status_route():
+    from backend.app.engines.cognitive_status_engine import get_cognitive_status
+    return get_cognitive_status()
+
+@app.get("/api/genius/status")
+def genius_status_route():
+    from backend.app.engines.genius_status_engine import get_genius_status
+    return get_genius_status()
+

@@ -1,30 +1,38 @@
-﻿import json
-import os
-from datetime import datetime, timezone
+﻿import os
+from backend.app.core.registry_engine import get_registry, update_module
 
-DATA_DIR = os.path.join("backend", "data")
+OUTPUT_ROOT = os.path.join("backend", "outputs")
 
-def build_founder_snapshot() -> dict:
-    now = datetime.now(timezone.utc).isoformat()
-    modules = [
-        "core",
-        "money",
-        "content",
-        "school",
-        "research",
-        "cognitive",
-        "genius"
-    ]
+def founder_summary():
+    registry = get_registry()
+    update_module("founder", last_output="founder_summary")
+    return registry
 
-    snapshot = {
-        "generated_at": now,
+def founder_recent_outputs(limit=25):
+    results = []
+    if os.path.isdir(OUTPUT_ROOT):
+        for root, dirs, files in os.walk(OUTPUT_ROOT):
+            for f in files:
+                full = os.path.join(root, f)
+                rel = os.path.relpath(full, OUTPUT_ROOT).replace("\\", "/")
+                results.append({
+                    "file_name": rel,
+                    "file_url": f"/api/file/{rel}",
+                    "modified": os.path.getmtime(full)
+                })
+    results = sorted(results, key=lambda x: x["modified"], reverse=True)[:limit]
+    update_module("founder", last_output=f"recent_outputs:{len(results)}")
+    return {
         "status": "ok",
-        "modules": [{"name": m, "status": "active"} for m in modules]
+        "count": len(results),
+        "outputs": results
     }
 
-    path = os.path.join(DATA_DIR, "founder_snapshot.json")
-    os.makedirs(DATA_DIR, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(snapshot, f, indent=2)
-
-    return snapshot
+def founder_module_status():
+    registry = get_registry()
+    modules = registry.get("modules", {})
+    update_module("founder", last_output="module_status")
+    return {
+        "status": "ok",
+        "modules": modules
+    }
