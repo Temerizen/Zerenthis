@@ -954,3 +954,17 @@ def genius_status_route():
     from backend.app.engines.genius_status_engine import get_genius_status
     return get_genius_status()
 
+
+# SWEEP5_CONTROL_BLOCK
+
+@app.get("/api/dashboard")
+def dashboard_route():
+    from backend.app.engines.dashboard_engine import get_dashboard
+    return get_dashboard()
+
+@app.post("/api/command")
+def command_route(payload: dict):
+    from backend.app.engines.command_engine import run_command
+    cmd = payload.get("command", "")
+    return run_command(cmd)
+
