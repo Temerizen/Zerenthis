@@ -908,7 +908,10 @@ def founder_snapshot_route():
 # CORE_LOOP_STARTUP_BLOCK
 @app.on_event("startup")
 async def zerenthis_start_core_loop_once():
-    from backend.app.core.loop_launcher import start_core_loop_once
+    try:
+        from app.core.loop_launcher import start_core_loop_once
+    except Exception:
+        from backend.app.core.loop_launcher import start_core_loop_once
     start_core_loop_once()
 # END_CORE_LOOP_STARTUP_BLOCK
 
@@ -973,6 +976,8 @@ def command_route(payload: dict):
     from backend.app.engines.command_engine import run_command
     cmd = payload.get("command", "")
     return run_command(cmd)
+
+
 
 
 

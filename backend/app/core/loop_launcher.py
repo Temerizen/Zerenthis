@@ -1,5 +1,8 @@
 ﻿import threading
-from backend.app.core.core_loop import run_core_loop
+try:
+    from app.core.core_loop import run_core_loop
+except Exception:
+    from backend.app.core.core_loop import run_core_loop
 
 _loop_started = False
 
