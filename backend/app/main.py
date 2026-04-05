@@ -794,3 +794,73 @@ async def zerenthis_start_core_loop_once():
         print("Core loop failed:", e)
 # END_CORE_LOOP_STARTUP_BLOCK
 
+
+# SWEEP4_INTELLIGENCE_STACK_BLOCK
+class SchoolRequest(BaseModel):
+    topic: str = "Untitled lesson"
+    level: str = "beginner"
+    goal: str = ""
+
+class ResearchRequest(BaseModel):
+    topic: str = "Untitled research topic"
+    audience: str = "general"
+    depth: str = "standard"
+
+class CognitiveRequest(BaseModel):
+    focus: str = "memory"
+    intensity: str = "medium"
+    duration_minutes: int = 20
+
+class GeniusRequest(BaseModel):
+    problem: str = "Untitled problem"
+    mode: str = "theory"
+    ambition: str = "high"
+
+@app.post("/api/school/lesson")
+def create_school_lesson(payload: SchoolRequest):
+    from backend.app.engines.school_engine import create_lesson
+    return create_lesson(
+        topic=payload.topic,
+        level=payload.level,
+        goal=payload.goal
+    )
+
+@app.post("/api/research/brief")
+def create_research_brief_route(payload: ResearchRequest):
+    from backend.app.engines.research_engine import create_research_brief
+    return create_research_brief(
+        topic=payload.topic,
+        audience=payload.audience,
+        depth=payload.depth
+    )
+
+@app.post("/api/cognitive/session")
+def create_cognitive_session_route(payload: CognitiveRequest):
+    from backend.app.engines.cognitive_engine import create_cognitive_session
+    return create_cognitive_session(
+        focus=payload.focus,
+        intensity=payload.intensity,
+        duration_minutes=payload.duration_minutes
+    )
+
+@app.post("/api/genius/report")
+def create_genius_report_route(payload: GeniusRequest):
+    from backend.app.engines.genius_engine import create_genius_report
+    return create_genius_report(
+        problem=payload.problem,
+        mode=payload.mode,
+        ambition=payload.ambition
+    )
+
+@app.get("/api/founder/modules")
+def founder_modules():
+    return {
+        "status": "ok",
+        "modules": [
+            {"name": "AI School", "route": "/api/school/lesson", "status": "active"},
+            {"name": "Research Engine", "route": "/api/research/brief", "status": "active"},
+            {"name": "Cognitive Lab", "route": "/api/cognitive/session", "status": "active"},
+            {"name": "Genius Mode", "route": "/api/genius/report", "status": "active"}
+        ]
+    }
+
