@@ -622,3 +622,47 @@ def create_product_pack(payload: ProductPackRequest):
         }
     })
 
+
+@app.get("/api/job/{job_id}")
+def get_job(job_id: str):
+    output_dir = os.path.join("backend", "outputs")
+    if not os.path.isdir(output_dir):
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    matches = [f for f in os.listdir(output_dir) if job_id in f]
+
+    if matches:
+        filename = matches[0]
+        return {
+            "job_id": job_id,
+            "status": "completed",
+            "file_name": filename,
+            "file_url": f"/api/file/{filename}",
+            "result": {
+                "file_name": filename,
+                "file_url": f"/api/file/{filename}"
+            }
+        }
+
+    # fallback: treat product-pack calls as instantly completed even if filename doesn't include the id
+    txt_files = sorted(
+        [f for f in os.listdir(output_dir) if f.endswith(".txt")],
+        key=lambda x: os.path.getmtime(os.path.join(output_dir, x)),
+        reverse=True
+    )
+
+    if txt_files:
+        filename = txt_files[0]
+        return {
+            "job_id": job_id,
+            "status": "completed",
+            "file_name": filename,
+            "file_url": f"/api/file/{filename}",
+            "result": {
+                "file_name": filename,
+                "file_url": f"/api/file/{filename}"
+            }
+        }
+
+    raise HTTPException(status_code=404, detail="Job not found")
+
