@@ -11,7 +11,7 @@ def _utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 def _log(message: str):
-    print(f"[CORE {_utc_now()}] {message}", flush=True)
+    print(message, flush=True)
 
 def _write_state(state: dict):
     os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
@@ -21,78 +21,69 @@ def _write_state(state: dict):
 def safe_import():
     try:
         from backend.app.engines.builder_engine import run_builder
-    except Exception as e:
-        _log(f"builder import failed, using skip stub: {e}")
-        run_builder = lambda: _log("builder skipped")
+    except:
+        run_builder = lambda cid: _log(f"[BUILDER][{cid}] skipped")
 
     try:
         from backend.app.engines.execution_engine import run_execution
-    except Exception as e:
-        _log(f"execution import failed, using skip stub: {e}")
-        run_execution = lambda: _log("execution skipped")
+    except:
+        run_execution = lambda cid: _log(f"[EXECUTION][{cid}] skipped")
 
     try:
         from backend.app.engines.money_engine import run_money
-    except Exception as e:
-        _log(f"money import failed, using skip stub: {e}")
-        run_money = lambda: _log("money skipped")
+    except:
+        run_money = lambda cid: _log(f"[MONEY][{cid}] skipped")
 
     try:
         from backend.app.engines.self_improver import run_self_improver
-    except Exception as e:
-        _log(f"self improver import failed, using skip stub: {e}")
-        run_self_improver = lambda: _log("self improver skipped")
+    except:
+        run_self_improver = lambda cid: _log(f"[SELF][{cid}] skipped")
 
     return run_builder, run_execution, run_money, run_self_improver
 
 def run_core_loop():
-    _log("Zerenthis Core Loop SAFE MODE started")
     run_builder, run_execution, run_money, run_self_improver = safe_import()
     cycle = 0
 
     while True:
         cycle += 1
-        started_at = _utc_now()
+        cid = f"CYCLE-{cycle}"
 
         if not _LOOP_LOCK.acquire(blocking=False):
-            _log("previous loop cycle still active, skipping overlap")
+            _log(f"[CORE][{cid}] skipped (lock active)")
             time.sleep(5)
             continue
 
+        started_at = _utc_now()
+
         try:
+            _log(f"[CORE][{cid}] START")
+
             _write_state({
                 "status": "running",
                 "cycle": cycle,
-                "started_at": started_at,
-                "last_completed_at": None,
-                "last_error": None
+                "started_at": started_at
             })
 
-            _log(f"cycle {cycle} starting")
-            run_builder()
-            run_execution()
-            run_money()
-            run_self_improver()
+            run_builder(cid)
+            run_execution(cid)
+            run_money(cid)
+            run_self_improver(cid)
 
             finished_at = _utc_now()
+
             _write_state({
                 "status": "idle",
                 "cycle": cycle,
                 "started_at": started_at,
-                "last_completed_at": finished_at,
-                "last_error": None
+                "finished_at": finished_at
             })
-            _log(f"cycle {cycle} completed")
+
+            _log(f"[CORE][{cid}] COMPLETE")
+
         except Exception as e:
-            error_text = str(e)
-            _write_state({
-                "status": "error",
-                "cycle": cycle,
-                "started_at": started_at,
-                "last_completed_at": None,
-                "last_error": error_text
-            })
-            _log(f"cycle {cycle} error: {error_text}")
+            _log(f"[CORE][{cid}] ERROR: {str(e)}")
+
         finally:
             _LOOP_LOCK.release()
 
