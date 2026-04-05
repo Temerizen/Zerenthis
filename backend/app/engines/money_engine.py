@@ -9,7 +9,7 @@ def run_money(cid):
     filename = f"{int(now.timestamp())}.txt"
     path = os.path.join(OUTPUT_DIR, filename)
 
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(f"Generated at {now.isoformat()}")
 
     print(f"[MONEY][{cid}] generated {filename}", flush=True)
