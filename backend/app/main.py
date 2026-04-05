@@ -968,3 +968,4 @@ def command_route(payload: dict):
     cmd = payload.get("command", "")
     return run_command(cmd)
 
+

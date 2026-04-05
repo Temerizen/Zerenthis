@@ -1,31 +1,25 @@
 ﻿from backend.app.core.output_engine import format_output
-import os, time
+from backend.app.engines.pdf_engine import create_pdf
 
 def run_money(cycle_id):
-    title = "AI Cashflow Micro-Product"
-
-    output = format_output(
-        title=title,
-        summary="A ready-to-sell digital product generated automatically using AI systems.",
+    product = format_output(
+        title="Faceless Content Cashflow Kit",
+        summary="A plug-and-play system to generate viral content and monetize instantly.",
         steps=[
-            "Pick a trending niche (AI, money, relationships)",
-            "Generate a simple but valuable PDF guide",
-            "Create viral short-form content for traffic",
-            "Sell via Gumroad or Stripe instantly"
+            "Pick a viral niche",
+            "Use AI to generate scripts",
+            "Post 3-5 short videos daily",
+            "Redirect traffic to digital product"
         ],
-        monetization="Sell as $9-$29 digital product with upsells"
+        monetization="Sell this as a $19-$49 product via Gumroad or Stripe"
     )
 
-    os.makedirs("backend/outputs", exist_ok=True)
-    filename = f"backend/outputs/money_{int(time.time())}.txt"
+    pdf = create_pdf(product)
 
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(str(output))
-
-    print(f"[MONEY][{cycle_id}] generated {filename}", flush=True)
+    print(f"[MONEY][{cycle_id}] product created → {pdf}", flush=True)
 
     return {
         "status": "success",
-        "file": filename,
-        "data": output
+        "file": pdf,
+        "product": product
     }
