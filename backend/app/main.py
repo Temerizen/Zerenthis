@@ -666,3 +666,31 @@ def get_job(job_id: str):
 
     raise HTTPException(status_code=404, detail="Job not found")
 
+
+@app.post("/api/winners")
+def get_winners():
+    output_dir = os.path.join("backend", "outputs")
+    os.makedirs(output_dir, exist_ok=True)
+
+    txt_files = sorted(
+        [f for f in os.listdir(output_dir) if f.endswith(".txt")],
+        key=lambda x: os.path.getmtime(os.path.join(output_dir, x)),
+        reverse=True
+    )[:10]
+
+    winners = []
+    for i, filename in enumerate(txt_files, start=1):
+        winners.append({
+            "rank": i,
+            "title": filename.replace(".txt", "").replace("_", " "),
+            "score": max(10 - i, 1),
+            "file_name": filename,
+            "file_url": f"/api/file/{filename}"
+        })
+
+    return {
+        "status": "ok",
+        "count": len(winners),
+        "winners": winners
+    }
+
