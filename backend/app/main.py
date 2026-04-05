@@ -534,13 +534,6 @@ def dashboard():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=False)
-
-
-try:
-except Exception as e:
-    print("Core loop failed:", e)
-
-
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse, FileResponse
 from datetime import datetime
@@ -774,10 +767,10 @@ def get_generated_file(filepath: str):
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(full_path)
 
-
-# CORE_LOOP_STARTUP_BLOCK
 import threading
 
+
+# CORE_LOOP_STARTUP_BLOCK
 @app.on_event("startup")
 async def zerenthis_start_core_loop_once():
     try:
@@ -787,7 +780,11 @@ async def zerenthis_start_core_loop_once():
 
         from backend.app.core.core_loop import run_core_loop
 
-        t = threading.Thread(target=run_core_loop, daemon=True, name="zerenthis-core-loop")
+        t = threading.Thread(
+            target=run_core_loop,
+            daemon=True,
+            name="zerenthis-core-loop"
+        )
         t.start()
 
         app.state.core_loop_started = True
