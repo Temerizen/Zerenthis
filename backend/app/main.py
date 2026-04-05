@@ -864,3 +864,66 @@ def founder_modules():
         ]
     }
 
+
+# GAP_FILL_UNIVERSAL_BLOCK
+class CampaignPackRequest(BaseModel):
+    topic: str = "Untitled campaign"
+    platform: str = "multi"
+    angle: str = "growth"
+
+class MoneyStackRequest(BaseModel):
+    topic: str = "Untitled offer"
+    buyer: str = "general audience"
+    price_anchor: str = ""
+
+class CoursePackRequest(BaseModel):
+    topic: str = "Untitled course"
+    level: str = "beginner"
+
+class ResearchPackRequest(BaseModel):
+    topic: str = "Untitled research"
+    depth: str = "standard"
+
+class CognitivePackRequest(BaseModel):
+    focus: str = "memory"
+    level: str = "medium"
+
+class BreakthroughPackRequest(BaseModel):
+    problem: str = "Untitled problem"
+    mode: str = "theory"
+
+@app.post("/api/content/campaign-pack")
+def create_campaign_pack_route(payload: CampaignPackRequest):
+    from backend.app.engines.content_expansion_engine import create_campaign_pack
+    return create_campaign_pack(payload.topic, payload.platform, payload.angle)
+
+@app.post("/api/money/stack")
+def create_money_stack_route(payload: MoneyStackRequest):
+    from backend.app.engines.money_expansion_engine import create_money_stack
+    return create_money_stack(payload.topic, payload.buyer, payload.price_anchor)
+
+@app.post("/api/school/course-pack")
+def create_course_pack_route(payload: CoursePackRequest):
+    from backend.app.engines.school_expansion_engine import create_course_pack
+    return create_course_pack(payload.topic, payload.level)
+
+@app.post("/api/research/pack")
+def create_research_pack_route(payload: ResearchPackRequest):
+    from backend.app.engines.research_expansion_engine import create_research_pack
+    return create_research_pack(payload.topic, payload.depth)
+
+@app.post("/api/cognitive/training-pack")
+def create_training_pack_route(payload: CognitivePackRequest):
+    from backend.app.engines.cognitive_expansion_engine import create_training_pack
+    return create_training_pack(payload.focus, payload.level)
+
+@app.post("/api/genius/breakthrough-pack")
+def create_breakthrough_pack_route(payload: BreakthroughPackRequest):
+    from backend.app.engines.genius_expansion_engine import create_breakthrough_pack
+    return create_breakthrough_pack(payload.problem, payload.mode)
+
+@app.get("/api/founder/snapshot")
+def founder_snapshot_route():
+    from backend.app.engines.founder_engine import build_founder_snapshot
+    return build_founder_snapshot()
+

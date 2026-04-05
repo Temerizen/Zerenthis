@@ -1,33 +1,30 @@
-from pathlib import Path
-import json
+﻿import json
+import os
+from datetime import datetime, timezone
 
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / "backend" / "data"
+DATA_DIR = os.path.join("backend", "data")
 
-JOB_FILE = DATA_DIR / "jobs.json"
-WINNERS_FILE = DATA_DIR / "autopilot" / "winners.json"
+def build_founder_snapshot() -> dict:
+    now = datetime.now(timezone.utc).isoformat()
+    modules = [
+        "core",
+        "money",
+        "content",
+        "school",
+        "research",
+        "cognitive",
+        "genius"
+    ]
 
-def safe_load(p):
-    if not p.exists():
-        return []
-    try:
-        return json.loads(p.read_text())
-    except:
-        return []
-
-def run(payload):
-    jobs = safe_load(JOB_FILE)
-    winners = safe_load(WINNERS_FILE)
-
-    return {
-        "system": "Zerenthis Founder Core",
-        "jobs_count": len(jobs),
-        "winners_count": len(winners),
-        "status": "operational",
-        "next_actions": [
-            "Generate Product Pack",
-            "Run Evolution",
-            "View Winners",
-            "Deploy Content"
-        ]
+    snapshot = {
+        "generated_at": now,
+        "status": "ok",
+        "modules": [{"name": m, "status": "active"} for m in modules]
     }
+
+    path = os.path.join(DATA_DIR, "founder_snapshot.json")
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(snapshot, f, indent=2)
+
+    return snapshot
