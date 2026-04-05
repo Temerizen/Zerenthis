@@ -1,16 +1,10 @@
-﻿
-try:
-    from app.routes.full_cycle import router as full_cycle_router
-except Exception:
-    from .routes.full_cycle import router as full_cycle_router
-from fastapi import FastAPI, HTTPException
+﻿from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse
 from pydantic import BaseModel
 from typing import Dict, Any
 import os, json, time, importlib, importlib.util, traceback, shutil, random
 
 app = FastAPI(title="Zerenthis Money Mode", version="3.0")
-app.include_router(full_cycle_router)
 
 BASE_DIR = os.path.dirname(__file__)
 GEN_DIR = os.path.join(BASE_DIR, "generated")
@@ -973,6 +967,5 @@ def command_route(payload: dict):
     from backend.app.engines.command_engine import run_command
     cmd = payload.get("command", "")
     return run_command(cmd)
-
 
 
