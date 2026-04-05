@@ -766,35 +766,6 @@ def get_generated_file(filepath: str):
     if not os.path.isfile(full_path):
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(full_path)
-
-import threading
-
-
-# CORE_LOOP_STARTUP_BLOCK
-@app.on_event("startup")
-async def zerenthis_start_core_loop_once():
-    try:
-        if getattr(app.state, "core_loop_started", False):
-            print("Core loop already started")
-            return
-
-        from backend.app.core.core_loop import run_core_loop
-
-        t = threading.Thread(
-            target=run_core_loop,
-            daemon=True,
-            name="zerenthis-core-loop"
-        )
-        t.start()
-
-        app.state.core_loop_started = True
-        app.state.core_loop_thread = t
-        print("Core loop startup launched")
-    except Exception as e:
-        print("Core loop failed:", e)
-# END_CORE_LOOP_STARTUP_BLOCK
-
-
 # SWEEP4_INTELLIGENCE_STACK_BLOCK
 class SchoolRequest(BaseModel):
     topic: str = "Untitled lesson"
@@ -926,4 +897,12 @@ def create_breakthrough_pack_route(payload: BreakthroughPackRequest):
 def founder_snapshot_route():
     from backend.app.engines.founder_engine import build_founder_snapshot
     return build_founder_snapshot()
+
+
+# CORE_LOOP_STARTUP_BLOCK
+@app.on_event("startup")
+async def zerenthis_start_core_loop_once():
+    from backend.app.core.loop_launcher import start_core_loop_once
+    start_core_loop_once()
+# END_CORE_LOOP_STARTUP_BLOCK
 
