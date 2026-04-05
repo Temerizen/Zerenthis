@@ -1,26 +1,40 @@
 ﻿import time
-from app.engines.builder_engine import run_builder
-from app.engines.execution_engine import run_execution
-from app.engines.money_engine import run_money
-from app.engines.self_improver import run_self_improver
+
+def safe_import():
+    try:
+        from backend.app.engines.builder_engine import run_builder
+    except:
+        run_builder = lambda: print("builder skipped")
+
+    try:
+        from backend.app.engines.execution_engine import run_execution
+    except:
+        run_execution = lambda: print("execution skipped")
+
+    try:
+        from backend.app.engines.money_engine import run_money
+    except:
+        run_money = lambda: print("money skipped")
+
+    try:
+        from backend.app.engines.self_improver import run_self_improver
+    except:
+        run_self_improver = lambda: print("self improver skipped")
+
+    return run_builder, run_execution, run_money, run_self_improver
+
 
 def run_core_loop():
-    print("🚀 Zerenthis Core Loop Started")
+    print("🚀 Zerenthis Core Loop SAFE MODE")
+
+    run_builder, run_execution, run_money, run_self_improver = safe_import()
 
     while True:
         try:
-            print("🧠 Running Builder...")
             run_builder()
-
-            print("⚙️ Running Execution...")
             run_execution()
-
-            print("💰 Running Money Engine...")
             run_money()
-
-            print("🧬 Running Self Improver...")
             run_self_improver()
-
         except Exception as e:
             print("Core Loop Error:", e)
 
