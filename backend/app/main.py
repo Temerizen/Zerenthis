@@ -537,9 +537,6 @@ if __name__ == "__main__":
 
 
 try:
-    from backend.app.core.core_loop import run_core_loop
-    import threading
-    threading.Thread(target=run_core_loop, daemon=True).start()
 except Exception as e:
     print("Core loop failed:", e)
 
@@ -776,4 +773,27 @@ def get_generated_file(filepath: str):
     if not os.path.isfile(full_path):
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(full_path)
+
+
+# CORE_LOOP_STARTUP_BLOCK
+import threading
+
+@app.on_event("startup")
+async def zerenthis_start_core_loop_once():
+    try:
+        if getattr(app.state, "core_loop_started", False):
+            print("Core loop already started")
+            return
+
+        from backend.app.core.core_loop import run_core_loop
+
+        t = threading.Thread(target=run_core_loop, daemon=True, name="zerenthis-core-loop")
+        t.start()
+
+        app.state.core_loop_started = True
+        app.state.core_loop_thread = t
+        print("Core loop startup launched")
+    except Exception as e:
+        print("Core loop failed:", e)
+# END_CORE_LOOP_STARTUP_BLOCK
 
