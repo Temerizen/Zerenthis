@@ -543,3 +543,82 @@ try:
 except Exception as e:
     print("Core loop failed:", e)
 
+
+from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+from datetime import datetime
+import os, uuid
+
+class ProductPackRequest(BaseModel):
+    topic: str = "Untitled"
+    niche: str = "General"
+    tone: str = "Premium"
+    buyer: str = "General audience"
+    promise: str = "Useful result"
+    bonus: str = ""
+    notes: str = ""
+    duration_seconds: int = 30
+
+@app.post("/api/product-pack")
+def create_product_pack(payload: ProductPackRequest):
+    os.makedirs("backend/outputs", exist_ok=True)
+    job_id = uuid.uuid4().hex[:12]
+    safe_topic = "".join(ch.lower() if ch.isalnum() else "_" for ch in payload.topic).strip("_")
+    if not safe_topic:
+        safe_topic = "product_pack"
+    filename = f"{safe_topic}_{job_id}.txt"
+    filepath = os.path.join("backend", "outputs", filename)
+
+    content = []
+    content.append("Zerenthis Product Pack")
+    content.append(f"Created: {datetime.utcnow().isoformat()}Z")
+    content.append("")
+    content.append(f"Topic: {payload.topic}")
+    content.append(f"Niche: {payload.niche}")
+    content.append(f"Tone: {payload.tone}")
+    content.append(f"Buyer: {payload.buyer}")
+    content.append(f"Promise: {payload.promise}")
+    if payload.bonus:
+        content.append(f"Bonus: {payload.bonus}")
+    if payload.notes:
+        content.append(f"Notes: {payload.notes}")
+    content.append("")
+    content.append("Deliverables:")
+    content.append("- Offer summary")
+    content.append("- 10 hooks")
+    content.append("- 5 short-form post ideas")
+    content.append("- 1 simple CTA")
+    content.append("")
+    content.append("Hooks:")
+    content.append("1. The fastest way to start is simpler than people think.")
+    content.append("2. Most people waste time. Do this instead.")
+    content.append("3. If you want results quickly, begin here.")
+    content.append("4. This angle makes the offer easier to sell.")
+    content.append("5. A cleaner system beats more effort.")
+    content.append("6. Use this to get momentum fast.")
+    content.append("7. This helps beginners avoid the usual mistakes.")
+    content.append("8. A small shift can change everything.")
+    content.append("9. This blueprint is built for speed.")
+    content.append("10. Start here and refine later.")
+    content.append("")
+    content.append("Short-form post ideas:")
+    content.append("- Problem → solution")
+    content.append("- Before → after")
+    content.append("- Myth → truth")
+    content.append("- Common mistake → better move")
+    content.append("- Quick blueprint")
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write("\n".join(content))
+
+    return JSONResponse({
+        "job_id": job_id,
+        "status": "completed",
+        "file_name": filename,
+        "file_url": f"/api/file/{filename}",
+        "result": {
+            "file_name": filename,
+            "file_url": f"/api/file/{filename}"
+        }
+    })
+
