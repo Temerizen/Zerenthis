@@ -1,0 +1,49 @@
+﻿ZERENTHIS HANDOFF STATUS
+========================
+
+CURRENT STATE
+- Local backend working
+- Railway backend working
+- /api/full-cycle working
+- /api/monetize working
+- Desktop EXE built
+- Storefront generation working
+- Offer stack generation working
+- Traffic generation working
+
+CONFIRMED WORKING ROUTES
+- GET /health
+- POST /api/full-cycle
+- POST /api/monetize
+
+IMPORTANT FILES/FOLDERS
+- backend/app/main.py
+- backend/app/routes/full_cycle.py
+- backend/app/routes/monetize.py
+- backend/app/engines/publish_engine.py
+- backend/app/engines/traffic_engine.py
+- backend/app/engines/feedback_engine.py
+- backend/app/engines/bridge_engine.py
+- backend/app/engines/storefront_engine.py
+- backend/app/engines/offer_engine.py
+- backend/app/core/loop_launcher.py
+- desktop/app.py
+- dist/ZerenthisControlCenter.exe
+- backend/outputs/publish/
+- backend/outputs/storefront/
+- backend/outputs/offers/
+
+KNOWN NEXT STEP
+- Auto product file sweep so product file is no longer null
+- Then later checkout integration
+
+HOW TO RESTART LOCAL
+1. Set-Location C:\Zerenthis\backend
+2. ..\venv\Scripts\Activate.ps1
+3. python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+
+LOCAL TEST
+Invoke-RestMethod http://127.0.0.1:8000/health | ConvertTo-Json -Depth 10
+
+MONETIZE TEST
+Invoke-RestMethod -Method POST http://127.0.0.1:8000/api/monetize -ContentType "application/json" -Body '{"topic":"Faceless Content Cashflow Kit","niche":"Content Monetization","price":29,"checkout_link":"https://your-real-checkout-link.com"}' | ConvertTo-Json -Depth 10
