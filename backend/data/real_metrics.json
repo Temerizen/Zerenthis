@@ -1,0 +1,544 @@
+{
+  "timestamp": 1775967116,
+  "topic": "money system",
+  "clicks": 46,
+  "leads": 12,
+  "sales": 2,
+  "revenue": 38,
+  "assets": [
+    "backend\\outputs\\content_1775967116.txt",
+    "backend\\outputs\\offer_1775967116.json",
+    "backend\\outputs\\storefront_1775967116.json",
+    {
+      "signal": {
+        "clicks": 105,
+        "leads": 23,
+        "sales": 4,
+        "revenue": 78.27
+      },
+      "value": 248.26999999999998
+    },
+    {
+      "signal": {
+        "clicks": 131,
+        "leads": 15,
+        "sales": 8,
+        "revenue": 141.97
+      },
+      "value": 373.16999999999996
+    },
+    {
+      "signal": {
+        "clicks": 82,
+        "leads": 18,
+        "sales": 7,
+        "revenue": 113.89
+      },
+      "value": 324.29
+    },
+    {
+      "signal": {
+        "clicks": 127,
+        "leads": 16,
+        "sales": 2,
+        "revenue": 180.73
+      },
+      "value": 294.13
+    },
+    {
+      "signal": {
+        "clicks": 111,
+        "leads": 23,
+        "sales": 1,
+        "revenue": 160.14
+      },
+      "value": 271.34
+    },
+    {
+      "signal": {
+        "clicks": 124,
+        "leads": 7,
+        "sales": 0,
+        "revenue": 153.87
+      },
+      "value": 199.67000000000002
+    },
+    {
+      "signal": {
+        "clicks": 86,
+        "leads": 15,
+        "sales": 6,
+        "revenue": 158.9
+      },
+      "value": 341.1
+    },
+    {
+      "signal": {
+        "clicks": 70,
+        "leads": 22,
+        "sales": 2,
+        "revenue": 127.08
+      },
+      "value": 247.07999999999998
+    },
+    {
+      "signal": {
+        "clicks": 82,
+        "leads": 0,
+        "sales": 10,
+        "revenue": 197.94
+      },
+      "value": 414.34000000000003
+    },
+    {
+      "signal": {
+        "clicks": 11,
+        "leads": 1,
+        "sales": 4,
+        "revenue": 170.62
+      },
+      "value": 255.82
+    },
+    {
+      "signal": {
+        "clicks": 135,
+        "leads": 16,
+        "sales": 8,
+        "revenue": 141.58
+      },
+      "value": 376.58000000000004
+    },
+    {
+      "signal": {
+        "clicks": 79,
+        "leads": 13,
+        "sales": 9,
+        "revenue": 52.81
+      },
+      "value": 287.61
+    },
+    {
+      "signal": {
+        "clicks": 69,
+        "leads": 12,
+        "sales": 2,
+        "revenue": 64.43
+      },
+      "value": 154.23000000000002
+    },
+    {
+      "signal": {
+        "clicks": 106,
+        "leads": 22,
+        "sales": 9,
+        "revenue": 144.04
+      },
+      "value": 411.24
+    },
+    {
+      "signal": {
+        "clicks": 90,
+        "leads": 8,
+        "sales": 2,
+        "revenue": 176.0
+      },
+      "value": 258.0
+    },
+    {
+      "signal": {
+        "clicks": 90,
+        "leads": 3,
+        "sales": 8,
+        "revenue": 187.66
+      },
+      "value": 374.65999999999997
+    },
+    {
+      "signal": {
+        "clicks": 129,
+        "leads": 5,
+        "sales": 8,
+        "revenue": 31.41
+      },
+      "value": 232.21
+    },
+    {
+      "signal": {
+        "clicks": 130,
+        "leads": 18,
+        "sales": 4,
+        "revenue": 87.09
+      },
+      "value": 247.09
+    },
+    {
+      "signal": {
+        "clicks": 91,
+        "leads": 20,
+        "sales": 3,
+        "revenue": 161.29
+      },
+      "value": 299.49
+    },
+    {
+      "signal": {
+        "clicks": 148,
+        "leads": 21,
+        "sales": 3,
+        "revenue": 96.98
+      },
+      "value": 249.57999999999998
+    },
+    {
+      "signal": {
+        "clicks": 44,
+        "leads": 15,
+        "sales": 4,
+        "revenue": 57.27
+      },
+      "value": 191.07000000000002
+    },
+    {
+      "signal": {
+        "clicks": 95,
+        "leads": 13,
+        "sales": 9,
+        "revenue": 141.13
+      },
+      "value": 379.13
+    },
+    {
+      "signal": {
+        "clicks": 73,
+        "leads": 7,
+        "sales": 5,
+        "revenue": 150.83
+      },
+      "value": 286.43
+    },
+    {
+      "signal": {
+        "clicks": 67,
+        "leads": 25,
+        "sales": 5,
+        "revenue": 74.97
+      },
+      "value": 263.37
+    },
+    {
+      "signal": {
+        "clicks": 33,
+        "leads": 15,
+        "sales": 6,
+        "revenue": 13.62
+      },
+      "value": 185.22
+    },
+    {
+      "signal": {
+        "clicks": 98,
+        "leads": 1,
+        "sales": 6,
+        "revenue": 167.09
+      },
+      "value": 309.69
+    },
+    {
+      "signal": {
+        "clicks": 51,
+        "leads": 6,
+        "sales": 9,
+        "revenue": 38.83
+      },
+      "value": 247.02999999999997
+    },
+    {
+      "signal": {
+        "clicks": 57,
+        "leads": 2,
+        "sales": 4,
+        "revenue": 64.44
+      },
+      "value": 161.84
+    },
+    {
+      "signal": {
+        "clicks": 35,
+        "leads": 4,
+        "sales": 9,
+        "revenue": 195.75
+      },
+      "value": 394.75
+    },
+    {
+      "signal": {
+        "clicks": 34,
+        "leads": 17,
+        "sales": 5,
+        "revenue": 20.03
+      },
+      "value": 177.83
+    },
+    {
+      "signal": {
+        "clicks": 113,
+        "leads": 10,
+        "sales": 5,
+        "revenue": 27.2
+      },
+      "value": 179.79999999999998
+    },
+    {
+      "signal": {
+        "clicks": 54,
+        "leads": 5,
+        "sales": 5,
+        "revenue": 11.07
+      },
+      "value": 136.87
+    },
+    {
+      "signal": {
+        "clicks": 77,
+        "leads": 0,
+        "sales": 2,
+        "revenue": 131.16
+      },
+      "value": 186.56
+    },
+    {
+      "signal": {
+        "clicks": 50,
+        "leads": 14,
+        "sales": 8,
+        "revenue": 36.86
+      },
+      "value": 248.86
+    },
+    {
+      "signal": {
+        "clicks": 104,
+        "leads": 16,
+        "sales": 4,
+        "revenue": 82.05
+      },
+      "value": 230.85000000000002
+    },
+    {
+      "signal": {
+        "clicks": 134,
+        "leads": 9,
+        "sales": 1,
+        "revenue": 127.55
+      },
+      "value": 201.35
+    },
+    {
+      "signal": {
+        "clicks": 127,
+        "leads": 22,
+        "sales": 0,
+        "revenue": 102.05
+      },
+      "value": 193.45
+    },
+    {
+      "signal": {
+        "clicks": 88,
+        "leads": 7,
+        "sales": 5,
+        "revenue": 188.95
+      },
+      "value": 327.54999999999995
+    },
+    {
+      "signal": {
+        "clicks": 22,
+        "leads": 7,
+        "sales": 4,
+        "revenue": 2.48
+      },
+      "value": 107.88000000000001
+    },
+    {
+      "signal": {
+        "clicks": 52,
+        "leads": 25,
+        "sales": 8,
+        "revenue": 55.41
+      },
+      "value": 300.81
+    },
+    {
+      "signal": {
+        "clicks": 97,
+        "leads": 20,
+        "sales": 2,
+        "revenue": 108.21
+      },
+      "value": 227.61
+    },
+    {
+      "signal": {
+        "clicks": 76,
+        "leads": 24,
+        "sales": 5,
+        "revenue": 34.06
+      },
+      "value": 221.26
+    },
+    {
+      "signal": {
+        "clicks": 96,
+        "leads": 8,
+        "sales": 8,
+        "revenue": 166.24
+      },
+      "value": 369.44
+    },
+    {
+      "signal": {
+        "clicks": 124,
+        "leads": 5,
+        "sales": 10,
+        "revenue": 61.25
+      },
+      "value": 301.05
+    },
+    {
+      "signal": {
+        "clicks": 69,
+        "leads": 3,
+        "sales": 9,
+        "revenue": 139.81
+      },
+      "value": 342.61
+    },
+    {
+      "signal": {
+        "clicks": 23,
+        "leads": 25,
+        "sales": 2,
+        "revenue": 31.41
+      },
+      "value": 151.01
+    },
+    {
+      "signal": {
+        "clicks": 65,
+        "leads": 22,
+        "sales": 4,
+        "revenue": 107.07
+      },
+      "value": 266.07
+    },
+    {
+      "signal": {
+        "clicks": 42,
+        "leads": 12,
+        "sales": 6,
+        "revenue": 168.36
+      },
+      "value": 332.76
+    },
+    {
+      "signal": {
+        "clicks": 54,
+        "leads": 18,
+        "sales": 9,
+        "revenue": 175.54
+      },
+      "value": 420.34000000000003
+    },
+    {
+      "signal": {
+        "clicks": 124,
+        "leads": 2,
+        "sales": 6,
+        "revenue": 1.94
+      },
+      "value": 152.74
+    },
+    {
+      "signal": {
+        "clicks": 69,
+        "leads": 3,
+        "sales": 6,
+        "revenue": 67.19
+      },
+      "value": 209.99
+    },
+    {
+      "signal": {
+        "clicks": 111,
+        "leads": 13,
+        "sales": 9,
+        "revenue": 53.06
+      },
+      "value": 294.26
+    },
+    {
+      "signal": {
+        "clicks": 89,
+        "leads": 8,
+        "sales": 7,
+        "revenue": 52.58
+      },
+      "value": 234.38
+    },
+    {
+      "signal": {
+        "clicks": 10,
+        "leads": 3,
+        "sales": 10,
+        "revenue": 185.55
+      },
+      "value": 396.55
+    },
+    {
+      "signal": {
+        "clicks": 14,
+        "leads": 9,
+        "sales": 5,
+        "revenue": 15.74
+      },
+      "value": 145.54000000000002
+    },
+    {
+      "signal": {
+        "clicks": 49,
+        "leads": 1,
+        "sales": 2,
+        "revenue": 109.25
+      },
+      "value": 162.05
+    },
+    {
+      "signal": {
+        "clicks": 147,
+        "leads": 14,
+        "sales": 5,
+        "revenue": 41.72
+      },
+      "value": 213.12
+    },
+    {
+      "signal": {
+        "clicks": 134,
+        "leads": 24,
+        "sales": 4,
+        "revenue": 62.53
+      },
+      "value": 241.33
+    },
+    {
+      "signal": {
+        "clicks": 81,
+        "leads": 5,
+        "sales": 1,
+        "revenue": 165.68
+      },
+      "value": 216.88
+    }
+  ]
+}

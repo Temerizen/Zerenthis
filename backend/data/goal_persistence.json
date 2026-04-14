@@ -1,0 +1,17 @@
+{
+  "reduce_revenue_scan": 0.40000000000000013,
+  "improve_tool_strategy": 0,
+  "initiate_recovery_mode": 0,
+  "explore_new_tasks": 0,
+  "reduce_builder_handoff": 0.5000000000000001,
+  "reduce_toolbox_strategy": 0.30000000000000016,
+  "improve_revenue_scan": 0,
+  "analyze_toolbox_strategy": 8.700000000000005,
+  "analyze_builder_handoff": 2.899999999999999,
+  "improve_companion_capability": 0.20000000000000015,
+  "initiate_exploration_shift": 0,
+  "initiate_mission_support": 0,
+  "initiate_companion_growth": 0,
+  "analyze_revenue_scan": 9.100000000000003,
+  "improve_toolbox_strategy": 0.6000000000000001
+}

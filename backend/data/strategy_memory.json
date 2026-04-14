@@ -1,0 +1,454 @@
+{
+  "sequences": [
+    {
+      "sequence": [
+        "advance_beyond_handoff",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": -0.04280614528638149,
+      "timestamp": 1776205814.6922805
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.8788811681773896,
+      "timestamp": 1776205814.740161
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": -0.6323768346050958,
+      "timestamp": 1776205814.7894468
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.4259778041152551,
+      "timestamp": 1776205814.8403513
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "explore_new_path"
+      ],
+      "score": 0.3121793244090092,
+      "timestamp": 1776205856.3174107
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": -0.6515689550767805,
+      "timestamp": 1776205856.3724446
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": 0.9696788976238564,
+      "timestamp": 1776205856.4267652
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": -0.0813655121863468,
+      "timestamp": 1776205856.4690225
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": -0.3878091892046942,
+      "timestamp": 1776205856.5102355
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "stabilize_and_observe"
+      ],
+      "score": 0.8937096111780696,
+      "timestamp": 1776205856.5733674
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.941461854430196,
+      "timestamp": 1776205856.6278028
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.792113291204209,
+      "timestamp": 1776205856.6700048
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.1678488068388424,
+      "timestamp": 1776205856.7107165
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.720873709437732,
+      "timestamp": 1776205856.7509124
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.7311029620151897,
+      "timestamp": 1776205856.814902
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.24757112198013065,
+      "timestamp": 1776205856.887704
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.5927493228366307,
+      "timestamp": 1776205856.9582253
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.24808361044286964,
+      "timestamp": 1776205857.0285883
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.5223135346975087,
+      "timestamp": 1776205857.0995471
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.028065777663768943,
+      "timestamp": 1776205857.1724374
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.05314103130241454,
+      "timestamp": 1776205857.2480419
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.576874716553053,
+      "timestamp": 1776205857.3233588
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.6425946416335355,
+      "timestamp": 1776205857.3956242
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.5463560778680063,
+      "timestamp": 1776205857.4713616
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.16983641426122276,
+      "timestamp": 1776205857.5455222
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.9334904945226188,
+      "timestamp": 1776205857.6239276
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.39639475142037495,
+      "timestamp": 1776205857.6986275
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.19413575419990203,
+      "timestamp": 1776205857.7741983
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.6190961297170798,
+      "timestamp": 1776205857.851593
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.32817925587268504,
+      "timestamp": 1776205857.92964
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.27751508408796965,
+      "timestamp": 1776205858.0021143
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.9134377599193741,
+      "timestamp": 1776205858.0744557
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.3502298203330443,
+      "timestamp": 1776205858.1560228
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.7148812798822779,
+      "timestamp": 1776205858.236178
+    },
+    {
+      "sequence": [
+        "advance_beyond_handoff",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": -0.4531077083249031,
+      "timestamp": 1776206144.9852953
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.9348223963052695,
+      "timestamp": 1776206145.053424
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.2628114104357564,
+      "timestamp": 1776206145.122355
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.6663416706486771,
+      "timestamp": 1776206145.1953876
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "explore_new_path"
+      ],
+      "score": -0.11833471411799201,
+      "timestamp": 1776206145.2871737
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": -0.4045344528928254,
+      "timestamp": 1776206145.3744636
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": 0.5009465387853806,
+      "timestamp": 1776206145.4455435
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": -0.400724201878339,
+      "timestamp": 1776206145.5172174
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "explore_new_path",
+        "explore_new_path"
+      ],
+      "score": 0.7888082350236234,
+      "timestamp": 1776206145.5861876
+    },
+    {
+      "sequence": [
+        "advance_beyond_handoff",
+        "explore_new_path",
+        "stabilize_and_observe"
+      ],
+      "score": 0.5699281738920412,
+      "timestamp": 1776206375.0666242
+    },
+    {
+      "sequence": [
+        "explore_new_path",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": -0.010281821530041979,
+      "timestamp": 1776206375.1499188
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.9674418576290353,
+      "timestamp": 1776206375.2211757
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "stabilize_and_observe"
+      ],
+      "score": 0.5613184211486162,
+      "timestamp": 1776206375.298926
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "stabilize_and_observe",
+        "probe_new_paths"
+      ],
+      "score": 0.5866636472114508,
+      "timestamp": 1776206375.3953285
+    },
+    {
+      "sequence": [
+        "stabilize_and_observe",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": -0.7095024026473553,
+      "timestamp": 1776206375.4984236
+    },
+    {
+      "sequence": [
+        "probe_new_paths",
+        "probe_new_paths",
+        "probe_new_paths"
+      ],
+      "score": 0.8281170007412084,
+      "timestamp": 1776206375.5767941
+    }
+  ]
+}

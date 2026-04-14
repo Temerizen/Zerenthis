@@ -1,0 +1,1428 @@
+{
+  "history": [
+    {
+      "time": 1776119099.6830108,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119102.8930569,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119106.1012862,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119109.3072822,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119112.5204878,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119115.7261531,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119118.902422,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119122.1054869,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119125.3129637,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119128.518829,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119131.7178583,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119134.9203212,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119138.1246812,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119141.3210576,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119144.5268185,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119147.7267554,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119150.9300275,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119154.1429837,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119157.3456972,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119160.5229914,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119163.7268338,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119166.931423,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119170.132909,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119173.3369515,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119176.5420508,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119179.7438898,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119182.9479914,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119186.1469252,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119189.3477397,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119192.5551355,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119195.7588813,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119198.957706,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119202.1383617,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119205.341215,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119208.541872,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119211.7418644,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119214.9502337,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119218.1496491,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119221.3515005,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119224.5599542,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119227.7906666,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119231.0128763,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119234.2194695,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119237.4259522,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119240.6294055,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119243.8068438,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119247.0064757,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119250.2088673,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119253.4100835,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119256.6180565,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119259.8179514,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119263.0224679,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119266.224889,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119269.4229164,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119272.6309328,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119275.836757,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119279.0412757,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119282.2441137,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119285.4199111,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119288.621817,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119291.82386,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119295.0291169,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119298.2312706,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119301.438807,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119304.6449754,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119307.8515208,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119311.0611746,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119314.2726607,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119317.4728,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119320.6781883,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119323.880823,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119327.0610087,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119330.263794,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119333.4639332,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119336.6738577,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119339.8805757,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119343.0824294,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119346.2828503,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119349.4867191,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119352.7059472,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119355.9125562,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119359.151961,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119362.372003,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119365.5957992,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119368.7794058,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119371.9918244,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119375.2280524,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119378.4559612,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119381.681937,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119384.9277232,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119388.1382418,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119391.3655524,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119394.6092913,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119397.8339236,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119401.0461318,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119404.2431571,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119407.4405923,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119410.611956,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119413.8324478,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119417.0609682,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119420.2738285,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119423.4910305,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119426.7031474,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119429.9026802,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119433.1144083,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119436.3280673,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119439.5269938,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119442.7415504,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119445.9558835,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119449.171975,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119452.3487496,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119584.9056933,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119588.125143,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119591.3458683,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119594.545606,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119597.727915,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119600.9161847,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119604.1138794,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119607.3023593,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119610.4827764,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119611.2371404,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119614.406816,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119617.5829194,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119620.7671795,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119623.973796,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119627.154495,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119630.331993,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119633.5130446,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119636.7089136,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119639.9150648,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119643.1054633,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119646.3069797,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119649.5079334,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119652.6948144,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119655.8804157,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119659.0957105,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119662.2821853,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119665.4649308,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119668.6458898,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119671.8222785,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119675.0163364,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119678.1985085,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119681.3744159,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119684.5518026,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119687.7325249,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119690.9099395,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119694.09093,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119697.2704318,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119700.4560719,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119703.6320944,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119706.8109858,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119709.9969282,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119713.173922,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119716.3514924,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119719.530279,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119722.7079105,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119725.8898344,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119729.0729027,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119732.2550132,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119735.4392118,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119738.621893,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119741.8188128,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119744.9992914,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119748.1799092,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119751.36335,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119754.5387561,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119757.7239966,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119760.914293,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119764.0980403,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119767.271847,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119770.4501235,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119773.626507,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119776.8048475,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119779.991681,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119783.1709478,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119786.352397,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119789.54562,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119792.7221305,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119795.905843,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119799.1101797,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119802.3003697,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119805.4825892,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119808.6670802,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119811.84633,
+      "strategy": "test_new_action",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119815.037947,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119818.2205899,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119821.4145827,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119875.9523323,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119879.0751767,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119881.7213337,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776119884.832214,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119887.9480484,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776119953.0676115,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776121949.538148,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776121999.2770524,
+      "strategy": "stress_test",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776122090.509885,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    },
+    {
+      "time": 1776122093.4010322,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776123262.2513368,
+      "strategy": "probe_unknown",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776123263.47272,
+      "strategy": "repeat_successful",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": true
+    },
+    {
+      "time": 1776123264.6757042,
+      "strategy": "modify_known",
+      "uncertainty": 1.0,
+      "confidence": 0.5,
+      "success": false
+    }
+  ],
+  "strategies": {
+    "test_new_action": {
+      "tries": 723,
+      "success": 423
+    },
+    "modify_known": {
+      "tries": 540,
+      "success": 339
+    },
+    "repeat_successful": {
+      "tries": 793,
+      "success": 455
+    },
+    "stress_test": {
+      "tries": 698,
+      "success": 418
+    },
+    "probe_unknown": {
+      "tries": 868,
+      "success": 499
+    }
+  },
+  "curiosity_bias": 1.0,
+  "last_action": "modify_known"
+}

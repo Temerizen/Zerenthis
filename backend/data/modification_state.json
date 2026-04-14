@@ -1,0 +1,1815 @@
+{
+  "history": [
+    {
+      "timestamp": 1776119080.5461292,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.671
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119083.7542586,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.673
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119086.9600492,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.46
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119090.1640277,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.603
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119093.3800077,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.499
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119096.590511,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.604
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119099.8020267,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.895
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119103.0120485,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.445
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119106.2188852,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.534
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119109.4260073,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.505
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119112.636856,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.787
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119115.8141687,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.636
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119119.0179474,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.694
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119122.2219548,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.688
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119125.431974,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.545
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119128.630361,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.581
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119131.8328524,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.487
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119135.0359285,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.842
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119138.2368805,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.541
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119141.4350588,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.563
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119144.6405895,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.694
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119147.8440354,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.856
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119151.0458324,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.748
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119154.25836,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.527
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119157.434925,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.442
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119160.6385517,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.687
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119163.8419235,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.887
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119167.0463848,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.564
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119170.2509122,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.584
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119173.4529786,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.654
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119176.6570525,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.598
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119179.8569245,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.7
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119183.0619125,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.888
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119186.2599378,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.818
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119189.4658854,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.605
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119192.6681926,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.701
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119195.8719804,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.698
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119199.0468895,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.743
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119202.2552028,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.859
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119205.4540854,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.453
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119208.655267,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.69
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119211.8562684,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.609
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119215.063899,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.564
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119218.263152,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.569
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119221.4687748,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.642
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119224.6871693,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.577
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119227.9193866,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.417
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119231.1299498,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.862
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119234.33382,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.513
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119237.5407836,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.412
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119240.716799,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.772
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119243.9179149,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.65
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119247.1220062,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.464
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119250.3191886,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.474
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119253.5287924,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.588
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119256.7310026,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.777
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119259.9348567,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.658
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119263.139343,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.478
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119266.3358123,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.54
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119269.5429194,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.85
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119272.7428348,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.75
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119275.9517407,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.838
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119279.155918,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.62
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119282.3321116,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.52
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119285.5359232,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.818
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119288.7366984,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.499
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119291.939418,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.74
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119295.142392,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.878
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119298.3463905,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.614
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119301.5533454,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.604
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119304.7650764,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.813
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119307.9669535,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.706
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119311.1868012,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.702
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119314.3869367,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.863
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119317.5893216,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.683
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119320.794187,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.874
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119323.9709709,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.631
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119327.177906,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.724
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119330.3779397,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.746
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119333.5769775,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.768
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119336.7928479,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.896
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119339.9938633,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.518
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119343.1966808,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.614
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119346.3963637,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.543
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119349.6127,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.823
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119352.819675,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.816
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119356.053561,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.733
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119359.2769606,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.536
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119362.504004,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.685
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119365.6880965,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.765
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119368.8989995,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.554
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119372.117825,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.753
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119375.3579876,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.746
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119378.5830276,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.557
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119381.8058684,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.727
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119385.053963,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.625
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119388.265241,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.613
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119391.5104327,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.549
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119394.7390583,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.654
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119397.9481668,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.731
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119401.1593637,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.706
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119404.3541389,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.511
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119407.5245686,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.548
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119410.7333229,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.505
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119413.9541242,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.793
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119417.1828158,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.749
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119420.3970857,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.485
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119423.6139274,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.876
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119426.8170438,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.456
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119430.0226908,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.696
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119433.2384086,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.868
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119436.43696,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.686
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119439.6483283,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.765
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119442.862696,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.501
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119446.08193,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.733
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119449.259973,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.468
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119585.0286896,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.559
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119588.247143,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.468
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119591.4481776,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.607
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119594.6390848,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.473
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119597.820751,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.708
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119601.0171864,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.722
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119604.207262,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.691
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119607.3953593,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.714
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119610.5667465,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.817
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119611.3239086,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.556
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119614.4939203,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.74
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119617.6762888,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.55
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119620.877184,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.453
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119624.0637832,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.51
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119627.2419686,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.523
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119630.4139943,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.684
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119633.6141129,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.555
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119636.8100586,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.52
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119640.0069523,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.789
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119643.20698,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.787
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119646.4092994,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.676
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119649.604527,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.639
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119652.7876961,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.428
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119655.9954135,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.728
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119659.1930153,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.547
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119662.3761854,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.774
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119665.5571203,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.603
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119668.732903,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.733
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119671.9110153,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.578
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119675.1093504,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.826
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119678.284968,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.478
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119681.4624178,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.675
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119684.6458433,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.85
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119687.8224874,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.747
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119690.9998627,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.691
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119694.180883,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.663
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119697.3602908,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.839
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119700.5448356,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.642
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119703.7241943,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.782
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119706.9038599,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.746
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119710.086158,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.727
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119713.2609022,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.422
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119716.4390645,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.523
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119719.6202788,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.412
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119722.7959266,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.683
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119725.9808342,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.629
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119729.1648674,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.678
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119732.3480077,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.526
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119735.5307055,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.624
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119738.7298012,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.864
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119741.909002,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.598
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119745.0867639,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.876
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119748.2714605,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.713
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119751.4489536,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.7
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119754.6279652,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.765
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119757.8189945,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.641
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119761.0088525,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.481
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119764.1856194,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.731
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119767.3609486,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.801
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119770.5381298,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.709
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119773.7148392,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.498
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119776.89821,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.743
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119780.0806231,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.539
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119783.2599475,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.75
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119786.4579413,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.896
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119789.6332967,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.728
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119792.8144088,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.494
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119795.9986997,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.611
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119799.2081773,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.846
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119802.3913689,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.597
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119805.573588,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.726
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119808.7587333,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.438
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119811.9427888,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.896
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119815.1309795,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.439
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119818.3116658,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.535
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776119821.507584,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.763
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776119953.1376128,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.538
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776121949.612148,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.406
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776121999.3470533,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.667
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776122090.581885,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.867
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776122093.4680312,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.797
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776123262.3223364,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/explore.py",
+        "confidence": 0.718
+      },
+      "accepted": true
+    },
+    {
+      "timestamp": 1776123263.5437152,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/decision.py",
+        "confidence": 0.565
+      },
+      "accepted": false
+    },
+    {
+      "timestamp": 1776123264.7487028,
+      "proposal": {
+        "idea": "optimize decision weighting",
+        "target": "backend/app/cognition/planning.py",
+        "confidence": 0.861
+      },
+      "accepted": true
+    }
+  ],
+  "accepted": 2057,
+  "rejected": 1409,
+  "last_proposal": {
+    "timestamp": 1776123264.7487028,
+    "proposal": {
+      "idea": "optimize decision weighting",
+      "target": "backend/app/cognition/planning.py",
+      "confidence": 0.861
+    },
+    "accepted": true
+  }
+}

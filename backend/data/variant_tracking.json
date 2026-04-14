@@ -1,0 +1,23 @@
+{
+  "Viral Content Engine Pack||The fastest way to consistent income even if experience": {
+    "product": "Viral Content Engine Pack",
+    "headline": "The fastest way to consistent income even if experience",
+    "variant_id": "07bd26b0",
+    "url": "http://127.0.0.1:8000/api/track/variant/07bd26b0",
+    "created_at": 1775985711.9221563
+  },
+  "Viral Content Engine Pack||Turn ideas into high-converting content automatically": {
+    "product": "Viral Content Engine Pack",
+    "headline": "Turn ideas into high-converting content automatically",
+    "variant_id": "4cc80d2e",
+    "url": "http://127.0.0.1:8000/api/track/variant/4cc80d2e",
+    "created_at": 1775985711.9347901
+  },
+  "Viral Content Engine Pack||Turn nothing into consistent income automatically": {
+    "product": "Viral Content Engine Pack",
+    "headline": "Turn nothing into consistent income automatically",
+    "variant_id": "2deb0d20",
+    "url": "http://127.0.0.1:8000/api/track/variant/2deb0d20",
+    "created_at": 1775985712.027287
+  }
+}

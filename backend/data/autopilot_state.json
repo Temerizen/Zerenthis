@@ -1,0 +1,259 @@
+{
+  "status": "completed",
+  "current_cycle": 10,
+  "max_cycles": 10,
+  "delay": 2.0,
+  "history_tail": [
+    {
+      "cycle": 6,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/mutation/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/strategic-memory/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/traffic/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/scaling/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/self-improve/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/demand/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promotion/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/signals/auto-capture",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775985233.037369
+    },
+    {
+      "cycle": 7,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/mutation/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/strategic-memory/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/traffic/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/scaling/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/self-improve/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/demand/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promotion/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/signals/auto-capture",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775985235.246048
+    },
+    {
+      "cycle": 8,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/mutation/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/strategic-memory/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/traffic/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/scaling/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/self-improve/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/demand/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promotion/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/signals/auto-capture",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775985237.4651182
+    },
+    {
+      "cycle": 9,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/mutation/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/strategic-memory/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/traffic/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/scaling/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/self-improve/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/demand/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promotion/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/signals/auto-capture",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775985239.6329553
+    },
+    {
+      "cycle": 10,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/mutation/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/strategic-memory/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/traffic/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/scaling/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/self-improve/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/demand/intelligence/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promotion/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/signals/auto-capture",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/decision/real",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775985241.7981098
+    }
+  ],
+  "timestamp": 1775985243.8002963
+}

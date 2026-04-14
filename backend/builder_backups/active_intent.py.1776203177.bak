@@ -1,0 +1,98 @@
+from __future__ import annotations
+
+import json
+import os
+import time
+from typing import Any, Dict
+
+INTENT_PATH = "backend/data/active_intent.json"
+STAGNATION_LIMIT = 3
+
+def _load() -> Dict[str, Any]:
+    if not os.path.exists(INTENT_PATH):
+        return {}
+    try:
+        with open(INTENT_PATH, "r", encoding="utf-8-sig") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def _save(data: Dict[str, Any]) -> None:
+    os.makedirs(os.path.dirname(INTENT_PATH), exist_ok=True)
+    with open(INTENT_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def get_active_intent() -> Dict[str, Any]:
+    return _load()
+
+def update_active_intent(task: str, reason: str, source: str = "brain_patch") -> Dict[str, Any]:
+    now = time.time()
+    current = _load()
+
+    history = current.get("history", [])
+    if not isinstance(history, list):
+        history = []
+
+    score = float(current.get("intent_score", 0.0))
+    previous_task = str(current.get("task", "") or "")
+    repeat_count = int(current.get("repeat_count", 0))
+
+    # === REPEAT TRACKING ===
+    if previous_task == task:
+        repeat_count += 1
+    else:
+        repeat_count = 0
+
+    # === STAGNATION DETECTION ===
+    stagnating = repeat_count >= STAGNATION_LIMIT
+
+    if stagnating:
+        score -= 2.0
+        direction = "pivot_required"
+    elif previous_task == task:
+        score += 1.0
+        direction = "stay_the_course"
+    elif previous_task:
+        score -= 0.5
+        direction = "pivot_required"
+    else:
+        score += 0.25
+        direction = "intent_initialized"
+
+    current.update({
+        "task": task,
+        "reason": reason,
+        "source": source,
+        "updated_at": now,
+        "intent_score": score,
+        "direction": direction,
+        "repeat_count": repeat_count,
+        "stagnating": stagnating,
+    })
+
+    prev_repeat = current.get("repeat_count", 0)
+    decay = 0.5 if current.get("direction") == "pivot_required" else 1.0
+    new_repeat = int(prev_repeat * decay)
+
+    history.append({
+        "task": task,
+        "reason": reason,
+        "source": source,
+        "timestamp": now,
+        "intent_score": score,
+        "direction": direction,
+        "repeat_count": repeat_count,
+        "stagnating": stagnating,
+    })
+
+    current["history"] = history[-20:]
+    _save(current)
+    return current
+
+if __name__ == "__main__":
+    print({
+        "status": "ok",
+        "message": "intent_stagnation_ready",
+        "path": INTENT_PATH
+    })

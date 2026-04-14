@@ -1,0 +1,166 @@
+{
+  "last_proposal": {
+    "timestamp": 1776109349.1687949,
+    "status": "proposal_created",
+    "component": "memory_reasoning",
+    "reason": "unstable_outcomes",
+    "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+    "approved": false,
+    "applied": false
+  },
+  "history": [
+    {
+      "timestamp": 1776105647.98089,
+      "status": "proposal_created",
+      "component": "directive",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776105799.0419788,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106540.6939917,
+      "status": "proposal_created",
+      "component": "coherence",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106586.4438307,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106703.1826441,
+      "status": "proposal_created",
+      "component": "reasoning",
+      "reason": "reasoning_disagrees_with_action",
+      "proposal": "Use reasoning output to influence next-cycle action selection more directly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106769.124458,
+      "status": "proposal_created",
+      "component": "directive",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106879.6421745,
+      "status": "proposal_created",
+      "component": "directive",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106989.4711802,
+      "status": "proposal_created",
+      "component": "coherence",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107177.2469733,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107222.092834,
+      "status": "proposal_created",
+      "component": "directive",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107295.8375509,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107552.6049535,
+      "status": "proposal_created",
+      "component": "strategy",
+      "reason": "declining_performance",
+      "proposal": "Refine strategic adjustment thresholds and reduce lag in corrective shifts.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108120.64176,
+      "status": "proposal_created",
+      "component": "coherence",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108351.5370667,
+      "status": "proposal_created",
+      "component": "strategy",
+      "reason": "declining_performance",
+      "proposal": "Refine strategic adjustment thresholds and reduce lag in corrective shifts.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108689.417199,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776109129.3366442,
+      "status": "proposal_created",
+      "component": "coherence",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "approved": false,
+      "applied": false
+    },
+    {
+      "timestamp": 1776109349.1687949,
+      "status": "proposal_created",
+      "component": "memory_reasoning",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "approved": false,
+      "applied": false
+    }
+  ]
+}

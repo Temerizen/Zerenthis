@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Zerenthis Control</title>
+    <style>
+        body { background:#0b0f1a; color:#00e5ff; font-family:monospace; padding:20px; }
+        h1 { color:white; }
+        button { margin:5px; padding:10px; background:#00e5ff; border:none; cursor:pointer; }
+        pre { background:#111; padding:10px; }
+    </style>
+</head>
+<body>
+
+<h1>Zerenthis Control Panel</h1>
+
+<button onclick="runCmd('money')">Run Money</button>
+<button onclick="runCmd('content')">Run Content</button>
+<button onclick="runCmd('research')">Run Research</button>
+<button onclick="runCmd('school')">Run School</button>
+<button onclick="runCmd('cognitive')">Run Cognitive</button>
+<button onclick="runCmd('genius')">Run Genius</button>
+
+<h2>Dashboard</h2>
+<pre id="output"></pre>
+
+<script>
+const API = "https://semantiqai-backend-production-bcab.up.railway.app";
+
+async function loadDashboard(){
+    const res = await fetch(API + "/api/dashboard");
+    const data = await res.json();
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+}
+
+async function runCmd(cmd){
+    await fetch(API + "/api/command", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({command:cmd})
+    });
+    setTimeout(loadDashboard, 1000);
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>
+
+
+

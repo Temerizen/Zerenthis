@@ -1,0 +1,19 @@
+{
+  "tasks": {
+    "explore_new_path": {
+      "success": 3.8749507074726823,
+      "fail": 3.2868825664088046,
+      "runs": 16
+    },
+    "stabilize_and_observe": {
+      "success": 10.367308685243358,
+      "fail": 8.00320744236985,
+      "runs": 35
+    },
+    "probe_new_paths": {
+      "success": 6.849531957656655,
+      "fail": 4.012561071806551,
+      "runs": 19
+    }
+  }
+}

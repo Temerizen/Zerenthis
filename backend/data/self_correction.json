@@ -1,0 +1,256 @@
+{
+  "last_correction": {
+    "timestamp": 1776109349.0936024,
+    "action": "no_change",
+    "goal_type_before": "balanced_progression",
+    "goal_type_after": "balanced_progression",
+    "mission_goal_type": "balanced_progression",
+    "has_goal": true,
+    "has_mission": true
+  },
+  "history": [
+    {
+      "timestamp": 1776102469.8479745,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102663.32177,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102875.674645,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103099.4967525,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103280.4539149,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": null,
+      "has_goal": true,
+      "has_mission": false
+    },
+    {
+      "timestamp": 1776103582.8517847,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103677.2989147,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105354.8609111,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": null,
+      "has_goal": true,
+      "has_mission": false
+    },
+    {
+      "timestamp": 1776105409.695128,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105562.3190374,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105647.8849907,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105798.950897,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106540.5917277,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106586.3376675,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106703.0838282,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106769.0294583,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106879.5528882,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106989.3788333,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107177.153153,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107221.9911296,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107295.7431107,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107552.5068202,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108120.563806,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108351.4558108,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108689.347135,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776109129.2668107,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776109349.0936024,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    }
+  ]
+}

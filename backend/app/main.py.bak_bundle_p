@@ -1,0 +1,763 @@
+from backend.app.routes import initiative_routes
+from backend.app.routes import conflict_routes
+from backend.app.routes import mission_routes
+from backend.app.routes import feedback_routes
+from backend.app.routes import plan_routes
+from backend.app.routes import goal_execution_routes
+from backend.app.routes import goal_routes
+from backend.app.execution import routes as execution_routes
+from backend.app.routes import decision as decision_routes
+from fastapi import FastAPI, Body
+from backend.app.builder.patch_plan_engine import create_patch_plan
+from backend.app.builder.feedback_loop import log_builder_feedback
+from backend.app.builder.guardrail_routes import builder_guardrails_status, builder_probe_path
+from backend.app.builder.apply_engine import apply_patch_plan
+from backend.app.builder.autopilot_bridge import detect_builder_need
+from backend.app.builder.autopilot_request_engine import build_request_from_autopilot
+from backend.app.builder.autopilot_handoff import execute_autopilot_builder_handoff
+from backend.app.builder.continuous_loop import run_continuous_builder_loop
+from backend.app.builder.feedback_selector import choose_strategy_for_target, build_target_stats
+from backend.app.builder.target_queue import build_target_queue, choose_next_target
+from backend.app.autonomy.loop import start_loop, stop_loop, get_status
+from backend.app.execution.runner import get_goals, reset_goals
+
+app = FastAPI(title="Zerenthis Unified Core")
+app.include_router(initiative_routes.router)
+app.include_router(conflict_routes.router)
+app.include_router(mission_routes.router)
+app.include_router(feedback_routes.router)
+app.include_router(plan_routes.router)
+app.include_router(goal_execution_routes.router)
+app.include_router(goal_routes.router)
+app.include_router(decision_routes.router)
+app.include_router(execution_routes.router)
+
+@app.on_event("startup")
+def startup_autonomy_loop():
+    try:
+        result = start_loop(interval=2.0)
+        print(f"[AUTONOMY] startup: {result}")
+    except Exception as e:
+        print(f"[AUTONOMY] startup error: {e}")
+
+
+@app.get("/")
+def root():
+    return {"status": "ok", "system": "Zerenthis Unified Core"}
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+
+@app.get("/api/autonomy/status")
+def api_autonomy_status():
+    return get_status()
+
+
+@app.post("/api/autonomy/start")
+def api_autonomy_start():
+    return start_loop(interval=2.0)
+
+
+@app.post("/api/autonomy/stop")
+def api_autonomy_stop():
+    return stop_loop()
+
+
+@app.get("/api/goals")
+def api_goals():
+    return get_goals()
+
+
+@app.post("/api/goals/reset")
+def api_goals_reset():
+    return reset_goals()
+
+
+@app.get("/api/builder/guardrails")
+def api_builder_guardrails():
+    return builder_guardrails_status()
+
+
+@app.post("/api/builder/probe")
+def api_builder_probe(payload: dict = Body(...)):
+    return builder_probe_path(payload.get("path", ""))
+
+
+@app.post("/api/builder/apply")
+def api_builder_apply(payload: dict = Body(...)):
+    return apply_patch_plan(payload)
+
+
+@app.get("/api/autopilot/builder-check")
+def api_autopilot_builder_check():
+    return detect_builder_need()
+
+
+@app.post("/api/autopilot/request-builder")
+def api_autopilot_request_builder():
+    return build_request_from_autopilot()
+
+
+@app.post("/api/run")
+def api_run(payload: dict = Body(...)):
+    task_type = payload.get("type")
+    data = payload.get("data", {})
+
+    if task_type == "builder":
+        plan = create_patch_plan(
+            goal=data.get("goal", "Safely improve module"),
+            target=data.get("target"),
+            reason=data.get("reason", ""),
+            priority=data.get("priority", "medium"),
+        )
+        result = apply_patch_plan(plan)
+        feedback = log_builder_feedback(data, plan, result)
+        return {
+            "controller": "active",
+            "task": "builder",
+            "result": {
+                "status": "builder_executed",
+                "plan": plan,
+                "apply_result": result,
+                "feedback": feedback
+            }
+        }
+
+    if task_type == "autopilot":
+        return {
+            "controller": "active",
+            "task": "autopilot",
+            "result": {
+                "status": "autopilot_live",
+                "data": data
+            }
+        }
+
+    if task_type == "agents":
+        return {
+            "controller": "active",
+            "task": "agents",
+            "result": {
+                "status": "agent_swarm_ready",
+                "data": data
+            }
+        }
+
+    return {
+        "controller": "active",
+        "task": task_type,
+        "result": {
+            "status": "unknown_task",
+            "data": data
+        }
+    }
+
+
+@app.post("/api/builder/strategy")
+def api_builder_strategy(payload: dict = Body(...)):
+    target = payload.get("target", None)
+    return choose_strategy_for_target(target)
+
+
+@app.get("/api/builder/stats")
+def api_builder_stats():
+    return build_target_stats()
+
+
+@app.post("/api/autopilot/handoff-builder")
+def api_autopilot_handoff_builder():
+    def _run_controller(payload: dict):
+        task_type = payload.get("type")
+        data = payload.get("data", {})
+
+        if task_type == "builder":
+            plan = create_patch_plan(
+                goal=data.get("goal", "Safely improve module"),
+                target=data.get("target"),
+                reason=data.get("reason", ""),
+                priority=data.get("priority", "medium"),
+            )
+            result = apply_patch_plan(plan)
+            feedback = log_builder_feedback(data, plan, result)
+            return {
+                "controller": "active",
+                "task": "builder",
+                "result": {
+                    "status": "builder_executed",
+                    "plan": plan,
+                    "apply_result": result,
+                    "feedback": feedback
+                }
+            }
+
+        return {
+            "controller": "active",
+            "task": task_type,
+            "result": {
+                "status": "unsupported_handoff_task",
+                "data": data
+            }
+        }
+
+    return execute_autopilot_builder_handoff(_run_controller)
+
+
+@app.post("/api/autopilot/continuous-builder-loop")
+def api_autopilot_continuous_builder_loop(payload: dict = Body(None)):
+    payload = payload or {}
+    max_cycles = int(payload.get("max_cycles", 5))
+    delay_seconds = float(payload.get("delay_seconds", 1.0))
+
+    def _run_controller(task_payload: dict):
+        task_type = task_payload.get("type")
+        data = task_payload.get("data", {})
+
+        if task_type == "builder":
+            plan = create_patch_plan(
+                goal=data.get("goal", "Safely improve module"),
+                target=data.get("target"),
+                reason=data.get("reason", ""),
+                priority=data.get("priority", "medium"),
+            )
+            result = apply_patch_plan(plan)
+            feedback = log_builder_feedback(data, plan, result)
+            return {
+                "controller": "active",
+                "task": "builder",
+                "result": {
+                    "status": "builder_executed",
+                    "plan": plan,
+                    "apply_result": result,
+                    "feedback": feedback
+                }
+            }
+
+        return {
+            "controller": "active",
+            "task": task_type,
+            "result": {
+                "status": "unsupported_loop_task",
+                "data": data
+            }
+        }
+
+    return run_continuous_builder_loop(
+        run_controller=_run_controller,
+        max_cycles=max_cycles,
+        delay_seconds=delay_seconds
+    )
+
+
+@app.get("/api/autopilot/queue")
+def api_autopilot_queue():
+    return {
+        "queue": build_target_queue(),
+        "next": choose_next_target()
+    }
+
+
+@app.post("/api/full-loop/run")
+def full_loop_run():
+    outputs = {}
+
+    try:
+        from backend.app.engines.product_engine import run as product_run
+        outputs["products"] = product_run()
+    except Exception as e:
+        outputs["products_error"] = str(e)
+
+    try:
+        from backend.app.engines.storefront_engine import run as storefront_run
+        outputs["storefront"] = storefront_run()
+    except Exception as e:
+        outputs["storefront_error"] = str(e)
+
+    try:
+        from backend.app.engines.offer_engine import run as offer_run
+        outputs["offers"] = offer_run()
+    except Exception as e:
+        outputs["offers_error"] = str(e)
+
+    try:
+        from backend.app.engines.traffic_engine import run as traffic_run
+        outputs["traffic"] = traffic_run()
+    except Exception as e:
+        outputs["traffic_error"] = str(e)
+
+    return {
+        "status": "full_loop_executed",
+        "outputs": outputs
+    }
+
+
+@app.post("/api/full-loop/revenue-run")
+def api_full_loop_revenue_run():
+    outputs = {}
+
+    try:
+        from backend.app.engines.product_engine import run as product_run
+        outputs["products"] = product_run()
+    except Exception as e:
+        outputs["products_error"] = str(e)
+
+    try:
+        from backend.app.engines.storefront_engine import run as storefront_run
+        outputs["storefront"] = storefront_run()
+    except Exception as e:
+        outputs["storefront_error"] = str(e)
+
+    try:
+        from backend.app.engines.offer_engine import run as offer_run
+        outputs["offers"] = offer_run()
+    except Exception as e:
+        outputs["offers_error"] = str(e)
+
+    try:
+        from backend.app.engines.traffic_engine import run as traffic_run
+        outputs["traffic"] = traffic_run()
+    except Exception as e:
+        outputs["traffic_error"] = str(e)
+
+    try:
+        from backend.app.engines.revenue_engine import record_result
+        products_block = outputs.get("products", {})
+        products = products_block.get("products", []) if isinstance(products_block, dict) else []
+        outputs["revenue"] = record_result(products)
+    except Exception as e:
+        outputs["revenue_error"] = str(e)
+
+    return {
+        "status": "full_loop_revenue_executed",
+        "outputs": outputs
+    }
+
+
+@app.get("/api/builder/winner-targets")
+def api_builder_winner_targets():
+    try:
+        from backend.app.builder.winner_mapper import winner_to_targets
+        return {
+            "status": "ok",
+            "targets": winner_to_targets()
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e)
+        }
+
+
+@app.post("/api/run-winner-builder")
+def api_run_winner_builder(payload: dict = Body(None)):
+    payload = payload or {}
+    data = payload.get("data", payload)
+
+    try:
+        from backend.app.builder.winner_mapper import winner_to_targets
+        selected_targets = winner_to_targets()
+    except Exception as e:
+        return {
+            "controller": "active",
+            "task": "builder",
+            "result": {
+                "status": "winner_target_error",
+                "error": str(e)
+            }
+        }
+
+    plan = create_patch_plan(
+        goal=data.get("goal", "Improve the strongest revenue pathway"),
+        target=selected_targets,
+        reason=data.get("reason", "winner_driven"),
+        priority=data.get("priority", "high"),
+    )
+    result = apply_patch_plan(plan)
+    feedback = log_builder_feedback(data, plan, result)
+
+    return {
+        "controller": "active",
+        "task": "builder",
+        "result": {
+            "status": "winner_builder_executed",
+            "selected_targets": selected_targets,
+            "plan": plan,
+            "apply_result": result,
+            "feedback": feedback
+        }
+    }
+
+
+@app.post("/api/variant/battle")
+def api_variant_battle(payload: dict = Body(None)):
+    payload = payload or {}
+    goal = payload.get("goal", "Increase conversions and revenue")
+
+    try:
+        from backend.app.engines.variant_engine import run_variant_battle
+        result = run_variant_battle(goal)
+        return result
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e)
+        }
+
+
+@app.post("/api/full-loop/champion-run")
+def api_full_loop_champion_run():
+    outputs = {}
+
+    try:
+        from backend.app.engines.product_engine import run as product_run
+        outputs["products"] = product_run()
+    except Exception as e:
+        outputs["products_error"] = str(e)
+
+    try:
+        from backend.app.engines.storefront_engine import run as storefront_run
+        outputs["storefront"] = storefront_run()
+    except Exception as e:
+        outputs["storefront_error"] = str(e)
+
+    try:
+        from backend.app.engines.offer_engine import run as offer_run
+        outputs["offers"] = offer_run()
+    except Exception as e:
+        outputs["offers_error"] = str(e)
+
+    try:
+        from backend.app.engines.traffic_engine import run as traffic_run
+        outputs["traffic"] = traffic_run()
+    except Exception as e:
+        outputs["traffic_error"] = str(e)
+
+    try:
+        from backend.app.engines.variant_memory_engine import get_variant_winner
+        outputs["champion_offer"] = get_variant_winner()
+    except Exception as e:
+        outputs["champion_offer_error"] = str(e)
+
+    try:
+        from backend.app.engines.revenue_engine import record_result
+
+        products_block = outputs.get("products", {})
+        products = products_block.get("products", []) if isinstance(products_block, dict) else []
+
+        champion = outputs.get("champion_offer", {})
+        if isinstance(champion, dict) and champion.get("name"):
+            products = list(products) + [{
+                "name": champion.get("name", "Champion Offer"),
+                "price": champion.get("price", 0),
+                "description": champion.get("headline", "")
+            }]
+
+        outputs["revenue"] = record_result(products)
+    except Exception as e:
+        outputs["revenue_error"] = str(e)
+
+    return {
+        "status": "full_loop_champion_executed",
+        "outputs": outputs
+    }
+
+
+# === REVENUE INTELLIGENCE ROUTE ===
+from backend.app.engines.revenue_intelligence_engine import run_revenue_intelligence
+
+@app.post("/api/revenue/intelligence")
+def api_revenue_intelligence():
+    return run_revenue_intelligence()
+
+
+# === MUTATION ENGINE ROUTE ===
+from backend.app.engines.mutation_engine import run_mutation_engine
+
+@app.post("/api/mutation/run")
+def api_mutation_run():
+    return run_mutation_engine()
+
+
+# === STRATEGIC MEMORY ROUTE ===
+from backend.app.engines.strategic_memory_engine import run_strategic_memory
+
+@app.post("/api/strategic-memory/run")
+def api_strategic_memory_run():
+    return run_strategic_memory()
+
+
+# === TRAFFIC INTELLIGENCE ROUTE ===
+from backend.app.engines.traffic_intelligence_engine import run_traffic_intelligence
+
+@app.post("/api/traffic/intelligence/run")
+def api_traffic_intelligence_run():
+    return run_traffic_intelligence()
+
+
+# === SCALING ENGINE ROUTE ===
+from backend.app.engines.scaling_engine import run_scaling_engine
+
+@app.post("/api/scaling/run")
+def api_scaling_run():
+    return run_scaling_engine()
+
+
+# === SELF IMPROVER ROUTE ===
+from backend.app.engines.self_improver import run_self_improver
+
+@app.post("/api/self-improve/run")
+def api_self_improve():
+    return run_self_improver()
+
+
+# === DEMAND INTELLIGENCE ROUTES ===
+from backend.app.engines.demand_intelligence_engine import run_demand_intelligence
+from backend.app.engines.manual_signal_engine import log_interest_signal
+
+@app.post("/api/demand/intelligence/run")
+def api_demand_intelligence_run():
+    return run_demand_intelligence()
+
+@app.post("/api/demand/signal")
+def api_demand_signal(payload: dict = Body(...)):
+    return log_interest_signal(payload)
+
+
+# === REAL SIGNAL DECISION ROUTE ===
+from backend.app.engines.real_signal_bridge import run_real_decision
+
+@app.post("/api/decision/real")
+def api_real_decision():
+    return run_real_decision()
+
+
+# === PROMOTION ENGINE ROUTE ===
+from backend.app.engines.promotion_engine import run_promotion
+
+@app.post("/api/promotion/run")
+def api_promotion_run():
+    return run_promotion()
+
+
+# === AUTO SIGNAL CAPTURE ROUTE ===
+from backend.app.engines.auto_signal_capture_engine import run_auto_signal_capture
+
+@app.post("/api/signals/auto-capture")
+def api_auto_signal_capture():
+    return run_auto_signal_capture()
+
+# === AUTOPILOT LOOP ROUTES ===
+from backend.app.engines.autopilot_engine import start_autopilot, get_autopilot_status
+
+@app.post("/api/autopilot/run")
+def api_autopilot_run():
+    return start_autopilot()
+
+@app.get("/api/autopilot/status")
+def api_autopilot_status():
+    return get_autopilot_status()
+
+
+# === TRACKING ROUTES ===
+from backend.app.engines.tracking_engine import generate_tracking_link, log_conversion
+
+@app.post("/api/track/generate")
+def api_generate_tracking(product: str):
+    return generate_tracking_link(product)
+
+@app.get("/api/track/{link_id}")
+def api_track_click(link_id: str):
+    return log_conversion(link_id)
+
+
+# === OPTIMIZATION ENGINE ===
+from backend.app.engines.optimization_engine import run_optimization
+
+@app.post("/api/optimize/run")
+def api_optimize_run():
+    return run_optimization()
+
+
+# === SWARM ENGINE ===
+from backend.app.engines.swarm_engine import run_swarm
+
+@app.post("/api/swarm/run")
+def api_swarm_run():
+    return run_swarm()
+
+
+# === VARIANT TRACKING ROUTES ===
+from backend.app.engines.variant_tracking_engine import generate_variant_link, log_variant_click
+
+@app.post("/api/track/variant/generate")
+def api_variant_generate(product: str, headline: str):
+    return generate_variant_link(product, headline)
+
+@app.get("/api/track/variant/{variant_id}")
+def api_variant_click(variant_id: str):
+    return log_variant_click(variant_id)
+
+# === REAL SWARM ===
+from backend.app.engines.real_swarm_engine import run_real_swarm
+
+@app.post("/api/swarm/real")
+def api_swarm_real():
+    return run_real_swarm()
+
+
+# === PROMOTION ENGINE ===
+from backend.app.engines.promotion_engine import run_promotion
+
+@app.post("/api/promote/run")
+def api_promote_run():
+    return run_promotion()
+
+
+# === LIVE PLATFORM DEPLOY ===
+from backend.app.engines.live_platform_engine import run_live_deploy
+
+@app.post("/api/deploy/live")
+def api_deploy_live():
+    return run_live_deploy()
+
+
+# === FLOOD ENGINE ===
+from backend.app.engines.flood_engine import run_flood
+
+@app.post("/api/flood/run")
+def api_flood_run():
+    return run_flood()
+
+
+# === AUTOPILOT V23 ===
+from backend.app.engines.autopilot_v23 import run_autopilot_v23
+
+@app.post("/api/autopilot/v23")
+def api_autopilot_v23():
+    return run_autopilot_v23()
+
+
+# === AUTOPILOT V24 (MULTI-LOOP) ===
+import threading
+from backend.app.engines.autopilot_v24 import start_all
+
+@app.post("/api/autopilot/v24")
+def run_v24():
+    threading.Thread(target=start_all, daemon=True).start()
+    return {"status": "v24_started"}
+
+
+# === PRIORITY ENGINE ===
+from backend.app.engines.priority_engine import build_priority
+
+@app.post("/api/priority/build")
+def priority_build():
+    return build_priority()
+
+
+# === AUTOPILOT V25 ===
+from backend.app.engines.autopilot_v25 import start_all as start_all_v25
+
+@app.post("/api/autopilot/v25")
+def run_v25():
+    threading.Thread(target=start_all_v25, daemon=True).start()
+    return {"status": "v25_started"}
+
+
+# === COMPANION MEMORY ===
+from backend.app.engines.companion_memory import remember, set_goal, get_memory
+
+@app.post("/api/companion/remember")
+def api_remember(data: dict):
+    return remember(data.get("message", ""))
+
+@app.post("/api/companion/set-goal")
+def api_set_goal(data: dict):
+    return set_goal(data.get("goal", ""))
+
+@app.get("/api/companion/memory")
+def api_get_memory():
+    return get_memory()
+
+
+# === COMPANION TASKS ===
+from backend.app.engines.companion_tasks import create_task, list_tasks, update_task, resume_task, complete_task
+
+@app.post("/api/companion/tasks/create")
+def api_create_task(data: dict):
+    return create_task(
+        data.get("title", ""),
+        data.get("priority", "normal"),
+        data.get("notes", "")
+    )
+
+@app.get("/api/companion/tasks")
+def api_list_tasks():
+    return list_tasks()
+
+@app.post("/api/companion/tasks/update")
+def api_update_task(data: dict):
+    return update_task(
+        data.get("id", ""),
+        data.get("status"),
+        data.get("notes"),
+        data.get("last_action")
+    )
+
+@app.post("/api/companion/tasks/resume")
+def api_resume_task(data: dict):
+    return resume_task(data.get("id", ""))
+
+@app.post("/api/companion/tasks/complete")
+def api_complete_task(data: dict):
+    return complete_task(data.get("id", ""))
+
+
+# === COMPANION INTENT ROUTER ===
+from backend.app.engines.intent_router import classify_intent, get_intent_history
+
+@app.post("/api/companion/intent")
+def api_companion_intent(data: dict):
+    return classify_intent(data.get("message", ""))
+
+@app.get("/api/companion/intent/history")
+def api_companion_intent_history():
+    return get_intent_history()
+
+
+# === COMPANION PRESENCE ENGINE ===
+from backend.app.engines.presence_engine import build_presence_reply, get_presence_state
+
+@app.post("/api/companion/presence")
+def api_companion_presence(data: dict):
+    return build_presence_reply(data.get("message", ""))
+
+@app.get("/api/companion/presence/state")
+def api_companion_presence_state():
+    return get_presence_state()
+
+
+# === COMPANION RESPONSE DIRECTOR ===
+from backend.app.engines.response_director import build_directed_response, get_director_state
+
+@app.post("/api/companion/respond")
+def api_companion_respond(data: dict):
+    return build_directed_response(data.get("message", ""))
+
+@app.get("/api/companion/respond/state")
+def api_companion_respond_state():
+    return get_director_state()
+
+
+# === EMOTIONAL REALISM ===
+from backend.app.engines.emotional_engine import build_emotional_reply, get_emotional_state
+
+@app.post("/api/companion/emotional")
+def api_emotional(data: dict):
+    return build_emotional_reply(data.get("message", ""))
+
+@app.get("/api/companion/emotional/state")
+def api_emotional_state():
+    return get_emotional_state()

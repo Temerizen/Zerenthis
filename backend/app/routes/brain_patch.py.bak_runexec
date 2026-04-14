@@ -1,0 +1,45 @@
+﻿from fastapi import APIRouter
+import time
+
+router = APIRouter()
+
+# === LOOP BREAK MEMORY ===
+_last_tasks = []
+MAX_REPEAT = 5
+
+def _loop_guard(task):
+    global _last_tasks
+    _last_tasks.append(task)
+    _last_tasks = _last_tasks[-MAX_REPEAT:]
+    return len(set(_last_tasks)) == 1  # all same → stuck
+
+@router.post("/api/brain/run")
+def brain():
+
+    from backend.app.cognition import world, meta, decision, execution, goal
+
+    # === RUN CORE ===
+    world_state = world.update({"tick": "loop"})
+    meta_state = meta.run({"event": "cycle"})
+    decision_state = decision.run()
+    goal_state = goal.run()
+    execution_state = execution.run()
+
+    task = execution_state.get("task", "unknown")
+
+    # === LOOP BREAK ===
+    if _loop_guard(task):
+        return {
+            "status": "stopped",
+            "reason": "loop_detected",
+            "task": task
+        }
+
+    # === LIGHTWEIGHT RESPONSE ===
+    return {
+        "status": "ok",
+        "task": task,
+        "goal": goal_state.get("active_goal"),
+        "decision": decision_state.get("action"),
+        "score": meta_state.get("score", 0.5)
+    }

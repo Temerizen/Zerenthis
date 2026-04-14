@@ -1,0 +1,1110 @@
+{
+  "last_conflict": {
+    "timestamp": 1776070176.4948938,
+    "drives": {
+      "explore": 0.85,
+      "persist": 0.8399999999999999,
+      "stabilize": 0.6600000000000001
+    },
+    "winner": "explore",
+    "insight": "stable",
+    "meta_adjustment": {
+      "explore_boost": 0.0,
+      "persist_penalty": -0.1
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776057344.4462383,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057426.5758908,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057556.995128,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057649.8044841,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057735.6893234,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057785.5351644,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057830.9975488,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057870.1798935,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776057919.8965533,
+      "label": "moderate_conflict",
+      "scores": {
+        "explore_vs_stable": 0.35,
+        "risk_vs_stability": 0.0,
+        "persistence_vs_change": 0.35,
+        "total_conflict": 0.2333
+      },
+      "dominant_trait": "curiosity",
+      "pattern": "stable_identity"
+    },
+    {
+      "timestamp": 1776068426.787326,
+      "drives": {
+        "explore": 0.65,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068427.1686661,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068427.5480382,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068427.9358504,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068428.3106365,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068428.6830468,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior"
+    },
+    {
+      "timestamp": 1776068571.0720897,
+      "drives": {
+        "explore": 0.81,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068571.45527,
+      "drives": {
+        "explore": 0.8,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068571.8440168,
+      "drives": {
+        "explore": 0.65,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068572.2350338,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068572.6235743,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068573.0275476,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068573.4322822,
+      "drives": {
+        "explore": 0.81,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068573.8169324,
+      "drives": {
+        "explore": 0.8,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068685.185369,
+      "drives": {
+        "explore": 0.65,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068685.5869157,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068686.025846,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068686.4361768,
+      "drives": {
+        "explore": 0.66,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068686.8422256,
+      "drives": {
+        "explore": 0.81,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068687.2439394,
+      "drives": {
+        "explore": 0.8200000000000001,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776068687.6505175,
+      "drives": {
+        "explore": 0.68,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068688.0560799,
+      "drives": {
+        "explore": 0.68,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068688.461079,
+      "drives": {
+        "explore": 0.68,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776068688.8800342,
+      "drives": {
+        "explore": 0.68,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069067.2056448,
+      "drives": {
+        "explore": 0.8300000000000001,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069067.617555,
+      "drives": {
+        "explore": 0.8400000000000001,
+        "persist": 0.65,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "overfitting_behavior",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069068.0381322,
+      "drives": {
+        "explore": 0.55,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stagnation_detected",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069068.4540758,
+      "drives": {
+        "explore": 0.55,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069068.8756924,
+      "drives": {
+        "explore": 0.55,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069069.2942224,
+      "drives": {
+        "explore": 0.55,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069311.6803308,
+      "drives": {
+        "explore": 0.7000000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069312.1036866,
+      "drives": {
+        "explore": 0.7100000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069312.5240283,
+      "drives": {
+        "explore": 0.7200000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069312.970502,
+      "drives": {
+        "explore": 0.7300000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069313.4078515,
+      "drives": {
+        "explore": 0.7400000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069313.8383222,
+      "drives": {
+        "explore": 0.7500000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069452.9048562,
+      "drives": {
+        "explore": 0.7600000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "stagnation_detected",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069453.3357391,
+      "drives": {
+        "explore": 0.6200000000000001,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stagnation_detected",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069453.7819216,
+      "drives": {
+        "explore": 0.6200000000000001,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069454.2127755,
+      "drives": {
+        "explore": 0.6200000000000001,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069454.654063,
+      "drives": {
+        "explore": 0.6200000000000001,
+        "persist": 0.85,
+        "stabilize": 0.5
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069455.0857143,
+      "drives": {
+        "explore": 0.7700000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069599.6191664,
+      "drives": {
+        "explore": 0.7800000000000001,
+        "persist": 0.75,
+        "stabilize": 0.5
+      },
+      "winner": "explore",
+      "insight": "stagnation_detected",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069600.062583,
+      "drives": {
+        "explore": 0.6600000000000001,
+        "persist": 0.83,
+        "stabilize": 0.52
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069600.5138958,
+      "drives": {
+        "explore": 0.6700000000000002,
+        "persist": 0.83,
+        "stabilize": 0.53
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069600.9526882,
+      "drives": {
+        "explore": 0.6800000000000002,
+        "persist": 0.83,
+        "stabilize": 0.54
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069601.4032652,
+      "drives": {
+        "explore": 0.6900000000000002,
+        "persist": 0.83,
+        "stabilize": 0.55
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069601.845786,
+      "drives": {
+        "explore": 0.8500000000000002,
+        "persist": 0.73,
+        "stabilize": 0.56
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069602.2978601,
+      "drives": {
+        "explore": 0.8800000000000002,
+        "persist": 0.71,
+        "stabilize": 0.5700000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      }
+    },
+    {
+      "timestamp": 1776069602.747809,
+      "drives": {
+        "explore": 0.7600000000000002,
+        "persist": 0.7899999999999999,
+        "stabilize": 0.5800000000000001
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069807.782166,
+      "drives": {
+        "explore": 0.7700000000000002,
+        "persist": 0.7899999999999999,
+        "stabilize": 0.5900000000000001
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069808.230708,
+      "drives": {
+        "explore": 0.7800000000000002,
+        "persist": 0.7899999999999999,
+        "stabilize": 0.6000000000000001
+      },
+      "winner": "persist",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069808.6822793,
+      "drives": {
+        "explore": 0.7900000000000003,
+        "persist": 0.7899999999999999,
+        "stabilize": 0.6100000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069809.1526358,
+      "drives": {
+        "explore": 0.8100000000000003,
+        "persist": 0.7799999999999999,
+        "stabilize": 0.6200000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069809.614853,
+      "drives": {
+        "explore": 0.8300000000000003,
+        "persist": 0.7699999999999999,
+        "stabilize": 0.6300000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069810.0531018,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7599999999999999,
+        "stabilize": 0.6400000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      }
+    },
+    {
+      "timestamp": 1776069810.4975026,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8499999999999999,
+        "stabilize": 0.6500000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069810.9680698,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8399999999999999,
+        "stabilize": 0.6600000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069881.517485,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8299999999999998,
+        "stabilize": 0.6700000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069881.9316654,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8199999999999998,
+        "stabilize": 0.6800000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069882.3485115,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8099999999999998,
+        "stabilize": 0.6900000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069882.7855237,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7999999999999998,
+        "stabilize": 0.7000000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069883.2189946,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7899999999999998,
+        "stabilize": 0.7100000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776069883.6567538,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7799999999999998,
+        "stabilize": 0.7200000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070173.335324,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7699999999999998,
+        "stabilize": 0.7300000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070173.7757027,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7799999999999998,
+        "stabilize": 0.7200000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070174.2233481,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7899999999999998,
+        "stabilize": 0.7100000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070174.6779559,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.7999999999999998,
+        "stabilize": 0.7000000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070175.1300523,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8099999999999998,
+        "stabilize": 0.6900000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070175.5937414,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8199999999999998,
+        "stabilize": 0.6800000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070176.0456817,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8299999999999998,
+        "stabilize": 0.6700000000000002
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    },
+    {
+      "timestamp": 1776070176.4948938,
+      "drives": {
+        "explore": 0.85,
+        "persist": 0.8399999999999999,
+        "stabilize": 0.6600000000000001
+      },
+      "winner": "explore",
+      "insight": "stable",
+      "meta_adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      }
+    }
+  ]
+}

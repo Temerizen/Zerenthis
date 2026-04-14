@@ -1,0 +1,17 @@
+{
+  "resolve_builder_handoff": {
+    "completed": true,
+    "route": "recovery",
+    "goal": "initiate_recovery_mode"
+  },
+  "create_thought_engine": {
+    "completed": true,
+    "route": "builder",
+    "goal": "initiate_recovery_mode"
+  },
+  "advance_beyond_handoff": {
+    "completed": true,
+    "route": "normal",
+    "goal": "novel_progression"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "status": "planned",
+  "source_handoff": "backend/outputs\\builder_handoff.json",
+  "target": "backend/app/routes/companion_emotional.py",
+  "patch_type": "increase_reality_feedback",
+  "reason": "you need proof, not more thinking",
+  "focus": "whether this has become real through evidence",
+  "goal": "Build or improve a system component that creates evidence, momentum, or structure for Zerenthis",
+  "proposed_changes": [
+    "Add stronger continuity between repeated detachment signals and builder-oriented next steps",
+    "Improve action selection so recurring proof-gaps route toward concrete system-building plans",
+    "Store builder-relevant intent in memory for future planning"
+  ],
+  "safe_mode": true,
+  "timestamp": 1776022202.7797334
+}

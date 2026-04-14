@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "results": [
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "price": 29,
+      "impressions": 52,
+      "clicks": 6,
+      "conversions": 0,
+      "revenue": 0.0
+    },
+    {
+      "name": "AI Side Hustle System",
+      "score": 5.32,
+      "price": 19,
+      "impressions": 85,
+      "clicks": 4,
+      "conversions": 0,
+      "revenue": 0.0
+    },
+    {
+      "name": "Premium Offer",
+      "score": 3.43,
+      "price": 49,
+      "impressions": 36,
+      "clicks": 4,
+      "conversions": 0,
+      "revenue": 0.0
+    }
+  ],
+  "top_performer": {
+    "name": "Viral Content Engine Pack",
+    "score": 8.12,
+    "price": 29,
+    "impressions": 52,
+    "clicks": 6,
+    "conversions": 0,
+    "revenue": 0.0
+  },
+  "timestamp": 1775985241.6956427
+}

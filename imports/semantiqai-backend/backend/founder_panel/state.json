@@ -1,0 +1,15 @@
+﻿{
+  "feature_toggles": {
+    "cognitive_lab": true,
+    "ai_school": true,
+    "execution_engine": true,
+    "simulation_engine": true,
+    "creation_engine": true,
+    "founder_video": true,
+    "founder_distribution": true
+  },
+  "system_mode": "ascension",
+  "maintenance_mode": false,
+  "founder_notes": "",
+  "module_registry": []
+}

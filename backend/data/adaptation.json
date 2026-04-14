@@ -1,0 +1,340 @@
+{
+  "last_adjustment": {
+    "timestamp": 1776109349.0895998,
+    "score": 0.6895607236664223,
+    "action": "neutral_adjust",
+    "intensity": 0.5
+  },
+  "history": [
+    {
+      "timestamp": 1776100940.445775,
+      "score": 0.5633827313195651,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776101064.9216845,
+      "score": 0.6628826291664404,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776101332.3958542,
+      "score": 0.7210734538159659,
+      "action": "reinforce",
+      "intensity": 0.7210734538159659
+    },
+    {
+      "timestamp": 1776101551.6967235,
+      "score": 0.5894214432136605,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776101769.96924,
+      "score": 0.5233511135711617,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776102208.5222638,
+      "score": 0.8802663063823305,
+      "action": "reinforce",
+      "intensity": 0.8802663063823305
+    },
+    {
+      "timestamp": 1776102431.484737,
+      "score": 0.8179497221797977,
+      "action": "reinforce",
+      "intensity": 0.8179497221797977
+    },
+    {
+      "timestamp": 1776102469.8199596,
+      "score": 0.730199931182492,
+      "action": "reinforce",
+      "intensity": 0.730199931182492
+    },
+    {
+      "timestamp": 1776102663.2958376,
+      "score": 0.8062946524764185,
+      "action": "reinforce",
+      "intensity": 0.8062946524764185
+    },
+    {
+      "timestamp": 1776102875.6456454,
+      "score": 0.822204439538337,
+      "action": "reinforce",
+      "intensity": 0.822204439538337
+    },
+    {
+      "timestamp": 1776103099.46974,
+      "score": 0.8822262583691565,
+      "action": "reinforce",
+      "intensity": 0.8822262583691565
+    },
+    {
+      "timestamp": 1776103280.4318657,
+      "score": 0.47237160475196693,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776103582.8287895,
+      "score": 0.45168186930402343,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776103677.2807882,
+      "score": 0.7032047753091404,
+      "action": "reinforce",
+      "intensity": 0.7032047753091404
+    },
+    {
+      "timestamp": 1776103807.9729054,
+      "score": 0.7549468180335718,
+      "action": "reinforce",
+      "intensity": 0.7549468180335718
+    },
+    {
+      "timestamp": 1776103925.4050741,
+      "score": 0.7928744691097254,
+      "action": "reinforce",
+      "intensity": 0.7928744691097254
+    },
+    {
+      "timestamp": 1776104059.1980424,
+      "score": 0.7333175095097987,
+      "action": "reinforce",
+      "intensity": 0.7333175095097987
+    },
+    {
+      "timestamp": 1776104296.9678783,
+      "score": 0.8299839673780757,
+      "action": "reinforce",
+      "intensity": 0.8299839673780757
+    },
+    {
+      "timestamp": 1776104430.051876,
+      "score": 0.7439922789621347,
+      "action": "reinforce",
+      "intensity": 0.7439922789621347
+    },
+    {
+      "timestamp": 1776104549.142979,
+      "score": 0.6878747789554609,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104549.5792055,
+      "score": 0.8090066628109419,
+      "action": "reinforce",
+      "intensity": 0.8090066628109419
+    },
+    {
+      "timestamp": 1776104550.0197902,
+      "score": 0.7119615405045271,
+      "action": "reinforce",
+      "intensity": 0.7119615405045271
+    },
+    {
+      "timestamp": 1776104656.9117875,
+      "score": 0.5902202146237898,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104657.4463801,
+      "score": 0.5072521214944018,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104657.894397,
+      "score": 0.5714110029638263,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104724.1504774,
+      "score": 0.8310477046121952,
+      "action": "reinforce",
+      "intensity": 0.8310477046121952
+    },
+    {
+      "timestamp": 1776104784.421862,
+      "score": 0.5567423899082906,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104784.8579373,
+      "score": 0.7302967629767224,
+      "action": "reinforce",
+      "intensity": 0.7302967629767224
+    },
+    {
+      "timestamp": 1776104785.2988305,
+      "score": 0.607624673374187,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776104888.9680169,
+      "score": 0.892996600458231,
+      "action": "reinforce",
+      "intensity": 0.892996600458231
+    },
+    {
+      "timestamp": 1776104889.424944,
+      "score": 0.7946261226535005,
+      "action": "reinforce",
+      "intensity": 0.7946261226535005
+    },
+    {
+      "timestamp": 1776104889.8610039,
+      "score": 0.5546623614562677,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776105008.2071848,
+      "score": 0.8353086783179839,
+      "action": "reinforce",
+      "intensity": 0.8353086783179839
+    },
+    {
+      "timestamp": 1776105008.6457567,
+      "score": 0.5167041127630537,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776105009.1016722,
+      "score": 0.7908176220307347,
+      "action": "reinforce",
+      "intensity": 0.7908176220307347
+    },
+    {
+      "timestamp": 1776105354.8339102,
+      "score": 0.7143789538374006,
+      "action": "reinforce",
+      "intensity": 0.7143789538374006
+    },
+    {
+      "timestamp": 1776105409.6664433,
+      "score": 0.5231967779873824,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776105562.2990346,
+      "score": 0.6655063261900745,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776105647.8661952,
+      "score": 0.7607998470339162,
+      "action": "reinforce",
+      "intensity": 0.7607998470339162
+    },
+    {
+      "timestamp": 1776105798.9299514,
+      "score": 0.662689870376007,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776106540.5539527,
+      "score": 0.44622044949298845,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776106586.3179657,
+      "score": 0.5845379606080465,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776106703.0622938,
+      "score": 0.6897273438334048,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776106769.009458,
+      "score": 0.7765164886404603,
+      "action": "reinforce",
+      "intensity": 0.7765164886404603
+    },
+    {
+      "timestamp": 1776106879.5338254,
+      "score": 0.8509232849465681,
+      "action": "reinforce",
+      "intensity": 0.8509232849465681
+    },
+    {
+      "timestamp": 1776106989.3538766,
+      "score": 0.693923498598245,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776107177.1329744,
+      "score": 0.8582301699646918,
+      "action": "reinforce",
+      "intensity": 0.8582301699646918
+    },
+    {
+      "timestamp": 1776107221.970554,
+      "score": 0.8918728038539586,
+      "action": "reinforce",
+      "intensity": 0.8918728038539586
+    },
+    {
+      "timestamp": 1776107295.7229402,
+      "score": 0.791057750174203,
+      "action": "reinforce",
+      "intensity": 0.791057750174203
+    },
+    {
+      "timestamp": 1776107552.4868238,
+      "score": 0.7108434756169216,
+      "action": "reinforce",
+      "intensity": 0.7108434756169216
+    },
+    {
+      "timestamp": 1776108120.536749,
+      "score": 0.6991897161800191,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776108351.4528103,
+      "score": 0.6162067281765755,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776108689.3432584,
+      "score": 0.7342962099215021,
+      "action": "reinforce",
+      "intensity": 0.7342962099215021
+    },
+    {
+      "timestamp": 1776109129.2458153,
+      "score": 0.6211445298836062,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    },
+    {
+      "timestamp": 1776109349.0895998,
+      "score": 0.6895607236664223,
+      "action": "neutral_adjust",
+      "intensity": 0.5
+    }
+  ]
+}

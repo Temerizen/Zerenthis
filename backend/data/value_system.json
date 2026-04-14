@@ -1,0 +1,441 @@
+{
+  "preferences": {
+    "exploration": 1.3200000000000003,
+    "efficiency": 1.11,
+    "stability": 1.11,
+    "novelty": 1.3200000000000003
+  },
+  "history": [
+    {
+      "t": 1776053626.3029804,
+      "score": 0.75,
+      "preferences": {
+        "exploration": 1.01,
+        "efficiency": 1.0,
+        "stability": 1.0,
+        "novelty": 1.01
+      }
+    },
+    {
+      "t": 1776053669.3052092,
+      "score": 0.753,
+      "preferences": {
+        "exploration": 1.02,
+        "efficiency": 1.0,
+        "stability": 1.0,
+        "novelty": 1.02
+      }
+    },
+    {
+      "t": 1776053670.164329,
+      "score": 0.8835,
+      "preferences": {
+        "exploration": 1.03,
+        "efficiency": 1.0,
+        "stability": 1.0,
+        "novelty": 1.03
+      }
+    },
+    {
+      "t": 1776053670.9843793,
+      "score": 0.759,
+      "preferences": {
+        "exploration": 1.03,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.03
+      }
+    },
+    {
+      "t": 1776053672.0661745,
+      "score": 0.7635,
+      "preferences": {
+        "exploration": 1.04,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.04
+      }
+    },
+    {
+      "t": 1776053672.799225,
+      "score": 0.7665,
+      "preferences": {
+        "exploration": 1.05,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.05
+      }
+    },
+    {
+      "t": 1776053765.4379892,
+      "score": 0.7742,
+      "preferences": {
+        "exploration": 1.06,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.06
+      }
+    },
+    {
+      "t": 1776053765.707661,
+      "score": 0.7858,
+      "preferences": {
+        "exploration": 1.07,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.07
+      }
+    },
+    {
+      "t": 1776053895.5392482,
+      "score": 0.818,
+      "preferences": {
+        "exploration": 1.08,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.08
+      }
+    },
+    {
+      "t": 1776053977.39784,
+      "score": 0.8228,
+      "preferences": {
+        "exploration": 1.09,
+        "efficiency": 1.01,
+        "stability": 1.01,
+        "novelty": 1.09
+      }
+    },
+    {
+      "t": 1776053977.638693,
+      "score": 0.7894,
+      "preferences": {
+        "exploration": 1.09,
+        "efficiency": 1.02,
+        "stability": 1.02,
+        "novelty": 1.09
+      }
+    },
+    {
+      "t": 1776053977.8673027,
+      "score": 0.8169,
+      "preferences": {
+        "exploration": 1.1,
+        "efficiency": 1.02,
+        "stability": 1.02,
+        "novelty": 1.1
+      }
+    },
+    {
+      "t": 1776054308.7152667,
+      "score": 0.5848,
+      "preferences": {
+        "exploration": 1.1,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.1
+      }
+    },
+    {
+      "t": 1776054310.4888206,
+      "score": 0.5872,
+      "preferences": {
+        "exploration": 1.11,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.11
+      }
+    },
+    {
+      "t": 1776054339.5414581,
+      "score": 0.5899,
+      "preferences": {
+        "exploration": 1.12,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.12
+      }
+    },
+    {
+      "t": 1776054399.1788554,
+      "score": 0.5926,
+      "preferences": {
+        "exploration": 1.1300000000000001,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.1300000000000001
+      }
+    },
+    {
+      "t": 1776054452.2200704,
+      "score": 0.5953,
+      "preferences": {
+        "exploration": 1.1400000000000001,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.1400000000000001
+      }
+    },
+    {
+      "t": 1776054499.257379,
+      "score": 0.7404,
+      "preferences": {
+        "exploration": 1.1500000000000001,
+        "efficiency": 1.03,
+        "stability": 1.03,
+        "novelty": 1.1500000000000001
+      }
+    },
+    {
+      "t": 1776054500.735376,
+      "score": 0.6004,
+      "preferences": {
+        "exploration": 1.1500000000000001,
+        "efficiency": 1.04,
+        "stability": 1.04,
+        "novelty": 1.1500000000000001
+      }
+    },
+    {
+      "t": 1776054541.665565,
+      "score": 0.6028,
+      "preferences": {
+        "exploration": 1.1600000000000001,
+        "efficiency": 1.04,
+        "stability": 1.04,
+        "novelty": 1.1600000000000001
+      }
+    },
+    {
+      "t": 1776054590.3733196,
+      "score": 0.7503,
+      "preferences": {
+        "exploration": 1.1700000000000002,
+        "efficiency": 1.04,
+        "stability": 1.04,
+        "novelty": 1.1700000000000002
+      }
+    },
+    {
+      "t": 1776054633.1264238,
+      "score": 0.6078,
+      "preferences": {
+        "exploration": 1.1700000000000002,
+        "efficiency": 1.05,
+        "stability": 1.05,
+        "novelty": 1.1700000000000002
+      }
+    },
+    {
+      "t": 1776054723.5517251,
+      "score": 0.7565,
+      "preferences": {
+        "exploration": 1.1800000000000002,
+        "efficiency": 1.05,
+        "stability": 1.05,
+        "novelty": 1.1800000000000002
+      }
+    },
+    {
+      "t": 1776054766.5257146,
+      "score": 0.7601,
+      "preferences": {
+        "exploration": 1.1900000000000002,
+        "efficiency": 1.05,
+        "stability": 1.05,
+        "novelty": 1.1900000000000002
+      }
+    },
+    {
+      "t": 1776054969.3455436,
+      "score": 0.615,
+      "preferences": {
+        "exploration": 1.1900000000000002,
+        "efficiency": 1.06,
+        "stability": 1.06,
+        "novelty": 1.1900000000000002
+      }
+    },
+    {
+      "t": 1776055001.3328931,
+      "score": 0.7662,
+      "preferences": {
+        "exploration": 1.2000000000000002,
+        "efficiency": 1.06,
+        "stability": 1.06,
+        "novelty": 1.2000000000000002
+      }
+    },
+    {
+      "t": 1776055001.7480001,
+      "score": 0.6198,
+      "preferences": {
+        "exploration": 1.2000000000000002,
+        "efficiency": 1.07,
+        "stability": 1.07,
+        "novelty": 1.2000000000000002
+      }
+    },
+    {
+      "t": 1776055002.1850102,
+      "score": 0.6223,
+      "preferences": {
+        "exploration": 1.2100000000000002,
+        "efficiency": 1.07,
+        "stability": 1.07,
+        "novelty": 1.2100000000000002
+      }
+    },
+    {
+      "t": 1776055002.6190104,
+      "score": 0.7758,
+      "preferences": {
+        "exploration": 1.2200000000000002,
+        "efficiency": 1.07,
+        "stability": 1.07,
+        "novelty": 1.2200000000000002
+      }
+    },
+    {
+      "t": 1776055003.040011,
+      "score": 0.6268,
+      "preferences": {
+        "exploration": 1.2200000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2200000000000002
+      }
+    },
+    {
+      "t": 1776055475.8708053,
+      "score": 0.6294,
+      "preferences": {
+        "exploration": 1.2300000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2300000000000002
+      }
+    },
+    {
+      "t": 1776055577.3136854,
+      "score": 0.7853,
+      "preferences": {
+        "exploration": 1.2400000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2400000000000002
+      }
+    },
+    {
+      "t": 1776055664.2882798,
+      "score": 0.7886,
+      "preferences": {
+        "exploration": 1.2500000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2500000000000002
+      }
+    },
+    {
+      "t": 1776055907.46881,
+      "score": 0.7919,
+      "preferences": {
+        "exploration": 1.2600000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2600000000000002
+      }
+    },
+    {
+      "t": 1776055907.8878074,
+      "score": 0.7952,
+      "preferences": {
+        "exploration": 1.2700000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2700000000000002
+      }
+    },
+    {
+      "t": 1776055908.3547916,
+      "score": 0.7984,
+      "preferences": {
+        "exploration": 1.2800000000000002,
+        "efficiency": 1.08,
+        "stability": 1.08,
+        "novelty": 1.2800000000000002
+      }
+    },
+    {
+      "t": 1776055908.8253188,
+      "score": 0.6415,
+      "preferences": {
+        "exploration": 1.2800000000000002,
+        "efficiency": 1.09,
+        "stability": 1.09,
+        "novelty": 1.2800000000000002
+      }
+    },
+    {
+      "t": 1776055909.2903173,
+      "score": 0.8042,
+      "preferences": {
+        "exploration": 1.2900000000000003,
+        "efficiency": 1.09,
+        "stability": 1.09,
+        "novelty": 1.2900000000000003
+      }
+    },
+    {
+      "t": 1776055909.7533185,
+      "score": 0.646,
+      "preferences": {
+        "exploration": 1.2900000000000003,
+        "efficiency": 1.1,
+        "stability": 1.1,
+        "novelty": 1.2900000000000003
+      }
+    },
+    {
+      "t": 1776055910.2233188,
+      "score": 0.81,
+      "preferences": {
+        "exploration": 1.3000000000000003,
+        "efficiency": 1.1,
+        "stability": 1.1,
+        "novelty": 1.3000000000000003
+      }
+    },
+    {
+      "t": 1776055910.6833186,
+      "score": 0.6505,
+      "preferences": {
+        "exploration": 1.3000000000000003,
+        "efficiency": 1.11,
+        "stability": 1.11,
+        "novelty": 1.3000000000000003
+      }
+    },
+    {
+      "t": 1776055911.153318,
+      "score": 0.6532,
+      "preferences": {
+        "exploration": 1.3100000000000003,
+        "efficiency": 1.11,
+        "stability": 1.11,
+        "novelty": 1.3100000000000003
+      }
+    },
+    {
+      "t": 1776055911.6023188,
+      "score": 0.8188,
+      "preferences": {
+        "exploration": 1.3200000000000003,
+        "efficiency": 1.11,
+        "stability": 1.11,
+        "novelty": 1.3200000000000003
+      }
+    }
+  ],
+  "last_score": 0.8188
+}

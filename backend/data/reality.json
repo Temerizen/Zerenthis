@@ -1,0 +1,346 @@
+{
+  "history": [
+    {
+      "timestamp": 1776100760.6319108,
+      "score": 0.5566201105051092,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776100940.4447732,
+      "score": 0.5633827313195651,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776101064.9216845,
+      "score": 0.6628826291664404,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776101332.3898537,
+      "score": 0.7210734538159659,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776101551.6967235,
+      "score": 0.5894214432136605,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776101769.9682393,
+      "score": 0.5233511135711617,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776102208.5222638,
+      "score": 0.8802663063823305,
+      "mission_id": "mission_1776100405",
+      "goal_type": "unknown"
+    },
+    {
+      "timestamp": 1776102431.4833102,
+      "score": 0.8179497221797977,
+      "mission_id": "mission_1776100405",
+      "goal_type": "unknown"
+    },
+    {
+      "timestamp": 1776102469.8199596,
+      "score": 0.730199931182492,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776102663.2948396,
+      "score": 0.8062946524764185,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776102875.6444795,
+      "score": 0.822204439538337,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103099.46974,
+      "score": 0.8822262583691565,
+      "mission_id": "mission_1776100405",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103280.430866,
+      "score": 0.47237160475196693,
+      "mission_id": null,
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103582.8277867,
+      "score": 0.45168186930402343,
+      "mission_id": null,
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103677.2797875,
+      "score": 0.7032047753091404,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103807.9719012,
+      "score": 0.7549468180335718,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776103925.3970716,
+      "score": 0.7928744691097254,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776104059.1910303,
+      "score": 0.7333175095097987,
+      "mission_id": "mission_1776103582",
+      "goal_type": "unknown"
+    },
+    {
+      "timestamp": 1776104296.9608822,
+      "score": 0.8299839673780757,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104430.0458753,
+      "score": 0.7439922789621347,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.136981,
+      "score": 0.6878747789554609,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.5720768,
+      "score": 0.8090066628109419,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104550.012255,
+      "score": 0.7119615405045271,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104656.9058094,
+      "score": 0.5902202146237898,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.4388351,
+      "score": 0.5072521214944018,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.889062,
+      "score": 0.5714110029638263,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104724.1444786,
+      "score": 0.8310477046121952,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.4158669,
+      "score": 0.5567423899082906,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.8499386,
+      "score": 0.7302967629767224,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104785.2918348,
+      "score": 0.607624673374187,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104888.959957,
+      "score": 0.892996600458231,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.4179351,
+      "score": 0.7946261226535005,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.8520024,
+      "score": 0.5546623614562677,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.2001839,
+      "score": 0.8353086783179839,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.6397574,
+      "score": 0.5167041127630537,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105009.093668,
+      "score": 0.7908176220307347,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105354.8269136,
+      "score": 0.7143789538374006,
+      "mission_id": "mission_1776103582",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105409.6654487,
+      "score": 0.5231967779873824,
+      "mission_id": null,
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105562.298032,
+      "score": 0.6655063261900745,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105647.8651955,
+      "score": 0.7607998470339162,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105798.9289489,
+      "score": 0.662689870376007,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776106540.552282,
+      "score": 0.44622044949298845,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776106586.3169646,
+      "score": 0.5845379606080465,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776106703.0612936,
+      "score": 0.6897273438334048,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776106769.008458,
+      "score": 0.7765164886404603,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776106879.5318081,
+      "score": 0.8509232849465681,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776106989.3528447,
+      "score": 0.693923498598245,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776107177.1319752,
+      "score": 0.8582301699646918,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776107221.9695551,
+      "score": 0.8918728038539586,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776107295.7219415,
+      "score": 0.791057750174203,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776107552.4858246,
+      "score": 0.7108434756169216,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776108120.5357492,
+      "score": 0.6991897161800191,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776108351.4508104,
+      "score": 0.6162067281765755,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776108689.341255,
+      "score": 0.7342962099215021,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776109129.2448225,
+      "score": 0.6211445298836062,
+      "mission_id": null,
+      "goal_type": null
+    },
+    {
+      "timestamp": 1776109349.087601,
+      "score": 0.6895607236664223,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    }
+  ],
+  "last_outcome": {
+    "timestamp": 1776109349.087601,
+    "score": 0.6895607236664223,
+    "mission_id": "mission_1776105409",
+    "goal_type": "balanced_progression"
+  }
+}

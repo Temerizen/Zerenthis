@@ -1,0 +1,15 @@
+{
+  "task_weights": {
+    "probe_new_paths": 1.0,
+    "explore_new_path": 1.0,
+    "stabilize_and_observe": 1.6105
+  },
+  "intent_bias": {},
+  "failure_decay": {
+    "probe_new_paths": 0,
+    "explore_new_path": 0,
+    "stabilize_and_observe": 0
+  },
+  "strategy_patterns": [],
+  "last_updated": 1776206375.5280874
+}

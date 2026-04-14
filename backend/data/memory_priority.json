@@ -1,0 +1,217 @@
+{
+  "memories": [
+    {
+      "t": 1776055911.2113194,
+      "importance": 0.8792,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "stress_test",
+      "success": true
+    },
+    {
+      "t": 1776055577.3586812,
+      "importance": 0.8744,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": true
+    },
+    {
+      "t": 1776055910.7443206,
+      "importance": 0.8741,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "stress_test",
+      "success": true
+    },
+    {
+      "t": 1776055909.8153186,
+      "importance": 0.8386,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": true
+    },
+    {
+      "t": 1776055475.9058058,
+      "importance": 0.8261,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "stress_test",
+      "success": true
+    },
+    {
+      "t": 1776055003.0760093,
+      "importance": 0.7994,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": true
+    },
+    {
+      "t": 1776055002.22101,
+      "importance": 0.7911,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": true
+    },
+    {
+      "t": 1776055911.6623178,
+      "importance": 0.7847,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "test_new_action",
+      "success": false
+    },
+    {
+      "t": 1776054969.3765428,
+      "importance": 0.7783,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": true
+    },
+    {
+      "t": 1776055910.283317,
+      "importance": 0.7704,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055909.347318,
+      "importance": 0.7611,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055908.411793,
+      "importance": 0.7517,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055907.9468067,
+      "importance": 0.7471,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055907.4858072,
+      "importance": 0.7425,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055664.3442802,
+      "importance": 0.7378,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055002.6550117,
+      "importance": 0.7195,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "test_new_action",
+      "success": false
+    },
+    {
+      "t": 1776055001.3678935,
+      "importance": 0.7062,
+      "decision": "pursue_exploration_priority",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "probe_unknown",
+      "success": false
+    },
+    {
+      "t": 1776055908.8873188,
+      "importance": 0.6562,
+      "decision": "prioritize_world_signal",
+      "goal": "expand_capabilities",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": false
+    },
+    {
+      "t": 1776055001.7829995,
+      "importance": 0.6212,
+      "decision": "prioritize_world_signal",
+      "goal": "analyze_environment",
+      "intent": "expand_capabilities",
+      "execution_goal": "expand_capabilities",
+      "execution_detail": "exploration_action_taken",
+      "strategy": "repeat_successful",
+      "success": false
+    }
+  ],
+  "stats": {
+    "total_memories": 19,
+    "high_value_memories": 12
+  }
+}

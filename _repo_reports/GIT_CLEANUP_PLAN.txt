@@ -1,0 +1,22 @@
+﻿ZERENTHIS CLEANUP PLAN
+Timestamp: 20260404_100419
+
+1. Autopilot entrypoint force-reset to direct app object
+2. Builder-family BASE_URL normalized to:
+   http://semantiqai-backend.railway.internal:8080
+3. _safety_backup and _repo_reports ignored
+4. .env-like files ignored and untracked if previously committed
+5. GitHub should receive only real source changes, not backup noise
+
+RAILWAY SETTINGS TO VERIFY
+- MAIN start command:
+  python -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+
+- AUTOPILOT start command:
+  python app/main.py
+
+- BUILDER start command:
+  python backend/architect_loop.py
+
+- BUILDER variable:
+  BASE_URL=http://semantiqai-backend.railway.internal:8080

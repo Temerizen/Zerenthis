@@ -1,0 +1,534 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zerenthis Live Terminal</title>
+<style>
+:root{
+  --bg:#03060a;
+  --panel:#071019;
+  --line:#00e5ff;
+  --text:#c8fbff;
+  --muted:#79dbe6;
+  --good:#7CFFB2;
+  --warn:#FFD166;
+  --bad:#FF6B6B;
+  --hot:#8a5cff;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at top right, rgba(0,229,255,.06), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(138,92,255,.05), transparent 28%),
+    var(--bg);
+  color:var(--text);
+  font-family:Consolas, "Courier New", monospace;
+  overflow:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.015), rgba(255,255,255,0) 2px);
+  background-size:100% 3px;
+  opacity:.15;
+}
+.wrap{
+  width:100vw;
+  height:100vh;
+  padding:4px;
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:4px;
+}
+.header,.controls,.log{
+  border:1px solid var(--line);
+  background:rgba(0,229,255,.03);
+  box-shadow:0 0 0 1px rgba(0,229,255,.07) inset, 0 0 18px rgba(0,229,255,.08);
+}
+.header{
+  padding:6px 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.lefthead{display:flex; align-items:center; gap:12px}
+.title{
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.4px;
+}
+.sub{
+  font-size:10px;
+  color:var(--muted);
+}
+.topbadges{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.badge{
+  border:1px solid var(--line);
+  padding:3px 6px;
+  font-size:10px;
+  color:#fff;
+  background:rgba(0,229,255,.04);
+  white-space:nowrap;
+}
+.badge.good{border-color:var(--good); color:var(--good)}
+.badge.warn{border-color:var(--warn); color:var(--warn)}
+.badge.bad{border-color:var(--bad); color:var(--bad)}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:4px;
+  min-height:0;
+}
+.panel{
+  border:1px solid var(--line);
+  background:rgba(0,229,255,.03);
+  box-shadow:0 0 0 1px rgba(0,229,255,.06) inset;
+  padding:6px;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+.panel h3{
+  margin:0 0 6px 0;
+  font-size:11px;
+  color:#fff;
+  letter-spacing:.35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:4px;
+}
+.kpi{
+  border:1px solid rgba(0,229,255,.5);
+  padding:5px;
+  min-width:0;
+  background:rgba(0,0,0,.15);
+}
+.kpi .label{
+  font-size:9px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.kpi .value{
+  font-size:13px;
+  color:#fff;
+  margin-top:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.value.good{color:var(--good)}
+.value.warn{color:var(--warn)}
+.value.bad{color:var(--bad)}
+pre.mini{
+  margin:6px 0 0 0;
+  font-size:10px;
+  line-height:1.22;
+  color:var(--muted);
+  overflow:auto;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+.list{
+  margin:6px 0 0 0;
+  padding:0;
+  list-style:none;
+  font-size:10px;
+  line-height:1.25;
+  overflow:auto;
+}
+.list li{
+  margin:0 0 4px 0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.controls{
+  padding:6px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+}
+button{
+  background:#000;
+  color:var(--text);
+  border:1px solid var(--line);
+  padding:6px 8px;
+  cursor:pointer;
+  font:inherit;
+  font-size:10px;
+  transition:transform .08s ease, box-shadow .12s ease, background .12s ease;
+}
+button:hover{
+  background:#081821;
+  box-shadow:0 0 10px rgba(0,229,255,.18);
+}
+button:active{transform:translateY(1px)}
+.log{
+  padding:6px;
+  min-height:72px;
+  max-height:92px;
+  overflow:auto;
+}
+.log h3{
+  margin:0 0 4px 0;
+  font-size:11px;
+  color:#fff;
+}
+#logBox{
+  font-size:10px;
+  line-height:1.22;
+  color:var(--muted);
+  white-space:pre-wrap;
+}
+.rightcol{grid-row:span 2}
+.glow-good{box-shadow:0 0 0 1px rgba(124,255,178,.18) inset, 0 0 18px rgba(124,255,178,.10)}
+.glow-warn{box-shadow:0 0 0 1px rgba(255,209,102,.18) inset, 0 0 18px rgba(255,209,102,.08)}
+.glow-bad{box-shadow:0 0 0 1px rgba(255,107,107,.18) inset, 0 0 18px rgba(255,107,107,.10)}
+.pulse{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--good);
+  box-shadow:0 0 10px var(--good);
+  animation:pulse 1.2s infinite;
+}
+.dot.warn{background:var(--warn); box-shadow:0 0 10px var(--warn)}
+.dot.bad{background:var(--bad); box-shadow:0 0 10px var(--bad)}
+@keyframes pulse{
+  0%{transform:scale(.9); opacity:.75}
+  50%{transform:scale(1.25); opacity:1}
+  100%{transform:scale(.9); opacity:.75}
+}
+.ticker{
+  overflow:hidden;
+  white-space:nowrap;
+  border:1px solid rgba(0,229,255,.45);
+  padding:4px 6px;
+  font-size:10px;
+  color:#fff;
+  background:rgba(0,0,0,.2);
+}
+.ticker span{
+  display:inline-block;
+  padding-left:100%;
+  animation:ticker 16s linear infinite;
+}
+@keyframes ticker{
+  from{transform:translateX(0)}
+  to{transform:translateX(-100%)}
+}
+.winner-frame{
+  outline:1px solid rgba(124,255,178,.55);
+  box-shadow:0 0 18px rgba(124,255,178,.10), 0 0 0 1px rgba(124,255,178,.18) inset;
+}
+.smallnote{font-size:9px;color:var(--muted)}
+@media (max-width: 1200px){
+  .grid{grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,1fr)}
+  .rightcol{grid-row:span 1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="lefthead">
+      <div>
+        <div class="title">⚡ Zerenthis Live Terminal</div>
+        <div class="sub">Burst 55 · autopilot visibility mode</div>
+      </div>
+      <div class="badge" id="refreshBadge">refreshing...</div>
+    </div>
+    <div class="topbadges">
+      <div class="badge" id="badgeTopic">topic: -</div>
+      <div class="badge" id="badgeRevenue">revenue: -</div>
+      <div class="badge" id="badgeDecision">decision: -</div>
+      <div class="badge" id="badgeLock">winner unlocked</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="panel" id="panelActive">
+      <h3><span>🔥 Active</span><span class="smallnote" id="activeStatus">-</span></h3>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Topic</div><div class="value" id="activeTopic">-</div></div>
+        <div class="kpi"><div class="label">Price</div><div class="value" id="activePrice">-</div></div>
+        <div class="kpi"><div class="label">Traffic</div><div class="value" id="trafficMult">-</div></div>
+        <div class="kpi"><div class="label">Suppressed</div><div class="value" id="suppressed">-</div></div>
+      </div>
+      <pre class="mini" id="activeMini"></pre>
+    </section>
+
+    <section class="panel" id="panelChampion">
+      <h3><span>👑 Champion / Queue</span><span class="smallnote" id="decisionTag">-</span></h3>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Champion</div><div class="value" id="championTopic">-</div></div>
+        <div class="kpi"><div class="label">Streak</div><div class="value" id="winStreak">-</div></div>
+        <div class="kpi"><div class="label">Queue</div><div class="value" id="queueTopic">-</div></div>
+        <div class="kpi"><div class="label">Confirmations</div><div class="value" id="queueConfirm">-</div></div>
+      </div>
+      <pre class="mini" id="battleMini"></pre>
+    </section>
+
+    <section class="panel rightcol" id="panelState">
+      <h3><span>📡 System State</span><span class="pulse"><span class="dot" id="heartbeatDot"></span><span id="heartbeatText">-</span></span></h3>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Autopilot</div><div class="value" id="autopilotState">-</div></div>
+        <div class="kpi"><div class="label">Risk Mode</div><div class="value" id="riskMode">-</div></div>
+        <div class="kpi"><div class="label">Fatigue</div><div class="value" id="fatigueVal">-</div></div>
+        <div class="kpi"><div class="label">Explore</div><div class="value" id="exploreVal">-</div></div>
+      </div>
+      <ul class="list" id="routeList"></ul>
+    </section>
+
+    <section class="panel" id="panelIntel">
+      <h3><span>🧠 Intelligence</span><span class="smallnote" id="recTag">-</span></h3>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Recommendation</div><div class="value" id="recommendation">-</div></div>
+        <div class="kpi"><div class="label">Scale Mode</div><div class="value" id="scaleMode">-</div></div>
+        <div class="kpi"><div class="label">Winner Locked</div><div class="value" id="winnerLocked">-</div></div>
+        <div class="kpi"><div class="label">Paused</div><div class="value" id="pausedVal">-</div></div>
+      </div>
+      <pre class="mini" id="intelMini"></pre>
+    </section>
+
+    <section class="panel" id="panelMoney">
+      <h3><span>💰 Revenue / Signals</span><span class="smallnote" id="moneyTag">-</span></h3>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Revenue</div><div class="value" id="revenueVal">-</div></div>
+        <div class="kpi"><div class="label">Sales</div><div class="value" id="salesVal">-</div></div>
+        <div class="kpi"><div class="label">Defenses</div><div class="value" id="defensesVal">-</div></div>
+        <div class="kpi"><div class="label">Replacements</div><div class="value" id="replacementsVal">-</div></div>
+      </div>
+      <div class="ticker"><span id="tickerText">Booting telemetry...</span></div>
+      <pre class="mini" id="moneyMini"></pre>
+    </section>
+  </div>
+
+  <div class="controls">
+    <button onclick="run('/api/performance/run')">Run Performance</button>
+    <button onclick="run('/api/battle/run')">Run Battle</button>
+    <button onclick="run('/api/revenue/update')">Run Revenue</button>
+    <button onclick="run('/api/scaling/update')">Run Scaling</button>
+    <button onclick="post('/api/founder/pause')">Pause</button>
+    <button onclick="post('/api/founder/resume')">Resume</button>
+    <button onclick="post('/api/founder/lock')">Lock</button>
+    <button onclick="post('/api/founder/unlock')">Unlock</button>
+    <button onclick="post('/api/founder/reset-fatigue')">Reset Fatigue</button>
+    <button onclick="post('/api/founder/reset-queue')">Reset Queue</button>
+    <button onclick="post('/api/founder/promote-queue')">Promote Queue</button>
+    <button onclick="refreshUI()">Refresh UI</button>
+  </div>
+
+  <div class="log">
+    <h3>📜 Event Log</h3>
+    <div id="logBox"></div>
+  </div>
+</div>
+
+<script>
+function byId(id){ return document.getElementById(id); }
+function safe(v, fallback='-'){ return (v === undefined || v === null || v === '') ? fallback : v; }
+function yn(v){ return v ? 'YES' : 'NO'; }
+function num(v, fallback=0){ return Number(v ?? fallback); }
+function log(msg){
+  const now = new Date().toLocaleTimeString();
+  const box = byId('logBox');
+  box.textContent = `[${now}] ${msg}\n` + box.textContent;
+  box.textContent = box.textContent.slice(0, 4500);
+}
+async function getJson(url, options){
+  const res = await fetch(url, options);
+  if(!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
+  return await res.json();
+}
+async function post(url){
+  try{
+    await getJson(url, {method:'POST'});
+    log(`POST ok: ${url}`);
+    await refreshUI();
+  }catch(e){
+    log(`POST fail: ${e.message}`);
+  }
+}
+async function run(url){
+  try{
+    await getJson(url, {method:'POST'});
+    log(`RUN ok: ${url}`);
+    await refreshUI();
+  }catch(e){
+    log(`RUN fail: ${e.message}`);
+  }
+}
+function setPanelGlow(el, mode){
+  el.classList.remove('glow-good','glow-warn','glow-bad','winner-frame');
+  if(mode === 'good') el.classList.add('glow-good');
+  if(mode === 'warn') el.classList.add('glow-warn');
+  if(mode === 'bad') el.classList.add('glow-bad');
+}
+function decisionTone(decision){
+  if(!decision) return 'warn';
+  const d = String(decision).toLowerCase();
+  if(d.includes('replaced') || d.includes('promoted')) return 'good';
+  if(d.includes('queued') || d.includes('locked')) return 'warn';
+  return 'good';
+}
+function recommendationTone(rec){
+  const r = String(rec).toLowerCase();
+  if(r.includes('scale')) return 'good';
+  if(r.includes('suppress')) return 'bad';
+  if(r.includes('rotate')) return 'warn';
+  return 'good';
+}
+async function refreshUI(){
+  try{
+    const snap = await getJson('/api/founder/snapshot');
+    const perf = await getJson('/api/performance/run', {method:'POST'});
+    const battle = await getJson('/api/battle/run', {method:'POST'});
+    const revenue = await getJson('/api/revenue/update', {method:'POST'});
+    const scaling = await getJson('/api/scaling/update', {method:'POST'});
+
+    const active = snap.active || {};
+    const queue = snap.queue || {};
+    const champion = snap.champion || {};
+    const diversity = snap.diversity || {};
+    const control = snap.control || {};
+
+    const fatigue = num(diversity.fatigue_penalty,0);
+    const explore = num(diversity.exploration_boost,0);
+    const decision = safe(battle.decision,'-');
+    const rev = num(revenue.total_revenue ?? revenue.revenue, 0);
+    const sales = num(revenue.total_sales ?? 0, 0);
+    const scaleMode = !!active.scale_mode;
+    const suppressed = !!active.suppressed;
+    const paused = !!control.autopilot_paused;
+    const winnerLocked = !!control.winner_locked;
+    const rec = suppressed ? 'SUPPRESS_OR_REPLACE' :
+      scaleMode ? 'SCALE_AGGRESSIVELY' :
+      (fatigue > 10 ? 'ROTATE_OR_TEST' : 'HOLD_AND_OBSERVE');
+
+    byId('activeTopic').textContent = safe(active.topic);
+    byId('activePrice').textContent = '$' + safe(active.price, 0);
+    byId('trafficMult').textContent = safe(active.traffic_multiplier, 1);
+    byId('suppressed').textContent = yn(suppressed);
+    byId('activeStatus').textContent = safe(active.status);
+    byId('activeMini').textContent =
+`status: ${safe(active.status)}
+mode: ${safe(active.mode)}
+last_weighted: ${safe(active.last_weighted)}
+last_amplified: ${safe(active.last_amplified)}`;
+
+    byId('championTopic').textContent = safe(champion.champion_topic || champion.topic);
+    byId('winStreak').textContent = safe(champion.win_streak, 0);
+    byId('queueTopic').textContent = safe(queue.topic);
+    byId('queueConfirm').textContent = safe(queue.confirmations, 0);
+    byId('decisionTag').textContent = decision;
+    byId('battleMini').textContent =
+`decision: ${decision}
+active_score: ${safe(battle.active_score)}
+challenger_score: ${safe(battle.challenger_score)}
+force_challenger: ${safe(battle.force_challenger, false)}`;
+
+    byId('autopilotState').textContent = paused ? 'PAUSED' : 'RUNNING';
+    byId('riskMode').textContent = safe(control.risk_mode, 'normal');
+    byId('fatigueVal').textContent = fatigue;
+    byId('exploreVal').textContent = explore;
+
+    const routes = [
+      '/api/founder/snapshot',
+      '/api/performance/run',
+      '/api/battle/run',
+      '/api/revenue/update',
+      '/api/scaling/update',
+      '/health'
+    ];
+    byId('routeList').innerHTML = routes.map(r => `<li>${r}</li>`).join('');
+
+    byId('recommendation').textContent = rec;
+    byId('scaleMode').textContent = yn(scaleMode);
+    byId('winnerLocked').textContent = yn(winnerLocked);
+    byId('pausedVal').textContent = yn(paused);
+    byId('recTag').textContent = recommendationTone(rec).toUpperCase();
+    byId('intelMini').textContent =
+`performance_topic: ${safe(perf.active_topic)}
+performance_score: ${safe(perf.active_score)}
+battle_status: ${safe(battle.status)}
+battle_decision: ${decision}`;
+
+    byId('revenueVal').textContent = '$' + rev;
+    byId('salesVal').textContent = sales;
+    byId('defensesVal').textContent = safe(battle.total_defenses, 0);
+    byId('replacementsVal').textContent = safe(battle.total_replacements, 0);
+    byId('moneyTag').textContent = rev >= 200 ? 'HOT' : (rev > 0 ? 'LIVE' : 'COLD');
+    byId('moneyMini').textContent =
+`revenue_status: ${safe(revenue.status)}
+scaling_status: ${safe(scaling.status)}
+traffic_multiplier: ${safe(scaling.traffic_multiplier ?? active.traffic_multiplier, 1)}
+conv_rate: ${safe(scaling.conv_rate, 'n/a')}`;
+
+    byId('badgeTopic').textContent = 'topic: ' + safe(active.topic);
+    byId('badgeRevenue').textContent = 'revenue: $' + rev;
+    byId('badgeDecision').textContent = 'decision: ' + decision;
+    byId('badgeLock').textContent = winnerLocked ? 'winner locked' : 'winner unlocked';
+    byId('refreshBadge').textContent = 'last refresh: ' + new Date().toLocaleTimeString();
+
+    byId('tickerText').textContent =
+      ` active=${safe(active.topic)} • price=$${safe(active.price,0)} • revenue=$${rev} • decision=${decision} • streak=${safe(champion.win_streak,0)} • fatigue=${fatigue} • explore=${explore} • scale_mode=${yn(scaleMode)} • paused=${yn(paused)} `;
+
+    const heartDot = byId('heartbeatDot');
+    const heartText = byId('heartbeatText');
+    if(paused){
+      heartDot.className = 'dot warn';
+      heartText.textContent = 'PAUSED';
+    } else if(suppressed){
+      heartDot.className = 'dot bad';
+      heartText.textContent = 'SUPPRESSED';
+    } else {
+      heartDot.className = 'dot';
+      heartText.textContent = 'RUNNING';
+    }
+
+    setPanelGlow(byId('panelActive'), suppressed ? 'bad' : 'good');
+    setPanelGlow(byId('panelChampion'), decisionTone(decision));
+    setPanelGlow(byId('panelIntel'), recommendationTone(rec));
+    setPanelGlow(byId('panelMoney'), rev >= 200 ? 'good' : (rev > 0 ? 'warn' : 'bad'));
+    setPanelGlow(byId('panelState'), paused ? 'warn' : 'good');
+
+    if((champion.champion_topic || champion.topic) && active.topic && (champion.champion_topic || champion.topic) === active.topic){
+      byId('panelChampion').classList.add('winner-frame');
+    } else {
+      byId('panelChampion').classList.remove('winner-frame');
+    }
+  }catch(e){
+    log(`refresh fail: ${e.message}`);
+  }
+}
+refreshUI();
+setInterval(refreshUI, 2500);
+</script>
+</body>
+</html>

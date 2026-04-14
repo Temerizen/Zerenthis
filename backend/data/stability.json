@@ -1,0 +1,841 @@
+{
+  "last_baseline": {
+    "timestamp": 1776109349.1539228,
+    "phase": "companion_coherent",
+    "overall_score": 0.8374,
+    "canonical": {
+      "goal_type": "balanced_progression",
+      "goal_commitment": 0.42,
+      "goal_progress_normalized": 1.0,
+      "mission_id": "mission_1776105409",
+      "mission_goal_type": "balanced_progression",
+      "mission_progress": 1.0,
+      "last_score": 0.6896,
+      "last_adjustment_action": "neutral_adjust",
+      "strategy": "reduce_risk",
+      "strategy_profile": "optimize_focus_ascendant_v24",
+      "strategy_tendency": "confident",
+      "strategy_stage": 24,
+      "coherence_action": "aligned",
+      "correction_action": "no_change",
+      "directive_priority": 1.0,
+      "directive_protection": 1.0,
+      "directive_status": "degraded"
+    },
+    "flags": {
+      "has_goal": true,
+      "has_mission": true,
+      "has_directive": true,
+      "coherent": true,
+      "self_correcting": true
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776102875.7298608,
+      "phase": "companion_coherent",
+      "overall_score": 0.7873,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.54,
+        "goal_progress_normalized": 0.69,
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.84,
+        "last_score": 0.8222,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "strategy_profile": "default_ascendant_v5",
+        "strategy_tendency": "confident",
+        "strategy_stage": 5,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "active"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776102875.762843,
+      "phase": "companion_coherent",
+      "overall_score": 0.7873,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.54,
+        "goal_progress_normalized": 0.69,
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.84,
+        "last_score": 0.8222,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "strategy_profile": "default_ascendant_v5",
+        "strategy_tendency": "confident",
+        "strategy_stage": 5,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "active"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776103099.5564282,
+      "phase": "companion_coherent",
+      "overall_score": 0.8243,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress_normalized": 0.74,
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.97,
+        "last_score": 0.8822,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "strategy_profile": "default_ascendant_v6",
+        "strategy_tendency": "confident",
+        "strategy_stage": 6,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "active"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776103280.5206966,
+      "phase": "proto_agency",
+      "overall_score": 0.5149,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.43,
+        "goal_progress_normalized": 0.79,
+        "mission_id": null,
+        "mission_goal_type": null,
+        "mission_progress": 0.0,
+        "last_score": 0.4724,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "default",
+        "strategy_profile": "default_steady_v7",
+        "strategy_tendency": "stable",
+        "strategy_stage": 7,
+        "coherence_action": "waiting_for_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": false,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776103582.9172416,
+      "phase": "companion_coherent",
+      "overall_score": 0.7358,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.36,
+        "goal_progress_normalized": 0.84,
+        "mission_id": "mission_1776103582",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.89,
+        "last_score": 0.4517,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "default",
+        "strategy_profile": "default_steady_v8",
+        "strategy_tendency": "stable",
+        "strategy_stage": 8,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776103677.377973,
+      "phase": "companion_coherent",
+      "overall_score": 0.7915,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.32,
+        "goal_progress_normalized": 0.89,
+        "mission_id": "mission_1776103582",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.97,
+        "last_score": 0.7032,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "strategy_profile": "default_steady_v9",
+        "strategy_tendency": "stable",
+        "strategy_stage": 9,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776105354.9559097,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6072,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.51,
+        "goal_progress_normalized": 0.99,
+        "mission_id": null,
+        "mission_goal_type": null,
+        "mission_progress": 0.0,
+        "last_score": 0.7144,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "default_steady_v10",
+        "strategy_tendency": "stable",
+        "strategy_stage": 10,
+        "coherence_action": "waiting_for_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": false,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776105409.78285,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6445,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.44,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.15,
+        "last_score": 0.5232,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "optimize_focus",
+        "strategy_profile": "reduce_risk_steady_v11",
+        "strategy_tendency": "stable",
+        "strategy_stage": 11,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776105562.418034,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6618,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.37,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.2,
+        "last_score": 0.6655,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_steady_v12",
+        "strategy_tendency": "stable",
+        "strategy_stage": 12,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776105647.966837,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6841,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.33,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.28,
+        "last_score": 0.7608,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v13",
+        "strategy_tendency": "stable",
+        "strategy_stage": 13,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776105799.0279784,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6654,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.26,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.33,
+        "last_score": 0.6627,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v14",
+        "strategy_tendency": "stable",
+        "strategy_stage": 14,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106540.6779964,
+      "phase": "adaptive_core_online",
+      "overall_score": 0.6409,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.38,
+        "last_score": 0.4462,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "optimize_focus",
+        "strategy_profile": "reduce_risk_steady_v14",
+        "strategy_tendency": "stable",
+        "strategy_stage": 14,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106586.4288356,
+      "phase": "companion_coherent",
+      "overall_score": 0.7077,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.43,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.43,
+        "last_score": 0.5845,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_adaptive_v15",
+        "strategy_tendency": "neutral",
+        "strategy_stage": 15,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106703.1686423,
+      "phase": "companion_coherent",
+      "overall_score": 0.7195,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.36,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.48,
+        "last_score": 0.6897,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v16",
+        "strategy_tendency": "stable",
+        "strategy_stage": 16,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106769.109458,
+      "phase": "companion_coherent",
+      "overall_score": 0.7285,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.29,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.53,
+        "last_score": 0.7765,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v17",
+        "strategy_tendency": "stable",
+        "strategy_stage": 17,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106879.6281712,
+      "phase": "companion_coherent",
+      "overall_score": 0.7356,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.22,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.58,
+        "last_score": 0.8509,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v18",
+        "strategy_tendency": "stable",
+        "strategy_stage": 18,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776106989.458179,
+      "phase": "companion_coherent",
+      "overall_score": 0.7281,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.63,
+        "last_score": 0.6939,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v19",
+        "strategy_tendency": "stable",
+        "strategy_stage": 19,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776107177.23319,
+      "phase": "companion_coherent",
+      "overall_score": 0.7987,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.43,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.68,
+        "last_score": 0.8582,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v20",
+        "strategy_tendency": "stable",
+        "strategy_stage": 20,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776107222.0768204,
+      "phase": "companion_coherent",
+      "overall_score": 0.7998,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.36,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.73,
+        "last_score": 0.8919,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v21",
+        "strategy_tendency": "stable",
+        "strategy_stage": 21,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776107295.8226347,
+      "phase": "companion_coherent",
+      "overall_score": 0.7807,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.29,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.78,
+        "last_score": 0.7911,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "reduce_risk_steady_v22",
+        "strategy_tendency": "stable",
+        "strategy_stage": 22,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776107552.590996,
+      "phase": "companion_coherent",
+      "overall_score": 0.7646,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.22,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.83,
+        "last_score": 0.7108,
+        "last_adjustment_action": "reinforce",
+        "strategy": "optimize_focus",
+        "strategy_profile": "reduce_risk_steady_v23",
+        "strategy_tendency": "stable",
+        "strategy_stage": 23,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776108120.6267602,
+      "phase": "companion_coherent",
+      "overall_score": 0.7789,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.88,
+        "last_score": 0.6992,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "increase_efficiency",
+        "strategy_profile": "optimize_focus_ascendant_v24",
+        "strategy_tendency": "confident",
+        "strategy_stage": 24,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776108351.5215821,
+      "phase": "companion_coherent",
+      "overall_score": 0.8064,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.42,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.91,
+        "last_score": 0.6162,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_ascendant_v24",
+        "strategy_tendency": "confident",
+        "strategy_stage": 24,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776108689.402591,
+      "phase": "companion_coherent",
+      "overall_score": 0.8141,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.34,
+        "goal_progress_normalized": 0.99,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.94,
+        "last_score": 0.7343,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_ascendant_v24",
+        "strategy_tendency": "confident",
+        "strategy_stage": 24,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776109129.3228278,
+      "phase": "companion_coherent",
+      "overall_score": 0.7872,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress_normalized": 1.0,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 0.97,
+        "last_score": 0.6211,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_ascendant_v24",
+        "strategy_tendency": "confident",
+        "strategy_stage": 24,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": false,
+        "self_correcting": true
+      }
+    },
+    {
+      "timestamp": 1776109349.1539228,
+      "phase": "companion_coherent",
+      "overall_score": 0.8374,
+      "canonical": {
+        "goal_type": "balanced_progression",
+        "goal_commitment": 0.42,
+        "goal_progress_normalized": 1.0,
+        "mission_id": "mission_1776105409",
+        "mission_goal_type": "balanced_progression",
+        "mission_progress": 1.0,
+        "last_score": 0.6896,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "strategy_profile": "optimize_focus_ascendant_v24",
+        "strategy_tendency": "confident",
+        "strategy_stage": 24,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_status": "degraded"
+      },
+      "flags": {
+        "has_goal": true,
+        "has_mission": true,
+        "has_directive": true,
+        "coherent": true,
+        "self_correcting": true
+      }
+    }
+  ]
+}

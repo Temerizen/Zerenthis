@@ -1,0 +1,4872 @@
+C:\Zerenthis\backend\app\agents\ai_brain.py:157
+        title = str(item.get("title", "")).strip()
+
+C:\Zerenthis\backend\app\agents\ai_brain.py:158
+        reason = str(item.get("reason", "")).strip()
+
+C:\Zerenthis\backend\app\agents\ai_brain.py:159
+        steps = item.get("steps", [])
+
+C:\Zerenthis\backend\app\agents\app_factory.py:96
+            "registered_modules": app.config.get("REGISTERED_MODULES", []),
+
+C:\Zerenthis\backend\app\agents\app_factory.py:97
+            "failed_modules": app.config.get("FAILED_MODULES", [])
+
+C:\Zerenthis\backend\app\agents\auth.py:27
+    header = request.headers.get("Authorization", "")
+
+C:\Zerenthis\backend\app\agents\auth.py:38
+    return payload.get("uid") if payload else None
+
+C:\Zerenthis\backend\app\agents\auth.py:42
+    return payload.get("role") if payload else None
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:46
+        response = requests.get(url, params=params, timeout=10)
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:50
+        for r in data.get("organic_results", []):
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:51
+            link = r.get("link")
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:104
+        response = requests.get(url, params=params, timeout=10)
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:109
+        for bill in data.get("bills", []):
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:110
+            title = bill.get("title", "No title")
+
+C:\Zerenthis\backend\app\agents\autonomous_research.py:111
+            action = bill.get("latestAction", {}).get("text", "")
+
+C:\Zerenthis\backend\app\agents\context.py:10
+    return get_user().get("role") == "founder"
+
+C:\Zerenthis\backend\app\agents\context.py:13
+    return get_user().get("role") in ["admin", "founder"]
+
+C:\Zerenthis\backend\app\agents\context_builder.py:9
+            parts.append(f"- ({item.get('role', 'unknown')}) {item.get('content', '')}")
+
+C:\Zerenthis\backend\app\agents\context_builder.py:15
+            parts.append(f"- [{item.get('category', 'general')}] {item.get('content', '')}")
+
+C:\Zerenthis\backend\app\agents\founder_guard.py:15
+        request.headers.get("X-Founder-Key", "") or
+
+C:\Zerenthis\backend\app\agents\founder_guard.py:16
+        request.args.get("founder_key", "") or
+
+C:\Zerenthis\backend\app\agents\founder_guard.py:17
+        ((request.get_json(silent=True) or {}).get("founder_key", ""))
+
+C:\Zerenthis\backend\app\agents\index_builder.py:11
+            <div class="type">{item.get("content_type", "unknown").upper()}</div>
+
+C:\Zerenthis\backend\app\agents\index_builder.py:12
+            <h3>{item.get("title", "Untitled")}</h3>
+
+C:\Zerenthis\backend\app\agents\index_builder.py:13
+            <p><strong>Topic:</strong> {item.get("topic", "")}</p>
+
+C:\Zerenthis\backend\app\agents\index_builder.py:14
+            <p><strong>Created:</strong> {item.get("created_at", "")}</p>
+
+C:\Zerenthis\backend\app\agents\index_builder.py:15
+            <p><strong>Path:</strong> {item.get("output_path", "")}</p>
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:53
+        tags = safe_json_loads(item.get("tags"), [])
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:55
+            str(item.get("title") or ""),
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:56
+            str(item.get("content") or ""),
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:61
+        base = float(item.get("score") or 1.0)
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:68
+    scored.sort(key=lambda x: (x["_score"], x.get("id", 0)), reverse=True)
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:85
+        title = m.get("title") or "Memory"
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:86
+        content = clip(m.get("content") or "", 220)
+
+C:\Zerenthis\backend\app\agents\intelligence_growth.py:87
+        tags = ", ".join((m.get("tags") or [])[:5])
+
+C:\Zerenthis\backend\app\agents\main.py:78
+@app.get("/")
+
+C:\Zerenthis\backend\app\agents\main.py:83
+@app.get("/health")
+
+C:\Zerenthis\backend\app\agents\main.py:181
+@app.get("/api/job/{job_id}")
+
+C:\Zerenthis\backend\app\agents\main.py:184
+    if data.get("status") == "not_found":
+
+C:\Zerenthis\backend\app\agents\main.py:193
+@app.get("/api/file/{name}")
+
+C:\Zerenthis\backend\app\agents\main.py:213
+@app.get("/api/gallery")
+
+C:\Zerenthis\backend\app\agents\memory.py:17
+    return mem.get(str(uid), {})
+
+C:\Zerenthis\backend\app\agents\middleware.py:8
+            token = request.headers.get("Authorization")
+
+C:\Zerenthis\backend\app\agents\module_map.py:7
+            "group": m.get("group", "general"),
+
+C:\Zerenthis\backend\app\agents\module_map.py:8
+            "route": m.get("route", f"/{m['name']}")
+
+C:\Zerenthis\backend\app\agents\notes.py:5
+    return {"founder_notes": state.get("founder_notes", "")}
+
+C:\Zerenthis\backend\app\agents\presets.py:28
+    return PRESETS.get(name)
+
+C:\Zerenthis\backend\app\agents\profile.py:18
+    return profiles.get(user_id, {
+
+C:\Zerenthis\backend\app\agents\profile.py:28
+    profile = profiles.get(user_id, get_profile(user_id))
+
+C:\Zerenthis\backend\app\agents\progress.py:5
+    return progress.get(user_id, {
+
+C:\Zerenthis\backend\app\agents\progress.py:14
+    profile = progress.get(user_id, {
+
+C:\Zerenthis\backend\app\agents\ratelimit.py:7
+    bucket = _BUCKETS.get(key, [])
+
+C:\Zerenthis\backend\app\agents\server.py:30
+    @app.get("/")
+
+C:\Zerenthis\backend\app\agents\short_term.py:32
+        items = [x for x in items if x.get("category") == category]
+
+C:\Zerenthis\backend\app\agents\smart_scraper.py:23
+        response = requests.get(url, headers=headers, timeout=10)
+
+C:\Zerenthis\backend\app\agents\smart_scraper.py:57
+        driver.get(url)
+
+C:\Zerenthis\backend\app\agents\templates.py:12
+    return TEMPLATES.get(name)
+
+C:\Zerenthis\backend\app\agents\toggles.py:5
+    return state.get("feature_toggles", {})
+
+C:\Zerenthis\backend\app\agents\toggles.py:9
+    toggles = state.get("feature_toggles", {})
+
+C:\Zerenthis\backend\app\agents\web_research.py:12
+response = requests.get(url, headers=headers, timeout=10)
+
+C:\Zerenthis\backend\app\agents\web_research.py:31
+            r = requests.get(url, timeout=10)
+
+C:\Zerenthis\backend\app\autonomy\loop.py:42
+                    chosen_task=results[0].get("task", "unknown") if results else "no_task",
+
+C:\Zerenthis\backend\app\autonomy\loop.py:50
+                    chosen_task=results[0].get("task", "unknown") if results else "no_task",
+
+C:\Zerenthis\backend\app\builder\apply_engine.py:31
+    changes = plan.get("changes", [])
+
+C:\Zerenthis\backend\app\builder\apply_engine.py:33
+    max_files = int(policy.get("max_files_per_apply", 2))
+
+C:\Zerenthis\backend\app\builder\apply_engine.py:88
+        "plan_summary": plan.get("summary", ""),
+
+C:\Zerenthis\backend\app\builder\autonomous_builder.py:43
+    if analysis.get("status") != "approved":
+
+C:\Zerenthis\backend\app\builder\autonomous_builder.py:53
+        "status": result.get("status"),
+
+C:\Zerenthis\backend\app\builder\autonomous_builder.py:56
+        "backup": result.get("backup")
+
+C:\Zerenthis\backend\app\builder\autonomous_evolution.py:36
+    if a1.get("status") == "approved":
+
+C:\Zerenthis\backend\app\builder\autonomous_evolution.py:38
+    if a2.get("status") == "approved":
+
+C:\Zerenthis\backend\app\builder\autonomous_evolution.py:61
+        "status": result.get("status"),
+
+C:\Zerenthis\backend\app\builder\autonomous_evolution.py:64
+        "backup": result.get("backup")
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:31
+        "balance": params.get("balance", 1000),
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:32
+        "risk_per_trade": max(0.01, min(0.15, params.get("risk_per_trade", 0.05) + random.uniform(-0.01, 0.01))),
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:33
+        "take_profit": max(0.005, min(0.06, params.get("take_profit", 0.02) + random.uniform(-0.005, 0.005))),
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:34
+        "stop_loss": max(0.005, min(0.05, params.get("stop_loss", 0.01) + random.uniform(-0.005, 0.005))),
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:35
+        "position_scale": max(0.5, min(2.5, params.get("position_scale", 1.0) + random.uniform(-0.2, 0.2)))
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:94
+    best_params = best.get("params") if best else None
+
+C:\Zerenthis\backend\app\builder\autonomous_max_evolution.py:95
+    best_score = best.get("score", float("-inf")) if best else float("-inf")
+
+C:\Zerenthis\backend\app\builder\autopilot_bridge.py:7
+    target = context.get("target")
+
+C:\Zerenthis\backend\app\builder\autopilot_bridge.py:32
+        candidate = item.get("target")
+
+C:\Zerenthis\backend\app\builder\autopilot_handoff.py:7
+    if envelope.get("status") != "builder_requested":
+
+C:\Zerenthis\backend\app\builder\autopilot_handoff.py:10
+            "signal": envelope.get("signal", {})
+
+C:\Zerenthis\backend\app\builder\autopilot_handoff.py:13
+    builder_request = envelope.get("builder_request", {})
+
+C:\Zerenthis\backend\app\builder\autopilot_handoff.py:18
+        "signal": envelope.get("signal", {}),
+
+C:\Zerenthis\backend\app\builder\autopilot_request_engine.py:7
+    if not signal.get("should_build"):
+
+C:\Zerenthis\backend\app\builder\autopilot_request_engine.py:13
+    target = signal.get("target")
+
+C:\Zerenthis\backend\app\builder\autopilot_request_engine.py:23
+                "reason": signal.get("reason"),
+
+C:\Zerenthis\backend\app\builder\autopilot_request_engine.py:24
+                "priority": signal.get("priority", "medium")
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:35
+    balance = float(account.get("balance", BASELINE_BALANCE))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:36
+    wins = int(account.get("wins", 0))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:37
+    losses = int(account.get("losses", 0))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:38
+    trades = max(1, int(account.get("trades", 1)))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:39
+    last_pnl = float(account.get("last_pnl", 0.0))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:44
+    risk = float(params.get("risk_per_trade", 0.05))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:45
+    tp = float(params.get("take_profit", 0.02))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:46
+    sl = float(params.get("stop_loss", 0.01))
+
+C:\Zerenthis\backend\app\builder\compounding_engine.py:47
+    scale = float(params.get("position_scale", 1.0))
+
+C:\Zerenthis\backend\app\builder\continuous_loop.py:32
+        if envelope.get("status") != "builder_requested":
+
+C:\Zerenthis\backend\app\builder\continuous_loop.py:50
+        builder_request = envelope.get("builder_request", {})
+
+C:\Zerenthis\backend\app\builder\continuous_loop.py:64
+        result_block = (((run_result or {}).get("result") or {}).get("apply_result") or {})
+
+C:\Zerenthis\backend\app\builder\continuous_loop.py:65
+        if result_block.get("status") not in ("applied",):
+
+C:\Zerenthis\backend\app\builder\control_engine.py:26
+    r = regime.get("regime", "UNKNOWN")
+
+C:\Zerenthis\backend\app\builder\control_engine.py:44
+    balance = float(account.get("balance", 1000.0))
+
+C:\Zerenthis\backend\app\builder\control_engine.py:45
+    peak = max(float(risk_state.get("peak_balance", balance)), balance)
+
+C:\Zerenthis\backend\app\builder\control_engine.py:47
+    loss_streak = int(risk_state.get("loss_streak", 0))
+
+C:\Zerenthis\backend\app\builder\control_engine.py:50
+    strat = strategies.get(strategy_name, {})
+
+C:\Zerenthis\backend\app\builder\control_engine.py:53
+        "risk": strat.get("risk_per_trade", 1.0),
+
+C:\Zerenthis\backend\app\builder\control_engine.py:54
+        "tp": strat.get("take_profit", 1.0),
+
+C:\Zerenthis\backend\app\builder\control_engine.py:55
+        "sl": strat.get("stop_loss", 1.0),
+
+C:\Zerenthis\backend\app\builder\control_engine.py:56
+        "scale": strat.get("position_scale", 1.0)
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:40
+    balance = float(account.get("balance", 1000.0))
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:41
+    last_pnl = float(account.get("last_pnl", 0.0))
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:43
+    peak_balance = max(float(state.get("peak_balance", 1000.0)), balance)
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:47
+        state["loss_streak"] = int(state.get("loss_streak", 0)) + 1
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:55
+    risk = float(params.get("risk_per_trade", 0.05))
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:56
+    tp = float(params.get("take_profit", 0.02))
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:57
+    sl = float(params.get("stop_loss", 0.01))
+
+C:\Zerenthis\backend\app\builder\drawdown_shield.py:58
+    scale = float(params.get("position_scale", 1.0))
+
+C:\Zerenthis\backend\app\builder\evolution_memory.py:26
+    if run.get("status") == "applied":
+
+C:\Zerenthis\backend\app\builder\evolution_memory.py:35
+    return _load().get("stats", {})
+
+C:\Zerenthis\backend\app\builder\evolution_memory.py:38
+    return _load().get("runs", [])[-n:]
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:20
+    success = apply_result.get("status") == "applied"
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:22
+    changes = patch_plan.get("changes", [])
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:25
+        target_path = first_change.get("file", "")
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:33
+            "strategy": patch_plan.get("strategy", "baseline"),
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:34
+            "strategy_reason": patch_plan.get("strategy_reason", "")
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:36
+        "plan_summary": patch_plan.get("summary", ""),
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:38
+        "target_score": patch_plan.get("target_score", {}),
+
+C:\Zerenthis\backend\app\builder\feedback_loop.py:39
+        "simulation": patch_plan.get("simulation", {}),
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:32
+            target = _normalize_target(((row.get("request") or {}).get("target", "")))
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:35
+                summary = row.get("plan_summary", "")
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:48
+        if row.get("success"):
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:65
+    row = stats.get(target_path, {"successes": 0, "failures": 0})
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:67
+    successes = int(row.get("successes", 0))
+
+C:\Zerenthis\backend\app\builder\feedback_selector.py:68
+    failures = int(row.get("failures", 0))
+
+C:\Zerenthis\backend\app\builder\live_param_enforcer.py:34
+    balance = float(account.get("balance", 1000.0))
+
+C:\Zerenthis\backend\app\builder\live_param_enforcer.py:37
+    params["risk_per_trade"] = max(0.015, min(0.12, float(params.get("risk_per_trade", 0.05))))
+
+C:\Zerenthis\backend\app\builder\live_param_enforcer.py:38
+    params["take_profit"] = max(0.006, min(0.03, float(params.get("take_profit", 0.02))))
+
+C:\Zerenthis\backend\app\builder\live_param_enforcer.py:39
+    params["stop_loss"] = max(0.005, min(0.02, float(params.get("stop_loss", 0.01))))
+
+C:\Zerenthis\backend\app\builder\live_param_enforcer.py:40
+    params["position_scale"] = max(0.90, min(2.50, float(params.get("position_scale", 1.0))))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:34
+    balance = float(account.get("balance", 1000.0))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:35
+    wins = int(account.get("wins", 0))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:36
+    losses = int(account.get("losses", 0))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:37
+    trades = max(1, int(account.get("trades", 1)))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:38
+    last_pnl = float(account.get("last_pnl", 0.0))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:42
+    risk = float(params.get("risk_per_trade", 0.05))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:43
+    tp = float(params.get("take_profit", 0.02))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:44
+    sl = float(params.get("stop_loss", 0.01))
+
+C:\Zerenthis\backend\app\builder\lock_profit_mode.py:45
+    scale = float(params.get("position_scale", 1.0))
+
+C:\Zerenthis\backend\app\builder\market_evo_brain.py:17
+            "risk_per_trade": max(0.02, min(0.15, (current or {}).get("risk_per_trade", 0.08) + random.uniform(-0.02, 0.02))),
+
+C:\Zerenthis\backend\app\builder\market_evo_brain.py:18
+            "take_profit": max(0.01, min(0.06, (current or {}).get("take_profit", 0.03) + random.uniform(-0.01, 0.01))),
+
+C:\Zerenthis\backend\app\builder\market_evo_brain.py:19
+            "stop_loss": max(0.005, min(0.05, (current or {}).get("stop_loss", 0.02) + random.uniform(-0.01, 0.01))),
+
+C:\Zerenthis\backend\app\builder\market_evo_brain.py:20
+            "position_scale": max(0.5, min(2.0, (current or {}).get("position_scale", 1.0) + random.uniform(-0.5, 0.5))),
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:4
+    balance = float(portfolio.get("balance", 1000))
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:6
+    risk = float(params.get("risk_per_trade", 0.08))
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:7
+    tp = float(params.get("take_profit", 0.03))
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:8
+    sl = float(params.get("stop_loss", 0.02))
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:9
+    scale = float(params.get("position_scale", 1.0))
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:11
+    signals = params.get("signals")
+
+C:\Zerenthis\backend\app\builder\market_simulator.py:23
+        action = s.get("action", "skip")
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:27
+    items = payload.get("items", [])
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:68
+        return decision.get("target", ""), decision
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:78
+    return decision.get("target", ""), decision
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:104
+    if not simulation.get("ok"):
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:117
+        "strategy_reason": strategy_info.get("reason", ""),
+
+C:\Zerenthis\backend\app\builder\patch_plan_engine.py:118
+        "cooldown": strategy_info.get("cooldown", False),
+
+C:\Zerenthis\backend\app\builder\performance_tracker.py:31
+    return load().get("best_score")
+
+C:\Zerenthis\backend\app\builder\performance_tracker.py:34
+    return load().get("history", [])[-n:]
+
+C:\Zerenthis\backend\app\builder\policy_engine.py:22
+    for root in policy.get("denied_roots", []):
+
+C:\Zerenthis\backend\app\builder\policy_engine.py:26
+    for root in policy.get("allowed_write_roots", []):
+
+C:\Zerenthis\backend\app\builder\policy_engine.py:30
+    for root in policy.get("read_only_roots", []):
+
+C:\Zerenthis\backend\app\builder\target_queue.py:31
+    failures = stats.get("failures", 0)
+
+C:\Zerenthis\backend\app\builder\target_queue.py:32
+    successes = stats.get("successes", 0)
+
+C:\Zerenthis\backend\app\builder\target_queue.py:49
+        s = stats.get(t, {})
+
+C:\Zerenthis\backend\app\builder\target_queue.py:67
+    next_index = (state.get("last_index", -1) + 1) % len(queue)
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:50
+    row = memory.get(target_path, {})
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:52
+    wins = int(row.get("wins", 0))
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:53
+    losses = int(row.get("losses", 0))
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:54
+    last_touched = int(row.get("last_touched", 0))
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:55
+    streak = int(row.get("streak", 0))
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:109
+    row = memory.get(target_path, {
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:118
+        row["wins"] = int(row.get("wins", 0)) + 1
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:119
+        if row.get("last_result") == "success":
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:120
+            row["streak"] = int(row.get("streak", 0)) + 1
+
+C:\Zerenthis\backend\app\builder\target_scorer.py:125
+        row["losses"] = int(row.get("losses", 0)) + 1
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:30
+    events = mem.get("events", []) if isinstance(mem, dict) else []
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:33
+        if isinstance(e, dict) and e.get("task") == task and e.get("outcome") == "failure":
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:40
+    mission = mission_payload.get("mission") if isinstance(mission_payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:47
+    focus = mission.get("focus_task")
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:48
+    blocked = mission.get("blocked_tasks", [])
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:85
+        prefs = identity.get("preferences", {})
+
+C:\Zerenthis\backend\app\cognition\conflict_engine.py:90
+        identity["traits"]["curiosity"] = min(1.0, identity["traits"].get("curiosity", 0.5) + 0.2)
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:30
+    plan = plan_data.get("plan") if isinstance(plan_data, dict) else None
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:37
+    current_step = plan.get("current_step", 1)
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:38
+    steps = plan.get("steps", [])
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:42
+        if s.get("status") == "done":
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:49
+    outcome_data = evaluate_outcome(last_done.get("task"))
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:53
+        "goal": plan.get("goal", {}).get("id"),
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:54
+        "task": last_done.get("task"),
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:55
+        "action": last_done.get("action"),
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:56
+        "step": last_done.get("step"),
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:57
+        "outcome": outcome_data.get("outcome"), "score": outcome_data.get("score"), "reason": outcome_data.get("reason")  # placeholder (next bundles improve this)
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:65
+    history["successes"] = int(history.get("successes", 0) or 0)
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:66
+    history["failures"] = int(history.get("failures", 0) or 0)
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:68
+    if event.get("outcome") == "failure":
+
+C:\Zerenthis\backend\app\cognition\execution_memory.py:70
+    elif event.get("outcome") == "success":
+
+C:\Zerenthis\backend\app\cognition\feedback_engine.py:29
+    events = memory.get("events", [])
+
+C:\Zerenthis\backend\app\cognition\feedback_engine.py:33
+    prefs = identity.get("preferences", {})
+
+C:\Zerenthis\backend\app\cognition\feedback_engine.py:42
+        if event.get("processed") is True:
+
+C:\Zerenthis\backend\app\cognition\feedback_engine.py:45
+        task = event.get("task")
+
+C:\Zerenthis\backend\app\cognition\feedback_engine.py:53
+        score = float(event.get("score", 0.0) or 0.0)
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:35
+    return str(goal.get("id") or goal.get("goal_id") or goal.get("name") or "unknown_goal")
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:59
+        gtype = str(g.get("goal_type", ""))
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:72
+            if str(g.get("goal_type", "")) == "expansion":
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:86
+    goals = payload.get("goals", []) if isinstance(payload, dict) else []
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:89
+    initiative_goals = initiative_payload.get("initiative_goals", []) if isinstance(initiative_payload, dict) else []
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:95
+    mission = mission_payload.get("mission") if isinstance(mission_payload, dict) else {}
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:96
+    blocked_tasks = mission.get("blocked_tasks", []) if isinstance(mission, dict) else []
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:116
+    ranked = selection.get("ranked_goals", []) or []
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:124
+                    g["score"] = round(float(g.get("score", 0.0)) - 0.5, 4)
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:127
+        ranked = sorted(ranked, key=lambda x: x.get("score", 0.0), reverse=True)
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:130
+    primary = threads.get("primary_goal")
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:142
+        "primary_goal": threads.get("primary_goal"),
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:143
+        "secondary_goals": threads.get("secondary_goals", []),
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:144
+        "exploration_thread": threads.get("exploration_thread"),
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:145
+        "ranked_goals": threads.get("ranked_goals", []),
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:148
+            "secondary_count": len(threads.get("secondary_goals", [])),
+
+C:\Zerenthis\backend\app\cognition\goal_arbiter.py:149
+            "has_exploration_thread": threads.get("exploration_thread") is not None,
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:28
+    goal_id = str(goal.get("id", "")).strip()
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:29
+    goal_type = str(goal.get("type", "")).strip().lower()
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:36
+            "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:44
+            "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:52
+            "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:59
+            "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:66
+            "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:74
+                "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:81
+                "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:88
+                "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:95
+                "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:101
+        "reason": goal.get("reason", ""),
+
+C:\Zerenthis\backend\app\cognition\goal_executor.py:107
+    goal = active.get("active_goal") if isinstance(active, dict) else None
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:30
+    prefs = identity.get("preferences", {})
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:31
+    traits = identity.get("traits", {})
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:32
+    dominant = identity.get("dominant_preference")
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:37
+            task = t.get("chosen_task")
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:43
+        repetition_bias[t] = repetition_bias.get(t, 0) + 1
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:49
+        for p in r.get("patterns", []):
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:50
+            if isinstance(p, dict) and p.get("type") == "task_repetition":
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:51
+                flagged = p.get("task")
+
+C:\Zerenthis\backend\app\cognition\goal_generator.py:73
+    if float(traits.get("curiosity", 0.5) or 0.5) > 0.5:
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:69
+            **base.get("traits", {}),
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:70
+            **(state.get("traits", {}) if isinstance(state.get("traits"), dict) else {})
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:73
+            **base.get("history", {}),
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:74
+            **(state.get("history", {}) if isinstance(state.get("history"), dict) else {})
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:78
+    if not isinstance(merged.get("beliefs"), list):
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:80
+    if not isinstance(merged.get("preferences"), dict):
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:82
+    if not isinstance(merged["history"].get("repeated_tasks"), dict):
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:108
+    current = float(prefs.get(chosen_task, 0.0))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:122
+    confidence = float(traits.get("confidence", 0.5))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:123
+    aggression = float(traits.get("aggression", 0.35))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:124
+    curiosity = float(traits.get("curiosity", 0.6))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:195
+    traits = state.get("traits", {})
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:196
+    confidence = float(traits.get("confidence", 0.5))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:197
+    curiosity = float(traits.get("curiosity", 0.5))
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:222
+        history["successes"] = int(history.get("successes", 0)) + 1
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:224
+        history["failures"] = int(history.get("failures", 0)) + 1
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:226
+    repeated_count = int(repeated_tasks.get(chosen_task, 0)) + 1 if chosen_task else 0
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:235
+    state["last_goal"] = current_goal or state.get("last_goal", "")
+
+C:\Zerenthis\backend\app\cognition\identity_engine.py:236
+    state["last_task"] = chosen_task or state.get("last_task", "")
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:32
+    events = memory.get("events", []) if isinstance(memory, dict) else []
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:35
+        if isinstance(event, dict) and event.get("outcome") == "failure":
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:43
+    mission = mission_payload.get("mission") if isinstance(mission_payload, dict) else {}
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:45
+    existing_goals = generated.get("goals", []) if isinstance(generated, dict) else []
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:47
+    traits = identity.get("traits", {}) if isinstance(identity, dict) else {}
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:48
+    curiosity = float(traits.get("curiosity", 0.5) or 0.5)
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:49
+    dominant_focus = str(identity.get("dominant_focus", "stability"))
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:70
+    if isinstance(mission, dict) and mission.get("status") == "active":
+
+C:\Zerenthis\backend\app\cognition\initiative_engine.py:71
+        progress = float(mission.get("progress", 0.0) or 0.0)
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:31
+    events = memory.get("events", []) if isinstance(memory, dict) else []
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:37
+        if event.get("task") == task and event.get("outcome") == "failure":
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:45
+    active_goal = active_goal_payload.get("active_goal") if isinstance(active_goal_payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:48
+    active_plan = active_plan_payload.get("plan") if isinstance(active_plan_payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:60
+    goal_id = active_goal.get("id", "unknown_goal")
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:64
+        for step in active_plan.get("steps", []):
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:65
+            if isinstance(step, dict) and step.get("status") == "pending":
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:66
+                goal_task = step.get("task")
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:70
+        steps = active_plan.get("steps", [])
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:72
+            goal_task = steps[0].get("task")
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:74
+    if not isinstance(mission, dict) or mission.get("goal_id") != goal_id:
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:80
+            "goal_type": active_goal.get("type"),
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:81
+            "reason": active_goal.get("reason"),
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:90
+        mission["cycles_active"] = int(mission.get("cycles_active", 0) or 0) + 1
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:94
+    failures = _recent_failures(mission.get("focus_task"), limit=25) if mission.get("focus_task") else 0
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:111
+    mission = payload.get("mission") if isinstance(payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:113
+    plan = plan_payload.get("plan") if isinstance(plan_payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:121
+        steps = plan.get("steps", [])
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:124
+            done = len([s for s in steps if isinstance(s, dict) and s.get("status") == "done"])
+
+C:\Zerenthis\backend\app\cognition\mission_engine.py:126
+            if plan.get("status") == "completed":
+
+C:\Zerenthis\backend\app\cognition\outcome_engine.py:23
+    history = identity.get("history", {}).get("repeated_tasks", {})
+
+C:\Zerenthis\backend\app\cognition\outcome_engine.py:25
+    repetition = history.get(task, 0)
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:28
+    goal_id = str(goal.get("id", "")).strip()
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:29
+    goal_reason = str(goal.get("reason", "")).strip()
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:78
+    goal = active_goal_payload.get("active_goal") if isinstance(active_goal_payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:108
+    plan = payload.get("plan") if isinstance(payload, dict) else None
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:119
+    steps = plan.get("steps", [])
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:126
+    current_step = int(plan.get("current_step", 1) or 1)
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:132
+        if int(step.get("step", 0) or 0) == current_step and step.get("status") == "pending":
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:141
+            if isinstance(step, dict) and step.get("status") == "pending":
+
+C:\Zerenthis\backend\app\cognition\plan_engine.py:142
+                next_pending = int(step.get("step", 0) or 0)
+
+C:\Zerenthis\backend\app\cognition\reflection_engine.py:36
+        result = (t.get("result") or "").lower()
+
+C:\Zerenthis\backend\app\cognition\reflection_engine.py:37
+        task = t.get("chosen_task", "unknown")
+
+C:\Zerenthis\backend\app\cognition\reflection_engine.py:39
+        tasks[task] = tasks.get(task, 0) + 1
+
+C:\Zerenthis\backend\app\cognition\reflection_engine.py:49
+        {"type": "task_repetition", "task": dominant_task, "count": tasks.get(dominant_task, 0)},
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:27
+            value = candidate.get(key)
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:38
+    patterns = last.get("patterns", [])
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:45
+        if item.get("type") == "task_repetition":
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:46
+            repeated_task = item.get("task")
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:47
+            count = int(item.get("count", 0) or 0)
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:54
+    focus = str(identity.get("dominant_focus", "stability")).strip().lower()
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:73
+        chosen = str(thought.get("chosen_task", "")).strip()
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:74
+        result = str(thought.get("result", "")).strip().lower()
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:104
+        preferences = identity.get("preferences", {})
+
+C:\Zerenthis\backend\app\cognition\self_influence.py:108
+        pref_bonus = float(preferences.get(task_name, 0.0) or 0.0)
+
+C:\Zerenthis\backend\app\cognition\thought_engine.py:95
+        "latest_goal": last.get("current_goal"),
+
+C:\Zerenthis\backend\app\cognition\thought_engine.py:96
+        "latest_task": last.get("chosen_task"),
+
+C:\Zerenthis\backend\app\cognition\thought_engine.py:97
+        "last_result": last.get("result"),
+
+C:\Zerenthis\backend\app\companion\write_patch_planner.py:122
+@app.get("/status")
+
+C:\Zerenthis\backend\app\core\control_core.py:52
+    history = state.get("history", [])
+
+C:\Zerenthis\backend\app\core\control_core.py:65
+    topic = state.get("active_topic")
+
+C:\Zerenthis\backend\app\core\control_core.py:77
+                value = top.get(key)
+
+C:\Zerenthis\backend\app\core\control_core.py:95
+                        value = obj.get(key)
+
+C:\Zerenthis\backend\app\core\directional_bias.py:10
+    weighted = float(base_score) * float(weights.get(goal_type, 1.0))
+
+C:\Zerenthis\backend\app\core\directional_bias.py:37
+        gid = g.get("goal_id") or g.get("id") or g.get("name") or "unknown_goal"
+
+C:\Zerenthis\backend\app\core\directional_bias.py:38
+        base = g.get("score", 0)
+
+C:\Zerenthis\backend\app\core\directional_bias.py:50
+    scored = sorted(scored, key=lambda x: x.get("score", 0), reverse=True)
+
+C:\Zerenthis\backend\app\core\directional_bias.py:55
+        chosen_id = chosen.get("goal_id") or chosen.get("id") or chosen.get("name") or "unknown_goal"
+
+C:\Zerenthis\backend\app\core\directional_bias.py:58
+            gid = g.get("goal_id") or g.get("id") or g.get("name") or "unknown_goal"
+
+C:\Zerenthis\backend\app\core\goal_persistence.py:15
+    return data.get(goal_id, 0)
+
+C:\Zerenthis\backend\app\core\queue.py:8
+        if job.get("id") == job_id:
+
+C:\Zerenthis\backend\app\core\worker.py:8
+    kind = job.get("kind")
+
+C:\Zerenthis\backend\app\engines\archive_harvester.py:30
+            title = data.get("title") or f.stem
+
+C:\Zerenthis\backend\app\engines\automation.py:3
+    for step in workflow.get("steps", []):
+
+C:\Zerenthis\backend\app\engines\autonomous_executor.py:6
+    task = payload.get("task")
+
+C:\Zerenthis\backend\app\engines\autonomous_executor.py:12
+{task.get("summary")}
+
+C:\Zerenthis\backend\app\engines\autonomous_executor.py:15
+{task.get("target")}
+
+C:\Zerenthis\backend\app\engines\autonomous_executor.py:28
+    path = Path(task.get("target"))
+
+C:\Zerenthis\backend\app\engines\autopilot_loop.py:5
+    cycles = payload.get("cycles",5)
+
+C:\Zerenthis\backend\app\engines\autopilot_loop.py:14
+            "built": b.get("created"),
+
+C:\Zerenthis\backend\app\engines\autopilot_loop.py:15
+            "executed": e.get("count")
+
+C:\Zerenthis\backend\app\engines\autopilot_v23.py:51
+        success_count = sum(1 for r in results if r.get("status") == 200)
+
+C:\Zerenthis\backend\app\engines\autopilot_v25.py:33
+        return json.load(f).get("priority_order", list(LOOPS.keys()))
+
+C:\Zerenthis\backend\app\engines\auto_product_engine.py:21
+            "topic": w.get("idea", {}).get("title", "Auto Product"),
+
+C:\Zerenthis\backend\app\engines\auto_product_engine.py:22
+            "niche": w.get("idea", {}).get("niche", "General")
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:53
+    p = PLATFORM_WEIGHTS.get((platform or "").lower(), 1.0)
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:70
+    posts = promotion.get("posts", [])
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:71
+    product = promotion.get("product", "Unknown")
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:79
+        platform = post.get("platform", "unknown")
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:80
+        content = post.get("content", "")
+
+C:\Zerenthis\backend\app\engines\auto_signal_capture_engine.py:85
+            "product": post.get("product", product),
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:49
+    title = payload.get("title") or payload.get("topic") or "Zerenthis Product"
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:50
+    summary = payload.get("summary") or payload.get("promise") or "A premium offer generated by Zerenthis."
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:51
+    price = int(payload.get("price") or 29)
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:56
+        "steps": payload.get("steps") or [
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:64
+        "checkout_link": payload.get("checkout_link", ""),
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:65
+        "sales_copy": payload.get("sales_copy", ""),
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:66
+        "topic": payload.get("topic") or title,
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:67
+        "niche": payload.get("niche", "General"),
+
+C:\Zerenthis\backend\app\engines\bridge_engine.py:68
+        "file": payload.get("file")
+
+C:\Zerenthis\backend\app\engines\builder_validator.py:35
+        if plan.get("status") != "planned":
+
+C:\Zerenthis\backend\app\engines\builder_validator.py:38
+        target = plan.get("target")
+
+C:\Zerenthis\backend\app\engines\builder_validator.py:49
+        patch_type = plan.get("patch_type")
+
+C:\Zerenthis\backend\app\engines\builder_validator.py:53
+        proposed_changes = plan.get("proposed_changes", [])
+
+C:\Zerenthis\backend\app\engines\builder_validator.py:57
+        if plan.get("safe_mode") is not True:
+
+C:\Zerenthis\backend\app\engines\campaign_packager.py:23
+    topic = topic_data.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\campaign_packager.py:33
+    product = last_cycle.get("product") if last_cycle else {}
+
+C:\Zerenthis\backend\app\engines\champion_engine.py:36
+    topic = current.get("topic")
+
+C:\Zerenthis\backend\app\engines\champion_engine.py:39
+    score = last.get("validation_score", 0)
+
+C:\Zerenthis\backend\app\engines\champion_engine.py:40
+    should_scale = last.get("should_scale", False)
+
+C:\Zerenthis\backend\app\engines\champion_engine.py:58
+    previous_champ = champ.get("topic")
+
+C:\Zerenthis\backend\app\engines\companion_tasks.py:61
+        if task.get("id") == task_id:
+
+C:\Zerenthis\backend\app\engines\companion_tasks.py:78
+        if task.get("id") == task_id:
+
+C:\Zerenthis\backend\app\engines\companion_tasks.py:91
+        if task.get("id") == task_id:
+
+C:\Zerenthis\backend\app\engines\content_engine.py:16
+    topic = payload.get("topic", "Untitled Offer")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:17
+    niche = payload.get("niche", "General")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:18
+    tone = payload.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:19
+    buyer = payload.get("buyer", "General audience")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:20
+    promise = payload.get("promise", "Useful result")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:21
+    bonus = payload.get("bonus", "")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:22
+    notes = payload.get("notes", "")
+
+C:\Zerenthis\backend\app\engines\content_engine.py:23
+    channel = payload.get("channel", "multi-platform")
+
+C:\Zerenthis\backend\app\engines\dashboard_engine.py:10
+        "modules": registry.get("modules", {}),
+
+C:\Zerenthis\backend\app\engines\dashboard_engine.py:11
+        "recent_outputs": outputs.get("outputs", []),
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:32
+    prefs = identity.get("preferences", {})
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:33
+    history = identity.get("history", {}).get("repeated_tasks", {})
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:38
+        task = t.get("chosen_task")
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:40
+            recent[task] = recent.get(task, 0) + 1
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:48
+        pref = prefs.get(task, 1.0)
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:51
+        hist = history.get(task, 0)
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:55
+        fatigue = recent.get(task, 0)
+
+C:\Zerenthis\backend\app\engines\decision_engine.py:98
+    "current_goal": identity.get("last_goal", "autonomy_cycle"),
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:21
+    impressions = int(product.get("impressions", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:22
+    clicks = int(product.get("clicks", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:23
+    conversions = int(product.get("conversions", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:24
+    score = float(product.get("score", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:59
+    results = traffic.get("results", [])
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:66
+        name = item.get("name", "Unknown")
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:71
+            "score": item.get("score", 0),
+
+C:\Zerenthis\backend\app\engines\demand_intelligence_engine.py:72
+            "price": item.get("price", 0),
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:69
+    return random.choice(pool.get(intent, pool["default"]))
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:75
+    goal = mem.get("user_profile", {}).get("goal", "")
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:76
+    tasks = mem.get("active_tasks", [])
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:77
+    active = next((t for t in tasks if t.get("status") == "active"), {})
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:79
+    intent = intent_data.get("intent", "unknown")
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:80
+    action = intent_data.get("suggested_action", "none")
+
+C:\Zerenthis\backend\app\engines\emotional_engine.py:90
+            f"Right now you're focused on '{active.get('title')}' and it's still active."
+
+C:\Zerenthis\backend\app\engines\engine.py:61
+        action = step.get("action")
+
+C:\Zerenthis\backend\app\engines\engine.py:62
+        path = step.get("path")
+
+C:\Zerenthis\backend\app\engines\engine.py:74
+            if not isinstance(step.get("content", ""), str):
+
+C:\Zerenthis\backend\app\engines\engine.py:78
+            find_text = step.get("find")
+
+C:\Zerenthis\backend\app\engines\engine.py:79
+            replace_text = step.get("replace")
+
+C:\Zerenthis\backend\app\engines\engine.py:153
+    _validate_steps(p.get("steps", []))
+
+C:\Zerenthis\backend\app\engines\engine.py:170
+                path.write_text(s.get("content", ""), encoding="utf-8")
+
+C:\Zerenthis\backend\app\engines\engine.py:229
+    return [x for x in load() if x.get("status") == "pending"]
+
+C:\Zerenthis\backend\app\engines\evolution_engine.py:32
+    topic = current.get("topic")
+
+C:\Zerenthis\backend\app\engines\evolution_engine.py:38
+    should_scale = last.get("should_scale", False)
+
+C:\Zerenthis\backend\app\engines\evolution_engine.py:59
+            "validation_score": last.get("validation_score"),
+
+C:\Zerenthis\backend\app\engines\execution_selector.py:9
+        conf = float(s.get("confidence", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\execution_selector.py:13
+    cleaned.sort(key=lambda x: float(x.get("confidence", 0) or 0), reverse=True)
+
+C:\Zerenthis\backend\app\engines\executor_worker.py:20
+    file_path = task.get("file_path")
+
+C:\Zerenthis\backend\app\engines\executor_worker.py:21
+    content = task.get("content", "")
+
+C:\Zerenthis\backend\app\engines\executor_worker.py:37
+        if task.get("status") != "queued":
+
+C:\Zerenthis\backend\app\engines\export_engine.py:39
+    product = bundle.get("product", {}) or {}
+
+C:\Zerenthis\backend\app\engines\export_engine.py:40
+    offer = bundle.get("offer", {}) or {}
+
+C:\Zerenthis\backend\app\engines\export_engine.py:41
+    traffic = bundle.get("traffic", {}) or {}
+
+C:\Zerenthis\backend\app\engines\export_engine.py:43
+    title = str(product.get("title", "Premium Digital System")).strip()
+
+C:\Zerenthis\backend\app\engines\export_engine.py:44
+    description = str(product.get("description", "")).strip()
+
+C:\Zerenthis\backend\app\engines\export_engine.py:45
+    steps = product.get("steps", []) or []
+
+C:\Zerenthis\backend\app\engines\export_engine.py:46
+    value_bullets = product.get("value_bullets", []) or []
+
+C:\Zerenthis\backend\app\engines\export_engine.py:47
+    bonus = str(product.get("bonus", "")).strip()
+
+C:\Zerenthis\backend\app\engines\export_engine.py:48
+    price = str(offer.get("price_suggestion", "29")).strip()
+
+C:\Zerenthis\backend\app\engines\export_engine.py:49
+    urgency = str(offer.get("urgency_angle", "")).strip()
+
+C:\Zerenthis\backend\app\engines\export_engine.py:50
+    hooks = traffic.get("hooks", []) or []
+
+C:\Zerenthis\backend\app\engines\export_engine.py:51
+    captions = traffic.get("captions", []) or []
+
+C:\Zerenthis\backend\app\engines\flood_engine.py:25
+    return store.get(key, {}).get("url")
+
+C:\Zerenthis\backend\app\engines\flood_engine.py:51
+        product = variant.get("product")
+
+C:\Zerenthis\backend\app\engines\flood_engine.py:52
+        headline = variant.get("headline")
+
+C:\Zerenthis\backend\app\engines\founder_engine.py:33
+    modules = registry.get("modules", {})
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:58
+    winner = strategy_results.get("best_strategy", "conservative")
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:66
+        asset = item.get("asset")
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:67
+        price = float(item.get("price", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:68
+        change = float(item.get("change", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:119
+    out = sorted(out, key=lambda x: float(x.get("confidence", 0) or 0), reverse=True)[:1]
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:126
+    strat_score = float(perf.get(chosen_strategy, {}).get("score", 0.0))
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:127
+    loss_streak = int(streak.get("loss_streak", 0))
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:131
+        confidence = float(s.get("confidence", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:174
+        data = data.get("scan", data.get("data", data))
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:187
+    if not strategy_results.get("best_strategy"):
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:190
+    chosen_strategy = strategy_results.get("best_strategy", "conservative")
+
+C:\Zerenthis\backend\app\engines\founder_market_canonical_engine.py:197
+    loop_pnl = round(sum(float(t.get("pnl", 0) or 0) for t in trades if isinstance(t, dict)), 4)
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:38
+    topic = signal.get("topic")
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:39
+    score = signal.get("score", 1)
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:42
+        state["scores"][topic] = state["scores"].get(topic, 0) + score
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:59
+    scores = state.get("scores", {})
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:84
+    scores = state.get("scores", {})
+
+C:\Zerenthis\backend\app\engines\intelligence_core.py:86
+    base_score = scores.get(topic, 5)
+
+C:\Zerenthis\backend\app\engines\intelligence_engine.py:24
+    recent = perf.get("recent_pnl", [])[-20:]
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:33
+        for item in data.get("leaders", []):
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:34
+            topic = item.get("topic")
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:39
+                    "revenue": item.get("revenue", 0),
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:40
+                    "conversions": item.get("conversions", 0)
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:46
+    if t.get("source") == "leaderboard":
+
+C:\Zerenthis\backend\app\engines\intelligence_priority_engine.py:47
+        score = (t.get("revenue", 0) * 2) + (t.get("conversions", 0) * 50) + 100
+
+C:\Zerenthis\backend\app\engines\jobs.py:51
+    return JOBS.get(job_id, {"job_id": job_id, "status": "not_found"})
+
+C:\Zerenthis\backend\app\engines\jobs.py:56
+    items.sort(key=lambda x: x.get("created_at", 0), reverse=True)
+
+C:\Zerenthis\backend\app\engines\kill_switch_engine.py:23
+    balance = state.get("balance", 0)
+
+C:\Zerenthis\backend\app\engines\kill_switch_engine.py:24
+    peak = state.get("peak_balance", balance)
+
+C:\Zerenthis\backend\app\engines\kill_switch_engine.py:25
+    loss_streak = state.get("loss_streak", 0)
+
+C:\Zerenthis\backend\app\engines\kill_switch_engine.py:49
+    regime = state.get("regime", {}).get("regime", "UNKNOWN")
+
+C:\Zerenthis\backend\app\engines\kill_switch_engine.py:70
+        params = state.get("final_params", {})
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:27
+    rec = store.get(key, {})
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:28
+    return rec.get("url")
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:83
+                post_id = ((body.get("data") or {}).get("id"))
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:150
+        access_token = token_body.get("access_token")
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:209
+    product = winner.get("product")
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:210
+    headline = winner.get("headline")
+
+C:\Zerenthis\backend\app\engines\live_platform_engine.py:238
+    overall = "posted" if any(r.get("status") == "posted" for r in results) else "completed"
+
+C:\Zerenthis\backend\app\engines\loop_runner.py:18
+        if task.get("status") == "pending":
+
+C:\Zerenthis\backend\app\engines\manual_signal_engine.py:24
+        "product": payload.get("product", "Unknown"),
+
+C:\Zerenthis\backend\app\engines\manual_signal_engine.py:25
+        "source": payload.get("source", "manual"),
+
+C:\Zerenthis\backend\app\engines\manual_signal_engine.py:26
+        "signal_type": payload.get("signal_type", "click"),
+
+C:\Zerenthis\backend\app\engines\manual_signal_engine.py:27
+        "value": payload.get("value", 1),
+
+C:\Zerenthis\backend\app\engines\manual_signal_engine.py:28
+        "note": payload.get("note", ""),
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:32
+        asset = t.get("asset")
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:33
+        profit = float(t.get("profit", 0))
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:34
+        action = t.get("action")
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:60
+    asset_data = stats["assets"].get(asset, {})
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:61
+    signal_data = stats["signals"].get(action, {})
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:64
+        wins = data.get("wins", 0)
+
+C:\Zerenthis\backend\app\engines\market_adaptation_engine.py:65
+        losses = data.get("losses", 0)
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:23
+    for name, strat in strategy_results.get("strategies", {}).items():
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:24
+        profit = float(strat.get("profit", 0))
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:25
+        winrate = float(strat.get("winrate", 0))
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:27
+        gene = genetics.get(name, strat.get("gene", {}))
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:29
+        threshold = float(gene.get("threshold", 1.5))
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:30
+        confidence_mult = float(gene.get("confidence_mult", 1.5))
+
+C:\Zerenthis\backend\app\engines\market_adaptive_engine.py:47
+            "max_conf": gene.get("max_conf", 10.0)
+
+C:\Zerenthis\backend\app\engines\market_data_engine.py:15
+        res = requests.get(url, params=params, timeout=5)
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:25
+    strategies = (strategy_board or {}).get("strategies", {}) or {}
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:32
+        key=lambda x: (float(x[1].get("avg_profit", 0)), float(x[1].get("avg_winrate", 0))),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:38
+    best_gene = genetics.get(best_name, {}).copy()
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:44
+        "threshold": mutate_value(float(best_gene.get("threshold", 2.0)), 0.20, 0.5, 8.0),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:45
+        "confidence_mult": mutate_value(float(best_gene.get("confidence_mult", 1.5)), 0.20, 0.5, 3.0),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:46
+        "max_conf": mutate_value(float(best_gene.get("max_conf", 10.0)), 0.10, 3.0, 10.0),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:53
+            "threshold": mutate_value(float(gene.get("threshold", 2.0)), 0.05, 0.5, 8.0),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:54
+            "confidence_mult": mutate_value(float(gene.get("confidence_mult", 1.5)), 0.05, 0.5, 3.0),
+
+C:\Zerenthis\backend\app\engines\market_genetics_engine.py:55
+            "max_conf": mutate_value(float(gene.get("max_conf", 10.0)), 0.03, 3.0, 10.0),
+
+C:\Zerenthis\backend\app\engines\market_memory_engine.py:20
+        asset = str(t.get("asset"))
+
+C:\Zerenthis\backend\app\engines\market_memory_engine.py:21
+        profit = float(t.get("profit", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:4
+    change = float(item.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:16
+    change = float(item.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:24
+    change = float(item.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:45
+                "asset": item.get("asset"),
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:49
+                "change": round(float(item.get("change", 0)), 2),
+
+C:\Zerenthis\backend\app\engines\market_multi_strategy_engine.py:50
+                "price": round(float(item.get("price", 0)), 2),
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:54
+        price = float(signal.get("price", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:58
+        confidence = float(signal.get("confidence", 1.0) or 1.0)
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:59
+        strategy = signal.get("strategy", "conservative")
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:80
+            "asset": signal.get("asset"),
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:81
+            "action": signal.get("action", "BUY"),
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:85
+            "reason": signal.get("reason", "signal_trade"),
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:107
+        valid = [x for x in data if isinstance(x, dict) and x.get("price")]
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:110
+            price = float(pick.get("price", 100) or 100)
+
+C:\Zerenthis\backend\app\engines\market_paper_engine.py:115
+                "asset": pick.get("asset"),
+
+C:\Zerenthis\backend\app\engines\market_portfolio_engine.py:23
+        "balance": float(account.get("balance", 50.0)),
+
+C:\Zerenthis\backend\app\engines\market_portfolio_engine.py:28
+        "peak_balance": float(account.get("balance", 50.0))
+
+C:\Zerenthis\backend\app\engines\market_portfolio_engine.py:31
+    real_balance = float(account.get("balance", 50.0))
+
+C:\Zerenthis\backend\app\engines\market_portfolio_engine.py:34
+    equity_curve = portfolio.get("equity_curve", [])
+
+C:\Zerenthis\backend\app\engines\market_portfolio_engine.py:40
+    portfolio["peak_balance"] = max(float(portfolio.get("peak_balance", real_balance)), real_balance)
+
+C:\Zerenthis\backend\app\engines\market_risk_engine.py:2
+    confidence = float(signal.get("confidence", 0))
+
+C:\Zerenthis\backend\app\engines\market_risk_engine.py:3
+    action = signal.get("action")
+
+C:\Zerenthis\backend\app\engines\market_risk_engine.py:9
+    equity_curve = portfolio.get("equity_curve", [50])
+
+C:\Zerenthis\backend\app\engines\market_risk_engine.py:16
+    last_trades = portfolio.get("last_run_trades", [])
+
+C:\Zerenthis\backend\app\engines\market_risk_engine.py:17
+    wins = sum(1 for t in last_trades if t.get("profit", 0) > 0)
+
+C:\Zerenthis\backend\app\engines\market_score_engine.py:4
+    total = round(sum(float(t.get("pnl", t.get("profit", 0))) for t in trades), 2)
+
+C:\Zerenthis\backend\app\engines\market_score_engine.py:5
+    wins = len([t for t in trades if float(t.get("pnl", t.get("profit", 0))) > 0])
+
+C:\Zerenthis\backend\app\engines\market_score_engine.py:6
+    losses = len([t for t in trades if float(t.get("pnl", t.get("profit", 0))) < 0])
+
+C:\Zerenthis\backend\app\engines\market_score_engine.py:9
+    starting_balance = float(portfolio.get("starting_balance", 50.0))
+
+C:\Zerenthis\backend\app\engines\market_score_engine.py:10
+    balance = float(portfolio.get("balance", starting_balance))
+
+C:\Zerenthis\backend\app\engines\market_signal_engine.py:8
+        price = float(asset.get("price", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_signal_engine.py:9
+        change = float(asset.get("change", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_signal_engine.py:17
+                "asset": asset.get("asset", "UNK"),
+
+C:\Zerenthis\backend\app\engines\market_signal_engine.py:25
+                "asset": asset.get("asset", "UNK"),
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:9
+    threshold = float(gene.get("threshold", 2.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:10
+    mult = float(gene.get("confidence_mult", 1.5))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:11
+    max_conf = float(gene.get("max_conf", 10.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:14
+        change = float(d.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:23
+    threshold = float(gene.get("threshold", 3.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:24
+    mult = float(gene.get("confidence_mult", 1.2))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:25
+    max_conf = float(gene.get("max_conf", 10.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:28
+        change = float(d.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:37
+    threshold = float(gene.get("threshold", 5.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:38
+    mult = float(gene.get("confidence_mult", 2.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:39
+    max_conf = float(gene.get("max_conf", 10.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:42
+        change = float(d.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:49
+    threshold = float(gene.get("threshold", 4.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:50
+    mult = float(gene.get("confidence_mult", 1.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:51
+    max_conf = float(gene.get("max_conf", 6.0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:54
+        change = float(d.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:73
+        gene = genetics.get(name, {})
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:80
+            asset_row = next((d for d in data if d.get("asset") == s.get("asset")), {})
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:81
+            change = float(asset_row.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:82
+            action = s.get("action")
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition.py:83
+            confidence = float(s.get("confidence", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition_engine.py:20
+            float(results[name]["score"].get("total_profit", 0)),
+
+C:\Zerenthis\backend\app\engines\market_strategy_competition_engine.py:21
+            float(results[name]["score"].get("wins", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_engine.py:9
+        asset = item.get("asset")
+
+C:\Zerenthis\backend\app\engines\market_strategy_engine.py:10
+        change = float(item.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\market_strategy_engine.py:14
+        mem = memory.get("assets", {}).get(asset, {})
+
+C:\Zerenthis\backend\app\engines\market_strategy_engine.py:15
+        wins = mem.get("wins", 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_engine.py:16
+        losses = mem.get("losses", 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:19
+        row = normalize_strategy_row(board["strategies"].get(name, {}))
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:21
+        row["total_profit"] += float(stats.get("profit", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:22
+        row["total_trades"] += int(stats.get("trades", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:23
+        row["wins"] += int(stats.get("wins", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:24
+        row["losses"] += int(stats.get("losses", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_strategy_leaderboard.py:25
+        row["last_profit"] = float(stats.get("profit", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\market_winner_signal_engine.py:9
+    gene = genetics.get(strategy_name, {})
+
+C:\Zerenthis\backend\app\engines\market_winner_signal_engine.py:10
+    threshold = float(gene.get("threshold", 2.0))
+
+C:\Zerenthis\backend\app\engines\market_winner_signal_engine.py:11
+    mult = float(gene.get("confidence_mult", 1.5))
+
+C:\Zerenthis\backend\app\engines\market_winner_signal_engine.py:12
+    max_conf = float(gene.get("max_conf", 10.0))
+
+C:\Zerenthis\backend\app\engines\market_winner_signal_engine.py:17
+        change = float(d.get("change", 0))
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:30
+        revenue = float(data.get("revenue", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:31
+        conversions = float(data.get("conversions", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:32
+        views = float(data.get("views", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:33
+        clicks = float(data.get("clicks", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:34
+        reality_score = float(data.get("reality_score", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:65
+    limit = int(payload.get("limit", 5))
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:73
+    best = ranked[0] if ranked else {"topic": current.get("topic", "unknown_topic")}
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:74
+    current_topic = current.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\multi_target_manager.py:75
+    next_topic = best.get("topic", current_topic)
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:20
+    name = p.get("name", "Product")
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:21
+    price = float(p.get("price", 19) or 19)
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:36
+    base = p.get("name", "Product")
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:37
+    price = float(p.get("price", 19) or 19)
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:54
+    dominant = intel.get("dominant")
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:55
+    at_risk = intel.get("at_risk", [])
+
+C:\Zerenthis\backend\app\engines\mutation_engine.py:68
+            output["pruned"].append(p.get("name"))
+
+C:\Zerenthis\backend\app\engines\optimization_engine.py:70
+        clicks = data.get("clicks", 0)
+
+C:\Zerenthis\backend\app\engines\optimization_engine.py:74
+            base_price = revenue[product].get("price", 19)
+
+C:\Zerenthis\backend\app\engines\performance_engine.py:41
+    trades = deque(mem.get("trades", []), maxlen=MAX_TRADES)
+
+C:\Zerenthis\backend\app\engines\performance_engine.py:48
+    trades = [float(x) for x in mem.get("trades", [])]
+
+C:\Zerenthis\backend\app\engines\pipeline.py:15
+    title = plan.get("title") or topic
+
+C:\Zerenthis\backend\app\engines\pipeline.py:16
+    scenes = plan.get("scenes") or []
+
+C:\Zerenthis\backend\app\engines\pipeline.py:19
+        plan.get("thumbnail_text", "WATCH THIS"),
+
+C:\Zerenthis\backend\app\engines\pipeline.py:32
+        durations.append(scene.get("duration_sec", 6))
+
+C:\Zerenthis\backend\app\engines\pipeline.py:33
+        full_voiceover_parts.append(scene.get("voiceover", ""))
+
+C:\Zerenthis\backend\app\engines\pipeline.py:55
+        "description": plan.get("description", ""),
+
+C:\Zerenthis\backend\app\engines\pipeline.py:56
+        "tags": plan.get("tags", []),
+
+C:\Zerenthis\backend\app\engines\pipeline.py:57
+        "thumbnail_text": plan.get("thumbnail_text", ""),
+
+C:\Zerenthis\backend\app\engines\planner.py:66
+    if isinstance(parsed, dict) and parsed.get("scenes"):
+
+C:\Zerenthis\backend\app\engines\posting_bridge.py:38
+    simulate_only = payload.get("simulate_only", True)
+
+C:\Zerenthis\backend\app\engines\posting_bridge.py:41
+    topic = current.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\posting_bridge.py:46
+    traffic = campaign.get("traffic", {})
+
+C:\Zerenthis\backend\app\engines\posting_bridge.py:47
+    posts = traffic.get("posts", [])
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:25
+    post_id = payload.get("id")
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:31
+        if item.get("id") == post_id:
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:38
+    if match.get("status") == "published":
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:48
+        "topic": match.get("post", {}).get("topic"),
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:49
+        "platform": match.get("post", {}).get("platform"),
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:50
+        "simulate_only": match.get("simulate_only", True)
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:59
+        "topic": match.get("post", {}).get("topic"),
+
+C:\Zerenthis\backend\app\engines\posting_execute.py:60
+        "platform": match.get("post", {}).get("platform")
+
+C:\Zerenthis\backend\app\engines\posting_result.py:26
+    post_id = payload.get("id")
+
+C:\Zerenthis\backend\app\engines\posting_result.py:32
+        if item.get("id") == post_id:
+
+C:\Zerenthis\backend\app\engines\posting_result.py:42
+        "topic": match.get("post", {}).get("topic"),
+
+C:\Zerenthis\backend\app\engines\posting_result.py:43
+        "platform": match.get("post", {}).get("platform"),
+
+C:\Zerenthis\backend\app\engines\posting_result.py:44
+        "views": payload.get("views", 0),
+
+C:\Zerenthis\backend\app\engines\posting_result.py:45
+        "clicks": payload.get("clicks", 0),
+
+C:\Zerenthis\backend\app\engines\posting_result.py:46
+        "conversions": payload.get("conversions", 0),
+
+C:\Zerenthis\backend\app\engines\posting_result.py:47
+        "revenue": payload.get("revenue", 0)
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:39
+    active = [t for t in tasks if t.get("status") == "active"]
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:46
+            priority_rank.get(t.get("priority", "normal"), 2),
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:47
+            t.get("updated_at", 0)
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:62
+    goal = mem.get("user_profile", {}).get("goal", "")
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:63
+    tasks = mem.get("active_tasks", [])
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:67
+    intent = latest_intent.get("intent", "unknown")
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:68
+    suggested_action = latest_intent.get("suggested_action", "store_for_review")
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:89
+            f"Active focus: {top_task.get('title')} "
+
+C:\Zerenthis\backend\app\engines\presence_engine.py:90
+            f"(priority: {top_task.get('priority')}, last action: {top_task.get('last_action')})"
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:21
+            result = item.get("result", {})
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:22
+            task_obj = item.get("task", {})
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:25
+                task = result.get("task")
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:28
+                task = task_obj.get("task")
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:31
+            counts[task] = counts.get(task, 0) + 1
+
+C:\Zerenthis\backend\app\engines\priority_engine.py:60
+        repeats = counts.get(task, 0)
+
+C:\Zerenthis\backend\app\engines\promotion_engine.py:25
+    return store.get(key, {}).get("url")
+
+C:\Zerenthis\backend\app\engines\promotion_engine.py:44
+    product = top.get("product")
+
+C:\Zerenthis\backend\app\engines\promotion_engine.py:45
+    headline = top.get("headline")
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:20
+    title = product.get("title", "Untitled Offer")
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:21
+    summary = product.get("summary", "A premium digital product.")
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:22
+    bullets = product.get("steps") or product.get("bullets") or []
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:43
+    title = product.get("title", "Untitled Product")
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:45
+    price = int(product.get("price") or 29)
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:46
+    summary = product.get("summary", "A premium digital product.")
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:47
+    checkout_link = product.get("checkout_link") or ""
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:48
+    sales_copy = product.get("sales_copy") or build_sales_copy(product)
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:55
+        "currency": product.get("currency", "USD"),
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:58
+        "file": product.get("file"),
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:59
+        "thumbnail": product.get("thumbnail"),
+
+C:\Zerenthis\backend\app\engines\publish_engine.py:60
+        "tags": product.get("tags", []),
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:29
+    return len([q for q in (queue or []) if q.get("status") in ["queued_simulated","queued_live"]])
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:34
+    return max([e.get("timestamp",0) for e in publish_log])
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:40
+    recent = [r for r in results if r.get("topic") == topic][-10:]
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:46
+        rev = float(r.get("revenue",0))
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:47
+        conv = float(r.get("conversions",0))
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:48
+        views = float(r.get("views",0))
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:49
+        clicks = float(r.get("clicks",0))
+
+C:\Zerenthis\backend\app\engines\queue_manager.py:69
+    topic = current.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:23
+            "topic": top.get("topic", "unknown_topic"),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:29
+        "topic": current.get("topic", "unknown_topic"),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:34
+    views = float(signal.get("views", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:35
+    clicks = float(signal.get("clicks", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:36
+    conversions = float(signal.get("conversions", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:37
+    revenue = float(signal.get("revenue", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:74
+    entry["revenue"] = float(entry.get("revenue", 0)) + float(signal.get("revenue", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:75
+    entry["conversions"] = float(entry.get("conversions", 0)) + float(signal.get("conversions", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:76
+    entry["views"] = float(entry.get("views", 0)) + float(signal.get("views", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:77
+    entry["clicks"] = float(entry.get("clicks", 0)) + float(signal.get("clicks", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:78
+    entry["reality_score"] = round(float(entry.get("reality_score", 0)) + float(validation["validation_score"]), 4)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:82
+        "views": signal.get("views", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:83
+        "clicks": signal.get("clicks", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:84
+        "conversions": signal.get("conversions", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:85
+        "revenue": signal.get("revenue", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:102
+        "views": signal.get("views", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:103
+        "clicks": signal.get("clicks", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:104
+        "conversions": signal.get("conversions", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:105
+        "revenue": signal.get("revenue", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:122
+        "views": payload.get("views", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:123
+        "clicks": payload.get("clicks", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:124
+        "conversions": payload.get("conversions", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:125
+        "revenue": payload.get("revenue", 0)
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:138
+            "revenue": updated_entry.get("revenue", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:139
+            "conversions": updated_entry.get("conversions", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:140
+            "views": updated_entry.get("views", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:141
+            "clicks": updated_entry.get("clicks", 0),
+
+C:\Zerenthis\backend\app\engines\reality_bridge.py:142
+            "reality_score": updated_entry.get("reality_score", 0)
+
+C:\Zerenthis\backend\app\engines\reality_exporter.py:17
+    topic = topic_data.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\reality_exporter.py:41
+        "should_scale": last_perf.get("should_scale", False),
+
+C:\Zerenthis\backend\app\engines\reality_exporter.py:42
+        "validation_score": last_perf.get("validation_score", 0)
+
+C:\Zerenthis\backend\app\engines\reality_loop.py:14
+    signal = real.get("signal", {})
+
+C:\Zerenthis\backend\app\engines\reality_loop.py:20
+        signal = simulated.get("signal", {})
+
+C:\Zerenthis\backend\app\engines\reality_loop.py:28
+        "topic": traffic.get("topic"),
+
+C:\Zerenthis\backend\app\engines\reality_loop.py:34
+        "decision": ingestion.get("decision_gate", {}),
+
+C:\Zerenthis\backend\app\engines\reality_loop_auto.py:12
+    signal = simulated.get("signal", {})
+
+C:\Zerenthis\backend\app\engines\reality_loop_auto.py:17
+        "topic": traffic.get("topic"),
+
+C:\Zerenthis\backend\app\engines\reality_loop_auto.py:22
+        "decision": ingestion.get("decision_gate", {}),
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:34
+    results = demand.get("results", [])
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:35
+    current = scaling.get("promoted", {})
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:39
+        name = a.get("product")
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:40
+        val = float(a.get("value", 1) or 1)
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:41
+        auto_scores[name] = auto_scores.get(name, 0) + val * 1.5
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:45
+        clicks = data.get("clicks", 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:51
+        name = r.get("name")
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:52
+        base = float(r.get("interest_score", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:53
+        auto_boost = auto_scores.get(name, 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:54
+        real_boost = real_scores.get(name, 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_bridge.py:71
+        "final_champion": chosen.get("name"),
+
+C:\Zerenthis\backend\app\engines\real_signal_engine.py:2
+    change = asset.get("change", 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_engine.py:3
+    price = asset.get("price", 0)
+
+C:\Zerenthis\backend\app\engines\real_signal_engine.py:5
+    aggression = dna.get(strategy_name, {}).get("aggression", 0.5) * bias
+
+C:\Zerenthis\backend\app\engines\real_signal_engine.py:6
+    threshold = dna.get(strategy_name, {}).get("threshold", 3.0)
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:26
+    for item in opt.get("optimized", []):
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:27
+        product = item.get("product")
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:28
+        for v in item.get("variants", []):
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:29
+            links.append(generate_variant_link(product, v.get("headline")))
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:41
+        clicks = v.get("clicks", 0)
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:42
+        last = v.get("last_click") or now
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:51
+            "product": v.get("product"),
+
+C:\Zerenthis\backend\app\engines\real_swarm_engine.py:52
+            "headline": v.get("headline"),
+
+C:\Zerenthis\backend\app\engines\real_trade_engine.py:5
+    balance = portfolio.get("balance", 1000)
+
+C:\Zerenthis\backend\app\engines\real_trade_engine.py:6
+    risk = portfolio.get("risk_per_trade", 0.05)
+
+C:\Zerenthis\backend\app\engines\response_director.py:39
+    active = [t for t in tasks if t.get("status") == "active"]
+
+C:\Zerenthis\backend\app\engines\response_director.py:46
+            priority_rank.get(t.get("priority", "normal"), 2),
+
+C:\Zerenthis\backend\app\engines\response_director.py:47
+            t.get("updated_at", 0)
+
+C:\Zerenthis\backend\app\engines\response_director.py:70
+    task_title = task.get("title", "")
+
+C:\Zerenthis\backend\app\engines\response_director.py:71
+    task_priority = task.get("priority", "")
+
+C:\Zerenthis\backend\app\engines\response_director.py:72
+    task_action = task.get("last_action", "")
+
+C:\Zerenthis\backend\app\engines\response_director.py:121
+    goal = mem.get("user_profile", {}).get("goal", "")
+
+C:\Zerenthis\backend\app\engines\response_director.py:122
+    top_task = _top_active_task(mem.get("active_tasks", []))
+
+C:\Zerenthis\backend\app\engines\response_director.py:125
+    intent = latest_intent.get("intent", "unknown")
+
+C:\Zerenthis\backend\app\engines\response_director.py:126
+    action = latest_intent.get("suggested_action", "store_for_review")
+
+C:\Zerenthis\backend\app\engines\revenue_engine.py:23
+        name = p.get("name", "unknown")
+
+C:\Zerenthis\backend\app\engines\revenue_engine.py:24
+        price = p.get("price", 0)
+
+C:\Zerenthis\backend\app\engines\revenue_intelligence_engine.py:54
+        signal = info.get("revenue", info.get("score", 0))
+
+C:\Zerenthis\backend\app\engines\revenue_intelligence_engine.py:55
+        history = info.get("history", [])
+
+C:\Zerenthis\backend\app\engines\revenue_intelligence_engine.py:80
+            "times_seen": info.get("times_seen", 0),
+
+C:\Zerenthis\backend\app\engines\revenue_intelligence_engine.py:81
+            "price": info.get("price", 0),
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:24
+    results = traffic.get("results", [])
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:25
+    top = traffic.get("top_performer", {})
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:27
+    clones = mutation.get("clones", [])
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:34
+        if r.get("revenue", 0) <= 0:
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:35
+            weak.append(r.get("name"))
+
+C:\Zerenthis\backend\app\engines\scaling_engine.py:55
+        "expanding": [c.get("name") for c in clones],
+
+C:\Zerenthis\backend\app\engines\selection_engine.py:19
+        key=lambda x: x[1].get("score", 0),
+
+C:\Zerenthis\backend\app\engines\selection_engine.py:30
+        if v.get("score", 0) >= min_score
+
+C:\Zerenthis\backend\app\engines\self_improver.py:29
+    results = traffic.get("results", [])
+
+C:\Zerenthis\backend\app\engines\self_improver.py:33
+        name = r.get("name")
+
+C:\Zerenthis\backend\app\engines\self_improver.py:34
+        rev = float(r.get("revenue", 0))
+
+C:\Zerenthis\backend\app\engines\self_improver.py:64
+    current_top = traffic.get("top_performer", {}).get("name")
+
+C:\Zerenthis\backend\app\engines\self_improver.py:65
+    stable_name = stable_winner.get("name")
+
+C:\Zerenthis\backend\app\engines\signal_simulator.py:60
+    forced = payload.get("profile")
+
+C:\Zerenthis\backend\app\engines\slides.py:30
+    scene_title = (scene.get("headline") or "Scene").strip()
+
+C:\Zerenthis\backend\app\engines\slides.py:31
+    visual_prompt = (scene.get("visual_prompt") or "").strip()
+
+C:\Zerenthis\backend\app\engines\slides.py:32
+    onscreen = (scene.get("onscreen_text") or "").strip()
+
+C:\Zerenthis\backend\app\engines\state_guard.py:51
+    starting_balance = round(max(1.0, _as_float(raw.get("starting_balance", 50.0), 50.0)), 2)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:52
+    balance = round(_as_float(raw.get("balance", starting_balance), starting_balance), 2)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:53
+    risk_per_trade = round(min(max(_as_float(raw.get("risk_per_trade", 0.10), 0.10), 0.001), 1.0), 4)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:54
+    last_run_trades = _as_list(raw.get("last_run_trades", []), [])
+
+C:\Zerenthis\backend\app\engines\state_guard.py:55
+    equity_curve = _as_list(raw.get("equity_curve", [starting_balance]), [starting_balance])
+
+C:\Zerenthis\backend\app\engines\state_guard.py:62
+        "max_open_positions": max(1, _as_int(raw.get("max_open_positions", 3), 3)),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:65
+        "peak_balance": round(_as_float(raw.get("peak_balance", max(equity_curve + [balance])), max(equity_curve + [balance])), 2)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:71
+        "runs": _as_int(raw.get("runs", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:72
+        "total_profit": round(_as_float(raw.get("total_profit", 0.0), 0.0), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:73
+        "total_trades": _as_int(raw.get("total_trades", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:74
+        "wins": _as_int(raw.get("wins", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:75
+        "losses": _as_int(raw.get("losses", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:76
+        "last_profit": round(_as_float(raw.get("last_profit", 0.0), 0.0), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:77
+        "avg_profit": round(_as_float(raw.get("avg_profit", 0.0), 0.0), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:78
+        "avg_winrate": round(_as_float(raw.get("avg_winrate", 0.0), 0.0), 2),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:84
+    for name, row in (raw.get("strategies", {}) or {}).items():
+
+C:\Zerenthis\backend\app\engines\state_guard.py:88
+        "last_best_strategy": raw.get("last_best_strategy")
+
+C:\Zerenthis\backend\app\engines\state_guard.py:94
+    for name, row in (raw.get("assets", {}) or {}).items():
+
+C:\Zerenthis\backend\app\engines\state_guard.py:97
+            "wins": _as_int(row.get("wins", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:98
+            "losses": _as_int(row.get("losses", 0), 0),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:99
+            "total_profit": round(_as_float(row.get("total_profit", 0.0), 0.0), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:103
+        "total_runs": _as_int(raw.get("total_runs", 0), 0)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:116
+        row = raw.get(name, {}) or {}
+
+C:\Zerenthis\backend\app\engines\state_guard.py:118
+            "threshold": round(_as_float(row.get("threshold", base["threshold"]), base["threshold"]), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:119
+            "confidence_mult": round(_as_float(row.get("confidence_mult", base["confidence_mult"]), base["confidence_mult"]), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:120
+            "max_conf": round(_as_float(row.get("max_conf", base["max_conf"]), base["max_conf"]), 4),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:126
+    equity_curve = _as_list(raw.get("equity_curve", []), [])
+
+C:\Zerenthis\backend\app\engines\state_guard.py:129
+        "max_drawdown": round(_as_float(raw.get("max_drawdown", 0.0), 0.0), 4)
+
+C:\Zerenthis\backend\app\engines\state_guard.py:143
+        "status": raw.get("status", "idle"),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:144
+        "best_strategy": raw.get("best_strategy"),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:145
+        "strategy_results": raw.get("strategy_results", {}),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:146
+        "strategy_board": normalize_strategy_board(raw.get("strategy_board", {})),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:147
+        "genetics": normalize_genetics(raw.get("genetics", {})),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:148
+        "scan": _as_list(raw.get("scan", []), []),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:149
+        "signals": _as_list(raw.get("signals", []), []),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:150
+        "trades": _as_list(raw.get("trades", []), []),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:151
+        "score": raw.get("score", {}),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:152
+        "memory": normalize_memory(raw.get("memory", {})),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:153
+        "portfolio": normalize_portfolio(raw.get("portfolio", {})),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:154
+        "performance": normalize_performance(raw.get("performance", {})),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:155
+        "stats": raw.get("stats", {}),
+
+C:\Zerenthis\backend\app\engines\state_guard.py:156
+        "updated_at": raw.get("updated_at"),
+
+C:\Zerenthis\backend\app\engines\storage.py:18
+    return data.get(user_id, {
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:72
+    products = intel.get("products", [])
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:73
+    dominant = intel.get("dominant") or {}
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:75
+    dominant_name = dominant.get("name", "")
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:76
+    dominant_score = float(dominant.get("score", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:81
+    for item in mutation.get("clones", []):
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:82
+        if isinstance(item, dict) and item.get("name"):
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:85
+    for item in mutation.get("mutations", []):
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:86
+        if isinstance(item, dict) and item.get("name"):
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:93
+        name = p.get("name", "Unknown")
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:94
+        score = float(p.get("score", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:95
+        price = float(p.get("price", 0) or 0)
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:104
+        angle = _infer_angle(name, p.get("headline", ""))
+
+C:\Zerenthis\backend\app\engines\strategic_memory_engine.py:127
+            key=lambda kv: (kv[1].get("wins", 0), kv[1].get("avg_score", 0)),
+
+C:\Zerenthis\backend\app\engines\strategy_lock.py:2
+    runs = strategy_data.get("runs",0)
+
+C:\Zerenthis\backend\app\engines\strategy_lock.py:3
+    winrate = strategy_data.get("avg_winrate",0)
+
+C:\Zerenthis\backend\app\engines\strategy_performance_engine.py:48
+        score = float(data.get("score", 0.0))
+
+C:\Zerenthis\backend\app\engines\strategy_performance_engine.py:69
+    row = perf.get(strategy_name, {"score": 0.0})
+
+C:\Zerenthis\backend\app\engines\strategy_performance_engine.py:70
+    score = float(row.get("score", 0.0))
+
+C:\Zerenthis\backend\app\engines\subtitles.py:14
+        dur = float(scene.get("duration_sec", 6))
+
+C:\Zerenthis\backend\app\engines\subtitles.py:15
+        text = (scene.get("voiceover") or scene.get("onscreen_text") or f"Scene {idx}").strip()
+
+C:\Zerenthis\backend\app\engines\swarm_engine.py:24
+    for item in opt.get("optimized", []):
+
+C:\Zerenthis\backend\app\engines\swarm_engine.py:25
+        product = item.get("product")
+
+C:\Zerenthis\backend\app\engines\swarm_engine.py:27
+        for v in item.get("variants", []):
+
+C:\Zerenthis\backend\app\engines\swarm_engine.py:30
+                "headline": v.get("headline"),
+
+C:\Zerenthis\backend\app\engines\swarm_engine.py:31
+                "price": v.get("price"),
+
+C:\Zerenthis\backend\app\engines\task_queue.py:34
+        if task.get("status") == "pending":
+
+C:\Zerenthis\backend\app\engines\task_queue.py:76
+        "type": task.get("type"),
+
+C:\Zerenthis\backend\app\engines\task_queue.py:77
+        "target": task.get("target")
+
+C:\Zerenthis\backend\app\engines\tracking_engine.py:46
+        if v.get("link_id") == link_id:
+
+C:\Zerenthis\backend\app\engines\trade_memory.py:20
+    total = sum(float(t.get("profit", 0) or 0) for t in history)
+
+C:\Zerenthis\backend\app\engines\trade_memory.py:21
+    wins = sum(1 for t in history if float(t.get("profit", 0) or 0) > 0)
+
+C:\Zerenthis\backend\app\engines\trade_memory.py:22
+    losses = sum(1 for t in history if float(t.get("profit", 0) or 0) <= 0)
+
+C:\Zerenthis\backend\app\engines\traffic_bridge.py:30
+    topic = topic_data.get("topic", "unknown")
+
+C:\Zerenthis\backend\app\engines\traffic_engine.py:5
+    items = payload.get("items", [])
+
+C:\Zerenthis\backend\app\engines\traffic_factory.py:41
+    topic = topic_data.get("topic", "unknown_topic")
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:20
+    base = product.get("score", 1)
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:26
+    revenue = conversions * float(product.get("price", 10))
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:38
+    products = intel.get("products", [])
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:50
+            "name": p.get("name"),
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:51
+            "score": p.get("score"),
+
+C:\Zerenthis\backend\app\engines\traffic_intelligence_engine.py:52
+            "price": p.get("price"),
+
+C:\Zerenthis\backend\app\engines\validation_engine.py:27
+    profits = [r.get("profit", 0) for r in runs]
+
+C:\Zerenthis\backend\app\engines\validation_engine.py:28
+    balances = [r.get("balance", 0) for r in runs]
+
+C:\Zerenthis\backend\app\engines\validation_engine.py:29
+    drawdowns = [r.get("drawdown", 0) for r in runs]
+
+C:\Zerenthis\backend\app\engines\variant_engine.py:44
+    price = float(variant.get("price", 0))
+
+C:\Zerenthis\backend\app\engines\variant_engine.py:45
+    angle = variant.get("angle", "")
+
+C:\Zerenthis\backend\app\engines\variant_engine.py:51
+    }.get(angle, 1.0)
+
+C:\Zerenthis\backend\app\engines\variant_memory_engine.py:16
+    winner = data.get("winner", {})
+
+C:\Zerenthis\backend\app\engines\variant_tracking_engine.py:45
+        if v.get("variant_id") == variant_id:
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:29
+    target = proposal.get("target", "")
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:30
+    risk = proposal.get("risk", "medium")
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:32
+    requires = safe_zones.get("requires_founder_approval", [])
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:33
+    blocked = safe_zones.get("blocked_prefixes", [])
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:57
+        if p.get("status") != "proposed":
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:66
+            "proposal_id": p.get("id"),
+
+C:\Zerenthis\backend\app\engines\watcher_engine.py:67
+            "title": p.get("title"),
+
+C:\Zerenthis\backend\app\execution\routes.py:8
+    task = payload.get("task")
+
+C:\Zerenthis\backend\app\execution\routes.py:19
+@router.get("/logs")
+
+C:\Zerenthis\backend\app\execution\runner.py:52
+            total = v.get("total", 0.0)
+
+C:\Zerenthis\backend\app\execution\runner.py:53
+            runs = v.get("runs", 0)
+
+C:\Zerenthis\backend\app\execution\runner.py:107
+    s = result.get("status")
+
+C:\Zerenthis\backend\app\execution\runner.py:129
+        objective = goal.get("objective", "").lower()
+
+C:\Zerenthis\backend\app\execution\runner.py:142
+        objective = goal.get("objective", "").lower()
+
+C:\Zerenthis\backend\app\execution\runner.py:156
+        result = entry.get("result", {})
+
+C:\Zerenthis\backend\app\execution\runner.py:157
+        if result.get("task") == task:
+
+C:\Zerenthis\backend\app\execution\runner.py:163
+    seen = any(entry.get("result", {}).get("task") == task for entry in recent)
+
+C:\Zerenthis\backend\app\execution\runner.py:169
+        g = observation.get("goal", {})
+
+C:\Zerenthis\backend\app\execution\runner.py:171
+            chosen_goal = g.get("objective", "")
+
+C:\Zerenthis\backend\app\execution\runner.py:172
+    if chosen_goal and isinstance(goal, dict) and goal.get("objective", "") == chosen_goal:
+
+C:\Zerenthis\backend\app\execution\runner.py:177
+    priority = str(goal.get("priority", "medium")).lower()
+
+C:\Zerenthis\backend\app\execution\runner.py:185
+    objective = str(goal.get("objective", "")).lower()
+
+C:\Zerenthis\backend\app\execution\runner.py:186
+    weight = float(goal.get("weight", 1.0))
+
+C:\Zerenthis\backend\app\execution\runner.py:187
+    drive = identity.get("drive", "")
+
+C:\Zerenthis\backend\app\execution\runner.py:199
+        score += perf["toolbox_strategy"].get("avg_score", 0.0) * 0.15
+
+C:\Zerenthis\backend\app\execution\runner.py:201
+        score += perf["revenue_scan"].get("avg_score", 0.0) * 0.15
+
+C:\Zerenthis\backend\app\execution\runner.py:203
+        score += perf["builder_handoff"].get("avg_score", 0.0) * 0.15
+
+C:\Zerenthis\backend\app\execution\runner.py:222
+    base = perf.get(task, {}).get("avg_score", 0.0)
+
+C:\Zerenthis\backend\app\execution\runner.py:224
+    preference_bonus = 0.3 if task == identity.get("dominant_preference") else 0.0
+
+C:\Zerenthis\backend\app\execution\runner.py:258
+    if result.get("status") == "failed":
+
+C:\Zerenthis\backend\app\execution\runner.py:266
+    scores = [v.get("avg_score", 0.0) for v in perf.values()]
+
+C:\Zerenthis\backend\app\execution\runner.py:279
+        "result_status": result.get("status"),
+
+C:\Zerenthis\backend\app\execution\runner.py:349
+    if not any(q.get("task") == chosen and q.get("status") in ACTIVE for q in queue):
+
+C:\Zerenthis\backend\app\execution\runner.py:360
+        if item.get("status") in ["pending", "retrying"]:
+
+C:\Zerenthis\backend\app\execution\runner.py:395
+                p["total"] = p.get("total_score", 0.0)
+
+C:\Zerenthis\backend\app\execution\runner.py:412
+            "objective": item["goal"].get("objective"),
+
+C:\Zerenthis\backend\app\execution\runner.py:413
+            "priority": item["goal"].get("priority"),
+
+C:\Zerenthis\backend\app\routes\ai.py:11
+    prompt = (payload.get("prompt") or "").strip()
+
+C:\Zerenthis\backend\app\routes\ai.py:12
+    force_agent = payload.get("agent")
+
+C:\Zerenthis\backend\app\routes\ai.py:20
+@ai_bp.get("/ai/agents")
+
+C:\Zerenthis\backend\app\routes\ai.py:27
+@ai_bp.get("/ai/memory/short")
+
+C:\Zerenthis\backend\app\routes\ai.py:34
+@ai_bp.get("/ai/memory/long")
+
+C:\Zerenthis\backend\app\routes\builder_intelligence.py:50
+        "backup": result.get("backup")
+
+C:\Zerenthis\backend\app\routes\bundle.py:22
+    traffic = generate_traffic(topic, str(product.get("title", "Premium Digital System")))
+
+C:\Zerenthis\backend\app\routes\companion_emotional.py:67
+    core = random.choice(state_responses.get(state, state_responses["neutral"]))
+
+C:\Zerenthis\backend\app\routes\control.py:13
+@router.get("/state")
+
+C:\Zerenthis\backend\app\routes\dashboard.py:6
+@router.get("/api/dashboard")
+
+C:\Zerenthis\backend\app\routes\decision.py:7
+@router.get("/next")
+
+C:\Zerenthis\backend\app\routes\decision.py:14
+    next_action = result.get("next_action")
+
+C:\Zerenthis\backend\app\routes\decision.py:16
+    if not next_action or not next_action.get("task"):
+
+C:\Zerenthis\backend\app\routes\directional_debug.py:6
+@router.get("/test")
+
+C:\Zerenthis\backend\app\routes\evolution.py:21
+@router.get("/api/evolution/stats")
+
+C:\Zerenthis\backend\app\routes\evolution.py:25
+@router.get("/api/evolution/recent")
+
+C:\Zerenthis\backend\app\routes\factory.py:18
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:26
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:34
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:42
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:50
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:58
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\factory.py:66
+    topics = payload.get("topics") or []
+
+C:\Zerenthis\backend\app\routes\factory.py:71
+@factory_bp.get("/factory/runs")
+
+C:\Zerenthis\backend\app\routes\founder.py:14
+    name = (payload.get("name") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:15
+    domain = (payload.get("domain") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:16
+    objective = (payload.get("objective") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:17
+    constraints = payload.get("constraints") or []
+
+C:\Zerenthis\backend\app\routes\founder.py:28
+@founder_bp.get("/simulation/runs")
+
+C:\Zerenthis\backend\app\routes\founder.py:35
+    target = (payload.get("target") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:36
+    platform = (payload.get("platform") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:37
+    cadence = (payload.get("cadence") or "").strip()
+
+C:\Zerenthis\backend\app\routes\founder.py:45
+@founder_bp.get("/growth/runs")
+
+C:\Zerenthis\backend\app\routes\founder.py:49
+@founder_bp.get("/founder/status")
+
+C:\Zerenthis\backend\app\routes\founder.py:57
+@founder_bp.get("/founder/dashboard")
+
+C:\Zerenthis\backend\app\routes\founder.py:75
+@founder_bp.get("/founder/events")
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:20
+    top = priority.get("top_target") or {}
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:22
+    if top.get("topic"):
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:26
+                    "topic": top.get("topic"),
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:27
+                    "source": top.get("source"),
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:28
+                    "revenue": top.get("revenue", 0),
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:29
+                    "conversions": top.get("conversions", 0),
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:30
+                    "total_score": top.get("total_score", 0),
+
+C:\Zerenthis\backend\app\routes\full_cycle.py:49
+@router.get("/api/intelligence/last-cycle")
+
+C:\Zerenthis\backend\app\routes\full_loop.py:23
+    traffic = generate_traffic(topic, str(product.get("title", "Premium Digital System")))
+
+C:\Zerenthis\backend\app\routes\health.py:6
+@health_bp.get("/health")
+
+C:\Zerenthis\backend\app\routes\health.py:15
+@health_bp.get("/status")
+
+C:\Zerenthis\backend\app\routes\intelligence.py:11
+@router.get("/intelligence/targets")
+
+C:\Zerenthis\backend\app\routes\intelligence.py:15
+@router.get("/intelligence/current")
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:17
+    top = result.get("top_target") or {}
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:19
+    if top.get("topic"):
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:23
+                    "topic": top.get("topic"),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:24
+                    "source": top.get("source"),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:25
+                    "revenue": top.get("revenue", 0),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:26
+                    "conversions": top.get("conversions", 0),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:27
+                    "total_score": top.get("total_score", 0),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:28
+                    "locked_at": result.get("timestamp")
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:37
+        "candidate_count": result.get("candidate_count", 0),
+
+C:\Zerenthis\backend\app\routes\intelligence_priority.py:39
+        "top_3": result.get("ranked", [])[:3],
+
+C:\Zerenthis\backend\app\routes\lab.py:10
+@lab_bp.get("/education/catalog")
+
+C:\Zerenthis\backend\app\routes\lab.py:21
+    subject = (payload.get("subject") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:22
+    level = (payload.get("level") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:32
+    subject = (payload.get("subject") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:33
+    level = (payload.get("level") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:34
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:44
+    subject = (payload.get("subject") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:45
+    level = (payload.get("level") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:46
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:56
+    subject = (payload.get("subject") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:57
+    level = (payload.get("level") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:58
+    topic = (payload.get("topic") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:65
+@lab_bp.get("/education/runs")
+
+C:\Zerenthis\backend\app\routes\lab.py:72
+    focus_area = (payload.get("focus_area") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:73
+    difficulty = (payload.get("difficulty") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:83
+    goal = (payload.get("goal") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:84
+    current_state = (payload.get("current_state") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:85
+    target_state = (payload.get("target_state") or "").strip()
+
+C:\Zerenthis\backend\app\routes\lab.py:92
+@lab_bp.get("/cognitive/runs")
+
+C:\Zerenthis\backend\app\routes\market.py:60
+@router.get("/market/portfolio")
+
+C:\Zerenthis\backend\app\routes\market.py:64
+@router.get("/market/latest")
+
+C:\Zerenthis\backend\app\routes\market.py:68
+@router.get("/market/performance")
+
+C:\Zerenthis\backend\app\routes\market.py:72
+        "score": state.get("score", {}),
+
+C:\Zerenthis\backend\app\routes\market.py:73
+        "performance": state.get("performance", {}),
+
+C:\Zerenthis\backend\app\routes\market.py:75
+        "best_strategy": state.get("best_strategy"),
+
+C:\Zerenthis\backend\app\routes\market.py:76
+        "updated_at": state.get("updated_at")
+
+C:\Zerenthis\backend\app\routes\market.py:79
+@router.get("/market/strategy-board")
+
+C:\Zerenthis\backend\app\routes\market.py:83
+@router.get("/market/genetics")
+
+C:\Zerenthis\backend\app\routes\market.py:87
+@router.get("/market/stats")
+
+C:\Zerenthis\backend\app\routes\performance.py:6
+@router.get("/performance/leaderboard")
+
+C:\Zerenthis\backend\app\routes\phase_verify.py:5
+@router.get("/api/phase/verify")
+
+C:\Zerenthis\backend\app\routes\router.py:48
+    return AGENTS.get(agent_name, strategy_agent.run)
+
+C:\Zerenthis\backend\app\routes\routes.py:10
+@router.get("/pending")
+
+C:\Zerenthis\backend\app\routes\targets.py:7
+@router.get("/api/targets")
+
+C:\Zerenthis\backend\app\routes\ui.py:8
+@ui_bp.get("/app")
+
+C:\Zerenthis\backend\app\routes\ui.py:12
+@ui_bp.get("/app/<path:filename>")
+
+C:\Zerenthis\backend\app\adaptive_brain.py:55
+    state["history"] = state.get("history", [])[-60:]
+
+C:\Zerenthis\backend\app\adaptive_brain.py:56
+    state["top_patterns"] = state.get("top_patterns", [])[:20]
+
+C:\Zerenthis\backend\app\adaptive_brain.py:60
+    weights = [max(0.1, float(weight_map.get(x, 1.0))) for x in items]
+
+C:\Zerenthis\backend\app\adaptive_brain.py:88
+    w["styles"][style] = round(max(0.2, min(5.0, w["styles"].get(style, 1.0) + bump)), 3)
+
+C:\Zerenthis\backend\app\adaptive_brain.py:89
+    w["formats"][fmt] = round(max(0.2, min(5.0, w["formats"].get(fmt, 1.0) + bump)), 3)
+
+C:\Zerenthis\backend\app\adaptive_brain.py:90
+    w["hooks"][hook] = round(max(0.2, min(5.0, w["hooks"].get(hook, 1.0) + bump)), 3)
+
+C:\Zerenthis\backend\app\adaptive_brain.py:91
+    w["twists"][twist] = round(max(0.2, min(5.0, w["twists"].get(twist, 1.0) + bump)), 3)
+
+C:\Zerenthis\backend\app\adaptive_brain.py:93
+    state["cycles"] = int(state.get("cycles", 0)) + 1
+
+C:\Zerenthis\backend\app\adaptive_brain.py:105
+    ranked = sorted(state["history"], key=lambda x: x.get("quality", 0), reverse=True)
+
+C:\Zerenthis\backend\app\adaptive_brain.py:123
+    interval_sec = int(payload.get("interval_sec", 45))
+
+C:\Zerenthis\backend\app\adaptive_brain.py:141
+@router.get("/status")
+
+C:\Zerenthis\backend\app\auto_engine.py:94
+@router.get("/leaderboard")
+
+C:\Zerenthis\backend\app\body_engine.py:116
+            "topic": input_data.get("topic", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:117
+            "buyer": input_data.get("buyer", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:118
+            "promise": input_data.get("promise", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:119
+            "niche": input_data.get("niche", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:120
+            "tone": input_data.get("tone", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:121
+            "bonus": input_data.get("bonus", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:122
+            "notes": input_data.get("notes", "")
+
+C:\Zerenthis\backend\app\body_engine.py:125
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:126
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\body_engine.py:127
+            "audio": package.get("audio", "")
+
+C:\Zerenthis\backend\app\body_engine.py:130
+            "script": package.get("script", "")
+
+C:\Zerenthis\backend\app\body_engine.py:132
+        "distribution": meta.get("tiktok", {}),
+
+C:\Zerenthis\backend\app\body_engine.py:133
+        "youtube": meta.get("youtube", {}),
+
+C:\Zerenthis\backend\app\body_engine.py:134
+        "monetization": meta.get("monetization", {}),
+
+C:\Zerenthis\backend\app\body_engine.py:135
+        "evolution": meta.get("evolution", {}),
+
+C:\Zerenthis\backend\app\browser_operator.py:45
+    url = (action.get("url") or "").lower()
+
+C:\Zerenthis\backend\app\browser_operator.py:46
+    op = (action.get("operation") or "").lower()
+
+C:\Zerenthis\backend\app\browser_operator.py:47
+    text = (action.get("text") or "").lower()
+
+C:\Zerenthis\backend\app\browser_operator.py:104
+    pending = approvals.get("pending", [])
+
+C:\Zerenthis\backend\app\browser_operator.py:105
+    item = next((x for x in pending if x.get("id") == approval_id), None)
+
+C:\Zerenthis\backend\app\browser_operator.py:110
+    approvals["pending"] = [x for x in pending if x.get("id") != approval_id]
+
+C:\Zerenthis\backend\app\browser_operator.py:118
+    pending = approvals.get("pending", [])
+
+C:\Zerenthis\backend\app\browser_operator.py:119
+    item = next((x for x in pending if x.get("id") == approval_id), None)
+
+C:\Zerenthis\backend\app\browser_operator.py:124
+    approvals["pending"] = [x for x in pending if x.get("id") != approval_id]
+
+C:\Zerenthis\backend\app\browser_operator.py:131
+    url = action.get("url", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:132
+    operation = action.get("operation", "open")
+
+C:\Zerenthis\backend\app\browser_operator.py:133
+    selector = action.get("selector", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:134
+    text = action.get("text", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:135
+    topic = action.get("topic", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:171
+        "url": payload.get("url", ""),
+
+C:\Zerenthis\backend\app\browser_operator.py:172
+        "operation": payload.get("operation", "open"),
+
+C:\Zerenthis\backend\app\browser_operator.py:173
+        "selector": payload.get("selector", ""),
+
+C:\Zerenthis\backend\app\browser_operator.py:174
+        "text": payload.get("text", ""),
+
+C:\Zerenthis\backend\app\browser_operator.py:175
+        "topic": payload.get("topic", ""),
+
+C:\Zerenthis\backend\app\browser_operator.py:176
+        "notes": payload.get("notes", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:197
+    artifact_url = _write_output(f"{_slug(action.get('topic') or action.get('operation'))}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_browser.json", result)
+
+C:\Zerenthis\backend\app\browser_operator.py:216
+    approval_id = payload.get("id", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:221
+    action = item.get("action", {})
+
+C:\Zerenthis\backend\app\browser_operator.py:223
+    artifact_url = _write_output(f"{_slug(action.get('topic') or action.get('operation'))}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_browser.json", result)
+
+C:\Zerenthis\backend\app\browser_operator.py:244
+    approval_id = payload.get("id", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:251
+        "action": item.get("action", {}),
+
+C:\Zerenthis\backend\app\browser_operator.py:260
+@router.get("/api/operator/browser/status")
+
+C:\Zerenthis\backend\app\browser_operator.py:264
+    operations = ops.get("operations", [])
+
+C:\Zerenthis\backend\app\browser_operator.py:271
+            "pending_approvals": len(approvals.get("pending", [])),
+
+C:\Zerenthis\backend\app\browser_operator.py:272
+            "approval_history": len(approvals.get("history", []))
+
+C:\Zerenthis\backend\app\browser_operator.py:275
+        "pending_approvals": approvals.get("pending", [])[-15:],
+
+C:\Zerenthis\backend\app\browser_operator.py:276
+        "approval_history": approvals.get("history", [])[-15:]
+
+C:\Zerenthis\backend\app\browser_operator.py:281
+    url = payload.get("url", "")
+
+C:\Zerenthis\backend\app\browser_operator.py:282
+    topic = payload.get("topic", "browser scan target")
+
+C:\Zerenthis\backend\app\browser_operator.py:286
+        "selector": payload.get("selector", "body"),
+
+C:\Zerenthis\backend\app\browser_operator.py:287
+        "text": payload.get("text", ""),
+
+C:\Zerenthis\backend\app\browser_operator.py:289
+        "notes": payload.get("notes", "scan and route")
+
+C:\Zerenthis\backend\app\browser_operator.py:293
+    extracted = (result.get("extracted") or {})
+
+C:\Zerenthis\backend\app\browser_operator.py:298
+        "opportunities": extracted.get("opportunities", [])
+
+C:\Zerenthis\backend\app\content_engine.py:2
+    topic = item.get("topic", "")
+
+C:\Zerenthis\backend\app\content_engine.py:3
+    buyer = item.get("buyer", "")
+
+C:\Zerenthis\backend\app\content_engine.py:4
+    promise = item.get("promise", "")
+
+C:\Zerenthis\backend\app\core_engine.py:25
+    topic = pack.get("topic", "").lower()
+
+C:\Zerenthis\backend\app\core_engine.py:30
+    if len(pack.get("content", "")) > 1500:
+
+C:\Zerenthis\backend\app\core_engine.py:33
+    if "beginner" in pack.get("buyer", "").lower():
+
+C:\Zerenthis\backend\app\core_engine.py:53
+        "title": pack.get("topic"),
+
+C:\Zerenthis\backend\app\core_engine.py:55
+        "description": f"{pack.get('topic')}\n\nFor: {pack.get('buyer')}\n\n{pack.get('promise')}",
+
+C:\Zerenthis\backend\app\core_engine.py:56
+        "file": pack.get("file_name"),
+
+C:\Zerenthis\backend\app\decision_engine.py:27
+    topic = (pack.get("topic") or "").lower()
+
+C:\Zerenthis\backend\app\decision_engine.py:28
+    content = pack.get("content") or ""
+
+C:\Zerenthis\backend\app\decision_engine.py:29
+    buyer = (pack.get("buyer") or "").lower()
+
+C:\Zerenthis\backend\app\decision_engine.py:30
+    niche = (pack.get("niche") or "").lower()
+
+C:\Zerenthis\backend\app\decision_engine.py:51
+        item["status"] = item.get("status", "pending")
+
+C:\Zerenthis\backend\app\decision_engine.py:53
+    queue = sorted(queue, key=lambda x: x.get("score", 0), reverse=True)
+
+C:\Zerenthis\backend\app\decision_engine.py:63
+        if item.get("status") != "posted":
+
+C:\Zerenthis\backend\app\decision_engine.py:70
+        if item.get("topic") == title:
+
+C:\Zerenthis\backend\app\evals.py:114
+    text = payload.get("text", "")
+
+C:\Zerenthis\backend\app\evals.py:115
+    name = payload.get("name", "eval_run")
+
+C:\Zerenthis\backend\app\evals.py:147
+@router.get("/api/eval/trace/{trace_id}")
+
+C:\Zerenthis\backend\app\evals.py:159
+@router.get("/api/eval/recent")
+
+C:\Zerenthis\backend\app\evolution_engine.py:27
+        p = w.get("payload",{})
+
+C:\Zerenthis\backend\app\evolution_engine.py:28
+        niche = p.get("niche","")
+
+C:\Zerenthis\backend\app\evolution_engine.py:29
+        buyer = p.get("buyer","")
+
+C:\Zerenthis\backend\app\evolution_engine.py:31
+        niche_count[niche] = niche_count.get(niche,0)+1
+
+C:\Zerenthis\backend\app\evolution_engine.py:32
+        buyer_count[buyer] = buyer_count.get(buyer,0)+1
+
+C:\Zerenthis\backend\app\evo_engine.py:48
+        if m["idea"].get("title") == idea.get("title"):
+
+C:\Zerenthis\backend\app\evo_engine.py:168
+    for item in mem.get("history", []):
+
+C:\Zerenthis\backend\app\evo_engine.py:175
+    elif mem.get("top"):
+
+C:\Zerenthis\backend\app\expansion.py:23
+    title = product.get("title")
+
+C:\Zerenthis\backend\app\expansion.py:43
+            "title": p.get("title"),
+
+C:\Zerenthis\backend\app\expansion_engine.py:24
+    topic = item.get("topic", "")
+
+C:\Zerenthis\backend\app\expansion_engine.py:25
+    buyer = item.get("buyer", "")
+
+C:\Zerenthis\backend\app\expansion_engine.py:26
+    promise = item.get("promise", "")
+
+C:\Zerenthis\backend\app\expansion_engine.py:27
+    content = item.get("content", "")
+
+C:\Zerenthis\backend\app\expansion_engine.py:28
+    niche = item.get("niche", "")
+
+C:\Zerenthis\backend\app\expansion_engine.py:29
+    tone = item.get("tone", "")
+
+C:\Zerenthis\backend\app\failsafe.py:79
+@router.get("/api/failsafe/status")
+
+C:\Zerenthis\backend\app\failsafe.py:81
+    errors = _read_json(ERROR_FILE, {}).get("errors", [])
+
+C:\Zerenthis\backend\app\failsafe.py:82
+    recovery = _read_json(RECOVERY_FILE, {}).get("events", [])
+
+C:\Zerenthis\backend\app\failsafe.py:105
+    action = data.get("action", "unknown")
+
+C:\Zerenthis\backend\app\feedback_engine.py:60
+        if item["idea"].get("title") == idea.get("title"):
+
+C:\Zerenthis\backend\app\feedback_engine.py:92
+    for item in mem.get("history", []):
+
+C:\Zerenthis\backend\app\founder.py:21
+    return bool(key) and request.headers.get("x-founder-key") == key
+
+C:\Zerenthis\backend\app\founder.py:28
+@router.get("/api/founder/ping")
+
+C:\Zerenthis\backend\app\founder.py:46
+        "topic": data.get("topic", "Faceless TikTok AI starter pack for beginners"),
+
+C:\Zerenthis\backend\app\founder.py:47
+        "buyer": data.get("buyer", "New creators"),
+
+C:\Zerenthis\backend\app\founder.py:48
+        "promise": data.get("promise", "start posting quickly"),
+
+C:\Zerenthis\backend\app\founder.py:49
+        "niche": data.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\founder.py:50
+        "tone": data.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\founder.py:51
+        "bonus": data.get("bonus", "hook templates"),
+
+C:\Zerenthis\backend\app\founder.py:52
+        "notes": data.get("notes", "Founder cash-machine run")
+
+C:\Zerenthis\backend\app\founder.py:56
+    script = package.get("script") or (
+
+C:\Zerenthis\backend\app\founder.py:113
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\founder.py:114
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\founder.py:115
+            "audio": package.get("audio", ""),
+
+C:\Zerenthis\backend\app\founder.py:119
+            "tiktok": distribution.get("tiktok", []),
+
+C:\Zerenthis\backend\app\founder.py:149
+    for item in distribution.get("tiktok", [])[:3]:
+
+C:\Zerenthis\backend\app\founder.py:159
+        "content": distribution.get("youtube_long", {})
+
+C:\Zerenthis\backend\app\founder.py:168
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\founder.py:169
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\founder.py:170
+            "audio": package.get("audio", ""),
+
+C:\Zerenthis\backend\app\founder.py:171
+            "video_url": _asset_url(package.get("video", "")),
+
+C:\Zerenthis\backend\app\founder.py:172
+            "thumbnail_url": _asset_url(package.get("thumbnail", "")),
+
+C:\Zerenthis\backend\app\founder.py:173
+            "audio_url": _asset_url(package.get("audio", "")),
+
+C:\Zerenthis\backend\app\god_mode.py:50
+    return min(["monetization", "virality", "clarity"], key=lambda k: scores.get(k, 5))
+
+C:\Zerenthis\backend\app\god_mode.py:95
+    topic_prefix = rule.get("topic_prefix", "")
+
+C:\Zerenthis\backend\app\god_mode.py:96
+    topic_suffix = rule.get("topic_suffix", "")
+
+C:\Zerenthis\backend\app\god_mode.py:97
+    promise_prefix = rule.get("promise_prefix", "")
+
+C:\Zerenthis\backend\app\god_mode.py:105
+    if rule.get("notes"):
+
+C:\Zerenthis\backend\app\god_mode.py:108
+    if rule.get("bonus"):
+
+C:\Zerenthis\backend\app\god_mode.py:128
+    script = package.get("script", "")
+
+C:\Zerenthis\backend\app\god_mode.py:130
+    topic = data.get("topic", "Generated Content")
+
+C:\Zerenthis\backend\app\god_mode.py:131
+    buyer = data.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\god_mode.py:132
+    promise = data.get("promise", "grow faster")
+
+C:\Zerenthis\backend\app\god_mode.py:133
+    niche = data.get("niche", "Content")
+
+C:\Zerenthis\backend\app\god_mode.py:134
+    tone = data.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\god_mode.py:135
+    bonus = data.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\god_mode.py:136
+    notes = data.get("notes", "fast execution")
+
+C:\Zerenthis\backend\app\god_mode.py:204
+        if m.get("topic") == topic and m.get("weakness") == weakness
+
+C:\Zerenthis\backend\app\god_mode.py:208
+    matches.sort(key=lambda m: m.get("time", ""), reverse=True)
+
+C:\Zerenthis\backend\app\god_mode.py:215
+    if entry.get("result") not in ("fail", "skip"):
+
+C:\Zerenthis\backend\app\god_mode.py:217
+    t = _parse_time(entry.get("time"))
+
+C:\Zerenthis\backend\app\god_mode.py:233
+    target = sorted(history, key=lambda x: x.get("scores", {}).get("overall", 5))[0]
+
+C:\Zerenthis\backend\app\god_mode.py:234
+    topic = target.get("topic", "")
+
+C:\Zerenthis\backend\app\god_mode.py:235
+    scores = target.get("scores", {})
+
+C:\Zerenthis\backend\app\god_mode.py:237
+    old_score = scores.get("overall", 0)
+
+C:\Zerenthis\backend\app\god_mode.py:248
+        "buyer": target.get("buyer", "Founders"),
+
+C:\Zerenthis\backend\app\god_mode.py:249
+        "promise": target.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\god_mode.py:250
+        "niche": target.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\god_mode.py:266
+            score = manifest.get("scores", {}).get("overall", 0)
+
+C:\Zerenthis\backend\app\god_mode.py:267
+            print("Variant score:", score, "| Topic:", manifest.get("input", {}).get("topic", ""))
+
+C:\Zerenthis\backend\app\god_mode.py:286
+        if dist.get("tiktok"):
+
+C:\Zerenthis\backend\app\guarantee.py:20
+    topic = payload.get("topic", "Untitled")
+
+C:\Zerenthis\backend\app\guarantee.py:28
+            file_url = result.get("file_url")
+
+C:\Zerenthis\backend\app\inbox.py:75
+    queue["tasks"] = sorted(queue["tasks"], key=lambda x: (-int(x.get("priority", 5)), x.get("created_at", "")))[-500:]
+
+C:\Zerenthis\backend\app\inbox.py:81
+    for t in queue.get("tasks", []):
+
+C:\Zerenthis\backend\app\inbox.py:82
+        if t.get("id") == task_id:
+
+C:\Zerenthis\backend\app\inbox.py:88
+    for i, t in enumerate(queue.get("tasks", [])):
+
+C:\Zerenthis\backend\app\inbox.py:89
+        if t.get("id") == task_id:
+
+C:\Zerenthis\backend\app\inbox.py:122
+    for i, p in enumerate(data.get("projects", [])):
+
+C:\Zerenthis\backend\app\inbox.py:123
+        if p.get("id") == project_id:
+
+C:\Zerenthis\backend\app\inbox.py:134
+    for i, p in enumerate(data.get("projects", [])):
+
+C:\Zerenthis\backend\app\inbox.py:135
+        if p.get("id") == project_id:
+
+C:\Zerenthis\backend\app\inbox.py:148
+    queued = [t for t in queue.get("tasks", []) if t.get("status") == "queued"]
+
+C:\Zerenthis\backend\app\inbox.py:149
+    queued = sorted(queued, key=lambda x: (-int(x.get("priority", 5)), x.get("created_at", "")))
+
+C:\Zerenthis\backend\app\inbox.py:159
+    kind = (task.get("kind") or "").lower()
+
+C:\Zerenthis\backend\app\inbox.py:160
+    payload = task.get("payload") or {}
+
+C:\Zerenthis\backend\app\inbox.py:161
+    title = task.get("title", "task")
+
+C:\Zerenthis\backend\app\inbox.py:167
+                "topic": payload.get("topic", title),
+
+C:\Zerenthis\backend\app\inbox.py:168
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\inbox.py:169
+                "promise": payload.get("promise", "move faster"),
+
+C:\Zerenthis\backend\app\inbox.py:170
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\inbox.py:171
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\inbox.py:172
+                "bonus": payload.get("bonus", "durable task hooks"),
+
+C:\Zerenthis\backend\app\inbox.py:173
+                "notes": payload.get("notes", "durable inbox task execution")
+
+C:\Zerenthis\backend\app\inbox.py:183
+                "topic": payload.get("topic", title),
+
+C:\Zerenthis\backend\app\inbox.py:184
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\inbox.py:185
+                "promise": payload.get("promise", "make money faster"),
+
+C:\Zerenthis\backend\app\inbox.py:186
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\inbox.py:187
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\inbox.py:188
+                "bonus": payload.get("bonus", "durable monetization stack"),
+
+C:\Zerenthis\backend\app\inbox.py:189
+                "notes": payload.get("notes", "durable inbox monetize execution")
+
+C:\Zerenthis\backend\app\inbox.py:199
+                "topic": payload.get("topic", title),
+
+C:\Zerenthis\backend\app\inbox.py:200
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\inbox.py:201
+                "promise": payload.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\inbox.py:202
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\inbox.py:203
+                "notes": payload.get("notes", "durable inbox winner execution")
+
+C:\Zerenthis\backend\app\inbox.py:221
+        name=payload.get("name", "Untitled Project"),
+
+C:\Zerenthis\backend\app\inbox.py:222
+        objective=payload.get("objective", ""),
+
+C:\Zerenthis\backend\app\inbox.py:223
+        metadata=payload.get("metadata", {})
+
+C:\Zerenthis\backend\app\inbox.py:234
+        title=payload.get("title", "Untitled Task"),
+
+C:\Zerenthis\backend\app\inbox.py:235
+        kind=payload.get("kind", "general"),
+
+C:\Zerenthis\backend\app\inbox.py:236
+        payload=payload.get("payload", {}),
+
+C:\Zerenthis\backend\app\inbox.py:237
+        priority=int(payload.get("priority", 5)),
+
+C:\Zerenthis\backend\app\inbox.py:238
+        project_id=payload.get("project_id", "")
+
+C:\Zerenthis\backend\app\inbox.py:240
+    if task.get("project_id"):
+
+C:\Zerenthis\backend\app\inbox.py:258
+    update_task(task["id"], status="running", attempts=int(task.get("attempts", 0)) + 1)
+
+C:\Zerenthis\backend\app\inbox.py:262
+    artifact_url = _write_output(f"{_slug(task.get('title','task'))}_task_{stamp}.json", {
+
+C:\Zerenthis\backend\app\inbox.py:268
+    final_status = "completed" if outcome.get("status") in ("ok", "fallback") else "failed"
+
+C:\Zerenthis\backend\app\inbox.py:273
+        error=outcome.get("error", "")
+
+C:\Zerenthis\backend\app\inbox.py:276
+    if task.get("project_id"):
+
+C:\Zerenthis\backend\app\inbox.py:280
+            "title": task.get("title", ""),
+
+C:\Zerenthis\backend\app\inbox.py:287
+                "text": f"Completed task: {task.get('title','')}"
+
+C:\Zerenthis\backend\app\inbox.py:297
+@router.get("/api/inbox/status")
+
+C:\Zerenthis\backend\app\inbox.py:302
+    tasks = queue.get("tasks", [])
+
+C:\Zerenthis\backend\app\inbox.py:303
+    queued = [t for t in tasks if t.get("status") == "queued"]
+
+C:\Zerenthis\backend\app\inbox.py:304
+    running = [t for t in tasks if t.get("status") == "running"]
+
+C:\Zerenthis\backend\app\inbox.py:305
+    completed = [t for t in tasks if t.get("status") == "completed"]
+
+C:\Zerenthis\backend\app\inbox.py:306
+    failed = [t for t in tasks if t.get("status") == "failed"]
+
+C:\Zerenthis\backend\app\inbox.py:316
+            "projects": len(projects.get("projects", []))
+
+C:\Zerenthis\backend\app\inbox.py:319
+        "recent_tasks": sorted(tasks, key=lambda x: x.get("updated_at", ""), reverse=True)[:12],
+
+C:\Zerenthis\backend\app\inbox.py:320
+        "recent_projects": sorted(projects.get("projects", []), key=lambda x: x.get("updated_at", ""), reverse=True)[:12]
+
+C:\Zerenthis\backend\app\inbox.py:323
+@router.get("/api/inbox/project/{project_id}")
+
+C:\Zerenthis\backend\app\inbox.py:326
+    project = next((p for p in projects.get("projects", []) if p.get("id") == project_id), None)
+
+C:\Zerenthis\backend\app\inbox.py:331
+    task_lookup = {t.get("id"): t for t in queue.get("tasks", [])}
+
+C:\Zerenthis\backend\app\inbox.py:332
+    project_tasks = [task_lookup[tid] for tid in project.get("task_ids", []) if tid in task_lookup]
+
+C:\Zerenthis\backend\app\inbox.py:343
+    project_id = payload.get("project_id", "")
+
+C:\Zerenthis\backend\app\inbox.py:344
+    note = payload.get("note", "")
+
+C:\Zerenthis\backend\app\inbox.py:345
+    bucket = payload.get("bucket", "notes")
+
+C:\Zerenthis\backend\app\intelligence.py:55
+        float(scores.get("clarity", 0)) * w.get("clarity", 0) +
+
+C:\Zerenthis\backend\app\intelligence.py:56
+        float(scores.get("virality", 0)) * w.get("virality", 0) +
+
+C:\Zerenthis\backend\app\intelligence.py:57
+        float(scores.get("monetization", 0)) * w.get("monetization", 0)
+
+C:\Zerenthis\backend\app\intelligence.py:64
+        s = float(scores.get(k, target))
+
+C:\Zerenthis\backend\app\intelligence.py:66
+        new_w[k] = max(0.05, min(0.9, float(new_w.get(k, DEFAULT_WEIGHTS[k])) * (1.0 + 0.5 * delta)))
+
+C:\Zerenthis\backend\app\intelligence.py:74
+    data = sorted(data, key=lambda x: x.get("scores", {}).get("overall", 0), reverse=True)[:200]
+
+C:\Zerenthis\backend\app\intelligence.py:91
+        if (e.get("topic") or "").lower() == t:
+
+C:\Zerenthis\backend\app\intelligence.py:106
+    scores = payload.get("scores") or {}
+
+C:\Zerenthis\backend\app\intelligence.py:117
+    scores = payload.get("scores") or {}
+
+C:\Zerenthis\backend\app\intelligence.py:118
+    topic = payload.get("topic", "unknown")
+
+C:\Zerenthis\backend\app\intelligence.py:150
+    topic = payload.get("topic", "Faceless TikTok AI starter pack for beginners")
+
+C:\Zerenthis\backend\app\intelligence.py:151
+    buyer = payload.get("buyer", "New creators")
+
+C:\Zerenthis\backend\app\intelligence.py:152
+    promise = payload.get("promise", "start posting quickly")
+
+C:\Zerenthis\backend\app\intelligence.py:153
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\intelligence.py:154
+    tone = payload.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\intelligence.py:155
+    bonus = payload.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\intelligence.py:193
+    script = package.get("script") or (
+
+C:\Zerenthis\backend\app\intelligence.py:209
+            titles = [v.get("title", "") for v in variants if isinstance(v, dict)]
+
+C:\Zerenthis\backend\app\intelligence.py:254
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\intelligence.py:255
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\intelligence.py:256
+            "audio": package.get("audio", "")
+
+C:\Zerenthis\backend\app\knowledge.py:101
+    base = float(item.get("importance", 5))
+
+C:\Zerenthis\backend\app\knowledge.py:102
+    profit = float(item.get("profitability", 5))
+
+C:\Zerenthis\backend\app\knowledge.py:103
+    confidence = float(item.get("confidence", 5))
+
+C:\Zerenthis\backend\app\knowledge.py:107
+    item_niche = (item.get("niche") or "").strip().lower()
+
+C:\Zerenthis\backend\app\knowledge.py:108
+    item_buyer = (item.get("buyer") or "").strip().lower()
+
+C:\Zerenthis\backend\app\knowledge.py:111
+        niche = (pack.get("niche") or "").strip().lower()
+
+C:\Zerenthis\backend\app\knowledge.py:112
+        buyer = (pack.get("buyer") or "").strip().lower()
+
+C:\Zerenthis\backend\app\knowledge.py:117
+        for kw in pack.get("keywords", []) or []:
+
+C:\Zerenthis\backend\app\knowledge.py:118
+            if kw in (item.get("tokens") or []):
+
+C:\Zerenthis\backend\app\knowledge.py:124
+    i_tokens = item.get("tokens") or _tokenize(item.get("text", ""))
+
+C:\Zerenthis\backend\app\knowledge.py:126
+    recency = _recency_score(item.get("created_at", ""))
+
+C:\Zerenthis\backend\app\knowledge.py:171
+        payload.get("name", "Untitled Pack"),
+
+C:\Zerenthis\backend\app\knowledge.py:172
+        payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\knowledge.py:173
+        payload.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\knowledge.py:175
+    pack["keywords"] = payload.get("keywords", []) or []
+
+C:\Zerenthis\backend\app\knowledge.py:176
+    pack["principles"] = payload.get("principles", []) or []
+
+C:\Zerenthis\backend\app\knowledge.py:177
+    pack["offers"] = payload.get("offers", []) or []
+
+C:\Zerenthis\backend\app\knowledge.py:178
+    pack["hooks"] = payload.get("hooks", []) or []
+
+C:\Zerenthis\backend\app\knowledge.py:179
+    pack["risks"] = payload.get("risks", []) or []
+
+C:\Zerenthis\backend\app\knowledge.py:193
+    name = payload.get("name", "Generated Knowledge Pack")
+
+C:\Zerenthis\backend\app\knowledge.py:194
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\knowledge.py:195
+    buyer = payload.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\knowledge.py:196
+    source_text = payload.get("text", "")
+
+C:\Zerenthis\backend\app\knowledge.py:244
+    text = payload.get("text", "")
+
+C:\Zerenthis\backend\app\knowledge.py:249
+        "topic": payload.get("topic", ""),
+
+C:\Zerenthis\backend\app\knowledge.py:250
+        "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\knowledge.py:251
+        "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\knowledge.py:252
+        "importance": float(payload.get("importance", 5)),
+
+C:\Zerenthis\backend\app\knowledge.py:253
+        "profitability": float(payload.get("profitability", 5)),
+
+C:\Zerenthis\backend\app\knowledge.py:254
+        "confidence": float(payload.get("confidence", 5)),
+
+C:\Zerenthis\backend\app\knowledge.py:255
+        "source": payload.get("source", "manual"),
+
+C:\Zerenthis\backend\app\knowledge.py:270
+    query = payload.get("query", "")
+
+C:\Zerenthis\backend\app\knowledge.py:271
+    pack_names = set([str(x).strip().lower() for x in (payload.get("pack_names", []) or [])])
+
+C:\Zerenthis\backend\app\knowledge.py:273
+    packs = _load_packs().get("packs", [])
+
+C:\Zerenthis\backend\app\knowledge.py:275
+        packs = [p for p in packs if (p.get("name", "") or "").strip().lower() in pack_names]
+
+C:\Zerenthis\backend\app\knowledge.py:277
+    items = _load_memory().get("items", [])
+
+C:\Zerenthis\backend\app\knowledge.py:295
+                "topic": r["item"].get("topic", ""),
+
+C:\Zerenthis\backend\app\knowledge.py:311
+    query = payload.get("query", "")
+
+C:\Zerenthis\backend\app\knowledge.py:312
+    topic = payload.get("topic", "Knowledge Guided Topic")
+
+C:\Zerenthis\backend\app\knowledge.py:313
+    buyer = payload.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\knowledge.py:314
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\knowledge.py:315
+    promise = payload.get("promise", "move faster")
+
+C:\Zerenthis\backend\app\knowledge.py:317
+    packs = _load_packs().get("packs", [])
+
+C:\Zerenthis\backend\app\knowledge.py:318
+    items = _load_memory().get("items", [])
+
+C:\Zerenthis\backend\app\knowledge.py:330
+            key=lambda p: sum(1 for kw in (p.get("keywords") or []) if kw in _tokenize(query or topic)),
+
+C:\Zerenthis\backend\app\knowledge.py:335
+        f"- {r['item'].get('text','')[:220]}"
+
+C:\Zerenthis\backend\app\knowledge.py:340
+    if best_pack and best_pack.get("keywords"):
+
+C:\Zerenthis\backend\app\knowledge.py:403
+@router.get("/api/knowledge/status")
+
+C:\Zerenthis\backend\app\knowledge.py:405
+    packs = _load_packs().get("packs", [])
+
+C:\Zerenthis\backend\app\knowledge.py:406
+    memory = _load_memory().get("items", [])
+
+C:\Zerenthis\backend\app\knowledge.py:407
+    rankings = _load_rankings().get("history", [])
+
+C:\Zerenthis\backend\app\knowledge.py:409
+    recent_memory = sorted(memory, key=lambda x: x.get("created_at", ""), reverse=True)[:12]
+
+C:\Zerenthis\backend\app\knowledge.py:410
+    recent_packs = sorted(packs, key=lambda x: x.get("updated_at", x.get("created_at", "")), reverse=True)[:12]
+
+C:\Zerenthis\backend\app\knowledge.py:411
+    recent_rankings = sorted(rankings, key=lambda x: x.get("time", ""), reverse=True)[:12]
+
+C:\Zerenthis\backend\app\learning.py:60
+    bucket[key] = int(bucket.get(key, 0)) + amount
+
+C:\Zerenthis\backend\app\learning.py:94
+    overall = float(scores.get("overall", (float(scores.get("clarity", 0)) + float(scores.get("virality", 0)) + float(scores.get("monetization", 0))) / 3 if scores else 0))
+
+C:\Zerenthis\backend\app\learning.py:112
+    data["runs"] = int(data.get("runs", 0)) + 1
+
+C:\Zerenthis\backend\app\learning.py:135
+    good = data.get("winning_keywords", {})
+
+C:\Zerenthis\backend\app\learning.py:136
+    bad = data.get("losing_keywords", {})
+
+C:\Zerenthis\backend\app\learning.py:141
+    kept = [w for w in words if good.get(w, 0) >= bad.get(w, 0)]
+
+C:\Zerenthis\backend\app\learning.py:151
+    buyer_bias = _top_items(data.get("winning_buyers", {}), 3)
+
+C:\Zerenthis\backend\app\learning.py:152
+    niche_bias = _top_items(data.get("winning_niches", {}), 3)
+
+C:\Zerenthis\backend\app\learning.py:179
+    clarity = float(scores.get("clarity", 0))
+
+C:\Zerenthis\backend\app\learning.py:180
+    virality = float(scores.get("virality", 0))
+
+C:\Zerenthis\backend\app\learning.py:181
+    monetization = float(scores.get("monetization", 0))
+
+C:\Zerenthis\backend\app\learning.py:182
+    overall = float(scores.get("overall", (clarity + virality + monetization) / 3 if scores else 0))
+
+C:\Zerenthis\backend\app\learning.py:196
+    losing_words = set(w for w, n in _top_items(data.get("losing_keywords", {}), 20) if n >= 2)
+
+C:\Zerenthis\backend\app\learning.py:203
+    if data.get("losing_buyers", {}).get(buyer_key, 0) >= 3:
+
+C:\Zerenthis\backend\app\learning.py:205
+    if data.get("losing_niches", {}).get(niche_key, 0) >= 3:
+
+C:\Zerenthis\backend\app\learning.py:232
+    topic = payload.get("topic", "unknown")
+
+C:\Zerenthis\backend\app\learning.py:233
+    buyer = payload.get("buyer", "creators")
+
+C:\Zerenthis\backend\app\learning.py:234
+    niche = payload.get("niche", "content monetization")
+
+C:\Zerenthis\backend\app\learning.py:235
+    scores = payload.get("scores", {})
+
+C:\Zerenthis\backend\app\learning.py:251
+    topic = payload.get("topic", "unknown")
+
+C:\Zerenthis\backend\app\learning.py:252
+    buyer = payload.get("buyer", "creators")
+
+C:\Zerenthis\backend\app\learning.py:253
+    niche = payload.get("niche", "content monetization")
+
+C:\Zerenthis\backend\app\learning.py:254
+    scores = payload.get("scores", {})
+
+C:\Zerenthis\backend\app\learning.py:264
+    topic = payload.get("topic", "Faceless TikTok AI starter pack for beginners")
+
+C:\Zerenthis\backend\app\learning.py:265
+    buyer = payload.get("buyer", "New creators")
+
+C:\Zerenthis\backend\app\learning.py:266
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\learning.py:267
+    promise = payload.get("promise", "start posting quickly")
+
+C:\Zerenthis\backend\app\learning.py:268
+    tone = payload.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\learning.py:269
+    bonus = payload.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\learning.py:302
+    scores = run.get("scores", {"overall": 7, "clarity": 7, "virality": 7, "monetization": 7})
+
+C:\Zerenthis\backend\app\learning.py:339
+@router.get("/api/learning/status")
+
+C:\Zerenthis\backend\app\learning.py:347
+        "runs_learned": patterns.get("runs", 0),
+
+C:\Zerenthis\backend\app\learning.py:348
+        "top_winning_keywords": _top_items(patterns.get("winning_keywords", {}), 12),
+
+C:\Zerenthis\backend\app\learning.py:349
+        "top_losing_keywords": _top_items(patterns.get("losing_keywords", {}), 12),
+
+C:\Zerenthis\backend\app\learning.py:350
+        "top_winning_buyers": _top_items(patterns.get("winning_buyers", {}), 8),
+
+C:\Zerenthis\backend\app\learning.py:351
+        "top_winning_niches": _top_items(patterns.get("winning_niches", {}), 8),
+
+C:\Zerenthis\backend\app\learning_engine.py:43
+        topic = (row.get("topic") or "").lower()
+
+C:\Zerenthis\backend\app\learning_engine.py:44
+        views = int(row.get("views", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:45
+        likes = int(row.get("likes", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:46
+        comments = int(row.get("comments", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:47
+        shares = int(row.get("shares", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:48
+        watch_time = float(row.get("watch_time", 0.0))
+
+C:\Zerenthis\backend\app\learning_engine.py:68
+            bonus[w] = bonus.get(w, 0) + quality
+
+C:\Zerenthis\backend\app\learning_engine.py:78
+        topic = row.get("topic") or ""
+
+C:\Zerenthis\backend\app\learning_engine.py:79
+        views = int(row.get("views", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:80
+        likes = int(row.get("likes", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:81
+        comments = int(row.get("comments", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:82
+        shares = int(row.get("shares", 0))
+
+C:\Zerenthis\backend\app\learning_engine.py:83
+        watch_time = float(row.get("watch_time", 0.0))
+
+C:\Zerenthis\backend\app\learning_engine.py:102
+        topic_scores[topic] = topic_scores.get(topic, 0) + score
+
+C:\Zerenthis\backend\app\learning_engine.py:118
+    topic_scores = learning.get("topic_scores", {})
+
+C:\Zerenthis\backend\app\learning_engine.py:119
+    keyword_scores = learning.get("keyword_scores", {})
+
+C:\Zerenthis\backend\app\learning_engine.py:121
+    topic = pack.get("topic") or ""
+
+C:\Zerenthis\backend\app\learning_engine.py:131
+        bonus += min(2, int(keyword_scores.get(w, 0)))
+
+C:\Zerenthis\backend\app\limit_lock.py:39
+    xff = request.headers.get("x-forwarded-for", "").strip()
+
+C:\Zerenthis\backend\app\limit_lock.py:48
+    hdr_key = request.headers.get("x-founder-key", "").strip()
+
+C:\Zerenthis\backend\app\limit_lock.py:96
+            day_bucket[ip] = day_bucket.get(ip, 0) + 1
+
+C:\Zerenthis\backend\app\limit_lock.py:113
+        "daily_counts": state.get("daily", {}).get(today, {}),
+
+C:\Zerenthis\backend\app\limit_lock.py:114
+        "tracked_ips": len(state.get("ips", {}))
+
+C:\Zerenthis\backend\app\limit_lock.py:117
+@_router.get("/api/limits/stats")
+
+C:\Zerenthis\backend\app\live_mode.py:159
+    if not state.get("niche") and ti.get("niche"):
+
+C:\Zerenthis\backend\app\live_mode.py:161
+    if not state.get("buyer") and ti.get("buyer"):
+
+C:\Zerenthis\backend\app\live_mode.py:163
+    if not state.get("promise") and ti.get("promise"):
+
+C:\Zerenthis\backend\app\live_mode.py:165
+    if ti.get("intent"):
+
+C:\Zerenthis\backend\app\live_mode.py:168
+    if vi.get("niche"):
+
+C:\Zerenthis\backend\app\live_mode.py:169
+        state["niche"] = vi["niche"] if state.get("niche") in ("", "general") else state["niche"]
+
+C:\Zerenthis\backend\app\live_mode.py:171
+    if not state.get("topic"):
+
+C:\Zerenthis\backend\app\live_mode.py:172
+        state["topic"] = f"{state.get('niche', 'AI')} live strategy"
+
+C:\Zerenthis\backend\app\live_mode.py:174
+    if not state.get("buyer"):
+
+C:\Zerenthis\backend\app\live_mode.py:176
+    if not state.get("promise"):
+
+C:\Zerenthis\backend\app\live_mode.py:178
+    if not state.get("niche"):
+
+C:\Zerenthis\backend\app\live_mode.py:180
+    if not state.get("intent"):
+
+C:\Zerenthis\backend\app\live_mode.py:186
+    topic = state.get("topic", "AI live strategy")
+
+C:\Zerenthis\backend\app\live_mode.py:187
+    buyer = state.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\live_mode.py:188
+    promise = state.get("promise", "move faster")
+
+C:\Zerenthis\backend\app\live_mode.py:189
+    niche = state.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\live_mode.py:190
+    intent = state.get("intent", "general")
+
+C:\Zerenthis\backend\app\live_mode.py:227
+    mode = payload.get("mode", "live")
+
+C:\Zerenthis\backend\app\live_mode.py:238
+    session_id = payload.get("session_id", "")
+
+C:\Zerenthis\backend\app\live_mode.py:239
+    text = payload.get("text", "")
+
+C:\Zerenthis\backend\app\live_mode.py:240
+    topic = payload.get("topic", "")
+
+C:\Zerenthis\backend\app\live_mode.py:250
+    session["state"] = _merge_state(session.get("state", {}), text_intel=text_intel)
+
+C:\Zerenthis\backend\app\live_mode.py:254
+    for f in session.get("files", [])[-6:]:
+
+C:\Zerenthis\backend\app\live_mode.py:255
+        for tag in (f.get("analysis", {}) or {}).get("tags", []):
+
+C:\Zerenthis\backend\app\live_mode.py:288
+    session["state"] = _merge_state(session.get("state", {}), visual_intel=analysis)
+
+C:\Zerenthis\backend\app\live_mode.py:303
+    session_id = payload.get("session_id", "")
+
+C:\Zerenthis\backend\app\live_mode.py:304
+    filename = payload.get("filename", f"live_{uuid.uuid4().hex[:6]}.png")
+
+C:\Zerenthis\backend\app\live_mode.py:305
+    image_base64 = payload.get("image_base64", "")
+
+C:\Zerenthis\backend\app\live_mode.py:327
+    session["state"] = _merge_state(session.get("state", {}), visual_intel=analysis)
+
+C:\Zerenthis\backend\app\live_mode.py:342
+    session_id = payload.get("session_id", "")
+
+C:\Zerenthis\backend\app\live_mode.py:349
+    for m in session.get("messages", []):
+
+C:\Zerenthis\backend\app\live_mode.py:350
+        if m.get("kind") == "text":
+
+C:\Zerenthis\backend\app\live_mode.py:351
+            transcript_parts.append((m.get("content") or {}).get("text", ""))
+
+C:\Zerenthis\backend\app\live_mode.py:352
+    for f in session.get("files", []):
+
+C:\Zerenthis\backend\app\live_mode.py:353
+        for tag in (f.get("analysis", {}) or {}).get("tags", []):
+
+C:\Zerenthis\backend\app\live_mode.py:358
+    response = _build_live_response(session.get("state", {}), transcript, visual_notes)
+
+C:\Zerenthis\backend\app\live_mode.py:388
+        "state": session.get("state", {}),
+
+C:\Zerenthis\backend\app\live_mode.py:391
+        "message_count": len(session.get("messages", [])),
+
+C:\Zerenthis\backend\app\live_mode.py:392
+        "file_count": len(session.get("files", []))
+
+C:\Zerenthis\backend\app\live_mode.py:413
+@router.get("/api/live/session/{session_id}")
+
+C:\Zerenthis\backend\app\main.py:62
+@app.get("/")
+
+C:\Zerenthis\backend\app\main.py:67
+@app.get("/health")
+
+C:\Zerenthis\backend\app\main.py:72
+@app.get("/api/autonomy/status")
+
+C:\Zerenthis\backend\app\main.py:87
+@app.get("/api/goals")
+
+C:\Zerenthis\backend\app\main.py:97
+@app.get("/api/builder/guardrails")
+
+C:\Zerenthis\backend\app\main.py:104
+    return builder_probe_path(payload.get("path", ""))
+
+C:\Zerenthis\backend\app\main.py:112
+@app.get("/api/autopilot/builder-check")
+
+C:\Zerenthis\backend\app\main.py:124
+    task_type = payload.get("type")
+
+C:\Zerenthis\backend\app\main.py:125
+    data = payload.get("data", {})
+
+C:\Zerenthis\backend\app\main.py:129
+            goal=data.get("goal", "Safely improve module"),
+
+C:\Zerenthis\backend\app\main.py:130
+            target=data.get("target"),
+
+C:\Zerenthis\backend\app\main.py:131
+            reason=data.get("reason", ""),
+
+C:\Zerenthis\backend\app\main.py:132
+            priority=data.get("priority", "medium"),
+
+C:\Zerenthis\backend\app\main.py:179
+    target = payload.get("target", None)
+
+C:\Zerenthis\backend\app\main.py:183
+@app.get("/api/builder/stats")
+
+C:\Zerenthis\backend\app\main.py:191
+        task_type = payload.get("type")
+
+C:\Zerenthis\backend\app\main.py:192
+        data = payload.get("data", {})
+
+C:\Zerenthis\backend\app\main.py:196
+                goal=data.get("goal", "Safely improve module"),
+
+C:\Zerenthis\backend\app\main.py:197
+                target=data.get("target"),
+
+C:\Zerenthis\backend\app\main.py:198
+                reason=data.get("reason", ""),
+
+C:\Zerenthis\backend\app\main.py:199
+                priority=data.get("priority", "medium"),
+
+C:\Zerenthis\backend\app\main.py:229
+    max_cycles = int(payload.get("max_cycles", 5))
+
+C:\Zerenthis\backend\app\main.py:230
+    delay_seconds = float(payload.get("delay_seconds", 1.0))
+
+C:\Zerenthis\backend\app\main.py:233
+        task_type = task_payload.get("type")
+
+C:\Zerenthis\backend\app\main.py:234
+        data = task_payload.get("data", {})
+
+C:\Zerenthis\backend\app\main.py:238
+                goal=data.get("goal", "Safely improve module"),
+
+C:\Zerenthis\backend\app\main.py:239
+                target=data.get("target"),
+
+C:\Zerenthis\backend\app\main.py:240
+                reason=data.get("reason", ""),
+
+C:\Zerenthis\backend\app\main.py:241
+                priority=data.get("priority", "medium"),
+
+C:\Zerenthis\backend\app\main.py:272
+@app.get("/api/autopilot/queue")
+
+C:\Zerenthis\backend\app\main.py:344
+        products_block = outputs.get("products", {})
+
+C:\Zerenthis\backend\app\main.py:345
+        products = products_block.get("products", []) if isinstance(products_block, dict) else []
+
+C:\Zerenthis\backend\app\main.py:356
+@app.get("/api/builder/winner-targets")
+
+C:\Zerenthis\backend\app\main.py:374
+    data = payload.get("data", payload)
+
+C:\Zerenthis\backend\app\main.py:390
+        goal=data.get("goal", "Improve the strongest revenue pathway"),
+
+C:\Zerenthis\backend\app\main.py:392
+        reason=data.get("reason", "winner_driven"),
+
+C:\Zerenthis\backend\app\main.py:393
+        priority=data.get("priority", "high"),
+
+C:\Zerenthis\backend\app\main.py:414
+    goal = payload.get("goal", "Increase conversions and revenue")
+
+C:\Zerenthis\backend\app\main.py:464
+        products_block = outputs.get("products", {})
+
+C:\Zerenthis\backend\app\main.py:465
+        products = products_block.get("products", []) if isinstance(products_block, dict) else []
+
+C:\Zerenthis\backend\app\main.py:467
+        champion = outputs.get("champion_offer", {})
+
+C:\Zerenthis\backend\app\main.py:468
+        if isinstance(champion, dict) and champion.get("name"):
+
+C:\Zerenthis\backend\app\main.py:470
+                "name": champion.get("name", "Champion Offer"),
+
+C:\Zerenthis\backend\app\main.py:471
+                "price": champion.get("price", 0),
+
+C:\Zerenthis\backend\app\main.py:472
+                "description": champion.get("headline", "")
+
+C:\Zerenthis\backend\app\main.py:576
+@app.get("/api/autopilot/status")
+
+C:\Zerenthis\backend\app\main.py:588
+@app.get("/api/track/{link_id}")
+
+C:\Zerenthis\backend\app\main.py:616
+@app.get("/api/track/variant/{variant_id}")
+
+C:\Zerenthis\backend\app\main.py:692
+    return remember(data.get("message", ""))
+
+C:\Zerenthis\backend\app\main.py:696
+    return set_goal(data.get("goal", ""))
+
+C:\Zerenthis\backend\app\main.py:698
+@app.get("/api/companion/memory")
+
+C:\Zerenthis\backend\app\main.py:709
+        data.get("title", ""),
+
+C:\Zerenthis\backend\app\main.py:710
+        data.get("priority", "normal"),
+
+C:\Zerenthis\backend\app\main.py:711
+        data.get("notes", "")
+
+C:\Zerenthis\backend\app\main.py:714
+@app.get("/api/companion/tasks")
+
+C:\Zerenthis\backend\app\main.py:721
+        data.get("id", ""),
+
+C:\Zerenthis\backend\app\main.py:722
+        data.get("status"),
+
+C:\Zerenthis\backend\app\main.py:723
+        data.get("notes"),
+
+C:\Zerenthis\backend\app\main.py:724
+        data.get("last_action")
+
+C:\Zerenthis\backend\app\main.py:729
+    return resume_task(data.get("id", ""))
+
+C:\Zerenthis\backend\app\main.py:733
+    return complete_task(data.get("id", ""))
+
+C:\Zerenthis\backend\app\main.py:741
+    return classify_intent(data.get("message", ""))
+
+C:\Zerenthis\backend\app\main.py:743
+@app.get("/api/companion/intent/history")
+
+C:\Zerenthis\backend\app\main.py:753
+    return build_presence_reply(data.get("message", ""))
+
+C:\Zerenthis\backend\app\main.py:755
+@app.get("/api/companion/presence/state")
+
+C:\Zerenthis\backend\app\main.py:765
+    return build_directed_response(data.get("message", ""))
+
+C:\Zerenthis\backend\app\main.py:767
+@app.get("/api/companion/respond/state")
+
+C:\Zerenthis\backend\app\main.py:777
+    return build_emotional_reply(data.get("message", ""))
+
+C:\Zerenthis\backend\app\main.py:779
+@app.get("/api/companion/emotional/state")
+
+C:\Zerenthis\backend\app\monetization.py:53
+    monetization = float(scores.get("monetization", 7))
+
+C:\Zerenthis\backend\app\monetization.py:54
+    clarity = float(scores.get("clarity", 7))
+
+C:\Zerenthis\backend\app\monetization.py:55
+    virality = float(scores.get("virality", 7))
+
+C:\Zerenthis\backend\app\monetization.py:56
+    overall = float(scores.get("overall", (monetization + clarity + virality) / 3))
+
+C:\Zerenthis\backend\app\monetization.py:69
+    r = rules.get(band, DEFAULT_PRICING[band])
+
+C:\Zerenthis\backend\app\monetization.py:149
+    return stacks.get(price_band, stacks["mid_ticket"])
+
+C:\Zerenthis\backend\app\monetization.py:153
+    topic = payload.get("topic", "Faceless TikTok AI starter pack for beginners")
+
+C:\Zerenthis\backend\app\monetization.py:154
+    buyer = payload.get("buyer", "New creators")
+
+C:\Zerenthis\backend\app\monetization.py:155
+    promise = payload.get("promise", "start posting quickly")
+
+C:\Zerenthis\backend\app\monetization.py:156
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\monetization.py:157
+    tone = payload.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\monetization.py:158
+    bonus = payload.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\monetization.py:159
+    notes = payload.get("notes", "monetization sweep run")
+
+C:\Zerenthis\backend\app\monetization.py:182
+            titles = [v.get("title", "") for v in variants if isinstance(v, dict)]
+
+C:\Zerenthis\backend\app\money_sweep.py:36
+    topic = payload.get("topic", "Faceless TikTok AI starter pack for beginners")
+
+C:\Zerenthis\backend\app\money_sweep.py:37
+    buyer = payload.get("buyer", "New creators")
+
+C:\Zerenthis\backend\app\money_sweep.py:38
+    promise = payload.get("promise", "start posting quickly")
+
+C:\Zerenthis\backend\app\money_sweep.py:39
+    niche = payload.get("niche", "Content Monetization")
+
+C:\Zerenthis\backend\app\money_sweep.py:40
+    tone = payload.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\money_sweep.py:41
+    bonus = payload.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\money_sweep.py:42
+    notes = payload.get("notes", "Founder full-stack generate run")
+
+C:\Zerenthis\backend\app\money_sweep.py:79
+    script = package.get("script") or safe_script
+
+C:\Zerenthis\backend\app\money_sweep.py:101
+            titles = [v.get("title", "") for v in variants if isinstance(v, dict)]
+
+C:\Zerenthis\backend\app\money_sweep.py:158
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\money_sweep.py:159
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\money_sweep.py:160
+            "audio": package.get("audio", "")
+
+C:\Zerenthis\backend\app\reality_engine.py:34
+    views = entry.get("views",0)
+
+C:\Zerenthis\backend\app\reality_engine.py:35
+    likes = entry.get("likes",0)
+
+C:\Zerenthis\backend\app\reality_engine.py:36
+    sales = entry.get("sales",0)
+
+C:\Zerenthis\backend\app\routes_founder.py:11
+    user_input = payload.get("message", "")
+
+C:\Zerenthis\backend\app\safe_layer.py:43
+    result = res.get("result", {})
+
+C:\Zerenthis\backend\app\safe_layer.py:44
+    file_url = result.get("file_url") if isinstance(result, dict) else None
+
+C:\Zerenthis\backend\app\self_improver_engine.py:23
+        topic = item.get("topic","")
+
+C:\Zerenthis\backend\app\self_improver_engine.py:24
+        score = item.get("scores",{}).get("overall",5)
+
+C:\Zerenthis\backend\app\singularity_engine.py:575
+@router.get("/api/singularity/file/{name:path}")
+
+C:\Zerenthis\backend\app\singularity_engine.py:583
+@router.get("/api/podcast/file/{name:path}")
+
+C:\Zerenthis\backend\app\singularity_engine.py:591
+@router.get("/api/comic/file/{name:path}")
+
+C:\Zerenthis\backend\app\singularity_engine.py:599
+@router.get("/api/novel/file/{name:path}")
+
+C:\Zerenthis\backend\app\singularity_engine.py:607
+@router.get("/api/game/file/{name:path}")
+
+C:\Zerenthis\backend\app\singularity_engine.py:615
+@router.get("/api/package/file/{name:path}")
+
+C:\Zerenthis\backend\app\system_hardening.py:118
+@router.get("/api/health/system")
+
+C:\Zerenthis\backend\app\system_hardening.py:136
+@router.get("/api/health/logs")
+
+C:\Zerenthis\backend\app\system_hardening.py:166
+        log_event("verify_outputs", "output verification complete", {"count": result.get("output_count", 0)})
+
+C:\Zerenthis\backend\app\video_engine.py:72
+    topic = data.get("topic", "Generated Video")
+
+C:\Zerenthis\backend\app\video_engine.py:73
+    script = data.get("script") or data.get("content") or f"Today we are breaking down {topic}."
+
+C:\Zerenthis\backend\app\video_factory_engine.py:49
+    topic = data.get("topic", "Generated Video")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:50
+    buyer = data.get("buyer", "Creators")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:51
+    promise = data.get("promise", "grow faster")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:52
+    niche = data.get("niche", "Content")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:53
+    tone = data.get("tone", "Premium")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:54
+    bonus = data.get("bonus", "hook templates")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:55
+    notes = data.get("notes", "fast execution")
+
+C:\Zerenthis\backend\app\video_factory_engine.py:56
+    script = data.get("script") or data.get("content") or (
+
+C:\Zerenthis\backend\app\vision.py:124
+    b64 = payload.get("image_base64", "")
+
+C:\Zerenthis\backend\app\vision_hardening.py:147
+    text = payload.get("text", "")
+
+C:\Zerenthis\backend\app\vision_hardening.py:188
+    topic = payload.get("topic", "AI content strategy")
+
+C:\Zerenthis\backend\app\visual_engine.py:13
+        img = requests.get(url, timeout=30).content
+
+C:\Zerenthis\backend\app\visual_renderer.py:21
+        img_data = requests.get(url, timeout=20).content
+
+C:\Zerenthis\backend\app\winner_cycle.py:51
+            "topic": payload.get("topic", "Faceless TikTok AI starter pack for beginners"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:52
+            "buyer": payload.get("buyer", "New creators"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:53
+            "promise": payload.get("promise", "start posting quickly"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:54
+            "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:55
+            "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:56
+            "bonus": payload.get("bonus", "hook templates"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:57
+            "notes": payload.get("notes", "Winner cycle fallback run")
+
+C:\Zerenthis\backend\app\winner_cycle.py:60
+        best = sorted(runs, key=lambda r: r.get("scores", {}).get("overall", 0), reverse=True)[0]
+
+C:\Zerenthis\backend\app\winner_cycle.py:62
+            "topic": payload.get("topic") or best.get("topic", "Untitled"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:63
+            "buyer": payload.get("buyer") or best.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:64
+            "promise": payload.get("promise") or best.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:65
+            "niche": payload.get("niche") or best.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:66
+            "tone": payload.get("tone") or best.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:67
+            "bonus": payload.get("bonus", "winner hooks"),
+
+C:\Zerenthis\backend\app\winner_cycle.py:68
+            "notes": payload.get("notes", "Winner cycle regeneration")
+
+C:\Zerenthis\backend\app\winner_cycle.py:78
+    script = package.get("script") or (
+
+C:\Zerenthis\backend\app\winner_cycle.py:95
+        titles = [v.get("title", "") for v in variants if isinstance(v, dict)]
+
+C:\Zerenthis\backend\app\winner_cycle.py:127
+            "video": package.get("video", ""),
+
+C:\Zerenthis\backend\app\winner_cycle.py:128
+            "thumbnail": package.get("thumbnail", ""),
+
+C:\Zerenthis\backend\app\winner_cycle.py:129
+            "audio": package.get("audio", "")
+
+C:\Zerenthis\backend\app\winner_cycle.py:139
+    for item in (distribution.get("tiktok", []) or [])[:3]:
+
+C:\Zerenthis\backend\app\winner_cycle.py:149
+        "content": distribution.get("youtube_long", {})
+
+C:\Zerenthis\backend\app\workflow_builder.py:154
+    for wf in data.get("workflows", []):
+
+C:\Zerenthis\backend\app\workflow_builder.py:155
+        if wf.get("id") == workflow_id:
+
+C:\Zerenthis\backend\app\workflow_builder.py:160
+    return payload.get("topic") or payload.get("title") or fallback
+
+C:\Zerenthis\backend\app\workflow_builder.py:163
+    route = node.get("route", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:164
+    kind = node.get("kind", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:165
+    label = node.get("label", route)
+
+C:\Zerenthis\backend\app\workflow_builder.py:172
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:173
+                "promise": payload.get("promise", "move faster"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:174
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:175
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:176
+                "bonus": payload.get("bonus", "workflow builder bonus"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:177
+                "notes": payload.get("notes", "workflow builder execution")
+
+C:\Zerenthis\backend\app\workflow_builder.py:185
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:186
+                "promise": payload.get("promise", "make money faster"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:187
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:188
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:189
+                "bonus": payload.get("bonus", "workflow pricing bonus"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:190
+                "notes": payload.get("notes", "workflow monetization")
+
+C:\Zerenthis\backend\app\workflow_builder.py:198
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:199
+                "promise": payload.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:200
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:201
+                "notes": payload.get("notes", "workflow winner cycle")
+
+C:\Zerenthis\backend\app\workflow_builder.py:209
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:210
+                "promise": payload.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:211
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:212
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:213
+                "bonus": payload.get("bonus", "workflow intelligence bonus")
+
+C:\Zerenthis\backend\app\workflow_builder.py:221
+                "buyer": payload.get("buyer", "Creators"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:222
+                "promise": payload.get("promise", "grow faster"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:223
+                "niche": payload.get("niche", "Content Monetization"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:224
+                "tone": payload.get("tone", "Premium"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:225
+                "bonus": payload.get("bonus", "workflow memory bonus")
+
+C:\Zerenthis\backend\app\workflow_builder.py:232
+                "text": payload.get("text", payload.get("topic", "workflow competitor scan")),
+
+C:\Zerenthis\backend\app\workflow_builder.py:240
+                "url": payload.get("url", "https://example.com"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:242
+                "text": payload.get("text", ""),
+
+C:\Zerenthis\backend\app\workflow_builder.py:243
+                "notes": payload.get("notes", "workflow browser scan")
+
+C:\Zerenthis\backend\app\workflow_builder.py:257
+            eval_text = payload.get("text") or payload.get("topic") or "workflow output"
+
+C:\Zerenthis\backend\app\workflow_builder.py:260
+                "name": payload.get("title", "workflow_eval")
+
+C:\Zerenthis\backend\app\workflow_builder.py:271
+    prompt = payload.get("prompt", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:272
+    title = payload.get("title", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:290
+    workflow_id = payload.get("workflow_id", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:296
+    run_payload = payload.get("payload", {})
+
+C:\Zerenthis\backend\app\workflow_builder.py:299
+    for node in workflow.get("nodes", []):
+
+C:\Zerenthis\backend\app\workflow_builder.py:302
+            "node_id": node.get("id"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:303
+            "label": node.get("label"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:304
+            "route": node.get("route"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:305
+            "status": result.get("status"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:306
+            "result": result.get("result"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:307
+            "error": result.get("error", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:310
+    success_count = len([r for r in results if r.get("status") == "ok"])
+
+C:\Zerenthis\backend\app\workflow_builder.py:311
+    error_count = len([r for r in results if r.get("status") == "error"])
+
+C:\Zerenthis\backend\app\workflow_builder.py:316
+        "workflow_title": workflow.get("title", ""),
+
+C:\Zerenthis\backend\app\workflow_builder.py:328
+        f"{_slug(workflow.get('title','workflow'))}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_workflow_run.json",
+
+C:\Zerenthis\backend\app\workflow_builder.py:339
+@router.get("/api/workflow/status")
+
+C:\Zerenthis\backend\app\workflow_builder.py:344
+    wf_list = workflows.get("workflows", [])
+
+C:\Zerenthis\backend\app\workflow_builder.py:345
+    run_list = runs.get("runs", [])
+
+C:\Zerenthis\backend\app\workflow_builder.py:354
+        "recent_workflows": sorted(wf_list, key=lambda x: x.get("updated_at", x.get("created_at", "")), reverse=True)[:12],
+
+C:\Zerenthis\backend\app\workflow_builder.py:355
+        "recent_runs": sorted(run_list, key=lambda x: x.get("time", ""), reverse=True)[:12]
+
+C:\Zerenthis\backend\app\workflow_builder.py:358
+@router.get("/api/workflow/{workflow_id}")
+
+C:\Zerenthis\backend\app\workflow_builder.py:371
+    prompt = payload.get("prompt", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:372
+    title = payload.get("title", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:373
+    run_payload = payload.get("payload", {})
+
+C:\Zerenthis\backend\app\workflow_builder.py:379
+    for node in workflow.get("nodes", []):
+
+C:\Zerenthis\backend\app\workflow_builder.py:382
+            "node_id": node.get("id"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:383
+            "label": node.get("label"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:384
+            "route": node.get("route"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:385
+            "status": result.get("status"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:386
+            "result": result.get("result"),
+
+C:\Zerenthis\backend\app\workflow_builder.py:387
+            "error": result.get("error", "")
+
+C:\Zerenthis\backend\app\workflow_builder.py:393
+        "workflow_title": workflow.get("title", ""),
+
+C:\Zerenthis\backend\app\workflow_builder.py:397
+        "success_count": len([r for r in results if r.get("status") == "ok"]),
+
+C:\Zerenthis\backend\app\workflow_builder.py:398
+        "error_count": len([r for r in results if r.get("status") == "error"]),
+
+C:\Zerenthis\backend\app\workflow_builder.py:399
+        "status": "completed_with_errors" if any(r.get("status") == "error" for r in results) else "completed"
+
+C:\Zerenthis\backend\app\workflow_builder.py:405
+        f"{_slug(workflow.get('title','workflow'))}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_workflow_quick_run.json",
+

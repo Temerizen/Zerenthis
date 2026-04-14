@@ -1,0 +1,19 @@
+ZERENTHIS RAILWAY SERVICE MAP
+
+1) ZERENTHIS MAIN
+Root Directory: /
+Start Command: python -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+
+2) ZERENTHIS AUTOPILOT
+Root Directory: /
+Start Command: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+3) ZERENTHIS BUILDER
+Root Directory: /
+Start Command: python -m backend.architect_loop
+
+NOTES
+- MAIN is the real API service.
+- AUTOPILOT is the lightweight health/control service.
+- BUILDER is the long-running proposal/execution loop.
+- MAIN must NOT point to app.main:app or it will boot the wrong service.

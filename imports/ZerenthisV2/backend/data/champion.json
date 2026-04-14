@@ -1,0 +1,23 @@
+{
+  "params": {
+    "risk_per_trade": 0.038456285038770535,
+    "take_profit": 0.028677214260792255,
+    "stop_loss": 0.04071132515451172,
+    "position_scale": 2.0,
+    "signals": [
+      {
+        "asset": "ETH",
+        "action": "buy"
+      },
+      {
+        "asset": "SOL",
+        "action": "sell"
+      },
+      {
+        "asset": "SOL",
+        "action": "sell"
+      }
+    ]
+  },
+  "score": -0.15382514015508217
+}

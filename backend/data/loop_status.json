@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "started_at": 1776023478.8283942,
+  "finished_at": 1776023478.829264,
+  "max_cycles": 4,
+  "delay_seconds": 0.2,
+  "completed_cycles": 1,
+  "results": [
+    {
+      "processed": false,
+      "reason": "no_tasks"
+    }
+  ]
+}

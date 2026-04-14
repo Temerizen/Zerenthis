@@ -1,0 +1,36 @@
+{
+  "active_mission": {
+    "id": "mission_1776105409",
+    "goal_type": "balanced_progression",
+    "progress": 1.0,
+    "status": "active",
+    "created_at": 1776105409.6646404,
+    "last_updated": 1776108120.5477474
+  },
+  "history": [
+    {
+      "id": "mission_1776100405",
+      "goal_type": "balanced_progression",
+      "description": "Execute mission: balanced_progression",
+      "status": "completed",
+      "progress": 1.0200000000000005,
+      "steps": [
+        {
+          "step": "advance_balanced_progression",
+          "status": "completed"
+        }
+      ],
+      "created_at": 1776100405.7669392,
+      "last_updated": 1776103280.430866,
+      "cycles_active": 13
+    },
+    {
+      "id": "mission_1776103582",
+      "goal_type": "balanced_progression",
+      "progress": 1.0,
+      "status": "completed",
+      "created_at": 1776103582.8277867,
+      "last_updated": 1776105354.8449106
+    }
+  ]
+}

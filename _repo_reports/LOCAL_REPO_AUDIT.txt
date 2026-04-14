@@ -1,0 +1,208 @@
+﻿ZERENTHIS REPO AUDIT - 20260404_100419
+
+TOP-LEVEL TREE
+
+Mode   Length LastWriteTime          Name                         
+----   ------ -------------          ----                         
+d--h--        2026-04-04 9:59:23 AM  .git                         
+d-----        2026-03-29 7:09:34 PM  .vercel                      
+d-----        2026-04-03 8:53:04 PM  app                          
+d-----        2026-04-03 8:05:41 PM  backend                      
+d-----        2026-04-03 2:27:17 PM  backend_clean                
+d-----        2026-04-03 11:03:43 AM engine                       
+d-----        2026-04-03 11:03:43 AM frontend                     
+d-----        2026-03-29 2:00:54 PM  venv                         
+d-----        2026-04-04 10:04:19 AM _repo_reports                
+d-----        2026-04-04 9:59:23 AM  _safety_backup               
+-a---- 277    2026-03-29 3:28:21 PM  .env                         
+-a---- 1200   2026-03-29 7:09:39 PM  .env.local                   
+-a---- 469    2026-04-04 9:59:23 AM  .gitignore                   
+-a---- 1030   2026-04-03 7:20:18 PM  builder_output.pdf           
+-a---- 1558   2026-03-29 3:21:56 PM  control.html                 
+-a---- 3125   2026-03-29 6:01:35 PM  deploy_everything.ps1        
+-a---- 42     2026-04-03 11:34:15 AM DEPLOY_TRIGGER.txt           
+-a---- 3139   2026-04-02 9:10:41 PM  download_test.txt            
+-a---- 1030   2026-04-03 7:15:46 PM  final_test.txt               
+-a---- 497211 2026-04-03 10:19:51 PM for_you_always.mp4           
+-a---- 20706  2026-04-03 11:45:32 AM index.html                   
+-a---- 132    2026-04-02 11:17:51 PM nixpacks.toml                
+-a---- 78     2026-04-03 4:16:37 PM  Procfile                     
+-a---- 579    2026-04-04 9:44:49 AM  RAILWAY_SERVICE_MAP.txt      
+-a---- 759    2026-04-03 2:45:48 PM  README.md                    
+-a---- 37     2026-04-02 11:17:51 PM rebuild.txt                  
+-a---- 212    2026-04-03 7:13:24 PM  recovery_test.txt            
+-a---- 218    2026-04-02 11:17:51 PM requirements.txt             
+-a---- 83     2026-04-04 9:50:04 AM  run-autopilot-safe.ps1       
+-a---- 137    2026-04-04 9:50:04 AM  run-builder-safe.ps1         
+-a---- 181    2026-04-04 9:44:49 AM  run-main-safe.ps1            
+-a---- 18     2026-04-02 8:29:14 PM  runtime.txt                  
+-a---- 329    2026-03-29 3:33:37 PM  run_autopilot.ps1            
+-a---- 121    2026-03-29 4:29:41 PM  run_self_healer.ps1          
+-a---- 116    2026-03-29 3:07:24 PM  run_server_safe.ps1          
+-a---- 937    2026-04-03 8:17:18 PM  run_unstoppable.py           
+-a---- 116    2026-03-29 3:07:24 PM  run_worker_safe.ps1          
+-a---- 638    2026-04-04 9:44:49 AM  smoke-test.ps1               
+-a---- 454    2026-04-03 11:08:09 AM STABILIZATION_NOTES.txt      
+-a---- 905    2026-03-29 5:52:01 PM  start_self_improver_stack.ps1
+-a---- 142    2026-03-29 3:07:24 PM  stop_zerenthis.ps1           
+-a---- 71     2026-04-03 11:34:15 AM vercel.json                  
+-a---- 89     2026-03-29 8:49:52 PM  worker.py                    
+-a---- 415348 2026-03-29 1:53:16 PM  zerenthis-logo.png           
+
+
+
+
+LARGEST FILES (top 80, excluding .git and venv)
+
+FullName                                                                                 Length LastWriteTime         
+--------                                                                                 ------ -------------         
+C:\Zerenthis\backend\data\self_improver\proposals.pre_dedupe.json                       1400062 2026-03-29 5:12:00 PM 
+C:\Zerenthis\backend\data\self_improver\proposals.json                                  1008132 2026-03-29 5:52:38 PM 
+C:\Zerenthis\backend\outputs\Faceless_TikTok_money_strategy.mp4                          504606 2026-04-03 11:24:05 AM
+C:\Zerenthis\for_you_always.mp4                                                          497211 2026-04-03 10:19:51 PM
+C:\Zerenthis\zerenthis-logo.png                                                          415348 2026-03-29 1:53:16 PM 
+C:\Zerenthis\backend\outputs\Faceless_TikTok_money_strategy_voice.mp3                    219456 2026-04-03 11:24:03 AM
+C:\Zerenthis\backend\data\self_improver\autopilot_log.json                                49509 2026-03-29 4:59:47 PM 
+C:\Zerenthis\backend\app\__pycache__\singularity_engine.cpython-311.pyc                   38865 2026-04-03 10:45:47 PM
+C:\Zerenthis\backend\data\self_improver\backups\1774826791_2e6dd4_product_engine.py.bak   32420 2026-03-29 4:26:31 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826791_f48732_product_engine.py.bak   31926 2026-03-29 4:23:49 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826629_f84163_product_engine.py.bak   31913 2026-03-29 4:23:49 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826629_8a310a_product_engine.py.bak   31591 2026-03-29 4:23:49 PM 
+C:\Zerenthis\backend\outputs\Faceless_TikTok_money_strategy_thumb.jpg                     31481 2026-04-03 11:24:01 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774826629_91d71a_product_engine.py.bak   30094 2026-03-29 4:21:12 PM 
+C:\Zerenthis\backend\app\main.pre_stabilization_backup.py                                 29631 2026-04-03 10:52:26 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774826304_ddd117_product_engine.py.bak   28721 2026-03-29 4:18:24 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826472_b09afe_product_engine.py.bak   28721 2026-03-29 4:18:24 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826304_ca2bd0_product_engine.py.bak   28234 2026-03-29 4:18:22 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826302_00daa3_product_engine.py.bak   27824 2026-03-29 4:15:50 PM 
+C:\Zerenthis\backend\app\__pycache__\workflow_builder.cpython-311.pyc                     27523 2026-04-03 11:18:00 AM
+C:\Zerenthis\backend\app\singularity_engine.py                                            27076 2026-04-03 10:45:47 PM
+C:\Zerenthis\backend\app\__pycache__\main.cpython-311.pyc                                 26867 2026-04-03 9:37:22 PM 
+C:\Zerenthis\backend\app\__pycache__\knowledge.cpython-311.pyc                            26278 2026-04-03 11:18:00 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774826150_745301_product_engine.py.bak   26206 2026-03-29 4:13:01 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825981_43f55a_product_engine.py.bak   26200 2026-03-29 4:13:01 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825981_b391a6_product_engine.py.bak   25342 2026-03-29 4:12:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825979_8c4cb6_product_engine.py.bak   24894 2026-03-29 4:12:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825979_3f173e_product_engine.py.bak   24556 2026-03-29 4:10:11 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825813_fbf4b8_product_engine.py.bak   24556 2026-03-29 4:10:11 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825811_c337ba_product_engine.py.bak   23579 2026-03-29 4:10:09 PM 
+C:\Zerenthis\backend\app\__pycache__\inbox.cpython-311.pyc                                22791 2026-04-03 11:18:00 AM
+C:\Zerenthis\backend\data\self_improver\memory.json                                       22748 2026-03-29 5:52:01 PM 
+C:\Zerenthis\backend\app\__pycache__\live_mode.cpython-311.pyc                            22700 2026-04-03 11:18:00 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774825809_71ed4e_product_engine.py.bak   22602 2026-03-29 4:07:42 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774827137_fbceb1_index.html.bak          22200 2026-03-29 4:32:17 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825662_928510_product_engine.py.bak   22161 2026-03-29 4:07:39 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774827137_3a41fc_index.html.bak          21706 2026-03-29 1:53:16 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774827135_e5ac2c_main.py.bak             21404 2026-03-29 4:32:13 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825659_6e5fb3_product_engine.py.bak   21175 2026-03-29 4:05:15 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774827133_b0d212_main.py.bak             20784 2026-03-29 4:26:27 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826958_0a0853_main.py.bak             20784 2026-03-29 4:26:27 PM 
+C:\Zerenthis\index.html                                                                   20706 2026-04-03 11:45:32 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774825515_f2cf23_product_engine.py.bak   20604 2026-03-29 4:05:15 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826789_fcf052_engine.py.bak           20219 2026-03-29 4:26:29 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825515_15253d_product_engine.py.bak   20188 2026-03-29 4:02:32 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826789_8c644a_engine.py.bak           20173 2026-03-29 4:23:47 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826787_43f026_main.py.bak             19963 2026-03-29 4:21:08 PM 
+C:\Zerenthis\backend\data\brain_state.json                                                19817 2026-04-03 3:08:45 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826468_770102_main.py.bak             19799 2026-03-29 4:21:08 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826468_66cfba_main.py.bak             19768 2026-03-29 4:21:08 PM 
+C:\Zerenthis\backend\_backup\main_evolution_20260402_191930.py                            19291 2026-04-02 7:10:14 PM 
+C:\Zerenthis\backend\app\__pycache__\browser_operator.cpython-311.pyc                     19156 2026-04-03 11:18:00 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774825352_d1ff43_product_engine.py.bak   19140 2026-03-29 3:59:58 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826468_974613_main.py.bak             19010 2026-03-29 4:12:57 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826627_fe88de_engine.py.bak           18865 2026-03-29 4:22:27 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825977_58f95b_main.py.bak             18829 2026-03-29 4:12:57 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825198_b040c1_product_engine.py.bak   18528 2026-03-29 3:57:22 PM 
+C:\Zerenthis\backend\data\self_improver\self_heal_log.json                                18271 2026-03-29 4:36:29 PM 
+C:\Zerenthis\backend\data\self_improver\reflections.json                                  18192 2026-03-29 5:52:01 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825977_b22dfc_main.py.bak             17702 2026-03-29 4:12:55 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825040_22cb14_product_engine.py.bak   17512 2026-03-29 3:46:00 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825042_aa4824_product_engine.py.bak   17512 2026-03-29 3:46:00 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826547_engine.py.bak                  17386 2026-03-29 4:21:14 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824360_4dc4a2_product_engine.py.bak   17366 2026-03-29 3:46:00 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824360_2e6fc3_product_engine.py.bak   17234 2026-03-29 3:46:00 PM 
+C:\Zerenthis\backend\Engine\__pycache__\product_engine.cpython-311.pyc                    17068 2026-03-29 5:42:15 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825975_ed907d_main.py.bak             16625 2026-03-29 4:12:55 PM 
+C:\Zerenthis\backend\app\workflow_builder.py                                              16547 2026-04-03 10:45:06 AM
+C:\Zerenthis\backend\data\self_improver\backups\1774824360_46330c_product_engine.py.bak   16464 2026-03-29 3:42:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824179_613eba_product_engine.py.bak   16341 2026-03-29 3:42:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824179_e857e4_product_engine.py.bak   16207 2026-03-29 3:42:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824179_ae9109_product_engine.py.bak   16083 2026-03-29 3:40:01 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774826474_f4b419_engine.py.bak           16077 2026-03-29 4:21:10 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824001_b103d3_product_engine.py.bak   16050 2026-03-29 3:40:01 PM 
+C:\Zerenthis\backend_clean\app\main.py                                                    15973 2026-04-03 2:16:51 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824001_2a1f67_product_engine.py.bak   15947 2026-03-29 3:40:01 PM 
+C:\Zerenthis\backend\_backup\main_autorate_20260402_191014.py                             15939 2026-04-02 6:59:59 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825975_549ca1_main.py.bak             15931 2026-03-29 4:05:13 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774825622_main.py.bak                    15931 2026-03-29 4:05:13 PM 
+C:\Zerenthis\backend\data\self_improver\backups\1774824001_3d33ef_product_engine.py.bak   15899 2026-03-29 3:40:01 PM 
+
+
+
+
+TRACKED FILES UNDER _safety_backup
+
+TRACKED .env-LIKE FILES
+
+GIT STATUS
+ M .gitignore
+D  _safety_backup/deploy_rewire_20260404_094449/architect_loop.py
+D  _safety_backup/deploy_rewire_20260404_094449/auto_loop.py
+D  _safety_backup/deploy_rewire_20260404_094449/autopilot.py
+D  _safety_backup/deploy_rewire_20260404_094449/body_routes.py
+D  _safety_backup/deploy_rewire_20260404_094449/evolution_autopilot.py
+D  _safety_backup/deploy_rewire_20260404_094449/founder.py
+D  _safety_backup/deploy_rewire_20260404_094449/full_loop_routes.py
+D  _safety_backup/deploy_rewire_20260404_094449/max_surgeon.py
+D  _safety_backup/deploy_rewire_20260404_094449/surgeon_autopilot.py
+D  _safety_backup/final_network_fix_20260404_095416/architect_loop.py
+D  _safety_backup/final_network_fix_20260404_095416/auto_loop.py
+D  _safety_backup/final_network_fix_20260404_095416/autopilot.py
+D  _safety_backup/final_network_fix_20260404_095416/evolution_autopilot.py
+D  _safety_backup/final_network_fix_20260404_095416/max_surgeon.py
+D  _safety_backup/final_network_fix_20260404_095416/surgeon_autopilot.py
+D  _safety_backup/service_fix_20260404_095003/architect_loop.py
+D  _safety_backup/service_fix_20260404_095003/auto_loop.py
+D  _safety_backup/service_fix_20260404_095003/autopilot.py
+D  _safety_backup/service_fix_20260404_095003/evolution_autopilot.py
+D  _safety_backup/service_fix_20260404_095003/main.py
+D  _safety_backup/service_fix_20260404_095003/max_surgeon.py
+D  _safety_backup/service_fix_20260404_095003/surgeon_autopilot.py
+ M app/main.py
+ M backend/architect_loop.py
+ M backend/auto_loop.py
+ M backend/autopilot.py
+ M backend/evolution_autopilot.py
+ M backend/max_surgeon.py
+ M backend/surgeon_autopilot.py
+?? _repo_reports/
+
+
+RECENT COMMITS
+ede62b0 Fix internal networking: correct Railway hostname + remove dead domains
+9a6cd47 Harden Railway startup and switch builder to internal main service URL
+230f432 Stabilize service routing and rewire backend base URL
+28d03a1 Add real scene generation engine (visual upgrade foundation)
+6640984 Fix Pillow ANTIALIAS compatibility for singularity renderer
+f4aab62 Add emotional music and beat sync to singularity video engine
+c6c3ca5 Add cinematic movie trailer engine with emotional pacing
+962dc97 ELITE cinematic polish: smooth zoom fades enhanced prompts audio layering
+838bdc7 Add real AI image generation + cinematic renderer
+5b5ce7b Add cinematic visual + voice variation engine
+aa748a7 Expand singularity to video podcast comic novel game and social packaging
+58d03a3 Upgrade singularity romantic video quality
+cddc76d Add core singularity sweep with studio brain story DNA and video team
+e470984 Stabilize autopilot as minimal healthy web service
+3d05db9 FINAL FIX: non-blocking autopilot with delayed loop
+
+
+GIT OBJECT SUMMARY
+count: 2519
+size: 17.47 MiB
+in-pack: 12020
+packs: 2
+size-pack: 93.78 MiB
+prune-packable: 0
+garbage: 0
+size-garbage: 0 bytes
+

@@ -1,0 +1,418 @@
+from __future__ import annotations
+from backend.app.cognition.brain_context import load_brain_context
+from backend.app.cognition import loop_guard
+
+import json
+import os
+import threading
+import time
+import traceback
+from typing import Any, Dict, Optional
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+from backend.app.cognition import (
+    meta,
+    world,
+    self as legacy_self,
+    self_model,
+    explore,
+    decision,
+    goal,
+    execution,
+    scheduler,
+    evolution,
+    planning,
+    modification,
+    apply,
+    validation,
+    world_model,
+    continuity,
+    task_selection,
+)
+
+app = FastAPI(title="Zerenthis Q51 Autonomous Task Selection Engine")
+
+_cycle_lock = threading.Lock()
+_worker_thread: Optional[threading.Thread] = None
+
+
+class ContinuityStartRequest(BaseModel):
+    interval_seconds: float = 3.0
+    max_errors: int = 5
+    max_cycles: int | None = None
+    reason: str = "manual_start"
+
+
+def _safe_json_load(path: str, default: Any) -> Any:
+    if not os.path.exists(path):
+        return default
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+
+def _call(module: Any, payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
+    payload = payload or {}
+    for fn_name in ("run", "update", "execute", "resolve", "apply"):
+        fn = getattr(module, fn_name, None)
+        if callable(fn):
+            try:
+                result = fn(payload)
+                if isinstance(result, dict):
+                    return result
+                return {"status": "ok", "result": result}
+            except TypeError:
+                try:
+                    result = fn()
+                    if isinstance(result, dict):
+                        return result
+                    return {"status": "ok", "result": result}
+                except Exception as e:
+                    return {"status": "error", "error": str(e)}
+            except Exception as e:
+                return {"status": "error", "error": str(e)}
+    return {"status": "missing_callable", "module": str(module)}
+
+
+def _read_aux_state() -> Dict[str, Any]:
+    return {
+        "active_mission": _safe_json_load("backend/data/active_mission.json", {}),
+        "goal_state": _safe_json_load("backend/data/goal_persistence.json", {}),
+        "reflection_state": _safe_json_load("backend/data/reflection_state.json", {}),
+        "identity_state": _safe_json_load("backend/data/identity_state.json", {}),
+        "active_task": _safe_json_load("backend/data/active_task.json", {}),
+        "task_selection_state": _safe_json_load("backend/data/task_selection_state.json", {}),
+    }
+
+
+def run_brain_cycle(trigger: str = "external_api") -> Dict[str, Any]:
+    if not _cycle_lock.acquire(blocking=False):
+        return {
+            "status": "busy",
+            "trigger": trigger,
+            "detail": "cycle_already_running",
+            "continuity": continuity.get_state(),
+            "brain_context": brain_context,
+        }
+
+    try:
+        continuity.record_cycle_start()
+
+        aux_pre = _read_aux_state()
+
+        brain_context = load_brain_context()
+
+        
+        # Inject real context (override legacy aux)
+        if isinstance(brain_context.get("goal_state"), dict):
+            aux_pre["goal_state"] = brain_context["goal_state"]
+
+        if isinstance(brain_context.get("reflection"), dict):
+            aux_pre["reflection_state"] = brain_context["reflection"]
+
+        selection_state = task_selection.select_next_task(
+            active_mission=aux_pre["active_mission"],
+            reflection_state=aux_pre["reflection_state"],
+            goal_state=aux_pre["goal_state"],
+            identity_state=aux_pre["identity_state"],
+        )
+
+        selected_task = selection_state.get("selected", {}) if isinstance(selection_state, dict) else {}
+
+        loop_state = loop_guard.detect_loop(aux_pre["active_mission"])
+        if loop_state.get("looping"):
+            selected_task = {
+                "task": loop_state.get("recommended_task", "advance_beyond_handoff"),
+                "goal": loop_state.get("recommended_goal", "novel_progression"),
+                "type": "loop_escape",
+                "reason": loop_state.get("reason", "repeat_pair_detected"),
+            }
+            selection_state = {
+                "status": "loop_override",
+                "selected": selected_task,
+                "loop_state": loop_state,
+            }
+        selected_task_name = selected_task.get("task", "analyze_state")
+        selected_goal = selected_task.get("goal", "balanced_progression")
+
+        world_state = _call(world, {
+            "tick": "loop",
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        meta_state = _call(meta, {
+            "event": "cycle",
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        legacy_self_state = _call(legacy_self, {
+            "result": "ok",
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        explore_state = _call(explore, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        world_model_state = _call(world_model, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        self_model_state = _call(self_model, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        planning_state = _call(planning, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        decision_state = _call(decision, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        goal_state_runtime = _call(goal, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        execution_state = execution.run_execution(planning_state)
+        validation_state = _call(validation, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        scheduler_state = _call(scheduler, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        evolution_state = _call(evolution, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        modification_state = _call(modification, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+        apply_state = _call(apply, {
+            "trigger": trigger,
+            "task": selected_task_name,
+            "goal": selected_goal,
+        })
+
+        aux = _read_aux_state()
+
+        goal_for_decision = aux["goal_state"] if isinstance(aux["goal_state"], dict) and aux["goal_state"] else goal_state_runtime
+        continue_decision = continuity.should_continue(
+            active_mission=aux["active_mission"],
+            goal_state=goal_for_decision,
+            reflection_state=aux["reflection_state"],
+        )
+
+        continuity.record_cycle_result(
+            should_continue=bool(continue_decision.get("should_continue", False)),
+            reason=str(continue_decision.get("reason", "continue")),
+        )
+
+        return {
+            "status": "ok",
+            "trigger": trigger,
+            "selected_task": selected_task,
+            "task_selection": selection_state,
+            "cycle": {
+                "world": world_state,
+                "meta": meta_state,
+                "self": legacy_self_state,
+                "explore": explore_state,
+                "world_model": world_model_state,
+                "self_model": self_model_state,
+                "planning": planning_state,
+                "decision": decision_state,
+                "goal": goal_state_runtime,
+                "execution": execution_state,
+                "validation": validation_state,
+                "scheduler": scheduler_state,
+                "evolution": evolution_state,
+                "modification": modification_state,
+                "apply": apply_state,
+            },
+            "reflection": aux["reflection_state"],
+            "active_mission": aux["active_mission"],
+            "identity": aux["identity_state"],
+            "continue_decision": continue_decision,
+            "continuity": continuity.get_state(),
+        }
+
+    except Exception as e:
+        continuity.record_error(f"{type(e).__name__}: {e}")
+        return {
+            "status": "error",
+            "trigger": trigger,
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+            "continuity": continuity.get_state(),
+        }
+    finally:
+        _cycle_lock.release()
+
+
+def _worker_loop() -> None:
+    while True:
+        state = continuity.get_state()
+
+        if not state.get("active", False):
+            time.sleep(0.50)
+            continue
+
+        interval_seconds = max(1.0, min(float(state.get("interval_seconds", 3.0)), 300.0))
+        last_finished = state.get("last_cycle_finished_at")
+        now = time.time()
+
+        if last_finished is not None:
+            elapsed = now - float(last_finished)
+            if elapsed < interval_seconds:
+                time.sleep(min(0.50, interval_seconds - elapsed))
+                continue
+
+        result = run_brain_cycle(trigger="autonomous_continuity")
+
+        if result.get("status") == "busy":
+            time.sleep(0.50)
+            continue
+
+        if result.get("status") == "error":
+            time.sleep(interval_seconds)
+            continue
+
+        if not result.get("continue_decision", {}).get("should_continue", False):
+            continuity.stop(reason=str(result.get("continue_decision", {}).get("reason", "internal_stop")))
+            time.sleep(0.50)
+            continue
+
+        time.sleep(interval_seconds)
+
+
+def _ensure_worker() -> None:
+    global _worker_thread
+    if _worker_thread is None or not _worker_thread.is_alive():
+        _worker_thread = threading.Thread(target=_worker_loop, daemon=True, name="zerenthis_continuity_worker")
+        _worker_thread.start()
+
+
+@app.on_event("startup")
+def startup_event() -> None:
+    _ensure_worker()
+    continuity.get_state()
+
+
+@app.get("/health")
+def health() -> Dict[str, Any]:
+    state = continuity.get_state()
+    selection = task_selection.get_selection_snapshot()
+    active_task = selection.get("active_task", {})
+    return {
+        "brain": "online",
+        "continuity_engine": True,
+        "task_selection_engine": True,
+        "continuity_active": state.get("active", False),
+        "cycles_completed": state.get("cycles_completed", 0),
+        "last_stop_reason": state.get("last_stop_reason"),
+        "worker_alive": _worker_thread.is_alive() if _worker_thread else False,
+        "active_task": active_task.get("task"),
+        "active_task_type": active_task.get("type"),
+    }
+
+
+@app.post("/api/brain/run")
+def brain_run() -> Dict[str, Any]:
+    return run_brain_cycle(trigger="external_api")
+
+
+@app.get("/api/continuity/state")
+def continuity_state() -> Dict[str, Any]:
+    _ensure_worker()
+    return {
+        "status": "ok",
+        "continuity": continuity.get_state(),
+    }
+
+
+@app.post("/api/continuity/start")
+def continuity_start(payload: ContinuityStartRequest) -> Dict[str, Any]:
+    _ensure_worker()
+    continuity.clear_hold()
+    state = continuity.start(
+        interval_seconds=payload.interval_seconds,
+        max_errors=payload.max_errors,
+        max_cycles=payload.max_cycles,
+        reason=payload.reason,
+    )
+    return {
+        "status": "started",
+        "continuity": state,
+    }
+
+
+@app.post("/api/continuity/stop")
+def continuity_stop() -> Dict[str, Any]:
+    state = continuity.stop(reason="manual_stop")
+    return {
+        "status": "stopped",
+        "continuity": state,
+    }
+
+
+@app.post("/api/continuity/reset")
+def continuity_reset() -> Dict[str, Any]:
+    state = continuity.update_state({
+        "active": False,
+        "cycles_completed": 0,
+        "consecutive_errors": 0,
+        "last_error": None,
+        "last_cycle_started_at": None,
+        "last_cycle_finished_at": None,
+        "last_stop_reason": "manual_reset",
+        "last_continue_reason": "reset",
+        "manual_hold": False,
+        "session_id": None,
+    })
+    return {
+        "status": "reset",
+        "continuity": state,
+    }
+
+
+@app.get("/api/task-selection/state")
+def task_selection_state() -> Dict[str, Any]:
+    return task_selection.get_selection_snapshot()
+
+
+@app.post("/api/task-selection/select")
+def task_selection_select() -> Dict[str, Any]:
+    aux = _read_aux_state()
+    result = task_selection.select_next_task(
+        active_mission=aux["active_mission"],
+        reflection_state=aux["reflection_state"],
+        goal_state=aux["goal_state"],
+        identity_state=aux["identity_state"],
+    )
+    return result
+
+
+
+
+

@@ -1,0 +1,130 @@
+{
+  "last_correction": {
+    "timestamp": 1776105009.08767,
+    "corrected": true,
+    "reason": "missing_active_goal_replaced",
+    "aligned_goal_type": "balanced_progression",
+    "stored_goal_type": "balanced_progression"
+  },
+  "history": [
+    {
+      "timestamp": 1776104430.039876,
+      "corrected": true,
+      "reason": "invalid_goal_rewritten",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.1359816,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.5710726,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104550.0112557,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104656.904774,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.4378357,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.882075,
+      "corrected": true,
+      "reason": "missing_active_goal_replaced",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104724.1434782,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.4148717,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.848935,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104785.2908313,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104888.952957,
+      "corrected": true,
+      "reason": "missing_active_goal_replaced",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.4169314,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.8510027,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.199184,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.6377583,
+      "corrected": false,
+      "reason": "already_clean",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105009.08767,
+      "corrected": true,
+      "reason": "missing_active_goal_replaced",
+      "aligned_goal_type": "balanced_progression",
+      "stored_goal_type": "balanced_progression"
+    }
+  ]
+}

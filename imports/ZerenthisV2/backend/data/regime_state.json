@@ -1,0 +1,15 @@
+{
+  "regime": "LOW_VOLATILITY_TRENDING_UP",
+  "confidence": 1.0,
+  "volatility_state": "LOW",
+  "price_points": 73,
+  "source": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=3&interval=hourly",
+  "fetch_meta": {
+    "source": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=3&interval=hourly",
+    "fetched": 73,
+    "errors": [
+      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=2&interval=hourly -> too_few_points_49"
+    ]
+  },
+  "timestamp": 1775782287
+}

@@ -1,0 +1,15 @@
+{
+  "tensions": [
+    {
+      "signature": "pattern_conflict_resolved_variation::variation",
+      "winner": "variation",
+      "reason": "pattern_conflict_resolved_variation",
+      "gap": 0.4,
+      "strength": 3.241,
+      "count": 9,
+      "timestamp": 1776094889.9601166,
+      "last_seen": 1776098078.2298968,
+      "hours_old": 0.624
+    }
+  ]
+}

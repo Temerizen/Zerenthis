@@ -1,0 +1,1204 @@
+{
+  "items": [
+    {
+      "timestamp": 1776118936.3082676,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118939.5109777,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118942.717934,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118945.9230502,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118952.3048675,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118955.5137148,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118958.7179573,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118961.9219105,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118965.127041,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118968.3297431,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118971.537903,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118974.7379394,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118977.9377863,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118981.142985,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118984.3516905,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118987.556798,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118993.9361467,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776118997.1425784,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119000.347484,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119003.5600173,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119006.782975,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119009.9900858,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119013.1924806,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119016.4030378,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119019.605046,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119022.805712,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119026.0058997,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119029.2067575,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119035.587792,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119038.7908921,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119041.9971287,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119045.200986,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119048.4012856,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119051.6043456,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119054.8110044,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119058.012571,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119061.2205682,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119064.4448023,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119067.6647887,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119070.8749795,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119077.272484,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119080.4811301,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119083.6862583,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119086.8930488,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119090.0979397,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119093.3080068,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119096.525414,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119099.7330282,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119102.9450536,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119106.1525776,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119109.3591814,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119112.5704315,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119118.9539466,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119122.15536,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119125.3649654,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119128.566828,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119131.7668529,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119134.9701216,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119138.1729436,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119141.370059,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119144.575837,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119147.7788775,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119150.9807725,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119154.1916635,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119160.5739934,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119163.776839,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119166.9810717,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119170.1829166,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119173.3869684,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119176.5910435,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119179.792925,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119182.9978402,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119186.19592,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119189.397856,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119192.6041968,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119195.8077207,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119202.1870086,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119205.3891654,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119208.5918424,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119211.7912564,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119214.9996207,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119218.1979845,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119221.4001667,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119224.615954,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119227.844321,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119231.0643253,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119234.2682705,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119237.47587,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119243.8546283,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119247.0579395,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119250.2558835,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119253.4628503,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119256.6670568,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119259.8707836,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119263.0726645,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119266.2731502,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119269.4749198,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119272.6786065,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119275.8858373,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119279.090904,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119285.4689028,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119288.670698,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119291.8739016,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119295.0780666,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119298.2793915,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119301.4887416,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119304.6943371,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119307.9015596,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119311.1099975,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119314.3216908,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119317.5208008,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119320.7281873,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119327.109961,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119330.3139727,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119333.5129144,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119336.72686,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119339.9278235,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119343.1322665,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119346.3318565,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119349.5386388,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119352.7549767,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119355.974045,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119359.206962,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119362.4270046,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119368.8307676,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119372.0458245,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119375.2840915,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119378.5100458,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119381.7342167,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119384.991886,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119388.1912415,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119391.426496,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119394.6641417,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119397.882715,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119401.0961325,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119404.2911396,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119410.6639483,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119413.8834913,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119417.1128654,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119420.3268292,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119423.5460465,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119426.753027,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119429.9536915,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119433.1674085,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119436.3749125,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119439.579581,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119442.7946937,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119446.0098822,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119584.9496908,
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode",
+      "note": "recovery_identified_handoff_gap",
+      "route": "recovery",
+      "status": "proposed"
+    },
+    {
+      "timestamp": 1776119588.1761432,
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode",
+      "note": "builder_identified_missing_reasoning_piece",
+      "route": "builder",
+      "status": "proposed"
+    }
+  ]
+}

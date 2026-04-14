@@ -1,0 +1,22 @@
+{
+  "advance_beyond_handoff": {
+    "until": 1776206494.9010046,
+    "set_at": 1776206374.9010046,
+    "seconds": 120
+  },
+  "explore_new_path": {
+    "until": 1776205976.5509434,
+    "set_at": 1776205856.5509434,
+    "seconds": 120
+  },
+  "stabilize_and_observe": {
+    "until": 1776206495.3714805,
+    "set_at": 1776206375.3714805,
+    "seconds": 120
+  },
+  "probe_new_paths": {
+    "until": 1776206265.263312,
+    "set_at": 1776206145.263312,
+    "seconds": 120
+  }
+}

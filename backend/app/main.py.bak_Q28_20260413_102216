@@ -1,0 +1,77 @@
+﻿from fastapi import FastAPI
+from backend.app.cognition import (
+    meta, world, self as legacy_self, self_model,
+    explore, decision, goal, execution,
+    scheduler, evolution, planning, modification,
+    apply, validation, world_model, thought,
+    intent, goals, mission, reality
+)
+
+from backend.app.cognition.value_hierarchy import evaluate_values
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {
+        "brain": "online",
+        "goal_persistence": True,
+        "mission_engine": True,
+        "reality_engine": True
+    }
+
+def _brain_cycle():
+    world_state = world.update({"tick": "loop"})
+    meta_state = meta.run({"event": "cycle"})
+    explore_state = explore.run()
+
+    value_state = evaluate_values()
+
+    intent_state = intent.form_intent({
+        "value_state": value_state
+    })
+
+    decision_state = decision.run({
+        "intent_state": intent_state
+    })
+
+    execution_state = execution.run({
+        "plan": {}
+    })
+
+    # GOALS
+    goal_state = goals.run({
+        "goal": intent_state.get("goal") if isinstance(intent_state, dict) else None,
+        "dominant_value": value_state.get("dominant_value") if isinstance(value_state, dict) else None,
+    })
+
+    active_goal = goal_state.get("active_goal") if goal_state else None
+
+    # MISSION
+    mission_state = mission.run({
+        "active_goal": active_goal
+    }) if active_goal else {"status": "no_goal", "active_mission": None}
+
+    active_mission = mission_state.get("active_mission") if mission_state else None
+
+    # REALITY (NEW)
+    reality_state = reality.run({
+        "mission_id": active_mission.get("id") if active_mission else None,
+        "goal_type": active_goal.get("type") if active_goal else None,
+        "mission_progress": active_mission.get("progress") if active_mission else 0
+    })
+
+    return {
+        "status": "ok",
+        "intent_state": intent_state,
+        "decision_state": decision_state,
+        "execution_state": execution_state,
+        "goal_state": goal_state,
+        "mission_state": mission_state,
+        "reality_state": reality_state,
+        "value_state": value_state
+    }
+
+@app.post("/api/brain/run")
+def brain():
+    return _brain_cycle()

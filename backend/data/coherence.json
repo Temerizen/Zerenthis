@@ -1,0 +1,184 @@
+{
+  "last_check": {
+    "timestamp": 1776109349.0925996,
+    "action": "aligned",
+    "has_goal": true,
+    "has_mission": true
+  },
+  "history": [
+    {
+      "timestamp": 1776102208.550262,
+      "action": "mismatch_detected",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102431.5143187,
+      "action": "mismatch_detected",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102469.846973,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102663.3207698,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776102875.6736436,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103099.4957545,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103280.4528852,
+      "action": "waiting_for_mission",
+      "has_goal": true,
+      "has_mission": false
+    },
+    {
+      "timestamp": 1776103582.8507848,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776103677.2982364,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105354.8599114,
+      "action": "waiting_for_mission",
+      "has_goal": true,
+      "has_mission": false
+    },
+    {
+      "timestamp": 1776105409.694128,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105562.3180337,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105647.8841302,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776105798.949896,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106540.57486,
+      "action": "goal_reconstructed_from_mission",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106586.3366652,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106703.0828302,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106769.0284579,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106879.5518873,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776106989.371834,
+      "action": "goal_reconstructed_from_mission",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107177.1521528,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107221.9901283,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107295.7421103,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776107552.5058208,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108120.5568075,
+      "action": "goal_reconstructed_from_mission",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108351.4548125,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776108689.3461354,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776109129.2578146,
+      "action": "goal_reconstructed_from_mission",
+      "has_goal": true,
+      "has_mission": true
+    },
+    {
+      "timestamp": 1776109349.0925996,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    }
+  ]
+}

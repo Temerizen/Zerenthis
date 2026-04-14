@@ -1,0 +1,150 @@
+{
+  "bands": {
+    "curiosity": {
+      "target": 0.62,
+      "min": 0.45,
+      "max": 0.78
+    },
+    "stability": {
+      "target": 0.58,
+      "min": 0.45,
+      "max": 0.75
+    },
+    "risk": {
+      "target": 0.48,
+      "min": 0.3,
+      "max": 0.68
+    },
+    "persistence": {
+      "target": 0.6,
+      "min": 0.45,
+      "max": 0.82
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776097217.7388368,
+      "traits": {
+        "curiosity": 0.64,
+        "stability": 0.51,
+        "risk": 0.565,
+        "persistence": 0.56
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "stability": 0.01,
+        "risk": -0.01,
+        "persistence": 0.01
+      }
+    },
+    {
+      "timestamp": 1776098078.29107,
+      "traits": {
+        "curiosity": 0.66,
+        "stability": 0.52,
+        "risk": 0.57,
+        "persistence": 0.57
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "stability": 0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776098892.9759128,
+      "traits": {
+        "curiosity": 0.68,
+        "stability": 0.53,
+        "risk": 0.575,
+        "persistence": 0.58
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "stability": 0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776099494.0908444,
+      "traits": {
+        "curiosity": 0.7,
+        "stability": 0.54,
+        "risk": 0.58,
+        "persistence": 0.59
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "stability": 0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776100042.7400675,
+      "traits": {
+        "curiosity": 0.71,
+        "stability": 0.55,
+        "risk": 0.585,
+        "persistence": 0.6
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "stability": 0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776100170.4988837,
+      "traits": {
+        "curiosity": 0.72,
+        "stability": 0.55,
+        "risk": 0.59,
+        "persistence": 0.61
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776100323.7002041,
+      "traits": {
+        "curiosity": 0.73,
+        "stability": 0.55,
+        "risk": 0.595,
+        "persistence": 0.62
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776100324.5219562,
+      "traits": {
+        "curiosity": 0.74,
+        "stability": 0.55,
+        "risk": 0.6,
+        "persistence": 0.63
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "risk": -0.01
+      }
+    },
+    {
+      "timestamp": 1776100325.193151,
+      "traits": {
+        "curiosity": 0.75,
+        "stability": 0.55,
+        "risk": 0.605,
+        "persistence": 0.63
+      },
+      "adjustments": {
+        "curiosity": -0.01,
+        "risk": -0.01,
+        "persistence": -0.01
+      }
+    }
+  ]
+}

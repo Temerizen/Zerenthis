@@ -1,0 +1,68 @@
+{
+  "backend/app/engines/traffic_engine.py": {
+    "successes": 21,
+    "failures": 0,
+    "last_success": 1775964683,
+    "last_failure": null,
+    "strategies": {
+      "baseline": 1,
+      "optimize": 20
+    },
+    "cooldown": false
+  },
+  "backend/app/engines/storefront_engine.py": {
+    "successes": 22,
+    "failures": 0,
+    "last_success": 1775966555,
+    "last_failure": null,
+    "strategies": {
+      "baseline": 1,
+      "optimize": 21
+    },
+    "cooldown": false
+  },
+  "backend/app/engines/product_engine.py": {
+    "successes": 18,
+    "failures": 0,
+    "last_success": 1775964685,
+    "last_failure": null,
+    "strategies": {
+      "baseline": 1,
+      "optimize": 17
+    },
+    "cooldown": false
+  },
+  "backend/app/engines/offer_engine.py": {
+    "successes": 41,
+    "failures": 0,
+    "last_success": 1775976796,
+    "last_failure": null,
+    "strategies": {
+      "baseline": 1,
+      "optimize": 40
+    },
+    "cooldown": false
+  },
+  "INVALID": {
+    "successes": 0,
+    "failures": 59,
+    "last_success": null,
+    "last_failure": 1775973803,
+    "strategies": {
+      "baseline": 1,
+      "stabilize": 58
+    },
+    "cooldown": true
+  },
+  "unknown": {
+    "successes": 8,
+    "failures": 0,
+    "last_success": 1775978797,
+    "last_failure": null,
+    "strategies": {
+      "optimize": 7,
+      "stabilize": 1
+    },
+    "cooldown": false
+  }
+}

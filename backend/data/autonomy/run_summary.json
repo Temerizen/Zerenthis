@@ -1,0 +1,12 @@
+﻿{
+    "started_at":  "2026-04-13T13:41:54.1737634-07:00",
+    "finished_at":  "2026-04-13T13:50:35.1433392-07:00",
+    "duration_seconds":  520.97,
+    "cycles_requested":  300,
+    "passes":  300,
+    "fails":  0,
+    "best_streak":  300,
+    "stop_reason":  "completed",
+    "log_path":  "backend\\data\\autonomy\\cycle_history.jsonl",
+    "status_path":  "backend\\data\\autonomy\\latest_status.json"
+}

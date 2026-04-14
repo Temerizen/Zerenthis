@@ -1,0 +1,82 @@
+{
+  "initiate_recovery_mode": {
+    "streak": 694,
+    "momentum": 0.017353689681062684,
+    "fatigue": 0.028492995038031693,
+    "wins": 700,
+    "last_selected": true
+  },
+  "initiate_exploration_shift": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "initiate_companion_growth": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "explore_new_tasks": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "analyze_toolbox_strategy": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "analyze_revenue_scan": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "analyze_builder_handoff": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "improve_companion_capability": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "reduce_toolbox_strategy": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "reduce_builder_handoff": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "reduce_revenue_scan": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "improve_revenue_scan": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "last_selected": false
+  },
+  "improve_toolbox_strategy": {
+    "streak": 0,
+    "momentum": 0.0,
+    "fatigue": 0.0,
+    "wins": 0,
+    "last_selected": false
+  }
+}

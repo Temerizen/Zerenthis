@@ -1,0 +1,10 @@
+﻿{
+    "started_at":  "2026-04-13T13:37:36.2686509-07:00",
+    "finished_at":  "2026-04-13T13:40:03.8353750-07:00",
+    "duration_seconds":  147.57,
+    "cycles_requested":  120,
+    "passes":  120,
+    "fails":  0,
+    "stop_reason":  "completed",
+    "log_path":  "backend\\data\\stability\\stability_log.jsonl"
+}

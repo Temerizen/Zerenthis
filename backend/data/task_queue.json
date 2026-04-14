@@ -1,0 +1,404 @@
+{
+  "tasks": [
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119725.8378222,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119729.0250912,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119732.2099721,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119735.3918126,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119738.574875,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119741.7739706,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119744.94929,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119748.1308932,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119751.3158333,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119754.4913723,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119757.6719954,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119760.860989,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119764.051161,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119767.2267704,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119770.401618,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119773.5793912,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119776.7554362,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119779.9430144,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119783.1249487,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119786.3071628,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119789.4999766,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119792.6729395,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119795.8588524,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119799.0411937,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119802.2533693,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119805.43459,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119808.618081,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119811.7981493,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119814.988874,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119818.1735904,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119821.3575826,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119875.904333,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119879.0241764,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119881.6753323,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119884.7812135,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776119887.9020493,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776119953.0226102,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776120920.0109954,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776120928.2237115,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776120931.2660239,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776120934.3112674,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776120937.3623044,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776120940.407409,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776121949.491148,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776121999.2250416,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776122090.454885,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776122093.348032,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776123262.1973357,
+      "reason": "blocked_task_recovery"
+    },
+    {
+      "task": "create_thought_engine",
+      "type": "mission_focus",
+      "goal": "initiate_recovery_mode",
+      "score": 1.238,
+      "created_at": 1776123263.420717,
+      "reason": "active_mission_focus"
+    },
+    {
+      "task": "resolve_builder_handoff",
+      "type": "unblocker",
+      "goal": "initiate_recovery_mode",
+      "score": 1.1901,
+      "created_at": 1776123264.622704,
+      "reason": "blocked_task_recovery"
+    }
+  ]
+}

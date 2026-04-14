@@ -1,0 +1,5 @@
+﻿FOUND CANDIDATE: backend\app\engines\autonomy_engine.py
+Injected choose_best_goal import into autonomy_engine.py
+Created directional_debug route
+Added directional_debug import to main.py grouped import
+Included directional_debug router in main.py

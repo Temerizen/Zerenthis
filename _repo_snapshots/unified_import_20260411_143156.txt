@@ -1,0 +1,15 @@
+﻿UNIFIED IMPORT SNAPSHOT: 20260411_143156
+
+Root:
+C:\Zerenthis
+
+Imported:
+- C:\ZerenthisCore  -> C:\Zerenthis\imports\ZerenthisCore
+- C:\Zerenthisv2    -> C:\Zerenthis\imports\ZerenthisV2
+- C:\semantiqai-frontend -> C:\Zerenthis\imports\semantiqai-frontend
+- C:\semantiqai-backend  -> C:\Zerenthis\imports\semantiqai-backend
+
+Status:
+STORAGE ONLY
+NO STRUCTURAL MERGE YET
+SAFE TO DIAGNOSE NEXT

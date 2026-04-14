@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "promoted": {
+    "name": "Viral Content Engine Pack",
+    "score": 8.12,
+    "price": 29,
+    "impressions": 52,
+    "clicks": 6,
+    "conversions": 0,
+    "revenue": 0.0
+  },
+  "expanding": [
+    "Viral Content Engine Pack Pro",
+    "Viral Content Engine Pack Lite",
+    "Viral Content Engine Pack Advanced"
+  ],
+  "pruned_candidates": [
+    "Viral Content Engine Pack",
+    "AI Side Hustle System",
+    "Premium Offer"
+  ],
+  "next_cycle_queue": [
+    {
+      "type": "champion",
+      "data": {
+        "name": "Viral Content Engine Pack",
+        "score": 8.12,
+        "price": 29,
+        "impressions": 52,
+        "clicks": 6,
+        "conversions": 0,
+        "revenue": 0.0
+      }
+    },
+    {
+      "type": "expansion",
+      "data": {
+        "name": "Viral Content Engine Pack Pro",
+        "price": 29.0,
+        "headline": "Pro version of Viral Content Engine Pack optimized for performance",
+        "source": "Viral Content Engine Pack",
+        "type": "clone"
+      }
+    },
+    {
+      "type": "expansion",
+      "data": {
+        "name": "Viral Content Engine Pack Lite",
+        "price": 29.0,
+        "headline": "Lite version of Viral Content Engine Pack optimized for performance",
+        "source": "Viral Content Engine Pack",
+        "type": "clone"
+      }
+    },
+    {
+      "type": "expansion",
+      "data": {
+        "name": "Viral Content Engine Pack Advanced",
+        "price": 29.0,
+        "headline": "Advanced version of Viral Content Engine Pack optimized for performance",
+        "source": "Viral Content Engine Pack",
+        "type": "clone"
+      }
+    }
+  ],
+  "queue_size": 4,
+  "timestamp": 1775985241.7071667
+}

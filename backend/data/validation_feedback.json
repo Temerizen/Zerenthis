@@ -1,0 +1,101 @@
+{
+  "__load_error__": "Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)",
+  "last_validation": {
+    "timestamp": 1776109349.183815,
+    "status": "validated",
+    "execution_component": "memory_reasoning",
+    "target_file": "backend/app/cognition/memory_depth_engine.py",
+    "trend": "unstable",
+    "overall_score": 0.8374,
+    "result": "inconclusive",
+    "decision": "observe"
+  },
+  "history": [
+    {
+      "timestamp": 1776107177.2589846,
+      "status": "no_execution_to_validate",
+      "exec_path_exists": true,
+      "exec_data_preview": {
+        "__load_error__": "Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "timestamp": 1776107222.1067677,
+      "status": "no_execution_to_validate",
+      "exec_path_exists": true,
+      "exec_data_preview": {
+        "__load_error__": "Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "timestamp": 1776107295.8505654,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "unstable",
+      "overall_score": 0.7807,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776107552.6179557,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "declining",
+      "overall_score": 0.7646,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776108120.6546383,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "declining",
+      "overall_score": 0.7789,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776108351.5510654,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "declining",
+      "overall_score": 0.8064,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776108689.4301987,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "unstable",
+      "overall_score": 0.8141,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776109129.3493927,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "unstable",
+      "overall_score": 0.7872,
+      "result": "inconclusive",
+      "decision": "observe"
+    },
+    {
+      "timestamp": 1776109349.183815,
+      "status": "validated",
+      "execution_component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "trend": "unstable",
+      "overall_score": 0.8374,
+      "result": "inconclusive",
+      "decision": "observe"
+    }
+  ]
+}

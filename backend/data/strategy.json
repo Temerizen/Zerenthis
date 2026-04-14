@@ -1,0 +1,307 @@
+{
+  "active_strategy": "default",
+  "strategies": {
+    "default": {
+      "score": 0.738786313432797,
+      "uses": 40,
+      "mutations": 0
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776103925.4050741,
+      "strategy": "default",
+      "score": 0.7928744691097254,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776103925.4120717,
+      "active": "default",
+      "score": 0.7928744691097254,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104059.1990435,
+      "strategy": "default",
+      "score": 0.7333175095097987,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104059.2040591,
+      "active": "default",
+      "score": 0.7333175095097987,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104296.9738786,
+      "strategy": "default",
+      "score": 0.8299839673780757,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776104296.9799147,
+      "active": "default",
+      "score": 0.8299839673780757,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104430.0588603,
+      "strategy": "default",
+      "score": 0.7439922789621347,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104430.0638595,
+      "active": "default",
+      "score": 0.7439922789621347,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104549.1509793,
+      "strategy": "default",
+      "score": 0.6878747789554609,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104549.1569786,
+      "active": "default",
+      "score": 0.6878747789554609,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104549.5861166,
+      "strategy": "default",
+      "score": 0.8090066628109419,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776104549.5939434,
+      "active": "default",
+      "score": 0.8090066628109419,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104550.0267923,
+      "strategy": "default",
+      "score": 0.7119615405045271,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104550.0337892,
+      "active": "default",
+      "score": 0.7119615405045271,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104656.9177856,
+      "strategy": "default",
+      "score": 0.5902202146237898,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104656.9257863,
+      "active": "default",
+      "score": 0.5902202146237898,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104657.4533806,
+      "strategy": "default",
+      "score": 0.5072521214944018,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104657.4593847,
+      "active": "default",
+      "score": 0.5072521214944018,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104657.9002836,
+      "strategy": "default",
+      "score": 0.5714110029638263,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104657.9072826,
+      "active": "default",
+      "score": 0.5714110029638263,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104724.1574776,
+      "strategy": "default",
+      "score": 0.8310477046121952,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776104724.1644812,
+      "active": "default",
+      "score": 0.8310477046121952,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104784.4299257,
+      "strategy": "default",
+      "score": 0.5567423899082906,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104784.436809,
+      "active": "default",
+      "score": 0.5567423899082906,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104784.8646934,
+      "strategy": "default",
+      "score": 0.7302967629767224,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104784.8716927,
+      "active": "default",
+      "score": 0.7302967629767224,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104785.3058312,
+      "strategy": "default",
+      "score": 0.607624673374187,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104785.3138304,
+      "active": "default",
+      "score": 0.607624673374187,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104888.9750297,
+      "strategy": "default",
+      "score": 0.892996600458231,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776104888.9840307,
+      "active": "default",
+      "score": 0.892996600458231,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104889.4319472,
+      "strategy": "default",
+      "score": 0.7946261226535005,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776104889.437993,
+      "active": "default",
+      "score": 0.7946261226535005,
+      "switched": false
+    },
+    {
+      "timestamp": 1776104889.8699455,
+      "strategy": "default",
+      "score": 0.5546623614562677,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776104889.8769572,
+      "active": "default",
+      "score": 0.5546623614562677,
+      "switched": false
+    },
+    {
+      "timestamp": 1776105008.2148013,
+      "strategy": "default",
+      "score": 0.8353086783179839,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776105008.221801,
+      "active": "default",
+      "score": 0.8353086783179839,
+      "switched": false
+    },
+    {
+      "timestamp": 1776105008.655758,
+      "strategy": "default",
+      "score": 0.5167041127630537,
+      "action": "stable"
+    },
+    {
+      "timestamp": 1776105008.661757,
+      "active": "default",
+      "score": 0.5167041127630537,
+      "switched": false
+    },
+    {
+      "timestamp": 1776105009.1086848,
+      "strategy": "default",
+      "score": 0.7908176220307347,
+      "action": "reinforced"
+    },
+    {
+      "timestamp": 1776105009.115681,
+      "active": "default",
+      "score": 0.7908176220307347,
+      "switched": false
+    },
+    {
+      "timestamp": 1776105354.8999107,
+      "from": "default",
+      "to": "reduce_risk",
+      "reason": "memory_trend:unstable"
+    },
+    {
+      "timestamp": 1776105409.7308462,
+      "from": "reduce_risk",
+      "to": "optimize_focus",
+      "reason": "memory_trend:declining"
+    },
+    {
+      "timestamp": 1776105562.3610332,
+      "from": "optimize_focus",
+      "to": "reduce_risk",
+      "reason": "memory_trend:unstable"
+    },
+    {
+      "timestamp": 1776106540.6272783,
+      "from": "reduce_risk",
+      "to": "optimize_focus",
+      "reason": "memory_trend:declining"
+    },
+    {
+      "timestamp": 1776106586.3724594,
+      "from": "optimize_focus",
+      "to": "reduce_risk",
+      "reason": "memory_trend:unstable"
+    },
+    {
+      "timestamp": 1776107552.5406284,
+      "from": "reduce_risk",
+      "to": "optimize_focus",
+      "reason": "memory_trend:declining"
+    },
+    {
+      "timestamp": 1776108120.5978248,
+      "from": "optimize_focus",
+      "to": "increase_efficiency",
+      "reason": "memory_trend:declining"
+    },
+    {
+      "timestamp": 1776108351.4968238,
+      "from": "increase_efficiency",
+      "to": "reduce_risk",
+      "reason": "memory_trend:declining"
+    }
+  ],
+  "leaderboard": [
+    [
+      "default",
+      0.738786313432797
+    ]
+  ],
+  "current_strategy": "reduce_risk"
+}

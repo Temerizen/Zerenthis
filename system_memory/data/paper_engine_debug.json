@@ -1,0 +1,28 @@
+{
+  "module_file": "C:\\ZerenthisV2\\backend\\app\\engines\\market_paper_engine.py",
+  "signals_type": "<class 'list'>",
+  "signals_count_before": 3,
+  "signals_preview": [
+    {
+      "asset": "BTC",
+      "action": "BUY",
+      "price": 71946.0,
+      "confidence": 1.45814
+    },
+    {
+      "asset": "ETH",
+      "action": "BUY",
+      "price": 2188.11,
+      "confidence": 1.0
+    },
+    {
+      "asset": "SOL",
+      "action": "BUY",
+      "price": 82.94,
+      "confidence": 1.24058
+    }
+  ],
+  "signals_count_after_cap": 1,
+  "exit_reason": "confidence_below_threshold",
+  "confidence": 1.45814
+}

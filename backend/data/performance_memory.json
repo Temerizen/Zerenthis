@@ -1,0 +1,20 @@
+{
+  "toolbox_strategy": {
+    "runs": 2266,
+    "total_score": 5.0,
+    "avg_score": 0.8883495145631068,
+    "total": 2013.0
+  },
+  "revenue_scan": {
+    "runs": 1670,
+    "total_score": 3.0,
+    "avg_score": 0.9005988023952096,
+    "total": 1504.0
+  },
+  "builder_handoff": {
+    "runs": 2169,
+    "total_score": 3.0,
+    "avg_score": 0.8902720147533425,
+    "total": 1931.0
+  }
+}

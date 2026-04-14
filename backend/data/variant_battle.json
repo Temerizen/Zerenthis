@@ -1,0 +1,33 @@
+{
+  "last_goal": "Increase conversions and revenue",
+  "variants": [
+    {
+      "name": "Premium Offer",
+      "headline": "Increase conversions and revenue with a premium done-for-you pack",
+      "price": 49,
+      "angle": "premium",
+      "score": 66.15
+    },
+    {
+      "name": "Urgency Offer",
+      "headline": "Increase conversions and revenue with a limited-time action plan",
+      "price": 19,
+      "angle": "urgency",
+      "score": 22.8
+    },
+    {
+      "name": "Beginner Offer",
+      "headline": "Increase conversions and revenue with a simple beginner-friendly starter kit",
+      "price": 9,
+      "angle": "beginner",
+      "score": 9.0
+    }
+  ],
+  "winner": {
+    "name": "Premium Offer",
+    "headline": "Increase conversions and revenue with a premium done-for-you pack",
+    "price": 49,
+    "angle": "premium",
+    "score": 66.15
+  }
+}

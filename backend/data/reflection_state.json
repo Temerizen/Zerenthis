@@ -1,0 +1,104 @@
+{
+  "last_reflection": {
+    "timestamp": 1776105009.1363068,
+    "score": 0.7908176220307347,
+    "evaluation": "positive",
+    "trend": "improving",
+    "goal": "balanced_progression",
+    "continuity": 1.0,
+    "decision": "continue",
+    "note": "Stable and effective behavior"
+  },
+  "history": [
+    {
+      "timestamp": 1776104784.4547155,
+      "score": 0.5567423899082906,
+      "evaluation": "neutral",
+      "trend": "unknown",
+      "goal": "balanced_progression",
+      "continuity": 0.7700000000000002,
+      "decision": "observe",
+      "note": "Monitoring behavior"
+    },
+    {
+      "timestamp": 1776104784.8972764,
+      "score": 0.7302967629767224,
+      "evaluation": "neutral",
+      "trend": "improving",
+      "goal": "balanced_progression",
+      "continuity": 0.8200000000000003,
+      "decision": "observe",
+      "note": "Monitoring behavior"
+    },
+    {
+      "timestamp": 1776104785.3388302,
+      "score": 0.607624673374187,
+      "evaluation": "neutral",
+      "trend": "declining",
+      "goal": "balanced_progression",
+      "continuity": 0.8700000000000003,
+      "decision": "observe",
+      "note": "Monitoring behavior"
+    },
+    {
+      "timestamp": 1776104888.9990273,
+      "score": 0.892996600458231,
+      "evaluation": "positive",
+      "trend": "improving",
+      "goal": "balanced_progression",
+      "continuity": 0.9200000000000004,
+      "decision": "continue",
+      "note": "Stable and effective behavior"
+    },
+    {
+      "timestamp": 1776104889.4629335,
+      "score": 0.7946261226535005,
+      "evaluation": "positive",
+      "trend": "declining",
+      "goal": "balanced_progression",
+      "continuity": 0.9700000000000004,
+      "decision": "continue",
+      "note": "Stable and effective behavior"
+    },
+    {
+      "timestamp": 1776104889.9059424,
+      "score": 0.5546623614562677,
+      "evaluation": "neutral",
+      "trend": "declining",
+      "goal": "balanced_progression",
+      "continuity": 1.0,
+      "decision": "observe",
+      "note": "Monitoring behavior"
+    },
+    {
+      "timestamp": 1776105008.2457232,
+      "score": 0.8353086783179839,
+      "evaluation": "positive",
+      "trend": "improving",
+      "goal": "balanced_progression",
+      "continuity": 1.0,
+      "decision": "continue",
+      "note": "Stable and effective behavior"
+    },
+    {
+      "timestamp": 1776105008.6856472,
+      "score": 0.5167041127630537,
+      "evaluation": "neutral",
+      "trend": "declining",
+      "goal": "balanced_progression",
+      "continuity": 1.0,
+      "decision": "observe",
+      "note": "Monitoring behavior"
+    },
+    {
+      "timestamp": 1776105009.1363068,
+      "score": 0.7908176220307347,
+      "evaluation": "positive",
+      "trend": "improving",
+      "goal": "balanced_progression",
+      "continuity": 1.0,
+      "decision": "continue",
+      "note": "Stable and effective behavior"
+    }
+  ]
+}

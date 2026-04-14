@@ -1,0 +1,106 @@
+{
+  "current_focus": "balanced_progression",
+  "last_goal_type": "balanced_progression",
+  "last_mission_id": "mission_1776103582",
+  "continuity_score": 1.0,
+  "cycle_count": 16,
+  "narrative": [
+    {
+      "timestamp": 1776104549.16898,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.42
+    },
+    {
+      "timestamp": 1776104549.6119642,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.47
+    },
+    {
+      "timestamp": 1776104550.0492966,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.52
+    },
+    {
+      "timestamp": 1776104656.9377866,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.5700000000000001
+    },
+    {
+      "timestamp": 1776104657.476496,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.6200000000000001
+    },
+    {
+      "timestamp": 1776104657.9204555,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.6700000000000002
+    },
+    {
+      "timestamp": 1776104724.1834786,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.7200000000000002
+    },
+    {
+      "timestamp": 1776104784.4538648,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.7700000000000002
+    },
+    {
+      "timestamp": 1776104784.8902993,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.8200000000000003
+    },
+    {
+      "timestamp": 1776104785.3318305,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.8700000000000003
+    },
+    {
+      "timestamp": 1776104888.998026,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.9200000000000004
+    },
+    {
+      "timestamp": 1776104889.4559345,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 0.9700000000000004
+    },
+    {
+      "timestamp": 1776104889.8989418,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 1.0
+    },
+    {
+      "timestamp": 1776105008.2398107,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 1.0
+    },
+    {
+      "timestamp": 1776105008.6776474,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 1.0
+    },
+    {
+      "timestamp": 1776105009.1283057,
+      "goal": "balanced_progression",
+      "mission": "mission_1776103582",
+      "continuity": 1.0
+    }
+  ],
+  "last_update": 1776105009.1283057
+}

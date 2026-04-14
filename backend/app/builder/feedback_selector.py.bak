@@ -1,0 +1,98 @@
+﻿from __future__ import annotations
+import json
+from pathlib import Path
+
+FEEDBACK_PATH = Path("backend/data/builder/feedback_log.json")
+STATS_PATH = Path("backend/data/builder/target_stats.json")
+
+def _load_json(path: Path, default):
+    try:
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    return default
+
+def load_feedback() -> list:
+    return _load_json(FEEDBACK_PATH, [])
+
+def build_target_stats() -> dict:
+    rows = load_feedback()
+    stats: dict = {}
+
+    for row in rows:
+        req = row.get("request", {})
+        result = row.get("result", {})
+        target = req.get("target", "unknown")
+        success = bool(row.get("success", False))
+        strategy = req.get("strategy", "baseline")
+
+        if target not in stats:
+            stats[target] = {
+                "successes": 0,
+                "failures": 0,
+                "last_success": None,
+                "last_failure": None,
+                "strategies": {},
+                "cooldown": False
+            }
+
+        bucket = stats[target]
+
+        if success:
+            bucket["successes"] += 1
+            bucket["last_success"] = row.get("timestamp")
+        else:
+            bucket["failures"] += 1
+            bucket["last_failure"] = row.get("timestamp")
+
+        bucket["strategies"][strategy] = bucket["strategies"].get(strategy, 0) + 1
+
+        if bucket["failures"] >= 3 and bucket["failures"] > bucket["successes"]:
+            bucket["cooldown"] = True
+
+    STATS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    STATS_PATH.write_text(json.dumps(stats, indent=2), encoding="utf-8")
+    return stats
+
+def choose_strategy_for_target(target: str) -> dict:
+    stats = build_target_stats()
+    s = stats.get(target)
+
+    if not s:
+        return {
+            "strategy": "baseline",
+            "reason": "no_history",
+            "cooldown": False
+        }
+
+    if s.get("cooldown"):
+        return {
+            "strategy": "stabilize",
+            "reason": "cooldown_after_failures",
+            "cooldown": True
+        }
+
+    failures = s.get("failures", 0)
+    successes = s.get("successes", 0)
+
+    if failures == 0 and successes >= 1:
+        return {
+            "strategy": "optimize",
+            "reason": "previous_success_detected",
+            "cooldown": False
+        }
+
+    if failures >= successes:
+        return {
+            "strategy": "stabilize",
+            "reason": "failures_meet_or_exceed_successes",
+            "cooldown": False
+        }
+
+    return {
+        "strategy": "baseline",
+        "reason": "mixed_history",
+        "cooldown": False
+    }
+

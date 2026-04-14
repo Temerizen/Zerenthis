@@ -1,0 +1,720 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zerenthis</title>
+  <style>
+    :root {
+      --bg: #06080f;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #9ea7b8;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --success: #86efac;
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(125,211,252,0.14), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(167,139,250,0.14), transparent 22%),
+        linear-gradient(180deg, #04060b 0%, #0a1020 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .hero {
+      padding: 32px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .orb {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 22px rgba(125,211,252,0.8);
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(40px, 6vw, 66px);
+      line-height: 0.96;
+      letter-spacing: -2px;
+    }
+
+    .sub {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .command-box {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+    }
+
+    .mode-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .mode-chip {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+    }
+
+    .mode-chip.active {
+      background: linear-gradient(135deg, rgba(125,211,252,0.18), rgba(167,139,250,0.18));
+      color: var(--text);
+      border-color: rgba(125,211,252,0.35);
+      box-shadow: 0 0 0 1px rgba(125,211,252,0.10) inset;
+    }
+
+    .prompt {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.55;
+      font-family: inherit;
+    }
+
+    .prompt::placeholder { color: #7e8798; }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      align-items: center;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.16s ease, opacity 0.16s ease, background 0.16s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07111f;
+      margin-left: auto;
+      min-width: 170px;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .side {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .side-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 8px;
+    }
+
+    .big {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .small {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .result {
+      grid-column: 1 / -1;
+      padding: 26px;
+      display: none;
+    }
+
+    .result.show { display: block; }
+
+    .result-top {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .result-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.7px;
+      margin: 0 0 8px;
+    }
+
+    .result-summary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .status {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(134,239,172,0.10);
+      border: 1px solid rgba(134,239,172,0.22);
+      color: var(--success);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      min-height: 100%;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .asset-list, .trace-list, .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .asset-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .asset-link:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .asset-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .asset-type {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .trace-item, .action-item {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .loading {
+      display: none;
+      color: var(--accent);
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    .loading.show { display: block; }
+
+    .error {
+      display: none;
+      margin-top: 14px;
+      color: #fca5a5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .error.show { display: block; }
+
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .btn-primary { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="panel hero">
+      <div class="brand">
+        <span class="orb"></span>
+        <span>Zerenthis Command Center</span>
+      </div>
+
+      <h1>One command.<br>Full outcome.</h1>
+      <p class="sub">
+        Describe what you want built, packaged, learned, researched, or monetized. Zerenthis routes the invisible machine and returns the clean result.
+      </p>
+
+      <div class="command-box">
+        <div class="mode-row" id="modeRow">
+          <button class="mode-chip active" data-mode="money">Money</button>
+          <button class="mode-chip" data-mode="learning">Learning</button>
+          <button class="mode-chip" data-mode="research">Research</button>
+          <button class="mode-chip" data-mode="cognitive">Cognitive</button>
+          <button class="mode-chip" data-mode="founder">Founder</button>
+        </div>
+
+        <textarea id="prompt" class="prompt" placeholder="Example: Build me a faceless TikTok money strategy with a sellable offer, promo assets, and a posting plan.">Faceless TikTok money strategy</textarea>
+
+        <div class="row">
+          <span class="pill" id="activeModePill">Mode: Money</span>
+          <span class="pill">Hidden orchestration</span>
+          <span class="pill">Monetizable output</span>
+          <button id="runBtn" class="btn btn-primary">Generate Outcome</button>
+        </div>
+
+        <div id="loading" class="loading">Generating through command center…</div>
+        <div id="error" class="error"></div>
+      </div>
+    </section>
+
+    <aside class="panel side">
+      <div class="side-card">
+        <div class="kicker">Mode</div>
+        <div id="modeTitle" class="big">Money flow</div>
+        <div id="modeDesc" class="small">Build monetizable outputs, sellable packages, and launch-ready assets from a single command.</div>
+      </div>
+
+      <div class="side-card">
+        <div class="kicker">Output</div>
+        <div class="big">Assets, not ideas</div>
+        <div class="small">The panel surfaces concrete artifacts and next actions, not a pile of loose suggestions.</div>
+      </div>
+
+      <div class="side-card">
+        <div class="kicker">Design language</div>
+        <div class="big">Quiet power</div>
+        <div class="small">Dark glass, low clutter, clear hierarchy. The point is inevitability, not dashboard confetti.</div>
+      </div>
+    </aside>
+
+    <section id="result" class="panel result">
+      <div class="result-top">
+        <div>
+          <h2 id="resultTitle" class="result-title">Result title</h2>
+          <p id="resultSummary" class="result-summary">Result summary</p>
+        </div>
+        <div id="statusBadge" class="status">Completed</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Top Assets</h3>
+          <ul id="assetsList" class="asset-list"></ul>
+          <div class="footer-note">Artifacts open directly from the backend file route.</div>
+        </div>
+
+        <div class="card">
+          <h3>Execution Trace</h3>
+          <ul id="traceList" class="trace-list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Command Input</h3>
+          <div id="inputMeta" class="meta"></div>
+        </div>
+
+        <div class="card">
+          <h3>Next Action</h3>
+          <div id="nextActionText" class="meta"></div>
+          <div class="action-buttons" id="actionButtons"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE = "https://semantiqai-backend-production-bcab.up.railway.app";
+
+    const MODES = {
+      money: {
+        title: "Money flow",
+        desc: "Build monetizable outputs, sellable packages, and launch-ready assets from a single command.",
+        prompt: "Build me a faceless TikTok money strategy with a sellable offer, promo assets, and a posting plan."
+      },
+      learning: {
+        title: "Learning flow",
+        desc: "Turn one command into a teaching path, breakdown, and guided learning structure.",
+        prompt: "Teach me the fastest path to master direct response copywriting from beginner to confident execution."
+      },
+      research: {
+        title: "Research flow",
+        desc: "Turn prompts into structured deep dives, insight synthesis, and strategic takeaways.",
+        prompt: "Research the best current strategy angles for faceless educational channels and summarize the opportunity."
+      },
+      cognitive: {
+        title: "Cognitive flow",
+        desc: "Train sharper thinking, better memory, clearer decisions, and stronger mental performance.",
+        prompt: "Build me a cognitive training plan to improve focus, memory, and strategic thinking."
+      },
+      founder: {
+        title: "Founder flow",
+        desc: "Operate the system like a control tower and aim it at execution, leverage, and advantage.",
+        prompt: "Design my highest-leverage move this week to grow Zerenthis faster."
+      }
+    };
+
+    let activeMode = "money";
+
+    const promptEl = document.getElementById("prompt");
+    const runBtn = document.getElementById("runBtn");
+    const resultEl = document.getElementById("result");
+    const loadingEl = document.getElementById("loading");
+    const errorEl = document.getElementById("error");
+
+    function prettifyAssetLabel(asset) {
+      const raw = (asset.label || asset.type || "Artifact").toString().toLowerCase();
+      if (raw.includes("knowledge")) return "Knowledge Brief";
+      if (raw.includes("workflow")) return "Workflow Run";
+      if (raw.includes("sales")) return "Sales Page";
+      if (raw.includes("email")) return "Email Promo";
+      if (raw.includes("gumroad")) return "Store Copy";
+      return asset.label || asset.type || "Artifact";
+    }
+
+    function setMode(mode) {
+      activeMode = mode;
+      document.querySelectorAll(".mode-chip").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
+      document.getElementById("activeModePill").textContent = `Mode: ${MODES[mode].title}`;
+      document.getElementById("modeTitle").textContent = MODES[mode].title;
+      document.getElementById("modeDesc").textContent = MODES[mode].desc;
+      promptEl.value = MODES[mode].prompt;
+    }
+
+    function setLoading(isLoading) {
+      runBtn.disabled = isLoading;
+      runBtn.textContent = isLoading ? "Generating..." : "Generate Outcome";
+      loadingEl.classList.toggle("show", isLoading);
+      errorEl.classList.remove("show");
+      errorEl.textContent = "";
+    }
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.classList.add("show");
+    }
+
+    function renderAssets(assets) {
+      const assetsList = document.getElementById("assetsList");
+      assetsList.innerHTML = "";
+
+      if (!assets || !assets.length) {
+        assetsList.innerHTML = '<li class="trace-item">No artifacts returned yet.</li>';
+        return;
+      }
+
+      for (const asset of assets.slice(0, 6)) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.className = "asset-link";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+
+        const url = asset.url || "";
+        a.href = url.startsWith("http") ? url : `${API_BASE}${url}`;
+        a.innerHTML = `
+          <span class="asset-left">
+            <strong>${prettifyAssetLabel(asset)}</strong>
+            <span class="asset-type">${asset.type || "artifact"}</span>
+          </span>
+          <span class="mono">${url}</span>
+        `;
+        li.appendChild(a);
+        assetsList.appendChild(li);
+      }
+    }
+
+    function renderTrace(trace) {
+      const traceList = document.getElementById("traceList");
+      traceList.innerHTML = "";
+
+      if (!trace || !trace.length) {
+        traceList.innerHTML = '<li class="trace-item">No trace available.</li>';
+        return;
+      }
+
+      for (const item of trace) {
+        const li = document.createElement("li");
+        li.className = "trace-item";
+        li.textContent = item.replaceAll("_", " ");
+        traceList.appendChild(li);
+      }
+    }
+
+    function renderInputMeta(input) {
+      const inputMeta = document.getElementById("inputMeta");
+      const rows = [
+        ["Prompt", input?.prompt || ""],
+        ["Buyer", input?.buyer || ""],
+        ["Niche", input?.niche || ""],
+        ["Promise", input?.promise || ""],
+        ["Mode", MODES[activeMode].title]
+      ];
+      inputMeta.innerHTML = rows.map(([k, v]) => `<div><strong>${k}:</strong> ${v || "-"}</div>`).join("");
+    }
+
+    function renderActions(data) {
+      const nextActionText = document.getElementById("nextActionText");
+      const actionButtons = document.getElementById("actionButtons");
+
+      nextActionText.innerHTML = `<div>${data.result?.next_action || "Use the strongest asset first and move to execution immediately."}</div>`;
+      actionButtons.innerHTML = "";
+
+      const assets = data.result?.assets || [];
+      for (const asset of assets.slice(0, 2)) {
+        const a = document.createElement("a");
+        const url = asset.url || "";
+        a.href = url.startsWith("http") ? url : `${API_BASE}${url}`;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "btn btn-secondary";
+        a.textContent = `Open ${prettifyAssetLabel(asset)}`;
+        actionButtons.appendChild(a);
+      }
+
+      const rerun = document.createElement("button");
+      rerun.className = "btn btn-secondary";
+      rerun.textContent = "Refine This Result";
+      rerun.onclick = () => {
+        promptEl.value = `${promptEl.value.trim()} Improve the clarity, conversion, and differentiation.`;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      actionButtons.appendChild(rerun);
+    }
+
+    async function runCommand() {
+      const prompt = promptEl.value.trim();
+      if (!prompt) {
+        showError("Write a command first.");
+        return;
+      }
+
+      setLoading(true);
+
+      const nicheMap = {
+        money: "Content Monetization",
+        learning: "AI Learning",
+        research: "Strategic Research",
+        cognitive: "Cognitive Performance",
+        founder: "Founder Operations"
+      };
+
+      const promiseMap = {
+        money: "start posting fast and monetize sooner",
+        learning: "learn faster and execute with clarity",
+        research: "extract strategic insight and opportunity",
+        cognitive: "improve focus memory and thinking",
+        founder: "increase leverage and execution speed"
+      };
+
+      try {
+        const response = await fetch(`${API_BASE}/api/command/run`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            prompt,
+            buyer: activeMode === "founder" ? "Founder" : "New creators",
+            niche: nicheMap[activeMode],
+            promise: promiseMap[activeMode],
+            mode: activeMode
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.status === "error") {
+          throw new Error(data.error || data.detail || "Command failed.");
+        }
+
+        document.getElementById("resultTitle").textContent = data.result?.title || "Command Result";
+        document.getElementById("resultSummary").textContent = data.result?.summary || "";
+        document.getElementById("statusBadge").textContent = (data.status || "ok").toUpperCase();
+
+        renderAssets(data.result?.assets || []);
+        renderTrace(data.trace || []);
+        renderInputMeta(data.input || {});
+        renderActions(data);
+
+        resultEl.classList.add("show");
+        resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (err) {
+        showError(err.message || "Something went sideways.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    document.querySelectorAll(".mode-chip").forEach(btn => {
+      btn.addEventListener("click", () => setMode(btn.dataset.mode));
+    });
+
+    runBtn.addEventListener("click", runCommand);
+    promptEl.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        runCommand();
+      }
+    });
+
+    setMode(activeMode);
+  </script>
+</body>
+</html>

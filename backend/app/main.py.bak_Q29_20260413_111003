@@ -1,0 +1,101 @@
+﻿from fastapi import FastAPI
+from backend.app.cognition import (
+    meta, world, explore, decision,
+    execution, intent, goals, mission,
+    reality, adaptation, strategy, status_engine,
+    strategy_pressure, strategy_evolution, coherence_engine,
+    self_correction_engine, autonomous_mission_engine,
+    stabilizer_engine, initiative_engine, reasoning_engine,
+    memory_depth_engine
+)
+from backend.app.cognition.value_hierarchy import evaluate_values
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {
+        "brain": "online",
+        "initiative": True,
+        "reasoning": True,
+        "memory_depth": True,
+        "stabilized": True
+    }
+
+def _brain_cycle():
+    world.update({"tick": "loop"})
+    meta.run({"event": "cycle"})
+    explore.run()
+
+    value_state = evaluate_values()
+
+    intent_state = intent.form_intent({
+        "value_state": value_state
+    })
+
+    decision.run({
+        "intent_state": intent_state
+    })
+
+    execution.run({"plan": {}})
+
+    goal_state = goals.run({
+        "goal": intent_state.get("goal"),
+        "dominant_value": value_state.get("dominant_value")
+    })
+
+    active_goal = goal_state.get("active_goal")
+
+    mission_state = mission.run({
+        "active_goal": active_goal
+    }) if active_goal else {"active_mission": None}
+
+    active_mission = mission_state.get("active_mission")
+
+    reality_state = reality.run({
+        "mission_id": active_mission.get("id") if active_mission else None,
+        "goal_type": active_goal.get("type") if active_goal else None,
+        "mission_progress": active_mission.get("progress") if active_mission else 0
+    })
+
+    score = reality_state.get("score", 0.5)
+
+    adaptation_state = adaptation.run({
+        "score": score,
+        "goal": active_goal
+    })
+
+    strategy_state = strategy.run({
+        "score": score
+    })
+
+    strategy_pressure.run({
+        "adjustment_action": adaptation_state.get("adjustment", {}).get("action", "neutral_adjust")
+    })
+
+    strategy_evolution.run({"score": score})
+
+    coherence_engine.run()
+    self_correction_engine.run()
+    autonomous_mission_engine.run()
+
+    initiative_state = initiative_engine.run()
+    reasoning_state = reasoning_engine.run()
+
+    # 🧠 NEW: memory layer
+    memory_state = memory_depth_engine.run()
+
+    status_state = status_engine.run()
+    stability_state = stabilizer_engine.run()
+
+    return {
+        "status": "ok",
+        "initiative_state": initiative_state,
+        "reasoning_state": reasoning_state,
+        "memory_state": memory_state,
+        "stability_state": stability_state
+    }
+
+@app.post("/api/brain/run")
+def brain():
+    return _brain_cycle()

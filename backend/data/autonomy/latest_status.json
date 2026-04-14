@@ -1,0 +1,13 @@
+﻿{
+    "status":  "ok",
+    "current_cycle":  300,
+    "cycles_requested":  300,
+    "passes":  300,
+    "fails":  0,
+    "current_streak":  300,
+    "best_streak":  300,
+    "consecutive_errors":  0,
+    "last_started_at":  "2026-04-13T13:50:33.4076709-07:00",
+    "last_error":  null,
+    "log_path":  "backend\\data\\autonomy\\cycle_history.jsonl"
+}

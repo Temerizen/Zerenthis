@@ -1,0 +1,23 @@
+﻿export const moduleMap = [
+  { id: 'cognitive_lab', label: 'Cognitive Lab', route: '/cognitive', group: 'intelligence' },
+  { id: 'ai_school', label: 'AI School', route: '/learning', group: 'learning' },
+  { id: 'execution_engine', label: 'Execution Engine', route: '/execution', group: 'action' },
+  { id: 'simulation_engine', label: 'Reality Simulation', route: '/simulation', group: 'strategy' },
+  { id: 'creation_engine', label: 'Infinite Creation', route: '/creation', group: 'creation' },
+  { id: 'finance', label: 'Finance System', route: '/dashboard', group: 'user' },
+  { id: 'health', label: 'Health System', route: '/dashboard', group: 'user' },
+  { id: 'writing', label: 'Writing Studio', route: '/creation', group: 'user' },
+  { id: 'research', label: 'Research Workspace', route: '/dashboard', group: 'user' },
+  { id: 'vault', label: 'Knowledge Vault', route: '/dashboard', group: 'user' },
+  { id: 'analytics', label: 'Personal Analytics', route: '/dashboard', group: 'user' },
+  { id: 'life', label: 'Life System', route: '/dashboard', group: 'user' },
+  { id: 'founder_video', label: 'Founder Video', route: '/founder', group: 'founder' },
+  { id: 'founder_distribution', label: 'Distribution Engine', route: '/founder', group: 'founder' },
+  { id: 'revenue', label: 'Revenue Engine', route: '/founder', group: 'founder' },
+  { id: 'campaign', label: 'Campaign Engine', route: '/founder', group: 'founder' },
+  { id: 'calendar', label: 'Content Calendar', route: '/founder', group: 'founder' },
+  { id: 'affiliate', label: 'Affiliate System', route: '/founder', group: 'founder' },
+  { id: 'growth', label: 'Growth Analytics', route: '/founder', group: 'founder' },
+  { id: 'audience', label: 'Audience Intelligence', route: '/founder', group: 'founder' },
+  { id: 'competitor', label: 'Competitor Analysis', route: '/founder', group: 'founder' }
+]

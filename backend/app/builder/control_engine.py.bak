@@ -1,0 +1,104 @@
+﻿import json, os, time
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+DATA_DIR = os.path.join(ROOT, "backend", "data")
+
+PARAMS_FILE = os.path.join(DATA_DIR, "market_params.json")
+ACCOUNT_FILE = os.path.join(DATA_DIR, "paper_account.json")
+RISK_FILE = os.path.join(DATA_DIR, "risk_state.json")
+REGIME_FILE = os.path.join(DATA_DIR, "regime_state.json")
+CONTROL_FILE = os.path.join(DATA_DIR, "control_state.json")
+BASE_FILE = os.path.join(DATA_DIR, "control_base.json")
+STRATEGY_FILE = os.path.join(DATA_DIR, "strategy_profiles.json")
+
+def load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    with open(path, "r", encoding="utf-8-sig") as f:
+        return json.load(f)
+
+def save_json(path, data):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def select_strategy(regime):
+    r = regime.get("regime", "UNKNOWN")
+
+    if "HIGH_VOLATILITY" in r:
+        return "defensive"
+    elif "RANGING" in r:
+        return "range"
+    elif "TRENDING" in r:
+        return "trend"
+    return "defensive"
+
+def run_control_cycle():
+    params = load_json(PARAMS_FILE, {})
+    account = load_json(ACCOUNT_FILE, {})
+    risk_state = load_json(RISK_FILE, {})
+    regime = load_json(REGIME_FILE, {})
+    base = load_json(BASE_FILE, {})
+    strategies = load_json(STRATEGY_FILE, {})
+
+    balance = float(account.get("balance", 1000.0))
+    peak = max(float(risk_state.get("peak_balance", balance)), balance)
+    drawdown = max(0.0, (peak - balance) / peak) if peak > 0 else 0.0
+    loss_streak = int(risk_state.get("loss_streak", 0))
+
+    strategy_name = select_strategy(regime)
+    strat = strategies.get(strategy_name, {})
+
+    multipliers = {
+        "risk": strat.get("risk_per_trade", 1.0),
+        "tp": strat.get("take_profit", 1.0),
+        "sl": strat.get("stop_loss", 1.0),
+        "scale": strat.get("position_scale", 1.0)
+    }
+
+    signals = [f"strategy_{strategy_name}"]
+
+    # drawdown overrides
+    if drawdown > 0.05:
+        multipliers["risk"] *= 0.8
+        multipliers["scale"] *= 0.85
+        signals.append("drawdown_override")
+
+    if loss_streak >= 3:
+        multipliers["risk"] *= 0.85
+        signals.append("loss_streak_override")
+
+    final = {
+        "risk_per_trade": round(max(0.01, min(0.12, base["risk_per_trade"] * multipliers["risk"])), 6),
+        "take_profit": round(max(0.006, min(0.03, base["take_profit"] * multipliers["tp"])), 6),
+        "stop_loss": round(max(0.005, min(0.02, base["stop_loss"] * multipliers["sl"])), 6),
+        "position_scale": round(max(0.75, min(2.5, base["position_scale"] * multipliers["scale"])), 6)
+    }
+
+    params.update(final)
+    risk_state["peak_balance"] = peak
+
+    save_json(PARAMS_FILE, params)
+    save_json(RISK_FILE, risk_state)
+
+    state = {
+        "timestamp": int(time.time()),
+        "strategy": strategy_name,
+        "regime": regime,
+        "signals": signals,
+        "multipliers": multipliers,
+        "final_params": final
+    }
+
+    save_json(CONTROL_FILE, state)
+    from backend.app.engines.kill_switch_engine import run_kill_switch
+kill_result = run_kill_switch()
+
+state["kill_switch"] = kill_result
+
+    return state
+
+if __name__ == "__main__":
+    print(json.dumps(run_control_cycle(), indent=2))
+
+

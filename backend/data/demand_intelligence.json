@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "mode": "no_money_validation",
+  "results": [
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "price": 29,
+      "impressions": 52,
+      "clicks": 6,
+      "ctr": 0.1154,
+      "saves": 2,
+      "waitlist_signups": 1,
+      "replies": 0,
+      "interest_score": 16.06,
+      "timestamp": 1775986757.9263113
+    },
+    {
+      "name": "AI Side Hustle System",
+      "score": 5.32,
+      "price": 19,
+      "impressions": 85,
+      "clicks": 4,
+      "ctr": 0.0471,
+      "saves": 1,
+      "waitlist_signups": 0,
+      "replies": 0,
+      "interest_score": 8.16,
+      "timestamp": 1775986757.9263113
+    },
+    {
+      "name": "Premium Offer",
+      "score": 3.43,
+      "price": 49,
+      "impressions": 36,
+      "clicks": 4,
+      "ctr": 0.1111,
+      "saves": 1,
+      "waitlist_signups": 0,
+      "replies": 0,
+      "interest_score": 7.21,
+      "timestamp": 1775986757.9263113
+    }
+  ],
+  "top_interest": {
+    "name": "Viral Content Engine Pack",
+    "score": 8.12,
+    "price": 29,
+    "impressions": 52,
+    "clicks": 6,
+    "ctr": 0.1154,
+    "saves": 2,
+    "waitlist_signups": 1,
+    "replies": 0,
+    "interest_score": 16.06,
+    "timestamp": 1775986757.9263113
+  },
+  "at_risk": [],
+  "timestamp": 1775986757.9263113
+}

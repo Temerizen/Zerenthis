@@ -1,0 +1,1552 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SemantiqAI Ascension Agent Council</title>
+  <meta name="description" content="SemantiqAI Ascension with multi-agent orchestration, onboarding, presets, threads, founder analytics, and artifact workflows." />
+  <style>
+    :root{
+      --bg:#07101d;
+      --bg2:#0d1730;
+      --panel:#101936;
+      --panel2:#17244c;
+      --line:#27376a;
+      --text:#eef3ff;
+      --muted:#aab7de;
+      --accent:#7c9cff;
+      --accent2:#5eead4;
+      --ok:#8ef7a3;
+      --warn:#ffd166;
+      --danger:#ff6b81;
+      --shadow:0 24px 80px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:
+      radial-gradient(circle at top left, rgba(124,156,255,.14), transparent 28%),
+      radial-gradient(circle at top right, rgba(94,234,212,.08), transparent 24%),
+      linear-gradient(180deg,#07101d 0%, #0b1327 100%);
+      color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+    body{min-height:100vh}
+    .shell{max-width:1600px;margin:0 auto;padding:18px}
+    .topbar{
+      position:sticky;top:12px;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:16px 18px;border:1px solid var(--line);border-radius:24px;
+      background:rgba(12,18,39,.84);backdrop-filter:blur(12px);box-shadow:var(--shadow)
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#7c9cff,#5eead4);
+      display:grid;place-items:center;font-weight:900;color:#08111f
+    }
+    .brand h1{margin:0;font-size:20px}
+    .brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+    .pill{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#0e1733;color:var(--muted);font-size:12px}
+    .layout{display:grid;grid-template-columns:300px 1fr 360px;gap:16px;margin-top:16px}
+    .card{
+      background:linear-gradient(180deg, rgba(17,25,54,.96), rgba(11,18,37,.96));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .card .inner{padding:18px}
+    .stack{display:grid;gap:12px}
+    input,textarea,button,select{
+      width:100%;padding:12px 14px;border-radius:16px;border:1px solid var(--line);
+      background:#0b1430;color:var(--text);font:inherit
+    }
+    textarea{min-height:120px;resize:vertical}
+    button{cursor:pointer}
+    .primary{background:linear-gradient(135deg,var(--accent),#6c7fff);border-color:#90a2ff}
+    .secondary{background:#121c3d}
+    .danger{background:linear-gradient(135deg,#ff6b81,#ff4d6d);border-color:#ff7f92}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .hero{
+      padding:24px;border-bottom:1px solid var(--line);
+      background:radial-gradient(circle at top right, rgba(124,156,255,.18), transparent 35%)
+    }
+    .hero h2{margin:0 0 10px;font-size:32px;line-height:1.08}
+    .hero p{margin:0;color:var(--muted);line-height:1.6}
+    .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+    .mini{padding:12px;border:1px solid var(--line);border-radius:16px;background:#0d1730}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line)}
+    .tab{width:auto;padding:10px 14px;border-radius:999px;background:#0f1731;border:1px solid var(--line);color:var(--muted)}
+    .tab.active{background:linear-gradient(135deg,#1d2b5d,#16224a);color:var(--text);border-color:#7c9cff}
+    .panel{display:none;padding:18px}
+    .panel.active{display:block}
+    .thread-list,.list,.chat-log,.starter-grid{
+      border:1px solid var(--line);border-radius:18px;background:#091126;padding:10px
+    }
+    .thread-list,.list{display:grid;gap:10px;max-height:420px;overflow:auto}
+    .starter-grid{display:grid;gap:10px}
+    .chat-log{display:grid;gap:12px;min-height:420px;max-height:560px;overflow:auto}
+    .thread-item,.item,.msg,.starter{
+      padding:12px;border:1px solid var(--line);border-radius:16px;background:#0d1730
+    }
+    .thread-item.active{outline:2px solid #7c9cff}
+    .msg.user{background:#121b3c}
+    .msg.ai{background:#0d1730}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .small{font-size:12px;color:var(--muted)}
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .kpi{padding:14px;border:1px solid var(--line);border-radius:16px;background:#0d1730}
+    .kpi b{display:block;font-size:22px;margin-top:6px}
+    .agent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .onboarding{
+      position:fixed;inset:0;background:rgba(3,7,18,.78);backdrop-filter:blur(8px);
+      display:none;align-items:center;justify-content:center;z-index:1000;padding:18px
+    }
+    .onboarding.show{display:flex}
+    .onboarding-card{
+      width:min(980px, 100%);background:linear-gradient(180deg, rgba(17,25,54,.98), rgba(11,18,37,.98));
+      border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px
+    }
+    .goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+    .goal{padding:14px;border:1px solid var(--line);border-radius:16px;background:#0d1730;cursor:pointer}
+    .goal.active{outline:2px solid #7c9cff}
+    @media (max-width: 1350px){ .layout{grid-template-columns:280px 1fr} .right-rail{grid-column:1 / -1} }
+    @media (max-width: 980px){ .layout{grid-template-columns:1fr} .module-grid,.kpi-grid,.row,.agent-grid,.goal-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<div class="onboarding" id="onboardingModal">
+  <div class="onboarding-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">Welcome to SemantiqAI Ascension</h2>
+        <div class="small" style="margin-top:6px">Pick your mode so the machine knows which gears to spin first.</div>
+      </div>
+      <button class="secondary" style="width:auto" onclick="closeOnboarding()">Skip for now</button>
+    </div>
+
+    <div class="goal-grid">
+      <div class="goal" data-goal="founder" onclick="pickGoal(this, 'founder')"><b>Founder OS</b><div class="small" style="margin-top:6px">Priorities, ops, launch rhythm</div></div>
+      <div class="goal" data-goal="product" onclick="pickGoal(this, 'product')"><b>Product Build</b><div class="small" style="margin-top:6px">Features, UX, roadmap, systems</div></div>
+      <div class="goal" data-goal="content" onclick="pickGoal(this, 'content')"><b>Content Engine</b><div class="small" style="margin-top:6px">Messaging, posts, assets, launch copy</div></div>
+      <div class="goal" data-goal="research" onclick="pickGoal(this, 'research')"><b>Research</b><div class="small" style="margin-top:6px">Analysis, evidence, opportunity mapping</div></div>
+      <div class="goal" data-goal="expansion" onclick="pickGoal(this, 'expansion')"><b>Expansion</b><div class="small" style="margin-top:6px">Scale, roadmap leverage, unfair growth</div></div>
+      <div class="goal" data-goal="general" onclick="pickGoal(this, 'general')"><b>General AI Workspace</b><div class="small" style="margin-top:6px">Flexible mode with full control</div></div>
+    </div>
+
+    <div class="row" style="margin-top:16px">
+      <select id="onboardingMode">
+        <option value="solo">Solo SemantiqAI</option>
+        <option value="council">Agent Council Mode</option>
+      </select>
+      <button class="primary" onclick="finishOnboarding()">Finish Onboarding</button>
+    </div>
+
+    <div class="starter-grid" id="starterCards" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <h1>SemantiqAI Ascension Agent Council</h1>
+        <p>AIBrain Strategist • Content Generator • Founder OS • Research Architect • Expansion Planner</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <div class="pill" id="statusText">Checking status...</div>
+      <div class="pill" id="userBadge">Guest</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="card">
+      <div class="inner stack">
+        <div>
+          <h3 style="margin:0 0 6px">Access + Threads</h3>
+          <div class="small">Now with guided entry instead of blank-screen poker face.</div>
+        </div>
+
+        <input id="username" placeholder="Username" />
+        <input id="password" type="password" placeholder="Password" />
+
+        <div class="row">
+          <button class="primary" onclick="signup()">Sign up</button>
+          <button class="secondary" onclick="login()">Log in</button>
+        </div>
+        <div class="row">
+          <button class="secondary" onclick="loadMe()">Refresh Me</button>
+          <button class="danger" onclick="logout()">Log out</button>
+        </div>
+
+        <div class="item">
+          <div class="small">Role</div>
+          <div id="roleText">guest</div>
+        </div>
+
+        <div class="row">
+          <button class="primary" onclick="createThread()">New Thread</button>
+          <button class="secondary" onclick="loadThreads()">Refresh Threads</button>
+        </div>
+
+        <div class="thread-list" id="threadList"></div>
+      </div>
+    </aside>
+
+    <main class="card">
+      <div class="hero">
+        <h2>Agent council orchestration layer</h2>
+        <p>
+          You now have multiple specialist minds inside the same workspace, plus onboarding that helps new users pick a lane instead of staring into the void.
+        </p>
+        <div class="module-grid">
+          <div class="mini">AIBrain Strategist</div>
+          <div class="mini">Content Generator</div>
+          <div class="mini">Founder OS</div>
+          <div class="mini">Research Architect</div>
+          <div class="mini">Expansion Planner</div>
+          <div class="mini">Council Synthesis</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="chat" onclick="showTab('chat', this)">Chat</button>
+        <button class="tab" data-tab="council" onclick="showTab('council', this)">Agent Council</button>
+        <button class="tab" data-tab="workflow" onclick="showTab('workflow', this)">Workflow</button>
+        <button class="tab" data-tab="artifacts" onclick="showTab('artifacts', this)">Artifacts</button>
+        <button class="tab" data-tab="knowledge" onclick="showTab('knowledge', this)">Knowledge</button>
+        <button class="tab" data-tab="presets" onclick="showTab('presets', this)">Presets</button>
+        <button class="tab" data-tab="feedback" onclick="showTab('feedback', this)">Feedback</button>`r`n        <button class="tab" data-tab="memory" onclick="showTab('memory', this)">Memory</button>`r`n        <button class="tab" data-tab="studio" onclick="showTab('studio', this)">Studio</button>
+        <button class="tab" data-tab="jobs" onclick="showTab('jobs', this)">Jobs</button>`r`n        <button class="tab" data-tab="founder" onclick="showTab('founder', this)">Founder</button>
+      </div>
+
+      <section class="panel active" id="tab-chat">
+        <div class="stack">
+          <div class="row">
+            <select id="chatPreset"></select>
+            <button class="secondary" onclick="loadMessages()">Refresh Messages</button>
+          </div>
+          <div class="chat-log" id="chatLog"></div>
+          <textarea id="chatMessage" placeholder="Ask SemantiqAI anything from strategy to product design to content planning..."></textarea>
+          <div class="row">
+            <button class="primary" onclick="sendChat()">Send Chat</button>
+            <button class="secondary" onclick="generateArtifact()">Generate Artifact</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-council">
+        <div class="stack">
+          <div class="agent-grid" id="agentGrid"></div>
+          <textarea id="councilMessage" placeholder="Ask the agent council for a combined response. Example: design the next unfair growth roadmap for SemantiqAI with founder ops, content, research, and expansion strategy."></textarea>
+          <div class="row">
+            <button class="primary" onclick="runCouncil()">Run Agent Council</button>
+            <button class="secondary" onclick="loadAgentRuns()">Load Agent Runs</button>
+          </div>
+          <div class="list" id="councilOutput"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-workflow">
+        <div class="stack">
+          <div class="row">
+            <select id="workflowPreset"></select>
+            <button class="secondary" onclick="runPresetQuick()">Run Selected Preset</button>
+          </div>
+          <textarea id="workflowMessage" placeholder="Describe the workflow you want, such as a founder operating model, content engine, research structure, or expansion roadmap."></textarea>
+          <div class="row">
+            <button class="primary" onclick="runWorkflow()">Run Workflow</button>
+            <button class="secondary" onclick="runPlan()">Plan Only</button>
+          </div>
+          <div class="list"><div class="item" id="workflowOutput" style="white-space:pre-wrap"></div></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-artifacts">
+        <div class="stack">
+          <div class="row">
+            <button class="primary" onclick="loadArtifacts()">Load Artifacts</button>
+            <button class="secondary" onclick="loadExports()">Load Exports</button>
+          </div>
+          <div class="list" id="artifactList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-knowledge">
+        <div class="stack">
+          <input id="knowledgeTitle" placeholder="Knowledge title" />
+          <input id="knowledgeTags" placeholder="Tags comma-separated" />
+          <textarea id="knowledgeContent" placeholder="Store doctrine, prompts, brand rules, onboarding notes, or operating knowledge here."></textarea>
+          <div class="row">
+            <button class="primary" onclick="saveKnowledge()">Save Knowledge</button>
+            <button class="secondary" onclick="loadKnowledge()">Load Knowledge</button>
+          </div>
+          <div class="list" id="knowledgeList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-presets">
+        <div class="stack">
+          <div class="item">
+            <div class="small">Create custom preset</div>
+            <input id="presetTitle" placeholder="Preset title" style="margin-top:10px" />
+            <input id="presetCategory" placeholder="Category" style="margin-top:10px" />
+            <input id="presetDescription" placeholder="Short description" style="margin-top:10px" />
+            <textarea id="presetTemplate" placeholder="Prompt template. Use {{input}} where the user request should go." style="margin-top:10px"></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="savePreset()">Save Preset</button>
+              <button class="secondary" onclick="loadPresets()">Load Presets</button>
+            </div>
+          </div>
+          <div class="list" id="presetList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-feedback">
+        <div class="stack">
+          <select id="feedbackRating">
+            <option value="up">Thumbs Up</option>
+            <option value="down">Thumbs Down</option>
+            <option value="idea">Idea</option>
+            <option value="bug">Bug</option>
+          </select>
+          <textarea id="feedbackNote" placeholder="What worked, what broke, what should become unfairly good next?"></textarea>
+          <div class="row">
+            <button class="primary" onclick="sendFeedback()">Send Feedback</button>
+            <button class="secondary" onclick="loadFeedback()">Founder Feedback Inbox</button>
+          </div>
+          <div class="list" id="feedbackList"></div>
+        </div>
+      </section>
+
+            <section class="panel" id="tab-memory">
+        <div class="stack">
+          <div class="row">
+            <input id="memoryTitle" placeholder="Memory title" />
+            <input id="memoryTags" placeholder="Tags comma-separated" />
+          </div>
+          <textarea id="memoryContent" placeholder="Save important memory, user preference, strategic note, adaptive hint, or persistent context here..."></textarea>
+          <div class="row">
+            <button class="primary" onclick="saveMemory()">Save Memory</button>
+            <button class="secondary" onclick="loadMemory()">Load Memory</button>
+          </div>
+          <div class="row">
+            <input id="memorySearchQuery" placeholder="Search memory..." />
+            <button class="secondary" onclick="searchMemory()">Search</button>
+          </div>
+          <div class="item">
+            <div class="small">User Profile</div>
+            <textarea id="profileGoals" placeholder='Goals, comma-separated' style="margin-top:10px"></textarea>
+            <textarea id="profilePreferences" placeholder='Preferences, comma-separated' style="margin-top:10px"></textarea>
+            <textarea id="profileTraits" placeholder='Traits, comma-separated' style="margin-top:10px"></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="saveProfile()">Save Profile</button>
+              <button class="secondary" onclick="loadProfile()">Load Profile</button>
+            </div>
+          </div>
+          <div class="list" id="memoryList"></div>
+        </div>
+      </section>
+      <section class="panel" id="tab-studio">
+        <div class="stack">
+          <div class="item">
+            <div class="small">Streaming chat</div>
+            <textarea id="streamMessage" placeholder="Type a prompt for streaming output..."></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="startStreaming()">Start Stream</button>
+              <button class="secondary" onclick="document.getElementById('streamOutput').textContent=''">Clear</button>
+            </div>
+            <div class="item" id="streamOutput" style="white-space:pre-wrap;margin-top:10px"></div>
+          </div>
+
+          <div class="item">
+            <div class="small">CSV upload + analysis</div>
+            <input type="file" id="csvFile" accept=".csv" style="margin-top:10px" />
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="uploadCsv()">Upload CSV</button>
+              <button class="secondary" onclick="document.getElementById('csvAnalysis').innerHTML=''">Clear</button>
+            </div>
+            <div class="list" id="csvAnalysis" style="margin-top:10px"></div>
+          </div>
+
+          <div class="item">
+            <div class="small">Exports + share</div>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="loadExportsRich()">Load Exports</button>
+              <button class="secondary" onclick="document.getElementById('exportsRich').innerHTML=''">Clear</button>
+            </div>
+            <div class="list" id="exportsRich" style="margin-top:10px"></div>
+          </div>
+        </div>
+      </section>
+<section class="panel" id="tab-founder">
+        <div class="stack">
+          <div class="kpi-grid">
+            <div class="kpi"><span class="small">Users</span><b id="kpiUsers">-</b></div>
+            <div class="kpi"><span class="small">Threads</span><b id="kpiThreads">-</b></div>
+            <div class="kpi"><span class="small">Messages</span><b id="kpiMessages">-</b></div>
+            <div class="kpi"><span class="small">Artifacts</span><b id="kpiArtifacts">-</b></div>
+            <div class="kpi"><span class="small">Knowledge</span><b id="kpiKnowledge">-</b></div>
+            <div class="kpi"><span class="small">Agent Runs</span><b id="kpiAgentRuns">-</b></div>
+          </div>
+
+          <div class="row">
+            <button class="primary" onclick="loadFounderStats()">Founder Stats</button>
+            <button class="secondary" onclick="loadAnalytics()">Analytics</button>
+          </div>
+          <div class="row">
+            <button class="secondary" onclick="loadDiagnostics()">Diagnostics</button>
+            <button class="secondary" onclick="loadLaunchChecklist()">Launch Checklist</button>
+          </div>
+          <div class="row">
+            <button class="secondary" onclick="loadRequestLogs()">Request Logs</button>
+            <button class="secondary" onclick="makeBackup()">Make Backup</button>
+          </div>
+
+          <div class="list" id="founderList"></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="card right-rail">
+      <div class="inner stack">
+        <div>
+          <h3 style="margin:0 0 6px">Guided rail</h3>
+          <div class="small">Onboarding, launch posture, and fast starts.</div>
+        </div>
+        <div class="item"><div class="small">Current thread</div><div id="currentThreadText">none</div></div>
+        <div class="item"><div class="small">App mode</div><div id="appModeText">Ready</div></div>
+        <div class="item"><div class="small">Launch score</div><div id="launchScoreText">unknown</div></div>
+        <div class="item"><div class="small">Selected goal</div><div id="selectedGoalText">none</div></div>
+        <div class="item"><div class="small">Selected mode</div><div id="selectedModeText">none</div></div>
+        <div class="item"><div class="small">Brand modules</div><div id="brandModulesText">loading...</div></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const API = {
+  token(){ return localStorage.getItem('sem_token') || ''; },
+  setToken(t){ localStorage.setItem('sem_token', t); },
+  clearToken(){ localStorage.removeItem('sem_token'); },
+  headers(){
+    const h = {'Content-Type':'application/json'};
+    const t = this.token();
+    if (t) h['Authorization'] = 'Bearer ' + t;
+    return h;
+  },
+  async get(path){
+    const r = await fetch(path, {headers:this.headers()});
+    return await r.json();
+  },
+  async post(path, body){
+    const r = await fetch(path, {method:'POST', headers:this.headers(), body:JSON.stringify(body || {})});
+    return await r.json();
+  },
+  async del(path){
+    const r = await fetch(path, {method:'DELETE', headers:this.headers()});
+    return await r.json();
+  }
+};
+
+let currentUser = null;
+let currentThreadId = null;
+let presetItems = [];
+let agentItems = [];
+let onboardingGoal = '';
+let onboardingState = null;
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function showTab(name, el){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function setUser(user){
+  currentUser = user || null;
+  document.getElementById('userBadge').textContent = user ? `${user.username} • ${user.role}` : 'Guest';
+  document.getElementById('roleText').textContent = user ? user.role : 'guest';
+  document.getElementById('appModeText').textContent = user ? `Logged in as ${user.username}` : 'Ready';
+}
+
+function setCurrentThread(thread){
+  currentThreadId = thread ? thread.id : null;
+  document.getElementById('currentThreadText').textContent = thread ? thread.title : 'none';
+}
+
+function presetOptions(){
+  return ['<option value="">No preset</option>'].concat(
+    presetItems.map(p => `<option value="${escapeHtml(p.preset_key)}">${escapeHtml(p.category)} • ${escapeHtml(p.title)}</option>`)
+  ).join('');
+}
+
+async function healthCheck(){
+  try{
+    const s = await API.get('/status');
+    document.getElementById('statusText').textContent = `${s.app || 'SemantiqAI'} • ${s.version || ''} • ${s.stage || ''}`;
+  }catch{
+    document.getElementById('statusText').textContent = 'Backend unreachable';
+  }
+  try{
+    const cfg = await API.get('/config/public');
+    document.getElementById('brandModulesText').textContent = (cfg.brand_modules || []).join(' • ');
+  }catch{
+    document.getElementById('brandModulesText').textContent = 'unavailable';
+  }
+}
+
+async function signup(){
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const d = await API.post('/signup', {username, password});
+  if (d.token){
+    API.setToken(d.token);
+    setUser(d.user);
+    await afterLoginLoad();
+  } else alert(d.error || 'Signup failed');
+}
+
+async function login(){
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const d = await API.post('/login', {username, password});
+  if (d.token){
+    API.setToken(d.token);
+    setUser(d.user);
+    await afterLoginLoad();
+  } else alert(d.error || 'Login failed');
+}
+
+async function afterLoginLoad(){
+  await loadThreads();
+  await loadPresets();
+  await loadAgents();
+  await loadOnboarding();
+}
+
+function logout(){
+  API.clearToken();
+  currentUser = null;
+  currentThreadId = null;
+  setUser(null);
+  setCurrentThread(null);
+  document.getElementById('threadList').innerHTML = '';
+  document.getElementById('chatLog').innerHTML = '';
+  closeOnboarding();
+}
+
+async function loadMe(){
+  try{
+    const d = await API.get('/me');
+    if (d.user) setUser(d.user);
+  }catch{}
+}
+
+async function createThread(){
+  const title = prompt('Thread title:', 'New Thread');
+  if (!title) return;
+  const d = await API.post('/threads', {title});
+  if (d.thread){
+    await loadThreads();
+    await openThread(d.thread.id);
+  }
+}
+
+async function loadThreads(){
+  const d = await API.get('/threads');
+  const items = d.items || [];
+  const el = document.getElementById('threadList');
+  el.innerHTML = items.map(t => `
+    <div class="thread-item ${t.id === currentThreadId ? 'active' : ''}">
+      <div><b>${escapeHtml(t.title)}</b></div>
+      <div class="small" style="margin-top:6px">${escapeHtml(t.updated_at || '')}${t.is_archived ? ' • archived' : ''}</div>
+      <div class="row" style="margin-top:10px">
+        <button class="secondary" onclick="openThread(${t.id})">Open</button>
+        <button class="secondary" onclick="renameThread(${t.id})">Rename</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button class="secondary" onclick="archiveThread(${t.id})">Archive</button>
+        <button class="danger" onclick="deleteThread(${t.id})">Delete</button>
+      </div>
+    </div>
+  `).join('') || '<div class="item">No threads yet.</div>';
+
+  if (!currentThreadId && items.length){
+    await openThread(items[0].id);
+  }
+}
+
+async function openThread(id){
+  const d = await API.get(`/threads/${id}/messages`);
+  setCurrentThread(d.thread);
+  const log = document.getElementById('chatLog');
+  log.innerHTML = (d.items || []).map(m => `
+    <div class="msg ${m.role === 'user' ? 'user' : 'ai'}">
+      <div class="meta">${escapeHtml(m.role)}${m.agent ? ' • ' + escapeHtml(m.agent) : ''} • ${escapeHtml(m.created_at || '')}</div>
+      <div>${escapeHtml(m.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No messages yet.</div>';
+  await loadThreads();
+}
+
+async function loadMessages(){
+  if (!currentThreadId) return;
+  await openThread(currentThreadId);
+}
+
+async function renameThread(id){
+  const title = prompt('New thread title:');
+  if (!title) return;
+  await API.post(`/threads/${id}/rename`, {title});
+  await loadThreads();
+  if (currentThreadId === id) await openThread(id);
+}
+
+async function archiveThread(id){
+  await API.post(`/threads/${id}/archive`, {});
+  await loadThreads();
+}
+
+async function deleteThread(id){
+  if (!confirm('Delete this thread and its messages/artifacts?')) return;
+  await API.del(`/threads/${id}`);
+  currentThreadId = null;
+  await loadThreads();
+  document.getElementById('chatLog').innerHTML = '';
+}
+
+async function loadPresets(){
+  const d = await API.get('/presets');
+  presetItems = d.items || [];
+  document.getElementById('chatPreset').innerHTML = presetOptions();
+  document.getElementById('workflowPreset').innerHTML = presetOptions();
+  document.getElementById('presetList').innerHTML = presetItems.map(p => `
+    <div class="item">
+      <div><b>${escapeHtml(p.title)}</b></div>
+      <div class="small">${escapeHtml(p.category || '')} • ${p.is_system ? 'system' : 'custom'}</div>
+      <div style="margin-top:8px">${escapeHtml(p.description || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No presets yet.</div>';
+}
+
+async function savePreset(){
+  const title = document.getElementById('presetTitle').value.trim();
+  const category = document.getElementById('presetCategory').value.trim();
+  const description = document.getElementById('presetDescription').value.trim();
+  const prompt_template = document.getElementById('presetTemplate').value.trim();
+  const d = await API.post('/presets', {title, category, description, prompt_template});
+  if (d.error) return alert(d.error);
+  document.getElementById('presetTitle').value = '';
+  document.getElementById('presetCategory').value = '';
+  document.getElementById('presetDescription').value = '';
+  document.getElementById('presetTemplate').value = '';
+  await loadPresets();
+}
+
+async function loadAgents(){
+  const d = await API.get('/agent-council/agents');
+  agentItems = d.items || [];
+  document.getElementById('agentGrid').innerHTML = agentItems.map(a => `
+    <label class="item" style="cursor:pointer">
+      <input type="checkbox" class="agentCheck" value="${escapeHtml(a.key)}" style="width:auto;margin-right:8px" />
+      <b>${escapeHtml(a.title)}</b>
+      <div class="small" style="margin-top:8px">${escapeHtml(a.system)}</div>
+    </label>
+  `).join('');
+}
+
+function selectedAgents(){
+  return Array.from(document.querySelectorAll('.agentCheck:checked')).map(x => x.value);
+}
+
+async function sendChat(){
+  const message = document.getElementById('chatMessage').value.trim();
+  const preset_key = document.getElementById('chatPreset').value;
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/chat', {message, thread_id: currentThreadId, preset_key});
+  if (d.error) return alert(d.error);
+  document.getElementById('chatMessage').value = '';
+  await openThread(currentThreadId);
+}
+
+async function runCouncil(){
+  const message = document.getElementById('councilMessage').value.trim();
+  const agents = selectedAgents();
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/agent-council/run', {message, thread_id: currentThreadId, agents});
+  if (d.error) return alert(d.error);
+  document.getElementById('councilOutput').innerHTML = `
+    ${(d.agents_used || []).map(a => `
+      <div class="item">
+        <b>${escapeHtml(a.agent_title)}</b>
+        <div style="margin-top:8px;white-space:pre-wrap">${escapeHtml(a.output)}</div>
+      </div>
+    `).join('')}
+    <div class="item">
+      <b>Agent Council Synthesis</b>
+      <div style="margin-top:8px;white-space:pre-wrap">${escapeHtml(d.final || '')}</div>
+    </div>
+  `;
+  await openThread(currentThreadId);
+}
+
+async function loadAgentRuns(){
+  const d = await API.get('/agent-council/runs');
+  if (d.error) return alert(d.error);
+  document.getElementById('councilOutput').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <b>${escapeHtml(x.agent_title || '')}</b>
+      <div class="small">${escapeHtml(x.created_at || '')}</div>
+      <div style="margin-top:8px"><b>Input</b><br>${escapeHtml(x.input_text || '')}</div>
+      <div style="margin-top:8px"><b>Output</b><br>${escapeHtml((x.output_text || '').slice(0,1200))}</div>
+    </div>
+  `).join('') || '<div class="item">No agent runs yet.</div>';
+}
+
+async function generateArtifact(){
+  const message = document.getElementById('chatMessage').value.trim();
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/artifact/generate-from-workflow', {
+    title: 'Council Artifact',
+    message,
+    thread_id: currentThreadId
+  });
+  if (d.error) return alert(d.error);
+  alert('Artifact created.');
+  await loadArtifacts();
+}
+
+async function runPlan(){
+  const message = document.getElementById('workflowMessage').value.trim();
+  const d = await API.post('/plan', {message});
+  document.getElementById('workflowOutput').textContent = d.plan || d.error || JSON.stringify(d, null, 2);
+}
+
+async function runWorkflow(){
+  const message = document.getElementById('workflowMessage').value.trim();
+  const preset_key = document.getElementById('workflowPreset').value;
+  const d = await API.post('/workflow', {message, preset_key});
+  document.getElementById('workflowOutput').textContent = d.final || d.error || JSON.stringify(d, null, 2);
+}
+
+async function runPresetQuick(){
+  const preset_key = document.getElementById('workflowPreset').value;
+  const message = document.getElementById('workflowMessage').value.trim();
+  const d = await API.post('/workflow', {message, preset_key});
+  document.getElementById('workflowOutput').textContent = d.final || d.error || JSON.stringify(d, null, 2);
+}
+
+async function loadArtifacts(){
+  const d = await API.get('/artifacts');
+  document.getElementById('artifactList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || x.filename || 'artifact')}</b></div>
+      <div class="small">${escapeHtml(x.artifact_type || '')} • ${escapeHtml(x.filename || '')}</div>
+      <div class="small">Thread: ${escapeHtml(x.thread_id || '')}</div>
+      <div class="small">${escapeHtml(x.file_path || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No artifacts yet.</div>';
+}
+
+async function loadExports(){
+  const d = await API.get('/exports');
+  document.getElementById('artifactList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.filename || 'export')}</b></div>
+      <div class="small">${escapeHtml(x.path || '')}</div>
+      <div class="small">Size: ${escapeHtml(x.size || 0)}</div>
+    </div>
+  `).join('') || '<div class="item">No exports yet.</div>';
+}
+
+async function saveKnowledge(){
+  const title = document.getElementById('knowledgeTitle').value.trim();
+  const content = document.getElementById('knowledgeContent').value.trim();
+  const tags = document.getElementById('knowledgeTags').value.split(',').map(x => x.trim()).filter(Boolean);
+  const d = await API.post('/knowledge', {title, content, source_type:'manual', tags, pinned:false});
+  if (d.error) return alert(d.error);
+  document.getElementById('knowledgeTitle').value = '';
+  document.getElementById('knowledgeContent').value = '';
+  document.getElementById('knowledgeTags').value = '';
+  await loadKnowledge();
+}
+
+async function loadKnowledge(){
+  const d = await API.get('/knowledge');
+  document.getElementById('knowledgeList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Knowledge')}</b></div>
+      <div class="small">${escapeHtml(x.source_type || '')} • ${(x.tags || []).map(escapeHtml).join(', ')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No knowledge saved yet.</div>';
+}
+
+async function sendFeedback(){
+  const rating = document.getElementById('feedbackRating').value;
+  const note = document.getElementById('feedbackNote').value.trim();
+  const d = await API.post('/feedback', {
+    rating,
+    note,
+    context_type: currentThreadId ? 'thread' : 'general',
+    context_value: currentThreadId ? String(currentThreadId) : '',
+    thread_id: currentThreadId
+  });
+  if (d.error) return alert(d.error);
+  document.getElementById('feedbackNote').value = '';
+  alert('Feedback sent.');
+}
+
+async function loadFeedback(){
+  const d = await API.get('/feedback');
+  if (d.error) return alert(d.error);
+  document.getElementById('feedbackList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.rating || '')}</b></div>
+      <div class="small">${escapeHtml(x.context_type || '')} • ${escapeHtml(x.context_value || '')} • ${escapeHtml(x.created_at || '')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.note || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No feedback yet.</div>';
+}
+
+async function loadFounderStats(){
+  const d = await API.get('/admin/stats');
+  if (d.error) return alert(d.error);
+  document.getElementById('kpiUsers').textContent = d.users ?? '-';
+  document.getElementById('kpiThreads').textContent = d.threads ?? '-';
+  document.getElementById('kpiMessages').textContent = d.messages ?? '-';
+  document.getElementById('kpiArtifacts').textContent = d.artifacts ?? '-';
+  document.getElementById('kpiKnowledge').textContent = d.knowledge ?? '-';
+  document.getElementById('kpiAgentRuns').textContent = d.agent_runs ?? '-';
+  document.getElementById('launchScoreText').textContent = `${d.launch_score} • ${d.launch_grade}`;
+  document.getElementById('founderList').innerHTML = `
+    <div class="item"><b>Founder Stats</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>
+  `;
+}
+
+async function loadAnalytics(){
+  const d = await API.get('/analytics');
+  if (d.error) return alert(d.error);
+  const blocks = [];
+  blocks.push(`<div class="item"><b>Top Routes</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.top_routes || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Top Agents</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.top_agents || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Latest Users</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_users || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Latest Feedback</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_feedback || [], null, 2))}</div></div>`);
+  document.getElementById('founderList').innerHTML = blocks.join('');
+}
+
+async function loadDiagnostics(){
+  const d = await API.get('/diagnostics');
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Diagnostics</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>`;
+}
+
+async function loadLaunchChecklist(){
+  const d = await API.get('/launch-checklist');
+  if (d.error) return alert(d.error);
+  document.getElementById('launchScoreText').textContent = `${d.score} • ${d.grade}`;
+  document.getElementById('founderList').innerHTML = `
+    <div class="item"><b>Launch Checklist</b><div class="small" style="margin-top:8px">${escapeHtml((d.items || []).map(x => `${x.ok ? 'PASS' : 'TODO'} ${x.item}`).join('\n'))}</div></div>
+  `;
+}
+
+async function loadRequestLogs(){
+  const d = await API.get('/admin/request-logs');
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Request Logs</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.items || [], null, 2))}</div></div>`;
+}
+
+async function makeBackup(){
+  const d = await API.post('/backup', {});
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Backup</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>`;
+}
+
+function pickGoal(el, goal){
+  onboardingGoal = goal;
+  document.querySelectorAll('.goal').forEach(g => g.classList.remove('active'));
+  el.classList.add('active');
+}
+
+async function loadOnboarding(){
+  const d = await API.get('/onboarding');
+  onboardingState = d.state || null;
+  document.getElementById('selectedGoalText').textContent = onboardingState?.selected_goal || 'none';
+  document.getElementById('selectedModeText').textContent = onboardingState?.selected_mode || 'none';
+
+  const cards = d.starter_cards || [];
+  document.getElementById('starterCards').innerHTML = cards.map(c => `
+    <div class="starter">
+      <b>${escapeHtml(c.title)}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(c.category)}</div>
+      <div style="margin-top:8px">${escapeHtml(c.prompt)}</div>
+      <button class="primary" style="margin-top:10px" onclick="useStarterPrompt(${JSON.stringify(c.prompt).replace(/"/g, '&quot;')})">Use This</button>
+    </div>
+  `).join('');
+
+  if (!onboardingState || !onboardingState.completed){
+    document.getElementById('onboardingModal').classList.add('show');
+  } else {
+    document.getElementById('onboardingModal').classList.remove('show');
+  }
+}
+
+function useStarterPrompt(prompt){
+  document.getElementById('workflowMessage').value = prompt;
+  document.getElementById('councilMessage').value = prompt;
+  showTab('workflow', document.querySelector('[data-tab="workflow"]'));
+  closeOnboarding();
+}
+
+async function finishOnboarding(){
+  const selected_mode = document.getElementById('onboardingMode').value;
+  const selected_goal = onboardingGoal || 'general';
+  const d = await API.post('/onboarding', {
+    selected_goal,
+    selected_mode,
+    completed: true
+  });
+  if (d.ok){
+    onboardingState = d.state;
+    document.getElementById('selectedGoalText').textContent = selected_goal;
+    document.getElementById('selectedModeText').textContent = selected_mode;
+    closeOnboarding();
+
+    if (selected_mode === 'council') {
+      showTab('council', document.querySelector('[data-tab="council"]'));
+    } else {
+      showTab('workflow', document.querySelector('[data-tab="workflow"]'));
+    }
+  }
+}
+
+function closeOnboarding(){
+  document.getElementById('onboardingModal').classList.remove('show');
+}
+
+
+async function saveMemory(){
+  const title = document.getElementById('memoryTitle').value.trim();
+  const content = document.getElementById('memoryContent').value.trim();
+  const tags = document.getElementById('memoryTags').value.split(',').map(x => x.trim()).filter(Boolean);
+  if (!content) return;
+
+  const d = await API.post('/memory/items', {
+    thread_id: currentThreadId,
+    memory_type: 'note',
+    title: title || 'Memory',
+    content,
+    tags,
+    score: 1.0
+  });
+  if (d.error) return alert(d.error);
+
+  document.getElementById('memoryTitle').value = '';
+  document.getElementById('memoryContent').value = '';
+  document.getElementById('memoryTags').value = '';
+  await loadMemory();
+}
+
+async function loadMemory(){
+  const d = await API.get('/memory/items');
+  const el = document.getElementById('memoryList');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Memory')}</b></div>
+      <div class="small">${escapeHtml(x.memory_type || '')} • score ${escapeHtml(x.score || '')} • ${(x.tags || []).map(escapeHtml).join(', ')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No memory yet.</div>';
+}
+
+async function searchMemory(){
+  const query = document.getElementById('memorySearchQuery').value.trim();
+  const d = await API.post('/memory/search', {query});
+  const el = document.getElementById('memoryList');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Memory')}</b></div>
+      <div class="small">${escapeHtml(x.memory_type || '')} • score ${escapeHtml(x.score || '')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No matches.</div>';
+}
+
+async function saveProfile(){
+  const goals = document.getElementById('profileGoals').value.split(',').map(x => x.trim()).filter(Boolean);
+  const preferences = document.getElementById('profilePreferences').value.split(',').map(x => x.trim()).filter(Boolean);
+  const traits = document.getElementById('profileTraits').value.split(',').map(x => x.trim()).filter(Boolean);
+
+  const d = await API.post('/profile', {goals, preferences, traits});
+  if (d.error) return alert(d.error);
+  alert('Profile saved.');
+}
+
+async function loadProfile(){
+  const d = await API.get('/profile');
+  const p = d.profile || {};
+  document.getElementById('profileGoals').value = (p.goals || []).join(', ');
+  document.getElementById('profilePreferences').value = (p.preferences || []).join(', ');
+  document.getElementById('profileTraits').value = (p.traits || []).join(', ');
+}
+
+
+async function startStreaming(){
+  const message = document.getElementById('streamMessage').value.trim();
+  if (!message) return;
+  const out = document.getElementById('streamOutput');
+  out.textContent = '';
+
+  const presetEl = document.getElementById('chatPreset');
+  const preset_key = presetEl ? presetEl.value : '';
+
+  const res = await fetch('/stream-chat', {
+    method: 'POST',
+    headers: API.headers(),
+    body: JSON.stringify({
+      message,
+      thread_id: currentThreadId,
+      preset_key
+    })
+  });
+
+  if (!res.ok || !res.body) {
+    const text = await res.text();
+    out.textContent = text || 'Streaming failed.';
+    return;
+  }
+
+  const contentType = (res.headers.get('content-type') || '').toLowerCase();
+
+  if (!contentType.includes('text/event-stream')) {
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      out.textContent += decoder.decode(value, { stream: true });
+    }
+    if (typeof openThread === 'function' && currentThreadId) {
+      await openThread(currentThreadId);
+    }
+    return;
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  function processEventBlock(block){
+    const lines = block.split('\n');
+    let eventName = 'message';
+    let data = '';
+    for (const line of lines) {
+      if (line.startsWith('event:')) eventName = line.slice(6).trim();
+      if (line.startsWith('data:')) data += line.slice(5).trim();
+    }
+    if (!data) return;
+    try {
+      const parsed = JSON.parse(data);
+      if (eventName === 'token' && parsed.token) {
+        out.textContent += parsed.token;
+      }
+    } catch (e) {
+      if (eventName === 'token') out.textContent += data;
+    }
+  }
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let idx;
+    while ((idx = buffer.indexOf('\n\n')) !== -1) {
+      const block = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+      processEventBlock(block);
+    }
+  }
+
+  if (buffer.trim()) processEventBlock(buffer);
+
+  if (typeof openThread === 'function' && currentThreadId) {
+    await openThread(currentThreadId);
+  }
+}
+
+async function uploadCsv(){
+  const fileInput = document.getElementById('csvFile');
+  const file = fileInput.files[0];
+  if (!file) return alert('Choose a CSV file first.');
+
+  const form = new FormData();
+  form.append('file', file);
+
+  const res = await fetch('/upload/csv', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + (API.token() || '') },
+    body: form
+  });
+
+  const d = await res.json();
+  const el = document.getElementById('csvAnalysis');
+
+  if (d.error) {
+    el.innerHTML = `<div class="item"><b>Error</b><div style="margin-top:8px">${escapeHtml(d.error)}</div></div>`;
+    return;
+  }
+
+  const sample = JSON.stringify(d.sample_rows || [], null, 2);
+  const summary = JSON.stringify(d.numeric_summary || {}, null, 2);
+
+  el.innerHTML = `
+    <div class="item">
+      <b>${escapeHtml(d.filename || '')}</b>
+      <div class="small" style="margin-top:6px">Rows: ${escapeHtml(d.rows || 0)} • Columns: ${escapeHtml((d.columns || []).length)}</div>
+      <div style="margin-top:8px"><b>Columns</b><br>${escapeHtml((d.columns || []).join(', '))}</div>
+      <div style="margin-top:8px"><b>Numeric Summary</b><pre>${escapeHtml(summary)}</pre></div>
+      <div style="margin-top:8px"><b>Sample Rows</b><pre>${escapeHtml(sample)}</pre></div>
+    </div>
+  `;
+}
+
+async function loadExportsRich(){
+  const d = await API.get('/exports');
+  const el = document.getElementById('exportsRich');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.filename || 'export')}</b></div>
+      <div class="small">${escapeHtml(x.path || '')} • ${escapeHtml(x.size || 0)} bytes</div>
+      <div class="row" style="margin-top:10px">
+        <button class="primary" onclick="downloadExport(${JSON.stringify((x.filename || '')).replace(/"/g, '&quot;')})">Download</button>
+        <button class="secondary" onclick="shareExport(${JSON.stringify((x.filename || '')).replace(/"/g, '&quot;')})">Create Share Link</button>
+      </div>
+    </div>
+  `).join('') || '<div class="item">No exports yet.</div>';
+}
+
+function downloadExport(filename){
+  window.open('/exports/download/' + encodeURIComponent(filename), '_blank');
+}
+
+async function shareExport(filename){
+  const d = await API.post('/share/create', { filename, title: filename });
+  if (d.error) return alert(d.error);
+  const url = window.location.origin + d.share_url;
+  await navigator.clipboard.writeText(url).catch(() => {});
+  alert('Share link created: ' + url);
+}
+
+(async function init(){
+  await healthCheck();
+  if (API.token()){
+    await loadMe();
+    await loadThreads();
+    await loadPresets();
+    await loadAgents();
+    await loadOnboarding();
+  }
+})();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+</body>
+</html>
+
+<!-- THREAD SIDEBAR -->
+<div id="threadSidebar" style="position:fixed;left:0;top:0;width:250px;height:100%;background:#0b1430;border-right:1px solid #27376a;padding:10px;overflow:auto;">
+  <button onclick="createThread()">+ New Thread</button>
+  <div id="threadList"></div>
+</div>
+
+<script>
+let currentThread = null;
+
+async function loadThreads(){
+  const d = await API.get('/threads');
+  const el = document.getElementById('threadList');
+  el.innerHTML = (d.items||[]).map(t => 
+    '<div onclick="openThread('+t.id+')" style="padding:8px;border:1px solid #27376a;margin-top:6px;cursor:pointer">'+t.title+'</div>'
+  ).join('');
+}
+
+async function createThread(){
+  await API.post('/threads',{title:'New Thread'});
+  loadThreads();
+}
+
+async function openThread(id){
+  currentThread = id;
+  const d = await API.get('/threads/'+id+'/messages');
+  const log = document.getElementById('chatLog');
+  log.innerHTML = (d.items||[]).map(m =>
+    '<div class="msg '+m.role+'"><b>'+m.role+'</b><br>'+m.content+'</div>'
+  ).join('');
+}
+
+async function sendChat(){
+  const msg = document.getElementById('chatMessage').value;
+  if(!currentThread){ alert('Create a thread first'); return; }
+  const d = await API.post('/threads/'+currentThread+'/message',{message:msg});
+  openThread(currentThread);
+}
+
+loadThreads();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<script>
+async function checkOnboarding(){
+  try{
+    const d = await API.get('/onboarding/status');
+    if(!d.completed){
+      const choice = prompt("What do you want to do?\n1. Make money\n2. Build product\n3. Learn\n4. Automate");
+      await API.post('/onboarding/complete',{});
+      await API.post('/memory/hint',{hint:choice});
+    }
+  }catch{}
+}
+
+checkOnboarding();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<!-- JOB PANEL -->
+<section class="tab-panel" id="tab-jobs">
+  <div class="stack">
+    <textarea id="jobInput" placeholder="Run async task..."></textarea>
+    <button onclick="createJob()">Run in Background</button>
+    <button onclick="loadJobs()">Refresh Jobs</button>
+    <div id="jobList"></div>
+  </div>
+</section>
+
+<script>
+async function createJob(){
+  const input = document.getElementById('jobInput').value;
+  await API.post('/jobs',{input});
+  alert('Job queued');
+}
+
+async function loadJobs(){
+  const d = await API.get('/jobs');
+  const el = document.getElementById('jobList');
+  el.innerHTML = (d.items||[]).map(j =>
+    '<div class="item"><b>'+j.status+'</b><br>'+j.input+'<br><pre>'+ (j.output||'') +'</pre></div>'
+  ).join('');
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+
+<!-- AGENT OS TAB -->
+<section class="tab-panel" id="tab-agentos">
+  <div class="stack">
+    <textarea id="agentMessage" placeholder="Run multi-agent intelligence..."></textarea>
+    <button onclick="runAgentOS()">Run Agent OS</button>
+    <div id="agentOutput"></div>
+  </div>
+</section>
+
+<script>
+async function runAgentOS(){
+  const msg = document.getElementById('agentMessage').value;
+  const d = await API.post('/agent/run',{message:msg});
+  document.getElementById('agentOutput').innerText = d.response || d.error;
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<section class="tab-panel" id="tab-agentos">
+  <div class="stack">
+    <textarea id="agentInput" placeholder="Run full intelligence system..."></textarea>
+    <button onclick="runAgentOS()">Run System</button>
+    <div id="agentResult"></div>
+  </div>
+</section>
+
+<script>
+async function runAgentOS(){
+  const msg = document.getElementById('agentInput').value;
+  const d = await API.post('/agent-os',{message:msg});
+  document.getElementById('agentResult').innerText = d.response || d.error;
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+
+

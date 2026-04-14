@@ -1,0 +1,342 @@
+{
+  "active_goal": "balanced_progression",
+  "last_updated": 1776058315.4156792,
+  "history": [
+    {
+      "t": 1776055911.1773176,
+      "goal": "expand_capabilities",
+      "decision": "pursue_exploration_priority",
+      "changed": false
+    },
+    {
+      "t": 1776055911.6273193,
+      "goal": "expand_capabilities",
+      "decision": "pursue_exploration_priority",
+      "changed": false
+    },
+    {
+      "t": 1776056827.3594246,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": true
+    },
+    {
+      "t": 1776057036.512762,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057131.6787727,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057227.6342309,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057344.4281347,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057426.5598927,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057556.9800417,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057557.01413,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057649.7864854,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057649.8376682,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057735.6721132,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "t": 1776057735.7196531,
+      "goal": "balanced_progression",
+      "decision": null,
+      "changed": false
+    },
+    {
+      "timestamp": 1776057785.5178971,
+      "decision_action": "",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776057785.5651648,
+      "decision_action": "probe_new_options",
+      "decision_mode": "exploratory",
+      "new_goal": "expand_capability",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057830.9804525,
+      "decision_action": "",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057831.0285997,
+      "decision_action": "probe_new_options",
+      "decision_mode": "exploratory",
+      "new_goal": "expand_capability",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057870.1538925,
+      "decision_action": "",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057870.210001,
+      "decision_action": "probe_new_options",
+      "decision_mode": "exploratory",
+      "new_goal": "expand_capability",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057919.8711238,
+      "decision_action": "",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057919.9308252,
+      "decision_action": "probe_new_options",
+      "decision_mode": "exploratory",
+      "new_goal": "expand_capability",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057973.8662198,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": true
+    },
+    {
+      "timestamp": 1776057973.8882203,
+      "decision_action": "probe_new_options",
+      "decision_mode": "exploratory",
+      "new_goal": "expand_capability",
+      "changed": true
+    },
+    {
+      "timestamp": 1776058029.2622993,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": true
+    },
+    {
+      "timestamp": 1776058077.3549569,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058077.7362518,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058078.1127675,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058078.4817235,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058078.856764,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058127.107037,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058127.4871871,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058127.8677368,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058128.2531786,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058128.629135,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058188.2898903,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058188.6716068,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058189.0451775,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058189.417055,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058189.7893581,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058269.840387,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058270.242538,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058270.6488132,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058271.0399897,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058271.4277155,
+      "decision_action": "balanced_progression",
+      "decision_mode": "balanced",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058313.8364382,
+      "decision_action": "reinforce_success_path",
+      "decision_mode": "persist",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058314.2266672,
+      "decision_action": "reinforce_success_path",
+      "decision_mode": "persist",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058314.6296523,
+      "decision_action": "reinforce_success_path",
+      "decision_mode": "persist",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058315.0215178,
+      "decision_action": "reinforce_success_path",
+      "decision_mode": "persist",
+      "new_goal": "balanced_progression",
+      "changed": false
+    },
+    {
+      "timestamp": 1776058315.4156792,
+      "decision_action": "reinforce_success_path",
+      "decision_mode": "persist",
+      "new_goal": "balanced_progression",
+      "changed": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "systems": [
+    "builder_engine",
+    "research_engine",
+    "offer_engine",
+    "traffic_engine",
+    "automation_loop"
+  ],
+  "priority_order": [
+    "builder_engine",
+    "research_engine",
+    "automation_loop",
+    "offer_engine",
+    "traffic_engine"
+  ],
+  "reason": "toolbox before money"
+}

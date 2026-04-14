@@ -1,0 +1,142 @@
+{
+  "last_action": {
+    "timestamp": 1776109349.1087978,
+    "drive": 0.9069,
+    "action": "advance_mission",
+    "mission_id": "mission_1776105409"
+  },
+  "history": [
+    {
+      "timestamp": 1776103099.517771,
+      "drive": 0.9647,
+      "action": "advance_mission",
+      "mission_id": "mission_1776100405"
+    },
+    {
+      "timestamp": 1776103582.8657875,
+      "drive": 0.8355,
+      "action": "advance_mission",
+      "mission_id": "mission_1776103582"
+    },
+    {
+      "timestamp": 1776103677.315311,
+      "drive": 0.911,
+      "action": "advance_mission",
+      "mission_id": "mission_1776103582"
+    },
+    {
+      "timestamp": 1776105409.711186,
+      "drive": 0.857,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776105562.3350365,
+      "drive": 0.8997,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776105647.899996,
+      "drive": 0.9282,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776105798.9658456,
+      "drive": 0.8988,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106540.6073902,
+      "drive": 0.8339,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106586.353654,
+      "drive": 0.8754,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106703.0998745,
+      "drive": 0.9069,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106769.0434585,
+      "drive": 0.933,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106879.5667918,
+      "drive": 0.9553,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776106989.3939414,
+      "drive": 0.9082,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776107177.1670709,
+      "drive": 0.9575,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776107222.0067098,
+      "drive": 0.9676,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776107295.7577705,
+      "drive": 0.9373,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776107552.52082,
+      "drive": 0.9133,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776108120.5798104,
+      "drive": 0.9098,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776108351.472825,
+      "drive": 0.8849,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776108689.362134,
+      "drive": 0.9203,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776109129.2818103,
+      "drive": 0.8863,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    },
+    {
+      "timestamp": 1776109349.1087978,
+      "drive": 0.9069,
+      "action": "advance_mission",
+      "mission_id": "mission_1776105409"
+    }
+  ]
+}

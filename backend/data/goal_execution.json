@@ -1,0 +1,24 @@
+{
+  "status": "ok",
+  "executed_at": 1776048501.3285322,
+  "goal": {
+    "id": "initiate_recovery_mode",
+    "type": "initiative",
+    "priority": 0.9,
+    "reason": "Recent failures detected; begin proactive recovery",
+    "goal_type": "expansion",
+    "persistence": 0.0,
+    "base_score": 0.9,
+    "momentum": 0.017354,
+    "streak": 693,
+    "fatigue": 0.028493,
+    "identity_bias": 0.6,
+    "score": 2.459861,
+    "_goal_family": "initiate_recovery"
+  },
+  "execution": {
+    "task": "create_thought_engine",
+    "mode": "initiative_recover",
+    "reason": "Recent failures detected; begin proactive recovery"
+  }
+}

@@ -1,0 +1,211 @@
+from __future__ import annotations
+
+import json
+import os
+import time
+from typing import Any, Dict, List
+
+STATE_PATH = "backend/data/planning_state.json"
+
+DEFAULT_STATE: Dict[str, Any] = {
+    "last_plan": [],
+    "last_goal": "balanced_progression",
+    "last_task": "analyze_state",
+    "plan_count": 0,
+    "history": [],
+}
+
+
+def _safe_load(path: str, default: Any) -> Any:
+    if not os.path.exists(path):
+        return default
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+
+def _safe_save(path: str, data: Any) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = f"{path}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    os.replace(tmp, path)
+
+
+def _normalize_payload(payload: Any = None) -> Dict[str, Any]:
+    if payload is None:
+        return {}
+
+    if isinstance(payload, dict):
+        return payload
+
+    if isinstance(payload, str):
+        return {
+            "task": payload,
+            "goal": "balanced_progression",
+            "trigger": "legacy_string_payload",
+        }
+
+    if isinstance(payload, list):
+        return {
+            "steps": payload,
+            "goal": "balanced_progression",
+            "trigger": "legacy_list_payload",
+        }
+
+    return {
+        "value": str(payload),
+        "goal": "balanced_progression",
+        "trigger": "coerced_payload",
+    }
+
+
+def _task_steps(task: str, goal: str) -> List[str]:
+    task = (task or "analyze_state").strip().lower()
+    goal = goal or "balanced_progression"
+
+    mapping = {
+        "analyze_state": [
+            "collect_state",
+            "summarize_conditions",
+            "identify_pressure_points",
+            "recommend_next_action",
+        ],
+        "plan_next_step": [
+            "inspect_goal",
+            "generate_options",
+            "rank_options",
+            "commit_top_option",
+        ],
+        "probe_new_paths": [
+            "inspect_known_space",
+            "select_novel_probe",
+            "execute_safe_probe",
+            "record_outcome",
+        ],
+        "validate_recent_behavior": [
+            "read_recent_actions",
+            "compare_expected_vs_actual",
+            "score_reliability",
+            "store_validation",
+        ],
+        "optimize_decision_weights": [
+            "inspect_decision_history",
+            "locate_weight_imbalance",
+            "propose_adjustment",
+            "store_adjustment",
+        ],
+        "compound_progress": [
+            "review_recent_wins",
+            "select_best_pattern",
+            "amplify_pattern",
+            "measure_gain",
+        ],
+        "create_thought_engine": [
+            "inspect_cognition_stack",
+            "identify_missing_reasoning_piece",
+            "draft_improvement_step",
+            "queue_followup",
+        ],
+        "resolve_builder_handoff": [
+            "inspect_blocker",
+            "identify_handoff_gap",
+            "create_resolution_step",
+            "queue_recovery",
+        ],
+        "execute": [
+            "inspect_current_task",
+            "perform_safe_action",
+            "record_result",
+            "return_status",
+        ],
+        "evaluate": [
+            "inspect_recent_result",
+            "score_outcome",
+            "adjust_confidence",
+            "store_evaluation",
+        ],
+    }
+
+    return mapping.get(task, [
+        "analyze_state",
+        "plan_next_step","trigger_builder_if_stuck; from backend.app.cognition.loop_guard import should_force_builder; if should_force_builder(task): return {"status":"force_builder","reason":"loop_detected"}; from backend.app.cognition.loop_guard import should_force_builder; if should_force_builder(task): return {"status":"force_builder","reason":"loop_detected"}",
+        "execute",
+        "evaluate",
+    ])
+
+
+def get_state() -> Dict[str, Any]:
+    state = _safe_load(STATE_PATH, DEFAULT_STATE.copy())
+    merged = DEFAULT_STATE.copy()
+    if isinstance(state, dict):
+        merged.update(state)
+    if not isinstance(merged.get("history"), list):
+        merged["history"] = []
+    if not isinstance(merged.get("last_plan"), list):
+        merged["last_plan"] = []
+    return merged
+
+
+def save_state(state: Dict[str, Any]) -> Dict[str, Any]:
+    _safe_save(STATE_PATH, state)
+    return state
+
+
+def run(payload: Any = None) -> Dict[str, Any]:
+    data = _normalize_payload(payload)
+
+    state = get_state()
+
+    goal = str(data.get("goal", state.get("last_goal", "balanced_progression")) or "balanced_progression")
+    task = str(data.get("task", state.get("last_task", "analyze_state")) or "analyze_state")
+    trigger = str(data.get("trigger", "planning_run"))
+
+    supplied_steps = data.get("steps")
+    if isinstance(supplied_steps, list) and supplied_steps:
+        plan = [str(step) for step in supplied_steps[:10]]
+        source = "payload_steps"
+    else:
+        plan = _task_steps(task, goal)
+        source = "task_mapping"
+
+    changed = bool(plan != state.get("last_plan", [])) or task != state.get("last_task")
+
+    state["last_plan"] = plan
+    state["last_goal"] = goal
+    state["last_task"] = task
+    state["plan_count"] = int(state.get("plan_count", 0)) + 1
+
+    history = state.get("history", [])
+    if not isinstance(history, list):
+        history = []
+
+    history.append({
+        "timestamp": time.time(),
+        "task": task,
+        "goal": goal,
+        "plan": plan,
+        "trigger": trigger,
+        "source": source,
+        "changed": changed,
+    })
+    state["history"] = history[-100:]
+
+    save_state(state)
+
+    return {
+        "status": "plan_ready",
+        "goal": goal,
+        "task": task,
+        "plan": plan,
+        "steps_count": len(plan),
+        "changed": changed,
+        "source": source,
+        "trigger": trigger,
+    }
+
+
+def update(payload: Any = None) -> Dict[str, Any]:
+    return run(payload)

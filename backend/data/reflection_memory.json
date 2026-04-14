@@ -1,0 +1,135 @@
+{
+  "reflections": [
+    {
+      "timestamp": 1776096655.7262647,
+      "averages": {
+        "curiosity": 0.56,
+        "stability": 0.5,
+        "risk": 0.5299999999999999,
+        "persistence": 0.52
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776096872.2952447,
+      "averages": {
+        "curiosity": 0.5900000000000001,
+        "stability": 0.5,
+        "risk": 0.545,
+        "persistence": 0.53
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776097217.7291355,
+      "averages": {
+        "curiosity": 0.6200000000000001,
+        "stability": 0.5,
+        "risk": 0.56,
+        "persistence": 0.54
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776098078.2798011,
+      "averages": {
+        "curiosity": 0.6466666666666668,
+        "stability": 0.5033333333333333,
+        "risk": 0.5716666666666668,
+        "persistence": 0.5533333333333333
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776098892.9588923,
+      "averages": {
+        "curiosity": 0.67,
+        "stability": 0.51,
+        "risk": 0.58,
+        "persistence": 0.5666666666666668
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776099494.0738373,
+      "averages": {
+        "curiosity": 0.6900000000000001,
+        "stability": 0.52,
+        "risk": 0.585,
+        "persistence": 0.58
+      },
+      "judgment": [],
+      "alignment_score": 0.5
+    },
+    {
+      "timestamp": 1776100042.7210503,
+      "averages": {
+        "curiosity": 0.71,
+        "stability": 0.53,
+        "risk": 0.59,
+        "persistence": 0.59
+      },
+      "judgment": [
+        "high_exploration"
+      ],
+      "alignment_score": 0.6
+    },
+    {
+      "timestamp": 1776100170.4808831,
+      "averages": {
+        "curiosity": 0.7266666666666666,
+        "stability": 0.54,
+        "risk": 0.5950000000000001,
+        "persistence": 0.6
+      },
+      "judgment": [
+        "high_exploration"
+      ],
+      "alignment_score": 0.6
+    },
+    {
+      "timestamp": 1776100323.6727986,
+      "averages": {
+        "curiosity": 0.7399999999999999,
+        "stability": 0.5466666666666667,
+        "risk": 0.6,
+        "persistence": 0.61
+      },
+      "judgment": [
+        "high_exploration"
+      ],
+      "alignment_score": 0.6
+    },
+    {
+      "timestamp": 1776100324.5010214,
+      "averages": {
+        "curiosity": 0.75,
+        "stability": 0.55,
+        "risk": 0.605,
+        "persistence": 0.62
+      },
+      "judgment": [
+        "high_exploration"
+      ],
+      "alignment_score": 0.6
+    },
+    {
+      "timestamp": 1776100325.1760538,
+      "averages": {
+        "curiosity": 0.7600000000000001,
+        "stability": 0.55,
+        "risk": 0.61,
+        "persistence": 0.63
+      },
+      "judgment": [
+        "high_exploration"
+      ],
+      "alignment_score": 0.6
+    }
+  ]
+}

@@ -1,0 +1,456 @@
+[
+  {
+    "asset": "BTC",
+    "action": "buy",
+    "price": 71864.0,
+    "confidence": 3.6901,
+    "stake": 71.9343,
+    "profit": -0.6164,
+    "balance_after": 2464.9836
+  },
+  {
+    "asset": "ETH",
+    "action": "buy",
+    "price": 2190.92,
+    "confidence": 2.1526,
+    "stake": 48.7219,
+    "profit": 0.0097,
+    "balance_after": 2464.9934
+  },
+  {
+    "asset": "SOL",
+    "action": "buy",
+    "price": 83.03,
+    "confidence": 2.8387,
+    "stake": 55.3222,
+    "profit": 0.0665,
+    "balance_after": 2465.0598
+  },
+  {
+    "asset": "NVDA",
+    "action": "buy",
+    "price": 183.91,
+    "confidence": 2.28,
+    "stake": 48.7234,
+    "profit": 1.1336,
+    "balance_after": 2466.1934
+  },
+  {
+    "asset": "TSLA",
+    "action": "buy",
+    "price": 345.62,
+    "confidence": 1.5,
+    "stake": 48.7459,
+    "profit": 1.1495,
+    "balance_after": 2467.3429
+  },
+  {
+    "asset": "SPY",
+    "action": "buy",
+    "price": 679.91,
+    "confidence": 1.5,
+    "stake": 48.7686,
+    "profit": 0.5964,
+    "balance_after": 2467.9393
+  },
+  {
+    "asset": "BTC",
+    "action": "buy",
+    "price": 71968.0,
+    "confidence": 3.8001,
+    "stake": 74.1481,
+    "profit": 0.3966,
+    "balance_after": 2468.3359
+  },
+  {
+    "asset": "ETH",
+    "action": "buy",
+    "price": 2193.63,
+    "confidence": 2.1202,
+    "stake": 48.7882,
+    "profit": 0.1411,
+    "balance_after": 2468.477
+  },
+  {
+    "asset": "SOL",
+    "action": "buy",
+    "price": 83.2,
+    "confidence": 3.0491,
+    "stake": 59.5074,
+    "profit": 0.4536,
+    "balance_after": 2468.9306
+  },
+  {
+    "asset": "NVDA",
+    "action": "buy",
+    "price": 183.91,
+    "confidence": 2.28,
+    "stake": 48.8,
+    "profit": 1.1051,
+    "balance_after": 2470.0357
+  },
+  {
+    "asset": "TSLA",
+    "action": "buy",
+    "price": 345.62,
+    "confidence": 1.5,
+    "stake": 48.8218,
+    "profit": -0.4658,
+    "balance_after": 2469.5699
+  },
+  {
+    "asset": "SPY",
+    "action": "buy",
+    "price": 679.91,
+    "confidence": 1.5,
+    "stake": 48.8126,
+    "profit": 1.0889,
+    "balance_after": 2470.6588
+  },
+  {
+    "asset": "BTC",
+    "action": "buy",
+    "price": 72032.0,
+    "confidence": 3.9796,
+    "stake": 77.7361,
+    "profit": -0.629,
+    "balance_after": 2470.0298
+  },
+  {
+    "asset": "ETH",
+    "action": "buy",
+    "price": 2194.35,
+    "confidence": 2.1862,
+    "stake": 48.8217,
+    "profit": -0.0475,
+    "balance_after": 2469.9823
+  },
+  {
+    "asset": "SOL",
+    "action": "buy",
+    "price": 83.31,
+    "confidence": 3.3291,
+    "stake": 65.012,
+    "profit": 0.7085,
+    "balance_after": 2470.6908
+  },
+  {
+    "asset": "NVDA",
+    "action": "buy",
+    "price": 183.91,
+    "confidence": 2.28,
+    "stake": 48.8347,
+    "profit": -0.1451,
+    "balance_after": 2470.5457
+  },
+  {
+    "asset": "TSLA",
+    "action": "buy",
+    "price": 345.62,
+    "confidence": 1.5,
+    "stake": 48.8319,
+    "profit": 0.7797,
+    "balance_after": 2471.3254
+  },
+  {
+    "asset": "SPY",
+    "action": "buy",
+    "price": 679.91,
+    "confidence": 1.5,
+    "stake": 48.8473,
+    "profit": -0.0866,
+    "balance_after": 2471.2388
+  },
+  {
+    "asset": "BTC",
+    "action": "buy",
+    "price": 72048.0,
+    "confidence": 4.1312,
+    "stake": 80.7163,
+    "profit": 0.6087,
+    "balance_after": 2471.8475
+  },
+  {
+    "asset": "ETH",
+    "action": "buy",
+    "price": 2195.37,
+    "confidence": 2.4243,
+    "stake": 48.8576,
+    "profit": 0.1637,
+    "balance_after": 2472.0112
+  },
+  {
+    "asset": "SOL",
+    "action": "buy",
+    "price": 83.32,
+    "confidence": 3.3331,
+    "stake": 65.144,
+    "profit": -0.6456,
+    "balance_after": 2471.3656
+  },
+  {
+    "asset": "NVDA",
+    "action": "buy",
+    "price": 183.91,
+    "confidence": 2.28,
+    "stake": 48.8481,
+    "profit": -0.4369,
+    "balance_after": 2470.9287
+  },
+  {
+    "asset": "TSLA",
+    "action": "buy",
+    "price": 345.62,
+    "confidence": 1.5,
+    "stake": 48.8395,
+    "profit": -0.4405,
+    "balance_after": 2470.4882
+  },
+  {
+    "asset": "SPY",
+    "action": "buy",
+    "price": 679.91,
+    "confidence": 1.5,
+    "stake": 48.8307,
+    "profit": -0.1164,
+    "balance_after": 2470.3718
+  },
+  {
+    "asset": "BTC",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4941,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "ETH",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4942,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "SOL",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4943,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "NVDA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4944,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "TSLA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4945,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "MSFT",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4946,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "SPY",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.4947,
+    "timestamp": 1775784121
+  },
+  {
+    "asset": "BTC",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.2969,
+    "timestamp": 1775785558
+  },
+  {
+    "asset": "ETH",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.2969,
+    "timestamp": 1775785558
+  },
+  {
+    "asset": "SOL",
+    "action": "BUY",
+    "confidence": 1.0,
+    "pnl": 0.2969,
+    "timestamp": 1775785558
+  },
+  {
+    "asset": "BTC",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8483,
+    "gross_pnl": -0.1022,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.1363,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "ETH",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8475,
+    "gross_pnl": -0.0194,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.0536,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "SOL",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8472,
+    "gross_pnl": 0.1778,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.1436,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "NVDA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8481,
+    "gross_pnl": -0.0502,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.0844,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "TSLA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8476,
+    "gross_pnl": 0.2351,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.2009,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "MSFT",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8488,
+    "gross_pnl": 0.1172,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.083,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "SPY",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8493,
+    "gross_pnl": 0.3396,
+    "fee_cost": 0.0148,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.3054,
+    "timestamp": 1775785826
+  },
+  {
+    "asset": "BTC",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8511,
+    "gross_pnl": -0.1132,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.1474,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "ETH",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8502,
+    "gross_pnl": 0.0027,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.0314,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "SOL",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.85,
+    "gross_pnl": 0.048,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.0138,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "NVDA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8501,
+    "gross_pnl": 0.2021,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.1679,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "TSLA",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8511,
+    "gross_pnl": 0.3401,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.306,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "MSFT",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8529,
+    "gross_pnl": 0.0667,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": 0.0325,
+    "timestamp": 1775786051
+  },
+  {
+    "asset": "SPY",
+    "action": "BUY",
+    "confidence": 1.0,
+    "size": 14.8531,
+    "gross_pnl": -0.1217,
+    "fee_cost": 0.0149,
+    "slippage_cost": 0.0119,
+    "fill_cost": 0.0074,
+    "pnl": -0.1559,
+    "timestamp": 1775786051
+  }
+]

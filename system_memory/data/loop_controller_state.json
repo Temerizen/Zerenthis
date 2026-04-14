@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "start_balance": 49.4353581002,
+    "end_balance": 49.4326581002,
+    "net_change": -0.0027,
+    "start_wins": 162,
+    "end_wins": 167,
+    "start_losses": 184,
+    "end_losses": 188,
+    "start_trades": 347,
+    "end_trades": 356,
+    "loops_ran": 9,
+    "last_result": {
+      "loop": 9,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": -0.0025,
+      "trades_this_loop": 1,
+      "balance": 49.4326581002,
+      "new_wins": 5,
+      "new_losses": 4,
+      "flat_loops": 0
+    }
+  },
+  "results": [
+    {
+      "loop": 1,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": 0.0019,
+      "trades_this_loop": 1,
+      "balance": 49.4372581002,
+      "new_wins": 1,
+      "new_losses": 0,
+      "flat_loops": 0
+    },
+    {
+      "loop": 2,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": -0.0018,
+      "trades_this_loop": 1,
+      "balance": 49.4354581002,
+      "new_wins": 1,
+      "new_losses": 1,
+      "flat_loops": 0
+    },
+    {
+      "loop": 3,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": 0.001,
+      "trades_this_loop": 1,
+      "balance": 49.4364581002,
+      "new_wins": 2,
+      "new_losses": 1,
+      "flat_loops": 0
+    },
+    {
+      "loop": 4,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": 0.0007,
+      "trades_this_loop": 1,
+      "balance": 49.4371581002,
+      "new_wins": 3,
+      "new_losses": 1,
+      "flat_loops": 0
+    },
+    {
+      "loop": 5,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": 0.0038,
+      "trades_this_loop": 1,
+      "balance": 49.4409581002,
+      "new_wins": 4,
+      "new_losses": 1,
+      "flat_loops": 0
+    },
+    {
+      "loop": 6,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": -0.0031,
+      "trades_this_loop": 1,
+      "balance": 49.4378581002,
+      "new_wins": 4,
+      "new_losses": 2,
+      "flat_loops": 0
+    },
+    {
+      "loop": 7,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": -0.0046,
+      "trades_this_loop": 1,
+      "balance": 49.4332581002,
+      "new_wins": 4,
+      "new_losses": 3,
+      "flat_loops": 0
+    },
+    {
+      "loop": 8,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": 0.0019,
+      "trades_this_loop": 1,
+      "balance": 49.4351581002,
+      "new_wins": 5,
+      "new_losses": 3,
+      "flat_loops": 0
+    },
+    {
+      "loop": 9,
+      "status": "full_cycle_complete",
+      "best_strategy": "conservative",
+      "loop_pnl": -0.0025,
+      "trades_this_loop": 1,
+      "balance": 49.4326581002,
+      "new_wins": 5,
+      "new_losses": 4,
+      "flat_loops": 0
+    }
+  ],
+  "rules": {
+    "max_loops": 20,
+    "min_balance_floor": 49.415358100199995,
+    "max_new_losses": 4,
+    "max_flat_loops": 8
+  }
+}

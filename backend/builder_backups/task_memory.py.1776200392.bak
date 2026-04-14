@@ -1,0 +1,98 @@
+from __future__ import annotations
+
+import json
+import os
+import time
+from typing import Any, Dict
+
+STATE_PATH = "backend/data/task_cooldowns.json"
+AUDIT_PATH = "backend/data/task_choice_audit.json"
+COOLDOWN_SECONDS = 120
+
+def _load() -> Dict[str, Any]:
+    if not os.path.exists(STATE_PATH):
+        return {}
+    try:
+        with open(STATE_PATH, "r", encoding="utf-8-sig") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def _save(data: Dict[str, Any]) -> None:
+    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+    with open(STATE_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def _save_audit(data: Dict[str, Any]) -> None:
+    os.makedirs(os.path.dirname(AUDIT_PATH), exist_ok=True)
+    with open(AUDIT_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def get_last_audit() -> Dict[str, Any]:
+    if not os.path.exists(AUDIT_PATH):
+        return {}
+    try:
+        with open(AUDIT_PATH, "r", encoding="utf-8-sig") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def put_on_cooldown(task: str, seconds: int = COOLDOWN_SECONDS) -> Dict[str, Any]:
+    now = time.time()
+    data = _load()
+    data[task] = {
+        "until": now + seconds,
+        "set_at": now,
+        "seconds": seconds,
+    }
+    _save(data)
+    return data[task]
+
+def is_on_cooldown(task: str) -> bool:
+    data = _load()
+    item = data.get(task, {})
+    if not isinstance(item, dict):
+        return False
+    return float(item.get("until", 0)) > time.time()
+
+def choose_alternate(task: str) -> str:
+    alternates = {
+        "advance_beyond_handoff": "explore_new_path",
+        "explore_new_path": "stabilize_and_observe",
+        "stabilize_and_observe": "probe_new_paths",
+        "resolve_builder_handoff": "explore_new_path",
+        "create_thought_engine": "stabilize_and_observe",
+        "unknown": "explore_new_path",
+    }
+
+    preferred = [
+        alternates.get(task, "explore_new_path"),
+        "stabilize_and_observe",
+        "probe_new_paths",
+        "explore_new_path",
+    ]
+
+    seen = set()
+    ordered = []
+    for item in preferred:
+        if item not in seen:
+            ordered.append(item)
+            seen.add(item)
+
+    chosen = "stabilize_and_observe"
+    for candidate in ordered:
+        if candidate != task and not is_on_cooldown(candidate):
+            chosen = candidate
+            break
+
+    _save_audit({
+        "timestamp": time.time(),
+        "original_task": task,
+        "candidates": ordered,
+        "chosen": chosen,
+        "cooldowns": {candidate: is_on_cooldown(candidate) for candidate in ordered},
+    })
+
+    return chosen

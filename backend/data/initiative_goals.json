@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "generated_at": 1776048501.0233462,
+  "initiative_count": 3,
+  "initiative_goals": [
+    {
+      "id": "initiate_exploration_shift",
+      "type": "initiative",
+      "priority": 0.82,
+      "reason": "Curiosity is high enough to justify proactive exploration"
+    },
+    {
+      "id": "initiate_recovery_mode",
+      "type": "initiative",
+      "priority": 0.9,
+      "reason": "Recent failures detected; begin proactive recovery"
+    },
+    {
+      "id": "initiate_companion_growth",
+      "type": "initiative",
+      "priority": 0.74,
+      "reason": "Exploration focus favors companion capability expansion"
+    }
+  ],
+  "context": {
+    "curiosity": 0.85,
+    "dominant_focus": "exploration",
+    "recent_failures": 25,
+    "existing_goal_count": 16
+  }
+}

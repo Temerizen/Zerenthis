@@ -1,0 +1,173 @@
+{
+  "angles": {
+    "general": {
+      "wins": 54,
+      "appearances": 108,
+      "total_score": 725.7600000000008,
+      "avg_score": 6.72
+    },
+    "premium": {
+      "wins": 0,
+      "appearances": 54,
+      "total_score": 185.22000000000023,
+      "avg_score": 3.43
+    }
+  },
+  "price_bands": {
+    "mid": {
+      "wins": 54,
+      "appearances": 54,
+      "total_score": 438.4800000000002,
+      "avg_score": 8.12
+    },
+    "low": {
+      "wins": 0,
+      "appearances": 54,
+      "total_score": 287.27999999999975,
+      "avg_score": 5.32
+    },
+    "high": {
+      "wins": 0,
+      "appearances": 54,
+      "total_score": 185.22000000000023,
+      "avg_score": 3.43
+    }
+  },
+  "types": {
+    "organic": {
+      "wins": 54,
+      "appearances": 162,
+      "total_score": 910.9800000000002,
+      "avg_score": 5.6233
+    }
+  },
+  "dominant_history": [
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985072.6959617
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985077.8824444
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985083.0738478
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985088.3030026
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985093.4760785
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985128.5580952
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985130.7451682
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985132.9253137
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985135.0778894
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985137.3019342
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985139.462534
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985141.6465797
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985143.8618531
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985146.0606601
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985148.2442377
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985221.87225
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985224.0853078
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985226.253383
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985228.4666805
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985230.6892908
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985232.872973
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985235.0966387
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985237.2992518
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985239.5007658
+    },
+    {
+      "name": "Viral Content Engine Pack",
+      "score": 8.12,
+      "timestamp": 1775985241.666972
+    }
+  ],
+  "runs": 54,
+  "last_updated": 1775985241.666972
+}

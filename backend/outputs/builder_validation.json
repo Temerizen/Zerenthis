@@ -1,0 +1,9 @@
+{
+  "status": "validated",
+  "validated": true,
+  "safe_to_apply": true,
+  "issues": [],
+  "warnings": [],
+  "checked_path": "backend/outputs\\builder_plan.json",
+  "timestamp": 1776022202.7847855
+}

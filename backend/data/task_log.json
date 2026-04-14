@@ -1,0 +1,2002 @@
+[
+  {
+    "task": {
+      "id": 1776048272964539100,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048272.964539,
+      "completed_at": 1776048273.0155385,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048273.0155385
+  },
+  {
+    "task": {
+      "id": 1776048275196415400,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048275.1964154,
+      "completed_at": 1776048275.2484176,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048275.2484176
+  },
+  {
+    "task": {
+      "id": 1776048277412553800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048277.4125538,
+      "completed_at": 1776048277.4645538,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048277.4645538
+  },
+  {
+    "task": {
+      "id": 1776048280005709400,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048280.0057094,
+      "completed_at": 1776048280.0577278,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048280.0577278
+  },
+  {
+    "task": {
+      "id": 1776048282231793400,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048282.2317934,
+      "completed_at": 1776048282.2827935,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048282.2827935
+  },
+  {
+    "task": {
+      "id": 1776048284444027000,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048284.444027,
+      "completed_at": 1776048284.4960294,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048284.4960294
+  },
+  {
+    "task": {
+      "id": 1776048286663893700,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048286.6638937,
+      "completed_at": 1776048286.7158966,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048286.7158966
+  },
+  {
+    "task": {
+      "id": 1776048289270038600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048289.2700386,
+      "completed_at": 1776048289.3215923,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048289.3215923
+  },
+  {
+    "task": {
+      "id": 1776048291480149100,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048291.480149,
+      "completed_at": 1776048291.5321496,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048291.5321496
+  },
+  {
+    "task": {
+      "id": 1776048293702148400,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048293.7021484,
+      "completed_at": 1776048293.7536988,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048293.7536988
+  },
+  {
+    "task": {
+      "id": 1776048295942022300,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048295.9420223,
+      "completed_at": 1776048295.9940217,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048295.9940217
+  },
+  {
+    "task": {
+      "id": 1776048298513947900,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048298.513948,
+      "completed_at": 1776048298.5659466,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048298.5659466
+  },
+  {
+    "task": {
+      "id": 1776048300727567800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048300.727568,
+      "completed_at": 1776048300.7795665,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048300.7795665
+  },
+  {
+    "task": {
+      "id": 1776048302961390500,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048302.9613905,
+      "completed_at": 1776048303.0133905,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048303.0133905
+  },
+  {
+    "task": {
+      "id": 1776048305176449200,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048305.1764493,
+      "completed_at": 1776048305.2274492,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048305.2274492
+  },
+  {
+    "task": {
+      "id": 1776048307782494600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048307.7824948,
+      "completed_at": 1776048307.8344936,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048307.8344936
+  },
+  {
+    "task": {
+      "id": 1776048310002074500,
+      "task": "toolbox_strategy",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048310.0020747,
+      "completed_at": 1776048310.0540738,
+      "result": {
+        "status": "retrying",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048310.0540738
+  },
+  {
+    "task": {
+      "id": 1776048310002074500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048310.0020747,
+      "completed_at": 1776048312.2715108,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048312.2715108
+  },
+  {
+    "task": {
+      "id": 1776048314441314100,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048314.441314,
+      "completed_at": 1776048314.4933136,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048314.4933136
+  },
+  {
+    "task": {
+      "id": 1776048317047158000,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048317.047158,
+      "completed_at": 1776048317.098159,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048317.098159
+  },
+  {
+    "task": {
+      "id": 1776048319261795800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048319.2617958,
+      "completed_at": 1776048319.3127964,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048319.3127964
+  },
+  {
+    "task": {
+      "id": 1776048321483640300,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048321.4836404,
+      "completed_at": 1776048321.5346396,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048321.5346396
+  },
+  {
+    "task": {
+      "id": 1776048323730888300,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048323.7308881,
+      "completed_at": 1776048323.7829266,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048323.7829266
+  },
+  {
+    "task": {
+      "id": 1776048326312350500,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048326.3123505,
+      "completed_at": 1776048326.3633509,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048326.3633509
+  },
+  {
+    "task": {
+      "id": 1776048328524366400,
+      "task": "toolbox_strategy",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048328.5243664,
+      "completed_at": 1776048328.575364,
+      "result": {
+        "status": "retrying",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048328.575364
+  },
+  {
+    "task": {
+      "id": 1776048328524366400,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048328.5243664,
+      "completed_at": 1776048330.8093467,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048330.8093467
+  },
+  {
+    "task": {
+      "id": 1776048332969587400,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048332.9695876,
+      "completed_at": 1776048333.021197,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048333.021197
+  },
+  {
+    "task": {
+      "id": 1776048335553509500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048335.5535095,
+      "completed_at": 1776048335.6055067,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048335.6055067
+  },
+  {
+    "task": {
+      "id": 1776048337778394200,
+      "task": "builder_handoff",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048337.7783942,
+      "completed_at": 1776048337.83039,
+      "result": {
+        "status": "retrying",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048337.83039
+  },
+  {
+    "task": {
+      "id": 1776048337778394200,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048337.7783942,
+      "completed_at": 1776048340.0500937,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048340.0500937
+  },
+  {
+    "task": {
+      "id": 1776048342239016200,
+      "task": "revenue_scan",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048342.2390163,
+      "completed_at": 1776048342.2910147,
+      "result": {
+        "status": "retrying",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048342.2910147
+  },
+  {
+    "task": {
+      "id": 1776048342239016200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048342.2390163,
+      "completed_at": 1776048344.8769307,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048344.8769307
+  },
+  {
+    "task": {
+      "id": 1776048347036737200,
+      "task": "revenue_scan",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048347.0367372,
+      "completed_at": 1776048347.0887327,
+      "result": {
+        "status": "retrying",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048347.0887327
+  },
+  {
+    "task": {
+      "id": 1776048347036737200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048347.0367372,
+      "completed_at": 1776048349.3083763,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048349.3083763
+  },
+  {
+    "task": {
+      "id": 1776048349257379600,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048349.2573795,
+      "completed_at": 1776048349.3593764,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048349.3593764
+  },
+  {
+    "task": {
+      "id": 1776048351535704000,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048351.5357041,
+      "completed_at": 1776048351.587224,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048351.587224
+  },
+  {
+    "task": {
+      "id": 1776048354080937500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048354.0809374,
+      "completed_at": 1776048354.131936,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048354.131936
+  },
+  {
+    "task": {
+      "id": 1776048356292939300,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048356.2929392,
+      "completed_at": 1776048356.3449402,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048356.3449402
+  },
+  {
+    "task": {
+      "id": 1776048358520828100,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048358.5208282,
+      "completed_at": 1776048358.5728269,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048358.5728269
+  },
+  {
+    "task": {
+      "id": 1776048360809634700,
+      "task": "builder_handoff",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048360.809635,
+      "completed_at": 1776048360.8616347,
+      "result": {
+        "status": "retrying",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048360.8616347
+  },
+  {
+    "task": {
+      "id": 1776048360809634700,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048360.809635,
+      "completed_at": 1776048363.8889012,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048363.8889012
+  },
+  {
+    "task": {
+      "id": 1776048366078405300,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048366.0784054,
+      "completed_at": 1776048366.1294084,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048366.1294084
+  },
+  {
+    "task": {
+      "id": 1776048368308187100,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048368.3081872,
+      "completed_at": 1776048368.3591883,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048368.3591883
+  },
+  {
+    "task": {
+      "id": 1776048370531305400,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048370.5313056,
+      "completed_at": 1776048370.5823202,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048370.5823202
+  },
+  {
+    "task": {
+      "id": 1776048373108718000,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048373.1087182,
+      "completed_at": 1776048373.1607127,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048373.1607127
+  },
+  {
+    "task": {
+      "id": 1776048375325152600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048375.3251524,
+      "completed_at": 1776048375.3771517,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048375.3771517
+  },
+  {
+    "task": {
+      "id": 1776048377552960500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048377.5529604,
+      "completed_at": 1776048377.6037412,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048377.6037412
+  },
+  {
+    "task": {
+      "id": 1776048379822506700,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048379.8225067,
+      "completed_at": 1776048379.873504,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048379.873504
+  },
+  {
+    "task": {
+      "id": 1776048382434653300,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048382.4346533,
+      "completed_at": 1776048382.4866495,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048382.4866495
+  },
+  {
+    "task": {
+      "id": 1776048384652051500,
+      "task": "builder_handoff",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048384.6520514,
+      "completed_at": 1776048384.7030506,
+      "result": {
+        "status": "retrying",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048384.7030506
+  },
+  {
+    "task": {
+      "id": 1776048384652051500,
+      "task": "builder_handoff",
+      "status": "failed",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048384.6520514,
+      "completed_at": 1776048386.9421766,
+      "result": {
+        "status": "failed",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "failed",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048386.9421766
+  },
+  {
+    "task": {
+      "id": 1776048389107156800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048389.1071568,
+      "completed_at": 1776048389.1591547,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048389.1591547
+  },
+  {
+    "task": {
+      "id": 1776048391728482500,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048391.7284825,
+      "completed_at": 1776048391.7795615,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048391.7795615
+  },
+  {
+    "task": {
+      "id": 1776048393955749200,
+      "task": "revenue_scan",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048393.955749,
+      "completed_at": 1776048394.0077486,
+      "result": {
+        "status": "retrying",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048394.0077486
+  },
+  {
+    "task": {
+      "id": 1776048393955749200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048393.955749,
+      "completed_at": 1776048396.2494817,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048396.2494817
+  },
+  {
+    "task": {
+      "id": 1776048396198456200,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048396.1984563,
+      "completed_at": 1776048396.3004239,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048396.3004239
+  },
+  {
+    "task": {
+      "id": 1776048398475456700,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048398.4754567,
+      "completed_at": 1776048398.5272028,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048398.5272028
+  },
+  {
+    "task": {
+      "id": 1776048401098812600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048401.0988126,
+      "completed_at": 1776048401.1504436,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048401.1504436
+  },
+  {
+    "task": {
+      "id": 1776048403336474900,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048403.336475,
+      "completed_at": 1776048403.3884757,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048403.3884757
+  },
+  {
+    "task": {
+      "id": 1776048405565947500,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048405.5659473,
+      "completed_at": 1776048405.6179671,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048405.6179671
+  },
+  {
+    "task": {
+      "id": 1776048407814225900,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048407.814226,
+      "completed_at": 1776048407.8663893,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048407.8663893
+  },
+  {
+    "task": {
+      "id": 1776048410416280700,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048410.4162805,
+      "completed_at": 1776048410.46828,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048410.46828
+  },
+  {
+    "task": {
+      "id": 1776048412632803300,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048412.6328034,
+      "completed_at": 1776048412.6838205,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048412.6838205
+  },
+  {
+    "task": {
+      "id": 1776048414886158100,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048414.886158,
+      "completed_at": 1776048414.9376724,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048414.9376724
+  },
+  {
+    "task": {
+      "id": 1776048417109008100,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048417.109008,
+      "completed_at": 1776048417.161009,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048417.161009
+  },
+  {
+    "task": {
+      "id": 1776048419723218000,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048419.723218,
+      "completed_at": 1776048419.775218,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048419.775218
+  },
+  {
+    "task": {
+      "id": 1776048421954145500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048421.9541454,
+      "completed_at": 1776048422.0061462,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048422.0061462
+  },
+  {
+    "task": {
+      "id": 1776048424175905500,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048424.1759055,
+      "completed_at": 1776048424.22692,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048424.22692
+  },
+  {
+    "task": {
+      "id": 1776048426404949900,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048426.40495,
+      "completed_at": 1776048426.4569452,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048426.4569452
+  },
+  {
+    "task": {
+      "id": 1776048429016079700,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048429.0160797,
+      "completed_at": 1776048429.068078,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048429.068078
+  },
+  {
+    "task": {
+      "id": 1776048431237869300,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048431.2378693,
+      "completed_at": 1776048431.2900512,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048431.2900512
+  },
+  {
+    "task": {
+      "id": 1776048433489333500,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048433.4893334,
+      "completed_at": 1776048433.5403335,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048433.5403335
+  },
+  {
+    "task": {
+      "id": 1776048435725487200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048435.725487,
+      "completed_at": 1776048435.7775064,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048435.7775064
+  },
+  {
+    "task": {
+      "id": 1776048438304813200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048438.3048134,
+      "completed_at": 1776048438.3558147,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048438.3558147
+  },
+  {
+    "task": {
+      "id": 1776048440525733700,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048440.5257337,
+      "completed_at": 1776048440.576736,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048440.576736
+  },
+  {
+    "task": {
+      "id": 1776048447671069700,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048447.6710696,
+      "completed_at": 1776048447.723069,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048447.723069
+  },
+  {
+    "task": {
+      "id": 1776048449892334200,
+      "task": "toolbox_strategy",
+      "status": "retrying",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048449.892334,
+      "completed_at": 1776048449.943333,
+      "result": {
+        "status": "retrying",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "retrying",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048449.943333
+  },
+  {
+    "task": {
+      "id": 1776048449892334200,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 2,
+      "max_attempts": 2,
+      "created_at": 1776048449.892334,
+      "completed_at": 1776048452.1750789,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048452.1750789
+  },
+  {
+    "task": {
+      "id": 1776048454368924600,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048454.3689246,
+      "completed_at": 1776048454.4199214,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048454.4199214
+  },
+  {
+    "task": {
+      "id": 1776048456942754100,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048456.942754,
+      "completed_at": 1776048456.9947531,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048456.9947531
+  },
+  {
+    "task": {
+      "id": 1776048459172002900,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048459.1720028,
+      "completed_at": 1776048459.224001,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048459.224001
+  },
+  {
+    "task": {
+      "id": 1776048461407548400,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048461.4075484,
+      "completed_at": 1776048461.4585469,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048461.4585469
+  },
+  {
+    "task": {
+      "id": 1776048463633321400,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048463.6333215,
+      "completed_at": 1776048463.684321,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048463.684321
+  },
+  {
+    "task": {
+      "id": 1776048466183809800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048466.1838098,
+      "completed_at": 1776048466.2353027,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048466.2353027
+  },
+  {
+    "task": {
+      "id": 1776048468415274600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048468.4152744,
+      "completed_at": 1776048468.4672523,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048468.4672523
+  },
+  {
+    "task": {
+      "id": 1776048470633055700,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048470.6330557,
+      "completed_at": 1776048470.6836698,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048470.6836698
+  },
+  {
+    "task": {
+      "id": 1776048472858293600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048472.8582935,
+      "completed_at": 1776048472.9104185,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048472.9104185
+  },
+  {
+    "task": {
+      "id": 1776048475458812600,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048475.4588127,
+      "completed_at": 1776048475.510813,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048475.510813
+  },
+  {
+    "task": {
+      "id": 1776048477686969900,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048477.6869698,
+      "completed_at": 1776048477.7386377,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048477.7386377
+  },
+  {
+    "task": {
+      "id": 1776048479913038800,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048479.9130387,
+      "completed_at": 1776048479.965039,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048479.965039
+  },
+  {
+    "task": {
+      "id": 1776048482162183400,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048482.1621835,
+      "completed_at": 1776048482.2142003,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048482.2142003
+  },
+  {
+    "task": {
+      "id": 1776048484745623800,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048484.7456238,
+      "completed_at": 1776048484.797635,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048484.797635
+  },
+  {
+    "task": {
+      "id": 1776048486963300200,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048486.9633,
+      "completed_at": 1776048487.0153017,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048487.0153017
+  },
+  {
+    "task": {
+      "id": 1776048489207708600,
+      "task": "revenue_scan",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048489.2077086,
+      "completed_at": 1776048489.2595713,
+      "result": {
+        "status": "done",
+        "task": "revenue_scan"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "revenue_scan"
+    },
+    "timestamp": 1776048489.2595713
+  },
+  {
+    "task": {
+      "id": 1776048491452200800,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048491.4522007,
+      "completed_at": 1776048491.5032282,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048491.5032282
+  },
+  {
+    "task": {
+      "id": 1776048494092758100,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048494.092758,
+      "completed_at": 1776048494.143761,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048494.143761
+  },
+  {
+    "task": {
+      "id": 1776048496333237600,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048496.3332374,
+      "completed_at": 1776048496.3842578,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048496.3842578
+  },
+  {
+    "task": {
+      "id": 1776048498553902100,
+      "task": "toolbox_strategy",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048498.5539021,
+      "completed_at": 1776048498.6049194,
+      "result": {
+        "status": "done",
+        "task": "toolbox_strategy"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "toolbox_strategy"
+    },
+    "timestamp": 1776048498.6049194
+  },
+  {
+    "task": {
+      "id": 1776048500795584800,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048500.7955847,
+      "completed_at": 1776048500.8468375,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048500.8468375
+  },
+  {
+    "task": {
+      "id": 1776048503429826000,
+      "task": "builder_handoff",
+      "status": "done",
+      "attempts": 1,
+      "max_attempts": 2,
+      "created_at": 1776048503.429826,
+      "completed_at": 1776048503.4808762,
+      "result": {
+        "status": "done",
+        "task": "builder_handoff"
+      }
+    },
+    "result": {
+      "status": "done",
+      "task": "builder_handoff"
+    },
+    "timestamp": 1776048503.4808762
+  }
+]

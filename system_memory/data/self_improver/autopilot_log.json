@@ -1,0 +1,1565 @@
+[
+  {
+    "time": 1774823957,
+    "id": "prop_1774822653_fe21f917",
+    "title": "Add API key protection and richer health status",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822653_5e45546c",
+    "title": "Protect self-improver routes with typed validation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822713_0e40884d",
+    "title": "Add API key gate and real base URL generation for monetization-safe output links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822785_4a9bfc4a",
+    "title": "Add API key gating and proper base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823957,
+    "id": "prop_1774822785_bb973c80",
+    "title": "Improve frontend user flow with a working generation console",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774822785_bb973c80"
+    }
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822856_b2be030d",
+    "title": "Make generated asset URLs production-ready and improve API health metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822916_ac611c3b",
+    "title": "Add API key gating and real base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822916_e9050282",
+    "title": "Improve gallery output for better user flow and selling presentation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774822986_4225755a",
+    "title": "Add production-safe API metadata and job/file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823053_09772023",
+    "title": "Add safer API contracts and monetization-ready job metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823126_9954e049",
+    "title": "Add API readiness, gallery filtering, and monetization metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823194_59c77513",
+    "title": "Add production-safe API metadata and monetization-ready request tracing",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823194_2cc2e217",
+    "title": "Return monetization metadata in gallery for better product browsing",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823265_01660a5e",
+    "title": "Add API key gating and production-aware base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823266_86cedb09",
+    "title": "Make gallery and job responses more user-ready with direct preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823333_e1952aa2",
+    "title": "Add API key gate and proper base URL generation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823333_b5ea22f8",
+    "title": "Upgrade gallery into a conversion-ready output index",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823959,
+    "id": "prop_1774823345_9acd56e4",
+    "title": "Upgrade API output metadata for better frontend flow and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823408_f34f5e90",
+    "title": "Add request validation, monetization metadata, and job UX fields to API responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823408_c31d0cd1",
+    "title": "Upgrade gallery output with monetization-friendly previews and safer filtering",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823456_fd5b8fc3",
+    "title": "Add monetization-ready product metadata to gallery output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823456_ca6c791f",
+    "title": "Make API root and health endpoints user-flow friendly",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823490_bd20c257",
+    "title": "Add API-level monetization and job UX metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823490_502ac326",
+    "title": "Expose richer gallery metadata for better product presentation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823510_ec4b20d5",
+    "title": "Add monetization-ready request validation and environment-based base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823510_9cfdcc85",
+    "title": "Improve gallery and file responses with product-ready metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823572_aa17c4fc",
+    "title": "Add API key protection, better health data, and monetization-ready metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823572_9a8454ff",
+    "title": "Improve gallery output with previews, type labels, and simple search",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823638_2104f64b",
+    "title": "Add product request validation and monetization-ready metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823638_b68c0a23",
+    "title": "Harden file gallery UX with filtering and safer downloads",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823649_b94e4653",
+    "title": "Add monetization-ready request tracking and stronger API metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823649_4f9fc4e5",
+    "title": "Improve gallery UX with file categorization and preview-ready metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823960,
+    "id": "prop_1774823721_3a531f76",
+    "title": "Add production-safe API metadata, base URL resolution, and monetization-ready gallery links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823787_bda4c0c0",
+    "title": "Add monetization-ready job polling, gallery filters, and environment-aware file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823820_f5c23f7c",
+    "title": "Add API validation, base URL generation, and monetization-ready gallery metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823961,
+    "id": "prop_1774823847_fdeb08dd",
+    "title": "Fix self-improver execution reliability and add rollback-safe result reporting",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774823847_fdeb08dd"
+    }
+  },
+  {
+    "time": 1774823962,
+    "id": "prop_1774823847_c2fa8de7",
+    "title": "Add API metadata, environment-based base URL, and monetization-ready gallery fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823847_2bd46863",
+    "title": "Improve product pack quality with clearer sales copy and built-in monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823907_0760bcc9",
+    "title": "Add API validation, monetization metadata, and safer CORS configuration",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823907_d47b76c0",
+    "title": "Repair truncated product engine sales copy to restore output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823957",
+    "title": "Add API metadata, request IDs, and monetization-ready intake fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774823963,
+    "id": "prop_1774823957",
+    "title": "Make YouTube pack output more sellable with embedded offer and CTA guidance",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774823999_3624afaa",
+    "title": "Add API metadata, base URL resolution, and gallery filtering for cleaner product delivery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824001_bac64690",
+    "title": "Add API metadata, input normalization, and monetization-friendly request context",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824001_3c3fb52b",
+    "title": "Expose structured gallery filters and monetization-oriented output metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824073_bc298315",
+    "title": "Add request validation, safer CORS, and startup diagnostics to API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824073_713c2e7d",
+    "title": "Upgrade product output with offer positioning and monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824136",
+    "title": "Add API-level request validation and monetization metadata to generation flows",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824136,
+    "id": "prop_1774824136",
+    "title": "Lock down CORS and improve health visibility for deployment reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824155_8f4fafca",
+    "title": "Make API responses production-ready with request validation and secure CORS",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824178_4939e914",
+    "title": "Add request validation, safer CORS, and gallery metadata for better UX and production readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824222_d920c456",
+    "title": "Add product-ready API metadata, better CORS handling, and monetization-friendly endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824222_5d6f88e8",
+    "title": "Improve output quality with stronger gallery metadata and file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824294",
+    "title": "Add proposal schema validation at the API boundary",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824295,
+    "id": "prop_1774824294",
+    "title": "Improve API trust and monetization readiness with metadata, CORS config, and request-safe gallery output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824463,
+    "id": "prop_1774824299_f7d3c9ea",
+    "title": "Add API request validation, useful health metadata, and monetization-ready lead capture endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824463,
+    "id": "prop_1774824299_89abadb1",
+    "title": "Improve frontend user flow with lead capture and clearer product CTA",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824299_89abadb1"
+    }
+  },
+  {
+    "time": 1774824465,
+    "id": "prop_1774824358_e0e833ac",
+    "title": "Add API request validation, better health info, and monetization-ready lead capture endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824465,
+    "id": "prop_1774824384_73f13b4c",
+    "title": "Add API request validation, monetization metadata, and stricter CORS configuration",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824465,
+    "id": "prop_1774824384_026d010a",
+    "title": "Increase product output quality with stronger offer strategy and monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824465,
+    "id": "prop_1774824463",
+    "title": "Add request deduplication and input normalization to product generation APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824465,
+    "id": "prop_1774824463",
+    "title": "Return better API metadata for health and downloads to improve UX and ops readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824627,
+    "id": "prop_1774824468_442f09e7",
+    "title": "Add job and request observability for better UX and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824628,
+    "id": "prop_1774824468_2a618e43",
+    "title": "Upgrade landing page with productized offers and clearer calls-to-action",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824468_2a618e43"
+    }
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824522_b9ff099c",
+    "title": "Finish file serving and add download metadata for cleaner user flow and monetization delivery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824522_0dd4b413",
+    "title": "Add request validation and package metadata endpoints to improve frontend reliability and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824629,
+    "id": "prop_1774824557_b4057504",
+    "title": "Add API response models and job polling metadata for better frontend flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824557_2f60cba3",
+    "title": "Improve product output with stronger monetization sections in YouTube packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824627",
+    "title": "Complete file serving and add download-safe metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824630,
+    "id": "prop_1774824627",
+    "title": "Upgrade product output with monetization-focused offer summary",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824631_6291274a",
+    "title": "Finish file-serving endpoint and add lead-capture checkout endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824709_2401d6f2",
+    "title": "Add product API UX, lead capture hooks, and complete file download responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824709_8d49e67e",
+    "title": "Strengthen API observability with request IDs and richer health status",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824789,
+    "id": "prop_1774824729_a7223bc6",
+    "title": "Add a conversion-ready capabilities endpoint and clearer API health metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824729_ef8634cb",
+    "title": "Improve generated product quality with stronger commercial packaging",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824789",
+    "title": "Finish file serving and add download metadata for generated outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824790,
+    "id": "prop_1774824789",
+    "title": "Add stronger commercial outputs to YouTube pack responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824972,
+    "id": "prop_1774824796_203383bd",
+    "title": "Finish file-serving and add product-ready download metadata endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824972,
+    "id": "prop_1774824796_b1468c3e",
+    "title": "Add input normalization to generation models for more consistent output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824856_0ea64a77",
+    "title": "Complete file serving and add downloadable output catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824856_0952f470",
+    "title": "Add lead-capture and monetization metadata to generation responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824883_f4a99ca2",
+    "title": "Complete file delivery and add lead-capture checkout metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824973,
+    "id": "prop_1774824934_269e5f3c",
+    "title": "Add proposal deduplication and execution audit trail",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824934_269e5f3c"
+    }
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824934_591d8a2d",
+    "title": "Add API metadata and monetization-ready intake fields",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824934_97fe6562",
+    "title": "Upgrade YouTube pack output with stronger conversion assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824975,
+    "id": "prop_1774824972",
+    "title": "Make self-improver execution safer, more auditable, and encoding-stable",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774824972"
+    }
+  },
+  {
+    "time": 1774824976,
+    "id": "prop_1774824972",
+    "title": "Add request validation and monetization-ready lead capture to generation APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774824977,
+    "id": "prop_1774824972",
+    "title": "Add product quality scoring and stronger commercialization sections to generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825020_5c138b9e",
+    "title": "Improve API reliability and user flow with request validation summaries and self-serve capability discovery",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825038_0c07aae9",
+    "title": "Add job metadata, timestamps, and download readiness to API responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825121,
+    "id": "prop_1774825070_33e3bf1c",
+    "title": "Fix self-improver execution reliability and add missing proposal listing",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825070_33e3bf1c"
+    }
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825070_5c5411ed",
+    "title": "Add product metadata endpoint for stronger user flow and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825070_7e484ff7",
+    "title": "Strengthen lead capture quality with timestamped deduplicated records",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825123,
+    "id": "prop_1774825121_a511ad16",
+    "title": "Add atomic lead logging and monetization analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825124,
+    "id": "prop_1774825121_ff852943",
+    "title": "Expose quality metadata in health for better product feedback loops",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825124,
+    "id": "prop_1774825121",
+    "title": "Complete self-improver engine lifecycle and failure logging",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825121"
+    }
+  },
+  {
+    "time": 1774825126,
+    "id": "prop_1774825121",
+    "title": "Add atomic lead logging and monetization visibility endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825126,
+    "id": "prop_1774825121",
+    "title": "Strengthen product-pack output with clearer monetization assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825178_a473d6ee",
+    "title": "Complete and harden API routes with job polling and monetization endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825194_03b00418",
+    "title": "Add lead-ready intake metadata and cleaner health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825239_7f55f902",
+    "title": "Add conversion-focused intake and monetization metrics to leads",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825239_859cf9cb",
+    "title": "Add product quality scoring to generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825290",
+    "title": "Expose execution log and failure detail in self-improver API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825291,
+    "id": "prop_1774825290",
+    "title": "Add conversion-focused generation metrics for monetization and user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825328_55bb4944",
+    "title": "Add conversion-ready job status, downloads, and monetization metrics to API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825350_39526613",
+    "title": "Add monetization-ready conversion metrics to product API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825402_23ba5804",
+    "title": "Add conversion-oriented intake endpoint with offer preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825471,
+    "id": "prop_1774825402_175532e4",
+    "title": "Upgrade homepage into a clear lead-capture and product preview flow",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825402_175532e4"
+    }
+  },
+  {
+    "time": 1774825473,
+    "id": "prop_1774825463_cc716297",
+    "title": "Add user-facing intake and monetization summary to metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825473,
+    "id": "prop_1774825463_c2d4b311",
+    "title": "Improve frontend hero flow with lead capture intent and trust signals",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825463_c2d4b311"
+    }
+  },
+  {
+    "time": 1774825475,
+    "id": "prop_1774825471",
+    "title": "Add conversion-ready lead capture analytics and stronger API health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825475,
+    "id": "prop_1774825471",
+    "title": "Raise product output quality with stronger scoring and monetization-focused content blocks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825513_b41b0e87",
+    "title": "Expose richer health and monetization dashboard metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825525_ff7931cd",
+    "title": "Add generation quality scoring to product packs for better output and upsell readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825526_25e2e9be",
+    "title": "Expose conversion-ready intake metrics in health and metrics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825621,
+    "id": "prop_1774825594_068be1a3",
+    "title": "Add monetization-ready metrics response with lead quality and output breakdown",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825594_62309519",
+    "title": "Upgrade self-improver history and stats with failure visibility and execution outcomes",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825621",
+    "title": "Add monetization-ready metrics and lead funnel summary response",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825622,
+    "id": "prop_1774825621",
+    "title": "Improve self-improver proposal quality with stricter validation heuristics",
+    "risk": "low",
+    "result": {
+      "ok": false,
+      "id": "prop_1774825621",
+      "error": "'charmap' codec can't decode byte 0x90 in position 4401: character maps to <undefined>"
+    }
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825647_b8d4b0df",
+    "title": "Add complete metrics response for lead capture and monetization visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825658_a7610782",
+    "title": "Complete metrics API for monetization and lead funnel visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825703_f841f2c9",
+    "title": "Finish and harden API metrics plus generation response metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825768,
+    "id": "prop_1774825703_d1db7ce9",
+    "title": "Add safer self-improver execution validation and duplicate-step protection",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825703_d1db7ce9"
+    }
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825703_23f3223e",
+    "title": "Upgrade product packs with built-in quality scoring and monetization sections",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825759_0c411670",
+    "title": "Complete API responses with quality scoring and monetization metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825759_1592989f",
+    "title": "Add product quality metadata to generated YouTube packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825770,
+    "id": "prop_1774825767",
+    "title": "Complete metrics and add monetization-ready lead analytics API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825809_f038c80c",
+    "title": "Complete metrics and add monetization-ready intake analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825811_b7de6853",
+    "title": "Finish metrics and add monetization-ready lead analytics endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825931,
+    "id": "prop_1774825879_a3745a89",
+    "title": "Add execution telemetry and safer self-improver edit validation",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825879_a3745a89"
+    }
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825879_ac419c07",
+    "title": "Expose monetization-ready metrics and product catalog on the API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825879_b09f2886",
+    "title": "Raise generated product quality with built-in QA scoring",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825933,
+    "id": "prop_1774825931",
+    "title": "Add safer self-improver step validation and edit targeting",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774825931"
+    }
+  },
+  {
+    "time": 1774825935,
+    "id": "prop_1774825931",
+    "title": "Expose monetization and delivery metrics in the API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774825935,
+    "id": "prop_1774825931",
+    "title": "Raise product output quality with built-in quality scoring and clearer package content",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774825952_1c05e95b",
+    "title": "Expose product and lead metrics through a reliable monetization API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774825975_7c8548a9",
+    "title": "Complete and harden API metrics plus lead capture insights",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_4f90cfed",
+    "title": "Add proposal risk scoring and safer self-improver stats",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_566eee8f",
+    "title": "Expose product quality and monetization signals in catalog and health APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826028_ef2caa28",
+    "title": "Strengthen YouTube pack conversion structure",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826083,
+    "id": "prop_1774826083",
+    "title": "Add proposal quality scoring and safer self-improver diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826084,
+    "id": "prop_1774826083",
+    "title": "Add product quality metadata and monetization-ready output signals",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826084,
+    "id": "prop_1774826083",
+    "title": "Expose conversion-friendly metrics and catalog completeness in API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826107_0676fbb3",
+    "title": "Add atomic lead logging and operational metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826149_fcab3fe2",
+    "title": "Add product deliverable quality metadata and monetization copy",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826235,
+    "id": "prop_1774826149_9d06be11",
+    "title": "Strengthen API health and lead logging for better user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826236,
+    "id": "prop_1774826162_557bd1f6",
+    "title": "Make self-improver edits safer with binary-file guard and atomic proposal writes",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826162_557bd1f6"
+    }
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826162_c83c984d",
+    "title": "Add monetization-ready lead funnel metrics and stronger health visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826162_b6a3daaf",
+    "title": "Raise product output quality with clearer PDF scoring and commercialization checks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826208_e68d185e",
+    "title": "Add product quality scoring and monetization metadata to PDF outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826208_586c7e1b",
+    "title": "Add conversion-focused intake and offer guidance to API catalog and health flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826235",
+    "title": "Add deterministic proposal quality gates and duplicate suppression",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826238,
+    "id": "prop_1774826235",
+    "title": "Add lead analytics and monetization-ready intake metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826239,
+    "id": "prop_1774826235",
+    "title": "Embed product quality scoring into generated PDF outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826282_051c193f",
+    "title": "Expose monetization and lead metrics in health and catalog responses",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826301_b33248a6",
+    "title": "Add API metrics endpoint for health, usage, and monetization visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826348_49a88c06",
+    "title": "Add intake analytics and conversion-ready lead metrics to health and catalog APIs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826348_633539eb",
+    "title": "Expose product quality scoring and monetization hooks in generated packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826400,
+    "id": "prop_1774826399",
+    "title": "Add durable lead analytics and monetization endpoints",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826401,
+    "id": "prop_1774826399",
+    "title": "Expose product and video quality scores in API catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826416_22ac5e72",
+    "title": "Add richer API health and monetization metrics endpoint",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826468_ea21e47e",
+    "title": "Expose business-facing metrics in health route for better operations and user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826547,
+    "id": "prop_1774826546",
+    "title": "Tighten self-improver step validation and proposal hygiene",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826546"
+    }
+  },
+  {
+    "time": 1774826549,
+    "id": "prop_1774826547",
+    "title": "Add API-level guardrails and proposal preview metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826550,
+    "id": "prop_1774826547",
+    "title": "Expose product-ready generation options and lead capture UX on homepage",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826547"
+    }
+  },
+  {
+    "time": 1774826710,
+    "id": "prop_1774826627_71f5c8fa",
+    "title": "Improve API health and lead capture trust signals for user flow",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Add proposal deduplication, stronger step validation, and execution metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Expose generation quality and monetization signals in health output",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826711,
+    "id": "prop_1774826710",
+    "title": "Improve generated offer quality with stronger CTA and conversion metadata",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826787_eac3b4f4",
+    "title": "Expose product and self-improver health metrics in the API health surface",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826857",
+    "title": "Complete health endpoint with monetization and job visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774826858,
+    "id": "prop_1774826857",
+    "title": "Add product output metadata for quality scoring and sales follow-up",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826864_0359389b",
+    "title": "Expose funnel-ready pricing and lead capture guidance in catalog",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826919_900180",
+    "title": "Add premium monetization layers to product pack outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827026,
+    "id": "prop_1774826919_244524",
+    "title": "Upgrade frontend homepage with outcome-led product previews and trust cues",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774826919_244524"
+    }
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826934_9157bd69",
+    "title": "Complete health endpoint with product readiness and monetization diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826958_d5ce27c9",
+    "title": "Improve API health visibility for user flow and operations",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826995_eecf75c0",
+    "title": "Complete health endpoint with monetization and funnel diagnostics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774826995_4e6d3d50",
+    "title": "Improve product-pack scoring with monetization and actionability signals",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774827026",
+    "title": "Add product catalog and lead-ready generation metadata to the API",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827028,
+    "id": "prop_1774827026",
+    "title": "Improve output quality with deterministic quality guards for video and product offers",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827197,
+    "id": "prop_1774827063_d468c9",
+    "title": "Add premium monetization blocks to generated product packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827197,
+    "id": "prop_1774827077_f1489ceb",
+    "title": "Finish and strengthen health endpoint for operational and monetization visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827197,
+    "id": "prop_1774827133_0dab8143",
+    "title": "Complete and strengthen health endpoint for product readiness visibility",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827198,
+    "id": "prop_1774827156_742ba61c",
+    "title": "Stabilize self-improver routes by adding missing validation and execution logging helpers",
+    "risk": "low",
+    "result": {
+      "ok": true,
+      "id": "prop_1774827156_742ba61c"
+    }
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827156_d47e9fcd",
+    "title": "Finish and harden API health reporting for better product readiness and reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827156_a3e56916",
+    "title": "Improve generated product packs with stronger quality checks and monetization content",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827197",
+    "title": "Complete health endpoint and add generation readiness metrics",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827200,
+    "id": "prop_1774827197",
+    "title": "Finish product engine prompt bank for stronger output quality",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827380,
+    "id": "prop_1774827201_8abf07",
+    "title": "Complete and upgrade product engine prompt bank with monetization-ready sales assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827380,
+    "id": "prop_1774827248_b238d45d",
+    "title": "Expose operational health and product-readiness safely",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827314_d22090c0",
+    "title": "Improve API health visibility for outputs and monetization readiness",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827338_f1c700b4",
+    "title": "Complete health endpoint with monetization and output observability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827338_e8cef34d",
+    "title": "Upgrade product packs with sales-page copy and stronger conversion assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827340_ccc145",
+    "title": "Complete and upgrade product engine prompt bank with monetization-focused assets",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827381,
+    "id": "prop_1774827380",
+    "title": "Finish and stabilize health endpoint for operational reliability",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774827382,
+    "id": "prop_1774827380",
+    "title": "Increase product-pack quality with stronger monetization copy blocks",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827423_2ad50a",
+    "title": "Fix truncated product offer generator and add conversion-ready fallback ideas",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827550_ce4253",
+    "title": "Finish and strengthen product offer generation with monetization-ready variants",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827677_ddabe2",
+    "title": "Complete and monetize product offer generation with conversion-focused ideas",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827860_97f748",
+    "title": "Repair truncated product engine and add offer-angle batch generation for stronger product-market outputs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774827996_12c0f5",
+    "title": "Add monetization-focused product pack content with built-in offer stack and buyer CTA",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774828134_8d7c8c",
+    "title": "Upgrade product packs with monetization-ready sales sections and branded file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828231,
+    "id": "prop_1774828231_66e971",
+    "title": "Add monetization-ready product pack metadata and unique batch variation",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828330,
+    "id": "prop_1774828231_1b5943",
+    "title": "Add monetization-ready product pack metadata and unique batch titles",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828330,
+    "id": "prop_1774828330_1a33ea",
+    "title": "Upgrade product packs into monetization-ready offer briefs with branded links",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828331_b78b26",
+    "title": "Upgrade product packs with monetization-ready offer assets and valid public file URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828395_c7aaa8",
+    "title": "Add monetization metadata and commercial copy to product packs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828396,
+    "id": "prop_1774828395_270a4f",
+    "title": "Upgrade product pack output into a monetization-ready PDF with offer stack and customization",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828533,
+    "id": "prop_1774828532_472049",
+    "title": "Upgrade product packs with monetization-ready sales metadata and personalized execution plan",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828533,
+    "id": "prop_1774828533_9913c4",
+    "title": "Add monetization-focused product pack metadata and cleaner filenames",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828670,
+    "id": "prop_1774828666_e93204",
+    "title": "Add monetization-ready product pack metadata and conversion copy",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828670,
+    "id": "prop_1774828670_6823c9",
+    "title": "Upgrade product packs with monetization-focused sections and a usable base URL",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828787,
+    "id": "prop_1774828785_163687",
+    "title": "Upgrade product packs with monetization sections and branded URLs",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  },
+  {
+    "time": 1774828787,
+    "id": "prop_1774828787_d1f0d1",
+    "title": "Add monetization-ready product metadata and deterministic batch naming",
+    "risk": "medium",
+    "result": "split_into_safe_and_risky"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "status": "enhanced_products_ready",
+  "count": 1,
+  "products": [
+    {
+      "sku": "ai_niche_10_money_system_1775438260",
+      "title": "Ai Niche 10 Money System 1775438260: Build a Profitable System Without Experience",
+      "headline": "Ai Niche 10 Money System 1775438260 Product: Ready-to-Use Digital System",
+      "subheadline": "Use this ready-made AI system to save time and get results faster.",
+      "price": 39,
+      "cta": "Get Instant Access Now",
+      "primary_topic": "ai_niche_10_money_system_1775438260_product",
+      "variants": [
+        "ai_niche_10_money_system_1775438260_hooks",
+        "ai_niche_10_money_system_1775438260_product",
+        "ai_niche_10_money_system_1775438260_sales"
+      ],
+      "checkout_dir": "C:\\Zerenthisv2\\backend\\checkout_ready\\ai_niche_10_money_system_1775438260_product",
+      "offer_file": "C:\\Zerenthisv2\\backend\\sales_ready\\ai_niche_10_money_system_1775438260_product\\offer.json",
+      "status": "enhanced_offer_ready",
+      "created_at": "2026-04-06T04:43:04.426774Z",
+      "promise": "Create a working, monetizable system in record time using AI-assisted workflows.",
+      "benefits": [
+        "Step-by-step system you can follow immediately",
+        "No prior experience required",
+        "Designed for fast monetization",
+        "Built using proven digital product frameworks"
+      ],
+      "stack": [
+        "Core product system",
+        "Hook & content templates",
+        "Execution roadmap",
+        "Monetization strategy"
+      ],
+      "enhanced_at": "2026-04-06T04:49:44.692694Z"
+    }
+  ]
+}

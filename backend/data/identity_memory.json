@@ -1,0 +1,37 @@
+{
+  "baseline_traits": {
+    "caution": 0.5768,
+    "adaptability": 0.5148,
+    "confidence": 0.5754,
+    "persistence": 0.5666
+  },
+  "history": [
+    {
+      "timestamp": 1776108689.4492035,
+      "traits": {
+        "caution": 0.6,
+        "adaptability": 0.518,
+        "confidence": 0.62,
+        "persistence": 0.6039
+      }
+    },
+    {
+      "timestamp": 1776109129.3693125,
+      "traits": {
+        "caution": 0.65,
+        "adaptability": 0.528,
+        "confidence": 0.65,
+        "persistence": 0.6311
+      }
+    },
+    {
+      "timestamp": 1776109349.2066855,
+      "traits": {
+        "caution": 0.7,
+        "adaptability": 0.54,
+        "confidence": 0.68,
+        "persistence": 0.6613
+      }
+    }
+  ]
+}

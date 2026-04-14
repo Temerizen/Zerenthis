@@ -1,0 +1,1902 @@
+[
+  {
+    "timestamp": 1776047809.0668738,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047815.7156513,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047822.7622085,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047829.7634776,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047836.785151,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047843.4367564,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047850.4504237,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047857.475417,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047864.4739425,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047871.1324897,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047878.139067,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047885.1249688,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047892.1270044,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047898.7785141,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047905.800917,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047912.8250318,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047919.8181446,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047926.4747424,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047933.5181816,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047940.54335,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047947.5759919,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047954.2376616,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047961.2502642,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047968.2374878,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776047975.1712456,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047981.8297539,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776047988.8439908,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776047995.8542159,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048002.8905587,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048009.5466106,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048016.5605736,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048023.591017,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048030.5916915,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048037.2465193,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048044.2835612,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048051.3179834,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048058.3546944,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048065.0078213,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048072.0217206,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048079.033929,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048085.9808788,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048092.6511388,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048099.6252875,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048106.580985,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048113.5762775,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048120.2501225,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048127.237586,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048134.23152,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048141.2589815,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048147.9440787,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048154.9673336,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048161.9817314,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048169.0463703,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048175.7151775,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048182.7654338,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048189.7780116,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048196.8092613,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048203.4996994,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048210.5285275,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048217.5308475,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048224.5713644,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 5
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048231.2880995,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 5
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048238.3348048,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 5
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048245.3563461,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048252.3993344,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048259.0670037,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048266.1022437,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048273.1395388,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048280.1767197,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048286.8388956,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048293.8870232,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048300.9085684,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048307.9514961,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048314.6183178,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048321.656887,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048328.7015502,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048335.7245085,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048342.415015,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048349.4823775,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048356.467827,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048364.0089824,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048370.709312,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048377.7602293,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048384.8320525,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048391.9002118,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048398.6499574,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048405.7571797,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048412.8108208,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 5
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048419.897221,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048426.5862255,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048433.6663337,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048440.7037334,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048452.303078,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048459.3520036,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048466.3552966,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "revenue_scan",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'revenue_scan'."
+    ]
+  },
+  {
+    "timestamp": 1776048473.0443695,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  },
+  {
+    "timestamp": 1776048480.0970395,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048487.1453526,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048494.2747579,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "builder_handoff",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'builder_handoff'."
+    ]
+  },
+  {
+    "timestamp": 1776048500.9764185,
+    "analyzed_cycles": 10,
+    "patterns": [
+      {
+        "type": "task_repetition",
+        "task": "toolbox_strategy",
+        "count": 4
+      },
+      {
+        "type": "success_rate",
+        "value": 1.0
+      }
+    ],
+    "insights": [
+      "System is performing effectively on recent tasks.",
+      "High repetition detected in task 'toolbox_strategy'."
+    ]
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "message": "Remember this: I want Zerenthis to feel like a real companion",
+    "intent": "memory",
+    "confidence": 0.95,
+    "suggested_action": "write_memory",
+    "timestamp": 1776014515.8840458
+  },
+  {
+    "message": "Create task: finish the companion presence layer",
+    "intent": "task_create",
+    "confidence": 0.95,
+    "suggested_action": "create_task",
+    "timestamp": 1776014515.9041727
+  },
+  {
+    "message": "Analyze why the companion still feels flat",
+    "intent": "analysis",
+    "confidence": 0.85,
+    "suggested_action": "analyze_request",
+    "timestamp": 1776014515.9242806
+  },
+  {
+    "message": "Analyze why the companion still feels flat",
+    "intent": "analysis",
+    "confidence": 0.85,
+    "suggested_action": "analyze_request",
+    "timestamp": 1776014955.9117486
+  },
+  {
+    "message": "Analyze why the companion still feels flat",
+    "intent": "analysis",
+    "confidence": 0.85,
+    "suggested_action": "analyze_request",
+    "timestamp": 1776015275.6360323
+  },
+  {
+    "message": "Create task: finish emotional realism layer",
+    "intent": "task_create",
+    "confidence": 0.95,
+    "suggested_action": "create_task",
+    "timestamp": 1776015275.6724668
+  },
+  {
+    "message": "Analyze why the companion still feels flat",
+    "intent": "analysis",
+    "confidence": 0.85,
+    "suggested_action": "analyze_request",
+    "timestamp": 1776015316.842613
+  },
+  {
+    "message": "Create task: finish emotional realism layer",
+    "intent": "task_create",
+    "confidence": 0.95,
+    "suggested_action": "create_task",
+    "timestamp": 1776015316.8727162
+  },
+  {
+    "message": "Analyze why this still doesn't feel real",
+    "intent": "analysis",
+    "confidence": 0.85,
+    "suggested_action": "analyze_request",
+    "timestamp": 1776015810.1335785
+  },
+  {
+    "message": "Why does this still not feel fully real?",
+    "intent": "explanation",
+    "confidence": 0.85,
+    "suggested_action": "explain_or_answer",
+    "timestamp": 1776016158.8514862
+  }
+]

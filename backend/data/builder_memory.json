@@ -1,0 +1,30 @@
+{
+  "backend/app/engines/traffic_engine.py": {
+    "wins": 2,
+    "losses": 0,
+    "last_touched": 1775979077,
+    "streak": 2,
+    "last_result": "success"
+  },
+  "backend/app/engines/offer_engine.py": {
+    "wins": 2,
+    "losses": 0,
+    "last_touched": 1775980694,
+    "streak": 2,
+    "last_result": "success"
+  },
+  "backend/app/engines/storefront_engine.py": {
+    "wins": 1,
+    "losses": 0,
+    "last_touched": 1775979305,
+    "streak": 1,
+    "last_result": "success"
+  },
+  "backend/app/engines/conversion_engine.py": {
+    "wins": 1,
+    "losses": 0,
+    "last_touched": 1775979398,
+    "streak": 1,
+    "last_result": "success"
+  }
+}

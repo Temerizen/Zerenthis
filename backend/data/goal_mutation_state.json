@@ -1,0 +1,169 @@
+{
+  "history": [
+    {
+      "timestamp": 1776206144.8815918,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 41,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206144.975141,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.0369108,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.105098,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.1773288,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.2460952,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.3562748,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.4290273,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.4992821,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206145.5693507,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206374.8902097,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206375.0570939,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 3,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206375.1312284,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 3,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206375.2033827,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 3,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206375.282182,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 3,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206375.3539522,
+      "from_goal": "balanced_progression",
+      "to_goal": "exploration_recovery",
+      "reason": "stagnation_detected",
+      "direction": "pivot_required",
+      "repeat_count": 3,
+      "stagnating": true
+    },
+    {
+      "timestamp": 1776206375.4764047,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    },
+    {
+      "timestamp": 1776206375.5595198,
+      "from_goal": "balanced_progression",
+      "to_goal": "balanced_progression",
+      "reason": "maintain_momentum",
+      "direction": "stay_the_course",
+      "repeat_count": 1,
+      "stagnating": false
+    }
+  ],
+  "last_goal": "balanced_progression",
+  "last_reason": "maintain_momentum",
+  "last_updated": 1776206375.5595198
+}

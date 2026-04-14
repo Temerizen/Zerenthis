@@ -1,0 +1,711 @@
+{
+  "last_feedback": {
+    "timestamp": 1776070176.5568578,
+    "goal": "expand_capability",
+    "success_score": 0.7,
+    "efficiency_score": 0.6,
+    "steps_count": 4
+  },
+  "history": [
+    {
+      "timestamp": 1776058354.258655,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058354.6403177,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058355.0345216,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058355.4251087,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058355.8143132,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058501.7684793,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058502.154515,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058502.5430555,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058502.9341393,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058503.3053446,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058503.6942294,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058504.0709717,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058504.443718,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058712.2017355,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058712.5799599,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058712.963978,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058713.3376706,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058713.7081223,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058897.763353,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058897.8066864,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058898.1678574,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058898.2178326,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058898.5831947,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058898.6382778,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058898.9943666,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058899.0364976,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058899.4089072,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776058899.4580727,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068426.8118908,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068427.1906667,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068427.5710375,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068427.9568524,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068428.331639,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068428.7030432,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068571.0950923,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068571.4804125,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068571.8670185,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068572.2560332,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068572.6464307,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068573.0505521,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068573.4544284,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068573.8391807,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068685.2083695,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068685.6119177,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068686.0542085,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068686.4593093,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068686.8653724,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068687.2669427,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068687.6738544,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068688.0800815,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068688.4843595,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776068688.9044292,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069067.2296453,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069067.6428304,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069068.0611343,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069068.477077,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069068.8986955,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069069.3174515,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069311.708333,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069312.139689,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069312.5650299,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069313.0090318,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069313.44685,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069313.8757114,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069452.9458587,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069453.3797393,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069453.8252966,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069454.2582748,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069454.6976228,
+      "goal": "reinforce_path",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069455.1297178,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776069599.6637654,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069600.115508,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069600.567041,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069601.0036917,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069601.4555128,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069601.8966625,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069602.3513584,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069602.7988112,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069807.8326364,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069808.2823076,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069808.738557,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069809.218868,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069809.668201,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069810.104245,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069810.5664902,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069811.0244484,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069881.5629647,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069881.9826663,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069882.3981307,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069882.8361018,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069883.272194,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776069883.708901,
+      "goal": "unknown",
+      "success_score": 0.2,
+      "efficiency_score": 0.2,
+      "steps_count": 0
+    },
+    {
+      "timestamp": 1776070173.3864644,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070173.8314838,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070174.2795506,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070174.7337208,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070175.1873124,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070175.64974,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070176.1046803,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    },
+    {
+      "timestamp": 1776070176.5568578,
+      "goal": "expand_capability",
+      "success_score": 0.7,
+      "efficiency_score": 0.6,
+      "steps_count": 4
+    }
+  ]
+}

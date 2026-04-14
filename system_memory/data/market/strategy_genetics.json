@@ -1,0 +1,22 @@
+{
+  "momentum": {
+    "threshold": 2.2348,
+    "confidence_mult": 1.5637,
+    "max_conf": 10.0
+  },
+  "mean_reversion": {
+    "threshold": 1.6089,
+    "confidence_mult": 1.6859,
+    "max_conf": 8.7528
+  },
+  "breakout": {
+    "threshold": 1.4864,
+    "confidence_mult": 1.7787,
+    "max_conf": 9.3587
+  },
+  "conservative": {
+    "threshold": 1.8462,
+    "confidence_mult": 1.5268,
+    "max_conf": 8.5335
+  }
+}

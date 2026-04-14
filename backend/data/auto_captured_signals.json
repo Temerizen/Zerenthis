@@ -1,0 +1,3602 @@
+[
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775984849.972828
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775984849.972828
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775984849.972828
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775984849.972828
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775984849.972828
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775984966.014506
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775984966.014506
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775984966.014506
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775984966.014506
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775984966.014506
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775984971.299151
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775984971.299151
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775984971.299151
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775984971.299151
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775984971.299151
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775984976.5178077
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775984976.5178077
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775984976.5178077
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775984976.5178077
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775984976.5178077
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775984981.7621405
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775984981.7621405
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775984981.7621405
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775984981.7621405
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775984981.7621405
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775984986.990842
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775984986.990842
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775984986.990842
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775984986.990842
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775984986.990842
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775984992.2004437
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775984992.2004437
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775984992.2004437
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775984992.2004437
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775984992.2004437
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775984997.4731607
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775984997.4731607
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775984997.4731607
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775984997.4731607
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775984997.4731607
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775985004.8021715
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985004.8021715
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985004.8021715
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985004.8021715
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985004.8021715
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985009.9993966
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985009.9993966
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985009.9993966
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985009.9993966
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985009.9993966
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985015.2337472
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985015.2337472
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985015.2337472
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985015.2337472
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985015.2337472
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985020.498603
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985020.498603
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985020.498603
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985020.498603
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985020.498603
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775985025.7588277
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985025.7588277
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985025.7588277
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985025.7588277
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985025.7588277
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985031.0173173
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985031.0173173
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985031.0173173
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985031.0173173
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985031.0173173
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775985036.2590153
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985036.2590153
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775985036.2590153
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985036.2590153
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985036.2590153
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985041.483117
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985041.483117
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775985041.483117
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985041.483117
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985041.483117
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985046.670926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985046.670926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985046.670926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985046.670926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985046.670926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985051.9042926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985051.9042926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985051.9042926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985051.9042926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985051.9042926
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985057.1353378
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985057.1353378
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 2,
+    "timestamp": 1775985057.1353378
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985057.1353378
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985057.1353378
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985062.4014597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985062.4014597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985062.4014597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985062.4014597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985062.4014597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985067.607531
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985067.607531
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 2,
+    "timestamp": 1775985067.607531
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985067.607531
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985067.607531
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985072.8091583
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985072.8091583
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985072.8091583
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985072.8091583
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985072.8091583
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985077.9750445
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985077.9750445
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985077.9750445
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985077.9750445
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985077.9750445
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985083.223792
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985083.2238069
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985083.2238069
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985083.2238069
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985083.2238069
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985088.40384
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985088.40384
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985088.40384
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985088.40384
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775985088.40384
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775985093.6160915
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985093.6160915
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775985093.6160915
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985093.6160915
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985093.6160915
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985128.6558313
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985128.6558313
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985128.6558313
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985128.6558313
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775985128.6558313
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985130.8654597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985130.8654597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985130.8654597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985130.8654597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985130.8654597
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985133.0104675
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985133.0104675
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 2,
+    "timestamp": 1775985133.0104675
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985133.0104675
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775985133.0104675
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985135.2372923
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985135.2372923
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985135.2372923
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985135.2372923
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985135.2372923
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985137.3998964
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985137.3998964
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985137.3998964
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985137.3998964
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985137.3998964
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985139.5897138
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985139.5897138
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985139.5897138
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985139.5897138
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985139.5897138
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985141.8016868
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985141.8016868
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 2,
+    "timestamp": 1775985141.8016868
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985141.8016868
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985141.8016868
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985143.9973605
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985143.9973605
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985143.9973605
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985143.9973605
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985143.9973605
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985146.1761467
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985146.1761467
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985146.1761467
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985146.1761467
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985146.1761467
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985148.3837097
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 1,
+    "timestamp": 1775985148.3837097
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985148.3837097
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985148.3837097
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985148.3837097
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 0,
+    "timestamp": 1775985222.0327988
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985222.0327988
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985222.0327988
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985222.0327988
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985222.0327988
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985224.1992705
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "interest",
+    "value": 0.81,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985224.1992705
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985224.1992705
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985224.1992705
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985224.1992705
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985226.3659205
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985226.3659205
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985226.3659205
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985226.3659205
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 4,
+    "timestamp": 1775985226.3659205
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "dm_intent",
+    "value": 1.82,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985228.591098
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "interest",
+    "value": 1.17,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 1,
+    "timestamp": 1775985228.591098
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985228.591098
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 3,
+    "timestamp": 1775985228.591098
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 4,
+    "timestamp": 1775985228.591098
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 0,
+    "timestamp": 1775985230.7956884
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985230.7956884
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 2,
+    "timestamp": 1775985230.7956884
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985230.7956884
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "comment_intent",
+    "value": 1.56,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 4,
+    "timestamp": 1775985230.7956884
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985233.0028608
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "dm_intent",
+    "value": 1.4,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985233.0028608
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 2,
+    "timestamp": 1775985233.0028608
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985233.0028608
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985233.0028608
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "click_intent",
+    "value": 1.0,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 0,
+    "timestamp": 1775985235.2286258
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "reply_intent",
+    "value": 1.65,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985235.2286258
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 2,
+    "timestamp": 1775985235.2286258
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "click_intent",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 3,
+    "timestamp": 1775985235.2286258
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985235.2286258
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985237.431536
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "dm_intent",
+    "value": 1.26,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 1,
+    "timestamp": 1775985237.431536
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 2,
+    "timestamp": 1775985237.431536
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "reply_intent",
+    "value": 1.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 3,
+    "timestamp": 1775985237.431536
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "dm_intent",
+    "value": 2.1,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This is unfair but it works\n\nViral Content Engine Pack\n\nDM me 'start' if you want this",
+    "capture_index": 4,
+    "timestamp": 1775985237.431536
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "interest",
+    "value": 1.35,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 0,
+    "timestamp": 1775985239.6071627
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "comment_intent",
+    "value": 1.08,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 1,
+    "timestamp": 1775985239.6071627
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "click_intent",
+    "value": 1.5,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985239.6071627
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "interest",
+    "value": 0.9,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nCheck this out",
+    "capture_index": 3,
+    "timestamp": 1775985239.6071627
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "reply_intent",
+    "value": 1.43,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985239.6071627
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775985241.7789898
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775985241.7789898
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775985241.7789898
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775985241.7789898
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775985241.7789898
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986631.760817
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986631.760817
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986631.760817
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986631.760817
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986631.760817
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986636.7940361
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986636.7940361
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986636.7940361
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986636.7940361
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986636.7940361
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986641.819542
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986641.819542
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986641.819542
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986641.819542
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986641.819542
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986646.8874764
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986646.8874764
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986646.8874764
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986646.8874764
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986646.8874764
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986651.9589992
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986651.9589992
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986651.9589992
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986651.9589992
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986651.9589992
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986657.0051162
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986657.0051162
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986657.0051162
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986657.0051162
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986657.0051162
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986662.0629747
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986662.0629747
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986662.0629747
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986662.0629747
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986662.0629747
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986667.1069872
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986667.1069872
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986667.1069872
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986667.1069872
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986667.1069872
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986672.2332244
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986672.2332244
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986672.2332244
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986672.2332244
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986672.2332244
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986677.283851
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986677.283851
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986677.283851
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986677.283851
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986677.283851
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986682.345485
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986682.345485
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986682.345485
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986682.345485
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986682.345485
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986687.3965704
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986687.3965704
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986687.3965704
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986687.3965704
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986687.3965704
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986692.423984
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986692.423984
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986692.423984
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986692.423984
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986692.423984
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986697.4558513
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986697.4558513
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986697.4558513
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986697.4558513
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986697.4558513
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986702.5022035
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986702.5022035
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986702.5022035
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986702.5022035
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986702.5022035
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986707.5636861
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986707.5636861
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986707.5636861
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986707.5636861
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986707.5636861
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986712.5912502
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986712.5912502
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986712.5912502
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986712.5912502
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986712.5912502
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986717.638013
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986717.638013
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986717.638013
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986717.638013
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986717.638013
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986722.6872265
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986722.6872265
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986722.6872265
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986722.6872265
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986722.6872265
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986727.710178
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986727.710178
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986727.710178
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986727.710178
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986727.7106931
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986732.7429447
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986732.7429447
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986732.7429447
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986732.7429447
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986732.7429447
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986737.7772331
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986737.7772331
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986737.7772331
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986737.7772331
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986737.7772331
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986742.8270497
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986742.8270497
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986742.8270497
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986742.8270497
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986742.8270497
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986747.8666909
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986747.8666909
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986747.8666909
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986747.8666909
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986747.8666909
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986752.9109116
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986752.9109116
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986752.9109116
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986752.9109116
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986752.9109116
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "tiktok",
+    "signal_type": "comment_intent",
+    "value": 1.8,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Most people are doing this wrong\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 0,
+    "timestamp": 1775986757.9363635
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 1,
+    "timestamp": 1775986757.9363635
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click_intent",
+    "value": 1.3,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "Nobody talks about this but it works\n\nViral Content Engine Pack\n\nLink in bio",
+    "capture_index": 2,
+    "timestamp": 1775986757.9363635
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "twitter",
+    "signal_type": "comment_intent",
+    "value": 1.2,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "This changed everything for me\n\nViral Content Engine Pack\n\nComment 'guide' and I\u2019ll send it",
+    "capture_index": 3,
+    "timestamp": 1775986757.9363635
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "discord",
+    "signal_type": "reply_intent",
+    "value": 0.99,
+    "note": "auto_captured_from_promotion",
+    "content_preview": "If you're struggling with money, read this\n\nViral Content Engine Pack\n\nSay 'yes' and I\u2019ll show you",
+    "capture_index": 4,
+    "timestamp": 1775986757.9363635
+  }
+]

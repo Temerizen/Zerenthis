@@ -1,0 +1,54 @@
+﻿from __future__ import annotations
+import json
+import os
+import time
+from typing import Any, Dict
+
+STATE_PATH = "backend/data/task_cooldowns.json"
+COOLDOWN_SECONDS = 120
+
+def _load() -> Dict[str, Any]:
+    if not os.path.exists(STATE_PATH):
+        return {}
+    try:
+        with open(STATE_PATH, "r", encoding="utf-8-sig") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def _save(data: Dict[str, Any]) -> None:
+    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+    with open(STATE_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def put_on_cooldown(task: str, seconds: int = COOLDOWN_SECONDS) -> Dict[str, Any]:
+    now = time.time()
+    data = _load()
+    data[task] = {
+        "until": now + seconds,
+        "set_at": now,
+        "seconds": seconds,
+    }
+    _save(data)
+    return data[task]
+
+def is_on_cooldown(task: str) -> bool:
+    data = _load()
+    item = data.get(task, {})
+    if not isinstance(item, dict):
+        return False
+    return float(item.get("until", 0)) > time.time()
+
+def choose_alternate(task: str) -> str:
+    alternates = {
+        "advance_beyond_handoff": "explore_new_path",
+        "explore_new_path": "stabilize_and_observe",
+        "resolve_builder_handoff": "explore_new_path",
+        "create_thought_engine": "stabilize_and_observe",
+        "unknown": "explore_new_path",
+    }
+    candidate = alternates.get(task, "explore_new_path")
+    if candidate == task or is_on_cooldown(candidate):
+        return "stabilize_and_observe"
+    return candidate

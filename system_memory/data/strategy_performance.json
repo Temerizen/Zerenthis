@@ -1,0 +1,22 @@
+{
+  "momentum": {
+    "wins": 1,
+    "losses": 2,
+    "score": -0.0011
+  },
+  "mean_reversion": {
+    "wins": 0,
+    "losses": 1,
+    "score": -0.0035
+  },
+  "breakout": {
+    "wins": 0,
+    "losses": 1,
+    "score": -0.0024
+  },
+  "conservative": {
+    "wins": 64,
+    "losses": 56,
+    "score": 0.023699999999999995
+  }
+}

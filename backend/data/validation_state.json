@@ -1,0 +1,523 @@
+{
+  "history": [
+    {
+      "timestamp": 1776051259.6218672,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051210.3651924
+      },
+      "validation": {
+        "valid": false,
+        "reason": "compile_error",
+        "error": "  File \"C:\\Users\\macau\\AppData\\Local\\Temp\\tmpse600v0z.py\", line 1\n    \u00ef\u00bb\u00bffrom __future__ import annotations\n     ^\nSyntaxError: invalid character '\u00bb' (U+00BB)\n"
+      }
+    },
+    {
+      "timestamp": 1776051313.1877139,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051462.3733847,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051577.0529077,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051577.9288611,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051578.8224773,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051639.3453288,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051642.2579467,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051956.830348,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051957.0131545,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776051957.5735185,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052051.0657065,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052051.285894,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052051.7766342,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052119.1216826,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052119.3236804,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052195.0035043,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052195.2453947,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052195.74494,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052195.960939,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052267.624879,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052267.845323,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052321.101221,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052321.6198113,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052321.8536017,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052504.2724118,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052507.0372145,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052507.9543655,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052560.2611997,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052562.1135101,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052621.2426875,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052622.2302666,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052623.1529799,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052624.0736763,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776052624.9933221,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053431.4273138,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053626.4368093,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053669.4324937,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053670.2904966,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053765.588139,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053977.53584,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    },
+    {
+      "timestamp": 1776053977.7676277,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "validation": {
+        "valid": true,
+        "reason": "safe_patch"
+      }
+    }
+  ],
+  "passed": 41,
+  "failed": 1,
+  "last_result": {
+    "timestamp": 1776053977.7676277,
+    "plan": {
+      "target": "backend/app/cognition/decision.py",
+      "change": "# improvement: increase exploration diversity",
+      "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+    },
+    "validation": {
+      "valid": true,
+      "reason": "safe_patch"
+    }
+  }
+}

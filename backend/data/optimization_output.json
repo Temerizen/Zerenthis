@@ -1,0 +1,25 @@
+{
+  "optimized": [
+    {
+      "product": "Viral Content Engine Pack",
+      "clicks": 3,
+      "old_price": 29,
+      "new_price": 29,
+      "variants": [
+        {
+          "headline": "The fastest way to consistent income even if experience",
+          "price": 29
+        },
+        {
+          "headline": "Turn ideas into high-converting content automatically",
+          "price": 29
+        },
+        {
+          "headline": "Turn nothing into consistent income automatically",
+          "price": 29
+        }
+      ]
+    }
+  ],
+  "timestamp": 1775985508.122783
+}

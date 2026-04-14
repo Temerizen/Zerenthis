@@ -1,0 +1,88 @@
+{
+  "last_override": {
+    "timestamp": 1776058899.441995,
+    "insight": "overfitting_behavior",
+    "flags": [
+      "high_persistence",
+      "low_change",
+      "low_exploration"
+    ],
+    "override": {
+      "force_mode": "explore",
+      "force_goal": "expand_capability",
+      "reason": "reflection_override_overfitting"
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776058897.7905881,
+      "insight": "overfitting_behavior",
+      "flags": [
+        "high_persistence",
+        "low_change",
+        "low_exploration"
+      ],
+      "override": {
+        "force_mode": "explore",
+        "force_goal": "expand_capability",
+        "reason": "reflection_override_overfitting"
+      }
+    },
+    {
+      "timestamp": 1776058898.2002926,
+      "insight": "overfitting_behavior",
+      "flags": [
+        "high_persistence",
+        "low_change",
+        "low_exploration"
+      ],
+      "override": {
+        "force_mode": "explore",
+        "force_goal": "expand_capability",
+        "reason": "reflection_override_overfitting"
+      }
+    },
+    {
+      "timestamp": 1776058898.6192777,
+      "insight": "overfitting_behavior",
+      "flags": [
+        "high_persistence",
+        "low_change",
+        "low_exploration"
+      ],
+      "override": {
+        "force_mode": "explore",
+        "force_goal": "expand_capability",
+        "reason": "reflection_override_overfitting"
+      }
+    },
+    {
+      "timestamp": 1776058899.0204973,
+      "insight": "overfitting_behavior",
+      "flags": [
+        "high_persistence",
+        "low_change",
+        "low_exploration"
+      ],
+      "override": {
+        "force_mode": "explore",
+        "force_goal": "expand_capability",
+        "reason": "reflection_override_overfitting"
+      }
+    },
+    {
+      "timestamp": 1776058899.441995,
+      "insight": "overfitting_behavior",
+      "flags": [
+        "high_persistence",
+        "low_change",
+        "low_exploration"
+      ],
+      "override": {
+        "force_mode": "explore",
+        "force_goal": "expand_capability",
+        "reason": "reflection_override_overfitting"
+      }
+    }
+  ]
+}

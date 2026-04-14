@@ -1,0 +1,1009 @@
+{
+  "last_meta": {
+    "timestamp": 1776070176.4798932,
+    "insight": "over_exploration_detected",
+    "adjustment": {
+      "explore_boost": 0.0,
+      "persist_penalty": -0.1
+    },
+    "recent_winners": [
+      "explore",
+      "explore",
+      "explore",
+      "explore",
+      "explore"
+    ]
+  },
+  "history": [
+    {
+      "timestamp": 1776068571.057957,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068571.4433763,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068571.8330195,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068572.2231555,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068572.6104302,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068573.0145519,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068573.4202826,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068573.8057861,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068685.1723695,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068685.573919,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068686.0058465,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068686.4231765,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068686.8300416,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068687.231804,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068687.6372185,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776068688.0432186,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068688.4470832,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776068688.8659055,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069067.1916451,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069067.6044502,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069068.023927,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069068.4409542,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069068.8616958,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069069.2809453,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069311.6623337,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069312.0886908,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069312.5099046,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069312.956401,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069313.3923142,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069313.8243248,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069452.8898606,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069453.3216064,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069453.7683513,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069454.1997757,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069454.638828,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069455.0727186,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069599.6051652,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069600.0475874,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069600.499898,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069600.9386911,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069601.3902702,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069601.8305147,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069602.2838633,
+      "insight": "over_persistence_detected",
+      "adjustment": {
+        "explore_boost": 0.15,
+        "persist_penalty": 0.1
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069602.733811,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069807.7689795,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069808.215598,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069808.6682816,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "persist",
+        "persist",
+        "persist"
+      ]
+    },
+    {
+      "timestamp": 1776069809.1354432,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "explore",
+        "persist",
+        "persist",
+        "persist",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069809.6006346,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "persist",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069810.038857,
+      "insight": "balanced",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": 0.0
+      },
+      "recent_winners": [
+        "persist",
+        "persist",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069810.4792252,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "persist",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069810.9540715,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069881.4992309,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069881.9135683,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069882.3323708,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069882.7683146,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069883.203135,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776069883.6426878,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070173.3200853,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070173.7617075,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070174.2082539,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070174.6639597,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070175.1150534,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070175.5797412,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070176.032817,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    },
+    {
+      "timestamp": 1776070176.4798932,
+      "insight": "over_exploration_detected",
+      "adjustment": {
+        "explore_boost": 0.0,
+        "persist_penalty": -0.1
+      },
+      "recent_winners": [
+        "explore",
+        "explore",
+        "explore",
+        "explore",
+        "explore"
+      ]
+    }
+  ]
+}

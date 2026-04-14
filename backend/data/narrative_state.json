@@ -1,0 +1,434 @@
+{
+  "last_narrative": {
+    "timestamp": 1776070176.572047,
+    "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+    "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+    "becoming": "I am becoming more exploratory.",
+    "dominant_trait": "curiosity",
+    "conflict_winner": "explore",
+    "reflection_insight": "stable",
+    "meta_insight": "over_exploration_detected"
+  },
+  "history": [
+    {
+      "timestamp": 1776069067.2416453,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is overfitting_behavior, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "overfitting_behavior",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069067.660964,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is overfitting_behavior, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "overfitting_behavior",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069068.0802438,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stagnation_detected, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stagnation_detected",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069068.4972658,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069068.9176936,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069069.337674,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069311.7244635,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069312.15369,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069312.5801768,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069313.0232239,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069313.4618497,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069313.8907092,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069452.960861,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stagnation_detected, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stagnation_detected",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069453.3937361,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stagnation_detected, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stagnation_detected",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069453.8392978,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069454.2732751,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069454.71162,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069455.1447186,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069599.6788604,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stagnation_detected, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stagnation_detected",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069600.128617,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069600.58122,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069601.0186875,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069601.4706209,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069601.9116638,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069602.3666642,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_persistence_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_persistence_detected"
+    },
+    {
+      "timestamp": 1776069602.8138118,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069807.8467436,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069808.2983062,
+      "self_summary": "I am currently driven by persist, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more persistent.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "persist",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069808.7546911,
+      "self_summary": "I am currently driven by explore, with confidence as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "confidence",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069809.2351892,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069809.6835318,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069810.1204045,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is balanced.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "balanced"
+    },
+    {
+      "timestamp": 1776069810.5814881,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776069811.0405838,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070173.402718,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070173.8474832,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070174.2955499,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070174.7498128,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070175.2023118,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070175.66374,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070176.12068,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    },
+    {
+      "timestamp": 1776070176.572047,
+      "self_summary": "I am currently driven by explore, with curiosity as my strongest trait.",
+      "recent_change": "My recent pattern is stable, and my meta-state is over_exploration_detected.",
+      "becoming": "I am becoming more exploratory.",
+      "dominant_trait": "curiosity",
+      "conflict_winner": "explore",
+      "reflection_insight": "stable",
+      "meta_insight": "over_exploration_detected"
+    }
+  ]
+}

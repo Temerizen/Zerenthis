@@ -1,0 +1,72 @@
+{
+  "workflows": [
+    {
+      "id": "wf_6703b36ce6",
+      "title": "Apple Flow: Faceless TikTok money strategy",
+      "prompt": "Faceless TikTok money strategy",
+      "workflow_type": "monetization",
+      "created_at": "2026-04-03T18:24:01.230862+00:00",
+      "updated_at": "2026-04-03T18:24:01.230862+00:00",
+      "nodes": [
+        {
+          "id": "money_generate",
+          "kind": "content",
+          "route": "/api/founder/full-stack-generate",
+          "label": "Full Stack Generate"
+        },
+        {
+          "id": "monetize_package",
+          "kind": "monetization",
+          "route": "/api/monetize/package",
+          "label": "Monetize Package"
+        },
+        {
+          "id": "eval_run",
+          "kind": "eval",
+          "route": "/api/eval/run",
+          "label": "Evaluate Output"
+        }
+      ],
+      "edges": [
+        {
+          "from": "money_generate",
+          "to": "monetize_package"
+        },
+        {
+          "from": "monetize_package",
+          "to": "eval_run"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "wf_b658838639",
+      "title": "Builder Test",
+      "prompt": "build me a monetization workflow",
+      "workflow_type": "content",
+      "created_at": "2026-04-03T22:14:53.622944+00:00",
+      "updated_at": "2026-04-03T22:14:53.622944+00:00",
+      "nodes": [
+        {
+          "id": "money_generate",
+          "kind": "content",
+          "route": "/api/founder/full-stack-generate",
+          "label": "Full Stack Generate"
+        },
+        {
+          "id": "eval_run",
+          "kind": "eval",
+          "route": "/api/eval/run",
+          "label": "Evaluate Output"
+        }
+      ],
+      "edges": [
+        {
+          "from": "money_generate",
+          "to": "eval_run"
+        }
+      ],
+      "status": "active"
+    }
+  ]
+}

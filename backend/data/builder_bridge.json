@@ -1,0 +1,191 @@
+{
+  "last_bridge": {
+    "timestamp": 1776109349.1818123,
+    "status": "plan_created",
+    "component": "memory_reasoning",
+    "target_file": "backend/app/cognition/memory_depth_engine.py",
+    "reason": "unstable_outcomes",
+    "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+    "safe_mode": true,
+    "ready_for_builder": true,
+    "applied": false
+  },
+  "history": [
+    {
+      "timestamp": 1776105799.0489783,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106540.7009928,
+      "status": "plan_created",
+      "component": "coherence",
+      "target_file": "backend/app/cognition/coherence_engine.py",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106586.4558516,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106703.1966429,
+      "status": "plan_created",
+      "component": "reasoning",
+      "target_file": "backend/app/cognition/reasoning_engine.py",
+      "reason": "reasoning_disagrees_with_action",
+      "proposal": "Use reasoning output to influence next-cycle action selection more directly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106769.136458,
+      "status": "plan_created",
+      "component": "directive",
+      "target_file": "backend/app/cognition/autonomous_mission_engine.py",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106879.6527605,
+      "status": "plan_created",
+      "component": "directive",
+      "target_file": "backend/app/cognition/autonomous_mission_engine.py",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776106989.485212,
+      "status": "plan_created",
+      "component": "coherence",
+      "target_file": "backend/app/cognition/coherence_engine.py",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107177.2579858,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107222.104778,
+      "status": "plan_created",
+      "component": "directive",
+      "target_file": "backend/app/cognition/autonomous_mission_engine.py",
+      "reason": "directive_not_fully_healthy",
+      "proposal": "Add directive recovery logic so autonomous protection never degrades silently.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107295.8495653,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776107552.6169572,
+      "status": "plan_created",
+      "component": "strategy",
+      "target_file": "backend/app/cognition/strategic_adjustment_engine.py",
+      "reason": "declining_performance",
+      "proposal": "Refine strategic adjustment thresholds and reduce lag in corrective shifts.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108120.6536365,
+      "status": "plan_created",
+      "component": "coherence",
+      "target_file": "backend/app/cognition/coherence_engine.py",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108351.5490656,
+      "status": "plan_created",
+      "component": "strategy",
+      "target_file": "backend/app/cognition/strategic_adjustment_engine.py",
+      "reason": "declining_performance",
+      "proposal": "Refine strategic adjustment thresholds and reduce lag in corrective shifts.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776108689.4281986,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776109129.3483925,
+      "status": "plan_created",
+      "component": "coherence",
+      "target_file": "backend/app/cognition/coherence_engine.py",
+      "reason": "state_misalignment",
+      "proposal": "Tighten goal-mission-directive synchronization rules.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    },
+    {
+      "timestamp": 1776109349.1818123,
+      "status": "plan_created",
+      "component": "memory_reasoning",
+      "target_file": "backend/app/cognition/memory_depth_engine.py",
+      "reason": "unstable_outcomes",
+      "proposal": "Deepen memory weighting so recent volatility affects reasoning more strongly.",
+      "safe_mode": true,
+      "ready_for_builder": true,
+      "applied": false
+    }
+  ]
+}

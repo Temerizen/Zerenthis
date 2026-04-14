@@ -1,0 +1,113 @@
+﻿from fastapi import FastAPI
+from backend.app.cognition import (
+    meta, world, explore, decision,
+    execution, intent, goals, mission,
+    reality, adaptation, strategy_mutation,
+    strategy_competition, memory_depth_engine,
+    goal_recovery_engine, goal_alignment_engine
+)
+from backend.app.cognition.value_hierarchy import evaluate_values
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {
+        "brain": "online",
+        "evolution": True,
+        "competition": True,
+        "goal_recovery": True,
+        "goal_alignment": True
+    }
+
+def _brain_cycle():
+    world.update({"tick": "loop"})
+    meta.run({"event": "cycle"})
+    explore.run()
+
+    value_state = evaluate_values()
+
+    intent_state = intent.form_intent({
+        "value_state": value_state
+    })
+
+    decision.run({"intent_state": intent_state})
+    execution.run({"plan": {}})
+
+    goal_state = goals.run({
+        "goal": intent_state.get("goal"),
+        "dominant_value": value_state.get("dominant_value")
+    })
+
+    raw_goal = goal_state.get("active_goal")
+
+    recovery_state = goal_recovery_engine.run({
+        "active_goal": raw_goal,
+        "dominant_value": value_state.get("dominant_value")
+    })
+
+    recovered_goal = recovery_state.get("active_goal")
+    pre_alignment_goal = raw_goal if raw_goal else recovered_goal
+
+    # Keep mission continuity first so alignment has both sides
+    initial_mission_state = mission.run({
+        "active_goal": pre_alignment_goal
+    }) if pre_alignment_goal else {"active_mission": None}
+
+    active_mission = initial_mission_state.get("active_mission")
+
+    alignment_state = goal_alignment_engine.run({
+        "active_goal": pre_alignment_goal,
+        "active_mission": active_mission,
+        "dominant_value": value_state.get("dominant_value")
+    })
+
+    effective_goal = alignment_state.get("aligned_goal")
+
+    # Re-run mission using aligned goal so both layers match
+    mission_state = mission.run({
+        "active_goal": effective_goal
+    }) if effective_goal else {"active_mission": None}
+
+    active_mission = mission_state.get("active_mission")
+
+    reality_state = reality.run({
+        "mission_id": active_mission.get("id") if active_mission else None,
+        "goal_type": effective_goal.get("type") if effective_goal else None,
+        "mission_progress": active_mission.get("progress") if active_mission else 0
+    })
+
+    score = reality_state.get("score", 0.5)
+
+    adaptation_state = adaptation.run({
+        "score": score,
+        "goal": effective_goal
+    })
+
+    mutation_state = strategy_mutation.run({
+        "score": score
+    })
+
+    competition_state = strategy_competition.run({
+        "score": score
+    })
+
+    memory_state = memory_depth_engine.run()
+
+    return {
+        "status": "ok",
+        "goal_state": goal_state,
+        "recovery_state": recovery_state,
+        "alignment_state": alignment_state,
+        "effective_goal": effective_goal,
+        "mission_state": mission_state,
+        "reality_state": reality_state,
+        "adaptation_state": adaptation_state,
+        "mutation_state": mutation_state,
+        "competition_state": competition_state,
+        "memory_state": memory_state
+    }
+
+@app.post("/api/brain/run")
+def brain():
+    return _brain_cycle()

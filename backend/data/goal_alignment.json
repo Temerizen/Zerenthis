@@ -1,0 +1,156 @@
+{
+  "last_alignment": {
+    "timestamp": 1776105009.0806687,
+    "action": "kept",
+    "reason": "already_valid",
+    "goal_type_before": "balanced_progression",
+    "mission_goal_type": "balanced_progression",
+    "goal_type_after": "balanced_progression"
+  },
+  "history": [
+    {
+      "timestamp": 1776104296.9598794,
+      "action": "realigned_from_mission",
+      "reason": "invalid_or_unknown_goal",
+      "goal_type_before": "unknown",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104430.0388758,
+      "action": "realigned_from_mission",
+      "reason": "invalid_or_unknown_goal",
+      "goal_type_before": "unknown",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.1349797,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104549.5650835,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104550.005255,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104656.8967738,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.4298322,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104657.8750713,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104724.137478,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.4078665,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104784.8429348,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104785.2838314,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104888.9449623,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.41101,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.8440027,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.192166,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.631756,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105009.0806687,
+      "action": "kept",
+      "reason": "already_valid",
+      "goal_type_before": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_type_after": "balanced_progression"
+    }
+  ]
+}

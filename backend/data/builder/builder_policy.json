@@ -1,0 +1,31 @@
+{
+  "canonical_backend_root": "backend/app",
+  "canonical_entrypoint": "backend/app/main.py",
+  "allowed_write_roots": [
+    "backend/app",
+    "backend/data"
+  ],
+  "read_only_roots": [
+    "frontend",
+    "desktop",
+    "desktop_app",
+    "app"
+  ],
+  "denied_roots": [
+    "backup",
+    "backend_clean",
+    ".git",
+    "node_modules",
+    "__pycache__",
+    ".next",
+    "dist",
+    "build",
+    ".venv",
+    "venv"
+  ],
+  "max_files_per_apply": 2,
+  "require_backup_before_write": true,
+  "require_validation_after_write": true,
+  "rollback_on_validation_failure": true
+}
+

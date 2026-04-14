@@ -1,0 +1,175 @@
+from __future__ import annotations
+
+import json
+import os
+import time
+from typing import Any, Dict
+
+STATE_PATH = "backend/data/task_cooldowns.json"
+AUDIT_PATH = "backend/data/task_choice_audit.json"
+USAGE_PATH = "backend/data/task_usage_memory.json"
+INTENT_PATH = "backend/data/active_intent.json"
+OUTCOME_PATH = "backend/data/task_outcomes.json"
+COOLDOWN_SECONDS = 120
+
+def _load_json(path: str) -> Dict[str, Any]:
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8-sig") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def _save_json(path: str, data: Dict[str, Any]) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def _load() -> Dict[str, Any]:
+    return _load_json(STATE_PATH)
+
+def _save(data: Dict[str, Any]) -> None:
+    _save_json(STATE_PATH, data)
+
+def _save_audit(data: Dict[str, Any]) -> None:
+    _save_json(AUDIT_PATH, data)
+
+def get_last_audit() -> Dict[str, Any]:
+    return _load_json(AUDIT_PATH)
+
+def _load_usage() -> Dict[str, Any]:
+    return _load_json(USAGE_PATH)
+
+def _save_usage(data: Dict[str, Any]) -> None:
+    _save_json(USAGE_PATH, data)
+
+def _get_active_intent() -> Dict[str, Any]:
+    return _load_json(INTENT_PATH)
+
+def _get_outcome_score(task: str) -> float:
+    data = _load_json(OUTCOME_PATH)
+    entry = data.get("tasks", {}).get(task, {})
+    if not isinstance(entry, dict):
+        return 0.0
+    success = float(entry.get("success", 0.0))
+    fail = float(entry.get("fail", 0.0))
+    runs = int(entry.get("runs", 0))
+    if runs <= 0:
+        return 0.0
+    return (success - fail) / runs
+
+def put_on_cooldown(task: str, seconds: int = COOLDOWN_SECONDS) -> Dict[str, Any]:
+    now = time.time()
+    data = _load()
+    data[task] = {
+        "until": now + seconds,
+        "set_at": now,
+        "seconds": seconds,
+    }
+    _save(data)
+    return data[task]
+
+def is_on_cooldown(task: str) -> bool:
+    data = _load()
+    item = data.get(task, {})
+    if not isinstance(item, dict):
+        return False
+    return float(item.get("until", 0)) > time.time()
+
+def _mark_used(task: str) -> None:
+    usage = _load_usage()
+    usage[task] = {
+        "last_used": time.time()
+    }
+    _save_usage(usage)
+
+def choose_alternate(task: str) -> str:
+    alternates = {
+        "advance_beyond_handoff": "explore_new_path",
+        "explore_new_path": "stabilize_and_observe",
+        "stabilize_and_observe": "probe_new_paths",
+        "probe_new_paths": "explore_new_path",
+        "resolve_builder_handoff": "explore_new_path",
+        "create_thought_engine": "stabilize_and_observe",
+        "unknown": "explore_new_path",
+    }
+
+    preferred = [
+        alternates.get(task, "explore_new_path"),
+        "stabilize_and_observe",
+        "probe_new_paths",
+        "explore_new_path",
+    ]
+
+    seen = set()
+    ordered = []
+    for item in preferred:
+        if item not in seen:
+            ordered.append(item)
+            seen.add(item)
+
+    usage = _load_usage()
+    active_intent = _get_active_intent()
+    intent_task = str(active_intent.get("task", "") or "")
+    direction = str(active_intent.get("direction", "") or "")
+    intent_score = float(active_intent.get("intent_score", 0.0) or 0.0)
+
+    scored = []
+    for candidate in ordered:
+        if candidate == task or is_on_cooldown(candidate):
+            continue
+
+        last_used = float(usage.get(candidate, {}).get("last_used", 0))
+        intent_bonus = 0.0
+        outcome_bonus = _get_outcome_score(candidate)
+
+        if intent_task:
+            if candidate == intent_task:
+                intent_bonus += 2.0
+            elif alternates.get(intent_task) == candidate:
+                intent_bonus += 1.0
+
+        if direction == "stay_the_course":
+            if candidate == intent_task:
+                intent_bonus += max(1.0, intent_score)
+        elif direction == "pivot_required":
+            if candidate == intent_task:
+                intent_bonus -= max(1.0, abs(intent_score))
+            else:
+                intent_bonus += 0.5
+
+        total_score = intent_bonus + outcome_bonus
+
+        scored.append({
+            "candidate": candidate,
+            "last_used": last_used,
+            "intent_bonus": intent_bonus,
+            "outcome_bonus": outcome_bonus,
+            "total_score": total_score,
+        })
+
+    if scored:
+        scored.sort(key=lambda x: (-x["total_score"], x["last_used"]))
+        chosen = scored[0]["candidate"]
+    else:
+        chosen = "stabilize_and_observe"
+
+    _mark_used(chosen)
+
+    _save_audit({
+        "timestamp": time.time(),
+        "original_task": task,
+        "candidates": ordered,
+        "chosen": chosen,
+        "cooldowns": {candidate: is_on_cooldown(candidate) for candidate in ordered},
+        "usage": {candidate: usage.get(candidate, {}).get("last_used", 0) for candidate in ordered},
+        "active_intent_task": intent_task,
+        "active_intent_direction": direction,
+        "active_intent_score": intent_score,
+        "scored_candidates": scored,
+        "selection_mode": "outcome_aware_direction_intent_lru",
+    })
+
+    return chosen

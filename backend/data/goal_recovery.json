@@ -1,0 +1,36 @@
+{
+  "last_recovery": {
+    "timestamp": 1776105009.067669,
+    "reason": "goal_missing",
+    "dominant_value": "exploration",
+    "trend": "unstable",
+    "recovered_goal_id": "goal_recovered_1776105009",
+    "recovered_goal_type": "balanced_progression"
+  },
+  "history": [
+    {
+      "timestamp": 1776104657.8600705,
+      "reason": "goal_missing",
+      "dominant_value": "exploration",
+      "trend": "declining",
+      "recovered_goal_id": "goal_recovered_1776104657",
+      "recovered_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104888.9320223,
+      "reason": "goal_missing",
+      "dominant_value": "exploration",
+      "trend": "unstable",
+      "recovered_goal_id": "goal_recovered_1776104888",
+      "recovered_goal_type": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105009.067669,
+      "reason": "goal_missing",
+      "dominant_value": "exploration",
+      "trend": "unstable",
+      "recovered_goal_id": "goal_recovered_1776105009",
+      "recovered_goal_type": "balanced_progression"
+    }
+  ]
+}

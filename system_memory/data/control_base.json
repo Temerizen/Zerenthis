@@ -1,0 +1,6 @@
+﻿{
+  "risk_per_trade": 0.05,
+  "take_profit": 0.02,
+  "stop_loss": 0.01,
+  "position_scale": 1.25
+}

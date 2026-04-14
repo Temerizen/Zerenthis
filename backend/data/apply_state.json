@@ -1,0 +1,268 @@
+{
+  "history": [
+    {
+      "timestamp": 1776051125.6343358,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051125.6343358
+      },
+      "result": {
+        "status": "skipped_apply_locked"
+      }
+    },
+    {
+      "timestamp": 1776051210.3651924,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051210.3651924
+      },
+      "result": {
+        "status": "skipped_apply_locked"
+      }
+    },
+    {
+      "timestamp": 1776051313.0978246,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "timestamp": 1776051313.0978246
+      },
+      "result": {
+        "status": "skipped_apply_locked"
+      }
+    },
+    {
+      "t": 1776051640.349799,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776051640.bak"
+      }
+    },
+    {
+      "t": 1776051869.312237,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776051869.bak"
+      }
+    },
+    {
+      "t": 1776051957.2108572,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776051957.bak"
+      }
+    },
+    {
+      "t": 1776052050.7206569,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\planning.py.1776052050.bak"
+      }
+    },
+    {
+      "t": 1776052051.5139499,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776052051.bak"
+      }
+    },
+    {
+      "t": 1776052118.7779198,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776052118.bak"
+      }
+    },
+    {
+      "t": 1776052119.5260127,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776052119.bak"
+      }
+    },
+    {
+      "t": 1776052195.4483776,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776052195.bak"
+      }
+    },
+    {
+      "t": 1776052267.2064102,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\planning.py.1776052267.bak"
+      }
+    },
+    {
+      "t": 1776052268.0628693,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776052267.bak"
+      }
+    },
+    {
+      "t": 1776052321.3368878,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\planning.py.1776052321.bak"
+      }
+    },
+    {
+      "t": 1776052505.2604206,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776052505.bak"
+      }
+    },
+    {
+      "t": 1776052558.4237306,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776052558.bak"
+      }
+    },
+    {
+      "t": 1776052561.190199,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776052561.bak"
+      }
+    },
+    {
+      "t": 1776053145.2187638,
+      "plan": {
+        "target": "backend/app/cognition/explore.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "84606eee116207cff1ec439e5cc6d5af"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\explore.py.1776053145.bak"
+      }
+    },
+    {
+      "t": 1776053671.1174135,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\planning.py.1776053671.bak"
+      }
+    },
+    {
+      "t": 1776053765.8542702,
+      "plan": {
+        "target": "backend/app/cognition/planning.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "e8bd37cf45a97311d445b19206b821c5"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\planning.py.1776053765.bak"
+      }
+    },
+    {
+      "t": 1776053977.9973125,
+      "plan": {
+        "target": "backend/app/cognition/decision.py",
+        "change": "# improvement: increase exploration diversity",
+        "plan_id": "951345104a9cbd914fe9e3a484ec0d6e"
+      },
+      "result": {
+        "status": "applied",
+        "backup": "backend\\builder_backups\\decision.py.1776053977.bak"
+      }
+    }
+  ],
+  "applied": 18,
+  "skipped": 3426,
+  "last_plan": {
+    "timestamp": 1776051313.0978246,
+    "plan": {
+      "target": "backend/app/cognition/decision.py",
+      "change": "# improvement: increase exploration diversity",
+      "timestamp": 1776051313.0978246
+    },
+    "result": {
+      "status": "skipped_apply_locked"
+    }
+  },
+  "rolled_back": 0,
+  "active_plan": null
+}

@@ -1,0 +1,166 @@
+{
+  "traits": {
+    "curiosity": 0.75,
+    "stability": 0.55,
+    "risk": 0.605,
+    "persistence": 0.63
+  },
+  "history": [
+    {
+      "timestamp": 1776095752.5743303,
+      "traits": {
+        "curiosity": 0.53,
+        "stability": 0.5,
+        "risk": 0.515,
+        "persistence": 0.51
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776096217.8032386,
+      "traits": {
+        "curiosity": 0.56,
+        "stability": 0.5,
+        "risk": 0.53,
+        "persistence": 0.52
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776096655.7198048,
+      "traits": {
+        "curiosity": 0.5900000000000001,
+        "stability": 0.5,
+        "risk": 0.545,
+        "persistence": 0.53
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776096872.2880707,
+      "traits": {
+        "curiosity": 0.6200000000000001,
+        "stability": 0.5,
+        "risk": 0.56,
+        "persistence": 0.54
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776097217.7221265,
+      "traits": {
+        "curiosity": 0.6500000000000001,
+        "stability": 0.5,
+        "risk": 0.5750000000000001,
+        "persistence": 0.55
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776098078.2727995,
+      "traits": {
+        "curiosity": 0.67,
+        "stability": 0.51,
+        "risk": 0.58,
+        "persistence": 0.5700000000000001
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776098892.951876,
+      "traits": {
+        "curiosity": 0.6900000000000001,
+        "stability": 0.52,
+        "risk": 0.585,
+        "persistence": 0.58
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776099494.0658364,
+      "traits": {
+        "curiosity": 0.7100000000000001,
+        "stability": 0.53,
+        "risk": 0.59,
+        "persistence": 0.59
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776100042.7140508,
+      "traits": {
+        "curiosity": 0.73,
+        "stability": 0.54,
+        "risk": 0.595,
+        "persistence": 0.6
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776100170.473895,
+      "traits": {
+        "curiosity": 0.74,
+        "stability": 0.55,
+        "risk": 0.6,
+        "persistence": 0.61
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776100323.6658008,
+      "traits": {
+        "curiosity": 0.75,
+        "stability": 0.55,
+        "risk": 0.605,
+        "persistence": 0.62
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776100324.4941103,
+      "traits": {
+        "curiosity": 0.76,
+        "stability": 0.55,
+        "risk": 0.61,
+        "persistence": 0.63
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": 1776100325.1691892,
+      "traits": {
+        "curiosity": 0.77,
+        "stability": 0.55,
+        "risk": 0.615,
+        "persistence": 0.64
+      },
+      "intent": "expand_behavior",
+      "action": "branch_and_explore",
+      "confidence": 1.0
+    }
+  ]
+}

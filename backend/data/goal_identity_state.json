@@ -1,0 +1,159 @@
+{
+  "dominant_goal_type": "expansion",
+  "type_weights": {
+    "expansion": 0.6
+  },
+  "history": [
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048222.286357
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048231.5860996
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048240.847768
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048250.089171
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048259.3710032
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048268.6131132
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048277.8865569
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048287.133894
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048296.3939476
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048305.6426413
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048314.9233158
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048324.1930473
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048333.4341896
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048342.7070158
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048351.9617386
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048361.333631
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048370.9853158
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048380.3113756
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048389.6029778
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048398.9716048
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048408.2866187
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048417.5990078
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048426.8892264
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048436.1776402
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048454.7979224
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048464.0557015
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048473.3318377
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048482.6233609
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048491.9591105
+    },
+    {
+      "goal_type": "expansion",
+      "goal_id": "initiate_recovery_mode",
+      "ts": 1776048501.3015318
+    }
+  ],
+  "updated_at": 1776048501.3015318
+}

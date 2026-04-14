@@ -1,0 +1,156 @@
+{
+  "status": "ok",
+  "generated_at": 1776048501.0018518,
+  "goal_count": 16,
+  "goals": [
+    {
+      "id": "explore_new_tasks",
+      "type": "exploration",
+      "priority": 0.7,
+      "reason": "Curiosity is high, explore less-used actions"
+    },
+    {
+      "id": "reduce_builder_handoff",
+      "type": "stabilization",
+      "priority": 0.8,
+      "reason": "High repetition detected for builder_handoff"
+    },
+    {
+      "id": "reduce_revenue_scan",
+      "type": "stabilization",
+      "priority": 0.8,
+      "reason": "High repetition detected for revenue_scan"
+    },
+    {
+      "id": "reduce_toolbox_strategy",
+      "type": "stabilization",
+      "priority": 0.8,
+      "reason": "High repetition detected for toolbox_strategy"
+    },
+    {
+      "id": "improve_toolbox_strategy",
+      "type": "optimization",
+      "priority": 0.6,
+      "reason": "Highest preference task is toolbox_strategy"
+    },
+    {
+      "id": "analyze_toolbox_strategy",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in toolbox_strategy"
+    },
+    {
+      "id": "analyze_revenue_scan",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in revenue_scan"
+    },
+    {
+      "id": "analyze_revenue_scan",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in revenue_scan"
+    },
+    {
+      "id": "analyze_revenue_scan",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in revenue_scan"
+    },
+    {
+      "id": "analyze_revenue_scan",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in revenue_scan"
+    },
+    {
+      "id": "analyze_toolbox_strategy",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in toolbox_strategy"
+    },
+    {
+      "id": "analyze_builder_handoff",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in builder_handoff"
+    },
+    {
+      "id": "analyze_builder_handoff",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in builder_handoff"
+    },
+    {
+      "id": "analyze_builder_handoff",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in builder_handoff"
+    },
+    {
+      "id": "analyze_toolbox_strategy",
+      "type": "reflection_response",
+      "priority": 0.75,
+      "reason": "Reflection flagged repetition in toolbox_strategy"
+    },
+    {
+      "id": "improve_companion_capability",
+      "type": "companion",
+      "priority": 0.65,
+      "reason": "Base directive: evolve toward companion intelligence"
+    }
+  ],
+  "signals_snapshot": {
+    "preferences": {
+      "create_thought_engine": 0.044,
+      "revenue_scan": 50.0,
+      "builder_handoff": 0.09,
+      "toolbox_strategy": 50.24
+    },
+    "traits": {
+      "confidence": 0.15,
+      "aggression": 0.15,
+      "curiosity": 0.85
+    },
+    "dominant": "builder_handoff",
+    "recent_tasks": [
+      "builder_handoff",
+      "builder_handoff",
+      "revenue_scan",
+      "revenue_scan",
+      "revenue_scan",
+      "toolbox_strategy",
+      "toolbox_strategy",
+      "toolbox_strategy",
+      "builder_handoff",
+      "builder_handoff",
+      "builder_handoff",
+      "builder_handoff",
+      "revenue_scan",
+      "revenue_scan",
+      "revenue_scan",
+      "toolbox_strategy",
+      "toolbox_strategy",
+      "toolbox_strategy",
+      "toolbox_strategy",
+      "builder_handoff"
+    ],
+    "repetition_bias": {
+      "builder_handoff": 7,
+      "revenue_scan": 6,
+      "toolbox_strategy": 7
+    },
+    "reflection_flags": [
+      "toolbox_strategy",
+      "revenue_scan",
+      "revenue_scan",
+      "revenue_scan",
+      "revenue_scan",
+      "toolbox_strategy",
+      "builder_handoff",
+      "builder_handoff",
+      "builder_handoff",
+      "toolbox_strategy"
+    ]
+  }
+}

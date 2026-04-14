@@ -1,0 +1,2776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SemantiqAI Ascension Agent Council</title>
+  <meta name="description" content="SemantiqAI Ascension with multi-agent orchestration, onboarding, presets, threads, founder analytics, and artifact workflows." />
+  <style>
+    :root{
+      --bg:#07101d;
+      --bg2:#0d1730;
+      --panel:#101936;
+      --panel2:#17244c;
+      --line:#27376a;
+      --text:#eef3ff;
+      --muted:#aab7de;
+      --accent:#7c9cff;
+      --accent2:#5eead4;
+      --ok:#8ef7a3;
+      --warn:#ffd166;
+      --danger:#ff6b81;
+      --shadow:0 24px 80px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:
+      radial-gradient(circle at top left, rgba(124,156,255,.14), transparent 28%),
+      radial-gradient(circle at top right, rgba(94,234,212,.08), transparent 24%),
+      linear-gradient(180deg,#07101d 0%, #0b1327 100%);
+      color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+    body{min-height:100vh}
+    .shell{max-width:1600px;margin:0 auto;padding:18px}
+    .topbar{
+      position:sticky;top:12px;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:16px 18px;border:1px solid var(--line);border-radius:24px;
+      background:rgba(12,18,39,.84);backdrop-filter:blur(12px);box-shadow:var(--shadow)
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#7c9cff,#5eead4);
+      display:grid;place-items:center;font-weight:900;color:#08111f
+    }
+    .brand h1{margin:0;font-size:20px}
+    .brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+    .pill{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#0e1733;color:var(--muted);font-size:12px}
+    .layout{display:grid;grid-template-columns:300px 1fr 360px;gap:16px;margin-top:16px}
+    .card{
+      background:linear-gradient(180deg, rgba(17,25,54,.96), rgba(11,18,37,.96));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .card .inner{padding:18px}
+    .stack{display:grid;gap:12px}
+    input,textarea,button,select{
+      width:100%;padding:12px 14px;border-radius:16px;border:1px solid var(--line);
+      background:#0b1430;color:var(--text);font:inherit
+    }
+    textarea{min-height:120px;resize:vertical}
+    button{cursor:pointer}
+    .primary{background:linear-gradient(135deg,var(--accent),#6c7fff);border-color:#90a2ff}
+    .secondary{background:#121c3d}
+    .danger{background:linear-gradient(135deg,#ff6b81,#ff4d6d);border-color:#ff7f92}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .hero{
+      padding:24px;border-bottom:1px solid var(--line);
+      background:radial-gradient(circle at top right, rgba(124,156,255,.18), transparent 35%)
+    }
+    .hero h2{margin:0 0 10px;font-size:32px;line-height:1.08}
+    .hero p{margin:0;color:var(--muted);line-height:1.6}
+    .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+    .mini{padding:12px;border:1px solid var(--line);border-radius:16px;background:#0d1730}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line)}
+    .tab{width:auto;padding:10px 14px;border-radius:999px;background:#0f1731;border:1px solid var(--line);color:var(--muted)}
+    .tab.active{background:linear-gradient(135deg,#1d2b5d,#16224a);color:var(--text);border-color:#7c9cff}
+    .panel{display:none;padding:18px}
+    .panel.active{display:block}
+    .thread-list,.list,.chat-log,.starter-grid{
+      border:1px solid var(--line);border-radius:18px;background:#091126;padding:10px
+    }
+    .thread-list,.list{display:grid;gap:10px;max-height:420px;overflow:auto}
+    .starter-grid{display:grid;gap:10px}
+    .chat-log{display:grid;gap:12px;min-height:420px;max-height:560px;overflow:auto}
+    .thread-item,.item,.msg,.starter{
+      padding:12px;border:1px solid var(--line);border-radius:16px;background:#0d1730
+    }
+    .thread-item.active{outline:2px solid #7c9cff}
+    .msg.user{background:#121b3c}
+    .msg.ai{background:#0d1730}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .small{font-size:12px;color:var(--muted)}
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .kpi{padding:14px;border:1px solid var(--line);border-radius:16px;background:#0d1730}
+    .kpi b{display:block;font-size:22px;margin-top:6px}
+    .agent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .onboarding{
+      position:fixed;inset:0;background:rgba(3,7,18,.78);backdrop-filter:blur(8px);
+      display:none;align-items:center;justify-content:center;z-index:1000;padding:18px
+    }
+    .onboarding.show{display:flex}
+    .onboarding-card{
+      width:min(980px, 100%);background:linear-gradient(180deg, rgba(17,25,54,.98), rgba(11,18,37,.98));
+      border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px
+    }
+    .goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+    .goal{padding:14px;border:1px solid var(--line);border-radius:16px;background:#0d1730;cursor:pointer}
+    .goal.active{outline:2px solid #7c9cff}
+    @media (max-width: 1350px){ .layout{grid-template-columns:280px 1fr} .right-rail{grid-column:1 / -1} }
+    @media (max-width: 980px){ .layout{grid-template-columns:1fr} .module-grid,.kpi-grid,.row,.agent-grid,.goal-grid{grid-template-columns:1fr} }
+  /* PUBLIC BRAND POLISH SWEEP */
+.public-shell{display:grid;gap:16px;margin-top:18px}
+.public-hero,.public-card,.pricing-grid .plan-card,.dashboard-welcome{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:18px;
+}
+.public-hero h1{margin:0 0 8px 0;font-size:30px;line-height:1.1}
+.public-hero .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;margin-bottom:12px}
+.public-grid,.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.plan-card .price{font-size:28px;font-weight:800;margin:8px 0}
+.muted{opacity:.8}
+.inline-note{font-size:12px;opacity:.75}
+/* COGNITIVE LAB SWEEP */
+.cog-grid,.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.cog-card,.plan-panel-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:16px;
+}
+.cog-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.cog-kpi{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:12px;
+}
+/* CELESTIAL COGNITIVE LAB UI SWEEP */
+.celestial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.celestial-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:16px;
+}
+.celestial-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.celestial-kpi{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:12px;
+}
+</style>
+</head>
+<body>
+<div class="onboarding" id="onboardingModal">
+  <div class="onboarding-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">Welcome to SemantiqAI Ascension</h2>
+        <div class="small" style="margin-top:6px">Pick your mode so the machine knows which gears to spin first.</div>
+      </div>
+      <button class="secondary" style="width:auto" onclick="closeOnboarding()">Skip for now</button>
+    </div>
+
+    <div class="goal-grid">
+      <div class="goal" data-goal="founder" onclick="pickGoal(this, 'founder')"><b>Founder OS</b><div class="small" style="margin-top:6px">Priorities, ops, launch rhythm</div></div>
+      <div class="goal" data-goal="product" onclick="pickGoal(this, 'product')"><b>Product Build</b><div class="small" style="margin-top:6px">Features, UX, roadmap, systems</div></div>
+      <div class="goal" data-goal="content" onclick="pickGoal(this, 'content')"><b>Content Engine</b><div class="small" style="margin-top:6px">Messaging, posts, assets, launch copy</div></div>
+      <div class="goal" data-goal="research" onclick="pickGoal(this, 'research')"><b>Research</b><div class="small" style="margin-top:6px">Analysis, evidence, opportunity mapping</div></div>
+      <div class="goal" data-goal="expansion" onclick="pickGoal(this, 'expansion')"><b>Expansion</b><div class="small" style="margin-top:6px">Scale, roadmap leverage, unfair growth</div></div>
+      <div class="goal" data-goal="general" onclick="pickGoal(this, 'general')"><b>General AI Workspace</b><div class="small" style="margin-top:6px">Flexible mode with full control</div></div>
+    </div>
+
+    <div class="row" style="margin-top:16px">
+      <select id="onboardingMode">
+        <option value="solo">Solo SemantiqAI</option>
+        <option value="council">Agent Council Mode</option>
+      </select>
+      <button class="primary" onclick="finishOnboarding()">Finish Onboarding</button>
+    </div>
+
+    <div class="starter-grid" id="starterCards" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <h1>SemantiqAI Ascension Agent Council</h1>
+        <p>AIBrain Strategist • Content Generator • Founder OS • Research Architect • Expansion Planner</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <div class="pill" id="statusText">Checking status...</div>
+      <div class="pill" id="userBadge">Guest</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="card">
+      <div class="inner stack">
+        <div>
+          <h3 style="margin:0 0 6px">Access + Threads</h3>
+          <div class="small">Now with guided entry instead of blank-screen poker face.</div>
+        </div>
+
+        <input id="username" placeholder="Username" />
+        <input id="password" type="password" placeholder="Password" />
+
+        <div class="row">
+          <button class="primary" onclick="signup()">Sign up</button>
+          <button class="secondary" onclick="login()">Log in</button>
+        </div>
+        <div class="row">
+          <button class="secondary" onclick="loadMe()">Refresh Me</button>
+          <button class="danger" onclick="logout()">Log out</button>
+        </div>
+
+        <div class="item">
+          <div class="small">Role</div>
+          <div id="roleText">guest</div>
+        </div>
+
+        <div class="row">
+          <button class="primary" onclick="createThread()">New Thread</button>
+          <button class="secondary" onclick="loadThreads()">Refresh Threads</button>
+        </div>
+
+        <div class="thread-list" id="threadList"></div>
+      </div>
+    </aside>
+
+    <main class="card">
+      <div class="hero">
+        <h2>Agent council orchestration layer</h2>
+        <p>
+          You now have multiple specialist minds inside the same workspace, plus onboarding that helps new users pick a lane instead of staring into the void.
+        </p>
+        <div class="module-grid">
+          <div class="mini">AIBrain Strategist</div>
+          <div class="mini">Content Generator</div>
+          <div class="mini">Founder OS</div>
+          <div class="mini">Research Architect</div>
+          <div class="mini">Expansion Planner</div>
+          <div class="mini">Council Synthesis</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="chat" onclick="showTab('chat', this)">Chat</button>
+        <button class="tab" data-tab="council" onclick="showTab('council', this)">Agent Council</button>
+        <button class="tab" data-tab="workflow" onclick="showTab('workflow', this)">Workflow</button>
+        <button class="tab" data-tab="artifacts" onclick="showTab('artifacts', this)">Artifacts</button>
+        <button class="tab" data-tab="knowledge" onclick="showTab('knowledge', this)">Knowledge</button>
+        <button class="tab" data-tab="presets" onclick="showTab('presets', this)">Presets</button>
+        <button class="tab" data-tab="feedback" onclick="showTab('feedback', this)">Feedback</button>`r`n        <button class="tab" data-tab="memory" onclick="showTab('memory', this)">Memory</button>`r`n        <button class="tab" data-tab="studio" onclick="showTab('studio', this)">Studio</button>
+        <button class="tab" data-tab="jobs" onclick="showTab('jobs', this)">Jobs</button>`r`n        <button class="tab" data-tab="founder" onclick="showTab('founder', this)">Founder</button>
+      </div>
+
+      <section class="panel active" id="tab-chat">
+        <div class="stack">
+          <div class="row">
+            <select id="chatPreset"></select>
+            <button class="secondary" onclick="loadMessages()">Refresh Messages</button>
+          </div>
+          <div class="chat-log" id="chatLog"></div>
+          <textarea id="chatMessage" placeholder="Ask SemantiqAI anything from strategy to product design to content planning..."></textarea>
+          <div class="row">
+            <button class="primary" onclick="sendChat()">Send Chat</button>
+            <button class="secondary" onclick="generateArtifact()">Generate Artifact</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-council">
+        <div class="stack">
+          <div class="agent-grid" id="agentGrid"></div>
+          <textarea id="councilMessage" placeholder="Ask the agent council for a combined response. Example: design the next unfair growth roadmap for SemantiqAI with founder ops, content, research, and expansion strategy."></textarea>
+          <div class="row">
+            <button class="primary" onclick="runCouncil()">Run Agent Council</button>
+            <button class="secondary" onclick="loadAgentRuns()">Load Agent Runs</button>
+          </div>
+          <div class="list" id="councilOutput"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-workflow">
+        <div class="stack">
+          <div class="row">
+            <select id="workflowPreset"></select>
+            <button class="secondary" onclick="runPresetQuick()">Run Selected Preset</button>
+          </div>
+          <textarea id="workflowMessage" placeholder="Describe the workflow you want, such as a founder operating model, content engine, research structure, or expansion roadmap."></textarea>
+          <div class="row">
+            <button class="primary" onclick="runWorkflow()">Run Workflow</button>
+            <button class="secondary" onclick="runPlan()">Plan Only</button>
+          </div>
+          <div class="list"><div class="item" id="workflowOutput" style="white-space:pre-wrap"></div></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-artifacts">
+        <div class="stack">
+          <div class="row">
+            <button class="primary" onclick="loadArtifacts()">Load Artifacts</button>
+            <button class="secondary" onclick="loadExports()">Load Exports</button>
+          </div>
+          <div class="list" id="artifactList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-knowledge">
+        <div class="stack">
+          <input id="knowledgeTitle" placeholder="Knowledge title" />
+          <input id="knowledgeTags" placeholder="Tags comma-separated" />
+          <textarea id="knowledgeContent" placeholder="Store doctrine, prompts, brand rules, onboarding notes, or operating knowledge here."></textarea>
+          <div class="row">
+            <button class="primary" onclick="saveKnowledge()">Save Knowledge</button>
+            <button class="secondary" onclick="loadKnowledge()">Load Knowledge</button>
+          </div>
+          <div class="list" id="knowledgeList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-presets">
+        <div class="stack">
+          <div class="item">
+            <div class="small">Create custom preset</div>
+            <input id="presetTitle" placeholder="Preset title" style="margin-top:10px" />
+            <input id="presetCategory" placeholder="Category" style="margin-top:10px" />
+            <input id="presetDescription" placeholder="Short description" style="margin-top:10px" />
+            <textarea id="presetTemplate" placeholder="Prompt template. Use {{input}} where the user request should go." style="margin-top:10px"></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="savePreset()">Save Preset</button>
+              <button class="secondary" onclick="loadPresets()">Load Presets</button>
+            </div>
+          </div>
+          <div class="list" id="presetList"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="tab-feedback">
+        <div class="stack">
+          <select id="feedbackRating">
+            <option value="up">Thumbs Up</option>
+            <option value="down">Thumbs Down</option>
+            <option value="idea">Idea</option>
+            <option value="bug">Bug</option>
+          </select>
+          <textarea id="feedbackNote" placeholder="What worked, what broke, what should become unfairly good next?"></textarea>
+          <div class="row">
+            <button class="primary" onclick="sendFeedback()">Send Feedback</button>
+            <button class="secondary" onclick="loadFeedback()">Founder Feedback Inbox</button>
+          </div>
+          <div class="list" id="feedbackList"></div>
+        </div>
+      </section>
+
+            <section class="panel" id="tab-memory">
+        <div class="stack">
+          <div class="row">
+            <input id="memoryTitle" placeholder="Memory title" />
+            <input id="memoryTags" placeholder="Tags comma-separated" />
+          </div>
+          <textarea id="memoryContent" placeholder="Save important memory, user preference, strategic note, adaptive hint, or persistent context here..."></textarea>
+          <div class="row">
+            <button class="primary" onclick="saveMemory()">Save Memory</button>
+            <button class="secondary" onclick="loadMemory()">Load Memory</button>
+          </div>
+          <div class="row">
+            <input id="memorySearchQuery" placeholder="Search memory..." />
+            <button class="secondary" onclick="searchMemory()">Search</button>
+          </div>
+          <div class="item">
+            <div class="small">User Profile</div>
+            <textarea id="profileGoals" placeholder='Goals, comma-separated' style="margin-top:10px"></textarea>
+            <textarea id="profilePreferences" placeholder='Preferences, comma-separated' style="margin-top:10px"></textarea>
+            <textarea id="profileTraits" placeholder='Traits, comma-separated' style="margin-top:10px"></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="saveProfile()">Save Profile</button>
+              <button class="secondary" onclick="loadProfile()">Load Profile</button>
+            </div>
+          </div>
+          <div class="list" id="memoryList"></div>
+        </div>
+      </section>
+      <section class="panel" id="tab-studio">
+        <div class="stack">
+          <div class="item">
+            <div class="small">Streaming chat</div>
+            <textarea id="streamMessage" placeholder="Type a prompt for streaming output..."></textarea>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="startStreaming()">Start Stream</button>
+              <button class="secondary" onclick="document.getElementById('streamOutput').textContent=''">Clear</button>
+            </div>
+            <div class="item" id="streamOutput" style="white-space:pre-wrap;margin-top:10px"></div>
+          </div>
+
+          <div class="item">
+            <div class="small">CSV upload + analysis</div>
+            <input type="file" id="csvFile" accept=".csv" style="margin-top:10px" />
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="uploadCsv()">Upload CSV</button>
+              <button class="secondary" onclick="document.getElementById('csvAnalysis').innerHTML=''">Clear</button>
+            </div>
+            <div class="list" id="csvAnalysis" style="margin-top:10px"></div>
+          </div>
+
+          <div class="item">
+            <div class="small">Exports + share</div>
+            <div class="row" style="margin-top:10px">
+              <button class="primary" onclick="loadExportsRich()">Load Exports</button>
+              <button class="secondary" onclick="document.getElementById('exportsRich').innerHTML=''">Clear</button>
+            </div>
+            <div class="list" id="exportsRich" style="margin-top:10px"></div>
+          </div>
+        </div>
+      </section>
+<section class="panel" id="tab-founder">
+        <div class="stack">
+          <div class="item">
+            <b>Founder Command Center</b>
+            <div class="small" style="margin-top:8px">Steer users, memory, leads, moderation, launch posture, and system visibility from one throne panel.</div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi"><span class="small">Users</span><b id="kpiUsers">-</b></div>
+            <div class="kpi"><span class="small">Threads</span><b id="kpiThreads">-</b></div>
+            <div class="kpi"><span class="small">Messages</span><b id="kpiMessages">-</b></div>
+            <div class="kpi"><span class="small">Artifacts</span><b id="kpiArtifacts">-</b></div>
+            <div class="kpi"><span class="small">Knowledge</span><b id="kpiKnowledge">-</b></div>
+            <div class="kpi"><span class="small">Agent Runs</span><b id="kpiAgentRuns">-</b></div>
+            <div class="kpi"><span class="small">Leads</span><b id="kpiLeads">-</b></div>
+            <div class="kpi"><span class="small">Memories</span><b id="kpiMemories">-</b></div>
+            <div class="kpi"><span class="small">Notes</span><b id="kpiFounderNotes">-</b></div>
+            <div class="kpi"><span class="small">Mod Actions</span><b id="kpiModActions">-</b></div>
+          </div>
+
+          <div class="row">
+            <button class="primary" onclick="loadFounderCommandCenter()">Command Center</button>
+            <button class="secondary" onclick="loadFounderUsers()">Users</button>
+            <button class="secondary" onclick="loadFounderLeads()">Leads</button>
+            <button class="secondary" onclick="loadFounderMemories()">Memory</button>
+            <button class="secondary" onclick="loadFounderThreads()">Threads</button>
+          </div>
+
+          <div class="row">
+            <button class="secondary" onclick="loadFounderNotes()">Notes</button>
+            <button class="secondary" onclick="loadFounderModeration()">Moderation</button>
+            <button class="secondary" onclick="loadFounderStats()">Legacy Stats</button>
+            <button class="secondary" onclick="loadAnalytics()">Analytics</button>
+          </div>
+
+          <div class="row">
+            <button class="secondary" onclick="loadDiagnostics()">Diagnostics</button>
+            <button class="secondary" onclick="loadLaunchChecklist()">Launch Checklist</button>
+            <button class="secondary" onclick="loadFounderRequestLogs()">Request Logs</button><button class="secondary" onclick="loadFounderSecurity()">Security</button>
+            <button class="secondary" onclick="makeBackup()">Make Backup</button>
+          </div>
+
+          <div class="item">
+            <div class="small" style="margin-bottom:8px">Founder note dropbox</div>
+            <input id="founderNoteTitle" placeholder="Founder note title" />
+            <textarea id="founderNoteContent" placeholder="Write ops notes, launch tasks, moderation rationale, or strategic reminders." style="margin-top:10px"></textarea>
+            <button class="primary" style="margin-top:10px" onclick="saveFounderNote()">Save Founder Note</button>
+          </div>
+
+          <div class="list" id="founderList"></div>
+        </div>
+      </section>
+    <section class="panel" id="tab-public">
+  <div class="stack">
+    <div class="public-shell" id="publicShell">
+      <div class="public-hero">
+        <div class="tag">SemantiqAI Ascension</div>
+        <h1 id="publicHeroTitle">Think deeper. Build faster. Launch smarter.</h1>
+        <div class="muted" id="publicHeroBody">Loading public site content...</div>
+        <div class="row" style="margin-top:14px">
+          <button class="primary" onclick="scrollToPublicBlock('publicWaitlist')">Join Waitlist</button>
+          <button class="secondary" onclick="showTab('chat')">Enter App</button>
+        </div>
+      </div>
+
+      <div class="public-grid" id="publicFeatureGrid"></div>
+
+      <div class="pricing-grid" id="pricingGrid">
+        <div class="plan-card">
+          <b>Explorer</b>
+          <div class="price">$0</div>
+          <div class="muted">Try core chat, workflow exploration, and the SemantiqAI experience.</div>
+        </div>
+        <div class="plan-card">
+          <b>Ascension</b>
+          <div class="price">Soon</div>
+          <div class="muted">Higher limits, advanced memory, premium workflows, and founder-era upgrades.</div>
+        </div>
+        <div class="plan-card">
+          <b>Operator</b>
+          <div class="price">Later</div>
+          <div class="muted">For builders, teams, and high-leverage users who want deep execution power.</div>
+        </div>
+      </div>
+
+      <div class="public-card" id="publicWaitlist">
+        <b>Join the waitlist</b>
+        <div class="small" style="margin-top:8px">Capture launch interest before full public rollout.</div>
+        <div class="stack" style="margin-top:12px">
+          <input id="publicWaitlistName" placeholder="Name (optional)" />
+          <input id="publicWaitlistEmail" placeholder="Email" />
+          <input id="publicWaitlistUseCase" placeholder="Main use case: business, learning, research, content, life ops..." />
+          <textarea id="publicWaitlistNote" placeholder="What do you want SemantiqAI to help you do?"></textarea>
+          <button class="primary" onclick="joinPublicWaitlist()">Join Waitlist</button>
+        </div>
+      </div>
+
+      <div class="dashboard-welcome" id="dashboardWelcomeCard" style="display:none">
+        <b>Your dashboard welcome</b>
+        <div id="dashboardWelcomeText" class="muted" style="margin-top:8px"></div>
+        <div id="dashboardWelcomeMeta" class="inline-note" style="margin-top:10px"></div>
+      </div>
+
+      <div class="public-card" id="onboardingPolishCard" style="display:none">
+        <b>Quick start</b>
+        <div class="small" style="margin-top:8px">Tell SemantiqAI what mode you want to use first.</div>
+        <div class="stack" style="margin-top:12px">
+          <input id="quickGoal" placeholder="Goal: make money, build an app, learn faster, plan a launch..." />
+          <input id="quickMode" placeholder="Mode: strategist, builder, research, creator, operator..." />
+          <input id="quickPrefs" placeholder="Preferences, comma-separated: concise, step-by-step, bold, tactical..." />
+          <button class="primary" onclick="completeQuickOnboarding()">Save Quick Start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="panel" id="tab-cognitive">
+  <div class="stack">
+    <div class="item">
+      <b>Cognitive Lab</b>
+      <div class="small" style="margin-top:8px">Train reasoning, synthesis, focus, decision quality, and learning systems. No fake miracle claims. Just disciplined cognitive tooling.</div>
+    </div>
+
+    <div class="cog-kpis">
+      <div class="cog-kpi"><span class="small">Recent Sessions</span><b id="cogRecentSessions">-</b></div>
+      <div class="cog-kpi"><span class="small">Average Score</span><b id="cogAverageScore">-</b></div>
+      <div class="cog-kpi"><span class="small">Decision Entries</span><b id="cogDecisionCount">-</b></div>
+      <div class="cog-kpi"><span class="small">Founder Pro</span><b id="cogFounderPro">-</b></div>
+    </div>
+
+    <div class="row">
+      <button class="primary" onclick="loadCognitiveDashboard()">Dashboard</button>
+      <button class="secondary" onclick="loadDailyProtocol()">Daily Protocol</button>
+      <button class="secondary" onclick="loadCognitiveProtocols()">Protocols</button>
+      <button class="secondary" onclick="loadCognitiveSessions()">Sessions</button>
+      <button class="secondary" onclick="loadDecisionJournal()">Decision Journal</button>
+      <button class="secondary" onclick="loadPlansPanel()">Plans</button>
+    </div>
+
+    <div class="row">
+      <button class="secondary" onclick="loadCognitiveAssessments()">Assessments</button>
+      <button class="secondary" onclick="saveCognitiveAssessment()">Add Assessment</button>
+      <button class="secondary" onclick="loadCognitiveTrainingPlans()">Training Plans</button>
+      <button class="secondary" onclick="generateDefaultTrainingPlan()">Generate Plan</button>
+      <button class="secondary" onclick="loadRecallCards(true)">Due Recall</button>
+      <button class="secondary" onclick="addRecallCard()">Add Recall Card</button>
+    </div>
+
+    <div class="row">
+      <button class="secondary" onclick="loadMentalModels()">Mental Models</button>
+      <button class="secondary" onclick="loadReadingSprints()">Reading Sprints</button>
+      <button class="secondary" onclick="saveReadingSprint()">Add Reading Sprint</button>
+      <button class="secondary" onclick="loadSynthesisSessions()">Synthesis</button>
+      <button class="secondary" onclick="saveSynthesisSession()">Add Synthesis</button>
+      <button class="secondary" onclick="loadCognitiveAdvancedDashboard()">Founder Advanced</button>
+    </div>
+
+        <div class="row">
+      <button class="primary" onclick="loadEducationDashboard()">Academy Dashboard</button>
+      <button class="secondary" onclick="saveEducationProfile()">Learning Profile</button>
+      <button class="secondary" onclick="generateEducationCourse()">Generate Course</button>
+      <button class="secondary" onclick="loadEducationCourses()">Browse Academy</button>
+    </div>
+
+    
+    <div class="row">
+      <button onclick="hyperTeach()">Hyper Teach</button>
+      <button onclick="hyperSession()">Live Tutor</button>
+    </div>
+    
+<div id="educationList" class="stack" style="margin-top:14px"></div>
+
+    <div class="cog-grid">
+      <div class="cog-card">
+        <b>Profile</b>
+        <input id="cogGoal" placeholder="Primary goal: clearer thinking, better decisions, stronger memory..." style="margin-top:10px" />
+        <input id="cogStyle" placeholder="Training style: tactical, structured, synthesis-heavy..." style="margin-top:10px" />
+        <input id="cogFocusWindow" placeholder="Focus window minutes" style="margin-top:10px" />
+        <input id="cogStrengths" placeholder="Strengths, comma-separated" style="margin-top:10px" />
+        <input id="cogWeaknesses" placeholder="Weaknesses, comma-separated" style="margin-top:10px" />
+        <textarea id="cogRecoveryNotes" placeholder="Recovery notes: sleep, exercise, breaks, fatigue patterns..." style="margin-top:10px"></textarea>
+        <button class="primary" style="margin-top:10px" onclick="saveCognitiveProfile()">Save Profile</button>
+      </div>
+
+      <div class="cog-card">
+        <b>Log Session</b>
+        <input id="cogSessionType" placeholder="Session type: reasoning, memory, synthesis, reading, focus" style="margin-top:10px" />
+        <input id="cogSessionTitle" placeholder="Session title" style="margin-top:10px" />
+        <textarea id="cogSessionInstructions" placeholder="Instructions / what you trained" style="margin-top:10px"></textarea>
+        <input id="cogSessionMinutes" placeholder="Duration minutes" style="margin-top:10px" />
+        <input id="cogSessionDifficulty" placeholder="Difficulty: standard, hard, deep" style="margin-top:10px" />
+        <input id="cogSessionScore" placeholder="Score (optional)" style="margin-top:10px" />
+        <textarea id="cogSessionNotes" placeholder="Notes / insights / failures / adjustments" style="margin-top:10px"></textarea>
+        <button class="primary" style="margin-top:10px" onclick="saveCognitiveSession()">Log Session</button>
+      </div>
+
+      <div class="cog-card">
+        <b>Decision Journal</b>
+        <input id="djTitle" placeholder="Decision title" style="margin-top:10px" />
+        <textarea id="djContext" placeholder="Context" style="margin-top:10px"></textarea>
+        <input id="djOptions" placeholder="Options, comma-separated" style="margin-top:10px" />
+        <input id="djChosen" placeholder="Chosen option" style="margin-top:10px" />
+        <input id="djOutcome" placeholder="Expected outcome" style="margin-top:10px" />
+        <textarea id="djReview" placeholder="Review notes / criteria / risk notes" style="margin-top:10px"></textarea>
+        <button class="primary" style="margin-top:10px" onclick="saveDecisionJournal()">Save Decision</button>
+      </div>
+    </div>
+
+    <div class="list" id="cognitiveList"></div>
+  </div>
+</section>
+</main>
+
+    <aside class="card right-rail">
+      <div class="inner stack">
+        <div>
+          <h3 style="margin:0 0 6px">Guided rail</h3>
+          <div class="small">Onboarding, launch posture, and fast starts.</div>
+        </div>
+        <div class="item"><div class="small">Current thread</div><div id="currentThreadText">none</div></div>
+        <div class="item"><div class="small">App mode</div><div id="appModeText">Ready</div></div>
+        <div class="item"><div class="small">Launch score</div><div id="launchScoreText">unknown</div></div>
+        <div class="item"><div class="small">Selected goal</div><div id="selectedGoalText">none</div></div>
+        <div class="item"><div class="small">Selected mode</div><div id="selectedModeText">none</div></div>
+        <div class="item"><div class="small">Brand modules</div><div id="brandModulesText">loading...</div></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const API = {
+  token(){ return localStorage.getItem('sem_token') || ''; },
+  setToken(t){ localStorage.setItem('sem_token', t); },
+  clearToken(){ localStorage.removeItem('sem_token'); },
+  headers(){
+    const h = {'Content-Type':'application/json'};
+    const t = this.token();
+    if (t) h['Authorization'] = 'Bearer ' + t;
+    return h;
+  },
+  async get(path){
+    const r = await fetch(path, {headers:this.headers()});
+    return await r.json();
+  },
+  async post(path, body){
+    const r = await fetch(path, {method:'POST', headers:this.headers(), body:JSON.stringify(body || {})});
+    return await r.json();
+  },
+  async del(path){
+    const r = await fetch(path, {method:'DELETE', headers:this.headers()});
+    return await r.json();
+  }
+};
+
+let currentUser = null;
+let currentThreadId = null;
+let presetItems = [];
+let agentItems = [];
+let onboardingGoal = '';
+let onboardingState = null;
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function showTab(name, el){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function setUser(user){
+  currentUser = user || null;
+  document.getElementById('userBadge').textContent = user ? `${user.username} • ${user.role}` : 'Guest';
+  document.getElementById('roleText').textContent = user ? user.role : 'guest';
+  document.getElementById('appModeText').textContent = user ? `Logged in as ${user.username}` : 'Ready';
+}
+
+function setCurrentThread(thread){
+  currentThreadId = thread ? thread.id : null;
+  document.getElementById('currentThreadText').textContent = thread ? thread.title : 'none';
+}
+
+function presetOptions(){
+  return ['<option value="">No preset</option>'].concat(
+    presetItems.map(p => `<option value="${escapeHtml(p.preset_key)}">${escapeHtml(p.category)} • ${escapeHtml(p.title)}</option>`)
+  ).join('');
+}
+
+async function healthCheck(){
+  try{
+    const s = await API.get('/status');
+    document.getElementById('statusText').textContent = `${s.app || 'SemantiqAI'} • ${s.version || ''} • ${s.stage || ''}`;
+  }catch{
+    document.getElementById('statusText').textContent = 'Backend unreachable';
+  }
+  try{
+    const cfg = await API.get('/config/public');
+    document.getElementById('brandModulesText').textContent = (cfg.brand_modules || []).join(' • ');
+  }catch{
+    document.getElementById('brandModulesText').textContent = 'unavailable';
+  }
+}
+
+async function signup(){
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const d = await API.post('/signup', {username, password});
+  if (d.token){
+    API.setToken(d.token);
+    setUser(d.user);
+    await afterLoginLoad();
+  } else alert(d.error || 'Signup failed');
+}
+
+async function login(){
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const d = await API.post('/login', {username, password});
+  if (d.token){
+    API.setToken(d.token);
+    setUser(d.user);
+    await afterLoginLoad();
+  } else alert(d.error || 'Login failed');
+}
+
+async function afterLoginLoad(){
+  await loadThreads();
+  await loadPresets();
+  await loadAgents();
+  await loadOnboarding();
+    loadPublicSite().catch(() => {});
+    loadDashboardWelcome().catch(() => {});
+    loadCognitiveDashboard().catch(() => {});
+    if (currentUser && (currentUser.role === 'founder' || currentUser.role === 'admin')) { loadFounderCommandCenter().catch(() => {}); }
+}
+
+function logout(){
+  API.clearToken();
+  currentUser = null;
+  currentThreadId = null;
+  setUser(null);
+  setCurrentThread(null);
+  document.getElementById('threadList').innerHTML = '';
+  document.getElementById('chatLog').innerHTML = '';
+  closeOnboarding();
+}
+
+async function loadMe(){
+  try{
+    const d = await API.get('/me');
+    if (d.user) setUser(d.user);
+  }catch{}
+}
+
+async function createThread(){
+  const title = prompt('Thread title:', 'New Thread');
+  if (!title) return;
+  const d = await API.post('/threads', {title});
+  if (d.thread){
+    await loadThreads();
+    await openThread(d.thread.id);
+  }
+}
+
+async function loadThreads(){
+  const d = await API.get('/threads');
+  const items = d.items || [];
+  const el = document.getElementById('threadList');
+  el.innerHTML = items.map(t => `
+    <div class="thread-item ${t.id === currentThreadId ? 'active' : ''}">
+      <div><b>${escapeHtml(t.title)}</b></div>
+      <div class="small" style="margin-top:6px">${escapeHtml(t.updated_at || '')}${t.is_archived ? ' • archived' : ''}</div>
+      <div class="row" style="margin-top:10px">
+        <button class="secondary" onclick="openThread(${t.id})">Open</button>
+        <button class="secondary" onclick="renameThread(${t.id})">Rename</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button class="secondary" onclick="archiveThread(${t.id})">Archive</button>
+        <button class="danger" onclick="deleteThread(${t.id})">Delete</button>
+      </div>
+    </div>
+  `).join('') || '<div class="item">No threads yet.</div>';
+
+  if (!currentThreadId && items.length){
+    await openThread(items[0].id);
+  }
+}
+
+async function openThread(id){
+  const d = await API.get(`/threads/${id}/messages`);
+  setCurrentThread(d.thread);
+  const log = document.getElementById('chatLog');
+  log.innerHTML = (d.items || []).map(m => `
+    <div class="msg ${m.role === 'user' ? 'user' : 'ai'}">
+      <div class="meta">${escapeHtml(m.role)}${m.agent ? ' • ' + escapeHtml(m.agent) : ''} • ${escapeHtml(m.created_at || '')}</div>
+      <div>${escapeHtml(m.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No messages yet.</div>';
+  await loadThreads();
+}
+
+async function loadMessages(){
+  if (!currentThreadId) return;
+  await openThread(currentThreadId);
+}
+
+async function renameThread(id){
+  const title = prompt('New thread title:');
+  if (!title) return;
+  await API.post(`/threads/${id}/rename`, {title});
+  await loadThreads();
+  if (currentThreadId === id) await openThread(id);
+}
+
+async function archiveThread(id){
+  await API.post(`/threads/${id}/archive`, {});
+  await loadThreads();
+}
+
+async function deleteThread(id){
+  if (!confirm('Delete this thread and its messages/artifacts?')) return;
+  await API.del(`/threads/${id}`);
+  currentThreadId = null;
+  await loadThreads();
+  document.getElementById('chatLog').innerHTML = '';
+}
+
+async function loadPresets(){
+  const d = await API.get('/presets');
+  presetItems = d.items || [];
+  document.getElementById('chatPreset').innerHTML = presetOptions();
+  document.getElementById('workflowPreset').innerHTML = presetOptions();
+  document.getElementById('presetList').innerHTML = presetItems.map(p => `
+    <div class="item">
+      <div><b>${escapeHtml(p.title)}</b></div>
+      <div class="small">${escapeHtml(p.category || '')} • ${p.is_system ? 'system' : 'custom'}</div>
+      <div style="margin-top:8px">${escapeHtml(p.description || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No presets yet.</div>';
+}
+
+async function savePreset(){
+  const title = document.getElementById('presetTitle').value.trim();
+  const category = document.getElementById('presetCategory').value.trim();
+  const description = document.getElementById('presetDescription').value.trim();
+  const prompt_template = document.getElementById('presetTemplate').value.trim();
+  const d = await API.post('/presets', {title, category, description, prompt_template});
+  if (d.error) return alert(d.error);
+  document.getElementById('presetTitle').value = '';
+  document.getElementById('presetCategory').value = '';
+  document.getElementById('presetDescription').value = '';
+  document.getElementById('presetTemplate').value = '';
+  await loadPresets();
+}
+
+async function loadAgents(){
+  const d = await API.get('/agent-council/agents');
+  agentItems = d.items || [];
+  document.getElementById('agentGrid').innerHTML = agentItems.map(a => `
+    <label class="item" style="cursor:pointer">
+      <input type="checkbox" class="agentCheck" value="${escapeHtml(a.key)}" style="width:auto;margin-right:8px" />
+      <b>${escapeHtml(a.title)}</b>
+      <div class="small" style="margin-top:8px">${escapeHtml(a.system)}</div>
+    </label>
+  `).join('');
+}
+
+function selectedAgents(){
+  return Array.from(document.querySelectorAll('.agentCheck:checked')).map(x => x.value);
+}
+
+async function sendChat(){
+  const message = document.getElementById('chatMessage').value.trim();
+  const preset_key = document.getElementById('chatPreset').value;
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/chat', {message, thread_id: currentThreadId, preset_key});
+  if (d.error) return alert(d.error);
+  document.getElementById('chatMessage').value = '';
+  await openThread(currentThreadId);
+}
+
+async function runCouncil(){
+  const message = document.getElementById('councilMessage').value.trim();
+  const agents = selectedAgents();
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/agent-council/run', {message, thread_id: currentThreadId, agents});
+  if (d.error) return alert(d.error);
+  document.getElementById('councilOutput').innerHTML = `
+    ${(d.agents_used || []).map(a => `
+      <div class="item">
+        <b>${escapeHtml(a.agent_title)}</b>
+        <div style="margin-top:8px;white-space:pre-wrap">${escapeHtml(a.output)}</div>
+      </div>
+    `).join('')}
+    <div class="item">
+      <b>Agent Council Synthesis</b>
+      <div style="margin-top:8px;white-space:pre-wrap">${escapeHtml(d.final || '')}</div>
+    </div>
+  `;
+  await openThread(currentThreadId);
+}
+
+async function loadAgentRuns(){
+  const d = await API.get('/agent-council/runs');
+  if (d.error) return alert(d.error);
+  document.getElementById('councilOutput').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <b>${escapeHtml(x.agent_title || '')}</b>
+      <div class="small">${escapeHtml(x.created_at || '')}</div>
+      <div style="margin-top:8px"><b>Input</b><br>${escapeHtml(x.input_text || '')}</div>
+      <div style="margin-top:8px"><b>Output</b><br>${escapeHtml((x.output_text || '').slice(0,1200))}</div>
+    </div>
+  `).join('') || '<div class="item">No agent runs yet.</div>';
+}
+
+async function generateArtifact(){
+  const message = document.getElementById('chatMessage').value.trim();
+  if (!message || !currentThreadId) return;
+  const d = await API.post('/artifact/generate-from-workflow', {
+    title: 'Council Artifact',
+    message,
+    thread_id: currentThreadId
+  });
+  if (d.error) return alert(d.error);
+  alert('Artifact created.');
+  await loadArtifacts();
+}
+
+async function runPlan(){
+  const message = document.getElementById('workflowMessage').value.trim();
+  const d = await API.post('/plan', {message});
+  document.getElementById('workflowOutput').textContent = d.plan || d.error || JSON.stringify(d, null, 2);
+}
+
+async function runWorkflow(){
+  const message = document.getElementById('workflowMessage').value.trim();
+  const preset_key = document.getElementById('workflowPreset').value;
+  const d = await API.post('/workflow', {message, preset_key});
+  document.getElementById('workflowOutput').textContent = d.final || d.error || JSON.stringify(d, null, 2);
+}
+
+async function runPresetQuick(){
+  const preset_key = document.getElementById('workflowPreset').value;
+  const message = document.getElementById('workflowMessage').value.trim();
+  const d = await API.post('/workflow', {message, preset_key});
+  document.getElementById('workflowOutput').textContent = d.final || d.error || JSON.stringify(d, null, 2);
+}
+
+async function loadArtifacts(){
+  const d = await API.get('/artifacts');
+  document.getElementById('artifactList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || x.filename || 'artifact')}</b></div>
+      <div class="small">${escapeHtml(x.artifact_type || '')} • ${escapeHtml(x.filename || '')}</div>
+      <div class="small">Thread: ${escapeHtml(x.thread_id || '')}</div>
+      <div class="small">${escapeHtml(x.file_path || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No artifacts yet.</div>';
+}
+
+async function loadExports(){
+  const d = await API.get('/exports');
+  document.getElementById('artifactList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.filename || 'export')}</b></div>
+      <div class="small">${escapeHtml(x.path || '')}</div>
+      <div class="small">Size: ${escapeHtml(x.size || 0)}</div>
+    </div>
+  `).join('') || '<div class="item">No exports yet.</div>';
+}
+
+async function saveKnowledge(){
+  const title = document.getElementById('knowledgeTitle').value.trim();
+  const content = document.getElementById('knowledgeContent').value.trim();
+  const tags = document.getElementById('knowledgeTags').value.split(',').map(x => x.trim()).filter(Boolean);
+  const d = await API.post('/knowledge', {title, content, source_type:'manual', tags, pinned:false});
+  if (d.error) return alert(d.error);
+  document.getElementById('knowledgeTitle').value = '';
+  document.getElementById('knowledgeContent').value = '';
+  document.getElementById('knowledgeTags').value = '';
+  await loadKnowledge();
+}
+
+async function loadKnowledge(){
+  const d = await API.get('/knowledge');
+  document.getElementById('knowledgeList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Knowledge')}</b></div>
+      <div class="small">${escapeHtml(x.source_type || '')} • ${(x.tags || []).map(escapeHtml).join(', ')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No knowledge saved yet.</div>';
+}
+
+async function sendFeedback(){
+  const rating = document.getElementById('feedbackRating').value;
+  const note = document.getElementById('feedbackNote').value.trim();
+  const d = await API.post('/feedback', {
+    rating,
+    note,
+    context_type: currentThreadId ? 'thread' : 'general',
+    context_value: currentThreadId ? String(currentThreadId) : '',
+    thread_id: currentThreadId
+  });
+  if (d.error) return alert(d.error);
+  document.getElementById('feedbackNote').value = '';
+  alert('Feedback sent.');
+}
+
+async function loadFeedback(){
+  const d = await API.get('/feedback');
+  if (d.error) return alert(d.error);
+  document.getElementById('feedbackList').innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.rating || '')}</b></div>
+      <div class="small">${escapeHtml(x.context_type || '')} • ${escapeHtml(x.context_value || '')} • ${escapeHtml(x.created_at || '')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.note || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No feedback yet.</div>';
+}
+
+async function loadFounderStats(){
+  const d = await API.get('/admin/stats');
+  if (d.error) return alert(d.error);
+  document.getElementById('kpiUsers').textContent = d.users ?? '-';
+  document.getElementById('kpiThreads').textContent = d.threads ?? '-';
+  document.getElementById('kpiMessages').textContent = d.messages ?? '-';
+  document.getElementById('kpiArtifacts').textContent = d.artifacts ?? '-';
+  document.getElementById('kpiKnowledge').textContent = d.knowledge ?? '-';
+  document.getElementById('kpiAgentRuns').textContent = d.agent_runs ?? '-';
+  document.getElementById('launchScoreText').textContent = `${d.launch_score} • ${d.launch_grade}`;
+  document.getElementById('founderList').innerHTML = `
+    <div class="item"><b>Founder Stats</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>
+  `;
+}
+
+async function loadAnalytics(){
+  const d = await API.get('/analytics');
+  if (d.error) return alert(d.error);
+  const blocks = [];
+  blocks.push(`<div class="item"><b>Top Routes</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.top_routes || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Top Agents</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.top_agents || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Latest Users</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_users || [], null, 2))}</div></div>`);
+  blocks.push(`<div class="item"><b>Latest Feedback</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_feedback || [], null, 2))}</div></div>`);
+  document.getElementById('founderList').innerHTML = blocks.join('');
+}
+
+async function loadDiagnostics(){
+  const d = await API.get('/diagnostics');
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Diagnostics</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>`;
+}
+
+async function loadLaunchChecklist(){
+  const d = await API.get('/launch-checklist');
+  if (d.error) return alert(d.error);
+  document.getElementById('launchScoreText').textContent = `${d.score} • ${d.grade}`;
+  document.getElementById('founderList').innerHTML = `
+    <div class="item"><b>Launch Checklist</b><div class="small" style="margin-top:8px">${escapeHtml((d.items || []).map(x => `${x.ok ? 'PASS' : 'TODO'} ${x.item}`).join('\n'))}</div></div>
+  `;
+}
+
+async function loadRequestLogs(){
+  const d = await API.get('/admin/request-logs');
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Request Logs</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.items || [], null, 2))}</div></div>`;
+}
+
+async function makeBackup(){
+  const d = await API.post('/backup', {});
+  document.getElementById('founderList').innerHTML = `<div class="item"><b>Backup</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>`;
+}
+
+function pickGoal(el, goal){
+  onboardingGoal = goal;
+  document.querySelectorAll('.goal').forEach(g => g.classList.remove('active'));
+  el.classList.add('active');
+}
+
+async function loadOnboarding(){
+  const d = await API.get('/onboarding');
+  onboardingState = d.state || null;
+  document.getElementById('selectedGoalText').textContent = onboardingState?.selected_goal || 'none';
+  document.getElementById('selectedModeText').textContent = onboardingState?.selected_mode || 'none';
+
+  const cards = d.starter_cards || [];
+  document.getElementById('starterCards').innerHTML = cards.map(c => `
+    <div class="starter">
+      <b>${escapeHtml(c.title)}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(c.category)}</div>
+      <div style="margin-top:8px">${escapeHtml(c.prompt)}</div>
+      <button class="primary" style="margin-top:10px" onclick="useStarterPrompt(${JSON.stringify(c.prompt).replace(/"/g, '&quot;')})">Use This</button>
+    </div>
+  `).join('');
+
+  if (!onboardingState || !onboardingState.completed){
+    document.getElementById('onboardingModal').classList.add('show');
+  } else {
+    document.getElementById('onboardingModal').classList.remove('show');
+  }
+}
+
+function useStarterPrompt(prompt){
+  document.getElementById('workflowMessage').value = prompt;
+  document.getElementById('councilMessage').value = prompt;
+  showTab('workflow', document.querySelector('[data-tab="workflow"]'));
+  closeOnboarding();
+}
+
+async function finishOnboarding(){
+  const selected_mode = document.getElementById('onboardingMode').value;
+  const selected_goal = onboardingGoal || 'general';
+  const d = await API.post('/onboarding', {
+    selected_goal,
+    selected_mode,
+    completed: true
+  });
+  if (d.ok){
+    onboardingState = d.state;
+    document.getElementById('selectedGoalText').textContent = selected_goal;
+    document.getElementById('selectedModeText').textContent = selected_mode;
+    closeOnboarding();
+
+    if (selected_mode === 'council') {
+      showTab('council', document.querySelector('[data-tab="council"]'));
+    } else {
+      showTab('workflow', document.querySelector('[data-tab="workflow"]'));
+    }
+  }
+}
+
+function closeOnboarding(){
+  document.getElementById('onboardingModal').classList.remove('show');
+}
+
+
+async function saveMemory(){
+  const title = document.getElementById('memoryTitle').value.trim();
+  const content = document.getElementById('memoryContent').value.trim();
+  const tags = document.getElementById('memoryTags').value.split(',').map(x => x.trim()).filter(Boolean);
+  if (!content) return;
+
+  const d = await API.post('/memory/items', {
+    thread_id: currentThreadId,
+    memory_type: 'note',
+    title: title || 'Memory',
+    content,
+    tags,
+    score: 1.0
+  });
+  if (d.error) return alert(d.error);
+
+  document.getElementById('memoryTitle').value = '';
+  document.getElementById('memoryContent').value = '';
+  document.getElementById('memoryTags').value = '';
+  await loadMemory();
+}
+
+async function loadMemory(){
+  const d = await API.get('/memory/items');
+  const el = document.getElementById('memoryList');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Memory')}</b></div>
+      <div class="small">${escapeHtml(x.memory_type || '')} • score ${escapeHtml(x.score || '')} • ${(x.tags || []).map(escapeHtml).join(', ')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No memory yet.</div>';
+}
+
+async function searchMemory(){
+  const query = document.getElementById('memorySearchQuery').value.trim();
+  const d = await API.post('/memory/search', {query});
+  const el = document.getElementById('memoryList');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.title || 'Memory')}</b></div>
+      <div class="small">${escapeHtml(x.memory_type || '')} • score ${escapeHtml(x.score || '')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+    </div>
+  `).join('') || '<div class="item">No matches.</div>';
+}
+
+async function saveProfile(){
+  const goals = document.getElementById('profileGoals').value.split(',').map(x => x.trim()).filter(Boolean);
+  const preferences = document.getElementById('profilePreferences').value.split(',').map(x => x.trim()).filter(Boolean);
+  const traits = document.getElementById('profileTraits').value.split(',').map(x => x.trim()).filter(Boolean);
+
+  const d = await API.post('/profile', {goals, preferences, traits});
+  if (d.error) return alert(d.error);
+  alert('Profile saved.');
+}
+
+async function loadProfile(){
+  const d = await API.get('/profile');
+  const p = d.profile || {};
+  document.getElementById('profileGoals').value = (p.goals || []).join(', ');
+  document.getElementById('profilePreferences').value = (p.preferences || []).join(', ');
+  document.getElementById('profileTraits').value = (p.traits || []).join(', ');
+}
+
+
+async function startStreaming(){
+  const message = document.getElementById('streamMessage').value.trim();
+  if (!message) return;
+  const out = document.getElementById('streamOutput');
+  out.textContent = '';
+
+  const presetEl = document.getElementById('chatPreset');
+  const preset_key = presetEl ? presetEl.value : '';
+
+  const res = await fetch('/stream-chat', {
+    method: 'POST',
+    headers: API.headers(),
+    body: JSON.stringify({
+      message,
+      thread_id: currentThreadId,
+      preset_key
+    })
+  });
+
+  if (!res.ok || !res.body) {
+    const text = await res.text();
+    out.textContent = text || 'Streaming failed.';
+    return;
+  }
+
+  const contentType = (res.headers.get('content-type') || '').toLowerCase();
+
+  if (!contentType.includes('text/event-stream')) {
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      out.textContent += decoder.decode(value, { stream: true });
+    }
+    if (typeof openThread === 'function' && currentThreadId) {
+      await openThread(currentThreadId);
+    }
+    return;
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  function processEventBlock(block){
+    const lines = block.split('\n');
+    let eventName = 'message';
+    let data = '';
+    for (const line of lines) {
+      if (line.startsWith('event:')) eventName = line.slice(6).trim();
+      if (line.startsWith('data:')) data += line.slice(5).trim();
+    }
+    if (!data) return;
+    try {
+      const parsed = JSON.parse(data);
+      if (eventName === 'token' && parsed.token) {
+        out.textContent += parsed.token;
+      }
+    } catch (e) {
+      if (eventName === 'token') out.textContent += data;
+    }
+  }
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let idx;
+    while ((idx = buffer.indexOf('\n\n')) !== -1) {
+      const block = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+      processEventBlock(block);
+    }
+  }
+
+  if (buffer.trim()) processEventBlock(buffer);
+
+  if (typeof openThread === 'function' && currentThreadId) {
+    await openThread(currentThreadId);
+  }
+}
+
+async function uploadCsv(){
+  const fileInput = document.getElementById('csvFile');
+  const file = fileInput.files[0];
+  if (!file) return alert('Choose a CSV file first.');
+
+  const form = new FormData();
+  form.append('file', file);
+
+  const res = await fetch('/upload/csv', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + (API.token() || '') },
+    body: form
+  });
+
+  const d = await res.json();
+  const el = document.getElementById('csvAnalysis');
+
+  if (d.error) {
+    el.innerHTML = `<div class="item"><b>Error</b><div style="margin-top:8px">${escapeHtml(d.error)}</div></div>`;
+    return;
+  }
+
+  const sample = JSON.stringify(d.sample_rows || [], null, 2);
+  const summary = JSON.stringify(d.numeric_summary || {}, null, 2);
+
+  el.innerHTML = `
+    <div class="item">
+      <b>${escapeHtml(d.filename || '')}</b>
+      <div class="small" style="margin-top:6px">Rows: ${escapeHtml(d.rows || 0)} • Columns: ${escapeHtml((d.columns || []).length)}</div>
+      <div style="margin-top:8px"><b>Columns</b><br>${escapeHtml((d.columns || []).join(', '))}</div>
+      <div style="margin-top:8px"><b>Numeric Summary</b><pre>${escapeHtml(summary)}</pre></div>
+      <div style="margin-top:8px"><b>Sample Rows</b><pre>${escapeHtml(sample)}</pre></div>
+    </div>
+  `;
+}
+
+async function loadExportsRich(){
+  const d = await API.get('/exports');
+  const el = document.getElementById('exportsRich');
+  el.innerHTML = (d.items || []).map(x => `
+    <div class="item">
+      <div><b>${escapeHtml(x.filename || 'export')}</b></div>
+      <div class="small">${escapeHtml(x.path || '')} • ${escapeHtml(x.size || 0)} bytes</div>
+      <div class="row" style="margin-top:10px">
+        <button class="primary" onclick="downloadExport(${JSON.stringify((x.filename || '')).replace(/"/g, '&quot;')})">Download</button>
+        <button class="secondary" onclick="shareExport(${JSON.stringify((x.filename || '')).replace(/"/g, '&quot;')})">Create Share Link</button>
+      </div>
+    </div>
+  `).join('') || '<div class="item">No exports yet.</div>';
+}
+
+function downloadExport(filename){
+  window.open('/exports/download/' + encodeURIComponent(filename), '_blank');
+}
+
+async function shareExport(filename){
+  const d = await API.post('/share/create', { filename, title: filename });
+  if (d.error) return alert(d.error);
+  const url = window.location.origin + d.share_url;
+  await navigator.clipboard.writeText(url).catch(() => {});
+  alert('Share link created: ' + url);
+}
+
+
+function renderFounderCards(title, items, formatter){
+  const el = document.getElementById('founderList');
+  const rows = (items || []).map(x => formatter(x)).join('');
+  el.innerHTML = `
+    <div class="item"><b>${escapeHtml(title)}</b><div class="small" style="margin-top:8px">${items.length} item(s)</div></div>
+    ${rows || '<div class="item">No items yet.</div>'}
+  `;
+}
+
+async function loadFounderCommandCenter(){
+  const d = await API.get('/founder/command');
+  if (d.error) return alert(d.error);
+
+  const c = d.counts || {};
+  document.getElementById('kpiUsers').textContent = c.users ?? '-';
+  document.getElementById('kpiThreads').textContent = c.threads ?? '-';
+  document.getElementById('kpiMessages').textContent = c.messages ?? '-';
+  document.getElementById('kpiArtifacts').textContent = c.artifacts ?? '-';
+  document.getElementById('kpiKnowledge').textContent = c.knowledge ?? '-';
+  document.getElementById('kpiAgentRuns').textContent = c.agent_runs ?? '-';
+
+  const leadsEl = document.getElementById('kpiLeads');
+  const memEl = document.getElementById('kpiMemories');
+  const notesEl = document.getElementById('kpiFounderNotes');
+  const modEl = document.getElementById('kpiModActions');
+  if (leadsEl) leadsEl.textContent = c.leads ?? '-';
+  if (memEl) memEl.textContent = c.memories ?? '-';
+  if (notesEl) notesEl.textContent = c.founder_notes ?? '-';
+  if (modEl) modEl.textContent = c.moderation_actions ?? '-';
+
+  if (d.launch) {
+    document.getElementById('launchScoreText').textContent = `${d.launch.score} • ${d.launch.grade}`;
+  }
+
+  const cards = [];
+  cards.push(`<div class="item"><b>System Flags</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.flags || {}, null, 2))}</div></div>`);
+  cards.push(`<div class="item"><b>Latest Users</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_users || [], null, 2))}</div></div>`);
+  cards.push(`<div class="item"><b>Latest Threads</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_threads || [], null, 2))}</div></div>`);
+  cards.push(`<div class="item"><b>Latest Leads</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_leads || [], null, 2))}</div></div>`);
+  cards.push(`<div class="item"><b>Latest Notes</b><div class="small" style="margin-top:8px">${escapeHtml(JSON.stringify(d.latest_notes || [], null, 2))}</div></div>`);
+  document.getElementById('founderList').innerHTML = cards.join('');
+}
+
+async function loadFounderUsers(){
+  const d = await API.get('/founder/users');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Founder Users', d.items || [], u => `
+    <div class="item">
+      <b>${escapeHtml(u.username)}</b>
+      <div class="small" style="margin-top:6px">role=${escapeHtml(u.role)} • threads=${u.threads_count} • messages=${u.messages_count}</div>
+      <div class="small" style="margin-top:6px">created=${escapeHtml(u.created_at || '')}</div>
+      <div class="row" style="margin-top:10px">
+        <button class="secondary" onclick="setFounderUserRole(${u.id}, 'user')">Set User</button>
+        <button class="secondary" onclick="setFounderUserRole(${u.id}, 'admin')">Set Admin</button>
+        <button class="secondary" onclick="setFounderUserRole(${u.id}, 'founder')">Set Founder</button>
+      </div>
+    </div>
+  `);
+}
+
+async function setFounderUserRole(userId, role){
+  const d = await API.post('/founder/users/' + userId + '/role', { role });
+  if (d.error) return alert(d.error);
+  await loadFounderUsers();
+}
+
+async function loadFounderLeads(){
+  const d = await API.get('/founder/leads');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Growth Leads', d.items || [], x => `
+    <div class="item">
+      <b>${escapeHtml(x.email || '')}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(x.name || 'Unnamed lead')} • ${escapeHtml(x.source || 'site')} • ${escapeHtml(x.status || 'new')}</div>
+      <div style="margin-top:8px">${escapeHtml(x.note || '')}</div>
+      <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+    </div>
+  `);
+}
+
+async function loadFounderMemories(){
+  const d = await API.get('/founder/memories');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Memory Inspector', d.items || [], x => `
+    <div class="item">
+      <b>${escapeHtml(x.title || 'Memory')}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(x.username || ('user #' + x.user_id))} • ${escapeHtml(x.memory_type || 'note')} • score=${x.score}</div>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+      <div class="small" style="margin-top:8px">tags=${escapeHtml(x.tags || '[]')} • created=${escapeHtml(x.created_at || '')}</div>
+    </div>
+  `);
+}
+
+async function loadFounderThreads(){
+  const d = await API.get('/founder/threads');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Thread Control', d.items || [], x => `
+    <div class="item">
+      <b>${escapeHtml(x.title || 'Untitled thread')}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(x.username || ('user #' + x.user_id))} • messages=${x.message_count} • archived=${x.is_archived}</div>
+      <div class="small" style="margin-top:8px">${escapeHtml(x.updated_at || '')}</div>
+      <div class="row" style="margin-top:10px">
+        <button class="secondary" onclick="archiveFounderThread(${x.id})">Archive Thread</button>
+      </div>
+    </div>
+  `);
+}
+
+async function archiveFounderThread(threadId){
+  const d = await API.post('/founder/threads/' + threadId + '/archive', {});
+  if (d.error) return alert(d.error);
+  await loadFounderThreads();
+}
+
+async function loadFounderNotes(){
+  const d = await API.get('/founder/notes');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Founder Notes', d.items || [], x => `
+    <div class="item">
+      <b>${escapeHtml(x.title || 'Founder note')}</b>
+      <div style="margin-top:8px">${escapeHtml(x.content || '')}</div>
+      <div class="small" style="margin-top:8px">${escapeHtml(x.username || 'founder')} • ${escapeHtml(x.created_at || '')}</div>
+    </div>
+  `);
+}
+
+async function saveFounderNote(){
+  const title = (document.getElementById('founderNoteTitle')?.value || '').trim();
+  const content = (document.getElementById('founderNoteContent')?.value || '').trim();
+  if (!content) return alert('Write a founder note first.');
+
+  const d = await API.post('/founder/notes', { title, content });
+  if (d.error) return alert(d.error);
+
+  document.getElementById('founderNoteTitle').value = '';
+  document.getElementById('founderNoteContent').value = '';
+  await loadFounderNotes();
+}
+
+async function loadFounderModeration(){
+  const d = await API.get('/founder/moderation');
+  if (d.error) return alert(d.error);
+
+  renderFounderCards('Moderation Actions', d.items || [], x => `
+    <div class="item">
+      <b>${escapeHtml(x.action_type || 'action')}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(x.username || 'founder')} • ${escapeHtml(x.target_type || '')} #${x.target_id}</div>
+      <div class="small" style="margin-top:8px">${escapeHtml(x.payload_json || '{}')}</div>
+      <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+    </div>
+  `);
+}
+
+const __sem_showTab_original = showTab;
+showTab = function(name, el){
+  __sem_showTab_original(name, el);
+  if (name === 'founder' && currentUser && (currentUser.role === 'founder' || currentUser.role === 'admin')) {
+    loadFounderCommandCenter().catch(() => {});
+  }
+};
+
+/* PUBLIC BRAND POLISH SWEEP */
+function scrollToPublicBlock(id){
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function loadPublicSite(){
+  try{
+    const d = await fetch('/public/site').then(r => r.json());
+    const sections = d.sections || [];
+    const hero = sections.find(x => x.section_key === 'hero');
+    if (hero){
+      const t = document.getElementById('publicHeroTitle');
+      const b = document.getElementById('publicHeroBody');
+      if (t) t.textContent = hero.title || d.brand || 'SemantiqAI';
+      if (b) b.textContent = hero.body || d.tagline || '';
+    }
+
+    const featureGrid = document.getElementById('publicFeatureGrid');
+    if (featureGrid){
+      const wanted = sections.filter(x => (x.section_key || '').startsWith('feature_') || x.section_key === 'positioning' || x.section_key === 'founder' || x.section_key === 'pricing');
+      featureGrid.innerHTML = wanted.map(x => `
+        <div class="public-card">
+          <b>${escapeHtml(x.title || x.section_key)}</b>
+          <div class="muted" style="margin-top:8px">${escapeHtml(x.body || '')}</div>
+          ${x.cta_text ? `<div class="row" style="margin-top:12px"><button class="secondary" onclick="handlePublicCTA('${escapeHtml((x.cta_link || '').replace(/'/g, "\\'"))}')">${escapeHtml(x.cta_text)}</button></div>` : ''}
+        </div>
+      `).join('');
+    }
+  }catch(e){}
+}
+
+function handlePublicCTA(link){
+  if (!link) return;
+  if (link.startsWith('#')) {
+    const id = link.slice(1);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  window.location.href = link;
+}
+
+async function joinPublicWaitlist(){
+  const name = (document.getElementById('publicWaitlistName')?.value || '').trim();
+  const email = (document.getElementById('publicWaitlistEmail')?.value || '').trim();
+  const use_case = (document.getElementById('publicWaitlistUseCase')?.value || '').trim();
+  const note = (document.getElementById('publicWaitlistNote')?.value || '').trim();
+
+  const res = await fetch('/public/waitlist', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, use_case, note, source: 'frontend_public_waitlist' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  ['publicWaitlistName','publicWaitlistEmail','publicWaitlistUseCase','publicWaitlistNote'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  alert('Joined the waitlist.');
+}
+
+async function loadDashboardWelcome(){
+  if (!currentUser) return;
+  try{
+    const d = await API.get('/me/dashboard');
+    if (d.error) return;
+    const card = document.getElementById('dashboardWelcomeCard');
+    const text = document.getElementById('dashboardWelcomeText');
+    const meta = document.getElementById('dashboardWelcomeMeta');
+    const quick = document.getElementById('onboardingPolishCard');
+
+    if (card && text && meta){
+      card.style.display = '';
+      text.textContent = d.welcome || 'Welcome back.';
+      meta.textContent = `threads=${d.thread_count || 0} • memories=${d.memory_count || 0} • onboarding=${d.onboarding && d.onboarding.completed ? 'complete' : 'not complete'}`;
+    }
+
+    if (quick){
+      quick.style.display = d.onboarding && d.onboarding.completed ? 'none' : '';
+    }
+  }catch(e){}
+}
+
+async function completeQuickOnboarding(){
+  const goal = (document.getElementById('quickGoal')?.value || '').trim();
+  const mode = (document.getElementById('quickMode')?.value || '').trim();
+  const rawPrefs = (document.getElementById('quickPrefs')?.value || '').trim();
+  const preferences = rawPrefs ? rawPrefs.split(',').map(x => x.trim()).filter(Boolean) : [];
+
+  const d = await API.post('/onboarding/complete', { goal, mode, preferences });
+  if (d.error) return alert(d.error);
+
+  alert('Quick start saved.');
+  await loadDashboardWelcome();
+}
+
+async function loadFounderPublicContent(){
+  const d = await API.get('/founder/public-content');
+  if (d.error) return alert(d.error);
+
+  const el = document.getElementById('founderList');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div class="item"><b>Public Site Content</b><div class="small" style="margin-top:8px">${(d.items || []).length} section(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.section_key)}</b>
+        <input id="pub_title_${x.section_key}" value="${escapeHtml(x.title || '')}" style="margin-top:8px" />
+        <textarea id="pub_body_${x.section_key}" style="margin-top:8px">${escapeHtml(x.body || '')}</textarea>
+        <input id="pub_cta_text_${x.section_key}" value="${escapeHtml(x.cta_text || '')}" style="margin-top:8px" />
+        <input id="pub_cta_link_${x.section_key}" value="${escapeHtml(x.cta_link || '')}" style="margin-top:8px" />
+        <div class="row" style="margin-top:10px">
+          <button class="secondary" onclick="saveFounderPublicContent('${x.section_key}')">Save Section</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveFounderPublicContent(sectionKey){
+  const title = (document.getElementById(`pub_title_${sectionKey}`)?.value || '').trim();
+  const body = (document.getElementById(`pub_body_${sectionKey}`)?.value || '').trim();
+  const cta_text = (document.getElementById(`pub_cta_text_${sectionKey}`)?.value || '').trim();
+  const cta_link = (document.getElementById(`pub_cta_link_${sectionKey}`)?.value || '').trim();
+
+  const d = await API.post('/founder/public-content/' + encodeURIComponent(sectionKey), {
+    title, body, cta_text, cta_link
+  });
+  if (d.error) return alert(d.error);
+
+  await loadFounderPublicContent();
+  await loadPublicSite();
+}
+
+if (typeof loadFounderCommandCenter === 'function') {
+  const __old_loadFounderCommandCenter = loadFounderCommandCenter;
+  loadFounderCommandCenter = async function(){
+    await __old_loadFounderCommandCenter();
+    if (currentUser && (currentUser.role === 'founder' || currentUser.role === 'admin')) {
+      const founderList = document.getElementById('founderList');
+      if (founderList && !document.getElementById('founderPublicContentButtonInjected')) {
+        const wrap = document.createElement('div');
+        wrap.id = 'founderPublicContentButtonInjected';
+        wrap.className = 'item';
+        wrap.innerHTML = '<div class="row"><button class="secondary" onclick="loadFounderPublicContent()">Public Content Editor</button></div>';
+        founderList.prepend(wrap);
+      }
+    }
+  };
+}
+
+async function loadFounderSecurity(){
+  const d = await API.get('/founder/security');
+  if (d.error) return alert(d.error);
+  const el = document.getElementById('founderList');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="item"><b>Security / Readiness</b></div>
+    <div class="item"><div class="small">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>
+  `;
+}
+
+async function loadFounderRequestLogs(){
+  const d = await API.get('/founder/request-logs');
+  if (d.error) return alert(d.error);
+  const el = document.getElementById('founderList');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="item"><b>Request Logs</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.method || '')} ${escapeHtml(x.path || '')}</b>
+        <div class="small" style="margin-top:6px">status=${x.status_code} • request=${escapeHtml(x.request_id || '')}</div>
+        <div class="small" style="margin-top:6px">user=${x.user_id ?? '-'} • ip=${escapeHtml(x.remote_addr || '')}</div>
+        <div class="small" style="margin-top:6px">${escapeHtml(x.created_at || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.meta_json || '{}')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+/* COGNITIVE LAB SWEEP */
+async function loadPlansPanel(){
+  const d = await API.get('/plans');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+
+  list.innerHTML = `
+    <div class="item"><b>Plans</b><div class="small" style="margin-top:8px">Monetization skeleton is now wired. Pricing can stay placeholder until live billing.</div></div>
+    <div class="plan-grid">
+      ${(d.items || []).map(x => `
+        <div class="plan-panel-card">
+          <b>${escapeHtml(x.name || x.plan_key)}</b>
+          <div class="small" style="margin-top:8px">$${escapeHtml(x.price_monthly || '0')}/mo</div>
+          <div class="small" style="margin-top:8px">requests=${x.request_limit} • memory=${x.memory_limit} • artifacts=${x.artifacts_limit}</div>
+          <div class="small" style="margin-top:8px">${escapeHtml(x.features_json || '[]')}</div>
+          <button class="secondary" style="margin-top:10px" onclick="sendUpgradeInterest('${x.plan_key}')">Interested</button>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+async function sendUpgradeInterest(planKey){
+  const note = prompt('Optional note for upgrade interest:') || '';
+  const d = await API.post('/upgrade-interest', { target_plan: planKey, note });
+  if (d.error) return alert(d.error);
+  alert('Upgrade interest recorded.');
+}
+
+async function loadCognitiveDashboard(){
+  const [dash, ent] = await Promise.all([
+    API.get('/cognitive/dashboard'),
+    API.get('/me/entitlements')
+  ]);
+
+  if (dash.error) return alert(dash.error);
+  if (ent.error) return alert(ent.error);
+
+  document.getElementById('cogRecentSessions').textContent = dash.stats?.recent_session_count ?? 0;
+  document.getElementById('cogAverageScore').textContent = dash.stats?.average_score ?? '-';
+  document.getElementById('cogDecisionCount').textContent = dash.stats?.decision_entries ?? 0;
+  document.getElementById('cogFounderPro').textContent = ent.founder_capabilities && ent.founder_capabilities.length ? 'ON' : 'OFF';
+
+  const p = dash.profile || {};
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ''; };
+  setVal('cogGoal', p.primary_goal || '');
+  setVal('cogStyle', p.training_style || '');
+  setVal('cogFocusWindow', p.focus_window_minutes || 45);
+  try {
+    setVal('cogStrengths', JSON.parse(p.strengths_json || '[]').join(', '));
+    setVal('cogWeaknesses', JSON.parse(p.weaknesses_json || '[]').join(', '));
+  } catch(e) {}
+  setVal('cogRecoveryNotes', p.recovery_notes || '');
+
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Cognitive Dashboard</b></div>
+    <div class="item"><div class="small">${escapeHtml(JSON.stringify(dash, null, 2))}</div></div>
+  `;
+}
+
+async function saveCognitiveProfile(){
+  const payload = {
+    primary_goal: (document.getElementById('cogGoal')?.value || '').trim(),
+    training_style: (document.getElementById('cogStyle')?.value || '').trim(),
+    focus_window_minutes: parseInt((document.getElementById('cogFocusWindow')?.value || '45').trim(), 10) || 45,
+    strengths: ((document.getElementById('cogStrengths')?.value || '').split(',').map(x => x.trim()).filter(Boolean)),
+    weaknesses: ((document.getElementById('cogWeaknesses')?.value || '').split(',').map(x => x.trim()).filter(Boolean)),
+    recovery_notes: (document.getElementById('cogRecoveryNotes')?.value || '').trim()
+  };
+  const d = await API.post('/cognitive/profile', payload);
+  if (d.error) return alert(d.error);
+  await loadCognitiveDashboard();
+}
+
+async function saveCognitiveSession(){
+  const payload = {
+    session_type: (document.getElementById('cogSessionType')?.value || '').trim(),
+    title: (document.getElementById('cogSessionTitle')?.value || '').trim(),
+    instructions: (document.getElementById('cogSessionInstructions')?.value || '').trim(),
+    duration_minutes: parseInt((document.getElementById('cogSessionMinutes')?.value || '15').trim(), 10) || 15,
+    difficulty: (document.getElementById('cogSessionDifficulty')?.value || '').trim(),
+    score: (() => {
+      const v = (document.getElementById('cogSessionScore')?.value || '').trim();
+      return v ? parseInt(v, 10) : null;
+    })(),
+    notes: (document.getElementById('cogSessionNotes')?.value || '').trim()
+  };
+  const d = await API.post('/cognitive/sessions', payload);
+  if (d.error) return alert(d.error);
+  await loadCognitiveSessions();
+}
+
+async function loadCognitiveSessions(){
+  const d = await API.get('/cognitive/sessions');
+  if (d.error) return alert(d.error);
+
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+
+  list.innerHTML = `
+    <div class="item"><b>Cognitive Sessions</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || 'Session')}</b>
+        <div class="small" style="margin-top:6px">${escapeHtml(x.session_type || '')} • ${x.duration_minutes} min • ${escapeHtml(x.difficulty || '')} • score=${x.score ?? '-'}</div>
+        <div style="margin-top:8px">${escapeHtml(x.instructions || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.notes || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function loadCognitiveProtocols(){
+  const d = await API.get('/cognitive/protocols');
+  if (d.error) return alert(d.error);
+
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+
+  list.innerHTML = `
+    <div class="item"><b>Cognitive Protocols</b><div class="small" style="margin-top:8px">Founder Pro: ${d.founder_pro_enabled ? 'ON' : 'OFF'}</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || x.key)}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.description || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml((x.steps || []).join(' → '))}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveDecisionJournal(){
+  const payload = {
+    title: (document.getElementById('djTitle')?.value || '').trim(),
+    context: (document.getElementById('djContext')?.value || '').trim(),
+    options: ((document.getElementById('djOptions')?.value || '').split(',').map(x => x.trim()).filter(Boolean)),
+    chosen_option: (document.getElementById('djChosen')?.value || '').trim(),
+    expected_outcome: (document.getElementById('djOutcome')?.value || '').trim(),
+    review_notes: (document.getElementById('djReview')?.value || '').trim()
+  };
+  const d = await API.post('/decision-journal', payload);
+  if (d.error) return alert(d.error);
+  await loadDecisionJournal();
+}
+
+async function loadDecisionJournal(){
+  const d = await API.get('/decision-journal');
+  if (d.error) return alert(d.error);
+
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+
+  list.innerHTML = `
+    <div class="item"><b>Decision Journal</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || 'Decision')}</b>
+        <div style="margin-top:8px">${escapeHtml(x.context || '')}</div>
+        <div class="small" style="margin-top:8px">options=${escapeHtml(x.options_json || '[]')}</div>
+        <div class="small" style="margin-top:8px">chosen=${escapeHtml(x.chosen_option || '')}</div>
+        <div class="small" style="margin-top:8px">expected=${escapeHtml(x.expected_outcome || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.review_notes || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function loadFounderCapabilities(){
+  const d = await API.get('/founder/capabilities');
+  if (d.error) return alert(d.error);
+  const el = document.getElementById('founderList');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div class="item"><b>Founder Capabilities</b><div class="small" style="margin-top:8px">${(d.items || []).length} capability flag(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.capability_key || '')}</b>
+        <div class="small" style="margin-top:8px">enabled=${x.enabled}</div>
+        <textarea id="cap_cfg_${x.capability_key}" style="margin-top:8px">${escapeHtml(x.config_json || '{}')}</textarea>
+        <div class="row" style="margin-top:10px">
+          <button class="secondary" onclick="saveFounderCapability('${x.capability_key}', true)">Enable</button>
+          <button class="secondary" onclick="saveFounderCapability('${x.capability_key}', false)">Disable</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveFounderCapability(capabilityKey, enabled){
+  let cfg = {};
+  try {
+    cfg = JSON.parse((document.getElementById(`cap_cfg_${capabilityKey}`)?.value || '{}'));
+  } catch(e) {
+    return alert('Capability config must be valid JSON.');
+  }
+  const d = await API.post('/founder/capabilities/' + encodeURIComponent(capabilityKey), { enabled, config: cfg });
+  if (d.error) return alert(d.error);
+  await loadFounderCapabilities();
+}
+
+if (typeof loadFounderCommandCenter === 'function') {
+  const __oldFCC = loadFounderCommandCenter;
+  loadFounderCommandCenter = async function(){
+    await __oldFCC();
+    const founderList = document.getElementById('founderList');
+    if (founderList && !document.getElementById('founderCapsBtnHook')) {
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.id = 'founderCapsBtnHook';
+      item.innerHTML = '<div class="row"><button class="secondary" onclick="loadFounderCapabilities()">Founder Capabilities</button><button class="secondary" onclick="loadFounderUpgradeInterest()">Upgrade Interest</button></div>';
+      founderList.prepend(item);
+    }
+  };
+}
+
+async function loadFounderUpgradeInterest(){
+  const d = await API.get('/founder/upgrade-interest');
+  if (d.error) return alert(d.error);
+  const el = document.getElementById('founderList');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div class="item"><b>Upgrade Interest</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.target_plan || '')}</b>
+        <div class="small" style="margin-top:8px">user=${x.user_id ?? '-'} • email=${escapeHtml(x.email || '')}</div>
+        <div style="margin-top:8px">${escapeHtml(x.note || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+/* CELESTIAL COGNITIVE LAB UI SWEEP */
+async function loadCognitiveAssessments(){
+  const d = await API.get('/cognitive/assessments');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Assessments</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || 'Assessment')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.assessment_type || '')} • raw=${x.raw_score ?? '-'} • normalized=${x.normalized_score ?? '-'}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.results_json || '{}')}</div>
+        <div style="margin-top:8px">${escapeHtml(x.notes || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.created_at || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveCognitiveAssessment(){
+  const title = prompt('Assessment title:', 'Reasoning Baseline') || 'Assessment';
+  const assessment_type = prompt('Assessment type:', 'reasoning') || 'reasoning';
+  const raw = prompt('Raw score:', '0') || '0';
+  const norm = prompt('Normalized score:', raw) || raw;
+  const notes = prompt('Notes:', '') || '';
+  const d = await API.post('/cognitive/assessments', {
+    title,
+    assessment_type,
+    raw_score: parseFloat(raw),
+    normalized_score: parseFloat(norm),
+    notes,
+    results: {}
+  });
+  if (d.error) return alert(d.error);
+  await loadCognitiveAssessments();
+}
+
+async function loadCognitiveTrainingPlans(){
+  const d = await API.get('/cognitive/training-plans');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Training Plans</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || 'Training Plan')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.domain_focus || '')} • ${escapeHtml(x.difficulty || '')} • ${escapeHtml(x.cadence || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.plan_json || '[]')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function generateDefaultTrainingPlan(){
+  const d = await API.post('/cognitive/training-plans', {
+    title: 'Celestial Daily Plan',
+    domain_focus: 'reasoning + memory + synthesis',
+    difficulty: 'deep',
+    cadence: 'daily',
+    plan: [
+      { block: 'reasoning', minutes: 20, task: 'argument breakdown + inversion' },
+      { block: 'recall', minutes: 10, task: 'review due recall cards' },
+      { block: 'reading', minutes: 20, task: 'read and compress one source' },
+      { block: 'synthesis', minutes: 15, task: 'merge ideas into one operational summary' },
+      { block: 'decision', minutes: 10, task: 'journal one meaningful decision' }
+    ]
+  });
+  if (d.error) return alert(d.error);
+  await loadCognitiveTrainingPlans();
+}
+
+async function loadRecallCards(dueOnly = false){
+  const path = dueOnly ? '/cognitive/recall-cards?due_only=true' : '/cognitive/recall-cards';
+  const d = await API.get(path);
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Recall Cards</b><div class="small" style="margin-top:8px">${(d.items || []).length} card(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.prompt || '')}</b>
+        <div style="margin-top:8px">${escapeHtml(x.answer || '')}</div>
+        <div class="small" style="margin-top:8px">deck=${escapeHtml(x.deck_key || '')} • reps=${x.reps} • interval=${x.interval_days}d • next=${escapeHtml(x.next_review_at || '')}</div>
+        <div class="row" style="margin-top:10px">
+          <button class="secondary" onclick="reviewRecallCard(${x.id}, 2)">Hard</button>
+          <button class="secondary" onclick="reviewRecallCard(${x.id}, 4)">Good</button>
+          <button class="secondary" onclick="reviewRecallCard(${x.id}, 5)">Easy</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function addRecallCard(){
+  const promptText = prompt('Recall prompt:', '') || '';
+  if (!promptText) return;
+  const answerText = prompt('Recall answer:', '') || '';
+  if (!answerText) return;
+  const deck = prompt('Deck key:', 'general') || 'general';
+  const d = await API.post('/cognitive/recall-cards', {
+    deck_key: deck,
+    prompt: promptText,
+    answer: answerText,
+    tags: []
+  });
+  if (d.error) return alert(d.error);
+  await loadRecallCards();
+}
+
+async function reviewRecallCard(cardId, score){
+  const d = await API.post('/cognitive/recall-cards/' + cardId + '/review', { score });
+  if (d.error) return alert(d.error);
+  await loadRecallCards(true);
+}
+
+async function loadMentalModels(){
+  const d = await API.get('/cognitive/mental-models');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Mental Models</b><div class="small" style="margin-top:8px">${(d.items || []).length} model(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.title || '')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.category || '')}</div>
+        <div style="margin-top:8px">${escapeHtml(x.description || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.application_notes || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function loadReadingSprints(){
+  const d = await API.get('/cognitive/reading-sprints');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Reading Sprints</b><div class="small" style="margin-top:8px">${(d.items || []).length} sprint(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.source_title || '')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.pages_or_minutes || '')} • compression=${x.compression_score ?? '-'}</div>
+        <div style="margin-top:8px">${escapeHtml(x.summary || '')}</div>
+        <div class="small" style="margin-top:8px">insights=${escapeHtml(x.insights_json || '[]')}</div>
+        <div class="small" style="margin-top:8px">questions=${escapeHtml(x.questions_json || '[]')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveReadingSprint(){
+  const source_title = prompt('Source title:', 'Article / Chapter / Paper') || 'Reading Sprint';
+  const pages_or_minutes = prompt('Pages or minutes:', '20 min') || '';
+  const summary = prompt('Summary:', '') || '';
+  const compression = prompt('Compression score:', '7') || '7';
+  const d = await API.post('/cognitive/reading-sprints', {
+    source_title,
+    pages_or_minutes,
+    summary,
+    insights: [],
+    questions: [],
+    compression_score: parseInt(compression, 10) || 0
+  });
+  if (d.error) return alert(d.error);
+  await loadReadingSprints();
+}
+
+async function loadSynthesisSessions(){
+  const d = await API.get('/cognitive/synthesis');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Synthesis Sessions</b><div class="small" style="margin-top:8px">${(d.items || []).length} session(s)</div></div>
+    ${(d.items || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.topic || '')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.output_type || '')} • ${escapeHtml(x.depth || '')} • score=${x.score ?? '-'}</div>
+        <div style="margin-top:8px">${escapeHtml(x.synthesis_text || '')}</div>
+        <div class="small" style="margin-top:8px">${escapeHtml(x.source_inputs_json || '[]')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function saveSynthesisSession(){
+  const topic = prompt('Topic:', 'Strategic synthesis') || 'Synthesis Session';
+  const synthesis_text = prompt('Synthesis text:', '') || '';
+  const output_type = prompt('Output type:', 'summary') || 'summary';
+  const depth = prompt('Depth:', 'standard') || 'standard';
+  const d = await API.post('/cognitive/synthesis', {
+    topic,
+    source_inputs: [],
+    synthesis_text,
+    output_type,
+    depth,
+    score: null
+  });
+  if (d.error) return alert(d.error);
+  await loadSynthesisSessions();
+}
+
+async function loadDailyProtocol(){
+  const d = await API.get('/cognitive/daily-protocol');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Daily Protocol</b><div class="small" style="margin-top:8px">goal=${escapeHtml(d.goal || '')} • due=${d.due_recall_cards ?? 0} • founder_pro=${d.founder_pro ? 'ON' : 'OFF'}</div></div>
+    ${(d.protocol || []).map(x => `
+      <div class="item">
+        <b>${escapeHtml(x.phase || '')}</b>
+        <div class="small" style="margin-top:8px">${x.minutes} minutes</div>
+        <div style="margin-top:8px">${escapeHtml(x.task || '')}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function loadCognitiveAdvancedDashboard(){
+  const d = await API.get('/cognitive/advanced-dashboard');
+  if (d.error) return alert(d.error);
+  const list = document.getElementById('cognitiveList');
+  if (!list) return;
+  list.innerHTML = `
+    <div class="item"><b>Founder Advanced Cognitive Dashboard</b></div>
+    <div class="item"><div class="small">${escapeHtml(JSON.stringify(d, null, 2))}</div></div>
+  `;
+}
+/* ACADEMY EDUCATION SWEEP V2 */
+async function loadEducationDashboard(){
+  const d = await API.get('/education/dashboard');
+  if (d.error) return alert(d.error);
+  renderEducationDashboard(d);
+}
+
+function renderEducationDashboard(d){
+  const host = document.getElementById('educationList');
+  if (!host) return;
+  const stats = d.stats || {};
+  host.innerHTML = `
+    <div class="item"><b>Academy Dashboard</b></div>
+    <div class="celestial-kpis" style="margin-top:12px">
+      <div class="celestial-kpi"><span class="small">Courses</span><b>${stats.courses ?? 0}</b></div>
+      <div class="celestial-kpi"><span class="small">Enrollments</span><b>${stats.enrollments ?? 0}</b></div>
+      <div class="celestial-kpi"><span class="small">Avg Progress</span><b>${stats.avg_progress ?? 0}%</b></div>
+    </div>
+    <div style="margin-top:14px">
+      ${(d.recent_courses || []).map(c => `
+        <div class="item">
+          <b>${escapeHtml(c.title || 'Course')}</b>
+          <div class="small" style="margin-top:8px">${escapeHtml(c.subject || '')} • ${escapeHtml(c.level || '')} • ${escapeHtml(c.audience || '')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+async function saveEducationProfile(){
+  const target_domain = prompt('Target domain:', 'Medicine') || '';
+  const current_level = prompt('Current level:', 'advanced') || '';
+  const learning_style = prompt('Learning style:', 'rigorous, adaptive, synthesis-heavy') || '';
+  const weekly_hours = prompt('Weekly hours:', '7') || '7';
+  const goal_text = prompt('Goal:', 'Become world-class in this subject') || '';
+  const constraints_text = prompt('Constraints:', '') || '';
+  const d = await API.post('/education/profile', {
+    target_domain, current_level, learning_style,
+    weekly_hours: parseInt(weekly_hours, 10) || 5,
+    goal_text, constraints_text
+  });
+  if (d.error) return alert(d.error);
+  alert('Education profile saved');
+}
+
+async function generateEducationCourse(){
+  const topic = prompt('Course topic:', 'Neuroscience') || 'General Knowledge';
+  const level = prompt('Level:', 'adaptive') || 'adaptive';
+  const audience = prompt('Audience:', 'general') || 'general';
+  const d = await API.post('/education/generate-course', { topic, level, audience, visibility: 'private' });
+  if (d.error) return alert(d.error);
+  alert('Course created: ' + (d.course?.title || 'Untitled'));
+  await loadEducationCourses();
+}
+
+async function loadEducationCourses(){
+  const d = await API.get('/education/courses');
+  if (d.error) return alert(d.error);
+  const host = document.getElementById('educationList');
+  if (!host) return;
+  host.innerHTML = `
+    <div class="item"><b>Courses</b><div class="small" style="margin-top:8px">${(d.items || []).length} item(s)</div></div>
+    ${(d.items || []).map(c => `
+      <div class="item">
+        <b>${escapeHtml(c.title || 'Course')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(c.subject || '')} • ${escapeHtml(c.level || '')} • ${escapeHtml(c.audience || '')}</div>
+        <div style="margin-top:8px">${escapeHtml(c.description || '')}</div>
+        <div class="row" style="margin-top:10px">
+          <button class="secondary" onclick="enrollEducationCourse(${c.id})">Enroll</button>
+          <button class="secondary" onclick="openEducationCourse(${c.id})">Open</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function enrollEducationCourse(courseId){
+  const d = await API.post('/education/enroll', { course_id: courseId });
+  if (d.error) return alert(d.error);
+  alert('Enrolled');
+}
+
+async function openEducationCourse(courseId){
+  const d = await API.get('/education/courses/' + courseId);
+  if (d.error) return alert(d.error);
+  const host = document.getElementById('educationList');
+  if (!host) return;
+  const course = d.course || {};
+  host.innerHTML = `
+    <div class="item">
+      <b>${escapeHtml(course.title || 'Course')}</b>
+      <div class="small" style="margin-top:8px">${escapeHtml(course.subject || '')} • ${escapeHtml(course.level || '')}</div>
+      <div style="margin-top:8px">${escapeHtml(course.description || '')}</div>
+    </div>
+    ${(d.lessons || []).map((l, idx) => `
+      <div class="item">
+        <b>${idx + 1}. ${escapeHtml(l.title || 'Lesson')}</b>
+        <div class="small" style="margin-top:8px">${escapeHtml(l.lesson_type || '')} • ${escapeHtml(l.difficulty || '')} • ${l.estimated_minutes ?? 20} min</div>
+        <div style="margin-top:8px; white-space:pre-wrap">${escapeHtml(l.content || '')}</div>
+        <div class="row" style="margin-top:10px">
+          <button class="secondary" onclick="generateEducationQuiz(${l.id})">Generate Quiz</button>
+          <button class="secondary" onclick="markEducationProgress(${course.id}, ${l.id}, ${Math.min(100, (idx + 1) * 12.5)})">Mark Progress</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function markEducationProgress(courseId, lessonId, progressPct){
+  const d = await API.post('/education/progress', {
+    course_id: courseId,
+    lesson_id: lessonId,
+    progress_pct: progressPct
+  });
+  if (d.error) return alert(d.error);
+  alert('Progress updated');
+}
+
+async function generateEducationQuiz(lessonId){
+  const d = await API.post('/education/generate-quiz', { lesson_id: lessonId });
+  if (d.error) return alert(d.error);
+  const q = d.quiz || {};
+  const questions = JSON.parse(q.questions_json || '[]');
+  const answers = JSON.parse(q.answer_key_json || '[]');
+  const explanations = JSON.parse(q.explanation_json || '[]');
+  const host = document.getElementById('educationList');
+  if (!host) return;
+  host.innerHTML = `
+    <div class="item"><b>${escapeHtml(q.title || 'Quiz')}</b></div>
+    ${questions.map((item, i) => `
+      <div class="item">
+        <b>Q${i + 1}</b>
+        <div style="margin-top:8px">${escapeHtml(item || '')}</div>
+        <div class="small" style="margin-top:8px">Answer: ${escapeHtml((answers[i] || ''))}</div>
+        <div class="small" style="margin-top:8px">Why: ${escapeHtml((explanations[i] || ''))}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+
+
+/* HYPER TEACHER UI */
+
+async function hyperTeach(){
+  const topic = prompt("What do you want to learn?");
+  const res = await API.post("/education/hyper-teach",{topic});
+  alert(res.lesson);
+}
+
+async function hyperSession(){
+  const msg = prompt("Ask your AI tutor:");
+  const res = await API.post("/education/hyper-session",{message:msg});
+  alert(res.reply);
+}
+
+(async function init(){
+  await healthCheck();
+  if (API.token()){
+    await loadMe();
+    await loadThreads();
+    await loadPresets();
+    await loadAgents();
+    await loadOnboarding();
+    loadPublicSite().catch(() => {});
+    loadDashboardWelcome().catch(() => {});
+    loadCognitiveDashboard().catch(() => {});
+    if (currentUser && (currentUser.role === 'founder' || currentUser.role === 'admin')) { loadFounderCommandCenter().catch(() => {}); }
+  }
+})();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+</body>
+</html>
+
+<!-- THREAD SIDEBAR -->
+<div id="threadSidebar" style="position:fixed;left:0;top:0;width:250px;height:100%;background:#0b1430;border-right:1px solid #27376a;padding:10px;overflow:auto;">
+  <button onclick="createThread()">+ New Thread</button>
+  <div id="threadList"></div>
+</div>
+
+<script>
+let currentThread = null;
+
+async function loadThreads(){
+  const d = await API.get('/threads');
+  const el = document.getElementById('threadList');
+  el.innerHTML = (d.items||[]).map(t => 
+    '<div onclick="openThread('+t.id+')" style="padding:8px;border:1px solid #27376a;margin-top:6px;cursor:pointer">'+t.title+'</div>'
+  ).join('');
+}
+
+async function createThread(){
+  await API.post('/threads',{title:'New Thread'});
+  loadThreads();
+}
+
+async function openThread(id){
+  currentThread = id;
+  const d = await API.get('/threads/'+id+'/messages');
+  const log = document.getElementById('chatLog');
+  log.innerHTML = (d.items||[]).map(m =>
+    '<div class="msg '+m.role+'"><b>'+m.role+'</b><br>'+m.content+'</div>'
+  ).join('');
+}
+
+async function sendChat(){
+  const msg = document.getElementById('chatMessage').value;
+  if(!currentThread){ alert('Create a thread first'); return; }
+  const d = await API.post('/threads/'+currentThread+'/message',{message:msg});
+  openThread(currentThread);
+}
+
+loadThreads();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<script>
+async function checkOnboarding(){
+  try{
+    const d = await API.get('/onboarding/status');
+    if(!d.completed){
+      const choice = prompt("What do you want to do?\n1. Make money\n2. Build product\n3. Learn\n4. Automate");
+      await API.post('/onboarding/complete',{});
+      await API.post('/memory/hint',{hint:choice});
+    }
+  }catch{}
+}
+
+checkOnboarding();
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<!-- JOB PANEL -->
+<section class="tab-panel" id="tab-jobs">
+  <div class="stack">
+    <textarea id="jobInput" placeholder="Run async task..."></textarea>
+    <button onclick="createJob()">Run in Background</button>
+    <button onclick="loadJobs()">Refresh Jobs</button>
+    <div id="jobList"></div>
+  </div>
+</section>
+
+<script>
+async function createJob(){
+  const input = document.getElementById('jobInput').value;
+  await API.post('/jobs',{input});
+  alert('Job queued');
+}
+
+async function loadJobs(){
+  const d = await API.get('/jobs');
+  const el = document.getElementById('jobList');
+  el.innerHTML = (d.items||[]).map(j =>
+    '<div class="item"><b>'+j.status+'</b><br>'+j.input+'<br><pre>'+ (j.output||'') +'</pre></div>'
+  ).join('');
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+
+<!-- AGENT OS TAB -->
+<section class="tab-panel" id="tab-agentos">
+  <div class="stack">
+    <textarea id="agentMessage" placeholder="Run multi-agent intelligence..."></textarea>
+    <button onclick="runAgentOS()">Run Agent OS</button>
+    <div id="agentOutput"></div>
+  </div>
+</section>
+
+<script>
+async function runAgentOS(){
+  const msg = document.getElementById('agentMessage').value;
+  const d = await API.post('/agent/run',{message:msg});
+  document.getElementById('agentOutput').innerText = d.response || d.error;
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+<section class="tab-panel" id="tab-agentos">
+  <div class="stack">
+    <textarea id="agentInput" placeholder="Run full intelligence system..."></textarea>
+    <button onclick="runAgentOS()">Run System</button>
+    <div id="agentResult"></div>
+  </div>
+</section>
+
+<script>
+async function runAgentOS(){
+  const msg = document.getElementById('agentInput').value;
+  const d = await API.post('/agent-os',{message:msg});
+  document.getElementById('agentResult').innerText = d.response || d.error;
+}
+
+async function growthLeadCapture(){
+  const nameEl = document.getElementById('growthLeadName');
+  const emailEl = document.getElementById('growthLeadEmail');
+  const noteEl = document.getElementById('growthLeadNote');
+  if (!emailEl) return;
+
+  const name = (nameEl?.value || '').trim();
+  const email = (emailEl?.value || '').trim();
+  const note = (noteEl?.value || '').trim();
+
+  const res = await fetch('/growth/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, note, source: 'frontend_growth_box' })
+  });
+
+  const d = await res.json();
+  if (d.error) return alert(d.error);
+
+  if (nameEl) nameEl.value = '';
+  if (emailEl) emailEl.value = '';
+  if (noteEl) noteEl.value = '';
+  alert(d.status === 'existing' ? 'Lead already exists.' : 'Lead captured.');
+}
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  if (!hero || document.getElementById('growthCaptureCard')) return;
+
+  const card = document.createElement('div');
+  card.id = 'growthCaptureCard';
+  card.className = 'mini';
+  card.style.marginTop = '16px';
+  card.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px">Growth Engine</div>
+    <div class="small" style="margin-bottom:10px">Capture early users, testers, and launch interest right inside the app.</div>
+    <div class="stack">
+      <input id="growthLeadName" placeholder="Name (optional)" />
+      <input id="growthLeadEmail" placeholder="Email for waitlist / beta access" />
+      <textarea id="growthLeadNote" placeholder="What they want from SemantiqAI"></textarea>
+      <button class="primary" onclick="growthLeadCapture()">Capture Lead</button>
+    </div>
+  `;
+  hero.appendChild(card);
+});
+</script>
+
+
+
+
+
+
+
+
+

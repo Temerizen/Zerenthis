@@ -1,0 +1,29 @@
+{
+  "id": "wf_b658838639",
+  "title": "Builder Test",
+  "prompt": "build me a monetization workflow",
+  "workflow_type": "content",
+  "created_at": "2026-04-03T22:14:53.622944+00:00",
+  "updated_at": "2026-04-03T22:14:53.622944+00:00",
+  "nodes": [
+    {
+      "id": "money_generate",
+      "kind": "content",
+      "route": "/api/founder/full-stack-generate",
+      "label": "Full Stack Generate"
+    },
+    {
+      "id": "eval_run",
+      "kind": "eval",
+      "route": "/api/eval/run",
+      "label": "Evaluate Output"
+    }
+  ],
+  "edges": [
+    {
+      "from": "money_generate",
+      "to": "eval_run"
+    }
+  ],
+  "status": "active"
+}

@@ -1,0 +1,43 @@
+{
+  "curiosity": 0.5360287499999999,
+  "pressure": 0.49995635,
+  "stability": 0.6412222999999999,
+  "last_update": {
+    "timestamp": 1776105009.1492033,
+    "curiosity": 0.5360287499999999,
+    "pressure": 0.49995635,
+    "stability": 0.6412222999999999,
+    "trend": "improving",
+    "adjustment": "reinforce_current_path",
+    "score": 0.7908176220307347
+  },
+  "history": [
+    {
+      "timestamp": 1776105008.2467275,
+      "curiosity": 0.4715,
+      "pressure": 0.4515,
+      "stability": 0.597,
+      "trend": "improving",
+      "adjustment": "reinforce_current_path",
+      "score": 0.8353086783179839
+    },
+    {
+      "timestamp": 1776105008.699759,
+      "curiosity": 0.567925,
+      "pressure": 0.549955,
+      "stability": 0.5455899999999999,
+      "trend": "declining",
+      "adjustment": "increase_exploration",
+      "score": 0.5167041127630537
+    },
+    {
+      "timestamp": 1776105009.1492033,
+      "curiosity": 0.5360287499999999,
+      "pressure": 0.49995635,
+      "stability": 0.6412222999999999,
+      "trend": "improving",
+      "adjustment": "reinforce_current_path",
+      "score": 0.7908176220307347
+    }
+  ]
+}

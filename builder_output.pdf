@@ -1,0 +1,33 @@
+{
+  "title": "Ai Money Engine Starter System For Beginners Execution Pack for start making money faster",
+  "file_name": "AI_money_engine_starter_system_for_beginners_d65186.pdf",
+  "file_url": "/api/file/AI_money_engine_starter_system_for_beginners_d65186.pdf",
+  "offer": {
+    "front_end": {
+      "name": "Ai Money Engine Starter System For Beginners Execution Pack for start making money faster",
+      "price": 29
+    },
+    "order_bump": {
+      "name": "templates and hooks",
+      "price": 12
+    },
+    "upsell": {
+      "name": "Ai Money Engine Starter System For Beginners Bundle",
+      "price": 59
+    },
+    "bundle_cart_value": 100
+  },
+  "summary": {
+    "buyer": "Beginners",
+    "promise": "start making money faster",
+    "cta": "Start with the front-end offer, add the bonus, and upgrade to the bundle.",
+    "quality_score": 100,
+    "quality_checks": {
+      "has_specific_topic": true,
+      "has_defined_buyer": true,
+      "has_promise": true,
+      "has_bonus": true,
+      "has_notes": true
+    }
+  }
+}

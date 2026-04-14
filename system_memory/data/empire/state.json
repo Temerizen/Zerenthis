@@ -1,0 +1,25 @@
+{
+  "mode": "empire",
+  "cycles": 4,
+  "focus": [
+    "increase perceived value",
+    "increase leverage per output",
+    "increase conversion potential",
+    "increase reusable assets",
+    "reduce fragility"
+  ],
+  "active_niches": [
+    "make money online",
+    "productivity",
+    "ai tools",
+    "creator education",
+    "digital products"
+  ],
+  "last_actions": [
+    "increase_output_pressure",
+    "double_down_offer:Creator Execution Bundle",
+    "exploit_trend:AI side-income starter kits",
+    "prioritize_niche:make money online"
+  ],
+  "compound_score": 56
+}

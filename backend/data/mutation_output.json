@@ -1,0 +1,55 @@
+{
+  "status": "ok",
+  "mutations": [
+    {
+      "name": "Viral Content Engine Pack v2",
+      "price": 31.55,
+      "headline": "Automation version of Viral Content Engine Pack designed to increase conversions",
+      "source": "Viral Content Engine Pack",
+      "type": "mutation"
+    },
+    {
+      "name": "AI Side Hustle System v2",
+      "price": 23.95,
+      "headline": "Simplicity version of AI Side Hustle System designed to increase conversions",
+      "source": "AI Side Hustle System",
+      "type": "mutation"
+    },
+    {
+      "name": "Premium Offer v2",
+      "price": 35.0,
+      "headline": "Automation version of Premium Offer designed to increase conversions",
+      "source": "Premium Offer",
+      "type": "mutation"
+    }
+  ],
+  "clones": [
+    {
+      "name": "Viral Content Engine Pack Pro",
+      "price": 29.0,
+      "headline": "Pro version of Viral Content Engine Pack optimized for performance",
+      "source": "Viral Content Engine Pack",
+      "type": "clone"
+    },
+    {
+      "name": "Viral Content Engine Pack Lite",
+      "price": 29.0,
+      "headline": "Lite version of Viral Content Engine Pack optimized for performance",
+      "source": "Viral Content Engine Pack",
+      "type": "clone"
+    },
+    {
+      "name": "Viral Content Engine Pack Advanced",
+      "price": 29.0,
+      "headline": "Advanced version of Viral Content Engine Pack optimized for performance",
+      "source": "Viral Content Engine Pack",
+      "type": "clone"
+    }
+  ],
+  "pruned": [
+    "Viral Content Engine Pack",
+    "AI Side Hustle System",
+    "Premium Offer"
+  ],
+  "timestamp": 1775986813.2588053
+}

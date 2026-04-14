@@ -1,0 +1,147 @@
+{
+  "active_goals": [
+    {
+      "id": "goal_reconstructed_1776109129",
+      "type": "balanced_progression",
+      "description": "Reconstructed from mission: None",
+      "priority": 0.5,
+      "commitment": 0.42000000000000004,
+      "progress": 0.9900000000000007,
+      "status": "active",
+      "created_at": 1776109129.256811,
+      "last_updated": 1776109349.079586,
+      "cycles_active": 1,
+      "source": "reconstructed_from_mission"
+    }
+  ],
+  "history": [
+    {
+      "id": "goal_1776100042",
+      "type": "balanced_progression",
+      "description": "Pursue balanced_progression",
+      "priority": 0.6,
+      "commitment": 0.15000000000000016,
+      "progress": 0.6,
+      "status": "dropped",
+      "created_at": 1776100042.7497828,
+      "last_updated": 1776101769.9682393,
+      "cycles_active": 12
+    },
+    {
+      "id": "goal_1776102208",
+      "type": "balanced_progression",
+      "description": "Aligned to mission: Execute mission: balanced_progression",
+      "priority": 0.6,
+      "commitment": 0.16000000000000023,
+      "progress": 0.9900000000000004,
+      "status": "dropped",
+      "created_at": 1776102208.5212626,
+      "last_updated": 1776103925.396072,
+      "cycles_active": 11,
+      "source": "self_corrected_from_mission"
+    },
+    {
+      "id": "goal_1776104059",
+      "type": "unknown",
+      "description": "Pursue unknown",
+      "priority": 0.6,
+      "commitment": 0.6200000000000001,
+      "progress": 0.15000000000000002,
+      "status": "active",
+      "created_at": 1776104059.1829402,
+      "last_updated": 1776104430.0288792,
+      "cycles_active": 3
+    },
+    {
+      "id": "goal_aligned_1776104430",
+      "type": "balanced_progression",
+      "description": "Aligned to mission: balanced_progression",
+      "priority": 0.7,
+      "commitment": 0.12000000000000002,
+      "progress": 0.3,
+      "status": "dropped",
+      "created_at": 1776104430.0388758,
+      "last_updated": 1776104657.8535314,
+      "cycles_active": 6,
+      "source": "goal_alignment_engine"
+    },
+    {
+      "id": "goal_recovered_1776104657",
+      "type": "balanced_progression",
+      "description": "Recover and continue balanced progression after performance decline",
+      "priority": 0.65,
+      "commitment": 0.15000000000000005,
+      "progress": 0.25,
+      "status": "dropped",
+      "created_at": 1776104657.8600705,
+      "last_updated": 1776104888.9250295,
+      "cycles_active": 5,
+      "source": "goal_recovery_engine"
+    },
+    {
+      "id": "goal_recovered_1776104888",
+      "type": "balanced_progression",
+      "description": "Recover and continue balanced progression",
+      "priority": 0.65,
+      "commitment": 0.15000000000000005,
+      "progress": 0.25,
+      "status": "dropped",
+      "created_at": 1776104888.9320223,
+      "last_updated": 1776105009.0616717,
+      "cycles_active": 5,
+      "source": "goal_recovery_engine"
+    },
+    {
+      "id": "goal_recovered_1776105009",
+      "type": "balanced_progression",
+      "description": "Recover and continue balanced progression",
+      "priority": 0.65,
+      "commitment": 0.18000000000000013,
+      "progress": 0.3,
+      "status": "dropped",
+      "created_at": 1776105009.067669,
+      "last_updated": 1776106540.551279,
+      "cycles_active": 6,
+      "source": "goal_recovery_engine"
+    },
+    {
+      "id": "goal_reconstructed_1776106540",
+      "type": "balanced_progression",
+      "description": "Reconstructed from mission: None",
+      "priority": 0.5,
+      "commitment": 0.14000000000000015,
+      "progress": 0.6000000000000002,
+      "status": "dropped",
+      "created_at": 1776106540.5737467,
+      "last_updated": 1776106989.3518443,
+      "cycles_active": 5,
+      "source": "reconstructed_from_mission"
+    },
+    {
+      "id": "goal_reconstructed_1776106989",
+      "type": "balanced_progression",
+      "description": "Reconstructed from mission: None",
+      "priority": 0.5,
+      "commitment": 0.14000000000000015,
+      "progress": 0.8500000000000005,
+      "status": "dropped",
+      "created_at": 1776106989.3708346,
+      "last_updated": 1776108120.5347579,
+      "cycles_active": 5,
+      "source": "reconstructed_from_mission"
+    },
+    {
+      "id": "goal_reconstructed_1776108120",
+      "type": "balanced_progression",
+      "description": "Reconstructed from mission: None",
+      "priority": 0.5,
+      "commitment": 0.2600000000000001,
+      "progress": 1.0000000000000007,
+      "status": "completed",
+      "created_at": 1776108120.555808,
+      "last_updated": 1776109129.2439156,
+      "cycles_active": 3,
+      "source": "reconstructed_from_mission"
+    }
+  ]
+}

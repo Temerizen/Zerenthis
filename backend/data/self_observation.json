@@ -1,0 +1,89 @@
+{
+  "timestamp": 1776048503.4808762,
+  "goal": {
+    "id": "primary_goal",
+    "type": "generated",
+    "priority": 0.5,
+    "reason": "primary_goal",
+    "goal_type": "expansion",
+    "metadata": {}
+  },
+  "goal_ranking": [
+    {
+      "objective": "primary_goal",
+      "priority": 0.5,
+      "score": 1.2313
+    },
+    {
+      "objective": "selected_at",
+      "priority": 0.5,
+      "score": 1.1948
+    },
+    {
+      "objective": "ranked_goals",
+      "priority": 0.5,
+      "score": 1.1599
+    },
+    {
+      "objective": "exploration_thread",
+      "priority": 0.5,
+      "score": 1.1401
+    },
+    {
+      "objective": "meta",
+      "priority": 0.5,
+      "score": 1.1111
+    },
+    {
+      "objective": "status",
+      "priority": 0.5,
+      "score": 1.0912
+    },
+    {
+      "objective": "secondary_goals",
+      "priority": 0.5,
+      "score": 1.0709
+    }
+  ],
+  "chosen_task": "builder_handoff",
+  "result_status": "done",
+  "decision_ranking": [
+    {
+      "task": "builder_handoff",
+      "score": 0.9951,
+      "parts": {
+        "base": 0.8902,
+        "preference_bonus": 0.3,
+        "goal_bonus": 0.0,
+        "novelty_bonus": 0.0,
+        "fatigue_penalty": 0.35,
+        "exploration_noise": 0.1549
+      }
+    },
+    {
+      "task": "revenue_scan",
+      "score": -0.0314,
+      "parts": {
+        "base": 0.9006,
+        "preference_bonus": 0.0,
+        "goal_bonus": 0.0,
+        "novelty_bonus": 0.0,
+        "fatigue_penalty": 1.05,
+        "exploration_noise": 0.118
+      }
+    },
+    {
+      "task": "toolbox_strategy",
+      "score": -0.3345,
+      "parts": {
+        "base": 0.8883,
+        "preference_bonus": 0.0,
+        "goal_bonus": 0.0,
+        "novelty_bonus": 0.0,
+        "fatigue_penalty": 1.4,
+        "exploration_noise": 0.1771
+      }
+    }
+  ],
+  "insight": "selected builder_handoff under directed goal pressure"
+}

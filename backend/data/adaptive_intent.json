@@ -1,0 +1,60 @@
+{
+  "last_adjustment": {
+    "timestamp": 1776105009.1433084,
+    "adjustment": "reinforce_current_path",
+    "intensity": 0.8,
+    "trend": "improving",
+    "decision": "continue",
+    "goal": "balanced_progression"
+  },
+  "history": [
+    {
+      "timestamp": 1776104889.0000277,
+      "adjustment": "reinforce_current_path",
+      "intensity": 0.8,
+      "trend": "improving",
+      "decision": "continue",
+      "goal": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.4689524,
+      "adjustment": "increase_exploration",
+      "intensity": 0.7,
+      "trend": "declining",
+      "decision": "continue",
+      "goal": "balanced_progression"
+    },
+    {
+      "timestamp": 1776104889.9129424,
+      "adjustment": "increase_exploration",
+      "intensity": 0.7,
+      "trend": "declining",
+      "decision": "observe",
+      "goal": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.2467275,
+      "adjustment": "reinforce_current_path",
+      "intensity": 0.8,
+      "trend": "improving",
+      "decision": "continue",
+      "goal": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105008.6926465,
+      "adjustment": "increase_exploration",
+      "intensity": 0.7,
+      "trend": "declining",
+      "decision": "observe",
+      "goal": "balanced_progression"
+    },
+    {
+      "timestamp": 1776105009.1433084,
+      "adjustment": "reinforce_current_path",
+      "intensity": 0.8,
+      "trend": "improving",
+      "decision": "continue",
+      "goal": "balanced_progression"
+    }
+  ]
+}

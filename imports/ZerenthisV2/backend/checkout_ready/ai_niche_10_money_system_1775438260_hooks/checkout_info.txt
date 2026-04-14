@@ -1,0 +1,7 @@
+﻿PRODUCT: Ai Niche 10 Money System 1775438260 Hooks
+TOPIC: ai_niche_10_money_system_1775438260_hooks
+PRICE: $39
+CHECKOUT PLATFORM: Gumroad or Stripe Payment Link
+FULFILLMENT: Send buyer to delivery file after payment
+STATUS: checkout_ready
+

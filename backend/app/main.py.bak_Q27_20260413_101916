@@ -1,0 +1,103 @@
+﻿from fastapi import FastAPI
+from backend.app.cognition import (
+    meta, world, self as legacy_self, self_model,
+    explore, decision, goal, execution,
+    scheduler, evolution, planning, modification,
+    apply, validation, world_model, thought,
+    intent, goals, mission
+)
+
+from backend.app.cognition.patterns import update_pattern_memory, decay_pattern_memory
+from backend.app.cognition.pattern_decision import pattern_bias_decision
+from backend.app.cognition.tension import decay_tension_memory, update_tension_memory, get_tension_bias
+from backend.app.cognition.intent import form_intent, update_intent_memory
+from backend.app.cognition.autonomy import evaluate_self_initiation, record_self_run
+from backend.app.cognition.identity_continuity import update_identity
+from backend.app.cognition.reflection_engine import reflect
+from backend.app.cognition.self_correction import apply_self_correction
+from backend.app.cognition.meta_stability import apply_meta_stability
+from backend.app.cognition.value_hierarchy import evaluate_values
+from backend.app.cognition.value_reinforcement import reinforce_values
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {"brain": "online", "goal_persistence": True, "mission_engine": True}
+
+def _brain_cycle():
+    world_state = world.update({"tick": "loop"})
+    meta_state = meta.run({"event": "cycle"})
+    legacy_self_state = legacy_self.update({"result": "ok"})
+    explore_state = explore.run()
+
+    world_model_state = world_model.run({
+        "world_state": world_state,
+        "explore_state": explore_state,
+    })
+
+    self_model_state = self_model.run({
+        "meta_state": meta_state,
+        "world_state": world_state,
+        "legacy_self_state": legacy_self_state,
+    })
+
+    thought_state = thought.run({
+        "world_state": world_state,
+        "meta_state": meta_state,
+        "self_model_state": self_model_state,
+        "world_model_state": world_model_state,
+        "explore_state": explore_state,
+    })
+
+    thought_chain = thought_state.get("thoughts", []) if isinstance(thought_state, dict) else []
+    pattern_state = update_pattern_memory(thought_chain)
+
+    value_state = evaluate_values()
+
+    intent_state = form_intent({
+        "pattern_bias": {},
+        "tension_bias": {},
+        "self_model_state": self_model_state,
+        "goal_state": {},
+        "value_state": value_state,
+    })
+
+    decision_state = decision.run({
+        "intent_state": intent_state
+    })
+
+    execution_state = execution.run({
+        "plan": {}
+    })
+
+    # =========================
+    # Q25 GOAL ENGINE
+    # =========================
+    goal_state = goals.run({
+        "goal": intent_state.get("goal") if isinstance(intent_state, dict) else None,
+        "dominant_value": value_state.get("dominant_value") if isinstance(value_state, dict) else None,
+    })
+
+    active_goal = goal_state.get("active_goal") if goal_state else None
+
+    # =========================
+    # Q26 MISSION ENGINE (SAFE)
+    # =========================
+    mission_state = mission.run({
+        "active_goal": active_goal
+    }) if active_goal else {"status": "no_goal", "active_mission": None}
+
+    return {
+        "status": "ok",
+        "intent_state": intent_state,
+        "decision_state": decision_state,
+        "execution_state": execution_state,
+        "goal_state": goal_state,
+        "mission_state": mission_state,
+        "value_state": value_state
+    }
+
+@app.post("/api/brain/run")
+def brain():
+    return _brain_cycle()

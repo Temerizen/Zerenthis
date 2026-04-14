@@ -1,0 +1,65 @@
+{
+  "history": [
+    {
+      "t": 1776055664.3372803,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055907.4848092,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055907.939808,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055908.4057925,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055908.8803222,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055909.3413188,
+      "success": false,
+      "score": 0.0
+    },
+    {
+      "t": 1776055909.8073204,
+      "success": true,
+      "score": 0.1429
+    },
+    {
+      "t": 1776055910.2763171,
+      "success": false,
+      "score": 0.125
+    },
+    {
+      "t": 1776055910.7383187,
+      "success": true,
+      "score": 0.2222
+    },
+    {
+      "t": 1776055911.2043185,
+      "success": true,
+      "score": 0.3
+    },
+    {
+      "t": 1776055911.6543193,
+      "success": false,
+      "score": 0.2727
+    }
+  ],
+  "performance": {
+    "total": 11,
+    "success": 3,
+    "failure": 8,
+    "score": 0.2727
+  }
+}

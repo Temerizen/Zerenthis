@@ -1,0 +1,15 @@
+{
+  "task_id": "unblock_builder_handoff",
+  "type": "unblocker",
+  "task": "resolve_builder_handoff",
+  "goal": "initiate_recovery_mode",
+  "reason": "blocked_task_recovery",
+  "base_priority": 0.88,
+  "novelty": 0.3,
+  "risk": 0.45,
+  "stability_fit": 0.75,
+  "score": 1.1901,
+  "repeat_penalty": 0.0,
+  "selected_at": 1776123264.622704,
+  "status": "active"
+}

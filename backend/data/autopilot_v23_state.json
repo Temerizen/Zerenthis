@@ -1,0 +1,172 @@
+{
+  "current": {
+    "status": "running",
+    "cycle": 51,
+    "delay": 5,
+    "results": [
+      {
+        "endpoint": "/api/revenue/intelligence",
+        "status": 200
+      },
+      {
+        "endpoint": "/api/swarm/real",
+        "status": 200
+      },
+      {
+        "endpoint": "/api/promote/run",
+        "status": 200
+      },
+      {
+        "endpoint": "/api/flood/run",
+        "status": 200
+      },
+      {
+        "endpoint": "/api/deploy/live",
+        "status": 200
+      }
+    ],
+    "timestamp": 1775986624.6010952
+  },
+  "recent": [
+    {
+      "status": "running",
+      "cycle": 47,
+      "delay": 5,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/swarm/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promote/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/flood/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/deploy/live",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775986604.1721265
+    },
+    {
+      "status": "running",
+      "cycle": 48,
+      "delay": 5,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/swarm/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promote/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/flood/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/deploy/live",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775986609.2877016
+    },
+    {
+      "status": "running",
+      "cycle": 49,
+      "delay": 5,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/swarm/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promote/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/flood/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/deploy/live",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775986614.4064314
+    },
+    {
+      "status": "running",
+      "cycle": 50,
+      "delay": 5,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/swarm/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promote/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/flood/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/deploy/live",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775986619.5109813
+    },
+    {
+      "status": "running",
+      "cycle": 51,
+      "delay": 5,
+      "results": [
+        {
+          "endpoint": "/api/revenue/intelligence",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/swarm/real",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/promote/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/flood/run",
+          "status": 200
+        },
+        {
+          "endpoint": "/api/deploy/live",
+          "status": 200
+        }
+      ],
+      "timestamp": 1775986624.6010952
+    }
+  ]
+}

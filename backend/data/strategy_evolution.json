@@ -1,0 +1,232 @@
+{
+  "current_profile": {
+    "name": "optimize_focus_ascendant_v24",
+    "base_strategy": "optimize_focus",
+    "tendency": "confident",
+    "score_history": [
+      0.5845379606080465,
+      0.6897273438334048,
+      0.7765164886404603,
+      0.8509232849465681,
+      0.693923498598245,
+      0.8582301699646918,
+      0.8918728038539586,
+      0.791057750174203,
+      0.7108434756169216,
+      0.6991897161800191
+    ],
+    "avg_score": 0.7546822492416518,
+    "evolution_stage": 24,
+    "last_updated": 1776108120.5548105
+  },
+  "history": [
+    {
+      "timestamp": 1776101769.9842396,
+      "strategy": "default",
+      "evolved_name": "default_adaptive_v0",
+      "tendency": "neutral",
+      "avg_score": 0.5233511135711617,
+      "stage": 0
+    },
+    {
+      "timestamp": 1776102208.5442605,
+      "strategy": "default",
+      "evolved_name": "default_steady_v1",
+      "tendency": "stable",
+      "avg_score": 0.701808709976746,
+      "stage": 1
+    },
+    {
+      "timestamp": 1776102431.5086527,
+      "strategy": "default",
+      "evolved_name": "default_steady_v2",
+      "tendency": "stable",
+      "avg_score": 0.7405223807110967,
+      "stage": 2
+    },
+    {
+      "timestamp": 1776102469.8409748,
+      "strategy": "default",
+      "evolved_name": "default_steady_v3",
+      "tendency": "stable",
+      "avg_score": 0.7379417683289455,
+      "stage": 3
+    },
+    {
+      "timestamp": 1776102663.3157697,
+      "strategy": "default",
+      "evolved_name": "default_ascendant_v4",
+      "tendency": "confident",
+      "avg_score": 0.7516123451584401,
+      "stage": 4
+    },
+    {
+      "timestamp": 1776102875.6666408,
+      "strategy": "default",
+      "evolved_name": "default_ascendant_v5",
+      "tendency": "confident",
+      "avg_score": 0.7633776942217563,
+      "stage": 5
+    },
+    {
+      "timestamp": 1776103099.4897568,
+      "strategy": "default",
+      "evolved_name": "default_ascendant_v6",
+      "tendency": "confident",
+      "avg_score": 0.7803560605285277,
+      "stage": 6
+    },
+    {
+      "timestamp": 1776103280.4468822,
+      "strategy": "default",
+      "evolved_name": "default_steady_v7",
+      "tendency": "stable",
+      "avg_score": 0.7418580035564576,
+      "stage": 7
+    },
+    {
+      "timestamp": 1776103582.8447862,
+      "strategy": "default",
+      "evolved_name": "default_steady_v8",
+      "tendency": "stable",
+      "avg_score": 0.7096162108617426,
+      "stage": 8
+    },
+    {
+      "timestamp": 1776103677.2907887,
+      "strategy": "default",
+      "evolved_name": "default_steady_v9",
+      "tendency": "stable",
+      "avg_score": 0.7089750673064824,
+      "stage": 9
+    },
+    {
+      "timestamp": 1776105354.8529105,
+      "strategy": "default",
+      "evolved_name": "default_steady_v10",
+      "tendency": "stable",
+      "avg_score": 0.7280778513331063,
+      "stage": 10
+    },
+    {
+      "timestamp": 1776105409.6846845,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v11",
+      "tendency": "stable",
+      "avg_score": 0.6923708984936116,
+      "stage": 11
+    },
+    {
+      "timestamp": 1776105562.3110373,
+      "strategy": "optimize_focus",
+      "evolved_name": "optimize_focus_steady_v12",
+      "tendency": "stable",
+      "avg_score": 0.6771265588946392,
+      "stage": 12
+    },
+    {
+      "timestamp": 1776105647.8765545,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v13",
+      "tendency": "stable",
+      "avg_score": 0.6801865504797817,
+      "stage": 13
+    },
+    {
+      "timestamp": 1776105798.9419641,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v14",
+      "tendency": "stable",
+      "avg_score": 0.6658260722697406,
+      "stage": 14
+    },
+    {
+      "timestamp": 1776106540.5727453,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v14",
+      "tendency": "stable",
+      "avg_score": 0.6282276732652056,
+      "stage": 14
+    },
+    {
+      "timestamp": 1776106586.328245,
+      "strategy": "optimize_focus",
+      "evolved_name": "optimize_focus_adaptive_v15",
+      "tendency": "neutral",
+      "avg_score": 0.5984588434890946,
+      "stage": 15
+    },
+    {
+      "timestamp": 1776106703.0740259,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v16",
+      "tendency": "stable",
+      "avg_score": 0.6201944173972385,
+      "stage": 16
+    },
+    {
+      "timestamp": 1776106769.020458,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v17",
+      "tendency": "stable",
+      "avg_score": 0.6526778793308822,
+      "stage": 17
+    },
+    {
+      "timestamp": 1776106879.5440855,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v18",
+      "tendency": "stable",
+      "avg_score": 0.667449730294625,
+      "stage": 18
+    },
+    {
+      "timestamp": 1776106989.3698347,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v19",
+      "tendency": "stable",
+      "avg_score": 0.6654041847707094,
+      "stage": 19
+    },
+    {
+      "timestamp": 1776107177.1441605,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v20",
+      "tendency": "stable",
+      "avg_score": 0.6989075239684404,
+      "stage": 20
+    },
+    {
+      "timestamp": 1776107221.9821124,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v21",
+      "tendency": "stable",
+      "avg_score": 0.7215441717348288,
+      "stage": 21
+    },
+    {
+      "timestamp": 1776107295.734241,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v22",
+      "tendency": "stable",
+      "avg_score": 0.7245699620488575,
+      "stage": 22
+    },
+    {
+      "timestamp": 1776107552.4968226,
+      "strategy": "reduce_risk",
+      "evolved_name": "reduce_risk_steady_v23",
+      "tendency": "stable",
+      "avg_score": 0.7293853225729487,
+      "stage": 23
+    },
+    {
+      "timestamp": 1776108120.5548105,
+      "strategy": "optimize_focus",
+      "evolved_name": "optimize_focus_ascendant_v24",
+      "tendency": "confident",
+      "avg_score": 0.7546822492416518,
+      "stage": 24
+    }
+  ]
+}

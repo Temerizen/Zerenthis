@@ -1,0 +1,17 @@
+{
+  "active": false,
+  "interval_seconds": 3.0,
+  "max_errors": 5,
+  "max_cycles": null,
+  "cycles_completed": 3345,
+  "consecutive_errors": 0,
+  "last_error": "KeyError: 'last_task'",
+  "last_started_at": 1776120928.0335505,
+  "last_cycle_started_at": 1776123264.6197047,
+  "last_cycle_finished_at": 1776123264.7727027,
+  "last_stop_reason": "engine_inactive",
+  "last_continue_reason": "engine_inactive",
+  "continue_bias": 0.6,
+  "manual_hold": false,
+  "session_id": 1776120928
+}

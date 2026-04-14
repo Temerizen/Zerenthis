@@ -1,0 +1,1418 @@
+{
+  "entities": {
+    "zerenthis": {
+      "id": "zerenthis",
+      "type": "system",
+      "state": "active",
+      "importance": 1.0,
+      "attributes": {
+        "mode": "intelligence_path"
+      },
+      "last_seen": 1776048849.8160717,
+      "observation_count": 1
+    },
+    "market": {
+      "id": "market",
+      "type": "domain",
+      "state": "tracked",
+      "importance": 0.8,
+      "attributes": {
+        "volatility": "unknown"
+      },
+      "last_seen": 1776048849.8160717,
+      "observation_count": 1
+    }
+  },
+  "signals": [
+    {
+      "t": 1776119697.2454116,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119700.4301777,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119703.6074684,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119706.7879472,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119709.970928,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119713.1488981,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119716.3270028,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119719.5051966,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119722.6839116,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119725.860835,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119729.0471103,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119732.232007,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119735.4137626,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119738.5968778,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119741.794971,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119744.9742916,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119748.1529086,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119751.3373404,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119754.5137339,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119757.6979957,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119760.8890548,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119764.0720594,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119767.2488313,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119770.4234142,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119773.6010091,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119776.7779553,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119779.9670138,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119783.145948,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119786.328061,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119789.5209763,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119792.69594,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119795.88085,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119799.0750844,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119802.274369,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119805.4565885,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119808.6390808,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119811.8201516,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119815.0109138,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119818.1945906,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119821.3875868,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119875.926332,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119879.046178,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119881.6963334,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119884.8052168,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119887.924049,
+      "data": {
+        "tick": "loop",
+        "trigger": "autonomous_continuity",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776119953.041611,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776121949.512148,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776121999.2480545,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776122090.482885,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776122093.376032,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776123262.225336,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776123263.4497185,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776123264.648704,
+      "data": {
+        "tick": "loop",
+        "trigger": "external_api",
+        "task": "advance_beyond_handoff",
+        "goal": "novel_progression"
+      }
+    },
+    {
+      "t": 1776123476.467456,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776123634.6762235,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776123654.9239469,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776123732.312626,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776123744.738953,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776124274.2092187,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776124287.1717966,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776124364.0737538,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776125490.817382,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776126259.7130651,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776126620.0694416,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776126629.0381064,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191133.6960766,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191176.8992045,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191228.865401,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191317.337306,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191404.624625,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191505.1497016,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776191707.2604246,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776192162.0853367,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776192279.0516117,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776192399.0746171,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776192660.303951,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776193115.2000275,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776193316.2674582,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776193362.133707,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776193551.6480844,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776193662.7067401,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776194273.2463315,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776194607.8733294,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776200401.8893414,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776200454.9290655,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776201050.970664,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776201747.9884806,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776202329.8737879,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776202330.9559088,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776202893.0741522,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776202894.1562705,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203043.5732994,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203044.1508374,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203044.704975,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203045.2577324,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203045.8141334,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203109.2805762,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203109.87921,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203110.4455068,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203111.0145833,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203111.5817788,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203112.1491718,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203195.325754,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203195.954631,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203196.5262387,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203197.0912714,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203197.672504,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203198.2392924,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203267.0435474,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203267.648521,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203268.2131271,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203268.7657027,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203269.3301015,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203269.8992019,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203356.6195672,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203357.2079477,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203357.7914972,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203358.3584268,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203358.927168,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203359.502431,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.4471612,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.4735603,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.4984686,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.5207977,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.543351,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.6073716,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.647934,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.6864936,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.728319,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203494.7686398,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.59034,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.6473217,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.6880217,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.7267013,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.7658985,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.8050785,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.8743963,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.91313,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.9513535,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776203771.9900045,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204579.8193936,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204580.406022,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204580.9822118,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204581.5520716,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204582.1215122,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776204582.689234,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205309.09465,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205814.5968466,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205814.6735616,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205814.7178512,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205814.766426,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205814.8166628,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.2743134,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.3502991,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.3915334,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.4459956,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.4865923,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.528815,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.6030502,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.6465828,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.6893034,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.7288194,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.7712278,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.845451,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.9172351,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205856.9866285,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.0580058,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.1297326,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.2023165,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.2797494,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.352661,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.4284375,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.50077,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.5783975,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.656158,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.7294602,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.8058717,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.8835578,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205857.9609687,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205858.0313773,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205858.1084464,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776205858.1903164,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206144.8683147,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206144.9595656,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.0194135,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.087112,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.159298,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.2292867,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.33892,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.4111085,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.4807074,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206145.5511024,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206374.872152,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.0420773,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.1153703,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.1870341,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.2622004,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.3362327,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.457263,
+      "data": {
+        "tick": "loop"
+      }
+    },
+    {
+      "t": 1776206375.5402248,
+      "data": {
+        "tick": "loop"
+      }
+    }
+  ],
+  "environment": {
+    "active_domains": [
+      "builder",
+      "intelligence",
+      "market"
+    ],
+    "priority_entities": [
+      "zerenthis",
+      "market"
+    ],
+    "risk_flags": [
+      "meta_empty_regression"
+    ],
+    "opportunity_flags": [
+      "world_awareness_online"
+    ]
+  },
+  "history": [
+    {
+      "timestamp": 1776048849.8160717,
+      "reason": "q10_bootstrap",
+      "entity_count": 2,
+      "signal_count": 2
+    }
+  ],
+  "last_updated": 1776048849.8160717,
+  "stats": {
+    "total_entities": 2,
+    "total_signals": 2,
+    "total_updates": 1
+  }
+}

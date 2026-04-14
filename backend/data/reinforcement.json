@@ -1,0 +1,43 @@
+{
+  "weights": {
+    "memory_reasoning": 0.6200000000000001
+  },
+  "history": [
+    {
+      "timestamp": 1776107552.6239605,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.52
+    },
+    {
+      "timestamp": 1776108120.6616359,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.54
+    },
+    {
+      "timestamp": 1776108351.5570648,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.56
+    },
+    {
+      "timestamp": 1776108689.4362025,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.5800000000000001
+    },
+    {
+      "timestamp": 1776109129.3564053,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.6000000000000001
+    },
+    {
+      "timestamp": 1776109349.1908123,
+      "component": "memory_reasoning",
+      "decision": "observe",
+      "new_weight": 0.6200000000000001
+    }
+  ]
+}

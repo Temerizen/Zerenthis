@@ -1,0 +1,1 @@
+print("DIFFERENT 1")

@@ -1,0 +1,52 @@
+from __future__ import annotations
+import json, time, random
+from pathlib import Path
+
+PATH = Path("backend/data/exploration_state.json")
+
+ACTIONS = ["optimize","expand","test","shift","explore"]
+
+def _default():
+    return {"history": []}
+
+def _load():
+    if not PATH.exists():
+        return _default()
+    try:
+        d = json.loads(PATH.read_text())
+
+        # --- MIGRATION LOGIC ---
+        if "history" not in d:
+            old = d.get("explorations", [])
+            migrated = []
+            for item in old:
+                migrated.append({
+                    "t": item.get("timestamp", time.time()),
+                    "a": item.get("action", "explore")
+                })
+            return {"history": migrated}
+
+        return d
+    except:
+        return _default()
+
+def _save(d):
+    PATH.parent.mkdir(parents=True, exist_ok=True)
+    PATH.write_text(json.dumps(d, indent=2))
+
+def run():
+    d = _load()
+    a = random.choice(ACTIONS)
+    d["history"].append({"t": time.time(), "a": a})
+    d["history"] = d["history"][-100:]
+    _save(d)
+    return {"action": a, "history": len(d["history"])}
+
+def state():
+    return _load()
+
+# improvement: increase exploration diversity
+
+# improvement: increase exploration diversity
+
+# improvement: increase exploration diversity

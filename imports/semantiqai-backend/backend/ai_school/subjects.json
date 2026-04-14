@@ -1,0 +1,30 @@
+﻿{
+  "mathematics": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["arithmetic", "algebra", "geometry", "calculus", "statistics", "logic"]
+  },
+  "science": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["biology", "chemistry", "physics", "earth science", "research methods"]
+  },
+  "business": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["marketing", "sales", "strategy", "finance", "operations", "leadership"]
+  },
+  "programming": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["python", "javascript", "web development", "algorithms", "databases", "ai"]
+  },
+  "medicine": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["anatomy", "physiology", "pathology", "pharmacology", "clinical reasoning"]
+  },
+  "law": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["contracts", "torts", "criminal law", "constitutional law", "legal analysis"]
+  },
+  "creator": {
+    "levels": ["beginner", "intermediate", "advanced", "expert"],
+    "topics": ["storytelling", "youtube", "shorts", "branding", "editing", "audience growth"]
+  }
+}

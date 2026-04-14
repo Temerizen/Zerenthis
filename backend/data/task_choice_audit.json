@@ -1,0 +1,40 @@
+{
+  "timestamp": 1776206375.5678554,
+  "original_task": "advance_beyond_handoff",
+  "candidates": [
+    "explore_new_path",
+    "stabilize_and_observe",
+    "probe_new_paths"
+  ],
+  "chosen": "probe_new_paths",
+  "cooldowns": {
+    "explore_new_path": false,
+    "stabilize_and_observe": true,
+    "probe_new_paths": false
+  },
+  "usage": {
+    "explore_new_path": 1776206374.913102,
+    "stabilize_and_observe": 1776206375.3624206,
+    "probe_new_paths": 1776206375.4858217
+  },
+  "active_intent_task": "probe_new_paths",
+  "active_intent_direction": "stay_the_course",
+  "active_intent_score": -72.0,
+  "scored_candidates": [
+    {
+      "candidate": "probe_new_paths",
+      "last_used": 1776206375.4858217,
+      "intent_bonus": 3.0,
+      "outcome_bonus": 0.11160299361716088,
+      "total_score": 3.111602993617161
+    },
+    {
+      "candidate": "explore_new_path",
+      "last_used": 1776206374.913102,
+      "intent_bonus": 1.0,
+      "outcome_bonus": 0.03675425881649236,
+      "total_score": 1.0367542588164924
+    }
+  ],
+  "selection_mode": "outcome_aware_direction_intent_lru"
+}

@@ -1,0 +1,11 @@
+from __future__ import annotations
+
+def run(payload: dict | None = None) -> dict:
+    payload = payload or {}
+    return {
+        "status": "ok",
+        "engine": "traffic_engine",
+        "mode": "stabilize",
+        "message": "Stability-focused traffic engine patch is active",
+        "input": payload
+    }

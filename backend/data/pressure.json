@@ -1,0 +1,284 @@
+{
+  "last_pressure": {
+    "timestamp": 1776108120.5477474,
+    "strategy": "default",
+    "adjustment_action": "neutral_adjust",
+    "mode": "default",
+    "goal_delta": 0.01,
+    "mission_delta": 0.02,
+    "changed_goal": false,
+    "changed_mission": true
+  },
+  "history": [
+    {
+      "timestamp": 1776101551.7107928,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776101769.9772384,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": false,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776102208.5372598,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776102431.4997182,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776102469.8339858,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776102663.3088522,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776102875.6586425,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776103099.482738,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776103280.4448822,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": false
+    },
+    {
+      "timestamp": 1776103582.837787,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776103677.2827873,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776105354.8449106,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776105409.6774573,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776105562.3030355,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776105647.8691945,
+      "strategy": "default",
+      "adjustment_action": "reinforce",
+      "mode": "default",
+      "goal_delta": 0.04,
+      "mission_delta": 0.05,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776105798.9339788,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106540.5637429,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": false,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106586.3209648,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106703.06631,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106769.013458,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106879.536817,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776106989.36286,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": false,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776107177.1370692,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776107221.9741867,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776107295.7274318,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776107552.4898245,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    {
+      "timestamp": 1776108120.5477474,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": false,
+      "changed_mission": true
+    }
+  ]
+}

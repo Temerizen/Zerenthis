@@ -1,0 +1,167 @@
+{
+  "history": [
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.45
+      },
+      "score": -9.2,
+      "result": {
+        "pnl": -0.0092,
+        "win": false
+      }
+    },
+    {
+      "strategy": {
+        "signal": "buy",
+        "confidence": 0.61
+      },
+      "score": 24.2,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.71
+      },
+      "score": 39.6,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.81
+      },
+      "score": 22.4,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.45
+      },
+      "score": 11.4,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.63
+      },
+      "score": 32.4,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.63
+      },
+      "score": 43.2,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "buy",
+        "confidence": 0.88
+      },
+      "score": -12.3,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "buy",
+        "confidence": 0.72
+      },
+      "score": 38.7,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.64
+      },
+      "score": 39.0,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.6
+      },
+      "score": 13.399999999999999,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.55
+      },
+      "score": 35.7,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.66
+      },
+      "score": 6.399999999999999,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.59
+      },
+      "score": 28.4,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.58
+      },
+      "score": 22.5,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.55
+      },
+      "score": -5.5,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.7
+      },
+      "score": 10.200000000000003,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "hold",
+        "confidence": 0.88
+      },
+      "score": 13.2,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.77
+      },
+      "score": -7.699999999999999,
+      "result": {}
+    },
+    {
+      "strategy": {
+        "signal": "sell",
+        "confidence": 0.68
+      },
+      "score": 13.600000000000001,
+      "result": {}
+    }
+  ]
+}

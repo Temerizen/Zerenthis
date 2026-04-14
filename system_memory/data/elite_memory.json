@@ -1,0 +1,232 @@
+[
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 6.187551544206686
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 4.125034362804458
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 4.125034362804458
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 4.125034362804458
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 4.125034362804458
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.028677214260792255,
+      "stop_loss": 0.04071132515451172,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 4.103626222613525
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.03126594948676112,
+      "take_profit": 0.03210681075968922,
+      "stop_loss": 0.04105798571574319,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 3.765272097679678
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.03126594948676112,
+      "take_profit": 0.03210681075968922,
+      "stop_loss": 0.04105798571574319,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 3.765272097679678
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.03126594948676112,
+      "take_profit": 0.03210681075968922,
+      "stop_loss": 0.04105798571574319,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 3.765272097679678
+  },
+  {
+    "params": {
+      "risk_per_trade": 0.038456285038770535,
+      "take_profit": 0.02881638618138566,
+      "stop_loss": 0.03951481292174373,
+      "position_scale": 2.0,
+      "signals": [
+        {
+          "asset": "ETH",
+          "action": "buy"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        },
+        {
+          "asset": "SOL",
+          "action": "sell"
+        }
+      ]
+    },
+    "score": 2.062517181402229
+  }
+]

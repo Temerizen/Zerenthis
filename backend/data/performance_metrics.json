@@ -1,0 +1,50 @@
+{
+  "backend/app/engines/traffic_engine.py": [
+    {
+      "metrics": {
+        "traffic": 144,
+        "conversions": 1,
+        "revenue": 14.6
+      },
+      "score": 34.0
+    },
+    {
+      "metrics": {
+        "traffic": 54,
+        "conversions": 7,
+        "revenue": 5.78
+      },
+      "score": 46.18
+    }
+  ],
+  "backend/app/engines/offer_engine.py": [
+    {
+      "metrics": {
+        "traffic": 74,
+        "conversions": 20,
+        "revenue": 24.5
+      },
+      "score": 131.9
+    }
+  ],
+  "backend/app/engines/product_engine.py": [
+    {
+      "metrics": {
+        "traffic": 112,
+        "conversions": 8,
+        "revenue": 13.75
+      },
+      "score": 64.95
+    }
+  ],
+  "backend/app/engines/storefront_engine.py": [
+    {
+      "metrics": {
+        "traffic": 81,
+        "conversions": 20,
+        "revenue": 36.49
+      },
+      "score": 144.59
+    }
+  ]
+}

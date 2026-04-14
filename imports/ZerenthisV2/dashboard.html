@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Zerenthis Live Terminal</title>
+<style>
+body{background:#05070d;color:#00e5ff;font-family:Consolas,monospace;padding:16px;margin:0}
+h1{color:#fff;margin:0 0 16px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.panel{border:1px solid #00e5ff;padding:12px;min-height:120px;background:#04060b}
+.big{grid-column:span 3}
+pre{white-space:pre-wrap;word-break:break-word;margin:0;font-size:12px;line-height:1.35}
+button{background:#000;color:#00e5ff;border:1px solid #00e5ff;padding:8px 10px;margin:4px 6px 0 0;cursor:pointer;font-family:inherit}
+button:hover{background:#07131a}
+.stat{font-size:22px;color:#fff;margin-top:8px}
+.label{color:#7eeeff;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+</style>
+</head>
+<body>
+<h1>? Zerenthis Live Terminal</h1>
+
+<div class="grid">
+  <div class="panel"><div class="label">?? Backend</div><div class="stat" id="backendBox">connecting...</div><pre id="backendDetail"></pre></div>
+  <div class="panel"><div class="label">?? Autopilot Pulse</div><div class="stat" id="pulseBox">...</div><pre id="pulseDetail"></pre></div>
+  <div class="panel"><div class="label">?? Route Status</div><div class="stat" id="routeCount">0/0</div><pre id="routeBox"></pre></div>
+
+  <div class="panel"><div class="label">?? Performance</div><div class="stat" id="perfBox">...</div><pre id="perfDetail"></pre></div>
+  <div class="panel"><div class="label">?? Battle</div><div class="stat" id="battleBox">...</div><pre id="battleDetail"></pre></div>
+  <div class="panel"><div class="label">?? Revenue/Scaling</div><div class="stat" id="moneyBox">...</div><pre id="moneyDetail"></pre></div>
+
+  <div class="panel big"><div class="label">?? System Log</div><pre id="logBox"></pre></div>
+
+  <div class="panel big">
+    <div class="label">?? Controls</div>
+    <button onclick="run('/api/full-cycle')">Run Performance</button>
+    <button onclick="run('/api/full-cycle')">Run Battle</button>
+    <button onclick="run('/api/revenue/update')">Run Revenue</button>
+    <button onclick="run('/api/scaling/update')">Run Scaling</button>
+    <button onclick="refreshNow()">Refresh UI</button>
+  </div>
+</div>
+
+<script>
+const BASE = "http://127.0.0.1:8000";
+const logBox = document.getElementById("logBox");
+
+function log(msg){
+  const now = new Date().toLocaleTimeString();
+  logBox.textContent = `[${now}] ${msg}\n` + logBox.textContent;
+  logBox.textContent = logBox.textContent.slice(0, 9000);
+}
+
+async function postJson(route){
+  const res = await fetch(BASE + route, {method:"POST"});
+  if(!res.ok) throw new Error(route + " -> HTTP " + res.status);
+  return await res.json();
+}
+
+async function probe(route){
+  try{
+    const data = await postJson(route);
+    return { ok:true, data };
+  }catch(e){
+    return { ok:false, error:e.message };
+  }
+}
+
+async function refreshNow(){
+  document.getElementById("backendBox").textContent = "127.0.0.1:8000";
+  document.getElementById("backendDetail").textContent = "Polling live working routes from your backend.";
+
+  const routes = [
+    "/api/topics/expand",
+    "/api/pipeline/build",
+    "/api/active/sync",
+    "/api/polish/storefront",
+    "/api/bind/products",
+    "/api/bind/storefront",
+    "/api/diversity/update",
+    "/api/full-cycle",
+    "/api/full-cycle",
+    "/api/traffic/convert",
+    "/api/revenue/update",
+    "/api/scaling/update"
+  ];
+
+  let okCount = 0;
+  let routeLines = [];
+
+  for (const r of routes){
+    const result = await probe(r);
+    if(result.ok){
+      okCount++;
+      routeLines.push("OK   " + r);
+    } else {
+      routeLines.push("FAIL " + r + " | " + result.error);
+    }
+  }
+
+  document.getElementById("routeCount").textContent = `${okCount}/${routes.length}`;
+  document.getElementById("routeBox").textContent = routeLines.join("\n");
+  document.getElementById("pulseBox").textContent = okCount > 0 ? "RUNNING" : "OFFLINE";
+  document.getElementById("pulseDetail").textContent = okCount > 0
+    ? "Autopilot routes are responding."
+    : "No routes responded.";
+
+  const perf = await probe("/api/full-cycle");
+  if(perf.ok){
+    document.getElementById("perfBox").textContent = perf.data.active_topic || perf.data.status || "ok";
+    document.getElementById("perfDetail").textContent = JSON.stringify(perf.data, null, 2);
+    log("performance updated");
+  } else {
+    document.getElementById("perfBox").textContent = "error";
+    document.getElementById("perfDetail").textContent = perf.error;
+  }
+
+  const battle = await probe("/api/full-cycle");
+  if(battle.ok){
+    document.getElementById("battleBox").textContent = battle.data.decision || battle.data.status || "ok";
+    document.getElementById("battleDetail").textContent = JSON.stringify(battle.data, null, 2);
+    log("battle updated");
+  } else {
+    document.getElementById("battleBox").textContent = "error";
+    document.getElementById("battleDetail").textContent = battle.error;
+  }
+
+  const revenue = await probe("/api/revenue/update");
+  const scaling = await probe("/api/scaling/update");
+  let moneyText = [];
+  if(revenue.ok) moneyText.push("revenue:\n" + JSON.stringify(revenue.data, null, 2));
+  if(scaling.ok) moneyText.push("scaling:\n" + JSON.stringify(scaling.data, null, 2));
+  if(!revenue.ok && !scaling.ok) moneyText.push("No revenue/scaling response.");
+  document.getElementById("moneyBox").textContent = revenue.ok || scaling.ok ? "LIVE" : "error";
+  document.getElementById("moneyDetail").textContent = moneyText.join("\n\n");
+  log("dashboard refresh complete");
+}
+
+async function run(route){
+  try{
+    const data = await postJson(route);
+    log("ACTION OK: " + route);
+    await refreshNow();
+  }catch(e){
+    log("ACTION ERROR: " + e.message);
+  }
+}
+
+refreshNow();
+setInterval(refreshNow, 5000);
+</script>
+</body>
+</html>
+
+
+

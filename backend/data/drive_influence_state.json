@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "last_updated": 1776057919.9177139,
+  "last_influence": {
+    "timestamp": 1776057919.9177139,
+    "active_drive": "explore",
+    "influence": {
+      "decision_bias": "novelty",
+      "goal_bias": "expansion",
+      "planning_bias": "breadth",
+      "execution_bias": "adaptive"
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776057557.0081275,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057649.8194852,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057735.7065423,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057785.552165,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057831.0155993,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057870.1978922,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    },
+    {
+      "timestamp": 1776057919.9177139,
+      "active_drive": "explore",
+      "influence": {
+        "decision_bias": "novelty",
+        "goal_bias": "expansion",
+        "planning_bias": "breadth",
+        "execution_bias": "adaptive"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+from fastapi import APIRouter
+import time
+
+router = APIRouter()
+
+# === LOOP BREAK MEMORY ===
+_last_tasks = []
+MAX_REPEAT = 5
+
+def _loop_guard(task):
+    global _last_tasks
+    _last_tasks.append(task)
+    _last_tasks = _last_tasks[-MAX_REPEAT:]
+    return len(set(_last_tasks)) == 1  # all same Ã¢â€ â€™ stuck
+
+@router.post("/api/brain/run")
+def brain():
+
+    from backend.app.cognition import world, meta, decision, execution, goal
+
+    # === RUN CORE ===
+    world_state = world.update({"tick": "loop"})
+    meta_state = meta.run({"event": "cycle"})
+    decision_state = decision.run()
+    goal_state = goal.run()
+    execution_state = execution.run_execution({"task": "advance_beyond_handoff", "plan": ["analyze_state","execute","evaluate"], "goal": "balanced_progression"})
+
+    task = execution_state.get("task", "unknown")
+
+    # === LOOP BREAK ===
+    if _loop_guard(task):
+        alt_task = "explore_new_path" if task == "advance_beyond_handoff" else "advance_beyond_handoff"
+        execution_state = execution.run_execution({
+            "task": alt_task,
+            "plan": ["analyze_state","execute","evaluate"],
+            "goal": "balanced_progression"
+        })
+        task = execution_state.get("task", alt_task)
+        return {
+            "status": "rerouted",
+            "reason": "loop_detected",
+            "original_task": "advance_beyond_handoff",
+            "task": task,
+            "execution_status": execution_state.get("status"),
+            "route": execution_state.get("route")
+        }
+
+    # === LIGHTWEIGHT RESPONSE ===
+    return {
+        "status": "ok",
+        "task": task,
+        "goal": goal_state.get("active_goal"),
+        "decision": decision_state.get("action"),
+        "score": meta_state.get("score", 0.5)
+    }

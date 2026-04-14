@@ -1,0 +1,135 @@
+﻿from fastapi import FastAPI
+from backend.app.cognition import (
+    meta, world, explore, decision,
+    execution, intent, goals, mission,
+    reality, adaptation, strategy_mutation,
+    strategy_competition, memory_depth_engine,
+    goal_recovery_engine, goal_alignment_engine,
+    memory_correction_engine, identity_stream_engine,
+    reflection_engine, adaptive_intent_engine,
+    drive_engine
+)
+from backend.app.cognition.value_hierarchy import evaluate_values
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {
+        "brain": "online",
+        "drive_system": True
+    }
+
+def _safe_dict(x):
+    return x if isinstance(x, dict) else {}
+
+def _brain_cycle():
+    world.update({"tick": "loop"})
+    meta.run({"event": "cycle"})
+    explore.run()
+
+    value_state = _safe_dict(evaluate_values())
+
+    intent_state = _safe_dict(intent.form_intent({
+        "value_state": value_state
+    }))
+
+    decision.run({"intent_state": intent_state})
+    execution.run({"plan": {}})
+
+    goal_state = _safe_dict(goals.run({
+        "goal": intent_state.get("goal"),
+        "dominant_value": value_state.get("dominant_value")
+    }))
+
+    raw_goal = goal_state.get("active_goal")
+
+    recovery_state = _safe_dict(goal_recovery_engine.run({
+        "active_goal": raw_goal,
+        "dominant_value": value_state.get("dominant_value")
+    }))
+
+    recovered_goal = recovery_state.get("active_goal")
+    pre_alignment_goal = raw_goal if raw_goal else recovered_goal
+
+    initial_mission_state = _safe_dict(mission.run({
+        "active_goal": pre_alignment_goal
+    })) if pre_alignment_goal else {"active_mission": None}
+
+    active_mission = initial_mission_state.get("active_mission")
+
+    alignment_state = _safe_dict(goal_alignment_engine.run({
+        "active_goal": pre_alignment_goal,
+        "active_mission": active_mission,
+        "dominant_value": value_state.get("dominant_value")
+    }))
+
+    effective_goal = alignment_state.get("aligned_goal")
+
+    memory_correction_engine.run({
+        "aligned_goal": effective_goal
+    })
+
+    mission_state = _safe_dict(mission.run({
+        "active_goal": effective_goal
+    })) if effective_goal else {"active_mission": None}
+
+    active_mission = mission_state.get("active_mission")
+
+    reality_state = _safe_dict(reality.run({
+        "mission_id": active_mission.get("id") if isinstance(active_mission, dict) else None,
+        "goal_type": effective_goal.get("type") if isinstance(effective_goal, dict) else None,
+        "mission_progress": active_mission.get("progress") if isinstance(active_mission, dict) else 0
+    }))
+
+    score = reality_state.get("score", 0.5)
+
+    adaptation.run({
+        "score": score,
+        "goal": effective_goal
+    })
+
+    strategy_mutation.run({"score": score})
+    strategy_competition.run({"score": score})
+    memory_depth_engine.run()
+
+    identity_state = _safe_dict(identity_stream_engine.run({
+        "goal": effective_goal,
+        "mission": active_mission
+    }))
+
+    reflection_state = _safe_dict(reflection_engine.run({
+        "score": score,
+        "goal_type": effective_goal.get("type") if isinstance(effective_goal, dict) else None,
+        "continuity": identity_state.get("continuity_score", 0.5)
+    }))
+
+    reflection_data = reflection_state.get("reflection", {})
+
+    adaptive_state = adaptive_intent_engine.run({
+        "reflection": reflection_data,
+        "goal": effective_goal
+    })
+
+    adaptive_data = adaptive_state.get("adjustment", {})
+
+    # =========================
+    # NEW: DRIVE SYSTEM
+    # =========================
+    drive_state = drive_engine.run({
+        "reflection": reflection_data,
+        "adaptive": adaptive_data
+    })
+
+    return {
+        "status": "ok",
+        "identity": identity_state,
+        "reflection": reflection_data,
+        "adaptive": adaptive_data,
+        "drives": drive_state,
+        "score": score
+    }
+
+@app.post("/api/brain/run")
+def brain():
+    return _brain_cycle()

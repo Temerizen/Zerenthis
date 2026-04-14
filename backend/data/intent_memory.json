@@ -1,0 +1,124 @@
+{
+  "intents": [
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "pattern_variation"
+      ],
+      "confidence": 0.97,
+      "timestamp": 1776095086.4084458
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "pattern_variation"
+      ],
+      "confidence": 0.98,
+      "timestamp": 1776095329.8389125
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776095752.55671
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776096217.7798307
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776096655.6958547
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776096872.2618885
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776097217.697216
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776098078.2489161
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776098892.9279547
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776099494.0417316
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776100042.6966102
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776100170.454917
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776100323.6260054
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776100324.4776118
+    },
+    {
+      "intent": "expand_behavior",
+      "reason": [
+        "tension_variation_momentum"
+      ],
+      "confidence": 1.0,
+      "timestamp": 1776100325.153058
+    }
+  ]
+}

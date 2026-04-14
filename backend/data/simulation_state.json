@@ -1,0 +1,794 @@
+{
+  "last_simulation": {
+    "timestamp": 1776070176.520028,
+    "goal": "expand_capability",
+    "options": [
+      {
+        "action": "explore_new_paths",
+        "score": 1.15
+      },
+      {
+        "action": "test_variations",
+        "score": 1.05
+      },
+      {
+        "action": "integrate_learnings",
+        "score": 1.5099999999999998
+      }
+    ],
+    "chosen": {
+      "action": "integrate_learnings",
+      "score": 1.5099999999999998
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776069452.923857,
+      "goal": "introduce_variation",
+      "options": [
+        {
+          "action": "maintain",
+          "score": 0.85
+        }
+      ],
+      "chosen": {
+        "action": "maintain",
+        "score": 0.85
+      }
+    },
+    {
+      "timestamp": 1776069453.357736,
+      "goal": "introduce_variation",
+      "options": [
+        {
+          "action": "maintain",
+          "score": 0.85
+        }
+      ],
+      "chosen": {
+        "action": "maintain",
+        "score": 0.85
+      }
+    },
+    {
+      "timestamp": 1776069453.8040721,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.05
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.05
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.7
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.7
+      }
+    },
+    {
+      "timestamp": 1776069454.2358663,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.05
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.05
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.7
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.7
+      }
+    },
+    {
+      "timestamp": 1776069454.6754303,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.05
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.05
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.7
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.7
+      }
+    },
+    {
+      "timestamp": 1776069455.1087172,
+      "goal": "rebalance_behavior",
+      "options": [
+        {
+          "action": "increase_exploration",
+          "score": 0.7350000000000001
+        },
+        {
+          "action": "reduce_persistence",
+          "score": 0.65
+        },
+        {
+          "action": "maintain_balance",
+          "score": 0.85
+        }
+      ],
+      "chosen": {
+        "action": "maintain_balance",
+        "score": 0.85
+      }
+    },
+    {
+      "timestamp": 1776069599.6351657,
+      "goal": "introduce_variation",
+      "options": [
+        {
+          "action": "maintain",
+          "score": 0.85
+        }
+      ],
+      "chosen": {
+        "action": "maintain",
+        "score": 0.85
+      }
+    },
+    {
+      "timestamp": 1776069600.0809686,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.03
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.04
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.67
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.67
+      }
+    },
+    {
+      "timestamp": 1776069600.530898,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.03
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.04
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.67
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.67
+      }
+    },
+    {
+      "timestamp": 1776069600.9696882,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.03
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.04
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.67
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.67
+      }
+    },
+    {
+      "timestamp": 1776069601.4202676,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 1.03
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.04
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.67
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.67
+      }
+    },
+    {
+      "timestamp": 1776069601.8621516,
+      "goal": "rebalance_behavior",
+      "options": [
+        {
+          "action": "increase_exploration",
+          "score": 0.8170000000000002
+        },
+        {
+          "action": "reduce_persistence",
+          "score": 0.67
+        },
+        {
+          "action": "maintain_balance",
+          "score": 0.84
+        }
+      ],
+      "chosen": {
+        "action": "maintain_balance",
+        "score": 0.84
+      }
+    },
+    {
+      "timestamp": 1776069602.315983,
+      "goal": "rebalance_behavior",
+      "options": [
+        {
+          "action": "increase_exploration",
+          "score": 0.8490000000000002
+        },
+        {
+          "action": "reduce_persistence",
+          "score": 0.6900000000000001
+        },
+        {
+          "action": "maintain_balance",
+          "score": 0.83
+        }
+      ],
+      "chosen": {
+        "action": "increase_exploration",
+        "score": 0.8490000000000002
+      }
+    },
+    {
+      "timestamp": 1776069602.7648118,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 0.99
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.02
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.6099999999999999
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.6099999999999999
+      }
+    },
+    {
+      "timestamp": 1776069807.7991688,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 0.99
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.02
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.6099999999999999
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.6099999999999999
+      }
+    },
+    {
+      "timestamp": 1776069808.2479975,
+      "goal": "optimize_and_scale",
+      "options": [
+        {
+          "action": "repeat_success",
+          "score": 0.99
+        },
+        {
+          "action": "optimize_efficiency",
+          "score": 1.02
+        },
+        {
+          "action": "lock_pattern",
+          "score": 1.6099999999999999
+        }
+      ],
+      "chosen": {
+        "action": "lock_pattern",
+        "score": 1.6099999999999999
+      }
+    },
+    {
+      "timestamp": 1776069808.699278,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.0900000000000003
+        },
+        {
+          "action": "test_variations",
+          "score": 0.9900000000000002
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.6099999999999999
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.6099999999999999
+      }
+    },
+    {
+      "timestamp": 1776069809.174639,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.1100000000000003
+        },
+        {
+          "action": "test_variations",
+          "score": 1.0100000000000002
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5899999999999999
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5899999999999999
+      }
+    },
+    {
+      "timestamp": 1776069809.6319869,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.1300000000000003
+        },
+        {
+          "action": "test_variations",
+          "score": 1.0300000000000002
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5699999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5699999999999998
+      }
+    },
+    {
+      "timestamp": 1776069810.0701003,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5499999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5499999999999998
+      }
+    },
+    {
+      "timestamp": 1776069810.5219676,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5299999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5299999999999998
+      }
+    },
+    {
+      "timestamp": 1776069810.986186,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5099999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5099999999999998
+      }
+    },
+    {
+      "timestamp": 1776069881.5364866,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4899999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4899999999999998
+      }
+    },
+    {
+      "timestamp": 1776069881.950666,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4699999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4699999999999998
+      }
+    },
+    {
+      "timestamp": 1776069882.3658023,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4499999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4499999999999997
+      }
+    },
+    {
+      "timestamp": 1776069882.8038092,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4299999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4299999999999997
+      }
+    },
+    {
+      "timestamp": 1776069883.2369933,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4099999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4099999999999997
+      }
+    },
+    {
+      "timestamp": 1776069883.6758978,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.3899999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.3899999999999997
+      }
+    },
+    {
+      "timestamp": 1776070173.3543227,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.3699999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.3699999999999997
+      }
+    },
+    {
+      "timestamp": 1776070173.799482,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.3899999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.3899999999999997
+      }
+    },
+    {
+      "timestamp": 1776070174.246448,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4099999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4099999999999997
+      }
+    },
+    {
+      "timestamp": 1776070174.7011845,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4299999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4299999999999997
+      }
+    },
+    {
+      "timestamp": 1776070175.1532085,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4499999999999997
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4499999999999997
+      }
+    },
+    {
+      "timestamp": 1776070175.6167364,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4699999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4699999999999998
+      }
+    },
+    {
+      "timestamp": 1776070176.0716805,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.4899999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.4899999999999998
+      }
+    },
+    {
+      "timestamp": 1776070176.520028,
+      "goal": "expand_capability",
+      "options": [
+        {
+          "action": "explore_new_paths",
+          "score": 1.15
+        },
+        {
+          "action": "test_variations",
+          "score": 1.05
+        },
+        {
+          "action": "integrate_learnings",
+          "score": 1.5099999999999998
+        }
+      ],
+      "chosen": {
+        "action": "integrate_learnings",
+        "score": 1.5099999999999998
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "waitlist_signup",
+    "value": 1,
+    "note": "test manual real-world intent",
+    "timestamp": 1775984502.2643461
+  },
+  {
+    "product": "Viral Content Engine Pack",
+    "source": "reddit",
+    "signal_type": "click",
+    "value": 1,
+    "note": "user asked for link",
+    "timestamp": 1775984571.3278596
+  }
+]

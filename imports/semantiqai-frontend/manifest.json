@@ -1,0 +1,9 @@
+﻿{
+  "name": "SemantiqAI Ascension",
+  "short_name": "SemantiqAI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07101d",
+  "theme_color": "#0b1020",
+  "description": "AI workspace for strategy, workflows, artifacts, founder operations, and launch-ready execution."
+}

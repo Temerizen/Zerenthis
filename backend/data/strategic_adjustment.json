@@ -1,0 +1,151 @@
+{
+  "last_adjustment": {
+    "timestamp": 1776109349.1318114,
+    "trend": "unstable",
+    "previous_strategy": "reduce_risk",
+    "new_strategy": "reduce_risk",
+    "action": "kept"
+  },
+  "history": [
+    {
+      "timestamp": 1776105354.9009106,
+      "trend": "unstable",
+      "previous_strategy": "default",
+      "new_strategy": "reduce_risk",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776105409.731852,
+      "trend": "declining",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "optimize_focus",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776105562.3620365,
+      "trend": "unstable",
+      "previous_strategy": "optimize_focus",
+      "new_strategy": "reduce_risk",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776105647.921042,
+      "trend": "improving",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776105798.984876,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776106540.6282794,
+      "trend": "declining",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "optimize_focus",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776106586.3734608,
+      "trend": "unstable",
+      "previous_strategy": "optimize_focus",
+      "new_strategy": "reduce_risk",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776106703.121808,
+      "trend": "improving",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776106769.0644581,
+      "trend": "improving",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776106879.5846677,
+      "trend": "improving",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776106989.4128625,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776107177.1859453,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776107222.0267708,
+      "trend": "improving",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776107295.7767725,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776107552.5406284,
+      "trend": "declining",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "optimize_focus",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776108120.598824,
+      "trend": "declining",
+      "previous_strategy": "optimize_focus",
+      "new_strategy": "increase_efficiency",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776108351.4978235,
+      "trend": "declining",
+      "previous_strategy": "increase_efficiency",
+      "new_strategy": "reduce_risk",
+      "action": "shifted"
+    },
+    {
+      "timestamp": 1776108689.3831594,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776109129.3038113,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    },
+    {
+      "timestamp": 1776109349.1318114,
+      "trend": "unstable",
+      "previous_strategy": "reduce_risk",
+      "new_strategy": "reduce_risk",
+      "action": "kept"
+    }
+  ]
+}

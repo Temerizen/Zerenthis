@@ -1,0 +1,1916 @@
+[
+  {
+    "timestamp": 1775961285,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve module | target=backend/app/engines/traffic_engine.py | reason=autopilot test | priority=medium"
+  },
+  {
+    "timestamp": 1775961373,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve module | target=backend/app/engines/traffic_engine.py | reason=feedback strategy test | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775961886,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve an underperforming module | target=backend/app/engines/traffic_engine.py | reason=no_leaderboard_data | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962370,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve an underperforming module | target=backend/app/engines/traffic_engine.py | reason=no_leaderboard_data | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962371,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve an underperforming module | target=backend/app/engines/traffic_engine.py | reason=no_leaderboard_data | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962372,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Safely improve an underperforming module | target=backend/app/engines/traffic_engine.py | reason=no_leaderboard_data | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962700,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=baseline"
+  },
+  {
+    "timestamp": 1775962701,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=baseline"
+  },
+  {
+    "timestamp": 1775962702,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962703,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=baseline"
+  },
+  {
+    "timestamp": 1775962705,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962881,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962882,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962883,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962884,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775962885,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963353,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963354,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963355,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963356,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963357,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963587,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve based on real feedback | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963588,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve based on real feedback | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963589,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve based on real feedback | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963590,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve based on real feedback | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963591,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve based on real feedback | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963891,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963892,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963893,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963894,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775963896,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964061,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964062,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964063,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964064,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964065,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964066,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964067,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964068,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964069,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964071,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964240,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964241,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964242,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964243,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964244,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964245,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964246,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964247,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964248,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964249,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964250,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964251,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964362,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964363,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964364,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964365,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964366,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964367,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964368,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964369,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964370,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964371,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964372,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964373,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964675,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964676,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964677,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964678,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964679,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964680,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964681,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964682,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964683,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/traffic_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964684,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/offer_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964685,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/product_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/product_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775964686,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize for real-world outcomes | target=backend/app/engines/storefront_engine.py | reason=default_detection | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965350,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965351,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965352,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965353,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965354,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965355,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965356,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965357,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965358,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965359,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965360,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775965361,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966552,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966553,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966554,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966555,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/storefront_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966556,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966557,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966558,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966559,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966560,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966561,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966562,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775966563,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize highest performing system | target=backend/app/engines/offer_engine.py | reason=highest_performance | priority=high | strategy=optimize"
+  },
+  {
+    "timestamp": 1775967405,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=baseline"
+  },
+  {
+    "timestamp": 1775967406,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967407,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967550,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967551,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967552,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967553,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967554,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967740,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967741,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775967742,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968158,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968159,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968160,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968243,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968244,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775968245,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969115,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969116,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969117,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969185,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969186,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775969187,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775970983,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775970984,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775970985,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971057,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971058,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971059,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971144,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971145,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971146,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971262,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971263,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971264,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971528,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971529,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775971530,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972138,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972139,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972140,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972229,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972230,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972231,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972545,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972546,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972547,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972800,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972801,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775972802,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973050,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973051,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973052,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973317,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973318,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973319,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973801,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973802,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775973803,
+    "result": {
+      "status": "error",
+      "touched": [],
+      "errors": [
+        "Builder cannot write to 'assets' (status=unknown)"
+      ]
+    },
+    "plan_summary": "Optimize highest performing system | target=assets | reason=highest_performance | priority=high | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775976796,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component | target=backend/app/engines/offer_engine.py | reason=queue_fallback_trigger | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775977505,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve weakest system component intelligently | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978240,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978241,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978241,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978242,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978243,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978637,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775978797,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Optimize system for money and impact | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775978844,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Maximize money generation | target=backend/app/engines/offer_engine.py | reason= | priority=medium | strategy=stabilize"
+  },
+  {
+    "timestamp": 1775979077,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/traffic_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Maximize money generation | target=backend/app/engines/traffic_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775979305,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/storefront_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Maximize money generation | target=backend/app/engines/storefront_engine.py | reason= | priority=medium | strategy=optimize"
+  },
+  {
+    "timestamp": 1775979398,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/conversion_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Increase conversions and revenue | target=backend/app/engines/conversion_engine.py | reason= | priority=medium | strategy=baseline"
+  },
+  {
+    "timestamp": 1775980694,
+    "result": {
+      "status": "applied",
+      "touched": [
+        "backend/app/engines/offer_engine.py"
+      ],
+      "errors": []
+    },
+    "plan_summary": "Improve the strongest revenue pathway | target=backend/app/engines/offer_engine.py | reason=winner_driven | priority=high | strategy=optimize"
+  }
+]

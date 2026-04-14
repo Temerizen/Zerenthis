@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "final_champion": "Viral Content Engine Pack",
+  "scores": [
+    {
+      "name": "Viral Content Engine Pack",
+      "interest_score": 16.06,
+      "auto_boost": 706.01,
+      "real_boost": 15,
+      "final_score": 737.07
+    },
+    {
+      "name": "AI Side Hustle System",
+      "interest_score": 8.16,
+      "auto_boost": 0,
+      "real_boost": 0,
+      "final_score": 8.16
+    },
+    {
+      "name": "Premium Offer",
+      "interest_score": 7.21,
+      "auto_boost": 0,
+      "real_boost": 0,
+      "final_score": 7.21
+    }
+  ],
+  "timestamp": 1775986813.2771723
+}

@@ -1,0 +1,16 @@
+{
+  "timestamp": 1775986810.180122,
+  "scores": {
+    "money": 1.0,
+    "traffic": 0.8,
+    "intelligence": 0.6,
+    "experiment": 0.5
+  },
+  "priority_order": [
+    "money",
+    "traffic",
+    "intelligence",
+    "experiment"
+  ],
+  "top": "money"
+}

@@ -1,0 +1,1136 @@
+{
+  "values": {
+    "exploration": 0.8400000000000001,
+    "stability": 0.7,
+    "persistence": 0.7900000000000001,
+    "efficiency": 0.6
+  },
+  "history": [
+    {
+      "timestamp": 1776098078.1393986,
+      "scores": {
+        "exploration": 0.617,
+        "stability": 0.495,
+        "persistence": 0.56,
+        "efficiency": 0.54
+      },
+      "weighted_scores": {
+        "exploration": 0.432,
+        "stability": 0.346,
+        "persistence": 0.364,
+        "efficiency": 0.324
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776098078.2419164,
+      "scores": {
+        "exploration": 0.617,
+        "stability": 0.495,
+        "persistence": 0.56,
+        "efficiency": 0.54
+      },
+      "weighted_scores": {
+        "exploration": 0.432,
+        "stability": 0.346,
+        "persistence": 0.364,
+        "efficiency": 0.324
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776098892.9189537,
+      "scores": {
+        "exploration": 0.633,
+        "stability": 0.502,
+        "persistence": 0.57,
+        "efficiency": 0.55
+      },
+      "weighted_scores": {
+        "exploration": 0.443,
+        "stability": 0.351,
+        "persistence": 0.37,
+        "efficiency": 0.33
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776098892.982913,
+      "values": {
+        "exploration": 0.72,
+        "stability": 0.7,
+        "persistence": 0.67,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776099494.03388,
+      "scores": {
+        "exploration": 0.648,
+        "stability": 0.509,
+        "persistence": 0.58,
+        "efficiency": 0.56
+      },
+      "weighted_scores": {
+        "exploration": 0.467,
+        "stability": 0.356,
+        "persistence": 0.389,
+        "efficiency": 0.336
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776099494.0968466,
+      "values": {
+        "exploration": 0.74,
+        "stability": 0.7,
+        "persistence": 0.6900000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100042.6896102,
+      "scores": {
+        "exploration": 0.664,
+        "stability": 0.516,
+        "persistence": 0.59,
+        "efficiency": 0.57
+      },
+      "weighted_scores": {
+        "exploration": 0.491,
+        "stability": 0.361,
+        "persistence": 0.407,
+        "efficiency": 0.342
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100042.7477791,
+      "values": {
+        "exploration": 0.76,
+        "stability": 0.7,
+        "persistence": 0.7100000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100170.4488764,
+      "scores": {
+        "exploration": 0.672,
+        "stability": 0.523,
+        "persistence": 0.6,
+        "efficiency": 0.58
+      },
+      "weighted_scores": {
+        "exploration": 0.511,
+        "stability": 0.366,
+        "persistence": 0.426,
+        "efficiency": 0.348
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100170.5058818,
+      "values": {
+        "exploration": 0.78,
+        "stability": 0.7,
+        "persistence": 0.7300000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100323.6089861,
+      "scores": {
+        "exploration": 0.681,
+        "stability": 0.522,
+        "persistence": 0.61,
+        "efficiency": 0.586
+      },
+      "weighted_scores": {
+        "exploration": 0.531,
+        "stability": 0.365,
+        "persistence": 0.445,
+        "efficiency": 0.352
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100323.7072895,
+      "values": {
+        "exploration": 0.8,
+        "stability": 0.7,
+        "persistence": 0.7500000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100324.471727,
+      "scores": {
+        "exploration": 0.69,
+        "stability": 0.521,
+        "persistence": 0.62,
+        "efficiency": 0.592
+      },
+      "weighted_scores": {
+        "exploration": 0.552,
+        "stability": 0.365,
+        "persistence": 0.465,
+        "efficiency": 0.355
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100324.52895,
+      "values": {
+        "exploration": 0.8200000000000001,
+        "stability": 0.7,
+        "persistence": 0.7700000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100325.145066,
+      "scores": {
+        "exploration": 0.698,
+        "stability": 0.52,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.572,
+        "stability": 0.364,
+        "persistence": 0.485,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100325.2001653,
+      "values": {
+        "exploration": 0.8400000000000001,
+        "stability": 0.7,
+        "persistence": 0.7900000000000001,
+        "efficiency": 0.6
+      },
+      "outcome": "execution_aligned"
+    },
+    {
+      "timestamp": 1776100405.7549205,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100760.619893,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776100940.4227734,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776101064.8936815,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776101332.3568535,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776101551.6834226,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776101769.9542398,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776102208.5092585,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776102431.4693997,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776102469.807957,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776102663.283906,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776102875.6309993,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103099.457812,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103280.419884,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103582.8106081,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103677.259788,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103807.95489,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776103925.3825505,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104059.1659744,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104296.9408646,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104430.0178757,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104549.1107976,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104549.5427508,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104549.9809597,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104656.8727605,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104657.4078233,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104657.8425148,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104724.1064773,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104784.38383,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104784.8189206,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104785.2598324,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104888.9130185,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104889.3809996,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776104889.8208768,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105008.167017,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105008.6087565,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105009.0506678,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105354.8069098,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105409.647358,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105562.277036,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105647.8471127,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776105798.909946,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106540.5402815,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106586.299414,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106703.0423038,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106768.990458,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106879.5127966,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776106989.3429704,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776107177.1135573,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776107221.950651,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776107295.705012,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776107552.4679735,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776108120.5248187,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776108351.4308107,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776108689.3166885,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776109129.2322052,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    },
+    {
+      "timestamp": 1776109349.067714,
+      "scores": {
+        "exploration": 0.706,
+        "stability": 0.519,
+        "persistence": 0.63,
+        "efficiency": 0.598
+      },
+      "weighted_scores": {
+        "exploration": 0.593,
+        "stability": 0.363,
+        "persistence": 0.498,
+        "efficiency": 0.359
+      },
+      "dominant_value": "exploration"
+    }
+  ]
+}

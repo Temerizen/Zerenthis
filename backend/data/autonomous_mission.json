@@ -1,0 +1,16 @@
+{
+  "active_directive": {
+    "id": "directive_1776102663",
+    "goal_type": "balanced_progression",
+    "mission_id": "mission_1776100405",
+    "mission_goal_type": "balanced_progression",
+    "priority": 1.0,
+    "protection": 1.0,
+    "status": "degraded",
+    "switch_resistance": 1.0,
+    "created_at": 1776102663.3327653,
+    "last_updated": 1776105354.8739102,
+    "reason": "autonomous_mission_selection"
+  },
+  "history": []
+}

@@ -1,0 +1,909 @@
+{
+  "route_counts": {
+    "recovery": 1366,
+    "builder": 1267
+  },
+  "last_route": "recovery",
+  "history": [
+    {
+      "timestamp": 1776119214.9902484,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119218.1889849,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119221.391178,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119224.6059535,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119227.833664,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119231.0533617,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119234.2595968,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119237.465869,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119240.669845,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119243.8456166,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119247.0489414,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119250.247882,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119253.4528425,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119256.6580553,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119259.8617833,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119263.0636663,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119266.2642453,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119269.4649205,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119272.670729,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119275.8769028,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119279.0820127,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119282.2841113,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119285.4599028,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119288.6617002,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119291.8648608,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119295.069055,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119298.2703912,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119301.479731,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119304.686042,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119307.8915358,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119311.1010146,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119314.3126948,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119317.5118005,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119320.7191875,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119323.9209793,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119327.099958,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119330.3039582,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119333.5039139,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119336.7168598,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119339.9188125,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119343.1233523,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119346.3228562,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119349.528819,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119352.7449756,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119355.9610443,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119359.1959608,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119362.4170039,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119365.6366744,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119368.820772,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119372.0358222,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119375.2730532,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119378.5000443,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119381.724812,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119384.9813528,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119388.1812418,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119391.4137542,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119394.6541421,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119397.8737493,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119401.0871336,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119404.2831388,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119407.4794736,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119410.653949,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119413.87315,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119417.1038656,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119420.3178291,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119423.5360727,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119426.7440166,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119429.9436738,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119433.1574106,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119436.3658967,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119439.5691233,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119442.784694,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119445.9998817,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119449.211972,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119584.939691,
+      "route": "recovery",
+      "task": "resolve_builder_handoff",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119588.1671445,
+      "route": "builder",
+      "task": "create_thought_engine",
+      "goal": "initiate_recovery_mode"
+    },
+    {
+      "timestamp": 1776119591.3931775,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119594.5899892,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119597.769915,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119600.9631855,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119604.1573863,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119607.3443594,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119610.5217307,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119611.2751093,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119614.4468706,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119617.624933,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119620.8122437,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119624.015815,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119627.1945128,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119630.3699958,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119633.560047,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119636.7580595,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119639.9569483,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119643.1499782,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119646.3546295,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119649.5527878,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119652.735626,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119655.9344122,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119659.1404393,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119662.3261578,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119665.5069268,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119668.685889,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119671.8630166,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119675.0593357,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119678.2389011,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119681.4144154,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119684.5958197,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119687.7760427,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119690.9488623,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119694.131944,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119697.3116686,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119700.497588,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119703.674214,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119706.8539462,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119710.0379848,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119713.2139044,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119716.3909132,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119719.571281,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119722.747911,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119725.9308348,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119729.112875,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119732.298045,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119735.481199,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119738.6627882,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119741.8600276,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119745.0392404,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119748.220965,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119751.4019277,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119754.578611,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119757.7689931,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119760.955385,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119764.1379254,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119767.3118513,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119770.49214,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119773.6664152,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119776.8494475,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119780.0306878,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119783.2109492,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119786.4119287,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119789.5856843,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119792.763242,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119795.9464097,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119799.1591797,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119802.3423688,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119805.524588,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119808.7120802,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119811.8892446,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119815.0809839,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119818.2605906,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    },
+    {
+      "timestamp": 1776119821.4575841,
+      "route": "recovery",
+      "task": "advance_beyond_handoff",
+      "goal": "novel_progression"
+    }
+  ]
+}

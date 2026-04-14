@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "last_updated": 1776058271.4207153,
+  "last_decision": {
+    "timestamp": 1776058271.4207153,
+    "active_drive": "balance",
+    "decision_bias": "balanced",
+    "novelty": 0.5,
+    "action": "balanced_progression",
+    "mode": "balanced",
+    "confidence": 0.6,
+    "rationale": [
+      "balanced_default"
+    ]
+  },
+  "history": [
+    {
+      "timestamp": 1776057735.6661148,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057735.713654,
+      "active_drive": "explore",
+      "decision_bias": "novelty",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776057785.510795,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057785.5591645,
+      "active_drive": "explore",
+      "decision_bias": "novelty",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776057830.9804525,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057831.0215998,
+      "active_drive": "explore",
+      "decision_bias": "novelty",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776057870.1458924,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057870.2040021,
+      "active_drive": "explore",
+      "decision_bias": "novelty",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776057919.8611267,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057919.9238272,
+      "active_drive": "explore",
+      "decision_bias": "novelty",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776057973.8592198,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776057973.8812218,
+      "active_drive": "explore",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "probe_new_options",
+      "mode": "exploratory",
+      "confidence": 0.68,
+      "rationale": [
+        "explore_drive_active"
+      ]
+    },
+    {
+      "timestamp": 1776058029.2552986,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058077.3479555,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058077.730252,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058078.1047714,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058078.474728,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058078.8497634,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058127.1000357,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058127.4801877,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058127.8597388,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058128.2471347,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058128.6221347,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058188.2828884,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058188.664607,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058189.0391762,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058189.4100552,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058189.7833588,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058269.8333874,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058270.2365375,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058270.6428115,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058271.0319874,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    },
+    {
+      "timestamp": 1776058271.4207153,
+      "active_drive": "balance",
+      "decision_bias": "balanced",
+      "novelty": 0.5,
+      "action": "balanced_progression",
+      "mode": "balanced",
+      "confidence": 0.6,
+      "rationale": [
+        "balanced_default"
+      ]
+    }
+  ]
+}

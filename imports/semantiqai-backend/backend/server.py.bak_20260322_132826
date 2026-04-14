@@ -1,0 +1,2075 @@
+﻿import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import os
+import json
+import sqlite3
+import shutil
+import traceback
+import csv
+import io
+import uuid
+import html
+import time
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from collections import defaultdict, deque
+
+from flask import Flask, jsonify, request, send_from_directory, Response, send_file
+from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.middleware.proxy_fix import ProxyFix
+from itsdangerous import URLSafeSerializer, BadSignature
+from dotenv import load_dotenv
+try:
+    from backend.intelligence_growth import (
+        compose_intelligence_prompt,
+        store_memory_candidates,
+        create_growth_event,
+        stream_chunks,
+    )
+except Exception:
+    from intelligence_growth import (
+        compose_intelligence_prompt,
+        store_memory_candidates,
+        create_growth_event,
+        stream_chunks,
+    )
+
+load_dotenv()
+
+ROOT = Path(__file__).resolve().parents[1]
+FRONTEND_DIR = ROOT / "frontend"
+BACKEND_DIR = ROOT / "backend"
+DB_PATH = BACKEND_DIR / "data.db"
+EXPORTS_DIR = BACKEND_DIR / "exports"
+BACKUPS_DIR = BACKEND_DIR / "backups"
+UPLOADS_DIR = BACKEND_DIR / "uploads"
+
+EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
+BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
+UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+
+APP_NAME = "SemantiqAI Ascension"
+APP_VERSION = "Agent Council + Onboarding Layer"
+APP_STAGE = os.getenv("APP_STAGE", "production")
+PORT = int(os.getenv("PORT", "5000"))
+JWT_SECRET = os.getenv("JWT_SECRET", "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET")
+FOUNDER_USERNAME = os.getenv("FOUNDER_USERNAME", "founder")
+FOUNDER_PASSWORD = os.getenv("FOUNDER_PASSWORD", "CHANGE_THIS_TO_A_LONG_FOUNDER_PASSWORD")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.4")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "90"))
+PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "").strip().rstrip("/")
+CORS_ORIGINS_RAW = os.getenv("CORS_ORIGINS", "*").strip()
+
+def parse_cors_origins(raw: str):
+    if not raw or raw == "*":
+        return "*"
+    parts = [p.strip().rstrip("/") for p in raw.split(",") if p.strip()]
+    return parts or "*"
+
+CORS_ORIGINS = parse_cors_origins(CORS_ORIGINS_RAW)
+
+app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="")
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
+CORS(app, resources={r"/*": {"origins": CORS_ORIGINS}}, supports_credentials=False)
+serializer = URLSafeSerializer(JWT_SECRET, salt="semantiqai-auth")
+rate_buckets = defaultdict(deque)
+
+DEFAULT_PRESETS = [
+    {
+        "key": "aibrain_v2",
+        "title": "AIBrain V2 Strategic Core",
+        "category": "AIBrain",
+        "description": "High-level strategic thinking, decomposition, systems planning, and execution framing.",
+        "prompt_template": "Act as AIBrain V2. Think like a systems architect and strategic operator. Build a powerful, practical response for:\n\n{{input}}"
+    },
+    {
+        "key": "content_generator_mega",
+        "title": "Content Generator Mega Pack",
+        "category": "Content",
+        "description": "Generate launch content, platform content, brand messaging, and output bundles.",
+        "prompt_template": "Act as a content generation engine. Create a high-value content pack for:\n\n{{input}}"
+    },
+    {
+        "key": "ultra_product_blueprint",
+        "title": "Ultra Product Blueprint",
+        "category": "Product",
+        "description": "Map features, modules, UX, workflows, founder controls, and launch structure.",
+        "prompt_template": "Create an ultra-detailed product blueprint for:\n\n{{input}}"
+    },
+    {
+        "key": "mega_ops_founder_os",
+        "title": "Mega Founder OS",
+        "category": "Founder",
+        "description": "Operating system for priorities, launches, risks, and execution rhythm.",
+        "prompt_template": "Create a founder operating system with priorities, risks, leverage points, and next actions for:\n\n{{input}}"
+    },
+    {
+        "key": "god_level_expansion",
+        "title": "God-Level Expansion Map",
+        "category": "Expansion",
+        "description": "Map the next horizon of product leverage, intelligence, scale, and compounding features.",
+        "prompt_template": "Design a god-level expansion roadmap that compounds product value, intelligence, and platform advantage for:\n\n{{input}}"
+    },
+    {
+        "key": "planet_level_brand_architecture",
+        "title": "Planet-Level Brand Architecture",
+        "category": "Brand",
+        "description": "Shape SemantiqAI Ascension as an ecosystem-level brand and positioning machine.",
+        "prompt_template": "Design a planet-level brand architecture, positioning system, and category strategy for:\n\n{{input}}"
+    },
+    {
+        "key": "money_generator_placeholder",
+        "title": "Money Generator Placeholder",
+        "category": "Future Revenue",
+        "description": "A future-ready strategy preset for revenue systems, intentionally left non-payment-operational for now.",
+        "prompt_template": "Create a future revenue systems blueprint, without implementing payments yet, for:\n\n{{input}}"
+    },
+    {
+        "key": "ascension_agent_council",
+        "title": "Ascension Agent Council",
+        "category": "Agents",
+        "description": "Think through a multi-agent operating model for planning, execution, research, content, and founder command.",
+        "prompt_template": "Act like an agent council inside SemantiqAI Ascension. Define agent roles, workflows, handoffs, and outputs for:\n\n{{input}}"
+    }
+]
+
+STARTER_CARDS = [
+    {
+        "title": "Build my founder operating system",
+        "category": "Founder",
+        "prompt": "Create a founder operating system for SemantiqAI Ascension with weekly priorities, launch milestones, risk controls, and decision loops."
+    },
+    {
+        "title": "Design my next unfair feature stack",
+        "category": "Expansion",
+        "prompt": "Design the next unfair feature stack for SemantiqAI Ascension focused on retention, trust, and leverage."
+    },
+    {
+        "title": "Create a content engine",
+        "category": "Content",
+        "prompt": "Create a content engine for SemantiqAI Ascension with homepage content, launch posts, short-form hooks, and long-form ideas."
+    },
+    {
+        "title": "Map a planet-level brand",
+        "category": "Brand",
+        "prompt": "Map a planet-level brand architecture for SemantiqAI Ascension, including positioning, sub-brands, and trust signals."
+    },
+    {
+        "title": "Build the product blueprint",
+        "category": "Product",
+        "prompt": "Create an ultra product blueprint for SemantiqAI Ascension including modules, user journeys, workflows, and founder controls."
+    },
+    {
+        "title": "Research next strategic moves",
+        "category": "Research",
+        "prompt": "Analyze the next strategic moves SemantiqAI Ascension should take before adding payments."
+    }
+]
+
+AGENTS = {
+    "aibrain_strategist": {
+        "title": "AIBrain Strategist",
+        "system": "You are AIBrain Strategist inside SemantiqAI Ascension. Focus on systems thinking, strategic decomposition, execution leverage, and intelligent architecture."
+    },
+    "content_generator": {
+        "title": "Content Generator",
+        "system": "You are Content Generator inside SemantiqAI Ascension. Focus on messaging, launch copy, marketing assets, content packs, and conversion-friendly communication."
+    },
+    "founder_os": {
+        "title": "Founder OS",
+        "system": "You are Founder OS inside SemantiqAI Ascension. Focus on priorities, operations, decision rhythms, accountability, and founder execution."
+    },
+    "research_architect": {
+        "title": "Research Architect",
+        "system": "You are Research Architect inside SemantiqAI Ascension. Focus on investigation framing, evidence synthesis, opportunity mapping, and knowledge structuring."
+    },
+    "expansion_planner": {
+        "title": "Expansion Planner",
+        "system": "You are Expansion Planner inside SemantiqAI Ascension. Focus on leverage, scale, roadmap compounding, ecosystem design, and future platform growth."
+    }
+}
+
+def utc_now():
+    return datetime.now(timezone.utc).isoformat()
+
+def env_ok(value: str) -> bool:
+    return bool(value and not value.startswith("CHANGE_THIS"))
+
+def db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def startup_flags():
+    public_url_ok = bool(PUBLIC_BASE_URL and PUBLIC_BASE_URL.startswith("http") and "your-domain-here.com" not in PUBLIC_BASE_URL)
+    cors_ok = False
+    if CORS_ORIGINS == "*":
+        cors_ok = APP_STAGE != "production"
+    elif isinstance(CORS_ORIGINS, list):
+        cors_ok = len(CORS_ORIGINS) > 0 and all(o.startswith("http") for o in CORS_ORIGINS)
+
+    return {
+        "frontend_exists": (FRONTEND_DIR / "index.html").exists(),
+        "database_exists": DB_PATH.exists(),
+        "jwt_configured": env_ok(JWT_SECRET),
+        "founder_password_configured": env_ok(FOUNDER_PASSWORD),
+        "openai_key_configured": bool(OPENAI_API_KEY),
+        "public_base_url_configured": public_url_ok,
+        "cors_configured": cors_ok,
+        "exports_exists": EXPORTS_DIR.exists(),
+        "backups_exists": BACKUPS_DIR.exists(),
+        "uploads_exists": UPLOADS_DIR.exists(),
+    }
+
+def checklist_items():
+    flags = startup_flags()
+    items = [
+        {"item": "Frontend index exists", "ok": flags["frontend_exists"], "weight": 10},
+        {"item": "Database initialized", "ok": flags["database_exists"], "weight": 10},
+        {"item": "JWT secret configured", "ok": flags["jwt_configured"], "weight": 18},
+        {"item": "Founder password configured", "ok": flags["founder_password_configured"], "weight": 12},
+        {"item": "OpenAI API key configured", "ok": flags["openai_key_configured"], "weight": 10},
+        {"item": "Public base URL configured", "ok": flags["public_base_url_configured"], "weight": 15},
+        {"item": "CORS configured safely", "ok": flags["cors_configured"], "weight": 10},
+        {"item": "Exports directory exists", "ok": flags["exports_exists"], "weight": 5},
+        {"item": "Backups directory exists", "ok": flags["backups_exists"], "weight": 5},
+        {"item": "Uploads directory exists", "ok": flags["uploads_exists"], "weight": 5},
+    ]
+    score = sum(item["weight"] for item in items if item["ok"])
+    grade = "A" if score >= 90 else "B" if score >= 75 else "C" if score >= 60 else "D"
+    return items, score, grade
+
+def init_db():
+    conn = db()
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        role TEXT NOT NULL DEFAULT 'user',
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        agent TEXT,
+        message TEXT,
+        response TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS knowledge (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        title TEXT,
+        content TEXT,
+        source_type TEXT,
+        tags TEXT,
+        pinned INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS artifacts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        thread_id INTEGER,
+        title TEXT,
+        artifact_type TEXT,
+        filename TEXT,
+        file_path TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS request_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        route TEXT,
+        method TEXT,
+        status_code INTEGER,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS tasks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        task_type TEXT,
+        status TEXT,
+        payload TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS threads (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        is_archived INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        thread_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        role TEXT NOT NULL,
+        agent TEXT,
+        content TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS presets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        preset_key TEXT,
+        title TEXT NOT NULL,
+        category TEXT,
+        description TEXT,
+        prompt_template TEXT NOT NULL,
+        is_system INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        thread_id INTEGER,
+        rating TEXT,
+        note TEXT,
+        context_type TEXT,
+        context_value TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS agent_runs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        thread_id INTEGER,
+        agent_key TEXT,
+        agent_title TEXT,
+        input_text TEXT,
+        output_text TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS onboarding_state (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER UNIQUE,
+        completed INTEGER NOT NULL DEFAULT 0,
+        selected_goal TEXT,
+        selected_mode TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """)
+
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS user_profiles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER UNIQUE NOT NULL,
+        goals TEXT NOT NULL DEFAULT '[]',
+        preferences TEXT NOT NULL DEFAULT '[]',
+        traits TEXT NOT NULL DEFAULT '[]',
+        updated_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS memory_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        thread_id INTEGER,
+        memory_type TEXT NOT NULL DEFAULT 'note',
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        tags TEXT NOT NULL DEFAULT '[]',
+        score REAL NOT NULL DEFAULT 1.0,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS growth_leads (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT NOT NULL,
+        source TEXT NOT NULL DEFAULT 'site',
+        note TEXT,
+        status TEXT NOT NULL DEFAULT 'new',
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS growth_events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        event_type TEXT NOT NULL,
+        source TEXT NOT NULL,
+        payload_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS founder_notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        author_user_id INTEGER,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS moderation_actions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        founder_user_id INTEGER,
+        action_type TEXT NOT NULL,
+        target_type TEXT NOT NULL,
+        target_id INTEGER,
+        payload_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS public_site_content (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        section_key TEXT UNIQUE NOT NULL,
+        title TEXT NOT NULL DEFAULT '',
+        body TEXT NOT NULL DEFAULT '',
+        cta_text TEXT NOT NULL DEFAULT '',
+        cta_link TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS public_waitlist (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT NOT NULL,
+        use_case TEXT,
+        note TEXT,
+        source TEXT NOT NULL DEFAULT 'public_site',
+        created_at TEXT NOT NULL
+    )
+    """)
+    conn.commit()
+
+    founder = cur.execute("SELECT id FROM users WHERE username = ?", (FOUNDER_USERNAME,)).fetchone()
+    if not founder and env_ok(FOUNDER_PASSWORD):
+        cur.execute(
+            "INSERT INTO users (username, password_hash, role, created_at) VALUES (?, ?, ?, ?)",
+            (FOUNDER_USERNAME, generate_password_hash(FOUNDER_PASSWORD), "founder", utc_now())
+        )
+        conn.commit()
+
+    for preset in DEFAULT_PRESETS:
+        exists = cur.execute(
+            "SELECT id FROM presets WHERE preset_key = ? AND is_system = 1",
+            (preset["key"],)
+        ).fetchone()
+        if not exists:
+            cur.execute(
+                "INSERT INTO presets (user_id, preset_key, title, category, description, prompt_template, is_system, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (None, preset["key"], preset["title"], preset["category"], preset["description"], preset["prompt_template"], 1, utc_now())
+            )
+
+    conn.commit()
+    conn.close()
+
+def token_for_user(user):
+    return serializer.dumps({
+        "id": user["id"],
+        "username": user["username"],
+        "role": user["role"]
+    })
+
+def user_from_token():
+    auth = request.headers.get("Authorization", "")
+    if not auth.startswith("Bearer "):
+        return None
+    token = auth.split(" ", 1)[1].strip()
+    if not token:
+        return None
+    try:
+        payload = serializer.loads(token)
+    except BadSignature:
+        return None
+    conn = db()
+    row = conn.execute(
+        "SELECT id, username, role, created_at FROM users WHERE id = ?",
+        (payload.get("id"),)
+    ).fetchone()
+    conn.close()
+    return row
+
+def require_user():
+    user = user_from_token()
+    if not user:
+        return None, (jsonify({"error": "Authentication required"}), 401)
+    return user, None
+
+def require_founder():
+    user, err = require_user()
+    if err:
+        return None, err
+    if user["role"] not in ("founder", "admin"):
+        return None, (jsonify({"error": "Founder access required"}), 403)
+    return user, None
+
+def client_key():
+    auth = request.headers.get("Authorization", "")
+    if auth.startswith("Bearer "):
+        return f"token:{auth[:48]}"
+    forwarded = request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+    ip = forwarded or request.remote_addr or "unknown"
+    return f"ip:{ip}"
+
+@app.before_request
+def apply_rate_limit():
+    exempt = {"/", "/status", "/health", "/ready"}
+    if request.path in exempt or request.path.startswith("/manifest") or request.path.startswith("/robots") or request.path.startswith("/sitemap"):
+        return None
+
+    key = client_key()
+    now = datetime.now(timezone.utc)
+    bucket = rate_buckets[key]
+    cutoff = now - timedelta(minutes=1)
+
+    while bucket and bucket[0] < cutoff:
+        bucket.popleft()
+
+    if len(bucket) >= RATE_LIMIT_PER_MINUTE:
+        return jsonify({"error": "Rate limit exceeded", "limit_per_minute": RATE_LIMIT_PER_MINUTE}), 429
+
+    bucket.append(now)
+    return None
+
+def log_request_row(status_code):
+    try:
+        user = user_from_token()
+        uid = user["id"] if user else None
+        conn = db()
+        conn.execute(
+            "INSERT INTO request_logs (user_id, route, method, status_code, created_at) VALUES (?, ?, ?, ?, ?)",
+            (uid, request.path, request.method, int(status_code), utc_now())
+        )
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass
+
+@app.after_request
+def after_request(response):
+    response.headers["X-App-Name"] = APP_NAME
+    response.headers["X-App-Version"] = APP_VERSION
+    response.headers["X-App-Stage"] = APP_STAGE
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    if request.is_secure or (PUBLIC_BASE_URL.startswith("https://") if PUBLIC_BASE_URL else False):
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    log_request_row(response.status_code)
+    return response
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    trace_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
+    print(f"[ERROR {trace_id}] {e}")
+    traceback.print_exc()
+    return jsonify({"error": "Internal server error", "trace_id": trace_id}), 500
+
+def maybe_generate_text(prompt: str) -> str:
+    prompt = (prompt or "").strip()
+    if not prompt:
+        return "No prompt provided."
+
+    try:
+        from backend.ai_engine import generate_text
+        result = generate_text(prompt)
+        if result:
+            return str(result).strip()
+    except Exception:
+        pass
+
+    try:
+        from openai import OpenAI
+        if OPENAI_API_KEY:
+            client = OpenAI(api_key=OPENAI_API_KEY)
+            response = client.responses.create(model=OPENAI_MODEL, input=prompt)
+            text = getattr(response, "output_text", None)
+            if text:
+                return text.strip()
+    except Exception:
+        pass
+
+    return (
+        "SemantiqAI fallback response:\n\n"
+        f"{prompt}\n\n"
+        "The AI engine is not fully wired yet, so this is the local fallback layer."
+    )
+
+def ensure_default_thread(user_id):
+    conn = db()
+    row = conn.execute(
+        "SELECT id, title, is_archived, created_at, updated_at FROM threads WHERE user_id = ? ORDER BY updated_at DESC, id DESC LIMIT 1",
+        (user_id,)
+    ).fetchone()
+    if row:
+        conn.close()
+        return row["id"]
+    now = utc_now()
+    conn.execute(
+        "INSERT INTO threads (user_id, title, is_archived, created_at, updated_at) VALUES (?, ?, 0, ?, ?)",
+        (user_id, "Main Thread", now, now)
+    )
+    conn.commit()
+    thread_id = conn.execute("SELECT last_insert_rowid() AS id").fetchone()["id"]
+    conn.close()
+    return thread_id
+
+def create_thread(user_id, title="New Thread"):
+    conn = db()
+    now = utc_now()
+    conn.execute(
+        "INSERT INTO threads (user_id, title, is_archived, created_at, updated_at) VALUES (?, ?, 0, ?, ?)",
+        (user_id, title, now, now)
+    )
+    conn.commit()
+    thread_id = conn.execute("SELECT last_insert_rowid() AS id").fetchone()["id"]
+    row = conn.execute("SELECT * FROM threads WHERE id = ?", (thread_id,)).fetchone()
+    conn.close()
+    return dict(row)
+
+def add_message(thread_id, user_id, role, content, agent=None):
+    conn = db()
+    now = utc_now()
+    conn.execute(
+        "INSERT INTO messages (thread_id, user_id, role, agent, content, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+        (thread_id, user_id, role, agent, content, now)
+    )
+    conn.execute("UPDATE threads SET updated_at = ? WHERE id = ?", (now, thread_id))
+    conn.commit()
+    conn.close()
+
+def add_history(user_id, agent, message, response):
+    conn = db()
+    conn.execute(
+        "INSERT INTO history (user_id, agent, message, response, created_at) VALUES (?, ?, ?, ?, ?)",
+        (user_id, agent, message, response, utc_now())
+    )
+    conn.commit()
+    conn.close()
+
+def create_artifact(user_id, thread_id, title, artifact_type, content):
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    safe_title = "".join(c if c.isalnum() or c in ("-", "_") else "_" for c in (title or "artifact"))[:60]
+    filename = f"{safe_title}_{stamp}.txt"
+    path = EXPORTS_DIR / filename
+    path.write_text(content, encoding="utf-8")
+
+    conn = db()
+    conn.execute(
+        "INSERT INTO artifacts (user_id, thread_id, title, artifact_type, filename, file_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (user_id, thread_id, title, artifact_type, filename, str(path), utc_now())
+    )
+    conn.commit()
+    conn.close()
+
+    return {
+        "title": title,
+        "artifact_type": artifact_type,
+        "filename": filename,
+        "file_path": str(path)
+    }
+
+def get_thread_owned(user_id, thread_id):
+    conn = db()
+    row = conn.execute("SELECT * FROM threads WHERE id = ? AND user_id = ?", (thread_id, user_id)).fetchone()
+    conn.close()
+    return row
+
+def run_agent(agent_key: str, user_input: str) -> dict:
+    agent = AGENTS.get(agent_key)
+    if not agent:
+        return {"agent_key": agent_key, "agent_title": agent_key, "output": f"Unknown agent: {agent_key}"}
+    prompt = f"{agent['system']}\n\nUser request:\n{user_input}"
+    output = maybe_generate_text(prompt)
+    return {
+        "agent_key": agent_key,
+        "agent_title": agent["title"],
+        "output": output
+    }
+
+def route_agents(user_input: str):
+    text = (user_input or "").lower()
+    chosen = ["aibrain_strategist"]
+
+    if any(k in text for k in ["content", "copy", "launch post", "marketing", "homepage"]):
+        chosen.append("content_generator")
+    if any(k in text for k in ["founder", "operations", "ops", "priority", "schedule", "weekly"]):
+        chosen.append("founder_os")
+    if any(k in text for k in ["research", "analyze", "investigate", "study", "evidence"]):
+        chosen.append("research_architect")
+    if any(k in text for k in ["expand", "roadmap", "scale", "ecosystem", "future", "unfair"]):
+        chosen.append("expansion_planner")
+
+    # dedupe preserving order
+    seen = set()
+    ordered = []
+    for c in chosen:
+        if c not in seen:
+            seen.add(c)
+            ordered.append(c)
+    return ordered
+
+def save_agent_run(user_id, thread_id, agent_key, agent_title, input_text, output_text):
+    conn = db()
+    conn.execute(
+        "INSERT INTO agent_runs (user_id, thread_id, agent_key, agent_title, input_text, output_text, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (user_id, thread_id, agent_key, agent_title, input_text, output_text, utc_now())
+    )
+    conn.commit()
+    conn.close()
+
+def analytics_summary():
+    conn = db()
+    users = conn.execute("SELECT COUNT(*) AS c FROM users").fetchone()["c"]
+    threads = conn.execute("SELECT COUNT(*) AS c FROM threads").fetchone()["c"]
+    messages = conn.execute("SELECT COUNT(*) AS c FROM messages").fetchone()["c"]
+    artifacts = conn.execute("SELECT COUNT(*) AS c FROM artifacts").fetchone()["c"]
+    knowledge = conn.execute("SELECT COUNT(*) AS c FROM knowledge").fetchone()["c"]
+    feedback = conn.execute("SELECT COUNT(*) AS c FROM feedback").fetchone()["c"]
+    presets = conn.execute("SELECT COUNT(*) AS c FROM presets").fetchone()["c"]
+    request_logs = conn.execute("SELECT COUNT(*) AS c FROM request_logs").fetchone()["c"]
+    agent_runs = conn.execute("SELECT COUNT(*) AS c FROM agent_runs").fetchone()["c"]
+
+    top_routes = [dict(r) for r in conn.execute(
+        "SELECT route, COUNT(*) AS hits FROM request_logs GROUP BY route ORDER BY hits DESC LIMIT 10"
+    ).fetchall()]
+
+    top_agents = [dict(r) for r in conn.execute(
+        "SELECT agent_title, COUNT(*) AS runs FROM agent_runs GROUP BY agent_title ORDER BY runs DESC LIMIT 10"
+    ).fetchall()]
+
+    latest_feedback = [dict(r) for r in conn.execute(
+        "SELECT rating, note, context_type, context_value, created_at FROM feedback ORDER BY id DESC LIMIT 20"
+    ).fetchall()]
+
+    latest_users = [dict(r) for r in conn.execute(
+        "SELECT username, role, created_at FROM users ORDER BY id DESC LIMIT 20"
+    ).fetchall()]
+
+    conn.close()
+    return {
+        "users": users,
+        "threads": threads,
+        "messages": messages,
+        "artifacts": artifacts,
+        "knowledge": knowledge,
+        "feedback": feedback,
+        "presets": presets,
+        "request_logs": request_logs,
+        "agent_runs": agent_runs,
+        "top_routes": top_routes,
+        "top_agents": top_agents,
+        "latest_feedback": latest_feedback,
+        "latest_users": latest_users,
+    }
+
+def get_onboarding_state(user_id):
+    conn = db()
+    row = conn.execute(
+        "SELECT completed, selected_goal, selected_mode, created_at, updated_at FROM onboarding_state WHERE user_id = ?",
+        (user_id,)
+    ).fetchone()
+    conn.close()
+    if row:
+        return dict(row)
+    return {
+        "completed": 0,
+        "selected_goal": "",
+        "selected_mode": "",
+        "created_at": "",
+        "updated_at": ""
+    }
+
+@app.get("/")
+def index():
+    if (FRONTEND_DIR / "index.html").exists():
+        return send_from_directory(FRONTEND_DIR, "index.html")
+    return jsonify({"ok": True, "app": APP_NAME, "message": "Frontend not found"})
+
+@app.get("/status")
+def status():
+    return jsonify({
+        "ok": True,
+        "app": APP_NAME,
+        "version": APP_VERSION,
+        "stage": APP_STAGE,
+        "time": utc_now(),
+        "frontend": (FRONTEND_DIR / "index.html").exists(),
+        "database": DB_PATH.exists(),
+        "public_base_url": PUBLIC_BASE_URL,
+        "cors_origins": CORS_ORIGINS,
+        "rate_limit_per_minute": RATE_LIMIT_PER_MINUTE
+    })
+
+@app.get("/health")
+def health():
+    return jsonify({"ok": True, "service": APP_NAME, "stage": APP_STAGE, "time": utc_now()})
+
+@app.get("/ready")
+def ready():
+    items, score, grade = checklist_items()
+    ready_state = score >= 75
+    return jsonify({
+        "ok": ready_state,
+        "score": score,
+        "grade": grade,
+        "items": items,
+        "public_testing_ready": score >= 75,
+        "public_launch_ready": score >= 90
+    }), (200 if ready_state else 503)
+
+@app.post("/signup")
+def signup():
+    data = request.get_json(silent=True) or {}
+    username = (data.get("username") or "").strip()
+    password = data.get("password") or ""
+
+    if len(username) < 3:
+        return jsonify({"error": "Username must be at least 3 characters"}), 400
+    if len(password) < 6:
+        return jsonify({"error": "Password must be at least 6 characters"}), 400
+
+    conn = db()
+    try:
+        conn.execute(
+            "INSERT INTO users (username, password_hash, role, created_at) VALUES (?, ?, ?, ?)",
+            (username, generate_password_hash(password), "user", utc_now())
+        )
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.close()
+        return jsonify({"error": "Username already exists"}), 400
+
+    user = conn.execute("SELECT id, username, role, created_at FROM users WHERE username = ?", (username,)).fetchone()
+    conn.execute(
+        "INSERT OR IGNORE INTO onboarding_state (user_id, completed, selected_goal, selected_mode, created_at, updated_at) VALUES (?, 0, '', '', ?, ?)",
+        (user["id"], utc_now(), utc_now())
+    )
+    conn.commit()
+    conn.close()
+
+    ensure_default_thread(user["id"])
+    return jsonify({"token": token_for_user(user), "user": dict(user)})
+
+@app.post("/login")
+def login():
+    data = request.get_json(silent=True) or {}
+    username = (data.get("username") or "").strip()
+    password = data.get("password") or ""
+
+    conn = db()
+    user = conn.execute(
+        "SELECT id, username, password_hash, role, created_at FROM users WHERE username = ?",
+        (username,)
+    ).fetchone()
+    conn.close()
+
+    if not user or not check_password_hash(user["password_hash"], password):
+        return jsonify({"error": "Invalid username or password"}), 401
+
+    clean_user = {"id": user["id"], "username": user["username"], "role": user["role"], "created_at": user["created_at"]}
+    ensure_default_thread(user["id"])
+    return jsonify({"token": token_for_user(clean_user), "user": clean_user})
+
+@app.get("/me")
+def me():
+    user, err = require_user()
+    if err:
+        return err
+    return jsonify({"user": dict(user)})
+
+@app.route("/threads", methods=["GET", "POST"])
+def threads():
+    user, err = require_user()
+    if err:
+        return err
+
+    conn = db()
+
+    if request.method == "POST":
+        data = request.get_json(silent=True) or {}
+        title = (data.get("title") or "New Thread").strip()
+        conn.close()
+        return jsonify({"thread": create_thread(user["id"], title)})
+
+    rows = conn.execute(
+        "SELECT * FROM threads WHERE user_id = ? ORDER BY is_archived ASC, updated_at DESC, id DESC",
+        (user["id"],)
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.get("/threads/<int:thread_id>/messages")
+def thread_messages(thread_id):
+    user, err = require_user()
+    if err:
+        return err
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT id, role, agent, content, created_at FROM messages WHERE thread_id = ? ORDER BY id ASC",
+        (thread_id,)
+    ).fetchall()
+    conn.close()
+    return jsonify({"thread": dict(thread), "items": [dict(r) for r in rows]})
+
+@app.post("/threads/<int:thread_id>/rename")
+def thread_rename(thread_id):
+    user, err = require_user()
+    if err:
+        return err
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    data = request.get_json(silent=True) or {}
+    title = (data.get("title") or "").strip()
+    if not title:
+        return jsonify({"error": "Title is required"}), 400
+
+    conn = db()
+    conn.execute("UPDATE threads SET title = ?, updated_at = ? WHERE id = ?", (title, utc_now(), thread_id))
+    conn.commit()
+    row = conn.execute("SELECT * FROM threads WHERE id = ?", (thread_id,)).fetchone()
+    conn.close()
+    return jsonify({"thread": dict(row)})
+
+@app.post("/threads/<int:thread_id>/archive")
+def thread_archive(thread_id):
+    user, err = require_user()
+    if err:
+        return err
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    conn = db()
+    conn.execute("UPDATE threads SET is_archived = 1, updated_at = ? WHERE id = ?", (utc_now(), thread_id))
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True})
+
+@app.delete("/threads/<int:thread_id>")
+def thread_delete(thread_id):
+    user, err = require_user()
+    if err:
+        return err
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    conn = db()
+    conn.execute("DELETE FROM messages WHERE thread_id = ?", (thread_id,))
+    conn.execute("DELETE FROM artifacts WHERE thread_id = ?", (thread_id,))
+    conn.execute("DELETE FROM feedback WHERE thread_id = ?", (thread_id,))
+    conn.execute("DELETE FROM agent_runs WHERE thread_id = ?", (thread_id,))
+    conn.execute("DELETE FROM threads WHERE id = ?", (thread_id,))
+    conn.commit()
+    remaining = conn.execute("SELECT COUNT(*) AS c FROM threads WHERE user_id = ?", (user["id"],)).fetchone()["c"]
+    conn.close()
+
+    if remaining == 0:
+        create_thread(user["id"], "Main Thread")
+
+    return jsonify({"ok": True})
+
+@app.post("/chat")
+def chat():
+    user, err = require_user()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    message = (data.get("message") or "").strip()
+    thread_id = int(data.get("thread_id") or ensure_default_thread(user["id"]))
+    preset_key = (data.get("preset_key") or "").strip()
+
+    if not message:
+        return jsonify({"error": "Message is required"}), 400
+
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    final_prompt = message
+    if preset_key:
+        conn = db()
+        preset = conn.execute(
+            "SELECT * FROM presets WHERE preset_key = ? AND (is_system = 1 OR user_id = ?)",
+            (preset_key, user["id"])
+        ).fetchone()
+        conn.close()
+        if preset:
+            final_prompt = (preset["prompt_template"] or "").replace("{{input}}", message)
+
+    conn = db()
+    enriched_prompt, context_meta = compose_intelligence_prompt(conn, user["id"], final_prompt, thread_id)
+    response = maybe_generate_text(enriched_prompt)
+
+    add_message(thread_id, user["id"], "user", message, None)
+    add_message(thread_id, user["id"], "assistant", response, "SemantiqAI")
+    add_history(user["id"], "SemantiqAI", message, response)
+
+    captured = store_memory_candidates(conn, user["id"], thread_id, message, response)
+    create_growth_event(conn, "chat", "authenticated_app", {
+        "thread_id": thread_id,
+        "preset_key": preset_key,
+        "memory_count": context_meta.get("memory_count", 0),
+        "profile_used": context_meta.get("profile_used", False),
+        "captured_memories": captured
+    }, user["id"])
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "agent": "SemantiqAI",
+        "response": response,
+        "thread_id": thread_id,
+        "memory_context_used": context_meta.get("memory_count", 0),
+        "profile_context_used": context_meta.get("profile_used", False),
+        "captured_memories": captured
+    })
+
+@app.route("/growth/lead", methods=["POST"])
+def growth_lead():
+    data = request.get_json(silent=True) or {}
+    name = (data.get("name") or "").strip()
+    email = (data.get("email") or "").strip().lower()
+    source = (data.get("source") or "site").strip() or "site"
+    note = (data.get("note") or "").strip()
+
+    if not email or "@" not in email or "." not in email:
+        return jsonify({"error": "Valid email is required"}), 400
+
+    conn = db()
+    exists = conn.execute("SELECT id FROM growth_leads WHERE email = ?", (email,)).fetchone()
+    if exists:
+        create_growth_event(conn, "lead_duplicate", source, {"email": email})
+        conn.commit()
+        conn.close()
+        return jsonify({"ok": True, "status": "existing"})
+
+    conn.execute(
+        "INSERT INTO growth_leads (name, email, source, note, status, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+        (name, email, source, note, "new", utc_now())
+    )
+    create_growth_event(conn, "lead_created", source, {"email": email, "name": name})
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "status": "created"})
+
+@app.route("/growth/event", methods=["POST"])
+def growth_event():
+    data = request.get_json(silent=True) or {}
+    event_type = (data.get("event_type") or "").strip()
+    source = (data.get("source") or "site").strip() or "site"
+    payload = data.get("payload") or {}
+
+    if not event_type:
+        return jsonify({"error": "event_type is required"}), 400
+
+    user_id = None
+    auth_header = request.headers.get("Authorization", "")
+    if auth_header.startswith("Bearer "):
+        token = auth_header.split(" ", 2)[1].strip()
+        try:
+            payload_user = serializer.loads(token)
+            if isinstance(payload_user, dict):
+                user_id = payload_user.get("id")
+        except Exception:
+            user_id = None
+
+    conn = db()
+    create_growth_event(conn, event_type, source, payload, user_id)
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/growth/stats", methods=["GET"])
+def growth_stats():
+    user, err = require_founder()
+    if err:
+        return err
+
+    conn = db()
+    leads = conn.execute("SELECT COUNT(*) AS c FROM growth_leads").fetchone()["c"]
+    leads_new = conn.execute("SELECT COUNT(*) AS c FROM growth_leads WHERE status = 'new'").fetchone()["c"]
+    events = conn.execute("SELECT COUNT(*) AS c FROM growth_events").fetchone()["c"]
+    event_rows = conn.execute(
+        "SELECT event_type, COUNT(*) AS count FROM growth_events GROUP BY event_type ORDER BY count DESC, event_type ASC LIMIT 20"
+    ).fetchall()
+    latest_leads = conn.execute(
+        "SELECT id, name, email, source, note, status, created_at FROM growth_leads ORDER BY id DESC LIMIT 50"
+    ).fetchall()
+    conn.close()
+
+    return jsonify({
+        "leads": leads,
+        "leads_new": leads_new,
+        "events": events,
+        "top_events": [dict(r) for r in event_rows],
+        "latest_leads": [dict(r) for r in latest_leads]
+    })
+
+@app.route("/stream-chat", methods=["POST"])
+def stream_chat():
+    user, err = require_user()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    message = (data.get("message") or "").strip()
+    thread_id = int(data.get("thread_id") or ensure_default_thread(user["id"]))
+    preset_key = (data.get("preset_key") or "").strip()
+
+    if not message:
+        return jsonify({"error": "Message is required"}), 400
+
+    thread = get_thread_owned(user["id"], thread_id)
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    final_prompt = message
+    if preset_key:
+        conn = db()
+        preset = conn.execute(
+            "SELECT * FROM presets WHERE preset_key = ? AND (is_system = 1 OR user_id = ?)",
+            (preset_key, user["id"])
+        ).fetchone()
+        conn.close()
+        if preset:
+            final_prompt = (preset["prompt_template"] or "").replace("{{input}}", message)
+
+    conn = db()
+    enriched_prompt, context_meta = compose_intelligence_prompt(conn, user["id"], final_prompt, thread_id)
+    response_text = maybe_generate_text(enriched_prompt)
+
+    add_message(thread_id, user["id"], "user", message, None)
+    add_message(thread_id, user["id"], "assistant", response_text, "SemantiqAI Stream")
+    add_history(user["id"], "SemantiqAI Stream", message, response_text)
+
+    captured = store_memory_candidates(conn, user["id"], thread_id, message, response_text)
+    create_growth_event(conn, "stream_chat", "authenticated_app", {
+        "thread_id": thread_id,
+        "preset_key": preset_key,
+        "memory_count": context_meta.get("memory_count", 0),
+        "profile_used": context_meta.get("profile_used", False),
+        "captured_memories": captured
+    }, user["id"])
+    conn.commit()
+    conn.close()
+
+    def generate():
+        yield "event: meta\ndata: " + json.dumps({
+            "thread_id": thread_id,
+            "memory_context_used": context_meta.get("memory_count", 0),
+            "profile_context_used": context_meta.get("profile_used", False),
+            "captured_memories": captured
+        }) + "\n\n"
+
+        for chunk in stream_chunks(response_text, max_words=8):
+            yield "event: token\ndata: " + json.dumps({"token": chunk}) + "\n\n"
+            time.sleep(0.02)
+
+        yield "event: done\ndata: " + json.dumps({"ok": True}) + "\n\n"
+
+    return Response(
+        generate(),
+        mimetype="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no"
+        }
+    )
+
+@app.route("/upload/csv", methods=["POST"])
+def upload_csv():
+    user, err = require_user()
+    if err:
+        return err
+
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    f = request.files["file"]
+    if not f or not f.filename:
+        return jsonify({"error": "Invalid file"}), 400
+
+    filename = f.filename
+    ext = os.path.splitext(filename)[1].lower()
+    if ext != ".csv":
+        return jsonify({"error": "Only CSV uploads are supported in this route"}), 400
+
+    safe_name = uuid.uuid4().hex + "_" + os.path.basename(filename)
+    saved_path = UPLOADS_DIR / safe_name
+    f.save(saved_path)
+
+    try:
+        text = saved_path.read_text(encoding="utf-8", errors="ignore")
+        reader = csv.DictReader(io.StringIO(text))
+        rows = list(reader)
+        columns = reader.fieldnames or []
+
+        numeric_summary = {}
+        for col in columns:
+            values = []
+            for row in rows[:1000]:
+                raw = (row.get(col) or "").strip()
+                if raw == "":
+                    continue
+                try:
+                    values.append(float(raw))
+                except Exception:
+                    pass
+            if values:
+                numeric_summary[col] = {
+                    "count": len(values),
+                    "min": min(values),
+                    "max": max(values),
+                    "avg": sum(values) / len(values)
+                }
+
+        sample_rows = rows[:10]
+
+        return jsonify({
+            "ok": True,
+            "filename": filename,
+            "saved_as": safe_name,
+            "rows": len(rows),
+            "columns": columns,
+            "sample_rows": sample_rows,
+            "numeric_summary": numeric_summary
+        })
+    except Exception as e:
+        return jsonify({"error": f"CSV analysis failed: {e}"}), 500
+
+@app.route("/exports/download/<path:filename>", methods=["GET"])
+def download_export(filename):
+    user, err = require_user()
+    if err:
+        return err
+
+    path = EXPORTS_DIR / filename
+    if not path.exists() or not path.is_file():
+        return jsonify({"error": "Export not found"}), 404
+
+    return send_file(path, as_attachment=True, download_name=path.name)
+
+@app.route("/share/create", methods=["POST"])
+def create_share():
+    user, err = require_user()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    title = (data.get("title") or "Shared Output").strip()
+    content = (data.get("content") or "").strip()
+    filename = (data.get("filename") or "").strip()
+
+    if filename and not content:
+        path = EXPORTS_DIR / filename
+        if not path.exists() or not path.is_file():
+            return jsonify({"error": "Export file not found"}), 404
+        content = path.read_text(encoding="utf-8", errors="ignore")
+        if not title or title == "Shared Output":
+            title = filename
+
+    if not content:
+        return jsonify({"error": "content or filename is required"}), 400
+
+    slug = uuid.uuid4().hex[:12]
+
+    conn = db()
+    conn.execute(
+        "INSERT INTO shared_outputs (slug, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
+        (slug, user["id"], title, content, utc_now())
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "ok": True,
+        "slug": slug,
+        "share_url": f"/share/{slug}"
+    })
+
+@app.route("/share/<slug>", methods=["GET"])
+def view_share(slug):
+    conn = db()
+    row = conn.execute(
+        "SELECT slug, title, content, created_at FROM shared_outputs WHERE slug = ?",
+        (slug,)
+    ).fetchone()
+    conn.close()
+
+    if not row:
+        if (FRONTEND_DIR / "404.html").exists():
+            return send_from_directory(FRONTEND_DIR, "404.html"), 404
+        return "Not found", 404
+
+    title = html.escape(row["title"] or "Shared Output")
+    content = html.escape(row["content"] or "")
+    created_at = html.escape(row["created_at"] or "")
+
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title} • SemantiqAI Share</title>
+<style>
+body{{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#091224;color:#eef3ff}}
+.wrap{{max-width:980px;margin:0 auto;padding:32px}}
+.card{{background:#101936;border:1px solid #27376a;border-radius:20px;padding:24px}}
+a{{color:#9ab0ff;text-decoration:none}}
+pre{{white-space:pre-wrap;line-height:1.6;color:#dce6ff}}
+.meta{{color:#aab7de;font-size:12px;margin-bottom:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>{title}</h1>
+    <div class="meta">Shared from SemantiqAI • {created_at}</div>
+    <pre>{content}</pre>
+    <p><a href="/">← Back to SemantiqAI</a></p>
+  </div>
+</div>
+</body>
+</html>"""
+    return Response(page, mimetype="text/html")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=PORT, debug=False)
+
+# ===== THREAD SYSTEM =====
+
+@app.route('/threads', methods=['GET'])
+def get_threads():
+    user = get_current_user()
+    rows = query_db("SELECT * FROM threads WHERE user_id=? ORDER BY id DESC", (user['id'],))
+    return jsonify({'items': rows})
+
+@app.route('/threads', methods=['POST'])
+def create_thread():
+    user = get_current_user()
+    data = request.json or {}
+    title = data.get('title', 'New Thread')
+    execute_db("INSERT INTO threads (user_id, title) VALUES (?,?)", (user['id'], title))
+    return jsonify({'ok': True})
+
+@app.route('/threads/<int:thread_id>', methods=['DELETE'])
+def delete_thread(thread_id):
+    user = get_current_user()
+    execute_db("DELETE FROM threads WHERE id=? AND user_id=?", (thread_id, user['id']))
+    execute_db("DELETE FROM thread_messages WHERE thread_id=?", (thread_id,))
+    return jsonify({'ok': True})
+
+@app.route('/threads/<int:thread_id>/messages', methods=['GET'])
+def get_thread_messages(thread_id):
+    rows = query_db("SELECT * FROM thread_messages WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    return jsonify({'items': rows})
+
+@app.route('/threads/<int:thread_id>/message', methods=['POST'])
+def send_thread_message(thread_id):
+    user = get_current_user()
+    data = request.json or {}
+    msg = data.get('message', '')
+
+    execute_db("INSERT INTO thread_messages (thread_id, role, content) VALUES (?,?,?)",
+               (thread_id, 'user', msg))
+
+    ai_response = generate_text(msg)
+
+    execute_db("INSERT INTO thread_messages (thread_id, role, content) VALUES (?,?,?)",
+               (thread_id, 'ai', ai_response))
+
+    return jsonify({'response': ai_response})
+
+# ===== ONBOARDING =====
+
+@app.route('/onboarding/status')
+def onboarding_status():
+    user = get_current_user()
+    row = query_db("SELECT * FROM onboarding WHERE user_id=?", (user['id'],), one=True)
+    return jsonify({'completed': bool(row and row['completed'])})
+
+@app.route('/onboarding/complete', methods=['POST'])
+def complete_onboarding():
+    user = get_current_user()
+    execute_db("INSERT OR REPLACE INTO onboarding (user_id, completed) VALUES (?,1)", (user['id'],))
+    return jsonify({'ok': True})
+
+# ===== ADAPTIVE MEMORY (LIGHT HOOK) =====
+
+@app.route('/memory/hint', methods=['POST'])
+def memory_hint():
+    data = request.json or {}
+    hint = data.get('hint','')
+    # future: plug into vector DB
+    return jsonify({'stored': True, 'hint': hint})
+
+
+# ===== JOB SYSTEM =====
+
+@app.route('/jobs', methods=['POST'])
+def create_job():
+    user = get_current_user()
+    data = request.json or {}
+    text = data.get('input','')
+
+    execute_db("INSERT INTO jobs (user_id, type, status, input) VALUES (?,?,?,?)",
+               (user['id'], 'ai_task', 'pending', text))
+
+    return jsonify({'ok': True})
+
+@app.route('/jobs', methods=['GET'])
+def get_jobs():
+    user = get_current_user()
+    rows = query_db("SELECT * FROM jobs WHERE user_id=? ORDER BY id DESC", (user['id'],))
+    return jsonify({'items': rows})
+
+@app.route('/jobs/<int:job_id>')
+def get_job(job_id):
+    user = get_current_user()
+    row = query_db("SELECT * FROM jobs WHERE id=? AND user_id=?", (job_id, user['id']), one=True)
+    return jsonify(row or {})
+
+
+from backend.agent_stack import run_agents
+from backend.safety import check as safety_check
+
+@app.route('/agent/run', methods=['POST'])
+def run_agent_os():
+    user = get_current_user()
+    data = request.json or {}
+    message = data.get('message','')
+
+    ok, err = safety_check(message)
+    if not ok:
+        return jsonify({'error': err})
+
+    result = run_agents(message)
+    return jsonify({'response': result})
+
+
+from backend.agent_stack import run_agents
+from backend.safety import check as safety_check
+
+@app.route('/agent-os', methods=['POST'])
+def agent_os():
+    data = request.json or {}
+    msg = data.get('message','')
+
+    ok, err = safety_check(msg)
+    if not ok:
+        return jsonify({'error': err})
+
+    result = run_agents(msg)
+    return jsonify({'response': result})
+
+
+
+
+
+
+
+
+
+
+# =========================================================
+# FOUNDER COMMAND CENTER SWEEP
+# =========================================================
+
+def _table_exists(name):
+    conn = db()
+    try:
+        row = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", (name,)).fetchone()
+        return bool(row)
+    finally:
+        conn.close()
+
+def _scalar(conn, sql, params=()):
+    row = conn.execute(sql, params).fetchone()
+    if not row:
+        return 0
+    val = row[0]
+    return val if val is not None else 0
+
+@app.get("/founder/command")
+def founder_command():
+    user, err = require_founder()
+    if err:
+        return err
+
+    conn = db()
+
+    counts = {
+        "users": _scalar(conn, "SELECT COUNT(*) FROM users") if _table_exists("users") else 0,
+        "threads": _scalar(conn, "SELECT COUNT(*) FROM threads") if _table_exists("threads") else 0,
+        "messages": _scalar(conn, "SELECT COUNT(*) FROM messages") if _table_exists("messages") else 0,
+        "artifacts": _scalar(conn, "SELECT COUNT(*) FROM artifacts") if _table_exists("artifacts") else 0,
+        "knowledge": _scalar(conn, "SELECT COUNT(*) FROM knowledge") if _table_exists("knowledge") else 0,
+        "agent_runs": _scalar(conn, "SELECT COUNT(*) FROM agent_runs") if _table_exists("agent_runs") else 0,
+        "memories": _scalar(conn, "SELECT COUNT(*) FROM memory_items") if _table_exists("memory_items") else 0,
+        "leads": _scalar(conn, "SELECT COUNT(*) FROM growth_leads") if _table_exists("growth_leads") else 0,
+        "founder_notes": _scalar(conn, "SELECT COUNT(*) FROM founder_notes") if _table_exists("founder_notes") else 0,
+        "moderation_actions": _scalar(conn, "SELECT COUNT(*) FROM moderation_actions") if _table_exists("moderation_actions") else 0,
+    }
+
+    latest_users = []
+    if _table_exists("users"):
+        latest_users = [dict(r) for r in conn.execute(
+            "SELECT id, username, role, created_at FROM users ORDER BY id DESC LIMIT 8"
+        ).fetchall()]
+
+    latest_threads = []
+    if _table_exists("threads"):
+        latest_threads = [dict(r) for r in conn.execute(
+            "SELECT t.id, t.user_id, t.title, t.is_archived, t.updated_at, u.username "
+            "FROM threads t LEFT JOIN users u ON u.id = t.user_id "
+            "ORDER BY t.updated_at DESC, t.id DESC LIMIT 8"
+        ).fetchall()]
+
+    latest_leads = []
+    if _table_exists("growth_leads"):
+        latest_leads = [dict(r) for r in conn.execute(
+            "SELECT id, name, email, source, status, created_at FROM growth_leads ORDER BY id DESC LIMIT 8"
+        ).fetchall()]
+
+    latest_notes = []
+    if _table_exists("founder_notes"):
+        latest_notes = [dict(r) for r in conn.execute(
+            "SELECT n.id, n.title, n.content, n.created_at, u.username "
+            "FROM founder_notes n LEFT JOIN users u ON u.id = n.author_user_id "
+            "ORDER BY n.id DESC LIMIT 8"
+        ).fetchall()]
+
+    conn.close()
+
+    flags = startup_flags()
+    items, score, grade = checklist_items()
+
+    return jsonify({
+        "ok": True,
+        "counts": counts,
+        "flags": flags,
+        "launch": {
+            "score": score,
+            "grade": grade
+        },
+        "latest_users": latest_users,
+        "latest_threads": latest_threads,
+        "latest_leads": latest_leads,
+        "latest_notes": latest_notes,
+        "time": utc_now()
+    })
+
+@app.get("/founder/users")
+def founder_users():
+    user, err = require_founder()
+    if err:
+        return err
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT u.id, u.username, u.role, u.created_at, "
+        "COALESCE((SELECT COUNT(*) FROM threads t WHERE t.user_id = u.id), 0) AS threads_count, "
+        "COALESCE((SELECT COUNT(*) FROM messages m WHERE m.user_id = u.id), 0) AS messages_count "
+        "FROM users u ORDER BY u.id DESC LIMIT 200"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.post("/founder/users/<int:target_user_id>/role")
+def founder_set_role(target_user_id):
+    user, err = require_founder()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    role = (data.get("role") or "").strip().lower()
+
+    if role not in ("user", "admin", "founder"):
+        return jsonify({"error": "Role must be user, admin, or founder"}), 400
+
+    conn = db()
+    target = conn.execute("SELECT id, username, role FROM users WHERE id = ?", (target_user_id,)).fetchone()
+    if not target:
+        conn.close()
+        return jsonify({"error": "User not found"}), 404
+
+    conn.execute("UPDATE users SET role = ? WHERE id = ?", (role, target_user_id))
+
+    if _table_exists("moderation_actions"):
+        conn.execute(
+            "INSERT INTO moderation_actions (founder_user_id, action_type, target_type, target_id, payload_json, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (user["id"], "set_role", "user", target_user_id, json.dumps({"old_role": target["role"], "new_role": role}), utc_now())
+        )
+
+    conn.commit()
+    updated = conn.execute("SELECT id, username, role, created_at FROM users WHERE id = ?", (target_user_id,)).fetchone()
+    conn.close()
+    return jsonify({"ok": True, "user": dict(updated)})
+
+@app.get("/founder/leads")
+def founder_leads():
+    user, err = require_founder()
+    if err:
+        return err
+
+    if not _table_exists("growth_leads"):
+        return jsonify({"items": []})
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT id, name, email, source, note, status, created_at FROM growth_leads ORDER BY id DESC LIMIT 300"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.get("/founder/memories")
+def founder_memories():
+    user, err = require_founder()
+    if err:
+        return err
+
+    if not _table_exists("memory_items"):
+        return jsonify({"items": []})
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT m.id, m.user_id, u.username, m.thread_id, m.memory_type, m.title, m.content, m.tags, m.score, m.created_at "
+        "FROM memory_items m LEFT JOIN users u ON u.id = m.user_id "
+        "ORDER BY m.id DESC LIMIT 300"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.get("/founder/threads")
+def founder_threads():
+    user, err = require_founder()
+    if err:
+        return err
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT t.id, t.user_id, u.username, t.title, t.is_archived, t.updated_at, "
+        "COALESCE((SELECT COUNT(*) FROM messages m WHERE m.thread_id = t.id), 0) AS message_count "
+        "FROM threads t LEFT JOIN users u ON u.id = t.user_id "
+        "ORDER BY t.updated_at DESC, t.id DESC LIMIT 300"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.post("/founder/threads/<int:thread_id>/archive")
+def founder_archive_thread(thread_id):
+    user, err = require_founder()
+    if err:
+        return err
+
+    conn = db()
+    row = conn.execute("SELECT id, title, is_archived FROM threads WHERE id = ?", (thread_id,)).fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Thread not found"}), 404
+
+    conn.execute("UPDATE threads SET is_archived = 1, updated_at = ? WHERE id = ?", (utc_now(), thread_id))
+
+    if _table_exists("moderation_actions"):
+        conn.execute(
+            "INSERT INTO moderation_actions (founder_user_id, action_type, target_type, target_id, payload_json, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (user["id"], "archive_thread", "thread", thread_id, json.dumps({"title": row["title"]}), utc_now())
+        )
+
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "archived_thread_id": thread_id})
+
+@app.get("/founder/notes")
+def founder_notes_get():
+    user, err = require_founder()
+    if err:
+        return err
+
+    if not _table_exists("founder_notes"):
+        return jsonify({"items": []})
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT n.id, n.title, n.content, n.created_at, u.username "
+        "FROM founder_notes n LEFT JOIN users u ON u.id = n.author_user_id "
+        "ORDER BY n.id DESC LIMIT 200"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.post("/founder/notes")
+def founder_notes_post():
+    user, err = require_founder()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    title = (data.get("title") or "Founder note").strip()
+    content = (data.get("content") or "").strip()
+
+    if not content:
+        return jsonify({"error": "content is required"}), 400
+
+    conn = db()
+    conn.execute(
+        "INSERT INTO founder_notes (author_user_id, title, content, created_at) VALUES (?, ?, ?, ?)",
+        (user["id"], title[:120], content[:5000], utc_now())
+    )
+    conn.commit()
+    row = conn.execute(
+        "SELECT n.id, n.title, n.content, n.created_at, u.username "
+        "FROM founder_notes n LEFT JOIN users u ON u.id = n.author_user_id "
+        "ORDER BY n.id DESC LIMIT 1"
+    ).fetchone()
+    conn.close()
+    return jsonify({"ok": True, "note": dict(row)})
+
+@app.get("/founder/moderation")
+def founder_moderation():
+    user, err = require_founder()
+    if err:
+        return err
+
+    if not _table_exists("moderation_actions"):
+        return jsonify({"items": []})
+
+    conn = db()
+    rows = conn.execute(
+        "SELECT a.id, a.action_type, a.target_type, a.target_id, a.payload_json, a.created_at, u.username "
+        "FROM moderation_actions a LEFT JOIN users u ON u.id = a.founder_user_id "
+        "ORDER BY a.id DESC LIMIT 200"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+
+
+# =========================================================
+# PUBLIC PRODUCT SWEEP
+# =========================================================
+
+def _table_exists_public(name):
+    conn = db()
+    try:
+        row = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", (name,)).fetchone()
+        return bool(row)
+    finally:
+        conn.close()
+
+def _seed_public_content():
+    if not _table_exists_public("public_site_content"):
+        return
+    conn = db()
+    defaults = [
+        ("hero", "SemantiqAI Ascension", "An intelligence system for strategy, learning, creation, execution, and growth.", "Start Free", "#app"),
+        ("positioning", "Built for ambitious humans", "Use SemantiqAI to think clearer, build faster, and turn scattered goals into action.", "Open Workspace", "#app"),
+        ("feature_memory", "True intelligence memory", "Persistent context, reusable user insight, and smarter long-range continuity.", "See Features", "#features"),
+        ("feature_streaming", "Real-time streaming", "Live response flow for a more responsive, premium product feel.", "Try Streaming", "#app"),
+        ("feature_growth", "Growth engine ready", "Capture leads, understand engagement, and launch with real traction mechanics.", "Join Waitlist", "#waitlist"),
+        ("pricing", "Simple launch pricing", "Start free, upgrade later. Build the product first, monetize with confidence.", "See Plans", "#pricing"),
+        ("founder", "Founder-built", "SemantiqAI is being shaped as a real product, not a toy demo.", "Enter App", "#app")
+    ]
+
+    for section_key, title, body, cta_text, cta_link in defaults:
+        existing = conn.execute("SELECT id FROM public_site_content WHERE section_key = ?", (section_key,)).fetchone()
+        if not existing:
+            conn.execute(
+                "INSERT INTO public_site_content (section_key, title, body, cta_text, cta_link, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (section_key, title, body, cta_text, cta_link, utc_now())
+            )
+    conn.commit()
+    conn.close()
+
+_seed_public_content()
+
+@app.get("/public/site")
+def public_site():
+    _seed_public_content()
+    conn = db()
+    rows = []
+    if _table_exists_public("public_site_content"):
+        rows = conn.execute(
+            "SELECT section_key, title, body, cta_text, cta_link, updated_at FROM public_site_content ORDER BY id ASC"
+        ).fetchall()
+    conn.close()
+    return jsonify({
+        "brand": "SemantiqAI Ascension",
+        "tagline": "Think deeper. Build faster. Launch smarter.",
+        "sections": [dict(r) for r in rows]
+    })
+
+@app.post("/public/waitlist")
+def public_waitlist():
+    data = request.get_json(silent=True) or {}
+    name = (data.get("name") or "").strip()
+    email = (data.get("email") or "").strip().lower()
+    use_case = (data.get("use_case") or "").strip()
+    note = (data.get("note") or "").strip()
+    source = (data.get("source") or "public_site").strip() or "public_site"
+
+    if not email or "@" not in email or "." not in email:
+        return jsonify({"error": "Valid email is required"}), 400
+
+    conn = db()
+
+    if _table_exists_public("public_waitlist"):
+        existing = conn.execute("SELECT id FROM public_waitlist WHERE email = ?", (email,)).fetchone()
+        if not existing:
+            conn.execute(
+                "INSERT INTO public_waitlist (name, email, use_case, note, source, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (name, email, use_case, note, source, utc_now())
+            )
+
+    if _table_exists_public("growth_leads"):
+        exists_growth = conn.execute("SELECT id FROM growth_leads WHERE email = ?", (email,)).fetchone()
+        if not exists_growth:
+            conn.execute(
+                "INSERT INTO growth_leads (name, email, source, note, status, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (name, email, source, (use_case + " | " + note).strip(" |"), "new", utc_now())
+            )
+
+    if _table_exists_public("growth_events"):
+        conn.execute(
+            "INSERT INTO growth_events (user_id, event_type, source, payload_json, created_at) VALUES (?, ?, ?, ?, ?)",
+            (None, "public_waitlist_signup", source, json.dumps({"email": email, "use_case": use_case}), utc_now())
+        )
+
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "status": "joined"})
+
+@app.get("/me/dashboard")
+def me_dashboard():
+    user, err = require_user()
+    if err:
+        return err
+
+    conn = db()
+
+    profile = None
+    if _table_exists_public("user_profiles"):
+        row = conn.execute(
+            "SELECT goals, preferences, traits, updated_at FROM user_profiles WHERE user_id = ?",
+            (user["id"],)
+        ).fetchone()
+        if row:
+            try:
+                profile = {
+                    "goals": json.loads(row["goals"] or "[]"),
+                    "preferences": json.loads(row["preferences"] or "[]"),
+                    "traits": json.loads(row["traits"] or "[]"),
+                    "updated_at": row["updated_at"]
+                }
+            except Exception:
+                profile = {
+                    "goals": [],
+                    "preferences": [],
+                    "traits": [],
+                    "updated_at": row["updated_at"]
+                }
+
+    thread_count = 0
+    recent_threads = []
+    try:
+        thread_count = conn.execute("SELECT COUNT(*) FROM threads WHERE user_id = ?", (user["id"],)).fetchone()[0]
+        recent_threads = [dict(r) for r in conn.execute(
+            "SELECT id, title, updated_at, is_archived FROM threads WHERE user_id = ? ORDER BY updated_at DESC, id DESC LIMIT 8",
+            (user["id"],)
+        ).fetchall()]
+    except Exception:
+        pass
+
+    memory_count = 0
+    try:
+        memory_count = conn.execute("SELECT COUNT(*) FROM memory_items WHERE user_id = ?", (user["id"],)).fetchone()[0]
+    except Exception:
+        pass
+
+    onboarding = None
+    try:
+        row = conn.execute(
+            "SELECT completed, selected_goal, selected_mode, updated_at FROM onboarding_state WHERE user_id = ?",
+            (user["id"],)
+        ).fetchone()
+        if row:
+            onboarding = dict(row)
+    except Exception:
+        onboarding = None
+
+    conn.close()
+
+    welcome = "Welcome back."
+    if profile and profile.get("goals"):
+        welcome = "Welcome back. Your current focus: " + ", ".join(profile["goals"][:3])
+
+    return jsonify({
+        "ok": True,
+        "welcome": welcome,
+        "profile": profile,
+        "onboarding": onboarding,
+        "thread_count": thread_count,
+        "memory_count": memory_count,
+        "recent_threads": recent_threads
+    })
+
+@app.post("/onboarding/complete")
+def onboarding_complete():
+    user, err = require_user()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    goal = (data.get("goal") or "").strip()
+    mode = (data.get("mode") or "").strip()
+    preferences = data.get("preferences") or []
+
+    now = utc_now()
+    conn = db()
+
+    conn.execute(
+        "INSERT INTO onboarding_state (user_id, completed, selected_goal, selected_mode, created_at, updated_at) "
+        "VALUES (?, ?, ?, ?, ?, ?) "
+        "ON CONFLICT(user_id) DO UPDATE SET completed = excluded.completed, selected_goal = excluded.selected_goal, "
+        "selected_mode = excluded.selected_mode, updated_at = excluded.updated_at",
+        (user["id"], 1, goal[:120], mode[:120], now, now)
+    )
+
+    if _table_exists_public("user_profiles"):
+        existing = conn.execute("SELECT goals, preferences, traits FROM user_profiles WHERE user_id = ?", (user["id"],)).fetchone()
+        if existing:
+            try:
+                goals = json.loads(existing["goals"] or "[]")
+                prefs = json.loads(existing["preferences"] or "[]")
+                traits = json.loads(existing["traits"] or "[]")
+            except Exception:
+                goals, prefs, traits = [], [], []
+        else:
+            goals, prefs, traits = [], [], []
+
+        if goal and goal not in goals:
+            goals.insert(0, goal)
+        for p in preferences:
+            p = str(p).strip()
+            if p and p not in prefs:
+                prefs.append(p)
+
+        conn.execute(
+            "INSERT INTO user_profiles (user_id, goals, preferences, traits, updated_at) VALUES (?, ?, ?, ?, ?) "
+            "ON CONFLICT(user_id) DO UPDATE SET goals = excluded.goals, preferences = excluded.preferences, traits = excluded.traits, updated_at = excluded.updated_at",
+            (user["id"], json.dumps(goals[:12]), json.dumps(prefs[:20]), json.dumps(traits[:20]), now)
+        )
+
+    if _table_exists_public("growth_events"):
+        conn.execute(
+            "INSERT INTO growth_events (user_id, event_type, source, payload_json, created_at) VALUES (?, ?, ?, ?, ?)",
+            (user["id"], "onboarding_completed", "app_onboarding", json.dumps({"goal": goal, "mode": mode}), now)
+        )
+
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "goal": goal, "mode": mode})
+
+@app.get("/founder/public-content")
+def founder_public_content():
+    user, err = require_founder()
+    if err:
+        return err
+
+    _seed_public_content()
+    conn = db()
+    rows = conn.execute(
+        "SELECT id, section_key, title, body, cta_text, cta_link, updated_at FROM public_site_content ORDER BY id ASC"
+    ).fetchall()
+    conn.close()
+    return jsonify({"items": [dict(r) for r in rows]})
+
+@app.post("/founder/public-content/<section_key>")
+def founder_public_content_update(section_key):
+    user, err = require_founder()
+    if err:
+        return err
+
+    data = request.get_json(silent=True) or {}
+    title = (data.get("title") or "").strip()
+    body = (data.get("body") or "").strip()
+    cta_text = (data.get("cta_text") or "").strip()
+    cta_link = (data.get("cta_link") or "").strip()
+
+    conn = db()
+    existing = conn.execute("SELECT id FROM public_site_content WHERE section_key = ?", (section_key,)).fetchone()
+    if existing:
+        conn.execute(
+            "UPDATE public_site_content SET title = ?, body = ?, cta_text = ?, cta_link = ?, updated_at = ? WHERE section_key = ?",
+            (title[:200], body[:4000], cta_text[:120], cta_link[:255], utc_now(), section_key)
+        )
+    else:
+        conn.execute(
+            "INSERT INTO public_site_content (section_key, title, body, cta_text, cta_link, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+            (section_key, title[:200], body[:4000], cta_text[:120], cta_link[:255], utc_now())
+        )
+    conn.commit()
+    row = conn.execute(
+        "SELECT id, section_key, title, body, cta_text, cta_link, updated_at FROM public_site_content WHERE section_key = ?",
+        (section_key,)
+    ).fetchone()
+    conn.close()
+    return jsonify({"ok": True, "item": dict(row)})

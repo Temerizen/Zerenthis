@@ -1,0 +1,2949 @@
+{
+  "last_snapshot": {
+    "timestamp": 1776107552.5830698,
+    "goal": {
+      "id": "goal_reconstructed_1776106989",
+      "type": "balanced_progression",
+      "description": "Reconstructed from mission: None",
+      "priority": 0.5,
+      "commitment": 0.22000000000000017,
+      "progress": 0.8000000000000005,
+      "status": "active",
+      "created_at": 1776106989.3708346,
+      "last_updated": 1776107552.4888241,
+      "cycles_active": 4,
+      "source": "reconstructed_from_mission"
+    },
+    "mission": {
+      "id": "mission_1776105409",
+      "goal_type": "balanced_progression",
+      "progress": 0.8300000000000005,
+      "status": "active",
+      "created_at": 1776105409.6646404,
+      "last_updated": 1776107552.4898245
+    },
+    "last_outcome": {
+      "timestamp": 1776107552.4858246,
+      "score": 0.7108434756169216,
+      "mission_id": "mission_1776105409",
+      "goal_type": "balanced_progression"
+    },
+    "last_adjustment": {
+      "timestamp": 1776107552.4868238,
+      "score": 0.7108434756169216,
+      "action": "reinforce",
+      "intensity": 0.7108434756169216
+    },
+    "current_strategy": "optimize_focus",
+    "last_pressure": {
+      "timestamp": 1776107552.4898245,
+      "strategy": "default",
+      "adjustment_action": "neutral_adjust",
+      "mode": "default",
+      "goal_delta": 0.01,
+      "mission_delta": 0.02,
+      "changed_goal": true,
+      "changed_mission": true
+    },
+    "strategy_profile": {
+      "name": "reduce_risk_steady_v23",
+      "base_strategy": "reduce_risk",
+      "tendency": "stable",
+      "score_history": [
+        0.44622044949298845,
+        0.5845379606080465,
+        0.6897273438334048,
+        0.7765164886404603,
+        0.8509232849465681,
+        0.693923498598245,
+        0.8582301699646918,
+        0.8918728038539586,
+        0.791057750174203,
+        0.7108434756169216
+      ],
+      "avg_score": 0.7293853225729487,
+      "evolution_stage": 23,
+      "last_updated": 1776107552.4968226
+    },
+    "last_coherence": {
+      "timestamp": 1776107552.5058208,
+      "action": "aligned",
+      "has_goal": true,
+      "has_mission": true
+    },
+    "last_correction": {
+      "timestamp": 1776107552.5068202,
+      "action": "no_change",
+      "goal_type_before": "balanced_progression",
+      "goal_type_after": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "has_goal": true,
+      "has_mission": true
+    },
+    "active_directive": {
+      "id": "directive_1776102663",
+      "goal_type": "balanced_progression",
+      "mission_id": "mission_1776100405",
+      "mission_goal_type": "balanced_progression",
+      "priority": 1.0,
+      "protection": 1.0,
+      "status": "degraded",
+      "switch_resistance": 1.0,
+      "created_at": 1776102663.3327653,
+      "last_updated": 1776105354.8739102,
+      "reason": "autonomous_mission_selection"
+    },
+    "summary": {
+      "has_goal": true,
+      "has_mission": true,
+      "goal_type": "balanced_progression",
+      "mission_goal_type": "balanced_progression",
+      "goal_commitment": 0.22000000000000017,
+      "goal_progress": 0.8000000000000005,
+      "mission_progress": 0.8300000000000005,
+      "last_score": 0.7108434756169216,
+      "last_adjustment_action": "reinforce",
+      "strategy": "optimize_focus",
+      "pressure_mode": "default",
+      "strategy_tendency": "stable",
+      "strategy_stage": 23,
+      "coherence_action": "aligned",
+      "correction_action": "no_change",
+      "directive_priority": 1.0,
+      "directive_protection": 1.0,
+      "directive_action": "degraded"
+    }
+  },
+  "history": [
+    {
+      "timestamp": 1776102431.622853,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.6600000000000001,
+        "progress": 0.54,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102431.5155673,
+        "cycles_active": 2,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.54,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102431.4997182,
+        "cycles_active": 8
+      },
+      "last_outcome": {
+        "timestamp": 1776102431.4833102,
+        "score": 0.8179497221797977,
+        "mission_id": "mission_1776100405",
+        "goal_type": "unknown"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102431.484737,
+        "score": 0.8179497221797977,
+        "action": "reinforce",
+        "intensity": 0.8179497221797977
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102431.4997182,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v2",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977
+        ],
+        "avg_score": 0.7405223807110967,
+        "evolution_stage": 2,
+        "last_updated": 1776102431.5086527
+      },
+      "last_coherence": {
+        "timestamp": 1776102431.5143187,
+        "action": "mismatch_detected",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102431.5165644,
+        "action": "goal_aligned_to_mission",
+        "goal_type_before": "unknown",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.6600000000000001,
+        "goal_progress": 0.54,
+        "mission_progress": 0.54,
+        "last_score": 0.8179497221797977,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 2,
+        "coherence_action": "mismatch_detected",
+        "correction_action": "goal_aligned_to_mission"
+      }
+    },
+    {
+      "timestamp": 1776102469.889751,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.6200000000000001,
+        "progress": 0.5900000000000001,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102469.8329568,
+        "cycles_active": 3,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.6400000000000001,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102469.8339858,
+        "cycles_active": 9
+      },
+      "last_outcome": {
+        "timestamp": 1776102469.8199596,
+        "score": 0.730199931182492,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102469.8199596,
+        "score": 0.730199931182492,
+        "action": "reinforce",
+        "intensity": 0.730199931182492
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102469.8339858,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v3",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492
+        ],
+        "avg_score": 0.7379417683289455,
+        "evolution_stage": 3,
+        "last_updated": 1776102469.8409748
+      },
+      "last_coherence": {
+        "timestamp": 1776102469.846973,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102469.8479745,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.6200000000000001,
+        "goal_progress": 0.5900000000000001,
+        "mission_progress": 0.6400000000000001,
+        "last_score": 0.730199931182492,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 3,
+        "coherence_action": "aligned",
+        "correction_action": "no_change"
+      }
+    },
+    {
+      "timestamp": 1776102469.9298253,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.6200000000000001,
+        "progress": 0.5900000000000001,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102469.8329568,
+        "cycles_active": 3,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.6400000000000001,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102469.8339858,
+        "cycles_active": 9
+      },
+      "last_outcome": {
+        "timestamp": 1776102469.8199596,
+        "score": 0.730199931182492,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102469.8199596,
+        "score": 0.730199931182492,
+        "action": "reinforce",
+        "intensity": 0.730199931182492
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102469.8339858,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v3",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492
+        ],
+        "avg_score": 0.7379417683289455,
+        "evolution_stage": 3,
+        "last_updated": 1776102469.8409748
+      },
+      "last_coherence": {
+        "timestamp": 1776102469.846973,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102469.8479745,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.6200000000000001,
+        "goal_progress": 0.5900000000000001,
+        "mission_progress": 0.6400000000000001,
+        "last_score": 0.730199931182492,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 3,
+        "coherence_action": "aligned",
+        "correction_action": "no_change"
+      }
+    },
+    {
+      "timestamp": 1776102663.3687925,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.5800000000000001,
+        "progress": 0.6400000000000001,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102663.3078506,
+        "cycles_active": 4,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.7400000000000002,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102663.3078506,
+        "cycles_active": 10
+      },
+      "last_outcome": {
+        "timestamp": 1776102663.2948396,
+        "score": 0.8062946524764185,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102663.2958376,
+        "score": 0.8062946524764185,
+        "action": "reinforce",
+        "intensity": 0.8062946524764185
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102663.3088522,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_ascendant_v4",
+        "base_strategy": "default",
+        "tendency": "confident",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185
+        ],
+        "avg_score": 0.7516123451584401,
+        "evolution_stage": 4,
+        "last_updated": 1776102663.3157697
+      },
+      "last_coherence": {
+        "timestamp": 1776102663.3207698,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102663.32177,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 0.9720000000000001,
+        "status": "active",
+        "switch_resistance": 0.9720000000000001,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776102663.3327653,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.5800000000000001,
+        "goal_progress": 0.6400000000000001,
+        "mission_progress": 0.7400000000000002,
+        "last_score": 0.8062946524764185,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "confident",
+        "strategy_stage": 4,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 0.9720000000000001,
+        "directive_action": "active"
+      }
+    },
+    {
+      "timestamp": 1776102663.4098864,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.5800000000000001,
+        "progress": 0.6400000000000001,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102663.3078506,
+        "cycles_active": 4,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.7400000000000002,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102663.3078506,
+        "cycles_active": 10
+      },
+      "last_outcome": {
+        "timestamp": 1776102663.2948396,
+        "score": 0.8062946524764185,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102663.2958376,
+        "score": 0.8062946524764185,
+        "action": "reinforce",
+        "intensity": 0.8062946524764185
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102663.3088522,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_ascendant_v4",
+        "base_strategy": "default",
+        "tendency": "confident",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185
+        ],
+        "avg_score": 0.7516123451584401,
+        "evolution_stage": 4,
+        "last_updated": 1776102663.3157697
+      },
+      "last_coherence": {
+        "timestamp": 1776102663.3207698,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102663.32177,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 0.9720000000000001,
+        "status": "active",
+        "switch_resistance": 0.9720000000000001,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776102663.3327653,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.5800000000000001,
+        "goal_progress": 0.6400000000000001,
+        "mission_progress": 0.7400000000000002,
+        "last_score": 0.8062946524764185,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "confident",
+        "strategy_stage": 4,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 0.9720000000000001,
+        "directive_action": "active"
+      }
+    },
+    {
+      "timestamp": 1776102875.725863,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.54,
+        "progress": 0.6900000000000002,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776102875.6576405,
+        "cycles_active": 5,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.8400000000000003,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776102875.6586425,
+        "cycles_active": 11
+      },
+      "last_outcome": {
+        "timestamp": 1776102875.6444795,
+        "score": 0.822204439538337,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776102875.6456454,
+        "score": 0.822204439538337,
+        "action": "reinforce",
+        "intensity": 0.822204439538337
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776102875.6586425,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_ascendant_v5",
+        "base_strategy": "default",
+        "tendency": "confident",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337
+        ],
+        "avg_score": 0.7633776942217563,
+        "evolution_stage": 5,
+        "last_updated": 1776102875.6666408
+      },
+      "last_coherence": {
+        "timestamp": 1776102875.6736436,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776102875.674645,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "active",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776102875.6892457,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.54,
+        "goal_progress": 0.6900000000000002,
+        "mission_progress": 0.8400000000000003,
+        "last_score": 0.822204439538337,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "confident",
+        "strategy_stage": 5,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "active"
+      }
+    },
+    {
+      "timestamp": 1776103099.5514274,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.5000000000000001,
+        "progress": 0.7400000000000002,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776103099.482738,
+        "cycles_active": 6,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776100405",
+        "goal_type": "balanced_progression",
+        "description": "Execute mission: balanced_progression",
+        "status": "active",
+        "progress": 0.9700000000000004,
+        "steps": [
+          {
+            "step": "advance_balanced_progression",
+            "status": "completed"
+          }
+        ],
+        "created_at": 1776100405.7669392,
+        "last_updated": 1776103099.482738,
+        "cycles_active": 12
+      },
+      "last_outcome": {
+        "timestamp": 1776103099.46974,
+        "score": 0.8822262583691565,
+        "mission_id": "mission_1776100405",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776103099.46974,
+        "score": 0.8822262583691565,
+        "action": "reinforce",
+        "intensity": 0.8822262583691565
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776103099.482738,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_ascendant_v6",
+        "base_strategy": "default",
+        "tendency": "confident",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565
+        ],
+        "avg_score": 0.7803560605285277,
+        "evolution_stage": 6,
+        "last_updated": 1776103099.4897568
+      },
+      "last_coherence": {
+        "timestamp": 1776103099.4957545,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776103099.4967525,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "active",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776103099.5107672,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.5000000000000001,
+        "goal_progress": 0.7400000000000002,
+        "mission_progress": 0.9700000000000004,
+        "last_score": 0.8822262583691565,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "confident",
+        "strategy_stage": 6,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "active"
+      }
+    },
+    {
+      "timestamp": 1776103280.507692,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.43000000000000016,
+        "progress": 0.7900000000000003,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776103280.4448822,
+        "cycles_active": 7,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": null,
+      "last_outcome": {
+        "timestamp": 1776103280.430866,
+        "score": 0.47237160475196693,
+        "mission_id": null,
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776103280.4318657,
+        "score": 0.47237160475196693,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776103280.4448822,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": false
+      },
+      "strategy_profile": {
+        "name": "default_steady_v7",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693
+        ],
+        "avg_score": 0.7418580035564576,
+        "evolution_stage": 7,
+        "last_updated": 1776103280.4468822
+      },
+      "last_coherence": {
+        "timestamp": 1776103280.4528852,
+        "action": "waiting_for_mission",
+        "has_goal": true,
+        "has_mission": false
+      },
+      "last_correction": {
+        "timestamp": 1776103280.4539149,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": null,
+        "has_goal": true,
+        "has_mission": false
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776103280.4688976,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": false,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": null,
+        "goal_commitment": 0.43000000000000016,
+        "goal_progress": 0.7900000000000003,
+        "mission_progress": null,
+        "last_score": 0.47237160475196693,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 7,
+        "coherence_action": "waiting_for_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776103582.907681,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.3600000000000002,
+        "progress": 0.8400000000000003,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776103582.837787,
+        "cycles_active": 8,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776103582",
+        "goal_type": "balanced_progression",
+        "progress": 0.8900000000000003,
+        "status": "active",
+        "created_at": 1776103582.8277867,
+        "last_updated": 1776103582.837787
+      },
+      "last_outcome": {
+        "timestamp": 1776103582.8277867,
+        "score": 0.45168186930402343,
+        "mission_id": null,
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776103582.8287895,
+        "score": 0.45168186930402343,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776103582.837787,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v8",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343
+        ],
+        "avg_score": 0.7096162108617426,
+        "evolution_stage": 8,
+        "last_updated": 1776103582.8447862
+      },
+      "last_coherence": {
+        "timestamp": 1776103582.8507848,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776103582.8517847,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776103280.4688976,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.3600000000000002,
+        "goal_progress": 0.8400000000000003,
+        "mission_progress": 0.8900000000000003,
+        "last_score": 0.45168186930402343,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 8,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776103677.3659704,
+      "goal": {
+        "id": "goal_1776102208",
+        "type": "balanced_progression",
+        "description": "Aligned to mission: Execute mission: balanced_progression",
+        "priority": 0.6,
+        "commitment": 0.32000000000000023,
+        "progress": 0.8900000000000003,
+        "status": "active",
+        "created_at": 1776102208.5212626,
+        "last_updated": 1776103677.2827873,
+        "cycles_active": 9,
+        "source": "self_corrected_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776103582",
+        "goal_type": "balanced_progression",
+        "progress": 0.9700000000000004,
+        "status": "active",
+        "created_at": 1776103582.8277867,
+        "last_updated": 1776103677.2827873
+      },
+      "last_outcome": {
+        "timestamp": 1776103677.2797875,
+        "score": 0.7032047753091404,
+        "mission_id": "mission_1776103582",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776103677.2807882,
+        "score": 0.7032047753091404,
+        "action": "reinforce",
+        "intensity": 0.7032047753091404
+      },
+      "current_strategy": "default",
+      "last_pressure": {
+        "timestamp": 1776103677.2827873,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v9",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.5233511135711617,
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404
+        ],
+        "avg_score": 0.7089750673064824,
+        "evolution_stage": 9,
+        "last_updated": 1776103677.2907887
+      },
+      "last_coherence": {
+        "timestamp": 1776103677.2982364,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776103677.2989147,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776103280.4688976,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.32000000000000023,
+        "goal_progress": 0.8900000000000003,
+        "mission_progress": 0.9700000000000004,
+        "last_score": 0.7032047753091404,
+        "last_adjustment_action": "reinforce",
+        "strategy": "default",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 9,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776105354.94391,
+      "goal": {
+        "id": "goal_recovered_1776105009",
+        "type": "balanced_progression",
+        "description": "Recover and continue balanced progression",
+        "priority": 0.65,
+        "commitment": 0.51,
+        "progress": 0.05,
+        "status": "active",
+        "created_at": 1776105009.067669,
+        "last_updated": 1776105354.8439126,
+        "cycles_active": 1,
+        "source": "goal_recovery_engine"
+      },
+      "mission": null,
+      "last_outcome": {
+        "timestamp": 1776105354.8269136,
+        "score": 0.7143789538374006,
+        "mission_id": "mission_1776103582",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776105354.8339102,
+        "score": 0.7143789538374006,
+        "action": "reinforce",
+        "intensity": 0.7143789538374006
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776105354.8449106,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "default_steady_v10",
+        "base_strategy": "default",
+        "tendency": "stable",
+        "score_history": [
+          0.8802663063823305,
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006
+        ],
+        "avg_score": 0.7280778513331063,
+        "evolution_stage": 10,
+        "last_updated": 1776105354.8529105
+      },
+      "last_coherence": {
+        "timestamp": 1776105354.8599114,
+        "action": "waiting_for_mission",
+        "has_goal": true,
+        "has_mission": false
+      },
+      "last_correction": {
+        "timestamp": 1776105354.8609111,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": null,
+        "has_goal": true,
+        "has_mission": false
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": false,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": null,
+        "goal_commitment": 0.51,
+        "goal_progress": 0.05,
+        "mission_progress": null,
+        "last_score": 0.7143789538374006,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 10,
+        "coherence_action": "waiting_for_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776105409.7708473,
+      "goal": {
+        "id": "goal_recovered_1776105009",
+        "type": "balanced_progression",
+        "description": "Recover and continue balanced progression",
+        "priority": 0.65,
+        "commitment": 0.44000000000000006,
+        "progress": 0.1,
+        "status": "active",
+        "created_at": 1776105009.067669,
+        "last_updated": 1776105409.6764536,
+        "cycles_active": 2,
+        "source": "goal_recovery_engine"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.15000000000000002,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776105409.6764536
+      },
+      "last_outcome": {
+        "timestamp": 1776105409.6654487,
+        "score": 0.5231967779873824,
+        "mission_id": null,
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776105409.6664433,
+        "score": 0.5231967779873824,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "optimize_focus",
+      "last_pressure": {
+        "timestamp": 1776105409.6774573,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v11",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.8179497221797977,
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824
+        ],
+        "avg_score": 0.6923708984936116,
+        "evolution_stage": 11,
+        "last_updated": 1776105409.6846845
+      },
+      "last_coherence": {
+        "timestamp": 1776105409.694128,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776105409.695128,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.44000000000000006,
+        "goal_progress": 0.1,
+        "mission_progress": 0.15000000000000002,
+        "last_score": 0.5231967779873824,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "optimize_focus",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 11,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776105562.4050355,
+      "goal": {
+        "id": "goal_recovered_1776105009",
+        "type": "balanced_progression",
+        "description": "Recover and continue balanced progression",
+        "priority": 0.65,
+        "commitment": 0.3700000000000001,
+        "progress": 0.15000000000000002,
+        "status": "active",
+        "created_at": 1776105009.067669,
+        "last_updated": 1776105562.3020327,
+        "cycles_active": 3,
+        "source": "goal_recovery_engine"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.2,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776105562.3020327
+      },
+      "last_outcome": {
+        "timestamp": 1776105562.298032,
+        "score": 0.6655063261900745,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776105562.2990346,
+        "score": 0.6655063261900745,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776105562.3030355,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "optimize_focus_steady_v12",
+        "base_strategy": "optimize_focus",
+        "tendency": "stable",
+        "score_history": [
+          0.730199931182492,
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745
+        ],
+        "avg_score": 0.6771265588946392,
+        "evolution_stage": 12,
+        "last_updated": 1776105562.3110373
+      },
+      "last_coherence": {
+        "timestamp": 1776105562.3180337,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776105562.3190374,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.3700000000000001,
+        "goal_progress": 0.15000000000000002,
+        "mission_progress": 0.2,
+        "last_score": 0.6655063261900745,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 12,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776105647.9599886,
+      "goal": {
+        "id": "goal_recovered_1776105009",
+        "type": "balanced_progression",
+        "description": "Recover and continue balanced progression",
+        "priority": 0.65,
+        "commitment": 0.3300000000000001,
+        "progress": 0.2,
+        "status": "active",
+        "created_at": 1776105009.067669,
+        "last_updated": 1776105647.8681953,
+        "cycles_active": 4,
+        "source": "goal_recovery_engine"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.28,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776105647.8691945
+      },
+      "last_outcome": {
+        "timestamp": 1776105647.8651955,
+        "score": 0.7607998470339162,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776105647.8661952,
+        "score": 0.7607998470339162,
+        "action": "reinforce",
+        "intensity": 0.7607998470339162
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776105647.8691945,
+        "strategy": "default",
+        "adjustment_action": "reinforce",
+        "mode": "default",
+        "goal_delta": 0.04,
+        "mission_delta": 0.05,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v13",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.8062946524764185,
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162
+        ],
+        "avg_score": 0.6801865504797817,
+        "evolution_stage": 13,
+        "last_updated": 1776105647.8765545
+      },
+      "last_coherence": {
+        "timestamp": 1776105647.8841302,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776105647.8849907,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.3300000000000001,
+        "goal_progress": 0.2,
+        "mission_progress": 0.28,
+        "last_score": 0.7607998470339162,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 13,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776105799.020969,
+      "goal": {
+        "id": "goal_recovered_1776105009",
+        "type": "balanced_progression",
+        "description": "Recover and continue balanced progression",
+        "priority": 0.65,
+        "commitment": 0.2600000000000001,
+        "progress": 0.25,
+        "status": "active",
+        "created_at": 1776105009.067669,
+        "last_updated": 1776105798.9329498,
+        "cycles_active": 5,
+        "source": "goal_recovery_engine"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.33000000000000007,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776105798.9329498
+      },
+      "last_outcome": {
+        "timestamp": 1776105798.9289489,
+        "score": 0.662689870376007,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776105798.9299514,
+        "score": 0.662689870376007,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776105798.9339788,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v14",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.822204439538337,
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007
+        ],
+        "avg_score": 0.6658260722697406,
+        "evolution_stage": 14,
+        "last_updated": 1776105798.9419641
+      },
+      "last_coherence": {
+        "timestamp": 1776105798.949896,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776105798.950897,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.2600000000000001,
+        "goal_progress": 0.25,
+        "mission_progress": 0.33000000000000007,
+        "last_score": 0.662689870376007,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 14,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106540.6709907,
+      "goal": {
+        "id": "goal_reconstructed_1776106540",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.5,
+        "progress": 0.3500000000000001,
+        "status": "active",
+        "created_at": 1776106540.5737467,
+        "last_updated": 1776106540.5737467,
+        "cycles_active": 0,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.3800000000000001,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106540.5637429
+      },
+      "last_outcome": {
+        "timestamp": 1776106540.552282,
+        "score": 0.44622044949298845,
+        "mission_id": null,
+        "goal_type": null
+      },
+      "last_adjustment": {
+        "timestamp": 1776106540.5539527,
+        "score": 0.44622044949298845,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "optimize_focus",
+      "last_pressure": {
+        "timestamp": 1776106540.5637429,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": false,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v14",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.8822262583691565,
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845
+        ],
+        "avg_score": 0.6282276732652056,
+        "evolution_stage": 14,
+        "last_updated": 1776106540.5727453
+      },
+      "last_coherence": {
+        "timestamp": 1776106540.57486,
+        "action": "goal_reconstructed_from_mission",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106540.5917277,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress": 0.3500000000000001,
+        "mission_progress": 0.3800000000000001,
+        "last_score": 0.44622044949298845,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "optimize_focus",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 14,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106586.4218159,
+      "goal": {
+        "id": "goal_reconstructed_1776106540",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.43000000000000005,
+        "progress": 0.4000000000000001,
+        "status": "active",
+        "created_at": 1776106540.5737467,
+        "last_updated": 1776106586.3209648,
+        "cycles_active": 1,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.43000000000000016,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106586.3209648
+      },
+      "last_outcome": {
+        "timestamp": 1776106586.3169646,
+        "score": 0.5845379606080465,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776106586.3179657,
+        "score": 0.5845379606080465,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776106586.3209648,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "optimize_focus_adaptive_v15",
+        "base_strategy": "optimize_focus",
+        "tendency": "neutral",
+        "score_history": [
+          0.47237160475196693,
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465
+        ],
+        "avg_score": 0.5984588434890946,
+        "evolution_stage": 15,
+        "last_updated": 1776106586.328245
+      },
+      "last_coherence": {
+        "timestamp": 1776106586.3366652,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106586.3376675,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.43000000000000005,
+        "goal_progress": 0.4000000000000001,
+        "mission_progress": 0.43000000000000016,
+        "last_score": 0.5845379606080465,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "neutral",
+        "strategy_stage": 15,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106703.1616406,
+      "goal": {
+        "id": "goal_reconstructed_1776106540",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.3600000000000001,
+        "progress": 0.45000000000000007,
+        "status": "active",
+        "created_at": 1776106540.5737467,
+        "last_updated": 1776106703.0653102,
+        "cycles_active": 2,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.4800000000000002,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106703.0653102
+      },
+      "last_outcome": {
+        "timestamp": 1776106703.0612936,
+        "score": 0.6897273438334048,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776106703.0622938,
+        "score": 0.6897273438334048,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776106703.06631,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v16",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.45168186930402343,
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048
+        ],
+        "avg_score": 0.6201944173972385,
+        "evolution_stage": 16,
+        "last_updated": 1776106703.0740259
+      },
+      "last_coherence": {
+        "timestamp": 1776106703.0828302,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106703.0838282,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.3600000000000001,
+        "goal_progress": 0.45000000000000007,
+        "mission_progress": 0.4800000000000002,
+        "last_score": 0.6897273438334048,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 16,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106769.102458,
+      "goal": {
+        "id": "goal_reconstructed_1776106540",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.29000000000000015,
+        "progress": 0.5000000000000001,
+        "status": "active",
+        "created_at": 1776106540.5737467,
+        "last_updated": 1776106769.0124588,
+        "cycles_active": 3,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.5300000000000002,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106769.0124588
+      },
+      "last_outcome": {
+        "timestamp": 1776106769.008458,
+        "score": 0.7765164886404603,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776106769.009458,
+        "score": 0.7765164886404603,
+        "action": "reinforce",
+        "intensity": 0.7765164886404603
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776106769.013458,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v17",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.7032047753091404,
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603
+        ],
+        "avg_score": 0.6526778793308822,
+        "evolution_stage": 17,
+        "last_updated": 1776106769.020458
+      },
+      "last_coherence": {
+        "timestamp": 1776106769.0284579,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106769.0294583,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.29000000000000015,
+        "goal_progress": 0.5000000000000001,
+        "mission_progress": 0.5300000000000002,
+        "last_score": 0.7765164886404603,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 17,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106879.6213925,
+      "goal": {
+        "id": "goal_reconstructed_1776106540",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.22000000000000017,
+        "progress": 0.5500000000000002,
+        "status": "active",
+        "created_at": 1776106540.5737467,
+        "last_updated": 1776106879.5358167,
+        "cycles_active": 4,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.5800000000000003,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106879.536817
+      },
+      "last_outcome": {
+        "timestamp": 1776106879.5318081,
+        "score": 0.8509232849465681,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776106879.5338254,
+        "score": 0.8509232849465681,
+        "action": "reinforce",
+        "intensity": 0.8509232849465681
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776106879.536817,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v18",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.7143789538374006,
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681
+        ],
+        "avg_score": 0.667449730294625,
+        "evolution_stage": 18,
+        "last_updated": 1776106879.5440855
+      },
+      "last_coherence": {
+        "timestamp": 1776106879.5518873,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106879.5528882,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.22000000000000017,
+        "goal_progress": 0.5500000000000002,
+        "mission_progress": 0.5800000000000003,
+        "last_score": 0.8509232849465681,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 18,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776106989.450171,
+      "goal": {
+        "id": "goal_reconstructed_1776106989",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.5,
+        "progress": 0.6000000000000003,
+        "status": "active",
+        "created_at": 1776106989.3708346,
+        "last_updated": 1776106989.3708346,
+        "cycles_active": 0,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.6300000000000003,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776106989.36286
+      },
+      "last_outcome": {
+        "timestamp": 1776106989.3528447,
+        "score": 0.693923498598245,
+        "mission_id": null,
+        "goal_type": null
+      },
+      "last_adjustment": {
+        "timestamp": 1776106989.3538766,
+        "score": 0.693923498598245,
+        "action": "neutral_adjust",
+        "intensity": 0.5
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776106989.36286,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": false,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v19",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.5231967779873824,
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681,
+          0.693923498598245
+        ],
+        "avg_score": 0.6654041847707094,
+        "evolution_stage": 19,
+        "last_updated": 1776106989.3698347
+      },
+      "last_coherence": {
+        "timestamp": 1776106989.371834,
+        "action": "goal_reconstructed_from_mission",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776106989.3788333,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.5,
+        "goal_progress": 0.6000000000000003,
+        "mission_progress": 0.6300000000000003,
+        "last_score": 0.693923498598245,
+        "last_adjustment_action": "neutral_adjust",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 19,
+        "coherence_action": "goal_reconstructed_from_mission",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776107177.2261922,
+      "goal": {
+        "id": "goal_reconstructed_1776106989",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.43000000000000005,
+        "progress": 0.6500000000000004,
+        "status": "active",
+        "created_at": 1776106989.3708346,
+        "last_updated": 1776107177.1360693,
+        "cycles_active": 1,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.6800000000000004,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776107177.1360693
+      },
+      "last_outcome": {
+        "timestamp": 1776107177.1319752,
+        "score": 0.8582301699646918,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776107177.1329744,
+        "score": 0.8582301699646918,
+        "action": "reinforce",
+        "intensity": 0.8582301699646918
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776107177.1370692,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v20",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.6655063261900745,
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681,
+          0.693923498598245,
+          0.8582301699646918
+        ],
+        "avg_score": 0.6989075239684404,
+        "evolution_stage": 20,
+        "last_updated": 1776107177.1441605
+      },
+      "last_coherence": {
+        "timestamp": 1776107177.1521528,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776107177.153153,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.43000000000000005,
+        "goal_progress": 0.6500000000000004,
+        "mission_progress": 0.6800000000000004,
+        "last_score": 0.8582301699646918,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 20,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776107222.0688186,
+      "goal": {
+        "id": "goal_reconstructed_1776106989",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.3600000000000001,
+        "progress": 0.7000000000000004,
+        "status": "active",
+        "created_at": 1776106989.3708346,
+        "last_updated": 1776107221.9735537,
+        "cycles_active": 2,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.7300000000000004,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776107221.9741867
+      },
+      "last_outcome": {
+        "timestamp": 1776107221.9695551,
+        "score": 0.8918728038539586,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776107221.970554,
+        "score": 0.8918728038539586,
+        "action": "reinforce",
+        "intensity": 0.8918728038539586
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776107221.9741867,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v21",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.7607998470339162,
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681,
+          0.693923498598245,
+          0.8582301699646918,
+          0.8918728038539586
+        ],
+        "avg_score": 0.7215441717348288,
+        "evolution_stage": 21,
+        "last_updated": 1776107221.9821124
+      },
+      "last_coherence": {
+        "timestamp": 1776107221.9901283,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776107221.9911296,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.3600000000000001,
+        "goal_progress": 0.7000000000000004,
+        "mission_progress": 0.7300000000000004,
+        "last_score": 0.8918728038539586,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 21,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776107295.8147247,
+      "goal": {
+        "id": "goal_reconstructed_1776106989",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.29000000000000015,
+        "progress": 0.7500000000000004,
+        "status": "active",
+        "created_at": 1776106989.3708346,
+        "last_updated": 1776107295.7264314,
+        "cycles_active": 3,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.7800000000000005,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776107295.7264314
+      },
+      "last_outcome": {
+        "timestamp": 1776107295.7219415,
+        "score": 0.791057750174203,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776107295.7229402,
+        "score": 0.791057750174203,
+        "action": "reinforce",
+        "intensity": 0.791057750174203
+      },
+      "current_strategy": "reduce_risk",
+      "last_pressure": {
+        "timestamp": 1776107295.7274318,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v22",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.662689870376007,
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681,
+          0.693923498598245,
+          0.8582301699646918,
+          0.8918728038539586,
+          0.791057750174203
+        ],
+        "avg_score": 0.7245699620488575,
+        "evolution_stage": 22,
+        "last_updated": 1776107295.734241
+      },
+      "last_coherence": {
+        "timestamp": 1776107295.7421103,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776107295.7431107,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.29000000000000015,
+        "goal_progress": 0.7500000000000004,
+        "mission_progress": 0.7800000000000005,
+        "last_score": 0.791057750174203,
+        "last_adjustment_action": "reinforce",
+        "strategy": "reduce_risk",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 22,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    },
+    {
+      "timestamp": 1776107552.5830698,
+      "goal": {
+        "id": "goal_reconstructed_1776106989",
+        "type": "balanced_progression",
+        "description": "Reconstructed from mission: None",
+        "priority": 0.5,
+        "commitment": 0.22000000000000017,
+        "progress": 0.8000000000000005,
+        "status": "active",
+        "created_at": 1776106989.3708346,
+        "last_updated": 1776107552.4888241,
+        "cycles_active": 4,
+        "source": "reconstructed_from_mission"
+      },
+      "mission": {
+        "id": "mission_1776105409",
+        "goal_type": "balanced_progression",
+        "progress": 0.8300000000000005,
+        "status": "active",
+        "created_at": 1776105409.6646404,
+        "last_updated": 1776107552.4898245
+      },
+      "last_outcome": {
+        "timestamp": 1776107552.4858246,
+        "score": 0.7108434756169216,
+        "mission_id": "mission_1776105409",
+        "goal_type": "balanced_progression"
+      },
+      "last_adjustment": {
+        "timestamp": 1776107552.4868238,
+        "score": 0.7108434756169216,
+        "action": "reinforce",
+        "intensity": 0.7108434756169216
+      },
+      "current_strategy": "optimize_focus",
+      "last_pressure": {
+        "timestamp": 1776107552.4898245,
+        "strategy": "default",
+        "adjustment_action": "neutral_adjust",
+        "mode": "default",
+        "goal_delta": 0.01,
+        "mission_delta": 0.02,
+        "changed_goal": true,
+        "changed_mission": true
+      },
+      "strategy_profile": {
+        "name": "reduce_risk_steady_v23",
+        "base_strategy": "reduce_risk",
+        "tendency": "stable",
+        "score_history": [
+          0.44622044949298845,
+          0.5845379606080465,
+          0.6897273438334048,
+          0.7765164886404603,
+          0.8509232849465681,
+          0.693923498598245,
+          0.8582301699646918,
+          0.8918728038539586,
+          0.791057750174203,
+          0.7108434756169216
+        ],
+        "avg_score": 0.7293853225729487,
+        "evolution_stage": 23,
+        "last_updated": 1776107552.4968226
+      },
+      "last_coherence": {
+        "timestamp": 1776107552.5058208,
+        "action": "aligned",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "last_correction": {
+        "timestamp": 1776107552.5068202,
+        "action": "no_change",
+        "goal_type_before": "balanced_progression",
+        "goal_type_after": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "has_goal": true,
+        "has_mission": true
+      },
+      "active_directive": {
+        "id": "directive_1776102663",
+        "goal_type": "balanced_progression",
+        "mission_id": "mission_1776100405",
+        "mission_goal_type": "balanced_progression",
+        "priority": 1.0,
+        "protection": 1.0,
+        "status": "degraded",
+        "switch_resistance": 1.0,
+        "created_at": 1776102663.3327653,
+        "last_updated": 1776105354.8739102,
+        "reason": "autonomous_mission_selection"
+      },
+      "summary": {
+        "has_goal": true,
+        "has_mission": true,
+        "goal_type": "balanced_progression",
+        "mission_goal_type": "balanced_progression",
+        "goal_commitment": 0.22000000000000017,
+        "goal_progress": 0.8000000000000005,
+        "mission_progress": 0.8300000000000005,
+        "last_score": 0.7108434756169216,
+        "last_adjustment_action": "reinforce",
+        "strategy": "optimize_focus",
+        "pressure_mode": "default",
+        "strategy_tendency": "stable",
+        "strategy_stage": 23,
+        "coherence_action": "aligned",
+        "correction_action": "no_change",
+        "directive_priority": 1.0,
+        "directive_protection": 1.0,
+        "directive_action": "degraded"
+      }
+    }
+  ]
+}

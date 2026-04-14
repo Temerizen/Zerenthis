@@ -1,0 +1,10 @@
+﻿{
+  "empire": {
+    "modules": [
+      {"name": "Cognitive Lab", "status": "planned", "priority": 10},
+      {"name": "AI School", "status": "planned", "priority": 9},
+      {"name": "Video Engine", "status": "partial", "priority": 10},
+      {"name": "Money Engine", "status": "partial", "priority": 10}
+    ]
+  }
+}

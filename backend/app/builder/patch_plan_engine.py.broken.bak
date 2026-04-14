@@ -1,0 +1,89 @@
+﻿from __future__ import annotations
+from pathlib import Path
+from backend.app.builder.feedback_selector import choose_strategy_for_target
+
+def _traffic_engine_content(strategy: str) -> str:
+    if strategy == "stabilize":
+        return '''from __future__ import annotations
+
+def run(payload: dict | None = None) -> dict:
+    payload = payload or {}
+    return {
+        "status": "ok",
+        "engine": "traffic_engine",
+        "mode": "stabilize",
+        "message": "Stability-focused traffic engine patch is active",
+        "input": payload
+    }
+'''
+    if strategy == "optimize":
+        return '''from __future__ import annotations
+
+def run(payload: dict | None = None) -> dict:
+    payload = payload or {}
+    items = payload.get("items", [])
+    return {
+        "status": "ok",
+        "engine": "traffic_engine",
+        "mode": "optimize",
+        "message": "Optimization-focused traffic engine patch is active",
+        "input_size": len(items) if isinstance(items, list) else 0,
+        "input": payload
+    }
+'''
+    return '''from __future__ import annotations
+
+def run(payload: dict | None = None) -> dict:
+    payload = payload or {}
+    return {
+        "status": "ok",
+        "engine": "traffic_engine",
+        "mode": "baseline",
+        "message": "Builder baseline traffic engine patch is active",
+        "input": payload
+    }
+'''
+
+def _generic_content(target_path: str, strategy: str) -> str:
+    stem = Path(target_path).stem
+    return f'''from __future__ import annotations
+
+def run(payload: dict | None = None) -> dict:
+    payload = payload or {{}}
+    return {{
+        "status": "ok",
+        "engine": "{stem}",
+        "mode": "{strategy}",
+        "message": "Builder generated {strategy} patch for {Path(target_path).name}",
+        "input": payload
+    }}
+'''
+
+def create_patch_plan(goal: str, target: str, reason: str = "", priority: str = "medium") -> dict:
+    target_path = Path(target).as_posix()
+    strategy_info = choose_strategy_for_target(target_path)
+    strategy = strategy_info["strategy"]
+
+    if target_path.endswith("traffic_engine.py"):
+        content = _traffic_engine_content(strategy)
+    else:
+        content = _generic_content(target_path, strategy)
+
+    return {
+        "summary": f"{goal} | 
+
+
+target={target_path} | reason={reason} | priority={priority} | strategy={strategy}",
+        "strategy": strategy,
+        "strategy_reason": strategy_info.get("reason", ""),
+        "cooldown": strategy_info.get("cooldown", False),
+        "changes": [
+            {
+                "file": target_path,
+                "content": content
+            }
+        ]
+    }
+
+
+
