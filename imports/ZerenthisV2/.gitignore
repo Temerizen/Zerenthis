@@ -1,7 +1,0 @@
-backend/data/snapshots/
-backend/outputs/
-backend/traffic_stream/
-backend/__pycache__/
-**/__pycache__/
-*.pyc
-.env

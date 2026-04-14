@@ -1,1 +1,0 @@
-print("DIFFERENT 1")

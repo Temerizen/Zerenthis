@@ -1,7 +1,0 @@
-PATCH PLAN
-
-Intent:
-rollback last patch
-
-Status:
-PLANNED ONLY

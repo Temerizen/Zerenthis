@@ -1,7 +1,0 @@
-PATCH PLAN
-
-Intent:
-create patch plan for frontend timeline
-
-Status:
-PLANNED ONLY
