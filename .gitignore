@@ -1,18 +1,18 @@
-﻿venv/
+﻿.env
+.env.local
+
+venv/
 __pycache__/
 *.pyc
 *.pyo
 *.log
-.env
-.env.local
 
 node_modules/
 .vite/
-
 build/
 dist/
-archive/
 
+archive/
 *.zip
 *.mp4
 *.mov
